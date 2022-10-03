@@ -1,5 +1,3 @@
-//基本と実践に分ける
-
 function basicAnzan(){
 
 const $keisanType = document.getElementById("keisan-type");

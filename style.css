@@ -25,6 +25,11 @@ h2 {
     font-size: 16px;
 }
 
+.backToTop {
+    font-size: 16px;
+}
+
 .hdn {
     visibility: hidden;
+    font-size: 10px;
 }
