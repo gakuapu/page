@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計算ドリル：基本</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <audio id="audio1" src="seikaion.mp3"></audio>
+    <audio id="audio2" src="clearon.mp3"></audio>
+
+    <div>
+        <progress id="progress" value="0"></progress>
+    </div>
+
+    <select id="keisan-type">
+        <option value="tasu">たしざん</option>
+        <option value="hiku">ひきざん</option>
+        <option value="kakeru">かけざん</option>
+        <option value="waru">わりざん</option>
+    </select>
+
+    <select id="keisan-level">
+        <option value="0">☆☆☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="4">★★★★☆</option>
+        <option value="5">★★★★★</option>
+    </select>
+
+    <input type="button" id="start-btn" value="スタート">
+
+    <div id="mondai"></div>
+
+    <input id="kotae" type="tel">
+
+    <div>
+        <input type="button" id="erase-btn" value="けす">
+        <input type="button" id="giveup-btn" value="やめる">
+    </div>
+
+    <script src="pgm_basic.js"></script>
+</body>
+</html>
