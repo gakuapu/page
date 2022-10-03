@@ -203,11 +203,12 @@ function practiceAnzan(){
     
     $kotae.addEventListener("input", () => {  
         if ($kotae.value == a){
-            audio1.play();
-            $kotae.value = "";
-            count++;
-            $progress.value = count / mondaiNum;
-            console.log($progress.value)
+            setTimeout(() => {
+                audio1.play();
+                $kotae.value = "";
+                count++;
+                $progress.value = count / mondaiNum;
+            }, 500);
             switch($keisanType.value){
                 case "tasu":
                     tasuSetup();
