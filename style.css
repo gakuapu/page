@@ -18,10 +18,28 @@ h2 {
 }
 
 select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select {
     width: 150px;
     height: 30px;
     font-size: 16px;
     font-family: serif;
+    border-radius: 3px;
+}
+
+select:after {
+    content: '<>';
+    font: 17px "Consolas", monospace;
+    color: #333;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    right: 11px;
 }
 
 .btn {
