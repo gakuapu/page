@@ -31,11 +31,16 @@ select {
     font-family: serif;
 }
 
+#mondai {
+    margin-top: 5px;
+}
+
 .kotae {
     width: 90px;
     height: 30px;
     font-size: 20px;
     font-family: serif;
+    margin-top: 5px;
 }
 
 progress {
