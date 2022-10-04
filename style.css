@@ -54,7 +54,7 @@ progress::-webkit-progress-value {
 }
 
 .footer-container {
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .menutxt {
@@ -68,7 +68,7 @@ progress::-webkit-progress-value {
 
 .hdn {
     visibility: hidden;
-    font-size: 10px;
+    font-size: 8px;
 }
 
 /* responsive design用
