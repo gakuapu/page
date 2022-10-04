@@ -18,12 +18,6 @@ h2 {
 }
 
 select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-select {
     width: 150px;
     height: 30px;
     font-size: 16px;
@@ -36,14 +30,7 @@ select {
     height: 30px;
     font-size: 16px;
     font-family: serif;
-}
-
-.btn_highlight {
-    width: 150px;
-    height: 30px;
-    font-size: 16px;
-    font-family: serif;
-    margin-top: 10px;
+    margin-top:20px;
 }
 
 #mondai {
@@ -70,7 +57,7 @@ progress::-webkit-progress-bar {
 }
 
 progress::-webkit-progress-value {
-    background-color: dimgray;
+    background-color: dodgerblue;
 }
 
 .footer-container {
