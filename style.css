@@ -18,17 +18,23 @@ h2 {
 }
 
 select {
+    -webkit-appearance: none;
     width: 150px;
     height: 30px;
     font-size: 16px;
     font-family: serif;
+    color: black;
+    border-radius: 1px;
 }
 
 .btn {
+    -webkit-appearance: none;
     width: 150x;
     height: 30px;
     font-size: 16px;
     font-family: serif;
+    color: black;
+    border-radius: 1px;
 }
 
 #mondai {
