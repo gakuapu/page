@@ -21,41 +21,44 @@
     <audio id="audio1" src="seikaion.mp3"></audio>
     <audio id="audio2" src="clearon.mp3"></audio>
 
-    <select id="keisan-type">
-        <option value="tasu">たしざん</option>
-        <option value="hiku">ひきざん</option>
-        <option value="kakeru">かけざん</option>
-        <option value="waru">わりざん</option>
-    </select>
+    <div>
+        <select id="keisan-type">
+            <option value="tasu">たしざん</option>
+            <option value="hiku">ひきざん</option>
+            <option value="kakeru">かけざん</option>
+            <option value="waru">わりざん</option>
+        </select>
 
-    <select id="keisan-level">
-        <option value="0">☆☆☆☆☆</option>
-        <option value="1">★☆☆☆☆</option>
-        <option value="2">★★☆☆☆</option>
-        <option value="3">★★★☆☆</option>
-        <option value="4">★★★★☆</option>
-        <option value="5">★★★★★</option>
-    </select>
+        <select id="keisan-level">
+            <option value="0">☆☆☆☆☆</option>
+            <option value="1">★☆☆☆☆</option>
+            <option value="2">★★☆☆☆</option>
+            <option value="3">★★★☆☆</option>
+            <option value="4">★★★★☆</option>
+            <option value="5">★★★★★</option>
+        </select>
+    </div>
 
-    <input type="button" id="start-btn" value="スタート">
+    <input type="button" id="start-btn" class="btn" value="スタート">
 
     <div id="mondai"></div>
 
-    <input id="kotae" type="tel">
+    <input id="kotae" class="kotae" type="tel">
 
     <div>
         <progress id="progress" value="0"></progress>
     </div>
 
     <div>
-        <input type="button" id="erase-btn" value="けす">
-        <input type="button" id="giveup-btn" value="やめる">
+        <input type="button" id="erase-btn" class="btn" value="けす">
+        <input type="button" id="giveup-btn" class="btn" value="やめる">
     </div>
 
     <script src="pgm_practice.js"></script>
 </main>
 
 <footer class="footer-container">
+    <br>
     <a class="backToTop" href="top.html">トップ</a>
     <hr>
     <p>Copyright(C) 2017- All Rights Reserved. 引用含む無断転載禁止</p>
