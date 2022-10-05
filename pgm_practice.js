@@ -208,7 +208,7 @@ function practiceAnzan(){
                 $kotae.value = "";
                 $progress.value = count / mondaiNum;
                 count++;
-            }, 750);
+            }, 600);
             switch($keisanType.value){
                 case "tasu":
                     tasuSetup();

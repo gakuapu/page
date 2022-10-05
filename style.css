@@ -25,12 +25,8 @@ select {
     border-radius: 4px;
     font-size: 16px;
     font-family: serif;
+    color: black;
     padding: 0.5em 0.5em 0.5em 0.5em;
-    /* width: 150px;
-    height: 30px;
-    font-size: 16px;
-    font-family: serif;
-    border-radius: 3px; */
 
     /* reset */
     margin: 0;
@@ -56,35 +52,23 @@ select {
     background-repeat: no-repeat;
 }
 
-/*select:focus {
-    background-image:
-        linear-gradient(45deg, green 50%, transparent 50%),
-        linear-gradient(135deg, transparent 50%, green 50%),
-        linear-gradient(to right, #ccc, #ccc);
-    background-position:
-        calc(100% - 15px) 1em,
-        calc(100% - 20px) 1em,
-        calc(100%-2.5em) 0.5em;
-    background-size:
-        5px 5px,
-        5px 5px,
-        1px 1.5em;
-    background-repeat: no-repeat;
-    border-color: green;
-    outline: 0;
-}*/
-
-/*select:-moz-focusring {
-    color: transparent;
-    text-shadow: 0 0 0 #000;
-}*/
-
 .btn {
     width: 150px;
     height: 35px;
+    background-color: whitesmoke;
+    border: thin solid dimgray;
+    border-radius: 4px;
     font-size: 16px;
     font-family: serif;
-    margin-top:20px;
+    color: black;
+    margin-top:10px;
+
+    /* reset */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 #mondai {
