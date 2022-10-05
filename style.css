@@ -19,15 +19,69 @@ h2 {
 
 select {
     width: 150px;
+    line-height: 1.2em;
+    background-color: white;
+    border: thin solid dimgray;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: serif;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    /* width: 150px;
     height: 30px;
     font-size: 16px;
     font-family: serif;
-    border-radius: 3px;
+    border-radius: 3px; */
+
+    /* reset */
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* 右側 */
+    background-image:
+        linear-gradient(45deg, transparent 50%, dimgray 50%),
+        linear-gradient(135deg, dimgray 50%, transparent 50%),
+        linear-gradient(to right, dimgray, dimgray);
+    background-position:
+        calc(100% - 15px) calc(1em + 2px),
+        calc(100% - 10px) calc(1em + 2px),
+        calc(100% - 30px) 0.5em;
+    background-size:
+        5px 5px,
+        5px 5px,
+        1px 1.3em;
+    background-repeat: no-repeat;
 }
+
+/*select:focus {
+    background-image:
+        linear-gradient(45deg, green 50%, transparent 50%),
+        linear-gradient(135deg, transparent 50%, green 50%),
+        linear-gradient(to right, #ccc, #ccc);
+    background-position:
+        calc(100% - 15px) 1em,
+        calc(100% - 20px) 1em,
+        calc(100%-2.5em) 0.5em;
+    background-size:
+        5px 5px,
+        5px 5px,
+        1px 1.5em;
+    background-repeat: no-repeat;
+    border-color: green;
+    outline: 0;
+}*/
+
+/*select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}*/
 
 .btn {
     width: 150px;
-    height: 30px;
+    height: 35px;
     font-size: 16px;
     font-family: serif;
     margin-top:20px;
@@ -39,7 +93,7 @@ select {
 
 .kotae {
     width: 90px;
-    height: 30px;
+    height: 35px;
     font-size: 20px;
     font-family: serif;
     margin-top: 5px;
@@ -69,7 +123,7 @@ progress::-webkit-progress-value {
     font-size: 16px;
 }
 
-.backToTop {
+.footer-container2 {
     font-size: 16px;
 }
 
@@ -77,9 +131,3 @@ progress::-webkit-progress-value {
     visibility: hidden;
     font-size: 8px;
 }
-
-/* responsive design用
-@media screen and (max-width: 480px) {
-    .xx
-}
-*/

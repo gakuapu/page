@@ -206,9 +206,9 @@ function practiceAnzan(){
             setTimeout(() => {
                 audio1.play();
                 $kotae.value = "";
-                count++;
                 $progress.value = count / mondaiNum;
-            }, 500);
+                count++;
+            }, 750);
             switch($keisanType.value){
                 case "tasu":
                     tasuSetup();
@@ -229,7 +229,7 @@ function practiceAnzan(){
     });
     
     $startBtn.addEventListener("click", () => {
-        count = 0;
+        count = 1;
         $progress.value = 0;
         switch($keisanType.value){
             case "tasu":

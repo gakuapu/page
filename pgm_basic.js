@@ -206,9 +206,9 @@ $kotae.addEventListener("input", () => {
         setTimeout(() => {
             audio1.play();
             $kotae.value = "";
-            count++;
             $progress.value = count / mondaiNum;
-        }, 500);
+            count++;
+        }, 700);
         switch($keisanType.value){
             case "tasu":
                 tasuSetup();
@@ -229,7 +229,7 @@ $kotae.addEventListener("input", () => {
 });
 
 $startBtn.addEventListener("click", () => {
-    count = 0;
+    count = 1;
     $progress.value = 0;
     switch($keisanType.value){
         case "tasu":
