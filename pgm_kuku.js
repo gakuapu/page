@@ -13,11 +13,11 @@ const kukuHint = [
 ];
 
 const $dan = document.getElementById("dan");
-const $level = document.getElementById("level");
+const $step = document.getElementById("step");
 const $startBtn = document.getElementById("start-btn");
 const $hintBtn = document.getElementById("hint-btn");
 const $eraseBtn = document.getElementById("erase-btn");
-const $giveupBtn = document.getElementById("giveup-btn");
+const $resetBtn = document.getElementById("reset-btn");
 
 const $kukuHint1 = document.getElementById("kuku-hint1");
 const $kukuHint2 = document.getElementById("kuku-hint2");
@@ -31,14 +31,12 @@ let count = 0;
 let n = 0;
 let a = 0;
 let countMax = 9;
-//let mondaiNum = 20;
+let mondaiNum = 20;
 
-/*
 function getRandom(min, max){
     let randomNum = Math.floor(Math.random() * (max + 1 - min)) + min;
     return randomNum;
 };
-*/
 
 function closing(){
     audio2.play();
@@ -53,7 +51,7 @@ function closing(){
     alert(`クリアしました`);
 };
 
-function level0Setup(){
+function step1Setup(){
     if (count <= countMax){
         a = n + danInt;
         $kukuMondai.innerText = n + `＋` + danInt + `＝`;
@@ -62,10 +60,10 @@ function level0Setup(){
     };
 };
 
-function level1Setup(){
+function step2Setup(){
     if (count <= countMax){
         a = danInt * count;
-        $kukuHint1.innerText = `こえに出しながらとこう`;
+        $kukuHint1.innerText = `こえに出しながらこたえを入れよう`;
         $kukuHint2.innerText = kukuHint[danInt-1][count-1];
         $kukuMondai.innerText = danInt + `×` + count + `＝`;
     } else if (count > countMax){
@@ -73,12 +71,31 @@ function level1Setup(){
     };
 };
 
-function level2Setup(){
+function step3Setup(){
     if (count <= countMax){
         a = danInt * count;
         $kukuMondai.innerText = danInt + `×` + count + `＝`;
     } else if (count > countMax){
         closing();
+    };
+};
+
+function step4Setup(){
+    if (count <= countMax){
+        a = danInt * (10 - count);
+        $kukuMondai.innerText = danInt + `×` + (10 - count) + `＝`;
+    } else if (count > countMax){
+        closing();
+    };
+};
+
+function step5Setup(){
+    if (count <= mondaiNum){
+        n = getRandom(1,9);
+        a = danInt * n;
+        $kukuMondai.innerText = danInt + `×` + n + `＝`; 
+    } else if (count > mondaiNum){
+            closing();
     };
 };
 
@@ -92,25 +109,23 @@ $kotae.addEventListener("input", () => {
         }, 500);
         count++;
         $kukuHint2.innerText = "";
-        switch($level.value){
-            case "0":
-                n = a;
-                level0Setup();
-                break;
+        switch($step.value){
             case "1":
-                level1Setup();
+                n = a;
+                step1Setup();
                 break;
             case "2":
-                level2Setup();
+                step2Setup();
                 break;
-            /*
             case "3":
-                level3Setup();
+                step3Setup();
                 break;
             case "4":
-                level4Setup();
+                step4Setup();
                 break;
-            */
+            case "5":
+                step5Setup();
+                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -121,39 +136,47 @@ $startBtn.addEventListener("click", () => {
     count = 1;
     //$progress.value = 0;
     danInt = parseInt($dan.value);
-    switch($level.value){
-        case "0":
-            level0Setup();
-            break;
+    switch($step.value){
         case "1":
-            level1Setup();
+            step1Setup();
             break;
         case "2":
-            level2Setup();
+            step2Setup();
+            break;
+        case "3":
+            step3Setup();
             $hintBtn.style.display = "inline-block";
             break;
-        /*
-        case "3":
-            level3Setup();
-            break;
         case "4":
-            level4Setup();
+            step4Setup();
+            $hintBtn.style.display = "inline-block";
             break;
-        */
+        case "5":
+            step5Setup();
+            break;
         default:
             alert(`リロードして下さい`);
     };
 });
 
 $hintBtn.addEventListener("click", () => {
-    $kukuHint2.innerText = kukuHint[danInt-1][count-1];
+    switch($step.value){
+        case "3":
+            $kukuHint2.innerText = kukuHint[danInt-1][count-1];
+            break;
+        case "4":
+            $kukuHint2.innerText = kukuHint[danInt-1][10-count-1];
+            break;
+        default:
+            alert(`リロードして下さい`);
+    };
 });
 
 $eraseBtn.addEventListener("click", () => {
     $kotae.value = "";
 });
 
-$giveupBtn.addEventListener("click", () => {
+$resetBtn.addEventListener("click", () => {
     count = 0;
     n = 0;
     $kukuHint1.innerText = "";
@@ -167,175 +190,3 @@ $giveupBtn.addEventListener("click", () => {
 };
 
 kuku();
-    
-/*
-    };
-    
-    function tasuSetup(){
-        if (count < mondaiNum){
-            switch($keisanLevel.value){
-                case "0":
-                    n1 = getRandom(1,9);
-                    n2 = getRandom(1,9);
-                    break;
-                case "1":
-                    n1 = getRandom(10,19);
-                    n2 = getRandom(1,9);
-                    break;
-                case "2":
-                    n1 = getRandom(20,99);
-                    n2 = getRandom(1,9);
-                    break;
-                case "3":
-                    n1 = getRandom(10,19);
-                    n2 = getRandom(10,19);
-                    break;
-                case "4":
-                    n1 = getRandom(20,99);
-                    n2 = getRandom(10,19);
-                    break;
-                case "5":
-                    n1 = getRandom(20,99);
-                    n2 = getRandom(20,99);
-                    break;
-                default:
-                    alert(`リロードして下さい`);
-            };
-            a = n1 + n2;
-            $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count == mondaiNum){
-            closing();
-        };
-    };
-    
-    function hikuSetup(){
-        if (count < mondaiNum){
-            switch($keisanLevel.value){
-                case "0":
-                    n1 = getRandom(1,9);
-                    n2 = getRandom(1,n1);
-                    break;
-                case "1":
-                    n1 = getRandom(10,19);
-                    n2 = getRandom(1,9);
-                    break;
-                case "2":
-                    n1 = getRandom(20,99);
-                    n2 = getRandom(1,9);
-                    break;
-                case "3":
-                    n1 = getRandom(20,99);
-                    n2 = getRandom(10,19);
-                    break;
-                case "4":
-                    n1 = getRandom(50,99);
-                    n2 = getRandom(20,49);
-                    break;
-                case "5":
-                    n1 = 100;
-                    n2 = getRandom(10,99);
-                    break;
-                default:
-                    alert(`リロードして下さい`);
-            };
-            a = n1 - n2;
-            $mondai.innerText = n1 + `－` + n2 + `＝`;
-        } else if (count == mondaiNum){
-            closing();
-        };
-    };
-    
-    function kakeruSetup(){
-        if (count < mondaiNum){
-            switch($keisanLevel.value){
-                case "0":
-                    n1 = getRandom(1,5);
-                    n2 = getRandom(1,9);
-                    break;
-                case "1":
-                    n1 = getRandom(6,9);
-                    n2 = getRandom(1,9);
-                    break;
-                case "2":
-                    n1 = getRandom(11,19);
-                    n2 = getRandom(2,9);
-                    break;
-                case "3":
-                    n1 = getRandom(21,99);
-                    n2 = getRandom(2,9);
-                    break;
-                case "4":
-                    n1 = getRandom(2,9);
-                    n2 = getRandom(2,9);
-                    n3 = getRandom(2,9);
-                    break;
-                case "5":
-                    n1 = getRandom(2,9) * ((getRandom(0,1) * 9) + 1);
-                    n2 = getRandom(2,9) * ((getRandom(0,1) * 9) + 1);
-                    n3 = getRandom(2,9) * ((getRandom(0,1) * 9) + 1);
-                    break;
-                default:
-                    alert(`リロードして下さい`);
-            };
-            if ($keisanLevel.value == "4" || $keisanLevel.value == "5"){
-                a = n1 * n2 * n3;
-                $mondai.innerText = n1 + `×` + n2 + `×` + n3 + `＝`;
-            } else {
-                a = n1 * n2;
-                $mondai.innerText = n1 + `×` + n2 + `＝`;  
-            };
-        } else if (count == mondaiNum){
-            closing();
-        };
-    };
-    
-    function waruSetup(){
-        if (count < mondaiNum){
-            switch($keisanLevel.value){
-                case "0":
-                    n1 = getRandom(1,9);
-                    n2 = getRandom(1,9);
-                    break;
-                case "1":
-                    n1 = getRandom(1,9);
-                    n2 = getRandom(1,9);
-                    break;
-                case "2":
-                    n1 = getRandom(11,19);
-                    n2 = getRandom(2,9);
-                    break;
-                case "3":
-                    n1 = getRandom(2,9);
-                    n2 = getRandom(11,19);
-                    break;
-                case "4":
-                    n1 = getRandom(20,99);
-                    n2 = getRandom(2,9);
-                    break;
-                case "5":
-                    n1 = getRandom(2,9);
-                    n2 = getRandom(2,9);
-                    n3 = getRandom(2,9);
-                    break;
-                default:
-                    alert(`リロードして下さい`);
-            };
-            if ($keisanLevel.value == "0"){
-                n3 = n1 * n2;
-                a = n2;
-                $mondai.innerText = n1 + `×` + `□` + `＝` + n3;
-            } else if ($keisanLevel.value == "5") {
-                n4 = n1 * n2 * n3;
-                a = n2;
-                $mondai.innerText = n4 + `÷` + n1 + `÷` + n3 + `＝`;
-            } else {
-                n3 = n1 * n2;
-                a = n2;
-                $mondai.innerText = n3 + `÷` + n1 + `＝`;
-            };
-        } else if (count == mondaiNum){
-            closing();
-        };
-    };
-    
-*/

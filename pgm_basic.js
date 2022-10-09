@@ -4,7 +4,7 @@ const $keisanType = document.getElementById("keisan-type");
 const $keisanLevel = document.getElementById("keisan-level");
 const $startBtn = document.getElementById("start-btn");
 const $eraseBtn = document.getElementById("erase-btn");
-const $giveupBtn = document.getElementById("giveup-btn");
+const $resetBtn = document.getElementById("reset-btn");
 
 const $mondai = document.getElementById("mondai");
 const $kotae = document.getElementById("kotae");
@@ -253,7 +253,7 @@ $eraseBtn.addEventListener("click", () => {
     $kotae.value = "";
 });
 
-$giveupBtn.addEventListener("click", () => {
+$resetBtn.addEventListener("click", () => {
     count = 0;
     $kotae.value = "";
     $mondai.innerText = "";
