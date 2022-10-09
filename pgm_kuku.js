@@ -18,8 +18,9 @@ const $startBtn = document.getElementById("start-btn");
 const $eraseBtn = document.getElementById("erase-btn");
 const $giveupBtn = document.getElementById("giveup-btn");
 
-const $hint = document.getElementById("hint");
-const $mondai = document.getElementById("mondai");
+const $kukuHint1 = document.getElementById("kuku-hint1");
+const $kukuHint2 = document.getElementById("kuku-hint2");
+const $kukuMondai = document.getElementById("kuku-mondai");
 const $kotae = document.getElementById("kotae");
 
 //const $progress = document.getElementById("progress");
@@ -42,8 +43,9 @@ function closing(){
     audio2.play();
     //$progress.value = 1;
     $kotae.value = "";
-    $hint.innerText = "";
-    $mondai.innerText = "";
+    $kukuHint1.innerText = "";
+    $kukuHint2.innerText ="";
+    $kukuMondai.innerText = "";
     count = 0;
     n = 0;
     alert(`クリアしました`);
@@ -52,7 +54,7 @@ function closing(){
 function level0Setup(){
     if (count <= countMax){
         a = n + danInt;
-        $mondai.innerText = n + `＋` + danInt + `＝`;
+        $kukuMondai.innerText = n + `＋` + danInt + `＝`;
     } else if (count > countMax){
         closing();
     };
@@ -61,8 +63,18 @@ function level0Setup(){
 function level1Setup(){
     if (count <= countMax){
         a = danInt * count;
-        $hint.innerText = kukuHint[danInt-1][count-1];
-        $mondai.innerText = danInt + `×` + count + `＝`;
+        $kukuHint1.innerText = `こえに出しながらとこう`;
+        $kukuHint2.innerText = kukuHint[danInt-1][count-1];
+        $kukuMondai.innerText = danInt + `×` + count + `＝`;
+    } else if (count > countMax){
+        closing();
+    };
+};
+
+function level2Setup(){
+    if (count <= countMax){
+        a = danInt * count;
+        $kukuMondai.innerText = danInt + `×` + count + `＝`;
     } else if (count > countMax){
         closing();
     };
@@ -77,7 +89,6 @@ $kotae.addEventListener("input", () => {
             //count++;
         }, 500);
         count++;
-        console.log(count);
         switch($level.value){
             case "0":
                 n = a;
@@ -86,10 +97,10 @@ $kotae.addEventListener("input", () => {
             case "1":
                 level1Setup();
                 break;
-            /*
             case "2":
                 level2Setup();
                 break;
+            /*
             case "3":
                 level3Setup();
                 break;
@@ -117,10 +128,10 @@ $startBtn.addEventListener("click", () => {
         case "1":
             level1Setup();
             break;
-        /*
         case "2":
             level2Setup();
             break;
+        /*
         case "3":
             level3Setup();
             break;
@@ -143,9 +154,10 @@ $eraseBtn.addEventListener("click", () => {
 $giveupBtn.addEventListener("click", () => {
     count = 0;
     n = 0;
-    $hint.innerText = "";
+    $kukuHint1.innerText = "";
+    $kukuHint2.innerText = "";
     $kotae.value = "";
-    $mondai.innerText = "";
+    $kukuMondai.innerText = "";
     //$progress.value = 0;
 });
 
