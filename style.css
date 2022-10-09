@@ -71,6 +71,11 @@ select {
     -moz-appearance: none;
 }
 
+#hint {
+    font-size: 18px;
+    margin-top: 5px;
+}
+
 #mondai {
     margin-top: 5px;
 }
