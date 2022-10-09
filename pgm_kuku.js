@@ -15,6 +15,7 @@ const kukuHint = [
 const $dan = document.getElementById("dan");
 const $level = document.getElementById("level");
 const $startBtn = document.getElementById("start-btn");
+const $hintBtn = document.getElementById("hint-btn");
 const $eraseBtn = document.getElementById("erase-btn");
 const $giveupBtn = document.getElementById("giveup-btn");
 
@@ -46,6 +47,7 @@ function closing(){
     $kukuHint1.innerText = "";
     $kukuHint2.innerText ="";
     $kukuMondai.innerText = "";
+    $hintBtn.style.display = "none";
     count = 0;
     n = 0;
     alert(`クリアしました`);
@@ -89,6 +91,7 @@ $kotae.addEventListener("input", () => {
             //count++;
         }, 500);
         count++;
+        $kukuHint2.innerText = "";
         switch($level.value){
             case "0":
                 n = a;
@@ -106,9 +109,6 @@ $kotae.addEventListener("input", () => {
                 break;
             case "4":
                 level4Setup();
-                break;
-            case "5":
-                level5Setup();
                 break;
             */
             default:
@@ -130,6 +130,7 @@ $startBtn.addEventListener("click", () => {
             break;
         case "2":
             level2Setup();
+            $hintBtn.style.display = "inline-block";
             break;
         /*
         case "3":
@@ -138,13 +139,14 @@ $startBtn.addEventListener("click", () => {
         case "4":
             level4Setup();
             break;
-        case "5":
-            level5Setup();
-            break;
         */
         default:
             alert(`リロードして下さい`);
     };
+});
+
+$hintBtn.addEventListener("click", () => {
+    $kukuHint2.innerText = kukuHint[danInt-1][count-1];
 });
 
 $eraseBtn.addEventListener("click", () => {
@@ -158,6 +160,7 @@ $giveupBtn.addEventListener("click", () => {
     $kukuHint2.innerText = "";
     $kotae.value = "";
     $kukuMondai.innerText = "";
+    $hintBtn.style.display = "none";
     //$progress.value = 0;
 });
 
