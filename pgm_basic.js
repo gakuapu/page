@@ -208,7 +208,7 @@ $kotae.addEventListener("input", () => {
             $kotae.value = "";
             $progress.value = count / mondaiNum;
             count++;
-        }, 600);
+        }, 500);
         switch($keisanType.value){
             case "tasu":
                 tasuSetup();

@@ -1,4 +1,21 @@
-function practiceAnzan(){
+
+console.log(`hello`);
+
+/*
+
+const hint = [
+    [`いん いち が いち`, `いん に が に`, `いん さん が さん`, `いん し が し`, `いん ご が ご`, `いん ろく が ろく`, `いん しち が しち`, `いん はち が はち`, `いん く が く`],
+    [``, ``, ``, ``, ``, ``, ``, ``, ``],
+    [``, ``, ``, ``, ``, ``, ``, ``, ``],
+    [``, ``, ``, ``, ``, ``, ``, ``, ``],
+    [``, ``, ``, ``, ``, ``, ``, ``, ``],
+    [``, ``, ``, ``, ``, ``, ``, ``, ``],
+    [``, ``, ``, ``, ``, ``, ``, ``, ``],
+    [``, ``, ``, ``, ``, ``, ``, ``, ``],
+    [``, ``, ``, ``, ``, ``, ``, ``, ``]
+];
+
+function kuku(){
 
     const $keisanType = document.getElementById("keisan-type");
     const $keisanLevel = document.getElementById("keisan-level");
@@ -262,4 +279,6 @@ function practiceAnzan(){
     
     };
     
-    practiceAnzan();
+    kuku();
+
+*/

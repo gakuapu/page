@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-XKL20YHCTB');
-    </script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-XKL20YHCTB');
+        </script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>計算ドリル：特訓</title>
+    <title>九九をおぼえよう</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 <main>
+<body>
+<!--
     <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
     <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
 
     <div>
-        <select id="keisan-type">
-            <option value="tasu">たしざん</option>
-            <option value="hiku">ひきざん</option>
-            <option value="kakeru">かけざん</option>
-            <option value="waru">わりざん</option>
+        <select id="dan">
+            <option value="1">1のだん</option>
+            <option value="2">2のだん</option>
+            <option value="3">3のだん</option>
+            <option value="4">4のだん</option>
+            <option value="5">5のだん</option>
+            <option value="6">6のだん</option>
+            <option value="7">7のだん</option>
+            <option value="8">8のだん</option>
+            <option value="9">9のだん</option>
         </select>
 
-        <select id="keisan-level">
+        <select id="level">
             <option value="0">☆☆☆☆☆</option>
             <option value="1">★☆☆☆☆</option>
             <option value="2">★★☆☆☆</option>
@@ -41,6 +47,7 @@
 
     <input type="button" id="start-btn" class="btn" value="スタート">
 
+    <div id="hint"></div>
     <div id="mondai"></div>
 
     <input id="kotae" class="kotae" type="tel">
@@ -53,15 +60,17 @@
         <input type="button" id="erase-btn" class="btn" value="けす">
         <input type="button" id="giveup-btn" class="btn" value="やめる">
     </div>
+-->
 
-    <script src="pgm_practice.js"></script>
+
+    <script src="pgm_kuku.js"></script>
 </main>
 
 <footer class="footer-container">
     <br>
     <a class="footer-container2" href="top.html">トップ</a>
     <br>
-    <p class="footer-container2">計算ドリル：特訓</p>
+    <p class="footer-container2">九九をおぼえよう</p>
     <hr>
     <p>暗算と算数が得意になる。小学生全学年向けの無料計算ドリルアプリ 学アプ</p>
     <p>Copyright(C) 2017- All Rights Reserved. 引用含む無断転載禁止</p>
