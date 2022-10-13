@@ -21,7 +21,6 @@ let a;
 let count = 0;
 
 function closing(){
-    audio2.currentTime = 0;
     audio2.play();
     $progress.value = 1;
     $kotae.value = "";
@@ -205,7 +204,6 @@ function waruSetup(){
 $kotae.addEventListener("input", () => {  
     if ($kotae.value == a){
         setTimeout(() => {
-            audio1.currentTime = 0;
             audio1.play();
             $kotae.value = "";
             $progress.value = count / mondaiNum;
