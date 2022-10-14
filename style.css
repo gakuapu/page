@@ -29,7 +29,11 @@ select {
     padding: 0.5em 0.5em 0.5em 0.5em;
 
     /* reset */
-    margin: 0;
+    /* margin: 0; */
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 0;
+    margin-right: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -61,7 +65,8 @@ select {
     font-size: 16px;
     font-family: serif;
     color: black;
-    margin-top:10px;
+    margin-top:5px;
+    margin-bottom: 5px;
 
     /* reset */
     -webkit-box-sizing: border-box;
@@ -69,10 +74,6 @@ select {
     box-sizing: border-box;
     -webkit-appearance: none;
     -moz-appearance: none;
-}
-
-#start-btn {
-    margin-bottom: 5px;
 }
 
 .kotae {
@@ -89,6 +90,8 @@ progress {
     height: 20px;
     border-radius: 0px;
     background-color: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 progress::-webkit-progress-bar {
@@ -114,5 +117,5 @@ progress::-webkit-progress-value {
 
 .hdn {
     visibility: hidden;
-    font-size: 8px;
+    font-size: 2px;
 }

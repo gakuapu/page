@@ -1,12 +1,8 @@
-#kuku-hint1 {
-    font-size: 18px;
-}
-
+#kuku-hint1,
 #kuku-hint2 {
     font-size: 18px;
 }
 
 #hint-btn {
-    margin-bottom: 5px;
     display: none;
 }

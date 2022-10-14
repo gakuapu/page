@@ -4,7 +4,7 @@ function tasuhiku1(){
     const $startBtn = document.getElementById("start-btn");
     const $eraseBtn = document.getElementById("erase-btn");
     const $resetBtn = document.getElementById("reset-btn");
-    
+
     const $mondai = document.getElementById("mondai");
     const $kotae = document.getElementById("kotae");
     
@@ -78,8 +78,12 @@ function tasuhiku1(){
     
     function step2Setup(){
         if (count < mondaiNum){
-            n1 = getRandom(0, 10);
-            a = 10 - n1;
+            ab = a;
+            a = getRandom(0, 10);
+            while (a == ab){
+                a = getRandom(1, 10);
+            };
+            n1 = 10 - a;
             $mondai.innerText = n1 + `＋` + `□` + `＝` + 10;
         } else if (count = mondaiNum)
             closing();
@@ -87,9 +91,15 @@ function tasuhiku1(){
     
     function step3Setup(){
         if (count < mondaiNum){
+            ab = a;
             n3 = getRandom(0, 8);
             n2 = getRandom(n3 + 1, 9);
             a = 10 + n3;
+            while (a == ab){
+                n3 = getRandom(0, 8);
+                n2 = getRandom(n3 + 1, 9);
+                a = 10 + n3;
+            };
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count = mondaiNum){
@@ -99,9 +109,15 @@ function tasuhiku1(){
     
     function step4Setup(){
         if (count < mondaiNum){
+            ab = a;
             n1 = getRandom(1, 9);
             n2 = getRandom(n1, 10);
             a = n2 - n1;
+            while (a == ab){
+                n1 = getRandom(1, 9);
+                n2 = getRandom(n1, 10);
+                a = n2 - n1;
+            };
             $mondai.innerText = n1 + `＋` + `□` + `＝` + n2;
         } else if (count = mondaiNum)
             closing();
@@ -109,9 +125,15 @@ function tasuhiku1(){
     
     function step5Setup(){
         if (count < mondaiNum){
+            ab = a;
             n1 = getRandom(1, 9);
             n2 = getRandom(0, n1);
             a = n1 - n2;
+            while (a == ab){
+                n1 = getRandom(1, 9);
+                n2 = getRandom(0, n1);
+                a = n1 - n2;
+            };
             $mondai.innerText = n1 + `－` + n2 + `＝`;
         } else if (count = mondaiNum){
             closing();
@@ -120,8 +142,13 @@ function tasuhiku1(){
     
     function step6Setup(){
         if (count < mondaiNum){
+            ab = a;
             n1 = getRandom(1,9);
             a = 10 - n1;
+            while (a == ab){
+                n1 = getRandom(1,9);
+                a = 10 - n1;  
+            };
             $mondai.innerText = 10 + `－` + n1 + `＝`; 
         } else if (count = mondaiNum){
                 closing();
