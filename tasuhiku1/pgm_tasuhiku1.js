@@ -15,6 +15,7 @@ function tasuhiku1(){
     let n2 = 0;
     let n3 = 0;
     let a = 0;
+    let ab = 0;
     let mondaiNum = 20;
     
     function getRandom(min, max){
@@ -22,20 +23,51 @@ function tasuhiku1(){
         return randomNum;
     };
     
+    function defaultlet(){
+        count = 0;
+        n1 = 0;
+        n2 = 0;
+        n3 = 0;
+        a = 0;
+        ab = 0;
+        $kotae.value = "";
+        $mondai.innerText = "";
+    };
+
+    function switchdisplay(){
+        $kotae.style.display = "block";
+        $progress.style.display = "block";
+        $eraseBtn.style.display = "inline-block";
+        $resetBtn.style.display = "inline-block";
+        $step.style.display = "none";
+        $startBtn.style.display = "none";
+    };
+
+    function defaultdisplay(){
+        $kotae.style.display = "none";
+        $progress.style.display = "none";
+        $eraseBtn.style.display = "none";
+        $resetBtn.style.display = "none";
+        $step.style.display = "block";
+        $startBtn.style.display = "block";
+    };
+
     function closing(){
         audio2.play();
         $progress.value = 1;
-        $kotae.value = "";
-        $mondai.innerText = "";
-        count = 0;
-        a = 0;
-        n = 0;
+        defaultdisplay();
+        defaultlet();
         alert(`クリアしました`);
     };
     
+    //前と同じにならないはず
     function step1Setup(){
         if (count < mondaiNum){
-            a = getRandom(0, 10);
+            ab = a;
+            a = getRandom(1, 10);
+            while (a == ab){
+                a = getRandom(1, 10);
+            };
             n1 = getRandom(0, a);
             n2 = a - n1;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
@@ -130,7 +162,8 @@ function tasuhiku1(){
     });
     
     $startBtn.addEventListener("click", () => {
-        count = 0;
+        switchdisplay();
+        defaultlet();
         $progress.value = 0;
         switch($step.value){
             case "1":
@@ -161,10 +194,8 @@ function tasuhiku1(){
     });
     
     $resetBtn.addEventListener("click", () => {
-        count = 0;
-        n = 0;
-        $kotae.value = "";
-        $mondai.innerText = "";
+        defaultdisplay();
+        defaultlet();
         $progress.value = 0;
     });
     
