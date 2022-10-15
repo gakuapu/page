@@ -125,7 +125,7 @@ function tasuhiku3(){
                 a = 10 + n3 - n2;
             };
             n1 = 10 + n3;
-            $hint.innerText = `ヒント：` + n1 + `を10と` + n3 + `にわけて、10から` + n2 + `をひこう`;
+            $hint.innerText = `まず` + n1 + `を10と` + n3 + `にわけて、10から` + n2 + `をひくよ`;
             $mondai.innerText = n1 + `－` + n2 + `＝`;
         } else if (count = mondaiNum){
             closing();
