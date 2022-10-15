@@ -13,9 +13,9 @@ function retsu1(){
     const $progress = document.getElementById("progress");
     
     let count = 0;
-    let mnum = 0; //前に☆
+    let mnum = 0; //前に
     let mth = 0; //前から ⇒ mnum + 1
-    let unum = 0; //後ろに☆
+    let unum = 0; //後ろに
     let uth = 0; //後ろから ⇒ unum + 1
     let allnum = 0; //全部で ⇒ mnum + 1 + unum
     let a = 0; //答え
@@ -85,6 +85,7 @@ function retsu1(){
 
     //全部で
     function step1Setup(){
+        $hintBtn.style.display = "block";
         setlet();
         a = allnum;
         if (count < mondaiNum){
@@ -117,6 +118,8 @@ function retsu1(){
 
     //前から・前に
     function step2Setup(){
+        $hintBtn.style.display = "block";
+        setlet();
         if (count < mondaiNum){
             pb = p;
             p = getRandom(5, 8);
@@ -125,16 +128,20 @@ function retsu1(){
             };
             switch(p){
                 case 5:
-                    $mondai.innerText = `TBD5`;
+                    a = mth;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたは後ろから` + uth + `番目です。あなたは前から何番目でしょう？`;
                     break;
                 case 6:
-                    $mondai.innerText = `TBD6`;
+                    a = mth;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたの後ろには` + unum + `人います。あなたは前から何番目でしょう？`;
                     break;
                 case 7:
-                    $mondai.innerText = `TBD7`;
+                    a = mnum;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたは後ろから` + uth + `番目です。あなたの前には何人いるでしょう？`;
                     break;
                 case 8:
-                    $mondai.innerText = `TBD8`;
+                    a = mnum;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたの後ろには` + unum + `人います。あなたの前には何人いるでしょう？`;
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -146,6 +153,8 @@ function retsu1(){
 
     //後ろから・後ろに
     function step3Setup(){
+        $hintBtn.style.display = "block";
+        setlet();
         if (count < mondaiNum){
             pb = p;
             p = getRandom(9, 12);
@@ -154,16 +163,20 @@ function retsu1(){
             };
             switch(p){
                 case 9:
-                    $mondai.innerText = `TBD9`;
+                    a = uth;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたは前から` + mth + `番目です。あなたは後ろから何番目でしょう？`;
                     break;
                 case 10:
-                    $mondai.innerText = `TBD10`;
+                    a = uth;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたの前には` + mnum + `人います。あなたは後ろから何番目でしょう？`;
                     break;
                 case 11:
-                    $mondai.innerText = `TBD11`;
+                    a = unum;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたは前から` + mth + `番目です。あなたの後ろには何人いるでしょう？`;
                     break;
                 case 12:
-                    $mondai.innerText = `TBD12`;
+                    a = unum;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたの前には` + mnum + `人います。あなたの後ろには何人いるでしょう？`;
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -175,7 +188,6 @@ function retsu1(){
     
     //全てのパターン
     function step4Setup(){
-        $hintBtn.style.display = "none";
         if (count < mondaiNum){
             pstep4b = pstep4;
             pstep4 = getRandom(1, 3);
@@ -185,12 +197,15 @@ function retsu1(){
             switch(pstep4){
                 case 1:
                     step1Setup();
+                    $hintBtn.style.display = "none";
                     break;
                 case 2:
                     step2Setup();
+                    $hintBtn.style.display = "none";
                     break;
                 case 3:
                     step3Setup();
+                    $hintBtn.style.display = "none";
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -236,6 +251,7 @@ function retsu1(){
         for (let iu = 0; iu < unum; iu++){
             $hint.innerText += `〇`;
         }
+        $hintBtn.style.display = "none";
     });
 
     $startBtn.addEventListener("click", () => {
