@@ -1,10 +1,11 @@
-function tasuhiku2(){
+function tasuhiku3(){
     
     const $step = document.getElementById("step");
     const $startBtn = document.getElementById("start-btn");
     const $eraseBtn = document.getElementById("erase-btn");
     const $resetBtn = document.getElementById("reset-btn");
 
+    const $hint = document.getElementById("hint");
     const $mondai = document.getElementById("mondai");
     const $kotae = document.getElementById("kotae");
     
@@ -31,6 +32,7 @@ function tasuhiku2(){
         a = 0;
         ab = 0;
         $kotae.value = "";
+        $hint.innerText = "";
         $mondai.innerText = "";
     };
 
@@ -59,71 +61,95 @@ function tasuhiku2(){
         defaultlet();
         alert(`クリアしました`);
     };
-    
+
     function step1Setup(){
         if (count < mondaiNum){
             ab = a;
-            a = getRandom(11, 19);
+            n1 = getRandom(1, 9);
+            n2 = getRandom(n1 + 1, 10);
+            a = n2 - n1;
             while (a == ab){
-                a = getRandom(11, 19);
+                n1 = getRandom(1, 9);
+                n2 = getRandom(n1 + 1, 10);
+                a = n2 - n1;
             };
-            n1 = getRandom(10, a - 1);
-            n2 = a - n1;
-            $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+            n1 = n1 + 10;
+            n2 = n2 + 10;
+            $mondai.innerText = n1 + `＋` + `□` + `＝` + n2;
+        } else if (count = mondaiNum)
             closing();
-        };
     };
     
     function step2Setup(){
         if (count < mondaiNum){
             ab = a;
-            a = getRandom(1, 10);
+            n3 = getRandom(1, 9);
+            n2 = getRandom(1, n3);
+            a = n3 + 10 - n2;
             while (a == ab){
-                a = getRandom(1, 10);
+                n1 = getRandom(1, 9);
+                n2 = getRandom(1, n3);
+                a = n3 + 10 - n2;
             };
-            n1 = 20 - a;
-            $mondai.innerText = n1 + `＋` + `□` + `＝` + 20;
-        } else if (count = mondaiNum)
+            n1 = n3 + 10;
+            $mondai.innerText = n1 + `－` + n2 + `＝`;
+        } else if (count = mondaiNum){
             closing();
+        };
     };
-
+    
     function step3Setup(){
         if (count < mondaiNum){
             ab = a;
-            n3 = getRandom(0, 8);
-            n2 = getRandom(n3 + 1, 9);
-            a = 10 + n3;
+            n1 = getRandom(1,9);
+            a = 20 - n1;
             while (a == ab){
-                n3 = getRandom(0, 8);
-                n2 = getRandom(n3 + 1, 9);
-                a = 10 + n3;
+                n1 = getRandom(1,9);
+                a = 20 - n1;  
             };
-            n1 = a - n2;
-            $mondai.innerText = n1 + `＋` + n2 + `＝`;
+            $mondai.innerText = 20 + `－` + n1 + `＝`; 
         } else if (count = mondaiNum){
-            closing();
+                closing();
         };
     };
-    
+
     function step4Setup(){
         if (count < mondaiNum){
             ab = a;
-            n3 = getRandom(0, 8);
+            n3 = getRandom(1, 8);
             n2 = getRandom(n3 + 1, 9);
-            a = 20 + n3;
+            a = 10 + n3 - n2;
             while (a == ab){
-                n3 = getRandom(0, 8);
+                n3 = getRandom(1, 8);
                 n2 = getRandom(n3 + 1, 9);
-                a = 20 + n3;
+                a = 10 + n3 - n2;
             };
-            n1 = a - n2;
-            $mondai.innerText = n1 + `＋` + n2 + `＝`;
+            n1 = 10 + n3;
+            $hint.innerText = `ヒント：` + n1 + `を10と` + n3 + `にわけて、10から` + n2 + `をひこう`;
+            $mondai.innerText = n1 + `－` + n2 + `＝`;
         } else if (count = mondaiNum){
             closing();
         };
     };
-    
+
+    function step5Setup(){
+        if (count < mondaiNum){
+            ab = a;
+            n3 = getRandom(1, 8);
+            n2 = getRandom(n3 + 1, 9);
+            a = 10 + n3 - n2;
+            while (a == ab){
+                n3 = getRandom(1, 8);
+                n2 = getRandom(n3 + 1, 9);
+                a = 10 + n3 - n2;
+            };
+            n1 = 10 + n3;
+            $mondai.innerText = n1 + `－` + n2 + `＝`;
+        } else if (count = mondaiNum){
+            closing();
+        };
+    };
+
     $kotae.addEventListener("input", () => {
         if ($kotae.value == a){
             setTimeout(() => {
@@ -143,7 +169,11 @@ function tasuhiku2(){
                     step3Setup();
                     break;
                 case "4":
+                    $hint.innerText = "";
                     step4Setup();
+                    break;
+                case "5":
+                    step5Setup();
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -168,6 +198,9 @@ function tasuhiku2(){
             case "4":
                 step4Setup();
                 break;
+            case "5":
+                step5Setup();
+                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -185,4 +218,4 @@ function tasuhiku2(){
     
 };
     
-tasuhiku2();
+tasuhiku3();
