@@ -16,7 +16,6 @@ function tasuhiku4(){
     let n3 = 0;
     let a = 0;
     let ab = 0;
-    let p = 0;
     let mondaiNum = 20;
     
     function getRandom(min, max){
@@ -31,7 +30,6 @@ function tasuhiku4(){
         n3 = 0;
         a = 0;
         ab = 0;
-        p = 0;
         $kotae.value = "";
         $mondai.innerText = "";
     };
