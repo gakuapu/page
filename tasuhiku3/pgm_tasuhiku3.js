@@ -17,6 +17,7 @@ function tasuhiku3(){
     let n3 = 0;
     let a = 0;
     let ab = 0;
+    let p = 0;
     let mondaiNum = 20;
     
     function getRandom(min, max){
@@ -31,6 +32,7 @@ function tasuhiku3(){
         n3 = 0;
         a = 0;
         ab = 0;
+        p = 0;
         $kotae.value = "";
         $hint.innerText = "";
         $mondai.innerText = "";
@@ -150,6 +152,66 @@ function tasuhiku3(){
         };
     };
 
+    function step6Setup(){
+        if (count < mondaiNum){
+            ab = a;
+            n1 = getRandom(1, 9);
+            n2 = getRandom(1, 9);
+            n3 = getRandom(1, 9);
+            a = n1 + 10 - n2 - n3;
+            while (a == ab || a < 0){
+                n1 = getRandom(1, 9);
+                n2 = getRandom(1, 9);
+                n3 = getRandom(1, 9);
+                a = n1 + 10 - n2 - n3;
+                };
+            n1 = n1 + 10;
+            $mondai.innerText = n1 + `－` + n2 + `－` + n3 + `＝`;
+        } else if (count = mondaiNum){
+            closing();
+        };
+    };
+
+    function step7Setup(){
+        if (count < mondaiNum){
+            p = getRandom(1,2);
+            switch(p){
+                case 1:
+                    ab = a;
+                    n1 = getRandom(1, 9);
+                    n2 = getRandom(1, 9);
+                    n3 = getRandom(1, n1 + n2 - 1);
+                    a = n1 + n2 - n3;
+                    while (a == ab){
+                        n1 = getRandom(1, 9);
+                        n2 = getRandom(1, 9);
+                        n3 = getRandom(1, n1 + n2 - 1);
+                        a = n1 + n2 - n3;
+                    };
+                    $mondai.innerText = n1 + `＋` + n2 + `－` + n3 + `＝`;
+                    break;
+                case 2:
+                    ab = a;
+                    n1 = getRandom(2, 9);
+                    n2 = getRandom(1, n1 - 1);
+                    n3 = getRandom(1, 9)
+                    a = n1 - n2 + n3;
+                    while (a == ab){
+                        n1 = getRandom(2, 9);
+                        n2 = getRandom(1, n1 - 1);
+                        n3 = getRandom(1, 9)
+                        a = n1 - n2 + n3;
+                    };
+                    $mondai.innerText = n1 + `－` + n2 + `＋` + n3 + `＝`;
+                    break;
+                default:
+                    alert(`リロードして下さい`);
+            };
+        } else if (count = mondaiNum){
+            closing();
+        };
+    };
+
     $kotae.addEventListener("input", () => {
         if ($kotae.value == a){
             setTimeout(() => {
@@ -174,6 +236,12 @@ function tasuhiku3(){
                     break;
                 case "5":
                     step5Setup();
+                    break;
+                case "6":
+                    step6Setup();
+                    break;
+                case "7":
+                    step7Setup();
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -200,6 +268,12 @@ function tasuhiku3(){
                 break;
             case "5":
                 step5Setup();
+                break;
+            case "6":
+                step6Setup();
+                break;
+            case "7":
+                step7Setup();
                 break;
             default:
                 alert(`リロードして下さい`);

@@ -124,6 +124,25 @@ function tasuhiku2(){
         };
     };
     
+    function step5Setup(){
+        if (count < mondaiNum){
+            ab = a;
+            n1 = getRandom(1, 9);
+            n2 = getRandom(1, 9);
+            n3 = getRandom(1, 9);
+            a = n1 + n2 + n3;
+            while (a == ab){
+                n1 = getRandom(1, 9);
+                n2 = getRandom(1, 9);
+                n3 = getRandom(1, 9);
+                a = n1 + n2 + n3;
+            };
+            $mondai.innerText = n1 + `＋` + n2 + `＋` + n3 + `＝`;
+        } else if (count = mondaiNum){
+            closing();
+        };
+    };
+
     $kotae.addEventListener("input", () => {
         if ($kotae.value == a){
             setTimeout(() => {
@@ -144,6 +163,9 @@ function tasuhiku2(){
                     break;
                 case "4":
                     step4Setup();
+                    break;
+                case "5":
+                    step5Setup();
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -167,6 +189,9 @@ function tasuhiku2(){
                 break;
             case "4":
                 step4Setup();
+                break;
+            case "5":
+                step5Setup();
                 break;
             default:
                 alert(`リロードして下さい`);
