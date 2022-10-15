@@ -23,7 +23,7 @@ function retsu1(){
     let pb = 0; //前問のパターン
     let pstep4 = 0; //ステップ4のパターン
     let pstep4b = 0; //前問のステップ4のパターン
-    let mondaiNum = 20;
+    let mondaiNum = 15;
     
     function getRandom(min, max){
         let randomNum = Math.floor(Math.random() * (max + 1 - min)) + min;
@@ -116,7 +116,8 @@ function retsu1(){
         };
     };
 
-    //前から・前に
+
+    //後ろから・後ろに
     function step2Setup(){
         $hintBtn.style.display = "block";
         setlet();
@@ -128,20 +129,20 @@ function retsu1(){
             };
             switch(p){
                 case 5:
-                    a = mth;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたは後ろから` + uth + `番目です。あなたは前から何番目でしょう？`;
+                    a = uth;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたは前から` + mth + `番目です。あなたは後ろから何番目でしょう？`;
                     break;
                 case 6:
-                    a = mth;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたの後ろには` + unum + `人います。あなたは前から何番目でしょう？`;
+                    a = uth;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたの前には` + mnum + `人います。あなたは後ろから何番目でしょう？`;
                     break;
                 case 7:
-                    a = mnum;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたは後ろから` + uth + `番目です。あなたの前には何人いるでしょう？`;
+                    a = unum;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたは前から` + mth + `番目です。あなたの後ろには何人いるでしょう？`;
                     break;
                 case 8:
-                    a = mnum;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたの後ろには` + unum + `人います。あなたの前には何人いるでしょう？`;
+                    a = unum;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたの前には` + mnum + `人います。あなたの後ろには何人いるでしょう？`;
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -151,7 +152,7 @@ function retsu1(){
         };
     };
 
-    //後ろから・後ろに
+    //前から・前に
     function step3Setup(){
         $hintBtn.style.display = "block";
         setlet();
@@ -163,20 +164,20 @@ function retsu1(){
             };
             switch(p){
                 case 9:
-                    a = uth;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたは前から` + mth + `番目です。あなたは後ろから何番目でしょう？`;
+                    a = mth;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたは後ろから` + uth + `番目です。あなたは前から何番目でしょう？`;
                     break;
                 case 10:
-                    a = uth;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたの前には` + mnum + `人います。あなたは後ろから何番目でしょう？`;
+                    a = mth;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたの後ろには` + unum + `人います。あなたは前から何番目でしょう？`;
                     break;
                 case 11:
-                    a = unum;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたは前から` + mth + `番目です。あなたの後ろには何人いるでしょう？`;
+                    a = mnum;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたは後ろから` + uth + `番目です。あなたの前には何人いるでしょう？`;
                     break;
                 case 12:
-                    a = unum;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたの前には` + mnum + `人います。あなたの後ろには何人いるでしょう？`;
+                    a = mnum;
+                    $mondai.innerText = `全部で` + allnum + `人います。あなたの後ろには` + unum + `人います。あなたの前には何人いるでしょう？`;
                     break;
                 default:
                     alert(`リロードして下さい`);
