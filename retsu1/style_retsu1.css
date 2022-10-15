@@ -1,0 +1,12 @@
+#hint-btn,
+#kotae,
+#progress,
+#erase-btn,
+#reset-btn {
+    display: none;
+}
+
+#mondai,
+#hint {
+    font-size: 20px;
+}
