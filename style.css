@@ -9,12 +9,14 @@ hr {
     color: dimgray;
 }
 
-h1 {
+h1,
+h2 {
     font-size: 20px;
 }
 
-h2 {
+ul {
     font-size: 20px;
+    line-height: 2em;
 }
 
 select {
@@ -106,16 +108,12 @@ progress::-webkit-progress-value {
     font-size: 12px;
 }
 
+.footer-container2 {
+    font-size: 16px;
+    line-height: 1.5em;
+}
+
 .menutxt {
     margin-bottom: 3em;
     font-size: 16px;
-}
-
-.footer-container2 {
-    font-size: 16px;
-}
-
-.hdn {
-    visibility: hidden;
-    font-size: 2px;
 }
