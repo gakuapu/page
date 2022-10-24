@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-XKL20YHCTB');
+        </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小学2年生の足し算・引き算（2）</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリです。小学校1年生から6年生まで、全学年向け。ブラウザで動くので、ダウンロードも不要です">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tasuhiku6\style_tasuhiku6.css">
+</head>
+<main>
+<body>
+
+    <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
+
+    <div>
+        <select id="step">
+            <option value="1">ステップ1</option>
+            <option value="2">ステップ2</option>
+            <option value="3">ステップ3</option>
+            <option value="4">ステップ4</option>
+            <option value="5">ステップ5</option>
+            <option value="6">ステップ6</option>
+            <option value="7">ステップ7</option>
+            <option value="8">ステップ8</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="button" id="start-btn" class="btn" value="スタート">
+    </div>
+
+    <div id="mondai"></div>
+
+    <input id="kotae" class="kotae" type="tel">
+
+    <div>
+        <progress id="progress" value="0"></progress>
+    </div>
+
+    <div>
+        <input type="button" id="erase-btn" class="btn" value="けす">
+        <input type="button" id="reset-btn" class="btn" value="リセット">
+    </div>
+
+    <script src="tasuhiku6\pgm_tasuhiku6.js"></script>
+</main>
+
+<footer class="footer-container">
+    <br>
+    <p class="footer-container2">足し算・引き算マスター（小学2年生-2）</p>
+    <ul class="footer-container2">
+        <li>ステップ1：20まで－1けたの引き算</li>
+        <li>ステップ2：2けた－1けたの引き算</li>
+        <li>ステップ3：2けた－20までの引き算（くり下がりなし）</li>
+        <li>ステップ4：2けた－20までの引き算（くり下がりあり）</li>
+        <li>ステップ5：2けた－2けたの引き算（くり下がりなし）</li>
+        <li>ステップ6：2けた－2けたの引き算（くり下がりあり）</li>
+        <li>ステップ7：2けた＋2けたの逆算</li>
+        <li>ステップ8：100－2けたの引き算</li>
+    </ul>
+    <a class="footer-container2" href="top.html">トップ</a>
+    <hr>
+    <p>算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで、全学年向け</p>
+    <p>Copyright(C) 2017- All Rights Reserved. 引用含む無断転載禁止</p>
+    <a class="footer-container2" href="aboutus.html">当サイトについて</a>
+</footer>
+</body>
+</html>
