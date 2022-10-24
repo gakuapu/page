@@ -92,13 +92,12 @@ function tasuhiku2(){
         if (count < mondaiNum){
             ab = a;
             n3 = getRandom(0, 8);
-            n2 = getRandom(n3 + 1, 9);
             a = 10 + n3;
             while (a == ab){
                 n3 = getRandom(0, 8);
-                n2 = getRandom(n3 + 1, 9);
                 a = 10 + n3;
             };
+            n2 = getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count = mondaiNum){
@@ -110,13 +109,12 @@ function tasuhiku2(){
         if (count < mondaiNum){
             ab = a;
             n3 = getRandom(0, 8);
-            n2 = getRandom(n3 + 1, 9);
             a = 20 + n3;
             while (a == ab){
                 n3 = getRandom(0, 8);
-                n2 = getRandom(n3 + 1, 9);
                 a = 20 + n3;
             };
+            n2 = getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count = mondaiNum){

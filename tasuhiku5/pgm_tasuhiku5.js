@@ -66,13 +66,12 @@ function tasuhiku5(){
         if (count < mondaiNum){
             ab = a;
             n3 = getRandom(0, 8);
-            n2 = getRandom(n3 + 1, 9);
             a = 20 + n3;
             while (a == ab){
                 n3 = getRandom(0, 8);
-                n2 = getRandom(n3 + 1, 9);
                 a = 20 + n3;
             };
+            n2 = getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count = mondaiNum){
@@ -84,13 +83,12 @@ function tasuhiku5(){
         if (count < mondaiNum){
             ab = a;
             n3 = getRandom(0, 8);
-            n2 = getRandom(n3 + 1, 9);
             a = getRandom(3, 9) * 10 + n3;
             while (a == ab){
                 n3 = getRandom(0, 8);
-                n2 = getRandom(n3 + 1, 9);
                 a = getRandom(3, 9) * 10 + n3;
             };
+            n2 = getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count = mondaiNum){
@@ -102,13 +100,12 @@ function tasuhiku5(){
         if (count < mondaiNum){
             ab = a;
             n3 = getRandom(0, 8);
-            n2 = getRandom(n3 + 1, 9);
             a = 100 + n3;
             while (a == ab){
                 n3 = getRandom(0, 8);
-                n2 = getRandom(n3 + 1, 9);
                 a = 100 + n3;
             };
+            n2 = getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count = mondaiNum){
@@ -120,13 +117,12 @@ function tasuhiku5(){
         if (count < mondaiNum){
             ab = a;
             n3 = getRandom(0, 8);
-            n1 = getRandom(n3 + 1, 9);
             a = getRandom(2, 10) * 10 + n3;
             while (a == ab){
                 n3 = getRandom(0, 8);
-                n1 = getRandom(n3 + 1, 9);
                 a = getRandom(2, 10) * 10 + n3;
             };
+            n1 = getRandom(n3 + 1, 9);
             n2 = a - n1;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count = mondaiNum){
@@ -138,13 +134,12 @@ function tasuhiku5(){
         if (count < mondaiNum){
             ab = a;
             n3 = getRandom(0, 8);
-            n2 = 10 + getRandom(n3 + 1, 9);
             a = 30 + n3;
             while (a == ab){
                 n3 = getRandom(0, 8);
-                n2 = 10 + getRandom(n3 + 1, 9);
                 a = 30 + n3;
             };
+            n2 = 10 + getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count = mondaiNum){
@@ -158,13 +153,12 @@ function tasuhiku5(){
             n3 = getRandom(0, 8);
             n4 = getRandom(4, 9);
             a = n4 * 10 + n3;
-            n2 = 10 + getRandom(n3 + 1, 9);
             while (a == ab){
                 n3 = getRandom(0, 8);
                 n4 = getRandom(4, 9);
                 a = n4 * 10 + n3;
-                n2 = 10 + getRandom(n3 + 1, 9);
             };
+            n2 = 10 + getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count = mondaiNum){
@@ -178,13 +172,12 @@ function tasuhiku5(){
             n3 = getRandom(0, 8);
             n4 = getRandom(3, 9);
             a = n4 * 10 + n3;
-            n2 = getRandom(1, n4 - 2) * 10 + getRandom(n3 + 1, 9);
             while (a == ab){
                 n3 = getRandom(0, 8);
                 n4 = getRandom(3, 9);
                 a = n4 * 10 + n3;
-                n2 = getRandom(1, n4 - 2) * 10 + getRandom(n3 + 1, 9);
             };
+            n2 = getRandom(1, n4 - 2) * 10 + getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count = mondaiNum){

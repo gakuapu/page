@@ -143,14 +143,12 @@ function tasuhiku4(){
         if (count < mondaiNum){
             ab = a;
             n3 = getRandom(0, 8);
-            n2 = getRandom(n3 + 1, 9);
             a = (10 + n3) * 10;
             while (a == ab){
                 n3 = getRandom(0, 8);
-                n2 = getRandom(n3 + 1, 9);
                 a = (10 + n3) * 10;
             };
-            n2 = n2 * 10;
+            n2 = getRandom(n3 + 1, 9) * 10;
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count = mondaiNum){

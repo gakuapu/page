@@ -89,7 +89,7 @@ function tasuhiku3(){
             n2 = getRandom(1, n3);
             a = n3 + 10 - n2;
             while (a == ab){
-                n1 = getRandom(1, 9);
+                n3 = getRandom(1, 9);
                 n2 = getRandom(1, n3);
                 a = n3 + 10 - n2;
             };
