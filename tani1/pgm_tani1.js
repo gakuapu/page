@@ -49,9 +49,7 @@ function tani1(){
     };
 
     function switchdisplay(){
-        $hintBtn.style.display = "block";
         $kotae1.style.display = "inline-block";
-        $kotae2.style.display = "inline-block";
         $checkBtn.style.display = "block";
         $progress.style.display = "block";
         $eraseBtn.style.display = "inline-block";
@@ -210,11 +208,161 @@ function tani1(){
     };
 
     function step3Setup(){
-        console.log("step3 on developing");
+        $kotae2.style.display = "inline-block";
+        $hintBtn.style.display = "none";
+        if (count < mondaiNum){
+            pb = p;
+            p = getRandom(1, 4);
+            while (p == pb){
+                p = getRandom(1, 4);
+            };
+            switch(p){
+                case 1:
+                    a1 = getRandom(2, 15);
+                    a2 = getRandom(2, 99);
+                    m = getRandom(1, a1 - 1);
+                    cm = getRandom(1, a2 - 1);
+                    $mondai.innerText = m + `m` + cm + `cm ＋ ` + (a1 - m) + `m` + (a2 - cm) + `cm ＝`;
+                    $unit1.innerText = `m`;
+                    $unit2.innerText = `cm`;
+                    break;
+                case 2:
+                    m = getRandom(2, 15);
+                    cm = getRandom(2, 99);
+                    a1 = getRandom(1, m - 1);
+                    a2 = getRandom(1, cm - 1);
+                    $mondai.innerText = m + `m` + cm + `cm － ` + (m - a1) + `m` + (cm - a2) + `cm ＝`;
+                    $unit1.innerText = `m`;
+                    $unit2.innerText = `cm`;
+                    break;
+                case 3:
+                    a1 = getRandom(2, 15);
+                    a2 = getRandom(2, 9);
+                    cm = getRandom(1, a1 - 1);
+                    mm = getRandom(1, a2 - 1);
+                    $mondai.innerText = cm + `cm` + mm + `mm ＋ ` + (a1 - cm) + `cm` + (a2 - mm) + `mm ＝`;
+                    $unit1.innerText = `cm`;
+                    $unit2.innerText = `mm`;
+                    break;
+                case 4:
+                    cm = getRandom(2, 15);
+                    mm = getRandom(2, 9);
+                    a1 = getRandom(1, cm - 1);
+                    a2 = getRandom(1, mm - 1);
+                    $mondai.innerText = cm + `cm` + mm + `mm － ` + (cm - a1) + `cm` + (mm - a2) + `mm ＝`;
+                    $unit1.innerText = `cm`;
+                    $unit2.innerText = `mm`;
+                    break;
+                default:
+                    alert(`リロードして下さい`);
+            };
+        } else if (count = mondaiNum){
+            closing();
+        };
     };  
 
     function step4Setup(){
-        console.log("step4 on developing");
+        $kotae2.style.display = "inline-block";
+        $hintBtn.style.display = "none";
+        if (count < mondaiNum){
+            pb = p;
+            p = getRandom(1, 4);
+            while (p == pb){
+                p = getRandom(1, 4);
+            };
+            switch(p){
+                case 1:
+                    a2 = getRandom(1, 98);
+                    cm = getRandom(a2 + 1, 99);
+                    a1 = getRandom(3, 9);
+                    m = getRandom(1, a1 - 2);
+                    $mondai.innerText = m + `m` + cm + `cm ＋ ` + (a1 - m - 1) + `m` + (a2 + 100 - cm) + `cm ＝`;
+                    $unit1.innerText = `m`;
+                    $unit2.innerText = `cm`;
+                    break;
+                case 2:
+                    a2 = getRandom(1, 8);
+                    mm = getRandom(a2 + 1, 9);
+                    a1 = getRandom(3, 9);
+                    cm = getRandom(1, a1 - 2);
+                    $mondai.innerText = cm + `cm` + mm + `mm ＋ ` + (a1 - cm - 1) + `cm` + (a2 + 10 - mm) + `mm ＝`;
+                    $unit1.innerText = `cm`;
+                    $unit2.innerText = `mm`;
+                    break;
+                case 3:
+                    a2 = getRandom(1, 98);
+                    cm = getRandom(a2 + 1, 99);
+                    a1 = getRandom(2, 9);
+                    $mondai.innerText = (a1 - 1) + `m` + cm + `cm ＋ ` + (a2 + 100 - cm) + `cm ＝`;
+                    $unit1.innerText = `m`;
+                    $unit2.innerText = `cm`;
+                    break;
+                case 4:
+                    a2 = getRandom(1, 8);
+                    mm = getRandom(a2 + 1, 9);
+                    a1 = getRandom(2, 9);
+                    $mondai.innerText = (a1 - 1) + `cm` + mm + `mm ＋ ` + (a2 + 10 - mm) + `mm ＝`;
+                    $unit1.innerText = `cm`;
+                    $unit2.innerText = `mm`;
+                    break;
+                default:
+                    alert(`リロードして下さい`);
+            };
+        } else if (count = mondaiNum){
+            closing();
+        };
+    };  
+
+    function step5Setup(){
+        $kotae2.style.display = "inline-block";
+        $hintBtn.style.display = "none";
+        if (count < mondaiNum){
+            pb = p;
+            p = getRandom(1, 4);
+            while (p == pb){
+                p = getRandom(1, 4);
+            };
+            switch(p){
+                case 1:
+                    a2 = getRandom(2, 99);
+                    cm = getRandom(1, a2 - 1,);
+                    a1 = getRandom(1, 7);
+                    m = getRandom(a1 + 2, 9);
+                    $mondai.innerText = m + `m` + cm + `cm － ` + (m - a1 - 1) + `m` + (cm + 100 - a2) + `cm ＝`;
+                    $unit1.innerText = `m`;
+                    $unit2.innerText = `cm`;
+                    break;
+                case 2:
+                    a2 = getRandom(2, 9);
+                    mm = getRandom(1, a2 - 1);
+                    a1 = getRandom(1, 7);
+                    cm = getRandom(a1 + 2, 9);
+                    $mondai.innerText = cm + `cm` + mm + `mm － ` + (cm - a1 - 1) + `cm` + (mm + 10 - a2) + `mm ＝`;
+                    $unit1.innerText = `cm`;
+                    $unit2.innerText = `mm`;
+                    break;
+                case 3:
+                    a2 = getRandom(2, 99);
+                    cm = getRandom(1, a2 - 1);
+                    a1 = getRandom(1, 9);
+                    $mondai.innerText = (a1 + 1) + `m` + cm + `cm － ` + (cm + 100 - a2) + `cm ＝`;
+                    $unit1.innerText = `m`;
+                    $unit2.innerText = `cm`;
+                    break;
+                case 4:
+                    a2 = getRandom(2, 9);
+                    mm = getRandom(1, a2 - 1);
+                    a1 = getRandom(1, 9);
+                    $mondai.innerText = (a1 + 1) + `cm` + mm + `mm － ` + (mm + 10 - a2) + `mm ＝`;
+                    $unit1.innerText = `cm`;
+                    $unit2.innerText = `mm`;
+                    break;
+                default:
+                    alert(`リロードして下さい`);
+            };
+        } else if (count = mondaiNum){
+            closing();
+        };
     };  
 
     $checkBtn.addEventListener("click", () => {
@@ -239,13 +387,16 @@ function tani1(){
                     break;
                 case "4":
                     step4Setup();
-                    break;          
+                    break;
+                case "5":
+                    step5Setup();
+                    break;           
                 default:
                     alert(`リロードして下さい`);
             };
         } else {
             setTimeout(() => {
-                audio1.play(); //※要差し替え
+                audio3.play();
             }, 500);
         };
     });
@@ -272,6 +423,9 @@ function tani1(){
             case "4":
                 step4Setup();
                 break;
+            case "5":
+                step5Setup();
+                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -291,125 +445,3 @@ function tani1(){
 };
     
 tani1();
-
-/*
-    let l = 0;
-    let dl = 0;
-    let ml = 0;
-    let h = 0;
-    let mts = 0;
-
-function step2Setup(){
-        $hintBtn.style.display = "block";
-        if (count < mondaiNum){
-            pb = p;
-            p = getRandom(1, 6);
-            while (p == pb){
-                p = getRandom(1, 6);
-            };
-            switch(p){
-                case 1:
-                    l = getRandom(1,19);
-                    a1 = l * 10;
-                    $mondai.innerText = l + `L ＝ □dL`;
-                    
-                    break;
-                case 2:
-                    dl = getRandom(1,19) * 10;
-                    a1 = dl / 10;
-                    $mondai.innerText = dl + `dL ＝ □L`;
-                    break;
-                case 3:
-                    dl = getRandom(1,19);
-                    a1 = dl * 100;
-                    $mondai.innerText = dl + `dL ＝ □mL`;
-                    break;
-                case 4:
-                    ml = getRandom(1,19) * 100;
-                    a1 = ml / 100;
-                    $mondai.innerText = ml + `mL ＝ □dL`;
-                    break;
-                case 5:
-                    l = getRandom(1,19);
-                    a1 = l * 1000;
-                    $mondai.innerText = l + `L ＝ □mL`;
-                    break;
-                case 6:
-                    ml = getRandom(1,19) * 1000;
-                    a1 = ml / 1000;
-                    $mondai.innerText = ml + `mL ＝ □L`;
-                    break;
-                default:
-                    alert(`リロードして下さい`);
-            };
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };
-
-    function step3Setup(){
-        $hintBtn.style.display = "block";
-        if (count < mondaiNum){
-            pb = p;
-            p = getRandom(1, 2);
-            while (p == pb){
-                p = getRandom(1, 2);
-            };
-            switch(p){
-                case 1:
-                    h = getRandom(1,10);
-                    a1 = h * 60;
-                    $mondai.innerText = h + `時間 ＝ □分`;
-                    break;
-                case 2:
-                    mts = getRandom(1,10) * 60;
-                    a1 = mts / 60;
-                    $mondai.innerText = mts + `分 ＝ □時間`;
-                    break;
-                default:
-                    alert(`リロードして下さい`);
-            };
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };
-
-    $hintBtn.addEventListener("click", () => {
-        switch($step.value){
-            case "1":
-                $hint.innerText = `1m=100cm、1cm=10mm`;
-                break;
-            case "2":
-                $hint.innerText = `1L=10dL、1dL=100mL、1L=1000mL`;
-                break;
-            case "3":
-                $hint.innerText = `1時間=60分`;
-            }
-        $hintBtn.style.display = "none";
-    });
-
-    $kotae1.addEventListener("input", () => {
-        if ($kotae1.value == a1){
-            setTimeout(() => {
-                audio1.play();
-                $hint.innerText = "";
-                $kotae1.value = "";
-                $progress.value = count / mondaiNum;
-            }, 500);
-            count++;
-            switch($step.value){
-                case "1":
-                    step1Setup();
-                    break;
-                case "2":
-                    step2Setup();
-                    break;
-                case "3":
-                    step3Setup();
-                    break;           
-                default:
-                    alert(`リロードして下さい`);
-            };
-        };
-    });
-*/
