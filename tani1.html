@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小学2年生の単位（長さ・水の量・時間）</title>
+    <title>小学2年生の単位（長さ）</title>
     <link rel="icon" href="favicon.ico">
     <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリです。小学校1年生から6年生まで、全学年向け。ブラウザで動くので、ダウンロードも不要です">
     <link rel="stylesheet" href="style.css">
@@ -30,6 +30,7 @@
             <option value="1">ステップ1</option>
             <option value="2">ステップ2</option>
             <option value="3">ステップ3</option>
+            <option value="4">ステップ4</option>
         </select>
     </div>
 
@@ -41,8 +42,17 @@
     <div id="hint"></div>
     <div id="mondai"></div>
 
-    <input id="kotae" class="kotae" type="tel">
+    <div>
+        <input id="kotae1" class="kotae" type="tel">
+        <a id="unit1"></a>
+        <input id="kotae2" class="kotae" type="tel">
+        <a id="unit2"></a>
+    <div>
 
+    <div>
+        <input type="button" id="check-btn" class="btn" value="答え合わせ">
+    </div>
+    
     <div>
         <progress id="progress" value="0"></progress>
     </div>
@@ -57,11 +67,12 @@
 
 <footer class="footer-container">
     <br>
-    <p class="footer-container2">小学2年生の単位（長さ・水の量・時間）</p>
+    <p class="footer-container2">小学2年生の単位（長さ）</p>
     <ul class="footer-container2">
-        <li>ステップ1：長さ</li>
-        <li>ステップ2：水の量</li>
-        <li>ステップ3：時間</li>
+        <li>ステップ1：長さの単位をそろえる1</li>
+        <li>ステップ2：長さの単位をそろえる2</li>
+        <li>ステップ3：長さの単位をそろえる3</li>
+        <li>ステップ4：長さの足し算・引き算</li>
     </ul>
     <a class="footer-container2" href="top.html">トップ</a>
     <hr>

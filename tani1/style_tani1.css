@@ -1,15 +1,28 @@
 #hint-btn,
-#kotae,
+#kotae1,
+#kotae2,
 #progress,
 #erase-btn,
 #reset-btn {
     display: none;
 }
 
-#mondai {
+#mondai,
+#unit1,
+#unit2 {
     font-size: 20px;
 }
 
 #hint {
     font-size: 16px;
+}
+
+#kotae1,
+#kotae2 {
+    width: 60px;
+    height: 35px;
+    font-size: 20px;
+    font-family: serif;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
