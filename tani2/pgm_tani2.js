@@ -360,7 +360,7 @@ function tani2(){
                     a1 = getRandom(2, 9);
                     a2 = a2 * 10;
                     mL = mL * 10;
-                    $mondai.innerText = (a1 - 1) + `L ` + mL + `mL ＋ ` + (a2 + 100 - mL) + `mL ＝`;
+                    $mondai.innerText = (a1 - 1) + `L ` + mL + `mL ＋ ` + (a2 + 1000 - mL) + `mL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
                     break;
@@ -372,7 +372,7 @@ function tani2(){
         };
     };  
 
-    function step6Setup(){ //要チェック
+    function step6Setup(){
         $kotae2.style.display = "inline-block";
         $hintBtn.style.display = "none";
         if (count < mondaiNum){
@@ -398,7 +398,7 @@ function tani2(){
                     L = getRandom(a1 + 2, 9);
                     a2 = a2 * 10;
                     mL = mL * 10;
-                    $mondai.innerText = L + `L ` + mL + `mL － ` + (L - a1 - 1) + `L ` + (mL + 100 - a2) + `mL ＝`;
+                    $mondai.innerText = L + `L ` + mL + `mL － ` + (L - a1 - 1) + `L ` + (mL + 1000 - a2) + `mL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
                     break;
@@ -416,7 +416,7 @@ function tani2(){
                     a1 = getRandom(1, 9);
                     a2 = a2 * 10;
                     mL = mL * 10;
-                    $mondai.innerText = (a1 + 1) + `L ` + mL + `mL － ` + (mL + 100 - a2) + `mL ＝`;
+                    $mondai.innerText = (a1 + 1) + `L ` + mL + `mL － ` + (mL + 1000 - a2) + `mL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
                     break;
