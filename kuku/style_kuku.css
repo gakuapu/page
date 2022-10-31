@@ -1,8 +1,12 @@
-#kuku-hint1,
-#kuku-hint2 {
+#hint0,
+#hint1,
+#hint2 {
     font-size: 18px;
 }
 
-#hint-btn {
+#erase-btn,
+#reset-btn,
+#hint-btn,
+#kotae {
     display: none;
 }

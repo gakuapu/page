@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>九九をおぼえよう</title>
+    <title>九九をマスターしよう</title>
     <link rel="icon" href="favicon.ico">
     <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリです。小学校1年生から6年生まで、全学年向け。ブラウザで動くので、ダウンロードも不要です">
     <link rel="stylesheet" href="style.css">
@@ -44,25 +44,20 @@
             <option value="3">ステップ3</option>
             <option value="4">ステップ4</option>
             <option value="5">ステップ5</option>
+            <option value="6">ステップ6</option>
+            <option value="7">ステップ7</option>
         </select>
     </div>
 
-    <div>
-        <input type="button" id="start-btn" class="btn" value="スタート">
-        <input type="button" id="hint-btn" class="btn" value="ヒント">
-    </div>
+    <input type="button" id="start-btn" class="btn" value="スタート">
 
-    <div id="kuku-hint1"></div>
-    <div id="kuku-hint2"></div>
-    <div id="kuku-mondai"></div>
+    <div id="hint0"></div>
+    <div id="hint1"></div>
+    <div id="hint2"></div>
+    <div id="mondai"></div>
 
     <input id="kotae" class="kotae" type="tel">
-
-<!--
-    <div>
-        <progress id="progress" value="0"></progress>
-    </div>
--->
+    <input type="button" id="hint-btn" class="btn" value="ヒント">
 
     <div>
         <input type="button" id="erase-btn" class="btn" value="けす">
@@ -75,6 +70,15 @@
 <footer class="footer-container">
     <br>
     <p class="footer-container2">九九をマスターしよう</p>
+    <ul class="footer-container2">
+        <li>ステップ1：まずは足し算</li>
+        <li>ステップ2：九九の練習（声に出そう・前から）</li>
+        <li>ステップ3：九九の練習（声に出そう・後ろから）</li>
+        <li>ステップ4：九九の練習（文字・前から）</li>
+        <li>ステップ5：九九の練習（文字・後ろから）</li>
+        <li>ステップ6：九九の練習（式・前から）</li>
+        <li>ステップ7：九九の練習（式・後ろから）</li>
+    </ul>
     <a class="footer-container2" href="top.html">トップ</a>
     <hr>
     <p>算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで、全学年向け</p>

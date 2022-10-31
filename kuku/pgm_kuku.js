@@ -1,15 +1,27 @@
 function kuku(){
 
-const kukuHint = [
-    [`いん いち が いち`, `いん に が に`, `いん さん が さん`, `いん し が し`, `いん ご が ご`, `いん ろく が ろく`, `いん しち が しち`, `いん はち が はち`, `いん く が く`],
-    [`に いち が に`, `に にん が し`, `に さん が ろく`, `に し が はち`, `に ご じゅう`, `に ろく じゅうに`, `に しち じゅうし`, `に はち じゅうろく`, `に く じゅうはち`],
-    [`さん いち が さん`, `さん に が ろく`, `さ ざん が く`, `さん し じゅうに`, `さん ご じゅうご`, `さぶ ろく じゅうはち`, `さん しち にじゅういち`, `さん ぱ にじゅうし`, `さん く にじゅうしち`],
-    [`し いち が し`, `し に が はち`, `し さん じゅうに`, `し し じゅうろく`, `し ご にじゅう`, `し ろく にじゅうし`, `し しち にじゅうはち`, `し は さんじゅうに`, `し く さんじゅうろく`],
-    [`ご いち が ご`, `ご に じゅう`, `ご さん じゅうご`, `ご し にじゅう`, `ご ご にじゅうご`, `ご ろく さんじゅう`, `ご しち さんじゅうご`, `ご は しじゅう`, `ごっく しじゅうご`],
-    [`ろく いち が ろく`, `ろく に じゅうに`, `ろく さん じゅうはち`, `ろく し にじゅうし`, `ろく ご さんじゅう`, `ろく ろく さんじゅうろく`, `ろく しち しじゅうに`, `ろく は しじゅうはち`, `ろっく ごじゅうし`],
-    [`しち いち が しち`, `しち に じゅうし`, `しち さん にじゅういち`, `しち し にじゅうはち`, `しち ご さんじゅうご`, `しち ろく しじゅうに`, `しち しち しじゅうく`, `しち は ごじゅうろく`, `しち く ろくじゅうさん`],
-    [`はち いち が はち`, `はち に じゅうろく`, `はち さん にじゅうし`, `はち し さんじゅうに`, `はち ご しじゅう`, `はち ろく しじゅうはち`, `はち しち ごじゅうろく`, `はっぱ ろくじゅうし`, `はっく しちじゅうに`],
-    [`く いち が く`, `く に じゅうはち`, `く さん にじゅうしち`, `く し さんじゅうろく`, `く ご しじゅうご`, `く ろく ごじゅうし`, `く しち ろくじゅうさん`, `く は しちじゅうに`, `く く はちじゅういち`]
+const kukuText1 = [
+    [`いん いち が`, `いん に が`, `いん さん が`, `いん し が`, `いん ご が`, `いん ろく が`, `いん しち が`, `いん はち が`, `いん く が`],
+    [`に いち が`, `に にん が`, `に さん が`, `に し が`, `に ご`, `に ろく`, `に しち`, `に はち`, `に く`],
+    [`さん いち が`, `さん に が`, `さ ざん が`, `さん し`, `さん ご`, `さぶ ろく`, `さん しち`, `さん ぱ`, `さん く`],
+    [`し いち が`, `し に が`, `し さん`, `し し`, `し ご`, `し ろく`, `し しち`, `し は`, `し く`],
+    [`ご いち が`, `ご に`, `ご さん`, `ご し`, `ご ご`, `ご ろく`, `ご しち`, `ご は`, `ごっく`],
+    [`ろく いち が`, `ろく に`, `ろく さん`, `ろく し`, `ろく ご`, `ろく ろく`, `ろく しち`, `ろく は`, `ろっく`],
+    [`しち いち が`, `しち に`, `しち さん`, `しち し`, `しち ご`, `しち ろく`, `しち しち`, `しち は`, `しち く`],
+    [`はち いち が`, `はち に`, `はち さん`, `はち し`, `はち ご`, `はち ろく`, `はち しち`, `はっぱ`, `はっく`],
+    [`く いち が`, `く に`, `く さん`, `く し`, `く ご`, `く ろく`, `く しち`, `く は`, `く く`]
+];
+
+const kukuText2 = [
+    [` いち`, ` に`, ` さん`, ` し`, ` ご`, ` ろく`, ` しち`, ` はち`, ` く`],
+    [` に`, ` し`, ` ろく`, ` はち`, ` じゅう`, ` じゅうに`, ` じゅうし`, ` じゅうろく`, ` じゅうはち`],
+    [` さん`, ` ろく`, ` く`, ` じゅうに`, ` じゅうご`, ` じゅうはち`, ` にじゅういち`, ` にじゅうし`, ` にじゅうしち`],
+    [` し`, ` はち`, ` じゅうに`, ` じゅうろく`, ` にじゅう`, ` にじゅうし`, ` にじゅうはち`, ` さんじゅうに`, ` さんじゅうろく`],
+    [` ご`, ` じゅう`, ` じゅうご`, ` にじゅう`, ` にじゅうご`, ` さんじゅう`, ` さんじゅうご`, ` しじゅう`, ` しじゅうご`],
+    [` ろく`, ` じゅうに`, ` じゅうはち`, ` にじゅうし`, ` さんじゅう`, ` さんじゅうろく`, ` しじゅうに`, ` しじゅうはち`, ` ごじゅうし`],
+    [` しち`, ` じゅうし`, ` にじゅういち`, ` にじゅうはち`, ` さんじゅうご`, ` しじゅうに`, ` しじゅうく`, ` ごじゅうろく`, ` ろくじゅうさん`],
+    [` はち`, ` じゅうろく`, ` にじゅうし`, ` さんじゅうに`, ` しじゅう`, ` しじゅうはち`, ` ごじゅうろく`, ` ろくじゅうし`, ` しちじゅうに`],
+    [` く`, ` じゅうはち`, ` にじゅうしち`, ` さんじゅうろく`, ` しじゅうご`, ` ごじゅうし`, ` ろくじゅうさん`, ` しちじゅうに`, ` はちじゅういち`]
 ];
 
 const $dan = document.getElementById("dan");
@@ -19,42 +31,58 @@ const $hintBtn = document.getElementById("hint-btn");
 const $eraseBtn = document.getElementById("erase-btn");
 const $resetBtn = document.getElementById("reset-btn");
 
-const $kukuHint1 = document.getElementById("kuku-hint1");
-const $kukuHint2 = document.getElementById("kuku-hint2");
-const $kukuMondai = document.getElementById("kuku-mondai");
+const $hint0 = document.getElementById("hint0");
+const $hint1 = document.getElementById("hint1");
+const $hint2 = document.getElementById("hint2");
+const $mondai = document.getElementById("mondai");
 const $kotae = document.getElementById("kotae");
-
-//const $progress = document.getElementById("progress");
 
 let danInt = 0;
 let count = 0;
 let n = 0;
 let a = 0;
 let countMax = 9;
-let mondaiNum = 20;
 
-function getRandom(min, max){
-    let randomNum = Math.floor(Math.random() * (max + 1 - min)) + min;
-    return randomNum;
+function switchdisplay(){
+    $dan.style.display = "none";
+    $step.style.display = "none";
+    $startBtn.style.display = "none";
+    $eraseBtn.style.display = "inline-block";
+    $resetBtn.style.display = "inline-block";
+    $kotae.style.display = "block";
+};
+
+function defaultdisplay(){
+    $dan.style.display = "inline-block";
+    $step.style.display = "inline-block";
+    $startBtn.style.display = "inline-block";
+    $eraseBtn.style.display = "none";
+    $resetBtn.style.display = "none";
+    $kotae.style.display = "none";
+    $hintBtn.style.display = "none";
+};
+
+function defaultlet(){
+    count = 0;
+    n = 0;
+    $hint0.innerText = "";
+    $hint1.innerText = "";
+    $hint2.innerText = "";
+    $mondai.innerText = "";
+    $kotae.value = "";
 };
 
 function closing(){
     audio2.play();
-    //$progress.value = 1;
-    $kotae.value = "";
-    $kukuHint1.innerText = "";
-    $kukuHint2.innerText ="";
-    $kukuMondai.innerText = "";
-    $hintBtn.style.display = "none";
-    count = 0;
-    n = 0;
+    defaultlet();
+    defaultdisplay();
     alert(`クリアしました`);
 };
 
 function step1Setup(){
     if (count <= countMax){
         a = n + danInt;
-        $kukuMondai.innerText = n + `＋` + danInt + `＝`;
+        $mondai.innerText = n + `＋` + danInt + `＝`;
     } else if (count > countMax){
         closing();
     };
@@ -63,9 +91,9 @@ function step1Setup(){
 function step2Setup(){
     if (count <= countMax){
         a = danInt * count;
-        $kukuHint1.innerText = `こえに出しながらこたえを入れよう`;
-        $kukuHint2.innerText = kukuHint[danInt-1][count-1];
-        $kukuMondai.innerText = danInt + `×` + count + `＝`;
+        $hint1.innerText = `こえに出しながら答えを入れよう`;
+        $hint2.innerText = kukuText1[danInt-1][count-1] + kukuText2[danInt-1][count-1];
+        $mondai.innerText = danInt + `×` + count + `＝`;
     } else if (count > countMax){
         closing();
     };
@@ -73,29 +101,54 @@ function step2Setup(){
 
 function step3Setup(){
     if (count <= countMax){
-        a = danInt * count;
-        $kukuMondai.innerText = danInt + `×` + count + `＝`;
+        a = danInt * (10 - count);
+        $hint1.innerText = `こえに出しながら答えを入れよう`;
+        $hint2.innerText = kukuText1[danInt-1][10-count-1] + kukuText2[danInt-1][10-count-1];
+        $mondai.innerText = danInt + `×` + (10 - count) + `＝`;
     } else if (count > countMax){
         closing();
     };
 };
 
 function step4Setup(){
+    $hintBtn.style.display = "block";
     if (count <= countMax){
-        a = danInt * (10 - count);
-        $kukuMondai.innerText = danInt + `×` + (10 - count) + `＝`;
+        a = danInt * count;
+        $hint1.innerText = `答えを数字で入れよう`;
+        $mondai.innerText = kukuText1[danInt-1][count-1];
     } else if (count > countMax){
         closing();
     };
 };
 
 function step5Setup(){
-    if (count <= mondaiNum){
-        n = getRandom(1,9);
-        a = danInt * n;
-        $kukuMondai.innerText = danInt + `×` + n + `＝`; 
-    } else if (count > mondaiNum){
-            closing();
+    $hintBtn.style.display = "block";
+    if (count <= countMax){
+        a = danInt * (10 - count);
+        $hint1.innerText = `答えを数字で入れよう`;
+        $mondai.innerText = kukuText1[danInt-1][10-count-1];
+    } else if (count > countMax){
+        closing();
+    };
+};
+
+function step6Setup(){
+    $hintBtn.style.display = "block";
+    if (count <= countMax){
+        a = danInt * count;
+        $mondai.innerText = danInt + `×` + count + `＝`;
+    } else if (count > countMax){
+        closing();
+    };
+};
+
+function step7Setup(){
+    $hintBtn.style.display = "block";
+    if (count <= countMax){
+        a = danInt * (10 - count);
+        $mondai.innerText = danInt + `×` + (10 - count) + `＝`;
+    } else if (count > countMax){
+        closing();
     };
 };
 
@@ -104,11 +157,9 @@ $kotae.addEventListener("input", () => {
         setTimeout(() => {
             audio1.play();
             $kotae.value = "";
-            //$progress.value = count / mondaiNum;
-            //count++;
         }, 500);
         count++;
-        $kukuHint2.innerText = "";
+        $hint2.innerText = "";
         switch($step.value){
             case "1":
                 n = a;
@@ -126,6 +177,12 @@ $kotae.addEventListener("input", () => {
             case "5":
                 step5Setup();
                 break;
+            case "6":
+                step6Setup();
+                break;
+            case "7":
+                step7Setup();
+                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -133,9 +190,10 @@ $kotae.addEventListener("input", () => {
 });
 
 $startBtn.addEventListener("click", () => {
+    switchdisplay();
     count = 1;
-    //$progress.value = 0;
     danInt = parseInt($dan.value);
+    $hint0.innerText = danInt + `のだんの練習`;
     switch($step.value){
         case "1":
             step1Setup();
@@ -145,14 +203,18 @@ $startBtn.addEventListener("click", () => {
             break;
         case "3":
             step3Setup();
-            $hintBtn.style.display = "inline-block";
             break;
         case "4":
             step4Setup();
-            $hintBtn.style.display = "inline-block";
             break;
         case "5":
             step5Setup();
+            break;
+        case "6":
+            step6Setup();
+            break;
+        case "7":
+            step7Setup();
             break;
         default:
             alert(`リロードして下さい`);
@@ -161,15 +223,22 @@ $startBtn.addEventListener("click", () => {
 
 $hintBtn.addEventListener("click", () => {
     switch($step.value){
-        case "3":
-            $kukuHint2.innerText = kukuHint[danInt-1][count-1];
-            break;
         case "4":
-            $kukuHint2.innerText = kukuHint[danInt-1][10-count-1];
+            $hint2.innerText = kukuText1[danInt-1][count-1] + kukuText2[danInt-1][count-1];;
+            break;
+        case "5":
+            $hint2.innerText = kukuText1[danInt-1][10-count-1] + kukuText2[danInt-1][10-count-1];
+            break;
+        case "6":
+            $hint2.innerText = kukuText1[danInt-1][count-1] + kukuText2[danInt-1][count-1];;
+            break;
+        case "7":
+            $hint2.innerText = kukuText1[danInt-1][10-count-1] + kukuText2[danInt-1][10-count-1];
             break;
         default:
             alert(`リロードして下さい`);
     };
+    $hintBtn.style.display = "none";
 });
 
 $eraseBtn.addEventListener("click", () => {
@@ -177,14 +246,8 @@ $eraseBtn.addEventListener("click", () => {
 });
 
 $resetBtn.addEventListener("click", () => {
-    count = 0;
-    n = 0;
-    $kukuHint1.innerText = "";
-    $kukuHint2.innerText = "";
-    $kotae.value = "";
-    $kukuMondai.innerText = "";
-    $hintBtn.style.display = "none";
-    //$progress.value = 0;
+    defaultlet();
+    defaultdisplay();
 });
 
 };
