@@ -18,7 +18,7 @@ function tasuhiku3(){
     let a = 0;
     let ab = 0;
     let p = 0;
-    let mondaiNum = 20;
+    let mondaiNum = 15;
     
     function getRandom(min, max){
         let randomNum = Math.floor(Math.random() * (max + 1 - min)) + min;
