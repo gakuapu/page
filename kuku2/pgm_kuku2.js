@@ -72,69 +72,62 @@ function defaultlet(){
     $kotae.value = "";
 };
 
+function writeRecords(){
+        //要リファクタ↓
+    if (records[0] == 3){
+            $r1.innerText = `マスターしました！`;
+        } else {
+            $r1.innerText = records[0] + `回クリア。あと` + (3 - records[0]) + `回`;
+        };
+    if (records[1] == 3){
+            $r2.innerText = `マスターしました！`;
+        } else {
+            $r2.innerText = records[1] + `回クリア。あと` + (3 - records[1]) + `回`;
+        };
+    if (records[2] == 3){
+            $r3.innerText = `マスターしました！`;
+        } else {
+            $r3.innerText = records[2] + `回クリア。あと` + (3 - records[2]) + `回`;
+        };
+    if (records[3] == 3){
+            $r4.innerText = `マスターしました！`;
+        } else {
+            $r4.innerText = records[3] + `回クリア。あと` + (3 - records[3]) + `回`;
+        };
+    if (records[4] == 3){
+            $r5.innerText = `マスターしました！`;
+        } else {
+            $r5.innerText = records[4] + `回クリア。あと` + (3 - records[4]) + `回`;
+        };
+    if (records[5] == 3){
+            $r6.innerText = `マスターしました！`;
+        } else {
+            $r6.innerText = records[5] + `回クリア。あと` + (3 - records[5]) + `回`;
+        };
+    if (records[6] == 3){
+            $r7.innerText = `マスターしました！`;
+        } else {
+            $r7.innerText = records[6] + `回クリア。あと` + (3 - records[6]) + `回`;
+        };
+    if (records[7] == 3){
+            $r8.innerText = `マスターしました！`;
+        } else {
+            $r8.innerText = records[7] + `回クリア。あと` + (3 - records[7]) + `回`;
+        };
+    if (records[8] == 3){
+            $r9.innerText = `マスターしました！`;
+        } else {
+            $r9.innerText = records[8] + `回クリア。あと` + (3 - records[8]) + `回`;
+        };
+    //要リファクタ↑
+};
+
 function closing(){
     audio2.play();
     if (records[danInt - 1] < 3){
         records[danInt - 1]++;
     };
-    //要リファクタ↓
-    $r1.innerText = ``;
-    $r2.innerText = ``;
-    $r3.innerText = ``;
-    $r4.innerText = ``;
-    $r5.innerText = ``;
-    $r6.innerText = ``;
-    $r7.innerText = ``;
-    $r8.innerText = ``;
-    $r9.innerText = ``;
-
-    let i;
-    if (records[0] > 0){
-        for (i = 0; i < records[0]; i++){
-            $r1.innerText += `☆ `;
-        }
-    };
-    if (records[1] > 0){
-        for (i = 0; i < records[1]; i++){
-            $r2.innerText = `☆ `;
-        }
-    };
-    if (records[2] > 0){
-        for (i = 0; i < records[2]; i++){
-            $r3.innerText += `☆ `;
-        }
-    };
-    if (records[3] > 0){
-        for (i = 0; i < records[3]; i++){
-            $r4.innerText += `☆ `;
-        }
-    };
-    if (records[4] > 0){
-        for (i = 0; i < records[4]; i++){
-            $r5.innerText += `☆ `;
-        }
-    };
-    if (records[5] > 0){
-        for (i = 0; i < records[5]; i++){
-            $r6.innerText += `☆ `;
-        }
-    };
-    if (records[6] > 0){
-        for (i = 0; i < records[6]; i++){
-            $r7.innerText += `☆ `;
-        }
-    };
-    if (records[7] > 0){
-        for (i = 0; i < records[7]; i++){
-            $r8.innerText += `☆ `;
-        }
-    };
-    if (records[8] > 0){
-        for (i = 0; i < records[8]; i++){
-            $r9.innerText += `☆ `;
-        }
-    };
-    //要リファクタ↑
+    writeRecords();
     defaultlet();
     defaultdisplay();
     alert(`クリアしました`);
@@ -177,6 +170,8 @@ $resetBtn.addEventListener("click", () => {
     defaultlet();
     defaultdisplay();
 });
+
+writeRecords();
 
 };
 
