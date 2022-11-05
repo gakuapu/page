@@ -13,11 +13,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>九九をマスターしよう</title>
+    <title>九九の確認テスト</title>
     <link rel="icon" href="favicon.ico">
     <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリです。小学校1年生から6年生まで、全学年向け。ブラウザで動くので、ダウンロードも不要です">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="kuku\style_kuku.css">
+    <link rel="stylesheet" href="kuku2\style_kuku2.css">
 </head>
 <main>
 <body>
@@ -37,49 +37,27 @@
             <option value="8">8のだん</option>
             <option value="9">9のだん</option>
         </select>
-
-        <select id="step">
-            <option value="1">ステップ1</option>
-            <option value="2">ステップ2</option>
-            <option value="3">ステップ3</option>
-            <option value="4">ステップ4</option>
-            <option value="5">ステップ5</option>
-            <option value="6">ステップ6</option>
-            <option value="7">ステップ7</option>
-        </select>
     </div>
 
     <input type="button" id="start-btn" class="btn" value="スタート">
 
     <div id="hint0"></div>
-    <div id="hint1"></div>
-    <div id="hint2"></div>
     <div id="mondai"></div>
 
     <input id="kotae" class="kotae" type="tel">
-    <input type="button" id="hint-btn" class="btn" value="ヒント">
 
     <div>
         <input type="button" id="erase-btn" class="btn" value="けす">
         <input type="button" id="reset-btn" class="btn" value="リセット">
     </div>
 
-    <script src="kuku\pgm_kuku.js"></script>
+    <script src="kuku2\pgm_kuku2.js"></script>
 </main>
 
 <footer class="footer-container">
     <br>
-    <p class="footer-container2">九九をマスターしよう</p>
-    <ul class="footer-container2">
-        <li>ステップ1：まずは足し算</li>
-        <li>ステップ2：九九の練習（声に出そう・前から）</li>
-        <li>ステップ3：九九の練習（声に出そう・後ろから）</li>
-        <li>ステップ4：九九の練習（文字・前から）</li>
-        <li>ステップ5：九九の練習（文字・後ろから）</li>
-        <li>ステップ6：九九の練習（式・前から）</li>
-        <li>ステップ7：九九の練習（式・後ろから）</li>
-    </ul>
-    <p><a class="footer-container2" href="kuku2.html">九九の確認テストに進む</a></p>
+    <p class="footer-container2">九九の確認テスト</p>
+    <p><a class="footer-container2" href="kuku.html">九九の練習にもどる</a></p>
     <a class="footer-container2" href="top.html">トップ</a>
     <hr>
     <p>算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで、全学年向け</p>
