@@ -108,6 +108,7 @@ function switchSetup(stepValue){
 };
 
 function step1Setup(){
+    n = a;
     if (count <= countMax){
         a = n + danInt;
         $mondai.innerText = n + `＋` + danInt + `＝`;

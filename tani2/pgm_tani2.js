@@ -341,7 +341,7 @@ function tani2(){
         };
     };  
 
-    function step5Setup(){ //要チェック
+    function step5Setup(){
         $kotae2.style.display = "inline-block";
         $hintBtn.style.display = "none";
         if (count < mondaiNum){

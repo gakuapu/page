@@ -86,7 +86,7 @@ function tasuhiku6(){
                 step7Setup();
                 break;
             case "8":
-                step7Setup();
+                step8Setup();
                 break;
             default:
                 alert(`リロードして下さい`);
