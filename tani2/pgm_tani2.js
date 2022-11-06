@@ -78,6 +78,31 @@ function tani2(){
         alert(`クリアしました`);
     };
 
+    function switchSetup(stepValue){
+        switch(stepValue){
+            case "1":
+                step1Setup();
+                break;
+            case "2":
+                step2Setup();
+                break;
+            case "3":
+                step3Setup();
+                break;
+            case "4":
+                step4Setup();
+                break;
+            case "5":
+                step5Setup();
+                break;
+            case "6":
+                step6Setup();
+                break;
+            default:
+                alert(`リロードして下さい`);
+        };
+    };
+
     function step1Setup(){
         $kotae2.style.display = "none";
         $hintBtn.style.display = "block";
@@ -438,28 +463,7 @@ function tani2(){
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;
-            switch($step.value){
-                case "1":
-                    step1Setup();
-                    break;
-                case "2":
-                    step2Setup();
-                    break;
-                case "3":
-                    step3Setup();
-                    break;
-                case "4":
-                    step4Setup();
-                    break;
-                case "5":
-                    step5Setup();
-                    break;
-                case "6":
-                    step6Setup();
-                    break;             
-                default:
-                    alert(`リロードして下さい`);
-            };
+            switchSetup($step.value);
         } else {
             setTimeout(() => {
                 audio3.play();
@@ -476,28 +480,7 @@ function tani2(){
         switchdisplay();
         defaultlet();
         $progress.value = 0;
-        switch($step.value){
-            case "1":
-                step1Setup();
-                break;
-            case "2":
-                step2Setup();
-                break;
-            case "3":
-                step3Setup();
-                break;
-            case "4":
-                step4Setup();
-                break;
-            case "5":
-                step5Setup();
-                break;
-            case "6":
-                step6Setup();
-                break;
-            default:
-                alert(`リロードして下さい`);
-        };
+        switchSetup($step.value);
     });
     
     $eraseBtn.addEventListener("click", () => {

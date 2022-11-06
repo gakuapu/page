@@ -22,7 +22,7 @@ function generateRandoms(){
 
 let records = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-//classnameでの取得なので配列になるはず
+//classnameでの取得なので配列になる
 const $r = document.getElementsByClassName("r");
 
 const $dan = document.getElementById("dan");

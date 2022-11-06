@@ -83,6 +83,25 @@ function retsu1(){
         alert(`クリアしました`);
     };
 
+    function switchSetup(stepValue){
+        switch(stepValue){
+            case "1":
+                step1Setup();
+                break;
+            case "2":
+                step2Setup();
+                break;
+            case "3":
+                step3Setup();
+                break;
+            case "4":
+                step4Setup();
+                break;
+            default:
+                alert(`リロードして下さい`);
+        };
+    };
+
     //全部で
     function step1Setup(){
         $hintBtn.style.display = "block";
@@ -225,22 +244,7 @@ function retsu1(){
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;
-            switch($step.value){
-                case "1":
-                    step1Setup();
-                    break;
-                case "2":
-                    step2Setup();
-                    break;
-                case "3":
-                    step3Setup();
-                    break;
-                case "4":
-                    step4Setup();
-                    break;
-                default:
-                    alert(`リロードして下さい`);
-            };
+            switchSetup($step.value);
         };
     });
     
@@ -259,22 +263,7 @@ function retsu1(){
         switchdisplay();
         defaultlet();
         $progress.value = 0;
-        switch($step.value){
-            case "1":
-                step1Setup();
-                break;
-            case "2":
-                step2Setup();
-                break;
-            case "3":
-                step3Setup();
-                break;
-            case "4":
-                step4Setup();
-                break;
-            default:
-                alert(`リロードして下さい`);
-        };
+        switchSetup($step.value);
     });
     
     $eraseBtn.addEventListener("click", () => {

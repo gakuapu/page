@@ -79,6 +79,34 @@ function closing(){
     alert(`クリアしました`);
 };
 
+function switchSetup(stepValue){
+    switch(stepValue){
+        case "1":
+            step1Setup();
+            break;
+        case "2":
+            step2Setup();
+            break;
+        case "3":
+            step3Setup();
+            break;
+        case "4":
+            step4Setup();
+            break;
+        case "5":
+            step5Setup();
+            break;
+        case "6":
+            step6Setup();
+            break;
+        case "7":
+            step7Setup();
+            break;
+        default:
+            alert(`リロードして下さい`);
+    };
+};
+
 function step1Setup(){
     if (count <= countMax){
         a = n + danInt;
@@ -160,32 +188,7 @@ $kotae.addEventListener("input", () => {
         }, 500);
         count++;
         $hint2.innerText = "";
-        switch($step.value){
-            case "1":
-                n = a;
-                step1Setup();
-                break;
-            case "2":
-                step2Setup();
-                break;
-            case "3":
-                step3Setup();
-                break;
-            case "4":
-                step4Setup();
-                break;
-            case "5":
-                step5Setup();
-                break;
-            case "6":
-                step6Setup();
-                break;
-            case "7":
-                step7Setup();
-                break;
-            default:
-                alert(`リロードして下さい`);
-        };
+        switchSetup($step.value);
     };
 });
 
@@ -194,31 +197,7 @@ $startBtn.addEventListener("click", () => {
     count = 1;
     danInt = parseInt($dan.value);
     $hint0.innerText = danInt + `のだんの練習`;
-    switch($step.value){
-        case "1":
-            step1Setup();
-            break;
-        case "2":
-            step2Setup();
-            break;
-        case "3":
-            step3Setup();
-            break;
-        case "4":
-            step4Setup();
-            break;
-        case "5":
-            step5Setup();
-            break;
-        case "6":
-            step6Setup();
-            break;
-        case "7":
-            step7Setup();
-            break;
-        default:
-            alert(`リロードして下さい`);
-    };
+    switchSetup($step.value);
 });
 
 $hintBtn.addEventListener("click", () => {
