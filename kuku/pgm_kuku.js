@@ -195,6 +195,7 @@ $kotae.addEventListener("input", () => {
 
 $startBtn.addEventListener("click", () => {
     switchdisplay();
+    a = 0;
     count = 1;
     danInt = parseInt($dan.value);
     $hint0.innerText = danInt + `のだんの練習`;
