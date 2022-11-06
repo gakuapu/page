@@ -11,9 +11,9 @@ function getRandom(min, max){
 function generateRandoms(){
     for (let i = 1; i <= 9; i++){
         while(true){
-            let tmp = getRandom(1, 9);
-            if(!randoms.includes(tmp)){
-                randoms.push(tmp);
+            let rtmp = getRandom(1, 9);
+            if(!randoms.includes(rtmp)){
+                randoms.push(rtmp);
                 break;
             }
         } 
@@ -22,24 +22,15 @@ function generateRandoms(){
 
 let records = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-//要リファクタ↓
-const $r1 = document.getElementById("r1");
-const $r2 = document.getElementById("r2");
-const $r3 = document.getElementById("r3");
-const $r4 = document.getElementById("r4");
-const $r5 = document.getElementById("r5");
-const $r6 = document.getElementById("r6");
-const $r7 = document.getElementById("r7");
-const $r8 = document.getElementById("r8");
-const $r9 = document.getElementById("r9");
-//要リファクタ↑
+//classnameでの取得なので配列になるはず
+const $r = document.getElementsByClassName("r");
 
 const $dan = document.getElementById("dan");
 const $startBtn = document.getElementById("start-btn");
 const $eraseBtn = document.getElementById("erase-btn");
 const $resetBtn = document.getElementById("reset-btn");
 
-const $hint0 = document.getElementById("hint0");
+const $danTitle = document.getElementById("dantitle");
 const $mondai = document.getElementById("mondai");
 const $kotae = document.getElementById("kotae");
 
@@ -67,59 +58,20 @@ function defaultdisplay(){
 function defaultlet(){
     count = 0;
     randoms.length = 0; //配列の要素を全て削除
-    $hint0.innerText = "";
+    $danTitle.innerText = "";
     $mondai.innerText = "";
     $kotae.value = "";
 };
 
 function writeRecords(){
-        //要リファクタ↓
-    if (records[0] == 3){
-            $r1.innerText = `マスターしました！`;
+    for (let rcount = 0; rcount < $r.length; rcount++){
+        $r[rcount].innerText = records[rcount] + `回クリア。`;
+        if (records[rcount] == 3){
+            $r[rcount].innerText += `マスター！`;
         } else {
-            $r1.innerText = records[0] + `回クリア。あと` + (3 - records[0]) + `回`;
+            $r[rcount].innerText += `あと` + (3 - records[rcount]) + `回`; 
         };
-    if (records[1] == 3){
-            $r2.innerText = `マスターしました！`;
-        } else {
-            $r2.innerText = records[1] + `回クリア。あと` + (3 - records[1]) + `回`;
-        };
-    if (records[2] == 3){
-            $r3.innerText = `マスターしました！`;
-        } else {
-            $r3.innerText = records[2] + `回クリア。あと` + (3 - records[2]) + `回`;
-        };
-    if (records[3] == 3){
-            $r4.innerText = `マスターしました！`;
-        } else {
-            $r4.innerText = records[3] + `回クリア。あと` + (3 - records[3]) + `回`;
-        };
-    if (records[4] == 3){
-            $r5.innerText = `マスターしました！`;
-        } else {
-            $r5.innerText = records[4] + `回クリア。あと` + (3 - records[4]) + `回`;
-        };
-    if (records[5] == 3){
-            $r6.innerText = `マスターしました！`;
-        } else {
-            $r6.innerText = records[5] + `回クリア。あと` + (3 - records[5]) + `回`;
-        };
-    if (records[6] == 3){
-            $r7.innerText = `マスターしました！`;
-        } else {
-            $r7.innerText = records[6] + `回クリア。あと` + (3 - records[6]) + `回`;
-        };
-    if (records[7] == 3){
-            $r8.innerText = `マスターしました！`;
-        } else {
-            $r8.innerText = records[7] + `回クリア。あと` + (3 - records[7]) + `回`;
-        };
-    if (records[8] == 3){
-            $r9.innerText = `マスターしました！`;
-        } else {
-            $r9.innerText = records[8] + `回クリア。あと` + (3 - records[8]) + `回`;
-        };
-    //要リファクタ↑
+    };
 };
 
 function closing(){
@@ -156,7 +108,7 @@ $kotae.addEventListener("input", () => {
 $startBtn.addEventListener("click", () => {
     switchdisplay();
     danInt = parseInt($dan.value);
-    $hint0.innerText = danInt + `のだんの確認テスト`;
+    $danTitle.innerText = danInt + `のだんの確認テスト`;
     count = 1;
     generateRandoms();
     setup();
