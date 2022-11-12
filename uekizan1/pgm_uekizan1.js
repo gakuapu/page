@@ -111,15 +111,15 @@ function uekizan1(){
             switch(p){
                 case 1:
                     TrNum = IntNum + 1;
-                    $mondai.innerText = `長さ` + AllLen + `mの道に` + IntLen + `m間隔（かんかく）で木を植えます。道の両はしにも木を植える場合、木は何本必要?`;
+                    $mondai.innerText = `長さ` + AllLen + `mの道に` + IntLen + `mごとに木を植えます。道の両はしにも木を植える場合、木は何本必要?`;
                     break;
                 case 2:
                     TrNum = IntNum - 1;
-                    $mondai.innerText = `長さ` + AllLen + `mの道に` + IntLen + `m間隔（かんかく）で木を植えます。道の両はしには木を植えない場合、木は何本必要?`; 
+                    $mondai.innerText = `長さ` + AllLen + `mの道に` + IntLen + `mごとに木を植えます。道の両はしには木を植えない場合、木は何本必要?`; 
                     break;
                 case 3:
                     TrNum = IntNum;
-                    $mondai.innerText = `1周` + AllLen + `mの池のまわりに` + IntLen + `m間隔（かんかく）で木を植える時、木は何本必要?`; 
+                    $mondai.innerText = `1周` + AllLen + `mの池のまわりに` + IntLen + `mごとに木を植える時、木は何本必要?`; 
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -143,17 +143,17 @@ function uekizan1(){
             switch(p){
                 case 4:
                     TrNum = IntNum + 1;
-                    $mondai.innerText = `道にそって` + IntLen + `m間隔（かんかく）で木を植えたところ、木が` + TrNum + `本必要でした。道の両はしにも木を植えていた場合、道の長さは何m?`;
+                    $mondai.innerText = `道にそって` + IntLen + `mごとに木を植えたところ、木が` + TrNum + `本必要でした。道の両はしにも木を植えていた場合、道の長さは何m?`;
                     hintMsg = `木と木の間は` + TrNum + `－1＝` + IntNum + `か所`;
                     break;
                 case 5:
                     TrNum = IntNum - 1;
-                    $mondai.innerText = `道にそって` + IntLen + `m間隔（かんかく）で木を植えたところ、木が` + TrNum + `本必要でした。道の両はしには木を植えていない場合、道の長さは何m?`;
+                    $mondai.innerText = `道にそって` + IntLen + `mごとに木を植えたところ、木が` + TrNum + `本必要でした。道の両はしには木を植えていない場合、道の長さは何m?`;
                     hintMsg = `木と木の間は` + TrNum + `＋1＝` + IntNum + `か所`;
                     break;
                 case 6:
                     TrNum = IntNum;
-                    $mondai.innerText = `池のまわりに` + IntLen + `m間隔（かんかく）で木を植えたところ、木が` + TrNum + `本必要でした。池のまわりの長さは何m?`;
+                    $mondai.innerText = `池のまわりに` + IntLen + `mごとに木を植えたところ、木が` + TrNum + `本必要でした。池のまわりの長さは何m?`;
                     hintMsg = `木と木の間は` + IntNum + `か所`;
                     break;
                 default:
