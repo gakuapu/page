@@ -313,22 +313,22 @@ function tani2(){
                     break;
                 case 3:
                     a1 = getRandom(2, 15);
-                    a2 = getRandom(2, 99);
+                    a2 = getRandom(2, 9);
                     L = getRandom(1, a1 - 1);
                     mL = getRandom(1, a2 - 1);
-                    a2 = a2 * 10;
-                    mL = mL * 10;
+                    a2 = a2 * 100;
+                    mL = mL * 100;
                     $mondai.innerText = L + `L ` + mL + `mL ＋ ` + (a1 - L) + `L ` + (a2 - mL) + `mL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
                     break;
                 case 4:
                     L = getRandom(2, 15);
-                    mL = getRandom(2, 99);
+                    mL = getRandom(2, 9);
                     a1 = getRandom(1, L - 1);
                     a2 = getRandom(1, mL - 1);
-                    a2 = a2 * 10;
-                    mL = mL * 10;
+                    a2 = a2 * 100;
+                    mL = mL * 100;
                     $mondai.innerText = L + `L ` + mL + `mL － ` + (L - a1) + `L ` + (mL - a2) + `mL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
@@ -361,12 +361,12 @@ function tani2(){
                     $unit2.innerText = `dL`;
                     break;
                 case 2:
-                    a2 = getRandom(1, 98);
-                    mL = getRandom(a2 + 1, 99);
+                    a2 = getRandom(1, 8);
+                    mL = getRandom(a2 + 1, 9);
                     a1 = getRandom(3, 9);
                     L = getRandom(1, a1 - 2);
-                    a2 = a2 * 10;
-                    mL = mL * 10;
+                    a2 = a2 * 100;
+                    mL = mL * 100;
                     $mondai.innerText = L + `L ` + mL + `mL ＋ ` + (a1 - L - 1) + `L ` + (a2 + 1000 - mL) + `mL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
@@ -380,11 +380,11 @@ function tani2(){
                     $unit2.innerText = `dL`;
                     break;
                 case 4:
-                    a2 = getRandom(1, 98);
-                    mL = getRandom(a2 + 1, 99);
+                    a2 = getRandom(1, 8);
+                    mL = getRandom(a2 + 1, 9);
                     a1 = getRandom(2, 9);
-                    a2 = a2 * 10;
-                    mL = mL * 10;
+                    a2 = a2 * 100;
+                    mL = mL * 100;
                     $mondai.innerText = (a1 - 1) + `L ` + mL + `mL ＋ ` + (a2 + 1000 - mL) + `mL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
@@ -417,12 +417,12 @@ function tani2(){
                     $unit2.innerText = `dL`;
                     break;
                 case 2:
-                    a2 = getRandom(2, 99);
+                    a2 = getRandom(2, 9);
                     mL = getRandom(1, a2 - 1,);
                     a1 = getRandom(1, 7);
                     L = getRandom(a1 + 2, 9);
-                    a2 = a2 * 10;
-                    mL = mL * 10;
+                    a2 = a2 * 100;
+                    mL = mL * 100;
                     $mondai.innerText = L + `L ` + mL + `mL － ` + (L - a1 - 1) + `L ` + (mL + 1000 - a2) + `mL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
@@ -436,11 +436,11 @@ function tani2(){
                     $unit2.innerText = `dL`;
                     break;
                 case 4:
-                    a2 = getRandom(2, 99);
+                    a2 = getRandom(2, 9);
                     mL = getRandom(1, a2 - 1);
                     a1 = getRandom(1, 9);
-                    a2 = a2 * 10;
-                    mL = mL * 10;
+                    a2 = a2 * 100;
+                    mL = mL * 100;
                     $mondai.innerText = (a1 + 1) + `L ` + mL + `mL － ` + (mL + 1000 - a2) + `mL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;

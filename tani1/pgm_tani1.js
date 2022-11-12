@@ -241,18 +241,22 @@ function tani1(){
             switch(p){
                 case 1:
                     a1 = getRandom(2, 15);
-                    a2 = getRandom(2, 99);
+                    a2 = getRandom(2, 9);
                     m = getRandom(1, a1 - 1);
                     cm = getRandom(1, a2 - 1);
+                    a2 = a2 * 10;
+                    cm = cm * 10;
                     $mondai.innerText = m + `m` + cm + `cm ＋ ` + (a1 - m) + `m` + (a2 - cm) + `cm ＝`;
                     $unit1.innerText = `m`;
                     $unit2.innerText = `cm`;
                     break;
                 case 2:
                     m = getRandom(2, 15);
-                    cm = getRandom(2, 99);
+                    cm = getRandom(2, 9);
                     a1 = getRandom(1, m - 1);
                     a2 = getRandom(1, cm - 1);
+                    a2 = a2 * 10;
+                    cm = cm * 10;
                     $mondai.innerText = m + `m` + cm + `cm － ` + (m - a1) + `m` + (cm - a2) + `cm ＝`;
                     $unit1.innerText = `m`;
                     $unit2.innerText = `cm`;
@@ -294,10 +298,12 @@ function tani1(){
             };
             switch(p){
                 case 1:
-                    a2 = getRandom(1, 98);
-                    cm = getRandom(a2 + 1, 99);
+                    a2 = getRandom(1, 8);
+                    cm = getRandom(a2 + 1, 9);
                     a1 = getRandom(3, 9);
                     m = getRandom(1, a1 - 2);
+                    a2 = a2 * 10;
+                    cm = cm * 10;
                     $mondai.innerText = m + `m` + cm + `cm ＋ ` + (a1 - m - 1) + `m` + (a2 + 100 - cm) + `cm ＝`;
                     $unit1.innerText = `m`;
                     $unit2.innerText = `cm`;
@@ -312,9 +318,11 @@ function tani1(){
                     $unit2.innerText = `mm`;
                     break;
                 case 3:
-                    a2 = getRandom(1, 98);
-                    cm = getRandom(a2 + 1, 99);
+                    a2 = getRandom(1, 8);
+                    cm = getRandom(a2 + 1, 9);
                     a1 = getRandom(2, 9);
+                    a2 = a2 * 10;
+                    cm = cm * 10;
                     $mondai.innerText = (a1 - 1) + `m` + cm + `cm ＋ ` + (a2 + 100 - cm) + `cm ＝`;
                     $unit1.innerText = `m`;
                     $unit2.innerText = `cm`;
@@ -346,10 +354,12 @@ function tani1(){
             };
             switch(p){
                 case 1:
-                    a2 = getRandom(2, 99);
+                    a2 = getRandom(2, 9);
                     cm = getRandom(1, a2 - 1,);
                     a1 = getRandom(1, 7);
                     m = getRandom(a1 + 2, 9);
+                    a2 = a2 * 10;
+                    cm = cm * 10;
                     $mondai.innerText = m + `m` + cm + `cm － ` + (m - a1 - 1) + `m` + (cm + 100 - a2) + `cm ＝`;
                     $unit1.innerText = `m`;
                     $unit2.innerText = `cm`;
@@ -364,9 +374,11 @@ function tani1(){
                     $unit2.innerText = `mm`;
                     break;
                 case 3:
-                    a2 = getRandom(2, 99);
+                    a2 = getRandom(2, 9);
                     cm = getRandom(1, a2 - 1);
                     a1 = getRandom(1, 9);
+                    a2 = a2 * 10;
+                    cm = cm * 10;
                     $mondai.innerText = (a1 + 1) + `m` + cm + `cm － ` + (cm + 100 - a2) + `cm ＝`;
                     $unit1.innerText = `m`;
                     $unit2.innerText = `cm`;
