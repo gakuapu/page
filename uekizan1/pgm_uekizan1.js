@@ -1,4 +1,4 @@
-function retsu1(){
+function uekizan1(){
     
     const $step = document.getElementById("step");
     const $startBtn = document.getElementById("start-btn");
@@ -13,17 +13,17 @@ function retsu1(){
     const $progress = document.getElementById("progress");
     
     let count = 0;
-    let mnum = 0; //前に
-    let mth = 0; //前から ⇒ mnum + 1
-    let unum = 0; //後ろに
-    let uth = 0; //後ろから ⇒ unum + 1
-    let allnum = 0; //全部で ⇒ mnum + 1 + unum
+    let AllLen = 0;
+    let IntLen = 0;
+    let IntNum = 0;
+    let TrNum = 0;
     let a = 0; //答え
     let p = 0; //パターン
     let pb = 0; //前問のパターン
     let pstep4 = 0; //ステップ4のパターン
     let pstep4b = 0; //前問のステップ4のパターン
     let mondaiNum = 10;
+    let hintMsg = "";
     
     function getRandom(min, max){
         let randomNum = Math.floor(Math.random() * (max + 1 - min)) + min;
@@ -32,11 +32,10 @@ function retsu1(){
     
     function defaultlet(){
         count = 0;
-        mnum = 0;
-        mth = 0;
-        unum = 0;
-        uth = 0;
-        allnum = 0;
+        AllLen = 0;
+        IntLen = 0;
+        IntNum = 0;
+        TrNum = 0;
         a = 0;
         p = 0;
         pb = 0;
@@ -48,11 +47,9 @@ function retsu1(){
     };
 
     function setlet(){
-        mnum = getRandom (3, 6);
-        unum = getRandom (3, 6);
-        mth = mnum + 1;
-        uth = unum + 1;
-        allnum = mnum + 1 + unum;
+        IntLen = getRandom (5, 9);
+        IntNum = getRandom (8, 15);
+        AllLen = IntLen * IntNum;
     };
 
     function switchdisplay(){
@@ -102,111 +99,106 @@ function retsu1(){
         };
     };
 
-    //全部で
     function step1Setup(){
         $hintBtn.style.display = "block";
         setlet();
-        a = allnum;
         if (count < mondaiNum){
             pb = p;
-            p = getRandom(1, 4);
+            p = getRandom(1, 3);
             while (p == pb){
-                p = getRandom(1, 4);
+                p = getRandom(1, 3);
             };
             switch(p){
                 case 1:
-                    $mondai.innerText = `あなたの前に` + mnum + `人、あなたの後ろに` + unum + `人います。`;
+                    TrNum = IntNum + 1;
+                    $mondai.innerText = `長さ` + AllLen + `mの道に` + IntLen + `m間隔（かんかく）で木を植えます。道の両はしにも木を植える場合、木は何本必要?`;
                     break;
                 case 2:
-                    $mondai.innerText = `あなたは前から` + mth + `番目、後ろから` + uth + `番目です。`;
+                    TrNum = IntNum - 1;
+                    $mondai.innerText = `長さ` + AllLen + `mの道に` + IntLen + `m間隔（かんかく）で木を植えます。道の両はしには木を植えない場合、木は何本必要?`; 
                     break;
                 case 3:
-                    $mondai.innerText = `あなたは前から` + mth + `番目です。あなたの後ろに` + unum + `人います。`;
-                    break;
-                case 4:
-                    $mondai.innerText = `あなたの前に` + mnum + `人います。あなたは後ろから` + uth + `番目です。`;
+                    TrNum = IntNum;
+                    $mondai.innerText = `1周` + AllLen + `mの池のまわりに` + IntLen + `m間隔（かんかく）で木を植える時、木は何本必要?`; 
                     break;
                 default:
                     alert(`リロードして下さい`);
             };
-            $mondai.innerText += `全部で何人いるでしょう？`;
+            a = TrNum;
+            hintMsg = `木と木の間は` + AllLen + `÷` + IntLen + `＝` + IntNum + `か所`;
         } else if (count = mondaiNum){
             closing();
         };
     };
 
-
-    //後ろから・後ろに
     function step2Setup(){
         $hintBtn.style.display = "block";
         setlet();
         if (count < mondaiNum){
             pb = p;
-            p = getRandom(5, 8);
+            p = getRandom(4, 6);
             while (p == pb){
-                p = getRandom(5, 8);
+                p = getRandom(4, 6);
             };
             switch(p){
+                case 4:
+                    TrNum = IntNum + 1;
+                    $mondai.innerText = `道にそって` + IntLen + `m間隔（かんかく）で木を植えたところ、木が` + TrNum + `本必要でした。道の両はしにも木を植えていた場合、道の長さは何m?`;
+                    hintMsg = `木と木の間は` + TrNum + `－1＝` + IntNum + `か所`;
+                    break;
                 case 5:
-                    a = uth;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたは前から` + mth + `番目です。あなたは後ろから何番目でしょう？`;
+                    TrNum = IntNum - 1;
+                    $mondai.innerText = `道にそって` + IntLen + `m間隔（かんかく）で木を植えたところ、木が` + TrNum + `本必要でした。道の両はしには木を植えていない場合、道の長さは何m?`;
+                    hintMsg = `木と木の間は` + TrNum + `＋1＝` + IntNum + `か所`;
                     break;
                 case 6:
-                    a = uth;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたの前には` + mnum + `人います。あなたは後ろから何番目でしょう？`;
-                    break;
-                case 7:
-                    a = unum;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたは前から` + mth + `番目です。あなたの後ろには何人いるでしょう？`;
-                    break;
-                case 8:
-                    a = unum;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたの前には` + mnum + `人います。あなたの後ろには何人いるでしょう？`;
+                    TrNum = IntNum;
+                    $mondai.innerText = `池のまわりに` + IntLen + `m間隔（かんかく）で木を植えたところ、木が` + TrNum + `本必要でした。池のまわりの長さは何m?`;
+                    hintMsg = `木と木の間は` + IntNum + `か所`;
                     break;
                 default:
                     alert(`リロードして下さい`);
             };
+            a = AllLen;
         } else if (count = mondaiNum){
             closing();
         };
     };
 
-    //前から・前に
     function step3Setup(){
         $hintBtn.style.display = "block";
         setlet();
         if (count < mondaiNum){
             pb = p;
-            p = getRandom(9, 12);
+            p = getRandom(7, 9);
             while (p == pb){
-                p = getRandom(9, 12);
+                p = getRandom(7, 9);
             };
             switch(p){
+                case 7:
+                    TrNum = IntNum + 1;    
+                    $mondai.innerText = `長さ` + AllLen + `mの道に同じ間隔（かんかく）で` + TrNum + `本の木を植えます。道の両はしにも木を植える時、木と木の間は何mにすればいいでしょう?`;
+                    hintMsg = `木と木の間は` + TrNum + `－1＝` + IntNum + `か所`;
+                    break;
+                case 8:
+                    TrNum = IntNum - 1;    
+                    $mondai.innerText = `長さ` + AllLen + `mの道に同じ間隔（かんかく）で` + TrNum + `本の木を植えます。道の両はしには木を植えない時、木と木の間は何mにすればいいでしょう?`;
+                    hintMsg = `木と木の間は` + TrNum + `＋1＝` + IntNum + `か所`;
+                    break;
                 case 9:
-                    a = mth;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたは後ろから` + uth + `番目です。あなたは前から何番目でしょう？`;
-                    break;
-                case 10:
-                    a = mth;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたの後ろには` + unum + `人います。あなたは前から何番目でしょう？`;
-                    break;
-                case 11:
-                    a = mnum;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたは後ろから` + uth + `番目です。あなたの前には何人いるでしょう？`;
-                    break;
-                case 12:
-                    a = mnum;
-                    $mondai.innerText = `全部で` + allnum + `人います。あなたの後ろには` + unum + `人います。あなたの前には何人いるでしょう？`;
+                    TrNum = IntNum;    
+                    $mondai.innerText = `1周` + AllLen + `mの池のまわりに同じ間隔（かんかく）で` + TrNum + `本の木を植える時、木と木の間は何mにすればいいでしょう?`;
+                    hintMsg = `木と木の間は` + IntNum + `か所`;
                     break;
                 default:
                     alert(`リロードして下さい`);
             };
+            a = IntLen;
         } else if (count = mondaiNum){
             closing();
         };
     };
     
-    //全てのパターン
     function step4Setup(){
         if (count < mondaiNum){
             pstep4b = pstep4;
@@ -249,13 +241,7 @@ function retsu1(){
     });
     
     $hintBtn.addEventListener("click", () => {
-        for (let im = 0; im < mnum; im++){
-            $hint.innerText += `〇`;
-        }
-        $hint.innerText += `●`;
-        for (let iu = 0; iu < unum; iu++){
-            $hint.innerText += `〇`;
-        }
+        $hint.innerText = hintMsg;
         $hintBtn.style.display = "none";
     });
 
@@ -278,4 +264,4 @@ function retsu1(){
     
 };
     
-retsu1();
+uekizan1();
