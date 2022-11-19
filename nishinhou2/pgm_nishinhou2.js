@@ -153,7 +153,7 @@ function nishinhou2(){
     });
     
     $hintBtn.addEventListener("click", () => {
-        $hint.innerText = `「` + no + `×` + n0 `の位」「` + n0 + `の位」「1の位」`;
+        $hint.innerText = `「` + n0 + `×` + n0 + `の位」「` + n0 + `の位」「1の位」`;
     });
 
     $startBtn.addEventListener("click", () => {
