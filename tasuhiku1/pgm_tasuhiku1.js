@@ -80,9 +80,6 @@ function tasuhiku1(){
             case "6":
                 step6Setup();
                 break;
-            case "7":
-                step7Setup();
-                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -115,22 +112,8 @@ function tasuhiku1(){
         } else if (count = mondaiNum)
             closing();
     };
-
-    function step3Setup(){
-        if (count < mondaiNum){
-            ab = a;
-            a = getRandom(1, 8);
-            while (a == ab){
-                a = getRandom(1, 8);
-            };
-            n1 = getRandom(a + 1, 9);
-            n2 = 10 + a - n1;
-            $mondai.innerText = n1 + `＋` + n2 + `＝` + 10 + `＋` + `□`;
-        } else if (count = mondaiNum)
-            closing();
-    };
     
-    function step4Setup(){
+    function step3Setup(){
         if (count < mondaiNum){
             ab = a;
             n3 = getRandom(0, 8);
@@ -147,7 +130,7 @@ function tasuhiku1(){
         };
     };
     
-    function step5Setup(){
+    function step4Setup(){
         if (count < mondaiNum){
             ab = a;
             n1 = getRandom(1, 9);
@@ -163,7 +146,7 @@ function tasuhiku1(){
             closing();
     };
     
-    function step6Setup(){
+    function step5Setup(){
         if (count < mondaiNum){
             ab = a;
             n1 = getRandom(2, 10);
@@ -180,7 +163,7 @@ function tasuhiku1(){
         };
     };
     
-    function step7Setup(){
+    function step6Setup(){
         if (count < mondaiNum){
             ab = a;
             n1 = getRandom(1,9);

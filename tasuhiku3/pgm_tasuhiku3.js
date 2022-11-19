@@ -5,7 +5,6 @@ function tasuhiku3(){
     const $eraseBtn = document.getElementById("erase-btn");
     const $resetBtn = document.getElementById("reset-btn");
 
-    const $hint = document.getElementById("hint");
     const $mondai = document.getElementById("mondai");
     const $kotae = document.getElementById("kotae");
     
@@ -34,7 +33,6 @@ function tasuhiku3(){
         ab = 0;
         p = 0;
         $kotae.value = "";
-        $hint.innerText = "";
         $mondai.innerText = "";
     };
 
@@ -83,9 +81,6 @@ function tasuhiku3(){
                 break;
             case "6":
                 step6Setup();
-                break;
-            case "7":
-                step7Setup();
                 break;
             default:
                 alert(`リロードして下さい`);
@@ -155,7 +150,6 @@ function tasuhiku3(){
                 a = 10 + n3 - n2;
             };
             n1 = 10 + n3;
-            $hint.innerText = `まず` + n1 + `を10と` + n3 + `にわけて、10から` + n2 + `をひくよ`;
             $mondai.innerText = n1 + `－` + n2 + `＝`;
         } else if (count = mondaiNum){
             closing();
@@ -163,24 +157,6 @@ function tasuhiku3(){
     };
 
     function step5Setup(){
-        if (count < mondaiNum){
-            ab = a;
-            n3 = getRandom(1, 8);
-            n2 = getRandom(n3 + 1, 9);
-            a = 10 + n3 - n2;
-            while (a == ab){
-                n3 = getRandom(1, 8);
-                n2 = getRandom(n3 + 1, 9);
-                a = 10 + n3 - n2;
-            };
-            n1 = 10 + n3;
-            $mondai.innerText = n1 + `－` + n2 + `＝`;
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };
-
-    function step6Setup(){
         if (count < mondaiNum){
             ab = a;
             n1 = getRandom(1, 9);
@@ -200,7 +176,7 @@ function tasuhiku3(){
         };
     };
 
-    function step7Setup(){
+    function step6Setup(){
         if (count < mondaiNum){
             p = getRandom(1,2);
             switch(p){
