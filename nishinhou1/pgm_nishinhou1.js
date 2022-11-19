@@ -125,7 +125,7 @@ function nishinhou1(){
                 a = n3 * 4 + n2 * 2 + n1;
             };
             ntxt = "" + n3 + n2 + n1;
-            $mondai.innerText = `2進法で` + ntxt + `を10進法で表すといくつ？`;
+            $mondai.innerText = `2進法で` + ntxt + `になる数を10進法で表すといくつ？`;
         } else if (count = mondaiNum){
             closing();
         };
@@ -151,7 +151,7 @@ function nishinhou1(){
                 a = n5 * 16 + n4 * 8 + n3 * 4 + n2 * 2 + n1;
             };
             ntxt = "" + n5 + n4 + n3 + n2 + n1;
-            $mondai.innerText = `2進法で` + ntxt + `を10進法で表すといくつ？`;
+            $mondai.innerText = `2進法で` + ntxt + `になる数を10進法で表すといくつ？`;
         } else if (count = mondaiNum){
             closing();
         };
