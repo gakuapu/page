@@ -162,9 +162,9 @@ function tani2(){
         $hintBtn.style.display = "block";
         if (count < mondaiNum){
             pb = p;
-            p = getRandom(1, 4);
+            p = getRandom(1, 3);
             while (p == pb){
-                p = getRandom(1, 4);
+                p = getRandom(1, 3);
             };
             switch(p){
                 case 1:
@@ -183,14 +183,7 @@ function tani2(){
                     break;
                 case 3:
                     L = getRandom(1, 9);
-                    mL = getRandom(1, 9) * 10;
-                    a1 = L * 1000 + mL;
-                    $mondai.innerText = L + `L ` + mL + `mL ＝`;
-                    $unit1.innerText = `mL`;
-                    break;
-                case 4:
-                    L = getRandom(1, 9);
-                    mL = getRandom(1, 9);
+                    mL = getRandom(1, 99);
                     a1 = L * 1000 + mL;
                     $mondai.innerText = L + `L ` + mL + `mL ＝`;
                     $unit1.innerText = `mL`;
@@ -208,9 +201,9 @@ function tani2(){
         $hintBtn.style.display = "block";
         if (count < mondaiNum){
             pb = p;
-            p = getRandom(1, 4);
+            p = getRandom(1, 3);
             while (p == pb){
-                p = getRandom(1, 4);
+                p = getRandom(1, 3);
             };
             switch(p){
                 case 1:
@@ -231,15 +224,7 @@ function tani2(){
                     break;
                 case 3:
                     a1 = getRandom(1, 9);
-                    a2 = getRandom(1, 9) * 10;
-                    mL = a1 * 1000 + a2;
-                    $mondai.innerText = mL + `mL ＝`;
-                    $unit1.innerText = `L`;
-                    $unit2.innerText = `mL`;
-                    break;
-                case 4:
-                    a1 = getRandom(1, 9);
-                    a2 = getRandom(1, 9);
+                    a2 = getRandom(1, 99);
                     mL = a1 * 1000 + a2;
                     $mondai.innerText = mL + `mL ＝`;
                     $unit1.innerText = `L`;
