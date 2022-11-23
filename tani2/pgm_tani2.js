@@ -138,13 +138,13 @@ function tani2(){
                     $unit1.innerText = `dL`;
                     break;
                 case 5:
-                    L = getRandom(2, 15);
+                    L = getRandom(2, 9);
                     a1 = L * 1000;
                     $mondai.innerText = L + `L ＝`;
                     $unit1.innerText = `mL`;
                     break;
                 case 6:
-                    mL = getRandom(2, 15) * 1000;
+                    mL = getRandom(2, 9) * 1000;
                     a1 = mL / 1000;
                     $mondai.innerText = mL + `mL ＝`;
                     $unit1.innerText = `L`;
@@ -162,52 +162,38 @@ function tani2(){
         $hintBtn.style.display = "block";
         if (count < mondaiNum){
             pb = p;
-            p = getRandom(1, 6);
+            p = getRandom(1, 4);
             while (p == pb){
-                p = getRandom(1, 6);
+                p = getRandom(1, 4);
             };
             switch(p){
                 case 1:
-                    L = getRandom(1, 15);
+                    L = getRandom(1, 9);
                     dL = getRandom(1, 9);
                     a1 = L * 10 + dL;
                     $mondai.innerText = L + `L ` + dL + `dL ＝`;
                     $unit1.innerText = `dL`;
                     break;
                 case 2:
-                    L = getRandom(1, 15);
-                    mL = getRandom(100, 999);
+                    L = getRandom(1, 9);
+                    mL = getRandom(1, 9) * 100;
                     a1 = L * 1000 + mL;
                     $mondai.innerText = L + `L ` + mL + `mL ＝`;
                     $unit1.innerText = `mL`;
                     break;
                 case 3:
-                    L = getRandom(1, 15);
-                    mL = getRandom(10, 99);
+                    L = getRandom(1, 9);
+                    mL = getRandom(1, 9) * 10;
                     a1 = L * 1000 + mL;
                     $mondai.innerText = L + `L ` + mL + `mL ＝`;
                     $unit1.innerText = `mL`;
                     break;
                 case 4:
-                    L = getRandom(1, 15);
+                    L = getRandom(1, 9);
                     mL = getRandom(1, 9);
                     a1 = L * 1000 + mL;
                     $mondai.innerText = L + `L ` + mL + `mL ＝`;
                     $unit1.innerText = `mL`;
-                    break;
-                case 5:
-                    L = getRandom(1, 15);
-                    dL = getRandom(1, 9);
-                    a1 = L * 1000 + dL * 100;
-                    $mondai.innerText = L + `L ` + dL + `dL ＝`;
-                    $unit1.innerText = `mL`;
-                    break;
-                case 6:
-                    L = getRandom(1, 15);
-                    mL = getRandom(1, 9) * 100;
-                    a1 = L * 10 + mL / 100;
-                    $mondai.innerText = L + `L ` + mL + `mL ＝`;
-                    $unit1.innerText = `dL`;
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -222,9 +208,9 @@ function tani2(){
         $hintBtn.style.display = "block";
         if (count < mondaiNum){
             pb = p;
-            p = getRandom(1, 6);
+            p = getRandom(1, 4);
             while (p == pb){
-                p = getRandom(1, 6);
+                p = getRandom(1, 4);
             };
             switch(p){
                 case 1:
@@ -236,42 +222,26 @@ function tani2(){
                     $unit2.innerText = `dL`;
                     break;
                 case 2:
-                    a1 = getRandom(1, 15);
-                    a2 = getRandom(100, 999);
+                    a1 = getRandom(1, 9);
+                    a2 = getRandom(1, 9) * 100;
                     mL = a1 * 1000 + a2;
                     $mondai.innerText = mL + `mL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
                     break;
                 case 3:
-                    a1 = getRandom(1, 15);
-                    a2 = getRandom(10, 99);
+                    a1 = getRandom(1, 9);
+                    a2 = getRandom(1, 9) * 10;
                     mL = a1 * 1000 + a2;
                     $mondai.innerText = mL + `mL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
                     break;
                 case 4:
-                    a1 = getRandom(1, 15);
+                    a1 = getRandom(1, 9);
                     a2 = getRandom(1, 9);
                     mL = a1 * 1000 + a2;
                     $mondai.innerText = mL + `mL ＝`;
-                    $unit1.innerText = `L`;
-                    $unit2.innerText = `mL`;
-                    break;
-                case 5:
-                    a1 = getRandom(1, 15);
-                    a2 = getRandom(1, 9);
-                    mL = a1 * 1000 + a2 * 100;
-                    $mondai.innerText = mL + `mL ＝`;
-                    $unit1.innerText = `L`;
-                    $unit2.innerText = `dL`;
-                    break;
-                case 6:
-                    a1 = getRandom(1, 15);
-                    a2 = getRandom(1, 9) * 100;
-                    dL = a1 * 10 + a2 / 100;
-                    $mondai.innerText = dL + `dL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
                     break;
@@ -294,7 +264,7 @@ function tani2(){
             };
             switch(p){
                 case 1:
-                    a1 = getRandom(2, 15);
+                    a1 = getRandom(2, 9);
                     a2 = getRandom(2, 9);
                     L = getRandom(1, a1 - 1);
                     dL = getRandom(1, a2 - 1);
@@ -303,7 +273,7 @@ function tani2(){
                     $unit2.innerText = `dL`;
                     break;
                 case 2:
-                    L = getRandom(2, 15);
+                    L = getRandom(2, 9);
                     dL = getRandom(2, 9);
                     a1 = getRandom(1, L - 1);
                     a2 = getRandom(1, dL - 1);
@@ -312,7 +282,7 @@ function tani2(){
                     $unit2.innerText = `dL`;
                     break;
                 case 3:
-                    a1 = getRandom(2, 15);
+                    a1 = getRandom(2, 9);
                     a2 = getRandom(2, 9);
                     L = getRandom(1, a1 - 1);
                     mL = getRandom(1, a2 - 1);
@@ -323,7 +293,7 @@ function tani2(){
                     $unit2.innerText = `mL`;
                     break;
                 case 4:
-                    L = getRandom(2, 15);
+                    L = getRandom(2, 9);
                     mL = getRandom(2, 9);
                     a1 = getRandom(1, L - 1);
                     a2 = getRandom(1, mL - 1);
@@ -430,7 +400,7 @@ function tani2(){
                 case 3:
                     a2 = getRandom(2, 9);
                     dL = getRandom(1, a2 - 1);
-                    a1 = getRandom(1, 9);
+                    a1 = getRandom(1, 8);
                     $mondai.innerText = (a1 + 1) + `L ` + dL + `dL － ` + (dL + 10 - a2) + `dL ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `dL`;
@@ -438,7 +408,7 @@ function tani2(){
                 case 4:
                     a2 = getRandom(2, 9);
                     mL = getRandom(1, a2 - 1);
-                    a1 = getRandom(1, 9);
+                    a1 = getRandom(1, 8);
                     a2 = a2 * 100;
                     mL = mL * 100;
                     $mondai.innerText = (a1 + 1) + `L ` + mL + `mL － ` + (mL + 1000 - a2) + `mL ＝`;
