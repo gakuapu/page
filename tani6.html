@@ -13,23 +13,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小学3年生の小数の計算</title>
+    <title>小学3年生の単位の計算：小数</title>
     <link rel="icon" href="favicon.ico">
     <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="shousuu1\style_shousuu1.css">
+    <link rel="stylesheet" href="tani6\style_tani6.css">
 </head>
 <main>
 <body>
 
     <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
     <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
+    <audio id="audio3" src="machigaion2.mp3" preload="auto"></audio>
 
     <div>
         <select id="step">
-            <option value="1">ステップ1</option>
-            <option value="2">ステップ2</option>
-            <option value="3">ステップ3</option>
+            <option value="1">水の量</option>
+            <option value="2">長さ</option>
+            <option value="3">重さ</option>
         </select>
     </div>
 
@@ -41,10 +42,15 @@
 
     <div>
         <input id="kotae1" class="kotae" type="tel">
-        <a id="dot"></a>
+        <a id="unit1"></a>
         <input id="kotae2" class="kotae" type="tel">
+        <a id="unit2"></a>
     <div>
 
+    <div>
+        <input type="button" id="check-btn" class="btn" value="答え合わせ">
+    </div>
+    
     <div>
         <progress id="progress" value="0"></progress>
     </div>
@@ -54,16 +60,16 @@
         <input type="button" id="reset-btn" class="btn" value="リセット">
     </div>
 
-    <script src="shousuu1\pgm_shousuu1.js"></script>
+    <script src="tani6\pgm_tani6.js"></script>
     <br>
-    <h1 class="footer-container2">小学3年生の小数の計算</h1>
+    <h1 class="footer-container2">小学3年生の単位の計算：小数</h1>
 </main>
 
 <footer class="footer-container">
     <ul class="footer-container2">
-        <li>ステップ1：小数の足し算・引き算1</li>
-        <li>ステップ2：小数の足し算・引き算2</li>
-        <li>ステップ3：小数の足し算・引き算3</li>
+        <li>水の量（L, dL, mL）</li>
+        <li>長さ（km, m, cm, mm）</li>
+        <li>重さ（t, kg, g, mg）</li>
     </ul>
     <a class="footer-container2" href="top.html">トップ</a>
     <hr>

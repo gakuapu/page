@@ -17,9 +17,10 @@ function tani5(){
     const $progress = document.getElementById("progress");
     
     let count = 0;
-    let t = 0;
     let kg = 0;
     let g = 0;
+    let t = 0;
+    let mg = 0;
     let a1 = 0;
     let a2 = 0;
     let p = 0; //パターン
@@ -33,9 +34,10 @@ function tani5(){
     
     function defaultlet(){
         count = 0;
-        t = 0;
         kg = 0;
         g = 0;
+        t = 0;
+        mg = 0;
         a1 = 0;
         a2 = 0;
         p = 0;
@@ -97,13 +99,7 @@ function tani5(){
                 break;
             case "6":
                 step6Setup();
-                break;
-            case "7":
-                step7Setup();
-                break;
-            case "8":
-                step8Setup();
-                break;
+                break;    
             default:
                 alert(`リロードして下さい`);
         };
@@ -315,67 +311,11 @@ function tani5(){
         } else if (count = mondaiNum){
             closing();
         };
-    };
+    }; 
 
     function step6Setup(){
-        a2 = "";
+        $kotae2.style.display = "none";
         $hintBtn.style.display = "block";
-        if (count < mondaiNum){
-            pb = p;
-            p = getRandom(1, 4);
-            while (p == pb){
-                p = getRandom(1, 4);
-            };
-            switch(p){
-                case 1:
-                    $kotae2.style.display = "none";
-                    t = getRandom(1, 9);
-                    kg = getRandom(1, 9) * 100;
-                    a1 = t * 1000 + kg;
-                    $mondai.innerText = t + `t ` + kg + `kg ＝`;
-                    $unit1.innerText = `kg`;
-                    $unit2.innerText = ``;
-                    break;
-                case 2:
-                    $kotae2.style.display = "none";
-                    t = getRandom(1, 9);
-                    kg = getRandom(1, 99);
-                    a1 = t * 1000 + kg;
-                    $mondai.innerText = t + `t ` + kg + `kg ＝`;
-                    $unit1.innerText = `kg`;
-                    $unit2.innerText = ``;
-                    break;
-                case 3:
-                    $kotae2.style.display = "inline-block";
-                    t = getRandom(1, 9);
-                    kg = getRandom(1, 9) * 100;
-                    a1 = t;
-                    a2 = kg;
-                    $mondai.innerText = t * 1000 + kg + `kg ＝`
-                    $unit1.innerText = `t`;
-                    $unit2.innerText = `kg`;
-                    break;
-                case 4:
-                    $kotae2.style.display = "inline-block";
-                    t = getRandom(1, 9);
-                    kg = getRandom(1, 99);
-                    a1 = t;
-                    a2 = kg;
-                    $mondai.innerText = t * 1000 + kg + `kg ＝`
-                    $unit1.innerText = `t`;
-                    $unit2.innerText = `kg`;
-                    break;              
-                default:
-                    alert(`リロードして下さい`);
-            };
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };
-
-    function step7Setup(){
-        $kotae2.style.display = "inline-block";
-        $hintBtn.style.display = "none";
         if (count < mondaiNum){
             pb = p;
             p = getRandom(1, 2);
@@ -384,86 +324,24 @@ function tani5(){
             };
             switch(p){
                 case 1:
-                    a1 = getRandom(2, 9);
-                    a2 = getRandom(2, 9);
-                    t = getRandom(1, a1 - 1);
-                    kg = getRandom(1, a2 - 1);
-                    a2 = a2 * 100;
-                    kg = kg * 100;
-                    $mondai.innerText = t + `t ` + kg + `kg ＋ ` + (a1 - t) + `t ` + (a2 - kg) + `kg ＝`;
+                    g = getRandom(2, 15);
+                    a1 = g * 1000;
+                    $mondai.innerText = g + `g ＝`;
+                    $unit1.innerText = `mg`;
                     break;
                 case 2:
-                    t = getRandom(2, 9);
-                    kg = getRandom(2, 9);
-                    a1 = getRandom(1, t - 1);
-                    a2 = getRandom(1, kg - 1);
-                    a2 = a2 * 100;
-                    kg = kg * 100;
-                    $mondai.innerText = t + `t ` + kg + `kg － ` + (t - a1) + `t ` + (kg - a2) + `kg ＝`;
+                    mg = getRandom(2, 15) * 1000;
+                    a1 = mg / 1000;
+                    $mondai.innerText = mg + `mg ＝`;
+                    $unit1.innerText = `g`;
                     break;
                 default:
                     alert(`リロードして下さい`);
             };
-            $unit1.innerText = `t`;
-            $unit2.innerText = `kg`;
         } else if (count = mondaiNum){
             closing();
         };
-    };  
-
-    function step8Setup(){
-        $kotae2.style.display = "inline-block";
-        $hintBtn.style.display = "none";
-        if (count < mondaiNum){
-            pb = p;
-            p = getRandom(1, 4);
-            while (p == pb){
-                p = getRandom(1, 4);
-            };
-            switch(p){
-                case 1:
-                    a2 = getRandom(1, 8);
-                    kg = getRandom(a2 + 1, 9);
-                    a1 = getRandom(3, 9);
-                    t = getRandom(1, a1 - 2);
-                    a2 = a2 * 100;
-                    kg = kg * 100;
-                    $mondai.innerText = t + `t ` + kg + `kg ＋ ` + (a1 - t - 1) + `t ` + (a2 + 1000 - kg) + `kg ＝`;
-                    break;
-                case 2:
-                    a2 = getRandom(1, 8);
-                    kg = getRandom(a2 + 1, 9);
-                    a1 = getRandom(2, 9);
-                    a2 = a2 * 100;
-                    kg = kg * 100;
-                    $mondai.innerText = (a1 - 1) + `t ` + kg + `kg ＋ ` + (a2 + 1000 - kg) + `kg ＝`;
-                    break;
-                case 3:
-                    a2 = getRandom(2, 9);
-                    kg = getRandom(1, a2 - 1,);
-                    a1 = getRandom(1, 7);
-                    t = getRandom(a1 + 2, 9);
-                    a2 = a2 * 100;
-                    kg = kg * 100;
-                    $mondai.innerText = t + `t ` + kg + `kg － ` + (t - a1 - 1) + `t ` + (kg + 1000 - a2) + `kg ＝`;
-                    break;
-                case 4:
-                    a2 = getRandom(2, 9);
-                    kg = getRandom(1, a2 - 1);
-                    a1 = getRandom(1, 9);
-                    a2 = a2 * 100;
-                    kg = kg * 100;
-                    $mondai.innerText = (a1 + 1) + `t ` + kg + `kg － ` + (kg + 1000 - a2) + `kg ＝`;
-                    break;
-                default:
-                    alert(`リロードして下さい`);
-            };
-            $unit1.innerText = `t`;
-            $unit2.innerText = `kg`;
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };  
+    }; 
 
     $checkBtn.addEventListener("click", () => {
         if ($kotae1.value == a1 && $kotae2.value == a2){
@@ -484,7 +362,28 @@ function tani5(){
     });
 
     $hintBtn.addEventListener("click", () => {
-        $hint.innerText = `1000g=1kg, 1000kg=1t`;
+        switch($step.value){
+            case "1":
+                $hint.innerText = `1kg=1000g`;
+                break;
+            case "2":
+                $hint.innerText = `1kg=1000g`;
+                break;
+            case "3":
+                $hint.innerText = "";
+                break;
+            case "4":
+                $hint.innerText = "";
+                break;
+            case "5":
+                $hint.innerText = `1t=1000kg`;
+                break;
+            case "6":
+                $hint.innerText = `1g=1000mg`;
+                break;
+            default:
+                alert(`リロードして下さい`);
+        };
         $hintBtn.style.display = "none";
     });
 
