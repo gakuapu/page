@@ -43,7 +43,6 @@ function tani6(){
 
     function switchdisplay(){
         $kotae1.style.display = "inline-block";
-        $kotae2.style.display = "inline-block";
         $checkBtn.style.display = "block";
         $progress.style.display = "block";
         $eraseBtn.style.display = "inline-block";
@@ -97,26 +96,27 @@ function tani6(){
             while (p == pb){
                 p = getRandom(1, 3);
             };
-            a1 = getRandom(1, 5);
-            a2 = getRandom(1, 9);
-            n = a1 + a2 / 10;
             switch(p){
                 case 1:
+                    $kotae2.style.display = "inline-block";
                     $mondai.innerText = n + `L ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `dL`;
                     break;
                 case 2:
+                    $kotae2.style.display = "inline-block";
                     a2 = a2 * 100;
                     $mondai.innerText = n + `L ＝`;
                     $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
                     break;
-                case 3: //直す
-                    a2 = a2 * 10;
+                case 3:
+                    $kotae2.style.display = "none";
+                    a1 = a1 * 100 + a2 * 10;
+                    a2 = "";
                     $mondai.innerText = n + `dL ＝`;
-                    $unit1.innerText = `dL`;
-                    $unit2.innerText = `mL`;
+                    $unit1.innerText = `mL`;
+                    $unit2.innerText = ``;
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -133,23 +133,23 @@ function tani6(){
             while (p == pb){
                 p = getRandom(1, 3);
             };
-            a1 = getRandom(1, 5);
-            a2 = getRandom(1, 9);
-            n = a1 + a2 / 10;
             switch(p){
                 case 1:
+                    $kotae2.style.display = "inline-block";
                     a2 = a2 * 100;
                     $mondai.innerText = n + `km ＝`;
                     $unit1.innerText = `km`;
                     $unit2.innerText = `m`;
                     break;
                 case 2:
+                    $kotae2.style.display = "inline-block";
                     a2 = a2 * 10;
                     $mondai.innerText = n + `m ＝`;
                     $unit1.innerText = `m`;
                     $unit2.innerText = `cm`;
                     break;
                 case 3:
+                    $kotae2.style.display = "inline-block";
                     $mondai.innerText = n + `cm ＝`;
                     $unit1.innerText = `cm`;
                     $unit2.innerText = `mm`;
@@ -169,27 +169,29 @@ function tani6(){
             while (p == pb){
                 p = getRandom(1, 3);
             };
-            a1 = getRandom(1, 5);
-            a2 = getRandom(1, 9);
-            n = a1 + a2 / 10;
             switch(p){
                 case 1:
-                    a2 = a2 * 100;
+                    $kotae2.style.display = "none";
+                    a1 = a1 * 1000 + a2 * 100;
+                    a2 = "";
                     $mondai.innerText = n + `t ＝`;
-                    $unit1.innerText = `t`;
-                    $unit2.innerText = `kg`;
+                    $unit1.innerText = `kg`;
+                    $unit2.innerText = ``;
                     break;
                 case 2:
+                    $kotae2.style.display = "inline-block";
                     a2 = a2 * 100;
                     $mondai.innerText = n + `kg ＝`;
                     $unit1.innerText = `kg`;
                     $unit2.innerText = `g`;
                     break;
-                case 3: //直す
-                    a2 = a2 * 100;
+                case 3:
+                    $kotae2.style.display = "none";
+                    a1 = a1 * 1000 + a2 * 100;
+                    a2 = "";
                     $mondai.innerText = n + `g ＝`;
-                    $unit1.innerText = `g`;
-                    $unit2.innerText = `mg`;
+                    $unit1.innerText = `mg`;
+                    $unit2.innerText = ``;
                     break;
                 default:
                     alert(`リロードして下さい`);
