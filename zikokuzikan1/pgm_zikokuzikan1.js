@@ -290,6 +290,7 @@ function zikokuzikan1(){
                     $mondai.innerText = `午前中に` + h1 + `時間` + m1 + `分、午後に` + h2 + `時間` + m2 + `分本を読みました。本を読んだ時間の合計は?`;
                     break;
                 case 2:
+                    $kotae1.style.display = "none"; 
                     $unit1.innerText = "";
                     ha = "";
                     ma = getRandom(2, 11);
