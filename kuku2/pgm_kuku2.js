@@ -65,18 +65,17 @@ function defaultlet(){
 
 function writeRecords(){
     for (let rcount = 0; rcount < $r.length; rcount++){
-        $r[rcount].innerText = records[rcount] + `回クリア。`;
-        if (records[rcount] == 3){
-            $r[rcount].innerText += `マスター！`;
+        if (records[rcount] == 1){
+            $r[rcount].innerText = `クリア！`;
         } else {
-            $r[rcount].innerText += `あと` + (3 - records[rcount]) + `回`; 
+            $r[rcount].innerText = `チャレンジしよう`; 
         };
     };
 };
 
 function closing(){
     audio2.play();
-    if (records[danInt - 1] < 3){
+    if (records[danInt - 1] < 1){
         records[danInt - 1]++;
     };
     writeRecords();
