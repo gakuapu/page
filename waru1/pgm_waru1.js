@@ -18,7 +18,7 @@ function waru1(){
     let a1 = 0;
     let a2 = 0;
     let ab = 0;
-    let mondaiNum = 15;
+    let mondaiNum = 10;
     
     function getRandom(min, max){
         let randomNum = Math.floor(Math.random() * (max + 1 - min)) + min;

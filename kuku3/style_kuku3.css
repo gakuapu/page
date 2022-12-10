@@ -1,0 +1,9 @@
+#dantitle {
+    font-size: 18px;
+}
+
+#erase-btn,
+#reset-btn,
+#kotae {
+    display: none;
+}

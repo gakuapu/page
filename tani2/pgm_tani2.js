@@ -24,7 +24,7 @@ function tani2(){
     let a2 = 0;
     let p = 0; //パターン
     let pb = 0; //前問のパターン
-    let mondaiNum = 15;
+    let mondaiNum = 10;
     
     function getRandom(min, max){
         let randomNum = Math.floor(Math.random() * (max + 1 - min)) + min;
