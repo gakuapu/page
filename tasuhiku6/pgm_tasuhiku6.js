@@ -82,12 +82,6 @@ function tasuhiku6(){
             case "6":
                 step6Setup();
                 break;
-            case "7":
-                step7Setup();
-                break;
-            case "8":
-                step8Setup();
-                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -132,16 +126,20 @@ function tasuhiku6(){
     function step3Setup(){
         if (count < mondaiNum){
             ab = a;
-            n3 = getRandom(2, 9);
-            n4 = getRandom(2, 9)
-            n2 = 10 + getRandom(1, n4);
-            n1 = n3 * 10 + n4;
+            n1 = getRandom(2, 9);
+            n2 = getRandom(1, n1);
+            n3 = getRandom(1, 9);
+            n4 = getRandom(1, n3 - 1);
+            n1 = n1 * 10 + n3;
+            n2 = n2 * 10 + n4;
             a = n1 - n2;
             while (a == ab){
-                n3 = getRandom(2, 9);
-                n4 = getRandom(2, 9)
-                n2 = 10 + getRandom(1, n4);
-                n1 = n3 * 10 + n4;
+                n1 = getRandom(2, 9);
+                n2 = getRandom(1, n1);
+                n3 = getRandom(1, 9);
+                n4 = getRandom(1, n3 - 1);
+                n1 = n1 * 10 + n3;
+                n2 = n2 * 10 + n4;
                 a = n1 - n2;
             };
             $mondai.innerText = n1 + `－` + n2 + `＝`;
@@ -175,17 +173,17 @@ function tasuhiku6(){
         if (count < mondaiNum){
             ab = a;
             n1 = getRandom(3, 9);
+            n3 = getRandom(1, 8);
             n2 = getRandom(2, n1 - 1);
-            n3 = getRandom(2, 9);
-            n4 = getRandom(1, n3 - 1);
+            n4 = getRandom(n3 + 1, 9);
             n1 = n1 * 10 + n3;
             n2 = n2 * 10 + n4;
             a = n1 - n2;
             while (a == ab){
                 n1 = getRandom(3, 9);
+                n3 = getRandom(1, 8);
                 n2 = getRandom(2, n1 - 1);
-                n3 = getRandom(2, 9);
-                n4 = getRandom(1, n3 - 1);
+                n4 = getRandom(n3 + 1, 9);
                 n1 = n1 * 10 + n3;
                 n2 = n2 * 10 + n4;
                 a = n1 - n2;
@@ -197,56 +195,6 @@ function tasuhiku6(){
     };
 
     function step6Setup(){
-        if (count < mondaiNum){
-            ab = a;
-            n1 = getRandom(2, 9);
-            n3 = getRandom(1, 8);
-            n2 = getRandom(1, n1 - 1);
-            n4 = getRandom(n3 + 1, 9);
-            n1 = n1 * 10 + n3;
-            n2 = n2 * 10 + n4;
-            a = n1 - n2;
-            while (a == ab){
-                n1 = getRandom(2, 9);
-                n3 = getRandom(1, 8);
-                n2 = getRandom(1, n1 - 1);
-                n4 = getRandom(n3 + 1, 9);
-                n1 = n1 * 10 + n3;
-                n2 = n2 * 10 + n4;
-                a = n1 - n2;
-            };
-            $mondai.innerText = n1 + `－` + n2 + `＝`;
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };
-
-    function step7Setup(){
-        if (count < mondaiNum){
-            ab = a;
-            n1 = getRandom(3, 9);
-            n3 = getRandom(1, 8);
-            n2 = getRandom(1, n1 - 2);
-            n4 = getRandom(n3 + 1, 9);
-            n1 = n1 * 10 + n3;
-            n2 = n2 * 10 + n4;
-            a = n1 - n2;
-            while (a == ab){
-                n1 = getRandom(3, 9);
-                n3 = getRandom(1, 8);
-                n2 = getRandom(1, n1 - 2);
-                n4 = getRandom(n3 + 1, 9);
-                n1 = n1 * 10 + n3;
-                n2 = n2 * 10 + n4;
-                a = n1 - n2;
-            };
-            $mondai.innerText = n2 + `＋` + `□` + `＝` + n1;
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };
-
-    function step8Setup(){
         if (count < mondaiNum){
             ab = a;
             n3 = getRandom(1, 9);

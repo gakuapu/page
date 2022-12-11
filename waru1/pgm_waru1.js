@@ -84,12 +84,6 @@ function waru1(){
             case "4":
                 step4Setup();
                 break;
-            case "5":
-                step5Setup();
-                break;
-            case "6":
-                step6Setup();
-                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -118,29 +112,13 @@ function waru1(){
                 a1 = getRandom(2, 9);
             };
             n2 = n1 * a1;
-            $mondai.innerText = n1 + `×□＝` +  n2;
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };
-
-    function step2Setup(){
-        if (count < mondaiNum){
-            ab = a1;
-            n1 = getRandom(2, 9);
-            a1 = getRandom(2, 9);
-            while (a1 == ab){
-                n1 = getRandom(2, 9);
-                a1 = getRandom(2, 9);
-            };
-            n2 = n1 * a1;
             $mondai.innerText = n2 + `÷` + n1 + `＝`;
         } else if (count = mondaiNum){
             closing();
         };
     };
 
-    function step3Setup(){
+    function step2Setup(){
         if (count < mondaiNum){
             switchdisplay2();
             ab = a1;
@@ -158,24 +136,8 @@ function waru1(){
             closing();
         };
     };
-    
-    function step4Setup(){
-        if (count < mondaiNum){
-            ab = a1;
-            n1 = getRandom(10, 19);
-            a1 = getRandom(2, 9);
-            while (a1 == ab){
-                n1 = getRandom(10, 19);
-                a1 = getRandom(2, 9);
-            };
-            n2 = n1 * a1;
-            $mondai.innerText = n1 + `×□＝` + n2;
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };
 
-    function step5Setup(){
+    function step3Setup(){
         if (count < mondaiNum){
             ab = a1;
             n1 = getRandom(2, 9);
@@ -191,7 +153,7 @@ function waru1(){
         };
     };
 
-    function step6Setup(){
+    function step4Setup(){
         if (count < mondaiNum){
             switchdisplay2();
             ab = a1;

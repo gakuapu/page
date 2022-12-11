@@ -77,9 +77,6 @@ function kakeru1(){
             case "5":
                 step5Setup();
                 break;
-            case "6":
-                step6Setup();
-                    break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -137,23 +134,8 @@ function kakeru1(){
             closing();
         };
     };
-    
-    function step4Setup(){
-        if (count < mondaiNum){
-            ab = a;
-            n1 = getRandom(11, 19);
-            a = n1 * n1;
-            while (a == ab){
-                n1 = getRandom(11, 19);
-                a = n1 * n1;
-            };
-            $mondai.innerText = n1 + `×` + n1 + `＝`;
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };
 
-    function step5Setup(){
+    function step4Setup(){
         if (count < mondaiNum){
             ab = a;
             n1 = getRandom(11, 19);
@@ -170,7 +152,7 @@ function kakeru1(){
         };
     };
 
-    function step6Setup(){
+    function step5Setup(){
         if (count < mondaiNum){
             ab = a;
             n1 = getRandom(1, 9);
