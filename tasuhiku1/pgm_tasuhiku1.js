@@ -88,11 +88,11 @@ function tasuhiku1(){
     function step1Setup(){
         if (count < mondaiNum){
             ab = a;
-            a = getRandom(1, 10);
+            a = getRandom(2, 10);
             while (a == ab){
-                a = getRandom(1, 10);
+                a = getRandom(2, 10);
             };
-            n1 = getRandom(0, a);
+            n1 = getRandom(1, a - 1);
             n2 = a - n1;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count = mondaiNum){
@@ -103,9 +103,9 @@ function tasuhiku1(){
     function step2Setup(){
         if (count < mondaiNum){
             ab = a;
-            a = getRandom(1, 10);
+            a = getRandom(1, 9);
             while (a == ab){
-                a = getRandom(1, 10);
+                a = getRandom(1, 9);
             };
             n1 = 10 - a;
             $mondai.innerText = n1 + `＋` + `□` + `＝` + 10;
