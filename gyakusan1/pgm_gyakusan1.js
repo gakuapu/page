@@ -88,12 +88,6 @@ function gyakusan1(){
             case "6":
                 step6Setup();
                 break;
-            case "7":
-                step7Setup();
-                break;
-            case "8":
-                step8Setup();
-                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -106,8 +100,8 @@ function gyakusan1(){
             while (p == pb){
                 p = getRandom(1, 2);
             };
-            n2 = getRandom(11, 19);
-            a = getRandom(11, 19);
+            n2 = getRandom(6, 19);
+            a = getRandom(6, 19);
             n1 = n2 + a;
             switch(p){
                 case 1:
@@ -131,46 +125,15 @@ function gyakusan1(){
             while (p == pb){
                 p = getRandom(1, 2);
             };
-            n1 = getRandom(3, 9);
-            n3 = getRandom(1, 8);
-            n2 = getRandom(1, n1 - 2);
-            n4 = getRandom(n3 + 1, 9);
-            n1 = n1 * 10 + n3;
-            n2 = n2 * 10 + n4;
-            a = n1 - n2;
-            n1 = n2 + a;
+            n1 = getRandom(6, 19);
             switch(p){
                 case 1:
-                    $mondai.innerText = n2 + `＋□` + `＝` + n1;
-                    break;
-                case 2:
-                    $mondai.innerText = `□＋` + n2 + `＝` + n1;
-                    break;
-                default:
-                    alert(`リロードして下さい`);
-            };
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };
-
-    function step3Setup(){
-        if (count < mondaiNum){
-            pb = p;
-            p = getRandom(1, 2);
-            while (p == pb){
-                p = getRandom(1, 2);
-            };
-            switch(p){
-                case 1:
-                    n1 = getRandom(11, 19);
-                    a = getRandom(11, 19);
+                    a = getRandom(6, 19);
                     n2 = n1 + a;
                     $mondai.innerText = n2 + `－□` + `＝` + n1;
                     break;
                 case 2:
-                    n1 = getRandom(11, 19);
-                    n2 = getRandom(11, 19);
+                    n2 = getRandom(6, 19);
                     a = n1 + n2;
                     $mondai.innerText = `□－` + n2 + `＝` + n1;
                     break;
@@ -182,6 +145,46 @@ function gyakusan1(){
         };
     };
     
+    function step3Setup(){
+        if (count < mondaiNum){
+            pb = p;
+            p = getRandom(1, 4);
+            while (p == pb){
+                p = getRandom(1, 4);
+            };
+            switch(p){
+                case 1:
+                    n2 = getRandom(6, 19);
+                    a = getRandom(6, 19);
+                    n1 = n2 + a;
+                    $mondai.innerText = n2 + `＋□` + `＝` + n1;
+                    break;
+                case 2:
+                    n2 = getRandom(6, 19);
+                    a = getRandom(6, 19);
+                    n1 = n2 + a;
+                    $mondai.innerText = `□＋` + n2 + `＝` + n1;
+                    break;
+                case 3:
+                    n1 = getRandom(6, 19);
+                    a = getRandom(6, 19);
+                    n2 = n1 + a;
+                    $mondai.innerText = n2 + `－□` + `＝` + n1;
+                    break;
+                case 4:
+                    n1 = getRandom(6, 19);
+                    n2 = getRandom(6, 19);
+                    a = n1 + n2;
+                    $mondai.innerText = `□－` + n2 + `＝` + n1;
+                    break;
+                default:
+                    alert(`リロードして下さい`);
+            };
+        } else if (count = mondaiNum){
+            closing();
+        };
+    };
+
     function step4Setup(){
         if (count < mondaiNum){
             pb = p;
@@ -189,27 +192,15 @@ function gyakusan1(){
             while (p == pb){
                 p = getRandom(1, 2);
             };
+            n1 = getRandom(2, 9);
+            a = getRandom(6, 15);
+            n2 = n1 * a;
             switch(p){
                 case 1:
-                    n1 = getRandom(3, 9);
-                    n3 = getRandom(1, 8);
-                    n2 = getRandom(1, n1 - 2);
-                    n4 = getRandom(n3 + 1, 9);
-                    n1 = n1 * 10 + n3;
-                    n2 = n2 * 10 + n4;
-                    a = n1 - n2;
-                    n1 = n2 + a;
-                    $mondai.innerText = n1 + `－□` + `＝` + n2;
+                    $mondai.innerText = n1 + `×□＝` +  n2;
                     break;
                 case 2:
-                    n5 = getRandom(3, 9);
-                    n6 = getRandom(1, 8);
-                    n2 = getRandom(1, n5 - 2);
-                    n4 = getRandom(n6 + 1, 9);
-                    a = n5 * 10 + n6;
-                    n2 = n2 * 10 + n4;
-                    n1 = a - n2;
-                    $mondai.innerText = `□－` + n2 + `＝` + n1;
+                    $mondai.innerText = `□×` + n1 + `＝` +  n2;
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -226,15 +217,17 @@ function gyakusan1(){
             while (p == pb){
                 p = getRandom(1, 2);
             };
-            n1 = getRandom(2, 9);
-            a = getRandom(2, 9);
-            n2 = n1 * a;
+            n2 = getRandom(2, 9);
             switch(p){
                 case 1:
-                    $mondai.innerText = n1 + `×□＝` +  n2;
+                    a = getRandom(6, 15);
+                    n1 = n2 * a;
+                    $mondai.innerText = n1 + `÷□＝` +  n2;
                     break;
                 case 2:
-                    $mondai.innerText = `□×` + n1 + `＝` +  n2;
+                    n1 = getRandom(6, 15);
+                    a = n1 * n2;
+                    $mondai.innerText = `□÷` + n1 + `＝` +  n2;
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -247,73 +240,32 @@ function gyakusan1(){
     function step6Setup(){
         if (count < mondaiNum){
             pb = p;
-            p = getRandom(1, 2);
+            p = getRandom(1, 4);
             while (p == pb){
-                p = getRandom(1, 2);
+                p = getRandom(1, 4);
             };
-            n1 = getRandom(2, 9);
-            a = getRandom(10, 19);
-            n2 = n1 * a;
             switch(p){
                 case 1:
+                    n1 = getRandom(2, 9);
+                    a = getRandom(6, 15);
+                    n2 = n1 * a;
                     $mondai.innerText = n1 + `×□＝` +  n2;
                     break;
                 case 2:
+                    n1 = getRandom(2, 9);
+                    a = getRandom(6, 15);
+                    n2 = n1 * a;
                     $mondai.innerText = `□×` + n1 + `＝` +  n2;
                     break;
-                default:
-                    alert(`リロードして下さい`);
-            };
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };
-
-    function step7Setup(){
-        if (count < mondaiNum){
-            pb = p;
-            p = getRandom(1, 2);
-            while (p == pb){
-                p = getRandom(1, 2);
-            };
-            switch(p){
-                case 1:
-                    a = getRandom(2, 9);
+                case 3:
                     n2 = getRandom(2, 9);
+                    a = getRandom(6, 15);
                     n1 = n2 * a;
                     $mondai.innerText = n1 + `÷□＝` +  n2;
                     break;
-                case 2:
-                    n1 = getRandom(2, 9);
+                case 4:
                     n2 = getRandom(2, 9);
-                    a = n1 * n2;
-                    $mondai.innerText = `□÷` + n1 + `＝` +  n2;
-                    break;
-                default:
-                    alert(`リロードして下さい`);
-            };
-        } else if (count = mondaiNum){
-            closing();
-        };
-    };
-
-    function step8Setup(){
-        if (count < mondaiNum){
-            pb = p;
-            p = getRandom(1, 2);
-            while (p == pb){
-                p = getRandom(1, 2);
-            };
-            switch(p){
-                case 1:
-                    a = getRandom(10, 19);
-                    n2 = getRandom(2, 9);
-                    n1 = n2 * a;
-                    $mondai.innerText = n1 + `÷□＝` +  n2;
-                    break;
-                case 2:
-                    n1 = getRandom(2, 9);
-                    n2 = getRandom(10, 19);
+                    n1 = getRandom(6, 15);
                     a = n1 * n2;
                     $mondai.innerText = `□÷` + n1 + `＝` +  n2;
                     break;

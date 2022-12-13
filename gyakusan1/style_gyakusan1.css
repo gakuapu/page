@@ -4,3 +4,7 @@
 #reset-btn {
     display: none;
 }
+
+#step {
+    width: 225px;
+}
