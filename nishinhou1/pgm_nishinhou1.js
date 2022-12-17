@@ -105,7 +105,7 @@ function nishinhou1(){
                 a = a * 2;
             };
             $mondai.innerText = `2を` + n1 + `回かけるといくつ？`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -126,7 +126,7 @@ function nishinhou1(){
             };
             ntxt = "" + n3 + n2 + n1;
             $mondai.innerText = `2進法で` + ntxt + `になる数を10進法で表すといくつ？`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -152,7 +152,7 @@ function nishinhou1(){
             };
             ntxt = "" + n5 + n4 + n3 + n2 + n1;
             $mondai.innerText = `2進法で` + ntxt + `になる数を10進法で表すといくつ？`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -174,7 +174,7 @@ function nishinhou1(){
                 n1 = n3 * 4 + n2 * 2 + n1;
             };
             $mondai.innerText = n1 + `(10進法)を3けたの2進法で表すといくつ？`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -200,7 +200,7 @@ function nishinhou1(){
                 n1 = n5 * 16 + n4 * 8 + n3 * 4 + n2 * 2 + n1;
             };
             $mondai.innerText = n1 + `(10進法)を5けたの2進法で表すといくつ？`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };

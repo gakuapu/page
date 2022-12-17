@@ -132,7 +132,7 @@ function tani7(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -167,7 +167,7 @@ function tani7(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -205,7 +205,7 @@ function tani7(){
             };
             $unit1.innerText = `時間`;
             $unit2.innerText = `分`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  
@@ -259,7 +259,7 @@ function tani7(){
             };
             $unit1.innerText = `時間`;
             $unit2.innerText = `分`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  
@@ -289,7 +289,7 @@ function tani7(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -324,7 +324,7 @@ function tani7(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -362,7 +362,7 @@ function tani7(){
             };
             $unit1.innerText = `分`;
             $unit2.innerText = `秒`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  
@@ -416,7 +416,7 @@ function tani7(){
             };
             $unit1.innerText = `分`;
             $unit2.innerText = `秒`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  

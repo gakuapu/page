@@ -109,7 +109,7 @@ function tasuhiku7(){
             n2 = getRandom(n5 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -130,7 +130,7 @@ function tasuhiku7(){
             n1 = n3 * 10 + getRandom(1, n5 - 1);
             n2 = a - n1;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -155,7 +155,7 @@ function tasuhiku7(){
                 a = n1 + n2;
             };
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -173,7 +173,7 @@ function tasuhiku7(){
             };
             n1 = 100 - a;
             $mondai.innerText = n1 + `＋□＝` + 100;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -191,7 +191,7 @@ function tasuhiku7(){
             };
             n1 = 100 + n3;
             $mondai.innerText = n1 + `－` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -210,7 +210,7 @@ function tasuhiku7(){
                 a = n1 - n2;
             };
             $mondai.innerText = n1 + `－` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -235,7 +235,7 @@ function tasuhiku7(){
                 a = n1 - n2;
             };
             $mondai.innerText = n1 + `－` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -260,7 +260,7 @@ function tasuhiku7(){
                 a = n1 - n2;
             };
             $mondai.innerText = n1 + `－` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };

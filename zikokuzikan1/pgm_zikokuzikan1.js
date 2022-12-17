@@ -150,7 +150,7 @@ function zikokuzikan1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -186,7 +186,7 @@ function zikokuzikan1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -227,7 +227,7 @@ function zikokuzikan1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  
@@ -263,7 +263,7 @@ function zikokuzikan1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  
@@ -303,7 +303,7 @@ function zikokuzikan1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -340,7 +340,7 @@ function zikokuzikan1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -381,7 +381,7 @@ function zikokuzikan1(){
             };
             ma = m2 - m1;
             $mondai.innerText = ampmTxt + h1 + `時` + m1 + `分から` + ampmTxt + h2 + `時` + m2 + `分までの時間の長さは?`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  
@@ -418,7 +418,7 @@ function zikokuzikan1(){
                     alert(`リロードして下さい`);
             };
             $mondai.innerText = ampmTxt + h1 + `時` + m1 + `分から` + ampmTxt + h2 + `時` + m2 + `分までの時間の長さは?`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  

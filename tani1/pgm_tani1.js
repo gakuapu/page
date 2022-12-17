@@ -134,7 +134,7 @@ function tani1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -169,7 +169,7 @@ function tani1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -203,7 +203,7 @@ function tani1(){
             };
             $unit1.innerText = `cm`;
             $unit2.innerText = `mm`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  
@@ -249,7 +249,7 @@ function tani1(){
             };
             $unit1.innerText = `cm`;
             $unit2.innerText = `mm`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  
@@ -279,7 +279,7 @@ function tani1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -335,7 +335,7 @@ function tani1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -373,7 +373,7 @@ function tani1(){
             };
             $unit1.innerText = `m`;
             $unit2.innerText = `cm`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  
@@ -427,7 +427,7 @@ function tani1(){
             };
             $unit1.innerText = `m`;
             $unit2.innerText = `cm`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  

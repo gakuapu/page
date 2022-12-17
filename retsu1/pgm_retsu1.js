@@ -130,7 +130,7 @@ function retsu1(){
                     alert(`リロードして下さい`);
             };
             $mondai.innerText += `全部で何人いるでしょう？`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -166,7 +166,7 @@ function retsu1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -201,7 +201,7 @@ function retsu1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -230,7 +230,7 @@ function retsu1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };

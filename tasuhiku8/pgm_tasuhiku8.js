@@ -83,7 +83,7 @@ function tasuhiku8(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };

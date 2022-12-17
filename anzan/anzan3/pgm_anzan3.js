@@ -91,7 +91,7 @@ function anzan3(){
         if (count < countMax){
             a = (count + 11) ** 2;
             $mondai.innerText = (count + 11) + `×` + (count + 11) + `＝`;
-        } else if (count = countMax){
+        } else if (count == countMax){
             closing();
         };
     };
@@ -100,7 +100,7 @@ function anzan3(){
         if (count < countMax){
             a = (randoms[count] + 10) ** 2;
             $mondai.innerText = (randoms[count] + 10) + `×` + (randoms[count] + 10) + `＝`;
-        } else if (count = countMax){
+        } else if (count == countMax){
             closing();
         };
     };

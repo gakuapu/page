@@ -94,7 +94,7 @@ function kakeru1(){
                 a = n1 * n2;
             };
             $mondai.innerText = n1 + `×` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -111,7 +111,7 @@ function kakeru1(){
                 a = n1 * n2;
             };
             $mondai.innerText = n1 + `×` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -130,7 +130,7 @@ function kakeru1(){
                 a = n1 * n2 * n3;
             };
             $mondai.innerText = n1 + `×` + n2 + `×` + n3 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -147,7 +147,7 @@ function kakeru1(){
                 a = n1 * n2;
             };
             $mondai.innerText = n1 + `×` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -168,7 +168,7 @@ function kakeru1(){
                 a = n1 * n2;
             };
             $mondai.innerText = n1 + `×` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };

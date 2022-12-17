@@ -102,7 +102,7 @@ function tasuhiku5(){
             n2 = getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -119,7 +119,7 @@ function tasuhiku5(){
             n2 = getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -136,7 +136,7 @@ function tasuhiku5(){
             n2 = getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -153,7 +153,7 @@ function tasuhiku5(){
             n1 = getRandom(n3 + 1, 9);
             n2 = a - n1;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -170,7 +170,7 @@ function tasuhiku5(){
             n2 = 10 + getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -189,7 +189,7 @@ function tasuhiku5(){
             n2 = 10 + getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -208,7 +208,7 @@ function tasuhiku5(){
             n2 = getRandom(1, n4 - 2) * 10 + getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };

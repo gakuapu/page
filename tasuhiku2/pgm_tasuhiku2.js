@@ -89,7 +89,7 @@ function tasuhiku2(){
             n1 = getRandom(10, a - 1);
             n2 = a - n1;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -103,7 +103,7 @@ function tasuhiku2(){
             };
             n1 = 20 - a;
             $mondai.innerText = n1 + `＋` + `□` + `＝` + 20;
-        } else if (count = mondaiNum)
+        } else if (count == mondaiNum)
             closing();
     };
     
@@ -119,7 +119,7 @@ function tasuhiku2(){
             n2 = getRandom(n3 + 1, 9);
             n1 = a - n2;
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -138,7 +138,7 @@ function tasuhiku2(){
                 a = n1 + n2 + n3;
             };
             $mondai.innerText = n1 + `＋` + n2 + `＋` + n3 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };

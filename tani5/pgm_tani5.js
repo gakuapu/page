@@ -130,7 +130,7 @@ function tani5(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -186,7 +186,7 @@ function tani5(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -224,7 +224,7 @@ function tani5(){
             };
             $unit1.innerText = `kg`;
             $unit2.innerText = `g`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  
@@ -278,7 +278,7 @@ function tani5(){
             };
             $unit1.innerText = `kg`;
             $unit2.innerText = `g`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  
@@ -308,7 +308,7 @@ function tani5(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     }; 
@@ -338,7 +338,7 @@ function tani5(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     }; 

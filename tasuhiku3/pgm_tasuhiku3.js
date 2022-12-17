@@ -97,7 +97,7 @@ function tasuhiku3(){
             };
             n1 = n3 + 10;
             $mondai.innerText = n1 + `－` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -112,7 +112,7 @@ function tasuhiku3(){
                 a = 20 - n1;  
             };
             $mondai.innerText = 20 + `－` + n1 + `＝`; 
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
                 closing();
         };
     };
@@ -130,7 +130,7 @@ function tasuhiku3(){
             };
             n1 = 10 + n3;
             $mondai.innerText = n1 + `－` + n2 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -150,7 +150,7 @@ function tasuhiku3(){
                 };
             n1 = n1 + 10;
             $mondai.innerText = n1 + `－` + n2 + `－` + n3 + `＝`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -190,7 +190,7 @@ function tasuhiku3(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };

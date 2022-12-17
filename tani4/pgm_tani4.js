@@ -120,7 +120,7 @@ function tani4(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -176,7 +176,7 @@ function tani4(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -214,7 +214,7 @@ function tani4(){
             };
             $unit1.innerText = `km`;
             $unit2.innerText = `m`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  
@@ -268,7 +268,7 @@ function tani4(){
             };
             $unit1.innerText = `km`;
             $unit2.innerText = `m`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };  

@@ -126,7 +126,7 @@ function uekizan1(){
             };
             a = TrNum;
             hintMsg = `木と木の間は` + AllLen + `÷` + IntLen + `＝` + IntNum + `か所`;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -160,7 +160,7 @@ function uekizan1(){
                     alert(`リロードして下さい`);
             };
             a = AllLen;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -194,7 +194,7 @@ function uekizan1(){
                     alert(`リロードして下さい`);
             };
             a = IntLen;
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };
@@ -222,7 +222,7 @@ function uekizan1(){
                 default:
                     alert(`リロードして下さい`);
             };
-        } else if (count = mondaiNum){
+        } else if (count == mondaiNum){
             closing();
         };
     };

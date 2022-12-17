@@ -1,4 +1,4 @@
-function anzan2(){
+function anzan4(){
     
     //1～countMaxまでのランダム配列（randoms）の生成
     let countMax = 8;
@@ -28,6 +28,7 @@ function anzan2(){
 
     const $mondai = document.getElementById("mondai");
     const $kotae = document.getElementById("kotae");
+    const $dot = document.getElementById("dot");
     
     let count = 0;
     let a = 0;
@@ -50,6 +51,7 @@ function anzan2(){
 
     function defaultdisplay(){
         $kotae.style.display = "none";
+        $dot.innerText = "";
         $eraseBtn.style.display = "none";
         $resetBtn.style.display = "none";
         $step.style.display = "block";
@@ -71,6 +73,9 @@ function anzan2(){
             case "2":
                 step2Setup();
                 break;
+            case "3":
+                step3Setup();
+                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -88,19 +93,55 @@ function anzan2(){
     };
 
     function step1Setup(){
-        if (count < countMax){
-            a = 45 * (count + 1);
-            $mondai.innerText = 45 + `×` + (count + 1) + `＝`;
-        } else if (count = countMax){
+        if (count < countMax - 1){
+            $dot.innerText = `0.`;
+            a = 125 * (count + 1);
+            while (a % 10 == 0){
+                a = a / 10;
+            };
+            $mondai.innerText = 0.125 + `×` + (count + 1) + `＝`;
+        } else if (count == countMax - 1){
+            $dot.innerText = "";
+            a = 1;
+            $mondai.innerText = 0.125 + `×` + (count + 1) + `＝`;
+        } else if (count == countMax){
             closing();
         };
     };
 
     function step2Setup(){
         if (count < countMax){
-            a = 45 * randoms[count];
-            $mondai.innerText = 45 + `×` + randoms[count] + `＝`;
-        } else if (count = countMax){
+            if (randoms[count] == 8){
+                $dot.innerText = "";
+                a = 1;
+                $mondai.innerText = 0.125 + `×` + randoms[count] + `＝`;
+            } else {
+                $dot.innerText = `0.`;
+                a = 125 * randoms[count];
+                while (a % 10 == 0){
+                    a = a / 10;
+                };
+                $mondai.innerText = 0.125 + `×` + randoms[count] + `＝`;
+            };
+        } else if (count == countMax){
+            closing();
+        };
+    };
+
+    function step3Setup(){
+        if (count < countMax){
+            if (randoms[count] == 8){
+                count++;
+                switchSetup($step.value);
+            } else {
+                $dot.innerText = `0.`;
+                a = 125 * randoms[count];
+                while (a % 10 == 0){
+                    a = a / 10;
+                };
+                $mondai.innerText = randoms[count] + `÷8＝`;
+            };
+        } else if (count == countMax){
             closing();
         };
     };
@@ -127,4 +168,4 @@ function anzan2(){
     
 };
     
-anzan2();
+anzan4();

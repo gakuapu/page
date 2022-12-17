@@ -91,7 +91,7 @@ function anzan2(){
         if (count < countMax){
             a = 45 * (count + 1);
             $mondai.innerText = 45 + `×` + (count + 1) + `＝`;
-        } else if (count = countMax){
+        } else if (count == countMax){
             closing();
         };
     };
@@ -100,7 +100,7 @@ function anzan2(){
         if (count < countMax){
             a = 45 * randoms[count];
             $mondai.innerText = 45 + `×` + randoms[count] + `＝`;
-        } else if (count = countMax){
+        } else if (count == countMax){
             closing();
         };
     };
