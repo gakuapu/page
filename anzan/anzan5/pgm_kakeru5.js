@@ -1,5 +1,26 @@
-function kakeru2(){
-    
+function anzan5(){
+
+    //1～countMaxまでのランダム配列（randoms）の生成
+    let countMax = 9;
+    let randoms = [];
+
+    function getRandom(min, max){
+    let randomNum = Math.floor(Math.random() * (max + 1 - min)) + min;
+    return randomNum;
+    };
+
+    function generateRandoms(){
+        for (let i = 1; i <= countMax; i++){
+            while(true){
+                let rtmp = getRandom(1, countMax);
+                if(!randoms.includes(rtmp)){
+                    randoms.push(rtmp);
+                    break;
+                }
+            } 
+        };
+    };
+
     const $step = document.getElementById("step");
     const $startBtn = document.getElementById("start-btn");
     const $eraseBtn = document.getElementById("erase-btn");
@@ -11,13 +32,14 @@ function kakeru2(){
     const $dot = document.getElementById("dot");
     
     let count = 0;
-    let n1 = 0;
+    let n = 0;
     let a1 = 0;
     let a2 = 0;
     
     function defaultlet(){
         count = 0;
-        n1 = 0;
+        n = 0;
+        randoms.length = 0; //配列の要素を全て削除
         a1 = 0;
         a2 = 0;
         $kotae1.value = "";
@@ -27,6 +49,8 @@ function kakeru2(){
 
     function switchdisplay(){
         $kotae1.style.display = "inline-block";
+        $kotae2.style.display = "inline-block";
+        $dot.innerText = `.`;
         $eraseBtn.style.display = "inline-block";
         $resetBtn.style.display = "inline-block";
         $step.style.display = "none";
@@ -35,8 +59,8 @@ function kakeru2(){
 
     function defaultdisplay(){
         $kotae1.style.display = "none";
-        $dot.innerText = "";
         $kotae2.style.display = "none";
+        $dot.innerText = "";
         $eraseBtn.style.display = "none";
         $resetBtn.style.display = "none";
         $step.style.display = "block";
@@ -58,9 +82,6 @@ function kakeru2(){
             case "2":
                 step2Setup();
                 break;
-            case "3":
-                step3Setup();
-                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -79,38 +100,29 @@ function kakeru2(){
     };
 
     function step1Setup(){
-        $kotae2.style.display = "none";
-        if (count < 9){
-            a1 = 180 * (count + 1);
-            $mondai.innerText = 180 + `×` + (count + 1) + `＝`;
-        } else if (count = 9){
+        if (count < countMax){
+            n = 3.14 * (count + 1);
+            a1 = Math.floor(n);
+            a2 = Math.round((n - a1) * 100);
+            if (a2 % 10 == 0){
+                a2 = a2 / 10;
+            };
+            $mondai.innerText = 3.14 + `×` + (count + 1) + `＝`;
+        } else if (count == countMax){
             closing();
         };
     };
 
     function step2Setup(){
-        $kotae2.style.display = "inline-block";
-        $dot.innerText = `.`;
-        if (count < 9){
-            n1 = 3.14 * (count + 1);
-            a1 = Math.floor(n1);
-            a2 = Math.round((n1 - a1) * 100);
+        if (count < countMax){
+            n = 3.14 * randoms[count];
+            a1 = Math.floor(n);
+            a2 = Math.round((n - a1) * 100);
             if (a2 % 10 == 0){
                 a2 = a2 / 10;
             };
-            $mondai.innerText = 3.14 + `×` + (count + 1) + `＝`;
-        } else if (count = 9){
-            closing();
-        };
-    };
-
-    function step3Setup(){
-        $kotae2.style.display = "none";
-        if (count < 10){
-            n1 = count + 11;
-            a1 = n1 * n1;
-            $mondai.innerText = n1 + `×` + n1 + `＝`;
-        } else if (count = 10){
+            $mondai.innerText = 3.14 + `×` + randoms[count] + `＝`;
+        } else if (count == countMax){
             closing();
         };
     };
@@ -126,6 +138,7 @@ function kakeru2(){
     $startBtn.addEventListener("click", () => {
         switchdisplay();
         defaultlet();
+        generateRandoms();
         switchSetup($step.value);
     });
     
@@ -141,4 +154,4 @@ function kakeru2(){
     
 };
     
-kakeru2();
+anzan5();
