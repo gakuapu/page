@@ -141,3 +141,7 @@ progress::-webkit-progress-value {
 .menutxt {
     font-size: 16px;
 }
+
+nav {
+    font-weight: bold;
+}
