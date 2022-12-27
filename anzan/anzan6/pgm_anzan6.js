@@ -6,6 +6,7 @@ function anzan6(){
     const $resetBtn = document.getElementById("reset-btn");
 
     const $mondai = document.getElementById("mondai");
+    const $hint = document.getElementById("hint");
     const $kotae = document.getElementById("kotae");
     
     const $progress = document.getElementById("progress");
@@ -32,6 +33,7 @@ function anzan6(){
         ab = 0;
         $kotae.value = "";
         $mondai.innerText = "";
+        $hint.innerText = "";
     };
 
     function switchdisplay(){
@@ -74,6 +76,7 @@ function anzan6(){
     };
 
     function step1Setup(){
+        $hint.innerText = "ヒント：99から引いて、最後に1を足そう";
         if (count < mondaiNum){
             ab = a;
             n2 = getRandom(1, 9);
@@ -91,6 +94,7 @@ function anzan6(){
     };
     
     function step2Setup(){
+        $hint.innerText = "ヒント：999から引いて、最後に1を足そう";
         if (count < mondaiNum){
             ab = a;
             n2 = getRandom(1, 9);
