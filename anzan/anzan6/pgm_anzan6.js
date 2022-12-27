@@ -14,7 +14,6 @@ function anzan6(){
     let count = 0;
     let n1 = 0;
     let n2 = 0;
-    let n3 = 0;
     let a = 0;
     let ab = 0;
     let mondaiNum = 10;
@@ -28,7 +27,6 @@ function anzan6(){
         count = 0;
         n1 = 0;
         n2 = 0;
-        n3 = 0;
         a = 0;
         ab = 0;
         $kotae.value = "";
