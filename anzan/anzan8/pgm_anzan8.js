@@ -1,4 +1,4 @@
-function anzan7(){
+function anzan8(){
     
     const $startBtn = document.getElementById("start-btn");
     const $hintBtn = document.getElementById("hint-btn");
@@ -16,10 +16,7 @@ function anzan7(){
     let n11 = 0;
     let n12 = 0;
     let n2 = 0;
-    let n21 = 0;
-    let n22 = 0;
     let a = 0;
-    let a2 = 0;
     let ab = 0;
     let mondaiNum = 10;
     
@@ -34,10 +31,7 @@ function anzan7(){
         n11 = 0;
         n12 = 0;
         n2 = 0;
-        n21 = 0;
-        n22 = 0;
         a = 0;
-        a2 = 0;
         ab = 0;
         $kotae.value = "";
         $mondai.innerText = "";
@@ -73,22 +67,19 @@ function anzan7(){
     function setup(){
         if (count < mondaiNum){
             ab = a;
-            n12 = getRandom(2, 9);
-            a2 = getRandom(1, n12 - 1);
+            n2 = getRandom(2, 9);
             n11 = getRandom(2, 9);
-            n21 = getRandom(2, 9);
-            a = (n11 + n21 + 1) * 10 + a2;
-            while (a == ab){
-                n12 = getRandom(2, 9);
-                a2 = getRandom(1, n12 - 1);
-                n11 = getRandom(2, 9);
-                n21 = getRandom(2, 9);
-                a = (n11 + n21 + 1) * 10 + a2;
-            };
+            n12 = getRandom(2, 9);
             n1 = n11 * 10 + n12;
-            n22 = a2 + 10 - n12;
-            n2 = n21 * 10 + n22;
-            $mondai.innerText = n1 + `＋` + n2 + `＝`;
+            a = n1 * n2;
+            while (a == ab){
+                n2 = getRandom(2, 9);
+                n11 = getRandom(2, 9);
+                n12 = getRandom(2, 9);
+                n1 = n11 * 10 + n12;
+                a = n1 * n2;
+            };
+            $mondai.innerText = n1 + `×` + n2 + `＝`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -108,7 +99,7 @@ function anzan7(){
     });
     
     $hintBtn.addEventListener("click", () => {
-        $hint.innerText = (n11 * 10) + `＋` + (n21 * 10) + `は... そこに` + n12 + `＋` + n22 + `を足すと...`;
+        $hint.innerText = (n11 * 10) + `×` + n2 + `は... そこに` + n12 + `×` + n2 + `を足すと...`;
     });
 
     $startBtn.addEventListener("click", () => {
@@ -130,4 +121,4 @@ function anzan7(){
     
 };
     
-anzan7();
+anzan8();
