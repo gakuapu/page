@@ -1,5 +1,6 @@
-function anzan7(){
+function anzan11(){
     
+    const $step = document.getElementById("step");
     const $startBtn = document.getElementById("start-btn");
     const $hintBtn = document.getElementById("hint-btn");
     const $eraseBtn = document.getElementById("erase-btn");
@@ -13,14 +14,15 @@ function anzan7(){
     
     let count = 0;
     let n1 = 0;
-    let n11 = 0;
     let n12 = 0;
     let n2 = 0;
-    let n21 = 0;
     let n22 = 0;
     let a = 0;
-    let a2 = 0;
     let ab = 0;
+    let p = 0;
+    let pb = 0;
+    let p2 = 0;
+    let p2b = 0;
     let mondaiNum = 10;
     
     function getRandom(min, max){
@@ -31,14 +33,15 @@ function anzan7(){
     function defaultlet(){
         count = 0;
         n1 = 0;
-        n11 = 0;
         n12 = 0;
         n2 = 0;
-        n21 = 0;
         n22 = 0;
         a = 0;
-        a2 = 0;
         ab = 0;
+        p = 0;
+        pb = 0;
+        p2 = 0;
+        p2b = 0;
         $kotae.value = "";
         $mondai.innerText = "";
         $hint.innerText = "";
@@ -70,25 +73,185 @@ function anzan7(){
         alert(`クリアしました`);
     };
 
-    function setup(){
+    function switchSetup(stepValue){
+        switch(stepValue){
+            case "1":
+                step1Setup();
+                break;
+            case "2":
+                step2Setup();
+                break;
+            case "3":
+                step3Setup();
+                break;
+            case "4":
+                step4Setup();
+                break;
+            case "5":
+                step5Setup();
+                break;
+            case "6":
+                step6Setup();
+                break;
+            default:
+                alert(`リロードして下さい`);
+        };
+    };
+
+    function step1Setup(){
         if (count < mondaiNum){
             ab = a;
-            n12 = getRandom(2, 9);
-            a2 = getRandom(1, n12 - 1);
-            n11 = getRandom(2, 9);
-            n21 = getRandom(2, 9);
-            a = (n11 + n21 + 1) * 10 + a2;
+            n1 = getRandom(3, 9) * 10;
+            n12 = getRandom(1, 3);
+            n2 = getRandom(3, 9) * 10;
+            n22 = getRandom(1, 3);
+            a = n1 - n12 + n2 - n22;
             while (a == ab){
-                n12 = getRandom(2, 9);
-                a2 = getRandom(1, n12 - 1);
-                n11 = getRandom(2, 9);
-                n21 = getRandom(2, 9);
-                a = (n11 + n21 + 1) * 10 + a2;
+                n1 = getRandom(3, 9) * 10;
+                n12 = getRandom(1, 3);
+                n2 = getRandom(3, 9) * 10;
+                n22 = getRandom(1, 3);
+                a = n1 - n12 + n2 - n22;
             };
-            n1 = n11 * 10 + n12;
-            n22 = a2 + 10 - n12;
-            n2 = n21 * 10 + n22;
-            $mondai.innerText = n1 + `＋` + n2 + `＝`;
+            $mondai.innerText = (n1 - n12) + `＋` + (n2 - n22) + `＝`;
+        } else if (count == mondaiNum){
+            closing();
+        };
+    };
+
+    function step2Setup(){
+        if (count < mondaiNum){
+            ab = a;
+            n1 = getRandom(2, 5) * 100;
+            n12 = getRandom(1, 5);
+            n2 = getRandom(2, 5) * 100;
+            n22 = getRandom(1, 5);
+            a = n1 - n12 + n2 - n22;
+            while (a == ab){
+                n1 = getRandom(1, 5) * 10;
+                n12 = getRandom(1, 5);
+                n2 = getRandom(1, 5) * 10;
+                n22 = getRandom(1, 5);
+                a = n1 - n12 + n2 - n22;
+            };
+            $mondai.innerText = (n1 - n12) + `＋` + (n2 - n22) + `＝`;
+        } else if (count == mondaiNum){
+            closing();
+        };
+    };
+
+    function step3Setup(){
+        if (count < mondaiNum){
+            pb = p;
+            p = getRandom(1, 3);
+            while (p == pb){
+                p = getRandom(1, 3);
+            };
+            n1 = getRandom(5, 9);
+            n2 = getRandom(3, n1 - 2);
+            n1 = n1 * 10;
+            n2 = n2 * 10;
+            switch(p){
+                case 1:
+                    n12 = getRandom(2, 3);
+                    n22 = getRandom(1, n12 - 1);
+                    a = (n1 - n12) - (n2 - n22);
+                    $mondai.innerText = (n1 - n12) + `－` + (n2 - n22) + `＝`;
+                    break;
+                case 2:
+                    n12 = getRandom(1, 2);
+                    n22 = getRandom(n12 + 1, 3);
+                    a = (n1 + n12) - (n2 + n22);
+                    $mondai.innerText = (n1 + n12) + `－` + (n2 + n22) + `＝`;
+                    break;
+                case 3:
+                    n12 = getRandom(1, 3);
+                    n22 = getRandom(1, 3);
+                    a = (n1 + n12) - (n2 - n22);
+                    $mondai.innerText = (n1 + n12) + `－` + (n2 - n22) + `＝`;
+                    break;
+                default:
+                    alert(`リロードして下さい`);
+            };
+        } else if (count == mondaiNum){
+            closing();
+        };
+    };
+
+    function step4Setup(){
+        if (count < mondaiNum){
+            pb = p;
+            p = getRandom(1, 3);
+            while (p == pb){
+                p = getRandom(1, 3);
+            };
+            n1 = getRandom(5, 9);
+            n2 = getRandom(3, n1 - 2);
+            n1 = n1 * 100;
+            n2 = n2 * 100;
+            switch(p){
+                case 1:
+                    n12 = getRandom(2, 5);
+                    n22 = getRandom(1, n12 - 1);
+                    a = (n1 - n12) - (n2 - n22);
+                    $mondai.innerText = (n1 - n12) + `－` + (n2 - n22) + `＝`;
+                    break;
+                case 2:
+                    n12 = getRandom(1, 4);
+                    n22 = getRandom(n12 + 1, 5);
+                    a = (n1 + n12) - (n2 + n22);
+                    $mondai.innerText = (n1 + n12) + `－` + (n2 + n22) + `＝`;
+                    break;
+                case 3:
+                    n12 = getRandom(1, 5);
+                    n22 = getRandom(1, 5);
+                    a = (n1 + n12) - (n2 - n22);
+                    $mondai.innerText = (n1 + n12) + `－` + (n2 - n22) + `＝`;
+                    break;
+                default:
+                    alert(`リロードして下さい`);
+            };
+        } else if (count == mondaiNum){
+            closing();
+        };
+    };
+
+    function step5Setup(){
+        if (count < mondaiNum){
+            p2b = p2;
+            p2 = getRandom(1, 3);
+            while (p2 == p2b){
+                p2 = getRandom(1, 3);
+            };
+            if (p2 == 1){
+                step2Setup();
+            } else {
+                pb = p;
+                p = getRandom(1, 3);
+                while (p == pb){
+                    p = getRandom(1, 3);
+                };
+                step4Setup();
+            };
+        } else if (count == mondaiNum){
+            closing();
+        };
+    };
+
+    function step6Setup(){
+        if (count < mondaiNum){
+            ab = a;
+            n1 = getRandom(2, 9) * 100;
+            n12 = getRandom(1, 2);
+            n2 = getRandom(2, 9);
+            a = (n1 - n12) * n2;
+            while (a == ab){
+                n1 = getRandom(2, 9) * 100;
+                n12 = getRandom(1, 2);
+                n2 = getRandom(3, 9);
+                a = (n1 - n12) * n2;
+            };
+            $mondai.innerText = (n1 - n12) + `×` + n2 + `＝`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -103,19 +266,45 @@ function anzan7(){
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;
-            setup();
+            switchSetup($step.value);
         };
     });
     
     $hintBtn.addEventListener("click", () => {
-        $hint.innerText = (n11 * 10) + `＋` + (n21 * 10) + `は... そこに` + n12 + `＋` + n22 + `を足すと...`;
+        switch($step.value){
+            case "1":
+                $hint.innerText = n1 + `＋` + n2 + `は... そこから` + n12 + `と` + n22;
+                break;
+            case "2":
+                $hint.innerText = n1 + `＋` + n2 + `は... そこから` + n12 + `と` + n22;
+                break;
+            case "3":
+                $hint.innerText = n1 + `－` + n2 + `は... そこから` + n12 + `と` + n22;
+                break;
+            case "4":
+                $hint.innerText = n1 + `－` + n2 + `は... そこから` + n12 + `と` + n22;
+                break;
+            case "5":
+                if (p2 == 1){
+                    $hint.innerText = n1 + `＋` + n2 + `は... そこから` + n12 + `と` + n22;
+                } else {
+                    $hint.innerText = n1 + `－` + n2 + `は... そこから` + n12 + `と` + n22;
+                };
+                break;
+            case "6":
+                $hint.innerText = n1 + `×` + n2 + `は... そこから` + n12 + `×` + n2;
+                break;
+            default:
+                alert(`リロードして下さい`);
+        };
+        $hint.innerText += `を調整するには...`;
     });
 
     $startBtn.addEventListener("click", () => {
         switchdisplay();
         defaultlet();
         $progress.value = 0;
-        setup();
+        switchSetup($step.value);
     });
     
     $eraseBtn.addEventListener("click", () => {
@@ -130,4 +319,4 @@ function anzan7(){
     
 };
     
-anzan7();
+anzan11();
