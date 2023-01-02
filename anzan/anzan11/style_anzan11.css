@@ -1,0 +1,11 @@
+#kotae,
+#progress,
+#erase-btn,
+#reset-btn,
+#hint-btn {
+    display: none;
+}
+
+#hint {
+    font-size: 16px;
+}
