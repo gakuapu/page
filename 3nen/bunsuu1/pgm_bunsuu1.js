@@ -13,15 +13,20 @@ function bunsuu1(){
     const $ca = document.getElementById("ca");
     const $ma = document.getElementById("ma");
     const $kigou = document.getElementById("kigou");
+    const $hrkotae = document.getElementById("hrkotae");
     
     const $progress = document.getElementById("progress");
     
+    const childMaster = [3, 5, 7];
+
     let count = 0;
     let nc1 = 0;
     let nc2 = 0;
-    let m = 0;
     let ca = 0;
+    let m = 0;
+    let mb = 0;
     let ma = 0;
+    let p = 0;
     let mondaiNum = 10;
     
     function getRandom(min, max){
@@ -29,18 +34,42 @@ function bunsuu1(){
         return randomNum;
     };
     
+    function getm(mbefore){
+        let mpickuped = getRandom(0, 2);
+        mpickuped = childMaster[mpickuped];
+        while(mpickuped == mbefore){
+            mpickuped = getRandom(0, 2);
+            mpickuped = childMaster[mpickuped];
+        };
+        return mpickuped;
+    }
+
+    function erase(){
+        $ca.value = "";
+        $ma.value = "";
+    };
+
     function defaultlet(){
         count = 0;
         nc1 = 0;
         nc2 = 0;
-        m = 0;
         ca = 0;
+        m = 0;
+        mb = 0;
         ma = 0;
+        p = 0;
         $kigou.innerText = "";
+    };
+
+    function defaultmondaikotae(){
+        $ma.style.display = "block";
+        $hrkotae.style.display = "block";
+        $c1.style.display = "block";
     };
 
     function switchdisplay(){
         $mondaikotae.style.display = "block";
+        defaultmondaikotae();
         $progress.style.display = "block";
         $eraseBtn.style.display = "inline-block";
         $resetBtn.style.display = "inline-block";
@@ -50,6 +79,7 @@ function bunsuu1(){
 
     function defaultdisplay(){
         $mondaikotae.style.display = "none";
+        defaultmondaikotae();
         $progress.style.display = "none";
         $eraseBtn.style.display = "none";
         $resetBtn.style.display = "none";
@@ -80,11 +110,23 @@ function bunsuu1(){
 
     function step1Setup(){
         if (count < mondaiNum){
-            m = getRandom (3, 9);
-            ca = getRandom (2, m - 1);
-            nc1 = getRandom (1, ca - 1);
-            nc2 = ca - nc1;
-            ma = m;
+            mb = m;
+            m = getm(mb);
+            p = getRandom (1, 3);
+            if(p == 1){
+                $ma.style.display = "none";
+                $hrkotae.style.display = "none";
+                ca = 1;
+                ma = "";
+                nc1 = getRandom (1, m - 1);
+                nc2 = m - nc1;
+            } else {
+                defaultmondaikotae();
+                ma = m;
+                ca = getRandom (2, m - 1);
+                nc1 = getRandom (1, ca - 1);
+                nc2 = ca - nc1;
+            };
             $m1.innerText = m;
             $m2.innerText = m;
             $c1.innerText = nc1
@@ -97,14 +139,24 @@ function bunsuu1(){
     
     function step2Setup(){
         if (count < mondaiNum){
-            m = getRandom (3, 9);
-            nc1 = getRandom (2, m - 1);
-            ca = getRandom (1, nc1 - 1);
-            nc2 = nc1 - ca;
+            mb = m;
+            m = getm(mb);
             ma = m;
-            $m1.innerText = m;
+            p = getRandom (1, 3);
+            if(p == 1){
+                $c1.style.display = "none";
+                $m1.innerText = 1;
+                ca = getRandom(1, m - 1);
+                nc2 = m - ca;
+            } else {
+                defaultmondaikotae();
+                nc1 = getRandom (2, m - 1);
+                ca = getRandom (1, nc1 - 1);
+                nc2 = nc1 - ca;
+                $m1.innerText = m;
+                $c1.innerText = nc1
+            };
             $m2.innerText = m;
-            $c1.innerText = nc1
             $c2.innerText = nc2;
             $kigou.innerText = "－";
         } else if (count == mondaiNum)
@@ -115,8 +167,7 @@ function bunsuu1(){
         if ($ca.value == ca && $ma.value == ma){
             setTimeout(() => {
                 audio1.play();
-                $ca.value = "";
-                $ma.value = "";
+                erase();
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;
@@ -128,8 +179,7 @@ function bunsuu1(){
         if ($ca.value == ca && $ma.value == ma){
             setTimeout(() => {
                 audio1.play();
-                $ca.value = "";
-                $ma.value = "";
+                erase();
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;
@@ -145,13 +195,13 @@ function bunsuu1(){
     });
     
     $eraseBtn.addEventListener("click", () => {
-        $ca.value = "";
-        $ma.value = "";
+        erase();
     });
     
     $resetBtn.addEventListener("click", () => {
         defaultdisplay();
         defaultlet();
+        erase();
         $progress.value = 0;
     });
     
