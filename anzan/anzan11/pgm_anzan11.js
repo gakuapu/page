@@ -90,9 +90,6 @@ function anzan11(){
             case "5":
                 step5Setup();
                 break;
-            case "6":
-                step6Setup();
-                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -238,25 +235,6 @@ function anzan11(){
         };
     };
 
-    function step6Setup(){
-        if (count < mondaiNum){
-            ab = a;
-            n1 = getRandom(2, 9) * 100;
-            n12 = getRandom(1, 2);
-            n2 = getRandom(2, 9);
-            a = (n1 - n12) * n2;
-            while (a == ab){
-                n1 = getRandom(2, 9) * 100;
-                n12 = getRandom(1, 2);
-                n2 = getRandom(3, 9);
-                a = (n1 - n12) * n2;
-            };
-            $mondai.innerText = (n1 - n12) + `×` + n2 + `＝`;
-        } else if (count == mondaiNum){
-            closing();
-        };
-    };
-
     $kotae.addEventListener("input", () => {
         if ($kotae.value == a){
             setTimeout(() => {
@@ -290,9 +268,6 @@ function anzan11(){
                 } else {
                     $hint.innerText = n1 + `－` + n2 + `は... そこから` + n12 + `と` + n22;
                 };
-                break;
-            case "6":
-                $hint.innerText = n1 + `×` + n2 + `は... そこから` + n12 + `×` + n2;
                 break;
             default:
                 alert(`リロードして下さい`);
