@@ -43,6 +43,7 @@ function anzan13(){
         $eraseBtn.style.display = "inline-block";
         $resetBtn.style.display = "inline-block";
         $startBtn.style.display = "none";
+        $step.style.display = "none";
         $hintBtn.style.display = "block";
     };
 
@@ -52,6 +53,7 @@ function anzan13(){
         $eraseBtn.style.display = "none";
         $resetBtn.style.display = "none";
         $startBtn.style.display = "block";
+        $step.style.display = "block";
         $hintBtn.style.display = "none";
     };
 

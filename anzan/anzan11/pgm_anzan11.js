@@ -53,6 +53,7 @@ function anzan11(){
         $eraseBtn.style.display = "inline-block";
         $resetBtn.style.display = "inline-block";
         $startBtn.style.display = "none";
+        $step.style.display = "none";
         $hintBtn.style.display = "block";
     };
 
@@ -62,6 +63,7 @@ function anzan11(){
         $eraseBtn.style.display = "none";
         $resetBtn.style.display = "none";
         $startBtn.style.display = "block";
+        $step.style.display = "block";
         $hintBtn.style.display = "none";
     };
 
@@ -99,15 +101,15 @@ function anzan11(){
         if (count < mondaiNum){
             ab = a;
             n1 = getRandom(3, 9) * 10;
-            n12 = getRandom(1, 3);
+            n12 = getRandom(1, 2);
             n2 = getRandom(3, 9) * 10;
-            n22 = getRandom(1, 3);
+            n22 = getRandom(1, 2);
             a = n1 - n12 + n2 - n22;
             while (a == ab){
                 n1 = getRandom(3, 9) * 10;
-                n12 = getRandom(1, 3);
+                n12 = getRandom(1, 2);
                 n2 = getRandom(3, 9) * 10;
-                n22 = getRandom(1, 3);
+                n22 = getRandom(1, 2);
                 a = n1 - n12 + n2 - n22;
             };
             $mondai.innerText = (n1 - n12) + `＋` + (n2 - n22) + `＝`;
@@ -150,20 +152,18 @@ function anzan11(){
             n2 = n2 * 10;
             switch(p){
                 case 1:
-                    n12 = getRandom(2, 3);
-                    n22 = getRandom(1, n12 - 1);
-                    a = (n1 - n12) - (n2 - n22);
-                    $mondai.innerText = (n1 - n12) + `－` + (n2 - n22) + `＝`;
+                    n22 = getRandom(1, 2);
+                    a = n1 - (n2 - n22);
+                    $mondai.innerText = n1 + `－` + (n2 - n22) + `＝`;
                     break;
                 case 2:
-                    n12 = getRandom(1, 2);
-                    n22 = getRandom(n12 + 1, 3);
-                    a = (n1 + n12) - (n2 + n22);
-                    $mondai.innerText = (n1 + n12) + `－` + (n2 + n22) + `＝`;
+                    n22 = getRandom(1, 2);
+                    a = n1 + - (n2 + n22);
+                    $mondai.innerText = n1 + `－` + (n2 + n22) + `＝`;
                     break;
                 case 3:
-                    n12 = getRandom(1, 3);
-                    n22 = getRandom(1, 3);
+                    n12 = getRandom(1, 2);
+                    n22 = getRandom(1, 2);
                     a = (n1 + n12) - (n2 - n22);
                     $mondai.innerText = (n1 + n12) + `－` + (n2 - n22) + `＝`;
                     break;
@@ -188,16 +188,14 @@ function anzan11(){
             n2 = n2 * 100;
             switch(p){
                 case 1:
-                    n12 = getRandom(2, 5);
-                    n22 = getRandom(1, n12 - 1);
-                    a = (n1 - n12) - (n2 - n22);
-                    $mondai.innerText = (n1 - n12) + `－` + (n2 - n22) + `＝`;
+                    n22 = getRandom(1, 5);
+                    a = n1 - (n2 - n22);
+                    $mondai.innerText = n1 + `－` + (n2 - n22) + `＝`;
                     break;
                 case 2:
-                    n12 = getRandom(1, 4);
-                    n22 = getRandom(n12 + 1, 5);
-                    a = (n1 + n12) - (n2 + n22);
-                    $mondai.innerText = (n1 + n12) + `－` + (n2 + n22) + `＝`;
+                    n22 = getRandom(1, 5);
+                    a = n1 - (n2 + n22);
+                    $mondai.innerText = n1 + `－` + (n2 + n22) + `＝`;
                     break;
                 case 3:
                     n12 = getRandom(1, 5);
@@ -251,28 +249,40 @@ function anzan11(){
     $hintBtn.addEventListener("click", () => {
         switch($step.value){
             case "1":
-                $hint.innerText = n1 + `＋` + n2 + `は... そこから` + n12 + `と` + n22;
+                $hint.innerText = n1 + `＋` + n2 + `は... そこから` + n12 + `と` + n22 + `少ない`;
                 break;
             case "2":
-                $hint.innerText = n1 + `＋` + n2 + `は... そこから` + n12 + `と` + n22;
+                $hint.innerText = n1 + `＋` + n2 + `は... そこから` + n12 + `と` + n22 + `少ない`;
                 break;
             case "3":
-                $hint.innerText = n1 + `－` + n2 + `は... そこから` + n12 + `と` + n22;
+                if (p == 3){
+                    $hint.innerText = n1 + `－` + n2 + `は... そこから` + n12 + `と` + n22 + `多くなる`;
+                } else {
+                    $hint.innerText = n1 + `－` + n2 + `は... そこから` + n22 + `の`;
+                };
                 break;
             case "4":
-                $hint.innerText = n1 + `－` + n2 + `は... そこから` + n12 + `と` + n22;
+                if (p == 3){
+                    $hint.innerText = n1 + `－` + n2 + `は... そこから` + n12 + `と` + n22 + `多くなる`;
+                } else {
+                    $hint.innerText = n1 + `－` + n2 + `は... そこから` + n22 + `の`;
+                };
                 break;
             case "5":
                 if (p2 == 1){
-                    $hint.innerText = n1 + `＋` + n2 + `は... そこから` + n12 + `と` + n22;
+                    $hint.innerText = n1 + `＋` + n2 + `は... そこから` + n12 + `と` + n22 + `少ない`;
                 } else {
-                    $hint.innerText = n1 + `－` + n2 + `は... そこから` + n12 + `と` + n22;
+                    if (p == 3){
+                        $hint.innerText = n1 + `－` + n2 + `は... そこから` + n12 + `と` + n22 + `多くなる`;
+                    } else {
+                        $hint.innerText = n1 + `－` + n2 + `は... そこから` + n22 + `の`;
+                    };
                 };
                 break;
             default:
                 alert(`リロードして下さい`);
         };
-        $hint.innerText += `を調整するには...`;
+        $hint.innerText += `分を調整するには...`;
     });
 
     $startBtn.addEventListener("click", () => {
