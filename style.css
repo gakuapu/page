@@ -2,11 +2,17 @@ html {
     font-family: serif;
     font-size: 24px;
     margin: 2%;
+    scroll-behavior: smooth;
 }
 
 hr {
     line-height: 1px;
     color: dimgray;
+}
+
+.dotted {
+    border: none;
+    border-top: dotted;
 }
 
 h1,
