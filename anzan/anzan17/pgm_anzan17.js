@@ -93,6 +93,12 @@ function anzan17(){
             case "2":
                 step2Setup();
                 break;
+            case "3":
+                step3Setup();
+                break;
+            case "4":
+                step4Setup();
+                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -105,54 +111,19 @@ function anzan17(){
             while(p == pb){
                 p = getRandom(1, 2);
             };
+            n1 = getRandom(1, 3) * 10;
+            n2 = getRandom(2, 9);
+            a = n1 * n2;
             switch(p){
                 case 1:
-                    n1 = getRandom(1, 3) * 10;
                     n11 = getRandom(2, n1 - 2);
                     n12 = n1 - n11;
-                    n2 = getRandom(2, 9);
-                    a = n1 * n2;
-                    q = getRandom(1, 4);
-                        switch(q){
-                            case 1:
-                                $mondai.innerText = n11 + `×` + n2 + `＋` + n12 + `×` + n2 + `＝`;
-                                break;
-                            case 2:
-                                $mondai.innerText = n2 + `×` + n11 + `＋` + n12 + `×` + n2 + `＝`;
-                                break;
-                            case 3:
-                                $mondai.innerText = n11 + `×` + n2 + `＋` + n2 + `×` + n12 + `＝`;
-                                break;
-                            case 4:
-                                $mondai.innerText = n2 + `×` + n11 + `＋` + n2 + `×` + n12 + `＝`;
-                                break;
-                            default:
-                                alert(`リロードして下さい`);
-                        };
+                    $mondai.innerText = n11 + `×` + n2 + `＋` + n12 + `×` + n2 + `＝`;
                     break;
                 case 2:
-                    n1 = getRandom(1, 3) * 10;
                     n12 = getRandom(2, n1 - 2);
                     n11 = n1 + n12;
-                    n2 = getRandom(2, 9);
-                    a = n1 * n2;
-                    q = getRandom(1, 4);
-                        switch(q){
-                            case 1:
-                                $mondai.innerText = n11 + `×` + n2 + `－` + n12 + `×` + n2 + `＝`;
-                                break;
-                            case 2:
-                                $mondai.innerText = n2 + `×` + n11 + `－` + n12 + `×` + n2 + `＝`;
-                                break;
-                            case 3:
-                                $mondai.innerText = n11 + `×` + n2 + `－` + n2 + `×` + n12 + `＝`;
-                                break;
-                            case 4:
-                                $mondai.innerText = n2 + `×` + n11 + `－` + n2 + `×` + n12 + `＝`;
-                                break;
-                            default:
-                                alert(`リロードして下さい`);
-                        };
+                    $mondai.innerText = n11 + `×` + n2 + `－` + n12 + `×` + n2 + `＝`;
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -163,6 +134,95 @@ function anzan17(){
     };
 
     function step2Setup(){
+        if (count < mondaiNum){
+            pb = p;
+            p = getRandom(1, 2);
+            while(p == pb){
+                p = getRandom(1, 2);
+            };
+            n1 = getRandom(1, 3) * 10;
+            n2 = getRandom(2, 9);
+            a = n1 * n2;
+            q = getRandom(1, 4);
+            switch(p){
+                case 1:
+                    n11 = getRandom(2, n1 - 2);
+                    n12 = n1 - n11;
+                    t11 = n11 + `×` + n2;
+                    t12 = n2 + `×` + n11;
+                    t21 = n12 + `×` + n2;
+                    t22 = n2 + `×` + n12;
+                        switch(q){
+                            case 1:
+                                $mondai.innerText = t11 + `＋` + t21;
+                                break;
+                            case 2:
+                                $mondai.innerText = t12 + `＋` + t21;
+                                break;
+                            case 3:
+                                $mondai.innerText = t11 + `＋` + t22;
+                                break;
+                            case 4:
+                                $mondai.innerText = t12 + `＋` + t22;
+                                break;
+                            default:
+                                alert(`リロードして下さい`);
+                        };
+                    break;
+                case 2:
+                    n12 = getRandom(2, n1 - 2);
+                    n11 = n1 + n12;
+                    t11 = n11 + `×` + n2;
+                    t12 = n2 + `×` + n11;
+                    t21 = n12 + `×` + n2;
+                    t22 = n2 + `×` + n12;
+                        switch(q){
+                            case 1:
+                                $mondai.innerText = t11 + `－` + t21;
+                                break;
+                            case 2:
+                                $mondai.innerText = t12 + `－` + t21;
+                                break;
+                            case 3:
+                                $mondai.innerText = t11 + `－` + t22;
+                                break;
+                            case 4:
+                                $mondai.innerText = t12 + `－` + t22;
+                                break;
+                            default:
+                                alert(`リロードして下さい`);
+                        };
+                    break;
+                default:
+                    alert(`リロードして下さい`);
+            };
+            $mondai.innerText += `＝`;
+        } else if (count == mondaiNum){
+            closing();
+        };
+    };
+
+    function step3Setup(){
+        if (count < mondaiNum){
+            pb = p;
+            p = getRandom(1, 3);
+            while(p == pb){
+                p = getRandom(1, 3);
+            };
+            n1 = getRandom(2, 5) * 10;
+            n2 = getRandom(6, 15);
+            n11 = getRandom(2, n1 - 2);
+            n12 = n1 - n11;
+            n21 = getRandom(2, n2 - 2);
+            n22 = n2 - n21;
+            a = n1 * n2;
+            $mondai.innerText = n11 + `×` + n21 + `＋` + n11 + `×` + n22 + `＋` + n12 + `×` + n2 + `＝`;
+        } else if (count == mondaiNum){
+            closing();
+        };
+    };
+
+    function step4Setup(){
         if (count < mondaiNum){
             pb = p;
             p = getRandom(1, 3);
@@ -198,9 +258,9 @@ function anzan17(){
                     };
                     q = getRandom(1, 2);
                     if(q == 1){
-                        $mondai.innerText += `＋` + t31 + `＝`;
+                        $mondai.innerText += `＋` + t31;
                     } else {
-                        $mondai.innerText += `＋` + t32 + `＝`;
+                        $mondai.innerText += `＋` + t32;
                     };
                     break;
                 case 2:
@@ -218,9 +278,9 @@ function anzan17(){
                     };
                     q = getRandom(1, 2);
                     if(q == 1){
-                        $mondai.innerText += `＋` + t21 + `＝`;
+                        $mondai.innerText += `＋` + t21;
                     } else {
-                        $mondai.innerText += `＋` + t22 + `＝`;
+                        $mondai.innerText += `＋` + t22;
                     };
                     break;
                 case 3:
@@ -238,14 +298,15 @@ function anzan17(){
                     };
                     q = getRandom(1, 2);
                     if(q == 1){
-                        $mondai.innerText += `＋` + t21 + `＝`;
+                        $mondai.innerText += `＋` + t21;
                     } else {
-                        $mondai.innerText += `＋` + t22 + `＝`;
+                        $mondai.innerText += `＋` + t22;
                     };
                     break;
                 default:
                     alert(`リロードして下さい`);
             };
+            $mondai.innerText += `＝`;
         } else if (count == mondaiNum){
             closing();
         };
