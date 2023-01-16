@@ -109,12 +109,17 @@ function waru2(){
             while (n1 == n1b){
                 n1 = getRandom(2, 9);
             };
-            a1 = getRandom(11, 19);
-            n2 = n1 * a1;
-            while (n2 >= 100){
+            if (n1 < 4){
+                a1 = getRandom(11, 33);
+                n2 = n1 * a1;
+            } else {
                 a1 = getRandom(11, 19);
                 n2 = n1 * a1;
-            };
+                while (n2 >= 100){
+                    a1 = getRandom(11, 19);
+                    n2 = n1 * a1;
+                };
+            }
             n2 = n1 * a1;
             $mondai.innerText = n2 + `÷` + n1 + `＝`;
         } else if (count == mondaiNum){
@@ -131,11 +136,16 @@ function waru2(){
                 n1 = getRandom(2, 8);
             };
             a2 = getRandom(1, n1 - 1);
-            a1 = getRandom(11, 19);
-            n2 = n1 * a1 + a2;
-            while (n2 >= 100){
+            if(n1 < 4){
+                a1 = getRandom(11, 32);
+                n2 = n1 * a1 + a2;
+            } else {
                 a1 = getRandom(11, 19);
                 n2 = n1 * a1 + a2;
+                while (n2 >= 100){
+                    a1 = getRandom(11, 19);
+                    n2 = n1 * a1 + a2;
+                };
             };
             $mondai.innerText = n2 + `÷` + n1 + `＝`;
         } else if (count == mondaiNum){
@@ -150,12 +160,14 @@ function waru2(){
             while (n1 == n1b){
                 n1 = getRandom(2, 9);
             };
-            a1 = getRandom(12, 199);
-            n2 = n1 * a1;
-            while (n2 < 100 || n2 >= 1000){
-                a1 = getRandom(12, 199);
-                n2 = n1 * a1;
+            if (n1 < 4){
+                a1 = getRandom(51, 299);
+            } else if (n1 < 6){
+                a1 = getRandom(26, 199);
+            } else {
+                a1 = getRandom(17, 111);
             };
+            n2 = n1 * a1;
             $mondai.innerText = n2 + `÷` + n1 + `＝`;
         } else if (count == mondaiNum){
             closing();
@@ -170,13 +182,15 @@ function waru2(){
             while (n1 == n1b){
                 n1 = getRandom(2, 9);
             };
-            a2 = getRandom(1, n1 - 1);
-            a1 = getRandom(12, 199);
-            n2 = n1 * a1 + a2;
-            while (n2 < 100 || n2 >= 1000){
-                a1 = getRandom(12, 199);
-                n2 = n1 * a1 + a2;
+            if (n1 < 4){
+                a1 = getRandom(51, 299);
+            } else if (n1 < 6){
+                a1 = getRandom(26, 198);
+            } else {
+                a1 = getRandom(17, 110);
             };
+            a2 = getRandom(1, n1 - 1);
+            n2 = n1 * a1 + a2;
             $mondai.innerText = n2 + `÷` + n1 + `＝`;
         } else if (count == mondaiNum){
             closing();
