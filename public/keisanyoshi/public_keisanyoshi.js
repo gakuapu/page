@@ -4,7 +4,16 @@ const $memoHyojiBtn = document.getElementById("memohyoji");
 const $memoClearBtn = document.getElementById("memoclear");
 const $memoTable = document.getElementById("memotable");
 
+const tdnum = 8;
+
 const $mt1 = document.getElementById("mt1");
+const $mt2 = document.getElementById("mt2");
+const $mt3 = document.getElementById("mt3");
+const $mt4 = document.getElementById("mt4");
+const $mt5 = document.getElementById("mt5");
+const $mt6 = document.getElementById("mt6");
+const $mt7 = document.getElementById("mt7");
+const $mt8 = document.getElementById("mt8");
 
 function memoActivate(){
 
@@ -14,9 +23,8 @@ function memoActivate(){
         memob.push("");
     };
 
-    //const $mt1 = document.getElementById("mt1");
     $mt1.addEventListener("click", () => {
-        for (let mi1 = 8 * (1 - 1); mi1 < 8 * 1; mi1++){
+        for (let mi1 = tdnum * (1 - 1); mi1 < tdnum * 1; mi1++){
             $memo[mi1].addEventListener("click", () => {
                 $memo[mi1].innerText = "";
             });
@@ -29,9 +37,8 @@ function memoActivate(){
         };
     });
 
-    const $mt2 = document.getElementById("mt2");
     $mt2.addEventListener("click", () => {
-        for (let mi2 = 8 * (2 - 1); mi2 < 8 * 2; mi2++){
+        for (let mi2 = tdnum * (2 - 1); mi2 < tdnum * 2; mi2++){
             $memo[mi2].addEventListener("click", () => {
                 $memo[mi2].innerText = "";
             });
@@ -44,9 +51,8 @@ function memoActivate(){
         };
     });
 
-    const $mt3 = document.getElementById("mt3");
     $mt3.addEventListener("click", () => {
-        for (let mi3 = 8 * (3 - 1); mi3 < 8 * 3; mi3++){
+        for (let mi3 = tdnum * (3 - 1); mi3 < tdnum * 3; mi3++){
             $memo[mi3].addEventListener("click", () => {
                 $memo[mi3].innerText = "";
             });
@@ -59,9 +65,8 @@ function memoActivate(){
         };
     });
 
-    const $mt4 = document.getElementById("mt4");
     $mt4.addEventListener("click", () => {
-        for (let mi4 = 8 * (4 - 1); mi4 < 8 * 4; mi4++){
+        for (let mi4 = tdnum * (4 - 1); mi4 < tdnum * 4; mi4++){
             $memo[mi4].addEventListener("click", () => {
                 $memo[mi4].innerText = "";
             });
@@ -74,9 +79,8 @@ function memoActivate(){
         };
     });
 
-    const $mt5 = document.getElementById("mt5");
     $mt5.addEventListener("click", () => {
-        for (let mi5 = 8 * (5 - 1); mi5 < 8 * 5; mi5++){
+        for (let mi5 = tdnum * (5 - 1); mi5 < tdnum * 5; mi5++){
             $memo[mi5].addEventListener("click", () => {
                 $memo[mi5].innerText = "";
             });
@@ -89,9 +93,8 @@ function memoActivate(){
         };
     });
 
-    const $mt6 = document.getElementById("mt6");
     $mt6.addEventListener("click", () => {
-        for (let mi6 = 8 * (6 - 1); mi6 < 8 * 6; mi6++){
+        for (let mi6 = tdnum * (6 - 1); mi6 < tdnum * 6; mi6++){
             $memo[mi6].addEventListener("click", () => {
                 $memo[mi6].innerText = "";
             });
@@ -104,9 +107,8 @@ function memoActivate(){
         };
     });
 
-    const $mt7 = document.getElementById("mt7");
     $mt7.addEventListener("click", () => {
-        for (let mi7 = 8 * (7 - 1); mi7 < 8 * 7; mi7++){
+        for (let mi7 = tdnum * (7 - 1); mi7 < tdnum * 7; mi7++){
             $memo[mi7].addEventListener("click", () => {
                 $memo[mi7].innerText = "";
             });
@@ -119,9 +121,8 @@ function memoActivate(){
         };
     });
 
-    const $mt8 = document.getElementById("mt8");
     $mt8.addEventListener("click", () => {
-        for (let mi8 = 8 * (8 - 1); mi8 < 8 * 8; mi8++){
+        for (let mi8 = tdnum * (8 - 1); mi8 < tdnum * 8; mi8++){
             $memo[mi8].addEventListener("click", () => {
                 $memo[mi8].innerText = "";
             });
@@ -135,22 +136,50 @@ function memoActivate(){
     });
 };
 
+function addtds(parent){
+    let addedtd = document.createElement("td");
+    addedtd.className = "memo";
+    addedtd.contentEditable = "true";
+    addedtd.inputtype = "tel"
+    parent.appendChild(addedtd);
+};
+
 $memoHyojiBtn.addEventListener("click", () => {
     $memoHyojiBtn.style.display = "none";
     $memoClearBtn.style.display = "block";
     $memoTable.style.display = "block";
-    memoActivate();
-    //ここからテスト
-    for (let mk = 0; mk < 8; mk++){
     let addtd = document.createElement("td");
     addtd.className = "memo";
     addtd.contentEditable = "true";
-    addtd.inputmodel = "tel";
-    $mt1.appendChild(addtd);
+    addtd.inputtype = "tel"
+    for (let mk = 0; mk < tdnum; mk++){
+        addtds($mt1);
+        addtds($mt2);
+        addtds($mt3);
+        addtds($mt4);
+        addtds($mt5);
+        addtds($mt6);
+        addtds($mt7);
+        addtds($mt8);
     };
+    memoActivate();
 });
 
+function removetds(parent){
+    while(parent.firstChild){
+        parent.removeChild(parent.firstChild);
+    }
+};
+
 $memoClearBtn.addEventListener("click", () => {
+    removetds($mt1);
+    removetds($mt2);
+    removetds($mt3);
+    removetds($mt4);
+    removetds($mt5);
+    removetds($mt6);
+    removetds($mt7);
+    removetds($mt8);
     $memoHyojiBtn.style.display = "block";
     $memoClearBtn.style.display = "none";
     $memoTable.style.display = "none";
