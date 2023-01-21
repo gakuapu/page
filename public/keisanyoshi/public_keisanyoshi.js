@@ -159,6 +159,7 @@ $memoHyojiBtn.addEventListener("click", () => {
         addtds($mt8);
     };
     memoActivate();
+    console.log($mt1[0]);
 });
 
 function removetds(parent){
