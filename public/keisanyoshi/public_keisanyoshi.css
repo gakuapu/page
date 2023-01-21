@@ -1,0 +1,19 @@
+#memotable,
+.memo {
+    border-collapse: collapse;
+    caret-color: transparent;
+  }
+
+.memo {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    font-family: serif;
+    text-align: center;
+    border: 1px dotted dimgray;
+}
+
+#memoclear,
+#memotable {
+  display: none;
+}
