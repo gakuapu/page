@@ -140,7 +140,7 @@ function addtds(parent){
     let addedtd = document.createElement("td");
     addedtd.className = "memo";
     addedtd.contentEditable = "true";
-    addedtd.inputtype = "tel"
+    addedtd.inputMode = "tel";
     parent.appendChild(addedtd);
 };
 
