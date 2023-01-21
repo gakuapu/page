@@ -148,10 +148,6 @@ $memoHyojiBtn.addEventListener("click", () => {
     $memoHyojiBtn.style.display = "none";
     $memoClearBtn.style.display = "block";
     $memoTable.style.display = "block";
-    let addtd = document.createElement("td");
-    addtd.className = "memo";
-    addtd.contentEditable = "true";
-    addtd.inputtype = "tel"
     for (let mk = 0; mk < tdnum; mk++){
         addtds($mt1);
         addtds($mt2);
