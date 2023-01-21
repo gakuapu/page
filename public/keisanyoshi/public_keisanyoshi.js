@@ -4,6 +4,8 @@ const $memoHyojiBtn = document.getElementById("memohyoji");
 const $memoClearBtn = document.getElementById("memoclear");
 const $memoTable = document.getElementById("memotable");
 
+const $mt1 = document.getElementById("mt1");
+
 function memoActivate(){
 
     const $memo = document.getElementsByClassName("memo");
@@ -12,7 +14,7 @@ function memoActivate(){
         memob.push("");
     };
 
-    const $mt1 = document.getElementById("mt1");
+    //const $mt1 = document.getElementById("mt1");
     $mt1.addEventListener("click", () => {
         for (let mi1 = 8 * (1 - 1); mi1 < 8 * 1; mi1++){
             $memo[mi1].addEventListener("click", () => {
@@ -137,7 +139,13 @@ $memoHyojiBtn.addEventListener("click", () => {
     $memoHyojiBtn.style.display = "none";
     $memoClearBtn.style.display = "block";
     $memoTable.style.display = "block";
-    memoActivate();
+    //memoActivate();
+    let testtd = document.createElement("td");
+    testtd.className = "memo";
+    testtd.contentEditable = "true";
+    testtd.inputmodel = "tel";
+    $mt1.appendChild(testtd);
+    console.log(testtd);
 });
 
 $memoClearBtn.addEventListener("click", () => {
