@@ -139,13 +139,15 @@ $memoHyojiBtn.addEventListener("click", () => {
     $memoHyojiBtn.style.display = "none";
     $memoClearBtn.style.display = "block";
     $memoTable.style.display = "block";
-    //memoActivate();
-    let testtd = document.createElement("td");
-    testtd.className = "memo";
-    testtd.contentEditable = "true";
-    testtd.inputmodel = "tel";
-    $mt1.appendChild(testtd);
-    console.log(testtd);
+    memoActivate();
+    //ここからテスト
+    for (let mk = 0; mk < 8; mk++){
+    let addtd = document.createElement("td");
+    addtd.className = "memo";
+    addtd.contentEditable = "true";
+    addtd.inputmodel = "tel";
+    $mt1.appendChild(addtd);
+    };
 });
 
 $memoClearBtn.addEventListener("click", () => {
