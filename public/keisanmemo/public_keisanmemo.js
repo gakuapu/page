@@ -192,3 +192,24 @@ $memoClearBtn.addEventListener("click", () => {
 };
 
 keisanmemo();
+
+/*
+HTML：↓＋cssリンク（<link rel="stylesheet" href="public\keisanmemo\public_keisanmemo.css">）
+
+<!--計算メモ（↓＋css）-->
+    <input id="memohyoji" type="button" class="btn" value="計算メモを表示">
+    <input id="memoclear" type="button" class="btn" value="計算メモ非表示">
+    <table id="memotable">
+        <tr id = "mt1"></tr>
+        <tr id = "mt2"></tr>
+        <tr id = "mt3"></tr>
+        <tr id = "mt4"></tr>
+        <tr id = "mt5"></tr>
+        <tr id = "mt6"></tr>
+        <tr id = "mt7"></tr>
+        <tr id = "mt8"></tr>
+    </table>
+    <script src="public\keisanyoshi\public_keisanyoshi.js"></script>
+<!--計算メモ-->
+
+*/
