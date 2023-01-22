@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-XKL20YHCTB');
+        </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小学3年生の足し算・引き算 | 算数＆計算ドリル 学アプ</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="3nen\tasuhiku9\style_tasuhiku9.css">
+    <link rel="stylesheet" href="public\keisanmemo\public_keisanmemo.css">
+</head>
+<main>
+<body>
+
+    <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
+
+    <div>
+        <select id="step">
+            <option value="1">ステップ1</option>
+            <option value="2">ステップ2</option>
+            <option value="3">ステップ3</option>
+            <option value="4">ステップ4</option>
+            <option value="5">ステップ5</option>
+            <option value="6">ステップ6</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="button" id="start-btn" class="btn" value="スタート">
+    </div>
+
+    <div id="mondai"></div>
+
+    <input id="kotae" class="kotae" type="tel">
+
+    <div>
+        <progress id="progress" value="0"></progress>
+    </div>
+
+    <div>
+        <input type="button" id="erase-btn" class="btn" value="けす">
+        <input type="button" id="reset-btn" class="btn" value="リセット">
+    </div>
+
+    <!--計算メモモジュール（↓＋css）-->
+    <input id="memohyoji" type="button" class="btn" value="計算メモを表示">
+    <input id="memoclear" type="button" class="btn" value="計算メモ非表示">
+    <table id="memotable">
+        <tr id = "mt1"></tr>
+        <tr id = "mt2"></tr>
+        <tr id = "mt3"></tr>
+        <tr id = "mt4"></tr>
+        <tr id = "mt5"></tr>
+        <tr id = "mt6"></tr>
+        <tr id = "mt7"></tr>
+        <tr id = "mt8"></tr>
+    </table>
+    <script src="public\keisanmemo\public_keisanmemo.js"></script>
+    <!--計算メモモジュール-->
+
+    <script src="3nen\tasuhiku9\pgm_tasuhiku9.js"></script>
+    <br>
+    <h1 class="footer-container2">足し算・引き算ドリル（小学3年生）</h1>
+    <ul class="footer-container2">
+        <li>ステップ1：3けたの足し算1</li>
+        <li>ステップ2：3けたの足し算2</li>
+        <li>ステップ3：3けたの足し算3</li>
+        <li>ステップ4：3けたの引き算1</li>
+        <li>ステップ5：3けたの引き算2</li>
+        <li>ステップ6：3けたの引き算3</li>
+    </ul>
+
+    <nav>
+        <ol class="pankuzu">
+            <li><a href="top.html">トップ</a></li>
+            <li><a href="3nen.html">小学3年生の算数</a></li>
+        </ol>
+    </nav>
+</main>
+
+<footer class="footer-container">
+    <hr>
+    <p>算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで、全学年向け</p>
+    <p>Copyright(C) 2022- All Rights Reserved</p>
+    <a class="footer-container2" href="aboutus.html">当サイトについて</a>
+</footer>
+</body>
+</html>
