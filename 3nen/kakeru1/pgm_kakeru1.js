@@ -9,6 +9,10 @@ function kakeru1(){
     const $kotae = document.getElementById("kotae");
     
     const $progress = document.getElementById("progress");
+
+    const $memoHyojiBtn = document.getElementById("memohyoji");//計算メモ
+    const $memoClearBtn = document.getElementById("memoclear");//計算メモ
+    const $memoTable = document.getElementById("memotable");//計算メモ
     
     let count = 0;
     let n1 = 0;
@@ -48,6 +52,9 @@ function kakeru1(){
         $progress.style.display = "none";
         $eraseBtn.style.display = "none";
         $resetBtn.style.display = "none";
+        $memoHyojiBtn.style.display = "none";//計算メモ
+        $memoClearBtn.style.display = "none";//計算メモ
+        $memoTable.style.display = "none";//計算メモ
         $step.style.display = "block";
         $startBtn.style.display = "block";
     };
@@ -61,6 +68,7 @@ function kakeru1(){
     };
 
     function switchSetup(stepValue){
+        $memoHyojiBtn.style.display = "block";//計算メモ
         switch(stepValue){
             case "1":
                 step1Setup();
@@ -131,6 +139,8 @@ function kakeru1(){
 
     $kotae.addEventListener("input", () => {
         if ($kotae.value == a){
+            $memoClearBtn.style.display = "none";//計算メモ
+            $memoTable.style.display = "none";//計算メモ
             setTimeout(() => {
                 audio1.play();
                 $kotae.value = "";

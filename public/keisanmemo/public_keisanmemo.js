@@ -209,7 +209,7 @@ HTML：↓＋cssリンク（<link rel="stylesheet" href="public\keisanmemo\publi
         <tr id = "mt7"></tr>
         <tr id = "mt8"></tr>
     </table>
-    <script src="public\keisanyoshi\public_keisanyoshi.js"></script>
+    <script src="public\keisanmemo\public_keisanmemo.js"></script>
 <!--計算メモ-->
 
 */
