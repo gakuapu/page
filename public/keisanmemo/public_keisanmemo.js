@@ -1,4 +1,4 @@
-function keisanyoshi(){
+function keisanmemo(){
 
 const $memoHyojiBtn = document.getElementById("memohyoji");
 const $memoClearBtn = document.getElementById("memoclear");
@@ -144,10 +144,24 @@ function addtds(parent){
     parent.appendChild(addedtd);
 };
 
+function removetds(parent){
+    while(parent.firstChild){
+        parent.removeChild(parent.firstChild);
+    }
+};
+
 $memoHyojiBtn.addEventListener("click", () => {
     $memoHyojiBtn.style.display = "none";
     $memoClearBtn.style.display = "block";
     $memoTable.style.display = "block";
+    removetds($mt1);
+    removetds($mt2);
+    removetds($mt3);
+    removetds($mt4);
+    removetds($mt5);
+    removetds($mt6);
+    removetds($mt7);
+    removetds($mt8);
     for (let mk = 0; mk < tdnum; mk++){
         addtds($mt1);
         addtds($mt2);
@@ -159,14 +173,7 @@ $memoHyojiBtn.addEventListener("click", () => {
         addtds($mt8);
     };
     memoActivate();
-    console.log($mt1[0]);
 });
-
-function removetds(parent){
-    while(parent.firstChild){
-        parent.removeChild(parent.firstChild);
-    }
-};
 
 $memoClearBtn.addEventListener("click", () => {
     removetds($mt1);
@@ -184,4 +191,4 @@ $memoClearBtn.addEventListener("click", () => {
 
 };
 
-keisanyoshi();
+keisanmemo();

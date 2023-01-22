@@ -10,7 +10,9 @@ function tasuhiku7(){
     
     const $progress = document.getElementById("progress");
     
-    const $memoHyojiBtn = document.getElementById("memohyoji");
+    const $memoHyojiBtn = document.getElementById("memohyoji");//計算メモ
+    const $memoClearBtn = document.getElementById("memoclear");//計算メモ
+    const $memoTable = document.getElementById("memotable");//計算メモ
 
     let count = 0;
     let n1 = 0;
@@ -53,7 +55,6 @@ function tasuhiku7(){
         $resetBtn.style.display = "inline-block";
         $step.style.display = "none";
         $startBtn.style.display = "none";
-        $memoHyojiBtn.style.display = "block";
     };
 
     function defaultdisplay(){
@@ -61,9 +62,11 @@ function tasuhiku7(){
         $progress.style.display = "none";
         $eraseBtn.style.display = "none";
         $resetBtn.style.display = "none";
+        $memoHyojiBtn.style.display = "none";//計算メモ
+        $memoClearBtn.style.display = "none";//計算メモ
+        $memoTable.style.display = "none";//計算メモ
         $step.style.display = "block";
         $startBtn.style.display = "block";
-        $memoHyojiBtn.style.display = "none";
     };
 
     function closing(){
@@ -201,6 +204,7 @@ function tasuhiku7(){
     };
 
     function step6Setup(){
+        $memoHyojiBtn.style.display = "block";//計算メモ
         if (count < mondaiNum){
             pb = p;
             p = getRandom(1, 3);
@@ -231,6 +235,8 @@ function tasuhiku7(){
 
     $kotae.addEventListener("input", () => {
         if ($kotae.value == a){
+            $memoClearBtn.style.display = "none";//計算メモ
+            $memoTable.style.display = "none";//計算メモ
             setTimeout(() => {
                 audio1.play();
                 $kotae.value = "";
