@@ -10,6 +10,8 @@ function tasuhiku7(){
     
     const $progress = document.getElementById("progress");
     
+    const $memoHyojiBtn = document.getElementById("memohyoji");
+
     let count = 0;
     let n1 = 0;
     let n2 = 0;
@@ -51,6 +53,7 @@ function tasuhiku7(){
         $resetBtn.style.display = "inline-block";
         $step.style.display = "none";
         $startBtn.style.display = "none";
+        $memoHyojiBtn.style.display = "block";
     };
 
     function defaultdisplay(){
@@ -60,6 +63,7 @@ function tasuhiku7(){
         $resetBtn.style.display = "none";
         $step.style.display = "block";
         $startBtn.style.display = "block";
+        $memoHyojiBtn.style.display = "none";
     };
 
     function closing(){

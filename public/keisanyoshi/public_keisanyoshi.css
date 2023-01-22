@@ -13,6 +13,7 @@
     border: 1px dotted dimgray;
 }
 
+#memohyoji,
 #memoclear,
 #memotable {
   display: none;
