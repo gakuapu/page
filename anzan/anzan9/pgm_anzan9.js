@@ -72,6 +72,7 @@ function anzan9(){
 
     function setup(){
         if (count < mondaiNum){
+            $hintBtn.style.display = "block";
             pb = p;
             p = getRandom(1, 5);
             while (p == pb){
@@ -115,6 +116,7 @@ function anzan9(){
     
     $hintBtn.addEventListener("click", () => {
         $hint.innerText = (n11 * 10) + `－` + (n21 * 10) + `は... ` + n12 + `－` + n22 + `は... くり下がりは...`;
+        $hintBtn.style.display = "none";
     });
 
     $startBtn.addEventListener("click", () => {

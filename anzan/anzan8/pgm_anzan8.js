@@ -66,6 +66,7 @@ function anzan8(){
 
     function setup(){
         if (count < mondaiNum){
+            $hintBtn.style.display = "block";
             ab = a;
             n2 = getRandom(2, 9);
             n11 = getRandom(2, 9);
@@ -100,6 +101,7 @@ function anzan8(){
     
     $hintBtn.addEventListener("click", () => {
         $hint.innerText = (n11 * 10) + `×` + n2 + `は... そこに` + n12 + `×` + n2 + `を足すと...`;
+        $hintBtn.style.display = "none";
     });
 
     $startBtn.addEventListener("click", () => {

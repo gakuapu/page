@@ -76,6 +76,7 @@ function anzan11(){
     };
 
     function switchSetup(stepValue){
+        $hintBtn.style.display = "block";
         switch(stepValue){
             case "1":
                 step1Setup();
@@ -283,6 +284,7 @@ function anzan11(){
                 alert(`リロードして下さい`);
         };
         $hint.innerText += `分を調整するには...`;
+        $hintBtn.style.display = "none";
     });
 
     $startBtn.addEventListener("click", () => {

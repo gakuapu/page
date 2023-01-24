@@ -72,6 +72,7 @@ function anzan15(){
     };
 
     function switchSetup(stepValue){
+        $hintBtn.style.display = "block";
         switch(stepValue){
             case "1":
                 step1Setup();
@@ -247,6 +248,7 @@ function anzan15(){
             default:
                 alert(`リロードして下さい`);
         };
+        $hintBtn.style.display = "none";
     });
 
     $startBtn.addEventListener("click", () => {

@@ -66,6 +66,7 @@ function anzan13(){
     };
 
     function switchSetup(stepValue){
+        $hintBtn.style.display = "block";
         switch(stepValue){
             case "1":
                 step1Setup();
@@ -141,6 +142,7 @@ function anzan13(){
     
     $hintBtn.addEventListener("click", () => {
         $hint.innerText = n + `を基準にすると...`;
+        $hintBtn.style.display = "none";
     });
 
     $startBtn.addEventListener("click", () => {
