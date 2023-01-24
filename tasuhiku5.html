@@ -18,6 +18,7 @@
     <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="2nen\tasuhiku5\style_tasuhiku5.css">
+    <link rel="stylesheet" href="public\keisanmemo\public_keisanmemo.css">
 </head>
 <main>
 <body>
@@ -44,6 +45,20 @@
     <div id="mondai"></div>
 
     <input id="kotae" class="kotae" type="tel">
+
+    <!--計算メモモジュール（↓＋css）-->
+    <input id="memohyoji" type="button" class="btn" value="計算メモを表示">
+    <input id="memoclear" type="button" class="btn" value="計算メモ非表示">
+    <table id="memotable">
+        <tr id = "mt1"></tr>
+        <tr id = "mt2"></tr>
+        <tr id = "mt3"></tr>
+        <tr id = "mt4"></tr>
+        <tr id = "mt5"></tr>
+        <tr id = "mt6"></tr>
+    </table>
+    <script src="public\keisanmemo\public_keisanmemo.js"></script>
+    <!--計算メモモジュール-->
 
     <div>
         <progress id="progress" value="0"></progress>

@@ -19,7 +19,10 @@ function kakeru2(){
     let n2 = 0;
     let a = 0;
     let ab = 0;
-    let mondaiNum = 8;
+    let p = 0;
+    let pb = 0;
+    let q = 0;
+    let mondaiNum = 10;
     
     function getRandom(min, max){
         let randomNum = Math.floor(Math.random() * (max + 1 - min)) + min;
@@ -32,6 +35,9 @@ function kakeru2(){
         n2 = 0;
         a = 0;
         ab = 0;
+        p = 0;
+        pb = 0;
+        q = 0;
         $kotae.value = "";
         $mondai.innerText = "";
     };
@@ -158,15 +164,23 @@ function kakeru2(){
 
     function step5Setup(){
         if (count < mondaiNum){
-            ab = a;
-            n1 = getRandom(101, 999);
+            pb = p;
+            p = getRandom(1, 2);
+            while (p == pb){
+                p = getRandom(1, 2);
+            };
+            if (p == 1){
+                n1 = getRandom(101, 999);
+            } else {
+                q = getRandom(1, 2);
+                if (q == 1){
+                    n1 = getRandom(2, 9) * 100;
+                } else {
+                    n1 = getRandom(11, 99) * 10;
+                };
+            };
             n2 = getRandom(11, 99);
             a = n1 * n2;
-            while (a == ab){
-                n1 = getRandom(101, 999);
-                n2 = getRandom(11, 99);
-                a = n1 * n2;
-            };
             $mondai.innerText = n1 + `×` + n2 + `＝`;
         } else if (count == mondaiNum){
             closing();

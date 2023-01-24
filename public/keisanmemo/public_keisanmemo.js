@@ -12,8 +12,6 @@ const $mt3 = document.getElementById("mt3");
 const $mt4 = document.getElementById("mt4");
 const $mt5 = document.getElementById("mt5");
 const $mt6 = document.getElementById("mt6");
-const $mt7 = document.getElementById("mt7");
-const $mt8 = document.getElementById("mt8");
 
 function memoActivate(){
 
@@ -106,34 +104,6 @@ function memoActivate(){
             });
         };
     });
-
-    $mt7.addEventListener("click", () => {
-        for (let mi7 = tdnum * (7 - 1); mi7 < tdnum * 7; mi7++){
-            $memo[mi7].addEventListener("click", () => {
-                $memo[mi7].innerText = "";
-            });
-            $memo[mi7].addEventListener("input", () => {
-                if ($memo[mi7].innerText.length > 1){
-                $memo[mi7].innerText = $memo[mi7].innerText.replace(memob[mi7], "");
-                };
-                memob[mi7] = $memo[mi7].innerText;
-            });
-        };
-    });
-
-    $mt8.addEventListener("click", () => {
-        for (let mi8 = tdnum * (8 - 1); mi8 < tdnum * 8; mi8++){
-            $memo[mi8].addEventListener("click", () => {
-                $memo[mi8].innerText = "";
-            });
-            $memo[mi8].addEventListener("input", () => {
-                if ($memo[mi8].innerText.length > 1){
-                $memo[mi8].innerText = $memo[mi8].innerText.replace(memob[mi8], "");
-                };
-                memob[mi8] = $memo[mi8].innerText;
-            });
-        };
-    });
 };
 
 function addtds(parent){
@@ -160,8 +130,6 @@ $memoHyojiBtn.addEventListener("click", () => {
     removetds($mt4);
     removetds($mt5);
     removetds($mt6);
-    removetds($mt7);
-    removetds($mt8);
     for (let mk = 0; mk < tdnum; mk++){
         addtds($mt1);
         addtds($mt2);
@@ -169,8 +137,6 @@ $memoHyojiBtn.addEventListener("click", () => {
         addtds($mt4);
         addtds($mt5);
         addtds($mt6);
-        addtds($mt7);
-        addtds($mt8);
     };
     memoActivate();
 });
@@ -182,8 +148,6 @@ $memoClearBtn.addEventListener("click", () => {
     removetds($mt4);
     removetds($mt5);
     removetds($mt6);
-    removetds($mt7);
-    removetds($mt8);
     $memoHyojiBtn.style.display = "block";
     $memoClearBtn.style.display = "none";
     $memoTable.style.display = "none";
@@ -206,8 +170,6 @@ HTML：↓＋cssリンク（<link rel="stylesheet" href="public\keisanmemo\publi
         <tr id = "mt4"></tr>
         <tr id = "mt5"></tr>
         <tr id = "mt6"></tr>
-        <tr id = "mt7"></tr>
-        <tr id = "mt8"></tr>
     </table>
     <script src="public\keisanmemo\public_keisanmemo.js"></script>
 <!--計算メモ-->
