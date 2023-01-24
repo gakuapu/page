@@ -275,9 +275,9 @@ function tani4(){
 
     $checkBtn.addEventListener("click", () => {
         if ($kotae1.value == a1 && $kotae2.value == a2){
+            $hint.innerText = "";
             setTimeout(() => {
                 audio1.play();
-                $hint.innerText = "";
                 $kotae1.value = "";
                 $kotae2.value = "";
                 $progress.value = count / mondaiNum;

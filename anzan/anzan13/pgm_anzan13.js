@@ -129,10 +129,10 @@ function anzan13(){
 
     $kotae.addEventListener("input", () => {
         if ($kotae.value == a){
+            $hint.innerText = "";
             setTimeout(() => {
                 audio1.play();
                 $kotae.value = "";
-                $hint.innerText = "";
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;

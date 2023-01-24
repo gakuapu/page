@@ -183,12 +183,12 @@ function step7Setup(){
 
 $kotae.addEventListener("input", () => {
     if ($kotae.value == a){
+        $hint2.innerText = "";
         setTimeout(() => {
             audio1.play();
             $kotae.value = "";
         }, 500);
         count++;
-        $hint2.innerText = "";
         switchSetup($step.value);
     };
 });

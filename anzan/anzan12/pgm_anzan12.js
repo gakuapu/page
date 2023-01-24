@@ -64,6 +64,7 @@ function anzan12(){
 
     function setup(){
         if (count < mondaiNum){
+            $hintBtn.style.display = "block";
             ab = a;
             n1 = getRandom(2, 9) * 100;
             n12 = getRandom(1, 2);
@@ -83,10 +84,10 @@ function anzan12(){
 
     $kotae.addEventListener("input", () => {
         if ($kotae.value == a){
+            $hint.innerText = "";
             setTimeout(() => {
                 audio1.play();
                 $kotae.value = "";
-                $hint.innerText = "";
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;
@@ -96,6 +97,7 @@ function anzan12(){
     
     $hintBtn.addEventListener("click", () => {
         $hint.innerText = n1 + `×` + n2 + `は... そこから` + n12 + `×` + n2 + `を調整するには...`;
+        $hintBtn.style.display = "none";
     });
 
     $startBtn.addEventListener("click", () => {
