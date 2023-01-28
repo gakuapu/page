@@ -19,6 +19,7 @@ function waru5(){
     let count = 0;
     let n1 = 0;
     let n2 = 0;
+    let n3 = 0;
     let a1 = 0;
     let a2 = 0;
     let p = 0;
@@ -34,6 +35,7 @@ function waru5(){
         count = 0;
         n1 = 0;
         n2 = 0;
+        n3 = 0;
         a1 = 0;
         a2 = 0;
         p = 0;
@@ -85,6 +87,7 @@ function waru5(){
                 step1Setup();
                 break;
             case "2":
+                $memoHyojiBtn.style.display = "block";//計算メモ
                 step2Setup();
                 break;
             case "3":
@@ -118,18 +121,20 @@ function waru5(){
             while (p == pb){
                 p = getRandom(1, 3);
             };
-            n1 = getRandom(2, 10);
-            a1 = getRandom(2, 10);
-            while (n1 == 10 && a1 == 10){
-                n1 = getRandom(2, 10);
-                a1 = getRandom(2, 10);
-            };
-            n2 = n1 * a1;
-            q = getRandom(1, 2);
+            n1 = getRandom(2, 9);
+            n3 = getRandom(2, 9);
+            q = getRandom(1, 3);
             if (q == 1){
+                n2 = n1 * n3;
                 $mondai.innerText = n2 * (10 ** p) + `÷` + n1 * (10 ** p) + `＝` + n2 + `÷□`;
                 a1 = n1;
+            } else if (q == 2){
+                n2 = n1 * n3;
+                $mondai.innerText = n2 * (10 ** p) + `÷` + n1 * (10 ** p) + `＝□÷` + n1;
+                a1 = n2;
             } else {
+                n3 = n3 * 10;
+                n2 = n1 * n3;
                 $mondai.innerText = n2 * (10 ** p) + `÷` + n1 * (10 ** p) + `＝□÷` + n1;
                 a1 = n2;
             };
@@ -146,7 +151,13 @@ function waru5(){
                 a1 = getRandom(2, 9);
             };
             p = getRandom(1, 3);
-            n1 = getRandom(2, 10) * (10 ** p);
+            n1 = getRandom(2, 9) * (10 ** p);
+            q = getRandom(1, 2);
+            if (q == 1){
+                a1 = a1 * 10;
+            } else if (q == 2){
+                a1 = a1 * 100;
+            };
             n2 = n1 * a1;
             $mondai.innerText = n2 + `÷` + n1 + `＝`;
         } else if (count == mondaiNum){
