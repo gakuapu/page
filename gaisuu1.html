@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-XKL20YHCTB');
+        </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小学4年生のがい数(およその数) | 算数＆計算ドリル 学アプ</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="4nen\gaisuu1\style_gaisuu1.css">
+</head>
+<main>
+<body>
+
+    <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
+    <audio id="audio3" src="machigaion2.mp3" preload="auto"></audio>
+
+    <div>
+        <select id="step">
+            <option value="1">四捨五入1</option>
+            <option value="2">四捨五入2</option>
+            <option value="3">切り上げ1</option>
+            <option value="4">切り上げ2</option>
+            <option value="5">切り捨て1</option>
+            <option value="6">切り捨て2</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="button" id="start-btn" class="btn" value="スタート">
+    </div>
+
+    <div id="mondai"></div>
+
+    <div>
+        <input id="kotae1" class="kotae" type="tel">
+        <a id="unit"></a>
+        <input id="kotae2" class="kotae" type="tel">
+    <div>
+
+    <div>
+        <input type="button" id="check-btn" class="btn" value="答え合わせ">
+    </div>
+    
+    <div>
+        <progress id="progress" value="0"></progress>
+    </div>
+
+    <div>
+        <input type="button" id="erase-btn" class="btn" value="けす">
+        <input type="button" id="reset-btn" class="btn" value="リセット">
+    </div>
+
+    <div>
+        <input type="button" id="hint-btn" class="btn" value="答えを見る">
+        <div id="hint"></div>
+    </div>
+
+    <script src="4nen\gaisuu1\pgm_gaisuu1.js"></script>
+    <br>
+    <h1 class="footer-container2">がい数(およその数)</h1>
+    <ul class="footer-container2">
+        <li>四捨五入1</li>
+        <li>四捨五入2</li>
+        <li>切り上げ1</li>
+        <li>切り上げ2</li>
+        <li>切り捨て1</li>
+        <li>切り捨て2</li>
+    </ul>
+
+    <nav>
+        <ol class="pankuzu">
+            <li><a href="top.html">トップ</a></li>
+            <li><a href="4nen.html">小学4年生の算数</a></li>
+        </ol>
+    </nav>
+</main>
+
+<footer class="footer-container">
+    <hr>
+    <p>算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで、全学年向け</p>
+    <p>Copyright(C) 2022- All Rights Reserved</p>
+    <a class="footer-container2" href="aboutus.html">当サイトについて</a>
+</footer>
+</body>
+</html>
