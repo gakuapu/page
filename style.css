@@ -152,3 +152,15 @@ progress::-webkit-progress-value {
 nav {
     font-weight: bold;
 }
+
+.page_top_btn {
+    position: fixed;
+    background-color: dodgerblue;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
+    padding: 5px 10px;
+    bottom: 30px;
+    right: 15px;
+}
