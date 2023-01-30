@@ -37,7 +37,7 @@ function tani2(){
         dL = 0;
         mL = 0;
         a1 = 0;
-        a2 = 0;
+        a2 = "";
         p = 0;
         pb = 0;
         $kotae1.value = "";
@@ -297,25 +297,27 @@ function tani2(){
     };  
 
     function step5Setup(){
-        $kotae2.style.display = "inline-block";
-        $hintBtn.style.display = "none";
         if (count < mondaiNum){
+            $hintBtn.style.display = "none";
             pb = p;
-            p = getRandom(1, 4);
+            p = getRandom(1, 6);
             while (p == pb){
-                p = getRandom(1, 4);
+                p = getRandom(1, 6);
             };
+            $unit1.innerText = `L`;
             switch(p){
                 case 1:
+                    $kotae2.style.display = "inline-block";
+                    $unit2.innerText = `dL`;
                     a2 = getRandom(1, 8);
                     dL = getRandom(a2 + 1, 9);
                     a1 = getRandom(3, 9);
                     L = getRandom(1, a1 - 2);
                     $mondai.innerText = L + `L ` + dL + `dL ＋ ` + (a1 - L - 1) + `L ` + (a2 + 10 - dL) + `dL ＝`;
-                    $unit1.innerText = `L`;
-                    $unit2.innerText = `dL`;
                     break;
                 case 2:
+                    $kotae2.style.display = "inline-block";
+                    $unit2.innerText = `mL`;
                     a2 = getRandom(1, 8);
                     mL = getRandom(a2 + 1, 9);
                     a1 = getRandom(3, 9);
@@ -323,26 +325,44 @@ function tani2(){
                     a2 = a2 * 100;
                     mL = mL * 100;
                     $mondai.innerText = L + `L ` + mL + `mL ＋ ` + (a1 - L - 1) + `L ` + (a2 + 1000 - mL) + `mL ＝`;
-                    $unit1.innerText = `L`;
-                    $unit2.innerText = `mL`;
                     break;
                 case 3:
+                    $kotae2.style.display = "inline-block";
+                    $unit2.innerText = `dL`;
                     a2 = getRandom(1, 8);
                     dL = getRandom(a2 + 1, 9);
                     a1 = getRandom(2, 9);
                     $mondai.innerText = (a1 - 1) + `L ` + dL + `dL ＋ ` + (a2 + 10 - dL) + `dL ＝`;
-                    $unit1.innerText = `L`;
-                    $unit2.innerText = `dL`;
                     break;
                 case 4:
+                    $kotae2.style.display = "inline-block";
+                    $unit2.innerText = `mL`;
                     a2 = getRandom(1, 8);
                     mL = getRandom(a2 + 1, 9);
                     a1 = getRandom(2, 9);
                     a2 = a2 * 100;
                     mL = mL * 100;
                     $mondai.innerText = (a1 - 1) + `L ` + mL + `mL ＋ ` + (a2 + 1000 - mL) + `mL ＝`;
-                    $unit1.innerText = `L`;
-                    $unit2.innerText = `mL`;
+                    break;
+                case 5:
+                    $kotae2.style.display = "none";
+                    $unit2.innerText = "";
+                    a2 = "";
+                    dL = getRandom(1, 9);
+                    a1 = getRandom(3, 9);
+                    L = getRandom(1, a1 - 2);
+                    $mondai.innerText = L + `L ` + dL + `dL ＋ ` + (a1 - L - 1) + `L ` + (10 - dL) + `dL ＝`;
+                    break;
+                case 6:
+                    $kotae2.style.display = "none";
+                    $unit2.innerText = "";
+                    a2 = "";
+                    mL = getRandom(1, 9);
+                    a1 = getRandom(3, 9);
+                    L = getRandom(1, a1 - 2);
+                    a2 = a2 * 100;
+                    mL = mL * 100;
+                    $mondai.innerText = L + `L ` + mL + `mL ＋ ` + (a1 - L - 1) + `L ` + (1000 - mL) + `mL ＝`;
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -353,13 +373,14 @@ function tani2(){
     };  
 
     function step6Setup(){
-        $kotae2.style.display = "inline-block";
-        $hintBtn.style.display = "none";
         if (count < mondaiNum){
+            $hintBtn.style.display = "none";
+            $kotae2.style.display = "inline-block";
+            $unit1.innerText = `L`;
             pb = p;
-            p = getRandom(1, 4);
+            p = getRandom(1, 6);
             while (p == pb){
-                p = getRandom(1, 4);
+                p = getRandom(1, 6);
             };
             switch(p){
                 case 1:
@@ -368,7 +389,6 @@ function tani2(){
                     a1 = getRandom(1, 7);
                     L = getRandom(a1 + 2, 9);
                     $mondai.innerText = L + `L ` + dL + `dL － ` + (L - a1 - 1) + `L ` + (dL + 10 - a2) + `dL ＝`;
-                    $unit1.innerText = `L`;
                     $unit2.innerText = `dL`;
                     break;
                 case 2:
@@ -379,7 +399,6 @@ function tani2(){
                     a2 = a2 * 100;
                     mL = mL * 100;
                     $mondai.innerText = L + `L ` + mL + `mL － ` + (L - a1 - 1) + `L ` + (mL + 1000 - a2) + `mL ＝`;
-                    $unit1.innerText = `L`;
                     $unit2.innerText = `mL`;
                     break;
                 case 3:
@@ -387,7 +406,6 @@ function tani2(){
                     dL = getRandom(1, a2 - 1);
                     a1 = getRandom(1, 8);
                     $mondai.innerText = (a1 + 1) + `L ` + dL + `dL － ` + (dL + 10 - a2) + `dL ＝`;
-                    $unit1.innerText = `L`;
                     $unit2.innerText = `dL`;
                     break;
                 case 4:
@@ -397,7 +415,20 @@ function tani2(){
                     a2 = a2 * 100;
                     mL = mL * 100;
                     $mondai.innerText = (a1 + 1) + `L ` + mL + `mL － ` + (mL + 1000 - a2) + `mL ＝`;
-                    $unit1.innerText = `L`;
+                    $unit2.innerText = `mL`;
+                    break;
+                case 5:
+                    a2 = getRandom(1, 9);
+                    a1 = getRandom(1, 7);
+                    L = getRandom(a1 + 2, 9);
+                    $mondai.innerText = L + `L － ` + (L - a1 - 1) + `L ` + (10 - a2) + `dL ＝`;
+                    $unit2.innerText = `dL`;
+                    break;
+                case 6:
+                    a2 = getRandom(1, 9) * 100;
+                    a1 = getRandom(1, 7);
+                    L = getRandom(a1 + 2, 9);
+                    $mondai.innerText = L + `L － ` + (L - a1 - 1) + `L ` + (1000 - a2) + `mL ＝`;
                     $unit2.innerText = `mL`;
                     break;
                 default:
