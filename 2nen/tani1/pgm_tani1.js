@@ -37,7 +37,7 @@ function tani1(){
         cm = 0;
         mm = 0;
         a1 = 0;
-        a2 = 0;
+        a2 = "";
         p = 0;
         pb = 0;
         $kotae1.value = "";
@@ -209,13 +209,20 @@ function tani1(){
     };  
 
     function step4Setup(){
-        $kotae2.style.display = "inline-block";
         $hintBtn.style.display = "none";
         if (count < mondaiNum){
             pb = p;
-            p = getRandom(1, 4);
+            p = getRandom(1, 6);
             while (p == pb){
-                p = getRandom(1, 4);
+                p = getRandom(1, 6);
+            };
+            $unit1.innerText = `cm`;
+            if (p == 3){
+                $kotae2.style.display = "none";
+                $unit2.innerText = "";
+            } else {
+                $kotae2.style.display = "inline-block";
+                $unit2.innerText = `mm`;
             };
             switch(p){
                 case 1:
@@ -232,23 +239,34 @@ function tani1(){
                     $mondai.innerText = (a1 - 1) + `cm ` + mm + `mm ＋ ` + (a2 + 10 - mm) + `mm ＝`;
                     break;
                 case 3:
+                    a2 = "";
+                    mm = getRandom(1, 9);
+                    a1 = getRandom(3, 9);
+                    cm = getRandom(1, a1 - 2);
+                    $mondai.innerText = cm + `cm ` + mm + `mm ＋ ` + (a1 - cm - 1) + `cm ` + (10 - mm) + `mm ＝`;
+                    break;
+                case 4:
                     a2 = getRandom(2, 9);
                     mm = getRandom(1, a2 - 1);
                     a1 = getRandom(1, 7);
                     cm = getRandom(a1 + 2, 9);
                     $mondai.innerText = cm + `cm ` + mm + `mm － ` + (cm - a1 - 1) + `cm ` + (mm + 10 - a2) + `mm ＝`;
                     break;
-                case 4:
+                case 5:
                     a2 = getRandom(2, 9);
                     mm = getRandom(1, a2 - 1);
                     a1 = getRandom(1, 9);
                     $mondai.innerText = (a1 + 1) + `cm ` + mm + `mm － ` + (mm + 10 - a2) + `mm ＝`;
                     break;
+                case 6:
+                    a2 = getRandom(1, 9);
+                    a1 = getRandom(1, 7);
+                    cm = getRandom(a1 + 2, 9);
+                    $mondai.innerText = cm + `cm － ` + (cm - a1 - 1) + `cm ` + (10 - a2) + `mm ＝`;
+                    break;
                 default:
                     alert(`リロードして下さい`);
             };
-            $unit1.innerText = `cm`;
-            $unit2.innerText = `mm`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -379,13 +397,21 @@ function tani1(){
     };  
 
     function step8Setup(){
-        $kotae2.style.display = "inline-block";
         $hintBtn.style.display = "none";
         if (count < mondaiNum){
             pb = p;
-            p = getRandom(1, 4);
+            p = getRandom(1, 6);
             while (p == pb){
-                p = getRandom(1, 4);
+                p = getRandom(1, 6);
+            };
+            if (p == 3){
+                $kotae2.style.display = "none";
+                $unit1.innerText = `m`;
+                $unit2.innerText = "";
+            } else {
+                $kotae2.style.display = "inline-block";
+                $unit1.innerText = `m`;
+                $unit2.innerText = `cm`;
             };
             switch(p){
                 case 1:
@@ -406,6 +432,15 @@ function tani1(){
                     $mondai.innerText = (a1 - 1) + `m ` + cm + `cm ＋ ` + (a2 + 100 - cm) + `cm ＝`;
                     break;
                 case 3:
+                    a2 = "";
+                    cm = getRandom(1, 9);
+                    a1 = getRandom(3, 9);
+                    m = getRandom(1, a1 - 2);
+                    a2 = a2 * 10;
+                    cm = cm * 10;
+                    $mondai.innerText = m + `m ` + cm + `cm ＋ ` + (a1 - m - 1) + `m ` + (100 - cm) + `cm ＝`;
+                    break;
+                case 4:
                     a2 = getRandom(2, 9);
                     cm = getRandom(1, a2 - 1,);
                     a1 = getRandom(1, 7);
@@ -414,7 +449,7 @@ function tani1(){
                     cm = cm * 10;
                     $mondai.innerText = m + `m ` + cm + `cm － ` + (m - a1 - 1) + `m ` + (cm + 100 - a2) + `cm ＝`;
                     break;
-                case 4:
+                case 5:
                     a2 = getRandom(2, 9);
                     cm = getRandom(1, a2 - 1);
                     a1 = getRandom(1, 9);
@@ -422,11 +457,17 @@ function tani1(){
                     cm = cm * 10;
                     $mondai.innerText = (a1 + 1) + `m ` + cm + `cm － ` + (cm + 100 - a2) + `cm ＝`;
                     break;
+                case 6:
+                    a2 = getRandom(1, 9);
+                    a1 = getRandom(1, 7);
+                    m = getRandom(a1 + 2, 9);
+                    a2 = a2 * 10;
+                    cm = cm * 10;
+                    $mondai.innerText = m + `m － ` + (m - a1 - 1) + `m ` + (100 - a2) + `cm ＝`;
+                    break;
                 default:
                     alert(`リロードして下さい`);
             };
-            $unit1.innerText = `m`;
-            $unit2.innerText = `cm`;
         } else if (count == mondaiNum){
             closing();
         };
