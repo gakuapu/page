@@ -20,6 +20,7 @@ function shousuu1(){
     let a2 = 0;
     let p = 0;
     let pb = 0;
+    let q = 0;
     let mondaiNum = 10;
     
     function getRandom(min, max){
@@ -33,9 +34,10 @@ function shousuu1(){
         n2 = 0;
         n3 = 0;
         a1 = 0;
-        a2 = 0;
+        a2 = "";
         p = 0;
         pb = 0;
+        q = 0;
         $kotae1.value = "";
         $kotae2.value = "";
         $mondai.innerText = "";
@@ -179,15 +181,28 @@ function shousuu1(){
             };
             switch(p){
                 case 1:
-                    n3 = getRandom(2, 9);
-                    a2 = getRandom(1, n3 - 1);
                     a1 = getRandom(1, 9);
                     n1 = getRandom(0, a1 - 1);
-                    n2 = (a1 * 10 + a2 - (n1 * 10 + n3)) / 10;
+                    q = getRandom(1, 3);
+                    if (q == 1){
+                        $dot.innerText = "";
+                        $kotae2.style.display = "none";
+                        a2 = "";
+                        n3 = getRandom(1, 9);
+                        n2 = (a1 * 10 - (n1 * 10 + n3)) / 10;
+                    } else {
+                        $dot.innerText = `.`;
+                        $kotae2.style.display = "inline-block";
+                        n3 = getRandom(2, 9);
+                        a2 = getRandom(1, n3 - 1);
+                        n2 = (a1 * 10 + a2 - (n1 * 10 + n3)) / 10;
+                    };
                     n1 = n1 + n3 / 10;
                     $mondai.innerText = n1 + `＋` + n2 + `＝`;
                     break;
                 case 2:
+                    $dot.innerText = `.`;
+                    $kotae2.style.display = "inline-block";
                     a2 = getRandom(2, 9);
                     n3 = getRandom(0, a2 - 1);
                     a1 = getRandom(0, 8);
