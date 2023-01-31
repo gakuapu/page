@@ -21,8 +21,9 @@ function tani7(){
     let n2 = 0;
     let a1 = 0;
     let a2 = 0;
-    let p = 0; //パターン
-    let pb = 0; //前問のパターン
+    let p = 0;
+    let pb = 0;
+    let q = 0;
     let mondaiNum = 10;
     
     function getRandom(min, max){
@@ -35,9 +36,10 @@ function tani7(){
         n1 = 0;
         n2 = 0;
         a1 = 0;
-        a2 = 0;
+        a2 = "";
         p = 0;
         pb = 0;
+        q = 0;
         $kotae1.value = "";
         $kotae2.value = "";
         $hint.innerText = "";
@@ -211,9 +213,9 @@ function tani7(){
     };  
 
     function step4Setup(){
-        $kotae2.style.display = "inline-block";
-        $hintBtn.style.display = "none";
         if (count < mondaiNum){
+            $hintBtn.style.display = "none";
+            $unit1.innerText = `時間`;
             pb = p;
             p = getRandom(1, 4);
             while (p == pb){
@@ -221,15 +223,31 @@ function tani7(){
             };
             switch(p){
                 case 1:
-                    a2 = getRandom(1, 4);
-                    n2 = getRandom(a2 + 1, 5);
-                    a1 = getRandom(3, 9);
-                    n1 = getRandom(1, a1 - 2);
-                    a2 = a2 * 10;
-                    n2 = n2 * 10;
-                    $mondai.innerText = n1 + `時間 ` + n2 + `分 ＋ ` + (a1 - n1 - 1) + `時間 ` + (a2 + 60 - n2) + `分 ＝`;
+                    q = getRandom(1, 3);
+                    if (q == 1){
+                        $kotae2.style.display = "none";
+                        $unit2.innerText = "";
+                        a2 = "";
+                        n2 = getRandom(1, 5);
+                        a1 = getRandom(3, 9);
+                        n1 = getRandom(1, a1 - 2);
+                        n2 = n2 * 10;
+                        $mondai.innerText = n1 + `時間 ` + n2 + `分 ＋ ` + (a1 - n1 - 1) + `時間 ` + (60 - n2) + `分 ＝`;
+                    } else {
+                        $kotae2.style.display = "inline-block";
+                        $unit2.innerText = `分`;
+                        a2 = getRandom(1, 4);
+                        n2 = getRandom(a2 + 1, 5);
+                        a1 = getRandom(3, 9);
+                        n1 = getRandom(1, a1 - 2);
+                        a2 = a2 * 10;
+                        n2 = n2 * 10;
+                        $mondai.innerText = n1 + `時間 ` + n2 + `分 ＋ ` + (a1 - n1 - 1) + `時間 ` + (a2 + 60 - n2) + `分 ＝`;
+                    };
                     break;
                 case 2:
+                    $kotae2.style.display = "inline-block";
+                    $unit2.innerText = `分`;
                     a2 = getRandom(1, 4);
                     n2 = getRandom(a2 + 1, 5);
                     a1 = getRandom(2, 9);
@@ -238,15 +256,28 @@ function tani7(){
                     $mondai.innerText = (a1 - 1) + `時間 ` + n2 + `分 ＋ ` + (a2 + 60 - n2) + `分 ＝`;
                     break;
                 case 3:
-                    a2 = getRandom(2, 5);
-                    n2 = getRandom(1, a2 - 1);
-                    a1 = getRandom(1, 7);
-                    n1 = getRandom(a1 + 2, 9);
-                    a2 = a2 * 10;
-                    n2 = n2 * 10;
-                    $mondai.innerText = n1 + `時間 ` + n2 + `分 － ` + (n1 - a1 - 1) + `時間 ` + (n2 + 60 - a2) + `分 ＝`;
+                    $kotae2.style.display = "inline-block";
+                    $unit2.innerText = `分`;
+                    q = getRandom(1, 3);
+                    if (q == 1) {
+                        a2 = getRandom(1, 5);
+                        a1 = getRandom(1, 7);
+                        n1 = getRandom(a1 + 2, 9);
+                        a2 = a2 * 10;
+                        $mondai.innerText = n1 + `時間 － ` + (n1 - a1 - 1) + `時間 ` + (60 - a2) + `分 ＝`;
+                    } else {
+                        a2 = getRandom(2, 5);
+                        n2 = getRandom(1, a2 - 1);
+                        a1 = getRandom(1, 7);
+                        n1 = getRandom(a1 + 2, 9);
+                        a2 = a2 * 10;
+                        n2 = n2 * 10;
+                        $mondai.innerText = n1 + `時間 ` + n2 + `分 － ` + (n1 - a1 - 1) + `時間 ` + (n2 + 60 - a2) + `分 ＝`;
+                    };
                     break;
                 case 4:
+                    $kotae2.style.display = "inline-block";
+                    $unit2.innerText = `分`;
                     a2 = getRandom(2, 5);
                     n2 = getRandom(1, a2 - 1);
                     a1 = getRandom(1, 9);
@@ -257,8 +288,6 @@ function tani7(){
                 default:
                     alert(`リロードして下さい`);
             };
-            $unit1.innerText = `時間`;
-            $unit2.innerText = `分`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -368,9 +397,9 @@ function tani7(){
     };  
 
     function step8Setup(){
-        $kotae2.style.display = "inline-block";
-        $hintBtn.style.display = "none";
         if (count < mondaiNum){
+            $hintBtn.style.display = "none";
+            $unit1.innerText = `分`;
             pb = p;
             p = getRandom(1, 4);
             while (p == pb){
@@ -378,15 +407,31 @@ function tani7(){
             };
             switch(p){
                 case 1:
-                    a2 = getRandom(1, 4);
-                    n2 = getRandom(a2 + 1, 5);
-                    a1 = getRandom(3, 9);
-                    n1 = getRandom(1, a1 - 2);
-                    a2 = a2 * 10;
-                    n2 = n2 * 10;
-                    $mondai.innerText = n1 + `分 ` + n2 + `秒 ＋ ` + (a1 - n1 - 1) + `分 ` + (a2 + 60 - n2) + `秒 ＝`;
+                    q = getRandom(1, 3);
+                    if (q == 1){
+                        $kotae2.style.display = "none";
+                        $unit2.innerText = "";
+                        a2 = "";
+                        n2 = getRandom(1, 5);
+                        a1 = getRandom(3, 9);
+                        n1 = getRandom(1, a1 - 2);
+                        n2 = n2 * 10;
+                        $mondai.innerText = n1 + `分 ` + n2 + `秒 ＋ ` + (a1 - n1 - 1) + `分 ` + (60 - n2) + `秒 ＝`;
+                    } else {
+                        $kotae2.style.display = "inline-block";
+                        $unit2.innerText = `秒`;
+                        a2 = getRandom(1, 4);
+                        n2 = getRandom(a2 + 1, 5);
+                        a1 = getRandom(3, 9);
+                        n1 = getRandom(1, a1 - 2);
+                        a2 = a2 * 10;
+                        n2 = n2 * 10;
+                        $mondai.innerText = n1 + `分 ` + n2 + `秒 ＋ ` + (a1 - n1 - 1) + `分 ` + (a2 + 60 - n2) + `秒 ＝`;
+                    };
                     break;
                 case 2:
+                    $kotae2.style.display = "inline-block";
+                    $unit2.innerText = `秒`;
                     a2 = getRandom(1, 4);
                     n2 = getRandom(a2 + 1, 5);
                     a1 = getRandom(2, 9);
@@ -395,15 +440,28 @@ function tani7(){
                     $mondai.innerText = (a1 - 1) + `分 ` + n2 + `秒 ＋ ` + (a2 + 60 - n2) + `秒 ＝`;
                     break;
                 case 3:
-                    a2 = getRandom(2, 5);
-                    n2 = getRandom(1, a2 - 1);
-                    a1 = getRandom(1, 7);
-                    n1 = getRandom(a1 + 2, 9);
-                    a2 = a2 * 10;
-                    n2 = n2 * 10;
-                    $mondai.innerText = n1 + `分 ` + n2 + `秒 － ` + (n1 - a1 - 1) + `分 ` + (n2 + 60 - a2) + `秒 ＝`;
+                    $kotae2.style.display = "inline-block";
+                    $unit2.innerText = `秒`;
+                    q = getRandom(1, 3);
+                    if (q == 1){
+                        a2 = getRandom(1, 5);
+                        a1 = getRandom(1, 7);
+                        n1 = getRandom(a1 + 2, 9);
+                        a2 = a2 * 10;
+                        $mondai.innerText = n1 + `分 － ` + (n1 - a1 - 1) + `分 ` + (60 - a2) + `秒 ＝`;
+                    } else {
+                        a2 = getRandom(2, 5);
+                        n2 = getRandom(1, a2 - 1);
+                        a1 = getRandom(1, 7);
+                        n1 = getRandom(a1 + 2, 9);
+                        a2 = a2 * 10;
+                        n2 = n2 * 10;
+                        $mondai.innerText = n1 + `分 ` + n2 + `秒 － ` + (n1 - a1 - 1) + `分 ` + (n2 + 60 - a2) + `秒 ＝`;
+                    };
                     break;
                 case 4:
+                    $kotae2.style.display = "inline-block";
+                    $unit2.innerText = `秒`;
                     a2 = getRandom(2, 5);
                     n2 = getRandom(1, a2 - 1);
                     a1 = getRandom(1, 9);
@@ -414,8 +472,6 @@ function tani7(){
                 default:
                     alert(`リロードして下さい`);
             };
-            $unit1.innerText = `分`;
-            $unit2.innerText = `秒`;
         } else if (count == mondaiNum){
             closing();
         };
