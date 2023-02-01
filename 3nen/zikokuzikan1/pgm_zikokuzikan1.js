@@ -24,8 +24,9 @@ function zikokuzikan1(){
     let m1 = 0;
     let m2 = 0;
     let ma = 0;
-    let p = 0; //パターン
-    let pb = 0; //前問のパターン
+    let p = 0;
+    let pb = 0;
+    let q = 0;
     let ampmTxt = "";
     let mondaiNum = 10;
     
@@ -41,9 +42,10 @@ function zikokuzikan1(){
         ha = 0;
         m1 = 0;
         m2 = 0;
-        ma = 0;
+        ma = "";
         p = 0;
         pb = 0;
+        q = 0;
         ampmTxt = "";
         $kotae1.value = "";
         $kotae2.value = "";
@@ -53,8 +55,6 @@ function zikokuzikan1(){
     };
 
     function switchdisplay(){
-        $kotae2.style.display = "inline-block";
-        $unit2.innerText = `分`;
         $checkBtn.style.display = "block";
         $progress.style.display = "block";
         $eraseBtn.style.display = "inline-block";
@@ -66,6 +66,8 @@ function zikokuzikan1(){
     function defaultdisplay(){
         $kotae1.style.display = "none";
         $kotae2.style.display = "none";
+        $unit0.innerText = "";
+        $unit1.innerText = "";
         $unit2.innerText = "";
         $checkBtn.style.display = "none";
         $progress.style.display = "none";
@@ -118,8 +120,10 @@ function zikokuzikan1(){
         if (count < mondaiNum){
             ampmTxt = ampm[getRandom(0, 1)];
             $kotae1.style.display = "inline-block";
+            $kotae2.style.display = "inline-block";
             $unit0.innerText = ampmTxt;
             $unit1.innerText = `時`;
+            $unit2.innerText = `分`;
             pb = p;
             p = getRandom(1, 2);
             while (p == pb){
@@ -166,21 +170,46 @@ function zikokuzikan1(){
             while (p == pb){
                 p = getRandom(1, 2);
             };
-            m1 = getRandom(2, 5);
-            ma = getRandom(1, m1 - 1);
-            m1 = m1 * 10;
-            ma = ma * 10;
-            m2 = ma + 60 - m1;
+            q = getRandom(1, 3);
+            if (q == 1){
+                $kotae2.style.display = "none";
+                $unit2.innerText = "";
+            } else {
+                $kotae2.style.display = "inline-block";
+                $unit2.innerText = "分";
+            };
             switch(p){
                 case 1:
                     ha = getRandom(2, 11);
                     h1 = ha - 1;
+                    if (q == 1){
+                        ma = ""
+                        m1 = getRandom(1, 5) * 10;
+                        m2 = 60 - m1;
+                    } else {
+                        m1 = getRandom(2, 5);
+                        ma = getRandom(1, m1 - 1);
+                        m1 = m1 * 10;
+                        ma = ma * 10;
+                        m2 = ma + 60 - m1;
+                    };
                     $mondai.innerText = ampmTxt + h1 + `時` + m1 + `分の` + m2 + `分後の時こくは?`;
                     break;
                 case 2:
                     ha = getRandom(3, 11);
                     h1 = getRandom(1, ha - 2);
                     h2 = ha - h1 - 1;
+                    if (q == 1){
+                        ma = "";
+                        m1 = getRandom(1, 5) * 10;
+                        m2 = 60 - m1;
+                    } else {
+                        m1 = getRandom(2, 5);
+                        ma = getRandom(1, m1 - 1);
+                        m1 = m1 * 10;
+                        ma = ma * 10;
+                        m2 = ma + 60 - m1;
+                    };
                     $mondai.innerText = ampmTxt + h1 + `時` + m1 + `分の` + h2 + `時間` + m2 + `分後の時こくは?`;
                     break;
                 default:
@@ -195,8 +224,10 @@ function zikokuzikan1(){
         if (count < mondaiNum){
             ampmTxt = ampm[getRandom(0, 1)];
             $kotae1.style.display = "inline-block";
+            $kotae2.style.display = "inline-block";
             $unit0.innerText = ampmTxt;
             $unit1.innerText = `時`;
+            $unit2.innerText = `分`;
             pb = p;
             p = getRandom(1, 2);
             while (p == pb){
@@ -236,29 +267,49 @@ function zikokuzikan1(){
         if (count < mondaiNum){
             ampmTxt = ampm[getRandom(0, 1)];
             $kotae1.style.display = "inline-block";
+            $kotae2.style.display = "inline-block";
             $unit0.innerText = ampmTxt;
             $unit1.innerText = `時`;
+            $unit2.innerText = `分`;
             pb = p;
             p = getRandom(1, 2);
             while (p == pb){
                 p = getRandom(1, 2);
             };
-            ma = getRandom(2, 5);
-            m1 = getRandom(1, ma - 1);
-            ma = ma * 10;
-            m1 = m1 * 10;
-            m2 = m1 + 60 - ma;
+            q = getRandom(1, 3);
             switch(p){
                 case 1:
                     h1 = getRandom(2, 11);
                     ha = h1 - 1;
-                    $mondai.innerText = ampmTxt + h1 + `時` + m1 + `分の` + m2 + `分前の時こくは?`;
+                    if (q == 1){
+                        ma = getRandom(1, 5) * 10;
+                        m2 = 60 - ma;
+                        $mondai.innerText = ampmTxt + h1 + `時の` + m2 + `分前の時こくは?`;
+                    } else {
+                        ma = getRandom(2, 5);
+                        m1 = getRandom(1, ma - 1);
+                        ma = ma * 10;
+                        m1 = m1 * 10;
+                        m2 = m1 + 60 - ma;
+                        $mondai.innerText = ampmTxt + h1 + `時` + m1 + `分の` + m2 + `分前の時こくは?`;
+                    };
                     break;
                 case 2:
                     h1 = getRandom(3, 11);
                     ha = getRandom(1, h1 - 2);
                     h2 = h1 - ha - 1;
-                    $mondai.innerText = ampmTxt + h1 + `時` + m1 + `分の` + h2 + `時間` + m2 + `分前の時こくは?`;
+                    if (q == 1){
+                        ma = getRandom(1, 5) * 10;
+                        m2 = 60 - ma;
+                        $mondai.innerText = ampmTxt + h1 + `時の` + h2 + `時間` + m2 + `分前の時こくは?`;
+                    } else {
+                        ma = getRandom(2, 5);
+                        m1 = getRandom(1, ma - 1);
+                        ma = ma * 10;
+                        m1 = m1 * 10;
+                        m2 = m1 + 60 - ma;
+                        $mondai.innerText = ampmTxt + h1 + `時` + m1 + `分の` + h2 + `時間` + m2 + `分前の時こくは?`;
+                    };
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -270,6 +321,8 @@ function zikokuzikan1(){
 
     function step5Setup(){
         if (count < mondaiNum){
+            $kotae2.style.display = "inline-block";
+            $unit2.innerText = `分`;
             pb = p;
             p = getRandom(1, 2);
             while (p == pb){
@@ -310,31 +363,69 @@ function zikokuzikan1(){
 
     function step6Setup(){
         if (count < mondaiNum){
-            $kotae1.style.display = "inline-block";    
+            $kotae1.style.display = "inline-block"; 
             $unit1.innerText = `時間`;
             pb = p;
             p = getRandom(1, 3);
             while (p == pb){
                 p = getRandom(1, 3);
             };
-            m1 = getRandom(2, 5);
-            ma = getRandom(1, m1 - 1);
-            m1 = m1 * 10;
-            ma = ma * 10;
-            m2 = ma + 60 - m1;
-            ha = getRandom(3, 5);
+            q = getRandom(1, 3);
+            if (q == 1){
+                $kotae2.style.display = "none";
+                $unit2.innerText = "";
+            } else {
+                $kotae2.style.display = "inline-block";
+                $unit2.innerText = `分`;
+            };
             switch(p){
                 case 1:
+                    ha = getRandom(3, 5);
                     h1 = getRandom(1, ha - 2);
                     h2 = ha - h1 - 1;
+                    if (q == 1){
+                        ma = "";
+                        m1 = getRandom(1, 5) * 10;
+                        m2 = 60 - m1;
+                    } else {
+                        m1 = getRandom(2, 5);
+                        ma = getRandom(1, m1 - 1);
+                        m1 = m1 * 10;
+                        ma = ma * 10;
+                        m2 = ma + 60 - m1;
+                    };
                     $mondai.innerText = `午前中に` + h1 + `時間` + m1 + `分、午後に` + h2 + `時間` + m2 + `分本を読みました。本を読んだ時間の合計は?`;
-                    break;
+                    break;            
                 case 2:
-                    h1 = ha - 1
+                    ha = getRandom(2, 5);
+                    h1 = ha - 1;
+                    if (q == 1){
+                        ma = "";
+                        m1 = getRandom(1, 5) * 10;
+                        m2 = 60 - m1;
+                    } else {
+                        m1 = getRandom(2, 5);
+                        ma = getRandom(1, m1 - 1);
+                        m1 = m1 * 10;
+                        ma = ma * 10;
+                        m2 = ma + 60 - m1;
+                    };
                     $mondai.innerText = `午前中に` + h1 + `時間` + m1 + `分、午後に` + m2 + `分本を読みました。本を読んだ時間の合計は?`;
                     break;
                 case 3:
-                    h2 = ha - 1
+                    ha = getRandom(2, 5);
+                    h2 = ha - 1;
+                    if (q == 1){
+                        ma = "";
+                        m1 = getRandom(1, 5) * 10;
+                        m2 = 60 - m1;
+                    } else {
+                        m1 = getRandom(2, 5);
+                        ma = getRandom(1, m1 - 1);
+                        m1 = m1 * 10;
+                        ma = ma * 10;
+                        m2 = ma + 60 - m1;
+                    };
                     $mondai.innerText = `午前中に` + m1 + `分、午後に` + h2 + `時間` + m2 + `分本を読みました。本を読んだ時間の合計は?`;
                     break;
                 default:
@@ -348,6 +439,8 @@ function zikokuzikan1(){
     function step7Setup(){
         if (count < mondaiNum){
             ampmTxt = ampm[getRandom(0, 1)];
+            $kotae2.style.display = "inline-block";
+            $unit2.innerText = `分`;
             pb = p;
             p = getRandom(1, 2);
             while (p == pb){
@@ -389,35 +482,53 @@ function zikokuzikan1(){
     function step8Setup(){
         if (count < mondaiNum){
             ampmTxt = ampm[getRandom(0, 1)];
+            $kotae2.style.display = "inline-block";
+            $unit2.innerText = `分`;
             pb = p;
-            p = getRandom(1, 2);
+            p = getRandom(1, 3);
             while (p == pb){
-                p = getRandom(1, 2);
+                p = getRandom(1, 3);
             };
-            m1 = getRandom(2, 5);
-            m2 = getRandom(1, m1 - 1);
-            m1 = m1 * 10;
-            m2 = m2 * 10;
-            ma = m2 + 60 - m1;
             switch(p){
                 case 1:
                     $kotae1.style.display = "none";    
                     $unit1.innerText = "";
+                    m1 = getRandom(2, 5);
+                    m2 = getRandom(1, m1 - 1);
+                    m1 = m1 * 10;
+                    m2 = m2 * 10;
+                    ma = m2 + 60 - m1;
                     h2 = getRandom(2, 11);
                     h1 = h2 - 1;
                     ha = ""
+                    $mondai.innerText = ampmTxt + h1 + `時` + m1 + `分から` + ampmTxt + h2 + `時` + m2 + `分までの時間の長さは?`;
                     break;
                 case 2:
                     $kotae1.style.display = "inline-block";    
                     $unit1.innerText = `時間`;
+                    m1 = getRandom(2, 5);
+                    m2 = getRandom(1, m1 - 1);
+                    m1 = m1 * 10;
+                    m2 = m2 * 10;
+                    ma = m2 + 60 - m1;
                     h2 = getRandom(3, 11);
                     h1 = getRandom(1, h2 - 2);
                     ha = h2 - h1 - 1;
+                    $mondai.innerText = ampmTxt + h1 + `時` + m1 + `分から` + ampmTxt + h2 + `時` + m2 + `分までの時間の長さは?`;
+                    break;
+                case 3:
+                    $kotae1.style.display = "inline-block";    
+                    $unit1.innerText = `時間`;
+                    m1 = getRandom(1, 5) * 10;
+                    ma = 60 - m1;
+                    h2 = getRandom(3, 11);
+                    h1 = getRandom(1, h2 - 2);
+                    ha = h2 - h1 - 1;
+                    $mondai.innerText = ampmTxt + h1 + `時` + m1 + `分から` + ampmTxt + h2 + `時までの時間の長さは?`;
                     break;
                 default:
                     alert(`リロードして下さい`);
             };
-            $mondai.innerText = ampmTxt + h1 + `時` + m1 + `分から` + ampmTxt + h2 + `時` + m2 + `分までの時間の長さは?`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -425,10 +536,10 @@ function zikokuzikan1(){
 
     $checkBtn.addEventListener("click", () => {
         if ($kotae1.value == ha && $kotae2.value == ma){
+            $kotae1.value = "";
+            $kotae2.value = "";
             setTimeout(() => {
                 audio1.play();
-                $kotae1.value = "";
-                $kotae2.value = "";
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;
