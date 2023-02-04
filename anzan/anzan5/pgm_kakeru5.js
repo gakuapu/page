@@ -35,6 +35,7 @@ function anzan5(){
     let n = 0;
     let a1 = 0;
     let a2 = 0;
+    let k2v = ""; //0xとxを区別
     
     function defaultlet(){
         count = 0;
@@ -42,6 +43,7 @@ function anzan5(){
         randoms.length = 0; //配列の要素を全て削除
         a1 = 0;
         a2 = 0;
+        k2v = ""; //0xとxを区別
         $kotae1.value = "";
         $kotae2.value = "";
         $mondai.innerText = "";
@@ -88,11 +90,12 @@ function anzan5(){
     };
 
     function checkAnswer(){
-        if ($kotae1.value == a1 && $kotae2.value == a2){
+        if ($kotae1.value == a1 && k2v == a2){ //0xとxを区別
+            $kotae1.value = "";
+            $kotae2.value = "";
+            k2v = ""; //0xとxを区別
             setTimeout(() => {
                 audio1.play();
-                $kotae1.value = "";
-                $kotae2.value = "";
             }, 500);
             count++;
             switchSetup($step.value);
@@ -106,6 +109,11 @@ function anzan5(){
             a2 = Math.round((n - a1) * 100);
             if (a2 % 10 == 0){
                 a2 = a2 / 10;
+            };
+            if (count == 4){ //0xとxを区別
+                a2 = a2 + 10;
+            } else {
+                a2 = a2 + 100;
             };
             $mondai.innerText = 3.14 + `×` + (count + 1) + `＝`;
         } else if (count == countMax){
@@ -121,6 +129,11 @@ function anzan5(){
             if (a2 % 10 == 0){
                 a2 = a2 / 10;
             };
+            if (randoms[count] == 5){ //0xとxを区別
+                a2 = a2 + 10;
+            } else {
+                a2 = a2 + 100;
+            };
             $mondai.innerText = 3.14 + `×` + randoms[count] + `＝`;
         } else if (count == countMax){
             closing();
@@ -128,10 +141,16 @@ function anzan5(){
     };
 
     $kotae1.addEventListener("input", () => {
+        if ($kotae2.value != ""){ //0xとxを区別
+            k2v = "1" + $kotae2.value;
+        };
         checkAnswer();
     });
     
     $kotae2.addEventListener("input", () => {
+        if ($kotae2.value != ""){ //0xとxを区別
+            k2v = "1" + $kotae2.value;
+        };
         checkAnswer();
     });
 

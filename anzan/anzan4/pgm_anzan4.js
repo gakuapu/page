@@ -32,11 +32,13 @@ function anzan4(){
     
     let count = 0;
     let a = 0;
+    let kv = ""; //0xとxを区別
     
     function defaultlet(){
         count = 0;
         randoms.length = 0; //配列の要素を全て削除
         a = 0;
+        kv = ""; //0xとxを区別
         $kotae.value = "";
         $mondai.innerText = "";
     };
@@ -82,10 +84,11 @@ function anzan4(){
     };
 
     function checkAnswer(){
-        if ($kotae.value == a){
+        if (kv == a){ //0xとxを区別
+            $kotae.value = "";
+            kv = ""; //0xとxを区別
             setTimeout(() => {
                 audio1.play();
-                $kotae.value = "";
             }, 500);
             count++;
             switchSetup($step.value);
@@ -96,13 +99,20 @@ function anzan4(){
         if (count < countMax - 1){
             $dot.innerText = `0.`;
             a = 125 * (count + 1);
-            while (a % 10 == 0){
+            if (a % 100 == 0){
+                a = a / 100;
+                a = a + 10; //0xとxを区別
+            } else if (a % 10 == 0){
                 a = a / 10;
+                a = a + 100; //0xとxを区別
+            } else {
+                a = a + 1000; //0xとxを区別
             };
             $mondai.innerText = 0.125 + `×` + (count + 1) + `＝`;
         } else if (count == countMax - 1){
             $dot.innerText = "";
             a = 1;
+            a = 1 + 10; //0xとxを区別
             $mondai.innerText = 0.125 + `×` + (count + 1) + `＝`;
         } else if (count == countMax){
             closing();
@@ -114,12 +124,19 @@ function anzan4(){
             if (randoms[count] == 8){
                 $dot.innerText = "";
                 a = 1;
+                a = 1 + 10; //0xとxを区別
                 $mondai.innerText = 0.125 + `×` + randoms[count] + `＝`;
             } else {
                 $dot.innerText = `0.`;
                 a = 125 * randoms[count];
-                while (a % 10 == 0){
+                if (a % 100 == 0){
+                    a = a / 100;
+                    a = a + 10; //0xとxを区別
+                } else if (a % 10 == 0){
                     a = a / 10;
+                    a = a + 100; //0xとxを区別
+                } else {
+                    a = a + 1000; //0xとxを区別
                 };
                 $mondai.innerText = 0.125 + `×` + randoms[count] + `＝`;
             };
@@ -136,8 +153,14 @@ function anzan4(){
             } else {
                 $dot.innerText = `0.`;
                 a = 125 * randoms[count];
-                while (a % 10 == 0){
+                if (a % 100 == 0){
+                    a = a / 100;
+                    a = a + 10; //0xとxを区別
+                } else if (a % 10 == 0){
                     a = a / 10;
+                    a = a + 100; //0xとxを区別
+                } else {
+                    a = a + 1000; //0xとxを区別
                 };
                 $mondai.innerText = randoms[count] + `÷8＝`;
             };
@@ -147,6 +170,9 @@ function anzan4(){
     };
 
     $kotae.addEventListener("input", () => {
+        if ($kotae.value != ""){ //0xとxを区別
+            kv = "1" + $kotae.value;
+        };
         checkAnswer();
     });
 

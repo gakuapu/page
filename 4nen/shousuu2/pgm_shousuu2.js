@@ -99,10 +99,10 @@ function shousuu2(){
         if ($kotae1.value == a1 && k2v == a2){ //0xとxを区別
             $memoClearBtn.style.display = "none";//計算メモ
             $memoTable.style.display = "none";//計算メモ
+            $kotae1.value = "";
+            $kotae2.value = "";
+            k2v = ""; //0xとxを区別
             setTimeout(() => {
-                $kotae1.value = "";
-                $kotae2.value = "";
-                k2v = ""; //0xとxを区別
                 audio1.play();
                 $progress.value = count / mondaiNum;
             }, 500);
