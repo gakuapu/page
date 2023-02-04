@@ -93,11 +93,11 @@ function shousuu1(){
 
     function checkAnswer(){
         if ($kotae1.value == a1 && k2v == a2){ //0xとxを区別
-            $kotae1.value = "";
-            $kotae2.value = "";
             k2v = ""; //0xとxを区別
             setTimeout(() => {
                 audio1.play();
+                $kotae1.value = "";
+                $kotae2.value = "";
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;

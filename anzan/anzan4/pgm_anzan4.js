@@ -85,10 +85,10 @@ function anzan4(){
 
     function checkAnswer(){
         if (kv == a){ //0xとxを区別
-            $kotae.value = "";
             kv = ""; //0xとxを区別
             setTimeout(() => {
                 audio1.play();
+                $kotae.value = "";
             }, 500);
             count++;
             switchSetup($step.value);

@@ -103,10 +103,10 @@ function waru5(){
         if ($kotae1.value == a1 && $kotae2.value == a2){
             $memoClearBtn.style.display = "none";//計算メモ
             $memoTable.style.display = "none";//計算メモ
-            $kotae1.value = "";
-            $kotae2.value = "";
             setTimeout(() => {
                 audio1.play();
+                $kotae1.value = "";
+                $kotae2.value = "";
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;

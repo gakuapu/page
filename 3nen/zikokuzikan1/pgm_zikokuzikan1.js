@@ -536,10 +536,10 @@ function zikokuzikan1(){
 
     $checkBtn.addEventListener("click", () => {
         if ($kotae1.value == ha && $kotae2.value == ma){
-            $kotae1.value = "";
-            $kotae2.value = "";
             setTimeout(() => {
                 audio1.play();
+                $kotae1.value = "";
+                $kotae2.value = "";
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;
