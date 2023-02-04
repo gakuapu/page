@@ -22,6 +22,7 @@ function shousuu2(){
     let n3 = 0;
     let a1 = 0;
     let a2 = 0;
+    let k2v = ""; //0xとxを区別
     let p = 0;
     let pb = 0;
     let mondaiNum = 10;
@@ -38,6 +39,7 @@ function shousuu2(){
         n3 = 0;
         a1 = 0;
         a2 = "";
+        k2v = ""; //0xとxを区別
         p = 0;
         pb = 0;
         $kotae1.value = "";
@@ -94,12 +96,13 @@ function shousuu2(){
     };
 
     function checkAnswer(){
-        if ($kotae1.value == a1 && $kotae2.value == a2){
+        if ($kotae1.value == a1 && k2v == a2){ //0xとxを区別
             $memoClearBtn.style.display = "none";//計算メモ
             $memoTable.style.display = "none";//計算メモ
             setTimeout(() => {
                 $kotae1.value = "";
                 $kotae2.value = "";
+                k2v = ""; //0xとxを区別
                 audio1.play();
                 $progress.value = count / mondaiNum;
             }, 500);
@@ -130,6 +133,7 @@ function shousuu2(){
             };
             a1 = Math.floor((n1 + n2) / 100);
             a2 = (n1 + n2) - a1 * 100;
+            a2 = a2 + 100 //0xとxを区別
             n1 = n1 / 100;
             n2 = n2 / 100; 
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
@@ -163,7 +167,7 @@ function shousuu2(){
                 n2 = getRandom(0, 99) * 10 + n2;
                 while ((n1 + n2) % 100 == 0){
                     n3 = getRandom(1, 9);
-                    n1 = getRandom(0, 99) + n3;
+                    n1 = getRandom(0, 99) * 10 + n3;
                     n2 = 10 - n3;
                     n2 = getRandom(0, 99) * 10 + n2;
                 };
@@ -172,11 +176,10 @@ function shousuu2(){
                 while (a2 % 10 == 0){
                     a2 = a2 / 10;
                 };
+                a2 = a2 + 10; //0xとxを区別
             };
             n1 = n1 / 100;
             n2 = n2 / 100;
-            console.log(a1);
-            console.log(a2);
             $mondai.innerText = n1 + `＋` + n2 + `＝`;
         } else if (count == mondaiNum){
             closing();
@@ -196,6 +199,7 @@ function shousuu2(){
             n2 = getRandom(0, 99) * 10 + getRandom(1, 9);
             a1 = Math.floor(((n1 * 10) + n2) / 100);
             a2 = (n1 * 10) + n2 - a1 * 100;
+            a2 = a2 + 100 //0xとxを区別
             n1 = n1 / 10;
             n2 = n2 / 100;
             if (p == 1){
@@ -211,10 +215,16 @@ function shousuu2(){
     };
 
     $kotae1.addEventListener("input", () => {
+        if ($kotae2.value != ""){ //0xとxを区別
+            k2v = "1" + $kotae2.value;
+        };
         checkAnswer();
     });
     
     $kotae2.addEventListener("input", () => {
+        if ($kotae2.value != ""){ //0xとxを区別
+            k2v = "1" + $kotae2.value;
+        };
         checkAnswer();
     });
 
