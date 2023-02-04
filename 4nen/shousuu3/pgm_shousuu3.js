@@ -1,4 +1,4 @@
-function shousuu2(){
+function shousuu3(){
     
     const $step = document.getElementById("step");
     const $startBtn = document.getElementById("start-btn");
@@ -20,6 +20,7 @@ function shousuu2(){
     let n1 = 0;
     let n2 = 0;
     let n3 = 0;
+    let n4 = 0;
     let a1 = 0;
     let a2 = 0;
     let k2v = ""; //0xとxを区別
@@ -37,6 +38,7 @@ function shousuu2(){
         n1 = 0;
         n2 = 0;
         n3 = 0;
+        n4 = 0;
         a1 = 0;
         a2 = "";
         k2v = ""; //0xとxを区別
@@ -49,6 +51,8 @@ function shousuu2(){
 
     function switchdisplay(){
         $kotae1.style.display = "inline-block";
+        $dot.innerText = `.`;
+        $kotae2.style.display = "inline-block";    
         $progress.style.display = "block";
         $eraseBtn.style.display = "inline-block";
         $resetBtn.style.display = "inline-block";
@@ -113,30 +117,25 @@ function shousuu2(){
 
     function step1Setup(){
         if (count < mondaiNum){
-            $dot.innerText = `.`;
-            $kotae2.style.display = "inline-block";
-            pb = p;
-            p = getRandom(1, 3);
-            while (p == pb){
-                p = getRandom(1, 3);
+            pb = n1;
+            n1 = getRandom(1, 99);
+            while (n1 == pb){
+                n1 = getRandom(1, 99);
             };
+            n2 = getRandom(0, n1 - 1);
             n3 = getRandom(1, 9);
-            n1 = getRandom(0, 99) * 10 + n3;
-            n2 = getRandom(1, 9);
-            while (n3 + n2 == 10){
-                n2 = getRandom(1, 9);
+            n4 = getRandom(1, 9);
+            while (n3 == n4){
+                n4 = getRandom(1, 9);
             };
-            if (p == 1){
-                n2 = getRandom(1, 9) * 10 + n2;
-            } else {
-                n2 = getRandom(10, 99) * 10 + n2;
-            };
-            a1 = Math.floor((n1 + n2) / 100);
-            a2 = (n1 + n2) - a1 * 100;
+            n1 = n1 * 10 + n3;
+            n2 = n2 * 10 + n4;
+            a1 = Math.floor((n1 - n2) / 100);
+            a2 = (n1 - n2) - a1 * 100;
             a2 = a2 + 100; //0xとxを区別
             n1 = n1 / 100;
             n2 = n2 / 100; 
-            $mondai.innerText = n1 + `＋` + n2 + `＝`;
+            $mondai.innerText = n1 + `－` + n2 + `＝`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -144,43 +143,23 @@ function shousuu2(){
 
     function step2Setup(){
         if (count < mondaiNum){
-            pb = p;
-            p = getRandom(1, 3);
-            while (p == pb){
-                p = getRandom(1, 3);
+            pb = n1;
+            n1 = getRandom(1, 99);
+            while (n1 == pb){
+                n1 = getRandom(1, 99);
             };
-            if (p == 1){
-                $dot.innerText = "";
-                $kotae2.style.display = "none";
-                a2 = "";
-                n3 = getRandom(0, 9) * 10 + getRandom(1, 9);
-                n1 = getRandom(0, 9) * 100 + n3;
-                n2 = 100 - n3;
-                n2 = getRandom(0, 9) * 100 + n2;
-                a1 = (n1 + n2) / 100;
-            } else {
-                $dot.innerText = `.`;
-                $kotae2.style.display = "inline-block";
-                n3 = getRandom(1, 9);
-                n1 = getRandom(0, 99) * 10 + n3;
-                n2 = 10 - n3;
-                n2 = getRandom(0, 99) * 10 + n2;
-                while ((n1 + n2) % 100 == 0){
-                    n3 = getRandom(1, 9);
-                    n1 = getRandom(0, 99) * 10 + n3;
-                    n2 = 10 - n3;
-                    n2 = getRandom(0, 99) * 10 + n2;
-                };
-                a1 = Math.floor((n1 + n2) / 100);
-                a2 = (n1 + n2) - a1 * 100;
-                while (a2 % 10 == 0){
-                    a2 = a2 / 10;
-                };
-                a2 = a2 + 10; //0xとxを区別
-            };
+            n2 = getRandom(0, n1 - 1);
+            n3 = getRandom(1, 9);
+            n4 = n3;
+            n1 = n1 * 10 + n3;
+            n2 = n2 * 10 + n4;
+            a1 = Math.floor((n1 - n2) / 100);
+            a2 = (n1 - n2) - a1 * 100;
+            a2 = a2 / 10;
+            a2 = a2 + 10; //0xとxを区別
             n1 = n1 / 100;
-            n2 = n2 / 100;
-            $mondai.innerText = n1 + `＋` + n2 + `＝`;
+            n2 = n2 / 100; 
+            $mondai.innerText = n1 + `－` + n2 + `＝`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -188,25 +167,42 @@ function shousuu2(){
 
     function step3Setup(){
         if (count < mondaiNum){
-            $dot.innerText = `.`;
-            $kotae2.style.display = "inline-block";
             pb = p;
-            p = getRandom(1, 2);
+            p = getRandom(1, 3);
             while (p == pb){
-                p = getRandom(1, 2);
+                p = getRandom(1, 3);
             };
-            n1 = getRandom(0, 9) * 10 + getRandom(1, 9);
-            n2 = getRandom(0, 99) * 10 + getRandom(1, 9);
-            a1 = Math.floor(((n1 * 10) + n2) / 100);
-            a2 = (n1 * 10) + n2 - a1 * 100;
+            switch(p){
+                case 1:
+                    n1 = getRandom(1, 9);
+                    n2 = getRandom(0, n1 - 1);
+                    n1 = n1 * 100;
+                    n2 = n2 * 100 + getRandom(0, 9) * 10 + getRandom(1, 9);
+                    break;
+                case 2:
+                    n1 = getRandom(1, 99);
+                    n2 = getRandom(0, n1 - 1);
+                    n1 = n1 * 10;
+                    n2 = n2 * 10 + getRandom(1, 9);
+                    break;
+                case 3:
+                    n1 = getRandom(2, 99);
+                    n2 = getRandom(1, n1 - 1);
+                    while (n2 % 10 == 0){
+                        n2 = getRandom(0, n1 - 1);
+                    };
+                    n1 = n1 * 10 + getRandom(1, 9);
+                    n2 = n2 * 10;
+                    break;
+                default:
+                    alert(`リロードして下さい`);
+            };
+            a1 = Math.floor((n1 - n2) / 100);
+            a2 = (n1 - n2) - a1 * 100;
             a2 = a2 + 100; //0xとxを区別
-            n1 = n1 / 10;
+            n1 = n1 / 100;
             n2 = n2 / 100;
-            if (p == 1){
-                $mondai.innerText = n1 + `＋` + n2 + `＝`;
-            } else {
-                $mondai.innerText = n2 + `＋` + n1 + `＝`;
-            };
+            $mondai.innerText = n1 + `－` + n2 + `＝`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -246,4 +242,4 @@ function shousuu2(){
     
 };
     
-shousuu2();
+shousuu3();
