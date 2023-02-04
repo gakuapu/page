@@ -1,0 +1,26 @@
+#hint-btn,
+#kotae,
+#check-btn,
+#progress,
+#erase-btn,
+#reset-btn {
+    display: none;
+}
+
+#mondai,
+#unit {
+    font-size: 20px;
+}
+
+#hint {
+    font-size: 16px;
+}
+
+#kotae {
+    width: 90px;
+    height: 35px;
+    font-size: 20px;
+    font-family: serif;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
