@@ -18,6 +18,7 @@ function shousuu1(){
     let n3 = 0;
     let a1 = 0;
     let a2 = 0;
+    let k2v = ""; //0xとxを区別
     let p = 0;
     let pb = 0;
     let q = 0;
@@ -35,6 +36,7 @@ function shousuu1(){
         n3 = 0;
         a1 = 0;
         a2 = "";
+        k2v = ""; //0xとxを区別
         p = 0;
         pb = 0;
         q = 0;
@@ -90,9 +92,10 @@ function shousuu1(){
     };
 
     function checkAnswer(){
-        if ($kotae1.value == a1 && $kotae2.value == a2){
+        if ($kotae1.value == a1 && k2v == a2){ //0xとxを区別
             $kotae1.value = "";
             $kotae2.value = "";
+            k2v = ""; //0xとxを区別
             setTimeout(() => {
                 audio1.play();
                 $progress.value = count / mondaiNum;
@@ -129,6 +132,7 @@ function shousuu1(){
                 default:
                     alert(`リロードして下さい`);
             };
+            a2 = a2 + 10; //0xとxを区別
         } else if (count == mondaiNum){
             closing();
         };
@@ -167,6 +171,7 @@ function shousuu1(){
                 default:
                     alert(`リロードして下さい`);
             };
+            a2 = a2 + 10; //0xとxを区別
         } else if (count == mondaiNum){
             closing();
         };
@@ -196,6 +201,7 @@ function shousuu1(){
                         n3 = getRandom(2, 9);
                         a2 = getRandom(1, n3 - 1);
                         n2 = (a1 * 10 + a2 - (n1 * 10 + n3)) / 10;
+                        a2 = a2 + 10; //0xとxを区別
                     };
                     n1 = n1 + n3 / 10;
                     $mondai.innerText = n1 + `＋` + n2 + `＝`;
@@ -210,6 +216,7 @@ function shousuu1(){
                     n2 = (n1 * 10 + n3 - (a1 * 10 + a2)) / 10;
                     n1 = n1 + n3 / 10;
                     $mondai.innerText = n1 + `－` + n2 + `＝`;
+                    a2 = a2 + 10; //0xとxを区別
                     break;
                 default:
                     alert(`リロードして下さい`);
@@ -220,10 +227,16 @@ function shousuu1(){
     };
 
     $kotae1.addEventListener("input", () => {
+        if ($kotae2.value != ""){ //0xとxを区別
+            k2v = "1" + $kotae2.value;
+        };
         checkAnswer();
     });
     
     $kotae2.addEventListener("input", () => {
+        if ($kotae2.value != ""){ //0xとxを区別
+            k2v = "1" + $kotae2.value;
+        };
         checkAnswer();
     });
 
