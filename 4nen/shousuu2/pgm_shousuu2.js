@@ -207,8 +207,6 @@ function shousuu2(){
             } else {
                 $mondai.innerText = n2 + `＋` + n1 + `＝`;
             };
-            console.log(a1);
-            console.log(a2);
         } else if (count == mondaiNum){
             closing();
         };

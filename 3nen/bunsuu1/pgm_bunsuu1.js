@@ -165,9 +165,9 @@ function bunsuu1(){
     
     $ca.addEventListener("input", () => {
         if ($ca.value == ca && $ma.value == ma){
+            erase();
             setTimeout(() => {
                 audio1.play();
-                erase();
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;
