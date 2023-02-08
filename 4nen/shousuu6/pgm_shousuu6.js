@@ -1,4 +1,4 @@
-function shousuu4(){
+function shousuu6(){
     
     const $step = document.getElementById("step");
     const $startBtn = document.getElementById("start-btn");
@@ -23,6 +23,7 @@ function shousuu4(){
     let a1 = 0;
     let a2 = 0;
     let k2v = ""; //0xとxを区別
+    let p = 0;
     let pb = 0;
     let q = 0;
     let mondaiNum = 10;
@@ -40,6 +41,7 @@ function shousuu4(){
         a1 = 0;
         a2 = "";
         k2v = ""; //0xとxを区別
+        p = 0;
         pb = 0;
         q = 0;
         $kotae1.value = "";
@@ -48,7 +50,9 @@ function shousuu4(){
     };
 
     function switchdisplay(){
-        $kotae1.style.display = "inline-block";    
+        $kotae1.style.display = "inline-block"; 
+        $dot.innerText = ".";
+        $kotae2.style.display = "inline-block";
         $progress.style.display = "block";
         $eraseBtn.style.display = "inline-block";
         $resetBtn.style.display = "inline-block";
@@ -116,40 +120,38 @@ function shousuu4(){
 
     function step1Setup(){
         if (count < mondaiNum){
-            pb = n2;
-            n2 = getRandom(2, 9);
-            while (n2 == pb){
-                n2 = getRandom(2, 9);
+            pb = p;
+            p = getRandom(1, 2);
+            while (p == pb){
+                p = getRandom(1, 2);
             };
-            q = getRandom(1, 3);
-            switch(q){
+            n2 = getRandom(2, 9);
+            switch(p){
                 case 1:
-                    n1 = getRandom(2, 9);
+                    a2 = getRandom(2, 9);
+                    n1 = n2 * a2;
+                    while (n1 % 10 == 0){
+                        a2 = getRandom(2, 9);
+                        n1 = n2 * a2;
+                    };
+                    a1 = 0;
                     break;
                 case 2:
-                    n1 = getRandom(1, 4) * 10 + getRandom(1, 9);
-                    break;
-                case 3:
-                    n1 = getRandom(1, 4) * 10 + 5;
+                    n3 = getRandom(1, 9) * 10 + getRandom(1, 9);
+                    n1 = n2 * n3;
+                    while (n1 % 10 == 0){
+                        n3 = getRandom(1, 9) * 10 + getRandom(1, 9);
+                        n1 = n2 * n3;
+                    };
+                    a1 = Math.floor(n3 / 10);
+                    a2 = n3 - (a1 * 10);
                     break;
                 default:
                     alert(`リロードして下さい`);
             };
-            n3 = n1 * n2;
-            if (n3 % 10 == 0){
-                $kotae2.style.display = "none";
-                $dot.innerText = "";
-                a2 = "";
-                a1 = n3 / 10;
-            } else {
-                $kotae2.style.display = "inline-block";
-                $dot.innerText = ".";
-                a1 = Math.floor(n3 / 10);
-                a2 = n3 - a1 * 10;
-                a2 = a2 + 10; //0xとxを区別
-            };
+            a2 = a2 + 10; //0xとxを区別
             n1 = n1 / 10;
-            $mondai.innerText = n1 + `×` + n2 + `＝`;
+            $mondai.innerText = n1 + `÷` + n2 + `＝`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -157,40 +159,38 @@ function shousuu4(){
 
     function step2Setup(){
         if (count < mondaiNum){
-            pb = n2;
-            n2 = getRandom(11, 30);
-            while (n2 == pb){
-                n2 = getRandom(11, 30);
+            pb = p;
+            p = getRandom(1, 2);
+            while (p == pb){
+                p = getRandom(1, 2);
             };
-            q = getRandom(1, 3);
-            switch(q){
+            n2 = getRandom(1, 2) * 10 + getRandom(1, 9);
+            switch(p){
                 case 1:
-                    n1 = getRandom(2, 9);
+                    a2 = getRandom(2, 9);
+                    n1 = n2 * a2;
+                    while (n1 % 10 == 0){
+                        a2 = getRandom(2, 9);
+                        n1 = n2 * a2;
+                    };
+                    a1 = 0;
                     break;
                 case 2:
-                    n1 = getRandom(1, 4) * 10 + getRandom(1, 9);
-                    break;
-                case 3:
-                    n1 = getRandom(1, 4) * 10 + 5;
+                    n3 = getRandom(1, 3) * 10 + getRandom(1, 9);
+                    n1 = n2 * n3;
+                    while (n1 % 10 == 0){
+                        n3 = getRandom(1, 3) * 10 + getRandom(1, 9);
+                        n1 = n2 * n3;
+                    };
+                    a1 = Math.floor(n3 / 10);
+                    a2 = n3 - (a1 * 10);
                     break;
                 default:
                     alert(`リロードして下さい`);
             };
-            n3 = n1 * n2;
-            if (n3 % 10 == 0){
-                $kotae2.style.display = "none";
-                $dot.innerText = "";
-                a2 = "";
-                a1 = n3 / 10;
-            } else {
-                $kotae2.style.display = "inline-block";
-                $dot.innerText = ".";
-                a1 = Math.floor(n3 / 10);
-                a2 = n3 - a1 * 10;
-                a2 = a2 + 10; //0xとxを区別
-            };
+            a2 = a2 + 10; //0xとxを区別
             n1 = n1 / 10;
-            $mondai.innerText = n1 + `×` + n2 + `＝`;
+            $mondai.innerText = n1 + `÷` + n2 + `＝`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -198,46 +198,42 @@ function shousuu4(){
 
     function step3Setup(){
         if (count < mondaiNum){
-            pb = n2;
+            pb = p;
+            p = getRandom(1, 5);
+            while (p == pb){
+                p = getRandom(1, 5);
+            };
             n2 = getRandom(2, 9);
-            while (n2 == pb){
-                n2 = getRandom(2, 9);
-            };
-            q = getRandom(1, 3);
-            switch(q){
-                case 1:
-                    n1 = getRandom(0, 9) * 10 + getRandom(2, 9);
-                    break;
-                case 2:
-                    n1 = getRandom(1, 4) * 100 + getRandom(0, 9) * 10 + getRandom(1, 9);
-                    break;
-                case 3:
-                    n1 = getRandom(0, 4) * 100 + getRandom(0, 9) * 10 + 5;
-                    break;
-                default:
-                    alert(`リロードして下さい`);
-            };
-            n3 = n1 * n2;
-            if (n3 % 100 == 0){
-                $kotae2.style.display = "none";
-                $dot.innerText = "";
-                a2 = "";
-                a1 = n3 / 100;
-            } else {
-                $kotae2.style.display = "inline-block";
-                $dot.innerText = ".";
-                if (n3 % 10 == 0){
-                    a1 = Math.floor(n3 / 100);
-                    a2 = (n3 - a1 * 100) / 10;
-                    a2 = a2 + 10; //0xとxを区別
-                } else {
-                    a1 = Math.floor(n3 / 100);
-                    a2 = n3 - a1 * 100;
-                    a2 = a2 + 100; //0xとxを区別
+            if (p == 1){
+                a2 = getRandom(2, 9);
+                n1 = n2 * a2;
+                while (n1 % 10 == 0){
+                    a2 = getRandom(2, 9);
+                    n1 = n2 * a2;
                 };
+                a1 = 0;
+            } else if (p == 2 || p == 3){
+                n3 = getRandom(1, 9) * 10 + getRandom(1, 9);
+                n1 = n2 * n3;
+                while (n1 % 10 == 0){
+                    n3 = getRandom(1, 9) * 10 + getRandom(1, 9);
+                    n1 = n2 * n3;
+                };
+                a1 = Math.floor(n3 / 100);
+                a2 = n3 - (a1 * 100);
+            } else {
+                n3 = getRandom(10, 99) * 10 + getRandom(1, 9);
+                n1 = n2 * n3;
+                while (n1 % 10 == 0){
+                    n3 = getRandom(0, 99) * 10 + getRandom(1, 9);
+                    n1 = n2 * n3;
+                };
+                a1 = Math.floor(n3 / 100);
+                a2 = n3 - (a1 * 100);
             };
+            a2 = a2 + 100; //0xとxを区別
             n1 = n1 / 100;
-            $mondai.innerText = n1 + `×` + n2 + `＝`;
+            $mondai.innerText = n1 + `÷` + n2 + `＝`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -245,46 +241,48 @@ function shousuu4(){
 
     function step4Setup(){
         if (count < mondaiNum){
-            pb = n2;
-            n2 = getRandom(11, 30);
-            while (n2 == pb){
-                n2 = getRandom(11, 30);
+            pb = p;
+            p = getRandom(1, 3);
+            while (p == pb){
+                p = getRandom(1, 3);
             };
-            q = getRandom(1, 3);
-            switch(q){
+            n2 = getRandom(1, 2) * 10 + getRandom(1, 9);
+            switch(p){
                 case 1:
-                    n1 = getRandom(0, 9) * 10 + getRandom(2, 9);
+                    a2 = getRandom(2, 9);
+                    n1 = n2 * a2;
+                    while (n1 % 10 == 0){
+                        a2 = getRandom(2, 9);
+                        n1 = n2 * a2;
+                    };
+                    a1 = 0;
                     break;
                 case 2:
-                    n1 = getRandom(1, 4) * 100 + getRandom(0, 9) * 10 + getRandom(1, 9);
+                    n3 = getRandom(1, 4) * 10 + getRandom(1, 9);
+                    n1 = n2 * n3;
+                    while (n1 % 10 == 0){
+                        n3 = getRandom(1, 4) * 10 + getRandom(1, 9);
+                        n1 = n2 * n3;
+                    };
+                    a1 = Math.floor(n3 / 100);
+                    a2 = n3 - (a1 * 100);
                     break;
                 case 3:
-                    n1 = getRandom(0, 4) * 100 + getRandom(0, 9) * 10 + 5;
+                    n3 = getRandom(1, 4) * 100 + getRandom(0, 4) * 10 + getRandom(1, 9);
+                    n1 = n2 * n3;
+                    while (n1 % 10 == 0){
+                        n3 = getRandom(1, 4) * 100 + getRandom(0, 4) * 10 + getRandom(1, 9);
+                        n1 = n2 * n3;
+                    };
+                    a1 = Math.floor(n3 / 100);
+                    a2 = n3 - (a1 * 100);
                     break;
                 default:
                     alert(`リロードして下さい`);
             };
-            n3 = n1 * n2;
-            if (n3 % 100 == 0){
-                $kotae2.style.display = "none";
-                $dot.innerText = "";
-                a2 = "";
-                a1 = n3 / 100;
-            } else {
-                $kotae2.style.display = "inline-block";
-                $dot.innerText = ".";
-                if (n3 % 10 == 0){
-                    a1 = Math.floor(n3 / 100);
-                    a2 = (n3 - a1 * 100) / 10;
-                    a2 = a2 + 10; //0xとxを区別
-                } else {
-                    a1 = Math.floor(n3 / 100);
-                    a2 = n3 - a1 * 100;
-                    a2 = a2 + 100; //0xとxを区別
-                };
-            };
+            a2 = a2 + 100; //0xとxを区別
             n1 = n1 / 100;
-            $mondai.innerText = n1 + `×` + n2 + `＝`;
+            $mondai.innerText = n1 + `÷` + n2 + `＝`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -324,4 +322,4 @@ function shousuu4(){
     
 };
     
-shousuu4();
+shousuu6();
