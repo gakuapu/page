@@ -14,6 +14,10 @@ const $mt5 = document.getElementById("mt5");
 const $mt6 = document.getElementById("mt6");
 const $mt7 = document.getElementById("mt7");
 const $mt8 = document.getElementById("mt8");
+const $mt9 = document.getElementById("mt9");
+const $mt10 = document.getElementById("mt10");
+const $mt11 = document.getElementById("mt11");
+const $mt12 = document.getElementById("mt12");
 
 function memoActivate(){
 
@@ -134,6 +138,64 @@ function memoActivate(){
             });
         };
     });
+
+    $mt9.addEventListener("click", () => {
+        for (let mi9 = tdnum * (9 - 1); mi9 < tdnum * 9; mi9++){
+            $memo[mi9].addEventListener("click", () => {
+                $memo[mi9].innerText = "";
+            });
+            $memo[mi9].addEventListener("input", () => {
+                if ($memo[mi9].innerText.length > 1){
+                $memo[mi9].innerText = $memo[mi9].innerText.replace(memob[mi9], "");
+                };
+                memob[mi9] = $memo[mi9].innerText;
+            });
+        };
+    });
+
+    $mt10.addEventListener("click", () => {
+        for (let mi10 = tdnum * (10 - 1); mi10 < tdnum * 10; mi10++){
+            $memo[mi10].addEventListener("click", () => {
+                $memo[mi10].innerText = "";
+            });
+            $memo[mi10].addEventListener("input", () => {
+                if ($memo[mi10].innerText.length > 1){
+                $memo[mi10].innerText = $memo[mi10].innerText.replace(memob[mi10], "");
+                };
+                memob[mi10] = $memo[mi10].innerText;
+            });
+        };
+    });
+
+    $mt11.addEventListener("click", () => {
+        for (let mi11 = tdnum * (11 - 1); mi11 < tdnum * 11; mi11++){
+            $memo[mi11].addEventListener("click", () => {
+                $memo[mi11].innerText = "";
+            });
+            $memo[mi11].addEventListener("input", () => {
+                if ($memo[mi11].innerText.length > 1){
+                $memo[mi11].innerText = $memo[mi11].innerText.replace(memob[mi11], "");
+                };
+                memob[mi11] = $memo[mi11].innerText;
+            });
+        };
+    });
+
+    $mt12.addEventListener("click", () => {
+        for (let mi12 = tdnum * (12 - 1); mi12 < tdnum * 12; mi12++){
+            $memo[mi12].addEventListener("click", () => {
+                $memo[mi12].innerText = "";
+            });
+            $memo[mi12].addEventListener("input", () => {
+                if ($memo[mi12].innerText.length > 1){
+                $memo[mi12].innerText = $memo[mi12].innerText.replace(memob[mi12], "");
+                };
+                memob[mi12] = $memo[mi12].innerText;
+            });
+        };
+    });
+
+
 };
 
 function addtds(parent){
@@ -162,6 +224,10 @@ $memoHyojiBtn.addEventListener("click", () => {
     removetds($mt6);
     removetds($mt7);
     removetds($mt8);
+    removetds($mt9);
+    removetds($mt10);
+    removetds($mt11);
+    removetds($mt12);
     for (let mk = 0; mk < tdnum; mk++){
         addtds($mt1);
         addtds($mt2);
@@ -171,6 +237,10 @@ $memoHyojiBtn.addEventListener("click", () => {
         addtds($mt6);
         addtds($mt7);
         addtds($mt8);
+        addtds($mt9);
+        addtds($mt10);
+        addtds($mt11);
+        addtds($mt12);
     };
     memoActivate();
 });
@@ -184,6 +254,10 @@ $memoClearBtn.addEventListener("click", () => {
     removetds($mt6);
     removetds($mt7);
     removetds($mt8);
+    removetds($mt9);
+    removetds($mt10);
+    removetds($mt11);
+    removetds($mt12);
     $memoHyojiBtn.style.display = "block";
     $memoClearBtn.style.display = "none";
     $memoTable.style.display = "none";
@@ -208,6 +282,10 @@ HTML：↓＋cssリンク（<link rel="stylesheet" href="public\keisanmemo\publi
         <tr id = "mt6"></tr>
         <tr id = "mt7"></tr>
         <tr id = "mt8"></tr>
+        <tr id = "mt9"></tr>
+        <tr id = "mt10"></tr>
+        <tr id = "mt11"></tr>
+        <tr id = "mt12"></tr>
     </table>
     <script src="public\keisanmemo\public_keisanmemo_large.js"></script>
 <!--計算メモ-->
