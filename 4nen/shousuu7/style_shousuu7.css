@@ -14,10 +14,17 @@
 
 #kotae1,
 #kotae2 {
-    width: 40px;
     height: 35px;
     font-size: 20px;
     font-family: serif;
     margin-top: 5px;
     margin-bottom: 10px;
+}
+
+#kotae1 {
+    width: 40px;
+}
+
+#kotae2 {
+    width: 60px;
 }

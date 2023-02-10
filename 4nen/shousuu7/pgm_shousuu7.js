@@ -30,7 +30,7 @@ function shousuu7(){
     let q = 0;
     let i = 0;
     let N1 = [4, 5, 8];
-    let N2 = [3, 6, 7, 9];
+    let N2 = [6, 7, 8];
     let mondaiNum = 10;
     
     function getRandom(min, max){
@@ -58,8 +58,6 @@ function shousuu7(){
 
     function switchdisplay(){
         $kotae1.style.display = "inline-block"; 
-        $dot.innerText = ".";
-        $kotae2.style.display = "inline-block";
         $checkBtn.style.display = "block";
         $progress.style.display = "block";
         $eraseBtn.style.display = "inline-block";
@@ -123,6 +121,8 @@ function shousuu7(){
 
     function step1Setup(){
         if (count < mondaiNum){
+            $dot.innerText = ".";
+            $kotae2.style.display = "inline-block";
             i = 0;
             pb = p;
             p = getRandom(1, 3);
@@ -140,9 +140,9 @@ function shousuu7(){
                 a1 = Math.floor((n1 * 1000 / n2) / 10000);
                 a2 = n1 * 1000 / n2 - a1 * 10000;
             } else {
-                n1 = getRandom(0, 49) * 10 + getRandom(1, 9);
+                n1 = getRandom(0, 39) * 10 + getRandom(1, 9);
                 while (n1 % n2 == 0){
-                    n1 = getRandom(0, 49) * 10 + getRandom(1, 9);
+                    n1 = getRandom(0, 39) * 10 + getRandom(1, 9);
                 };
                 a1 = Math.floor((n1 * 1000 / n2) / 10000);
                 a2 = n1 * 1000 / n2 - a1 * 10000;
@@ -162,35 +162,39 @@ function shousuu7(){
 
     function step2Setup(){
         if (count < mondaiNum){
+            $dot.innerText = ".";
+            $kotae2.style.display = "inline-block";
             pb = p;
             p = getRandom(1, 3);
             while (p == pb){
                 p = getRandom(1, 3);
             };
-            n3 = getRandom(0, 3);
+            n3 = getRandom(0, 2);
             n2 = N2[n3];
             if (p == 1){
-                n1 = getRandom(1, 9);
-                while (n1 % 3 == 0 || n1 % 7 == 0){
-                    n1 = getRandom(1, 9);
+                n1 = getRandom(1, 19);
+                while (n1 % 2 == 0 || n1 % 3 == 0 || n1 % 7 == 0){
+                    n1 = getRandom(1, 19);
                 };
-            } else {
-                n1 = getRandom(1, 9) * 10 + getRandom(1, 9);
-                while (n1 % 3 == 0 || n1 % 7 == 0){
-                    n1 = getRandom(10, 99);
-                };
-            };
-            a1 = Math.floor((n1 * 100 / n2) / 100);
-            q = getRandom(1, 2);
-            if (q == 1){
-                a2 = Math.round(n1 * 100 / n2 - a1 * 100);
-                a2 = a2 + 100; //0xとxを区別
-                $mondai0.innerText = `小数第3位で四捨五入して小数第2位まで求めると、商はいくつ?`;
-            } else {
+                a1 = Math.floor(n1 / n2);
                 a2 = Math.round(n1 * 10 / n2 - a1 * 10);
-                a2 = a2 + 10; //0xとxを区別
-                $mondai0.innerText = `小数第2位で四捨五入して小数第1位まで求めると、商はいくつ?`;
+            } else {
+                n1 = getRandom(1, 49) * 10 + getRandom(1, 9);
+                while (n1 % 2 == 0 || n1 % 3 == 0 || n1 % 7 == 0){
+                    n1 = getRandom(1, 49) * 10 + getRandom(1, 9);
+                };
+                a1 = Math.floor(n1 / n2 / 10);
+                a2 = Math.round(n1 / n2 - a1 * 10);
+                n1 = n1 / 10;
             };
+            a2 = a2 + 10; //0xとxを区別
+            if (a2 != 0 && a2 % 10 == 0){
+                $dot.innerText = "";
+                $kotae2.style.display = "none";
+                a2 = "";
+                a1 = a1 + 1;
+            };
+            $mondai0.innerText = `小数第2位で四捨五入して小数第1位まで求めると、商はいくつ?`;
             $mondai.innerText = n1 + `÷` + n2 + `＝`;
         } else if (count == mondaiNum){
             closing();
