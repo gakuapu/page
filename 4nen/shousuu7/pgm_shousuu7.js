@@ -27,7 +27,6 @@ function shousuu7(){
     let k2v = ""; //0xとxを区別
     let p = 0;
     let pb = 0;
-    let q = 0;
     let i = 0;
     let N1 = [4, 5, 8];
     let N2 = [6, 7, 8];
@@ -48,7 +47,6 @@ function shousuu7(){
         k2v = ""; //0xとxを区別
         p = 0;
         pb = 0;
-        q = 0;
         i = 0;
         $kotae1.value = "";
         $kotae2.value = "";
