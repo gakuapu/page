@@ -1,0 +1,10 @@
+#kotae,
+#progress,
+#erase-btn,
+#reset-btn {
+    display: none;
+}
+
+#kotae {
+    width: 60px;
+}
