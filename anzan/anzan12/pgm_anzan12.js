@@ -1,5 +1,6 @@
 function anzan12(){
     
+    const $step = document.getElementById("step");
     const $startBtn = document.getElementById("start-btn");
     const $hintBtn = document.getElementById("hint-btn");
     const $eraseBtn = document.getElementById("erase-btn");
@@ -41,6 +42,7 @@ function anzan12(){
         $progress.style.display = "block";
         $eraseBtn.style.display = "inline-block";
         $resetBtn.style.display = "inline-block";
+        $step.style.display = "none";
         $startBtn.style.display = "none";
         $hintBtn.style.display = "block";
     };
@@ -50,6 +52,7 @@ function anzan12(){
         $progress.style.display = "none";
         $eraseBtn.style.display = "none";
         $resetBtn.style.display = "none";
+        $step.style.display = "block";
         $startBtn.style.display = "block";
         $hintBtn.style.display = "none";
     };
@@ -62,13 +65,44 @@ function anzan12(){
         alert(`クリアしました`);
     };
 
-    function setup(){
+    function switchSetup(stepValue){
+        switch(stepValue){
+            case "1":
+                step1Setup();
+                break;
+            case "2":
+                step2Setup();
+                break;
+            default:
+                alert(`リロードして下さい`);
+        };
+    };
+
+    function step1Setup(){
+        if (count < mondaiNum){
+            $hintBtn.style.display = "block";
+            ab = a;
+            n1 = getRandom(3, 9) * 10;
+            n2 = getRandom(3, 9);
+            a = (n1 - 1) * n2;
+            while (a == ab){
+                n1 = getRandom(3, 9) * 10;
+                n2 = getRandom(3, 9);
+                a = (n1 - 1) * n2;
+            };
+            $mondai.innerText = (n1 - 1) + `×` + n2 + `＝`;
+        } else if (count == mondaiNum){
+            closing();
+        };
+    };
+
+    function step2Setup(){
         if (count < mondaiNum){
             $hintBtn.style.display = "block";
             ab = a;
             n1 = getRandom(2, 9) * 100;
             n12 = getRandom(1, 2);
-            n2 = getRandom(2, 9);
+            n2 = getRandom(3, 9);
             a = (n1 - n12) * n2;
             while (a == ab){
                 n1 = getRandom(2, 9) * 100;
@@ -91,12 +125,21 @@ function anzan12(){
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;
-            setup();
+            switchSetup($step.value);
         };
     });
     
     $hintBtn.addEventListener("click", () => {
-        $hint.innerText = n1 + `×` + n2 + `は... そこから` + n12 + `×` + n2 + `を調整するには...`;
+        switch($step.value){
+            case "1":
+                $hint.innerText = n1 + `×` + n2 + `は... そこから` + n2 + `を調整するには...`;
+                break;
+            case "2":
+                $hint.innerText = n1 + `×` + n2 + `は... そこから` + n12 + `×` + n2 + `を調整するには...`;
+                break;
+            default:
+                alert(`リロードして下さい`);
+        };
         $hintBtn.style.display = "none";
     });
 
@@ -104,7 +147,7 @@ function anzan12(){
         switchdisplay();
         defaultlet();
         $progress.value = 0;
-        setup();
+        switchSetup($step.value);
     });
     
     $eraseBtn.addEventListener("click", () => {
