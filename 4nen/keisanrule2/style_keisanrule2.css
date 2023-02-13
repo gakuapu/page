@@ -1,8 +1,13 @@
+#mondai0,
 #kotae,
 #progress,
 #erase-btn,
 #reset-btn {
     display: none;
+}
+
+#mondai0 {
+    font-size: 18px;
 }
 
 #kotae {

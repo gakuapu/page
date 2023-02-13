@@ -18,11 +18,9 @@
     <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="4nen\keisanrule2\style_keisanrule2.css">
-    <link rel="stylesheet" href="public\keisanmemo\public_keisanmemo.css">
 </head>
 <main>
 <body>
-<!--
     <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
     <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
 
@@ -33,7 +31,6 @@
             <option value="3">ステップ3</option>
             <option value="4">ステップ4</option>
             <option value="5">ステップ5</option>
-            <option value="6">ステップ6</option>
         </select>
     </div>
 
@@ -41,24 +38,11 @@
         <input type="button" id="start-btn" class="btn" value="スタート">
     </div>
 
+    <div id="mondai0">工夫して暗算で解こう</div>
     <div id="mondai"></div>
 
     <input id="kotae" class="kotae" type="tel">
--->
-    <!--計算メモモジュール（↓＋css）-->
-    <input id="memohyoji" type="button" class="btn" value="計算メモを表示">
-    <input id="memoclear" type="button" class="btn" value="計算メモ非表示">
-    <table id="memotable">
-        <tr id = "mt1"></tr>
-        <tr id = "mt2"></tr>
-        <tr id = "mt3"></tr>
-        <tr id = "mt4"></tr>
-        <tr id = "mt5"></tr>
-        <tr id = "mt6"></tr>
-    </table>
-    <script src="public\keisanmemo\public_keisanmemo.js"></script>
-    <!--計算メモモジュール-->
-<!--
+
     <div>
         <progress id="progress" value="0"></progress>
     </div>
@@ -70,44 +54,44 @@
 
     <script src="4nen\keisanrule2\pgm_keisanrule2.js"></script>
     <br>
-    <h1 class="footer-container2">計算のルール（小学4年生）</h1>
+    <h1 class="footer-container2">計算のルールと工夫2（小学4年生）</h1>
     <ul class="footer-container2">
-        <li>ステップ1：3けたの足し算1</li>
-        <li>ステップ2：3けたの足し算2</li>
-        <li>ステップ3：3けたの足し算3</li>
-        <li>ステップ4：3けたの引き算1</li>
-        <li>ステップ5：3けたの引き算2</li>
-        <li>ステップ6：3けたの引き算3</li>
+        <li>ステップ1：計算ルール2の練習問題1</li>
+        <li>ステップ2：計算ルール2の練習問題2</li>
+        <li>ステップ3：計算ルール3の練習問題</li>
+        <li>ステップ4：計算ルール4の練習問題1</li>
+        <li>ステップ5：計算ルール4の練習問題2</li>
     </ul>
--->
+    <p><a class="footer-container2" href="anzan.html">発展問題：暗算トレーニング</a></p>
+
     <hr class="dotted">
 
     <h2 class="footer-container2">【計算のルール2】<br>
-        足し算・引き算は計算の順番を入れかえられる</h2>
-        <p class="menutxt">① 「〇＋□」と「□＋〇」の答えは同じになる<br>
+        足し算・引き算は計算の順番を入れかえても答えは同じ</h2>
+        <p class="menutxt">① 〇＋□＝□＋〇<br>
         例：3＋5＝5＋3</p>
-        <p class="menutxt">② 「〇＋□＋△」は〇、□、△をどの順番で足しても、答えは同じになる<br>
+        <p class="menutxt">② 「〇＋□＋△」は〇、□、△をどの順番で足しても、答えは同じ<br>
         例：「47＋29＋3」は「47＋3＋29（＝50＋29＝79）」と同じ</p>
         <p class="menutxt">③ 「〇＋□－△」「〇－△＋□」「〇＋(□－△)」は同じ答えになる<br>
         例：「47－29＋2」は「47＋2－29（＝49－29＝20）」と同じ<br>
         例：「47＋29－9」は「47＋(29－9)（＝47－20＝27）」と同じ</p>
-        <p class="menutxt">※「足す」と「引く」が変わる順番の入れかえはできないので注意<br>
-        例：× 47－29＋2＝47－(29＋2) ⇒ 2が「足す」から「引く」に変わっているのでダメ</p>
+        <p class="menutxt">※「足す」と「引く」が変わる入れかえはできない<br>
+        例：× 47－29＋2＝47－(29＋2) ⇒ 2が「足す」から「引く」に変わるのでダメ</p>
 
     <h2 class="footer-container2">【計算のルール3】<br>
-        かけ算・割り算は計算の順番を入れかえられる</h2>
-        <p class="menutxt">④ 「〇×□」と「□×〇」の答えは同じになる<br>
+        かけ算・割り算は計算の順番を入れかえても答えは同じ</h2>
+        <p class="menutxt">④ 〇×□＝□×〇<br>
         例：3×5＝5×3</p>
-        <p class="menutxt">⑤ 「〇×□×△」は〇、□、△をどの順番で足しても、答えは同じになる<br>
+        <p class="menutxt">⑤ 「〇×□×△」は〇、□、△をどの順番でかけても、答えは同じ<br>
         例：「25×9×4」は「25×4×9（＝100×9＝900）」と同じ</p>
         <p class="menutxt">⑥ 「〇×□÷△」「〇÷△×□」「〇×(□÷△)」は同じ答えになる<br>
         例：「25×9÷5」は「25÷5×9（＝5×9＝45）」と同じ<br>
         例：「25×12÷3」は「25×（12÷3）（＝25×4＝100）」と同じ</p>
-        <p class="menutxt">※「かける」と「割る」が変わる順番の入れかえはできないので注意<br>
-        例：× 24÷12×2＝24÷(12×2) ⇒ 2が「かける」から「割る」に変わっているのでダメ</p>
+        <p class="menutxt">※「かける」と「割る」が変わる入れかえはできない<br>
+        例：× 24÷12×2＝24÷(12×2) ⇒ 2が「かける」から「割る」に変わるのでダメ</p>
 
     <h2 class="footer-container2">【計算のルール4】<br>
-        バラバラにかけ算しても、まとめてからかけ算しても答えは同じになる</h2>
+        バラバラにかけても、まとめてからかけても答えは同じ</h2>
         <p class="menutxt">⑦ 〇×△＋□×△＝(〇＋□)×△<br>
         例：7×8＋3×8＝(7＋3)×8</p>
         <p class="menutxt">⑧ 〇×△－□×△＝(〇－□)×△<br>
