@@ -1,0 +1,73 @@
+#progress,
+#erase-btn,
+#reset-btn,
+#i1,
+#bunsuu1,
+#kigou1,
+#i2,
+#bunsuu2,
+#kigou2,
+#ia,
+#bunsuua {
+    display: none;
+}
+
+.bunsuu {
+    width: 30px;
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+    text-align: center;
+    margin: 10px 0;
+    padding: 0;
+}
+
+.child {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid black;
+}
+
+.mother {
+    margin: 0;
+    padding: 0;
+}
+
+.seisuu,
+.kigou {
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.kotae {
+    width: 40px;
+    height: 35px;
+    font-size: 20px;
+    font-family: serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#ca {
+    margin-bottom: 5px;
+}
+
+#ma {
+    margin-top: 5px;
+}
+
+#hrkotae {
+    width: 42px;
+    margin: 0;
+    padding: 0;
+}
+
+#mondai0 {
+    font-size: 18px;
+}
+
+#ia {
+    width: 40px;
+}

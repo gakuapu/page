@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-XKL20YHCTB');
+        </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小学4年生の分数の計算ドリル | 算数＆計算ドリル 学アプ</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロードも不要">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="4nen\bunsuu2\style_bunsuu2.css">
+</head>
+<main>
+<body>
+
+    <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
+
+    <div>
+        <select id="step">
+            <option value="1">ステップ1</option>
+            <option value="2">ステップ2</option>
+            <option value="3">ステップ3</option>
+            <option value="4">ステップ4</option>
+            <option value="5">ステップ5</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="button" id="start-btn" class="btn" value="スタート">
+    </div>
+
+    <!--spanタグの間の隙間の処理：改行をコメントアウト-->
+
+    <div id="mondai0"></div>
+
+    <div id="mondaikotae">
+        <a id="i1" class="seisuu"></a>
+        <span id="bunsuu1" class="bunsuu">
+            <div id="c1" class="child"></div>
+            <div id="m1" class="mother"></div>
+        </span><!--
+        --><a id="kigou1" class="kigou"></a><!--
+        --><a id="i2" class="seisuu"></a>
+        <span id="bunsuu2" class="bunsuu">
+            <div id="c2" class="child"></div>
+            <div id="m2" class="mother"></div>
+        </span><!--
+        --><a id="kigou2" class="kigou">＝</a>
+        <input id="ia" class="kotae" type="tel">
+        <div id="bunsuua" class="bunsuu">
+            <input id="ca" class="kotae" type="tel">
+            <hr id="hrkotae">
+            <input id="ma" class="kotae" type="tel">
+        </div>
+    </div>
+
+    <div>
+        <progress id="progress" value="0"></progress>
+    </div>
+
+    <div>
+        <input type="button" id="erase-btn" class="btn" value="けす">
+        <input type="button" id="reset-btn" class="btn" value="リセット">
+    </div>
+
+    <script src="4nen\bunsuu2\pgm_bunsuu2.js"></script>
+    <br>
+    <h1 class="footer-container2">小学4年生の分数の計算ドリル</h1>
+    <ul class="footer-container2">
+        <li>ステップ1：帯分数と仮分数</li>
+        <li>ステップ2：分数の足し算1</li>
+        <li>ステップ3：分数の足し算2</li>
+        <li>ステップ4：分数の引き算1</li>
+        <li>ステップ5：分数の引き算2</li>
+    </ul>
+
+    <hr class="dotted">
+
+    <h2 class="footer-container2">【算数の言葉】</h2>
+        <p class="menutxt">真分数（しんぶんすう）：分子が分母より小さい分数</p>
+        <p class="menutxt">仮分数（かぶんすう）：分子が分母と同じか、分母より大きい分数</p>
+        <p class="menutxt">帯分数（たいぶんすう）：整数と真分数でできている分数</p>
+
+    <nav>
+        <ol class="pankuzu">
+            <li><a href="top.html">トップ</a></li>
+            <li><a href="4nen.html">小学4年生の算数</a></li>
+        </ol>
+    </nav>
+</main>
+
+<footer class="footer-container">
+    <hr>
+    <p>算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで、全学年向け</p>
+    <p>Copyright(C) 2022- All Rights Reserved</p>
+    <a class="footer-container2" href="aboutus.html">当サイトについて</a>
+</footer>
+</body>
+</html>

@@ -129,7 +129,7 @@ function bunsuu1(){
             };
             $m1.innerText = m;
             $m2.innerText = m;
-            $c1.innerText = nc1
+            $c1.innerText = nc1;
             $c2.innerText = nc2;
             $kigou.innerText = "＋";
         } else if (count == mondaiNum){
@@ -154,7 +154,7 @@ function bunsuu1(){
                 ca = getRandom (1, nc1 - 1);
                 nc2 = nc1 - ca;
                 $m1.innerText = m;
-                $c1.innerText = nc1
+                $c1.innerText = nc1;
             };
             $m2.innerText = m;
             $c2.innerText = nc2;
