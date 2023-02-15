@@ -95,6 +95,7 @@ function anzan15(){
             if (p == 1){
                 n3 = getRandom(6, 19);
                 n1 = n3 * 2;
+                a = n1 * 5;
                 while(n1 % 5 == 0 || a == ab){
                     n3 = getRandom(6, 19);
                     n1 = n3 * 2;
@@ -104,6 +105,7 @@ function anzan15(){
             } else {
                 n3 = getRandom(3, 9);
                 n1 = n3 * 4;
+                a = n1 * 25;
                 while(n1 % 5 == 0 || a == ab){
                     n3 = getRandom(3, 9);
                     n1 = n3 * 4;
