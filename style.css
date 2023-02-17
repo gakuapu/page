@@ -13,6 +13,7 @@ hr {
 .dotted {
     border: none;
     border-top: dotted;
+    color: silver
 }
 
 h1,
@@ -133,7 +134,7 @@ select {
 }
 
 #timer-bar::-webkit-progress-value {
-    background-color: dodgerblue;
+    background-color: dodgerblue
 }
 
 .pankuzu {
