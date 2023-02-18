@@ -61,7 +61,7 @@ function anzan_keisan(){
         tb = tb - 500/10000;
         $timerBar.value = tb;
         if (tb < 0){
-            mistakes.push(randoms[count] % 5); //
+            mistakes.push(randoms[count] % 5);
             clearInterval(timer1);
             $kotae.value = "";
             $progress.value = count / countMax;

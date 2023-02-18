@@ -2,7 +2,8 @@
 #timer-bar,
 #progress,
 #erase-btn,
-#reset-btn {
+#reset-btn,
+#back-to-start-btn {
     display: none;
 }
 
@@ -15,6 +16,13 @@
     margin-bottom: 10px;
 }
 
-#mondai0 {
+#mondai0,
+#kekka,
+#recommend,
+.recommend-li {
     font-size: 18px;
+}
+
+#recommend-list {
+    margin-top: 5px; 
 }

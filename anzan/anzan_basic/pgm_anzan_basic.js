@@ -1,7 +1,7 @@
 function anzan_basic(){
     
     //1～countMaxまでのランダム配列（randoms）の生成
-    let countMax = 20;
+    let countMax = 12;
     let randoms = [];
 
     function getRandom(min, max){
@@ -31,20 +31,28 @@ function anzan_basic(){
 
     const $progress = document.getElementById("progress");
     const $timerBar = document.getElementById("timer-bar");
+
+    const $kekka = document.getElementById("kekka");
+    const $recommend = document.getElementById("recommend");
+    const $recommendList = document.getElementById("recommend-list");
+
+    const $backToStartBtn = document.getElementById("back-to-start-btn");
     
     let count = 0;
+    let seikaiNum = 0;
     let n1 = 0;
-    let nb = 0; //同じ問題が出てこないようにする
+    let nb = 0;
     let n11 = 0;
     let n12 = 0;
     let n2 = 0;
-    let n21 = 0;
-    let n22 = 0;
     let n3 = 0;
+    let n4 = [];
     let a = 0;
-    let a2 = 0;
     let p = 0;
     let tb = 1;
+
+    let mistakes = [];
+    let mistakesR = [];
     
     //timerBar↓
     let timer1;
@@ -52,14 +60,14 @@ function anzan_basic(){
     function insideTimer1(){
         tb = tb - 500/10000;
         $timerBar.value = tb;
-        console.log(tb);
         if (tb < 0){
+            mistakes.push(randoms[count] % 6);
             clearInterval(timer1);
             $kotae.value = "";
             $progress.value = count / countMax;
             count++;
             if (count < countMax){
-                switchSetup(randoms[count] % 10);
+                switchSetup(randoms[count] % 6);
             } else {
                 closing();
             };
@@ -78,16 +86,24 @@ function anzan_basic(){
         n11 = 0;
         n12 = 0;
         n2 = 0;
-        n21 = 0;
-        n22 = 0;
         n3 = 0;
+        n4.length = 0;
         a = 0;
-        a2 = 0;
         p = 0;
-        randoms.length = 0; //配列の要素を全て削除
+        randoms.length = 0;
+        mistakes.length = 0;
+        mistakesR.length = 0;
         $kotae.value = "";
         $mondai.innerText = "";
         $mondai0.innerText = "";
+    };
+
+    function defaultrecommend(){
+        $kekka.innerText = "";
+        $recommend.innerText = "";
+        while($recommendList.firstChild){
+            $recommendList.removeChild($recommendList.firstChild);
+        };
     };
 
     function switchdisplay(){
@@ -97,6 +113,7 @@ function anzan_basic(){
         $eraseBtn.style.display = "inline-block";
         $resetBtn.style.display = "inline-block";
         $startBtn.style.display = "none";
+        $backToStartBtn.style.display = "none";
     };
 
     function defaultdisplay(){
@@ -106,15 +123,81 @@ function anzan_basic(){
         $eraseBtn.style.display = "none";
         $resetBtn.style.display = "none";
         $startBtn.style.display = "block";
+        $backToStartBtn.style.display = "none";
         clearInterval(timer1);
+    };
+
+    function recommenddisplay(){
+        $kotae.style.display = "none";
+        $progress.style.display = "none";
+        $timerBar.style.display = "none";
+        $eraseBtn.style.display = "none";
+        $resetBtn.style.display = "none";
+        $startBtn.style.display = "none";
+        $backToStartBtn.style.display = "block";
+        clearInterval(timer1);
+    };
+
+    function asc(a, b){ //昇順に並べ替え
+        return(a - b);
+    };
+
+    function displayrecommend(mt){
+        if (mt.length == 0){
+            $recommend.innerText = `全問正解！`;
+        } else {
+            $recommend.innerText = `まちがえた問題の練習ドリル`;
+            mistakesR = mt.filter((element, index) => mt.indexOf(element) === index); //mistakesから重複排除
+            mistakesR.sort(asc); //昇順に並べ替え
+            for (let j = 0; j < mistakesR.length; j++){
+                if(mistakesR[j] == 0){
+                    let li0 = document.createElement(`li`);
+                    li0.classList.add(`recommend-li`);
+                    li0.innerHTML = `<a href="anzan14.html">順番を工夫する足し算の練習</a>`;
+                    $recommendList.appendChild(li0);
+                };
+                if(mistakesR[j] == 1){
+                    let li1 = document.createElement(`li`);
+                    li1.classList.add(`recommend-li`);
+                    li1.innerHTML = `<a href="anzan11.html">キリがいい数で計算してから調整する暗算の練習（足し算・引き算）</a>`;
+                    $recommendList.appendChild(li1);
+                };
+                if(mistakesR[j] == 2){
+                    let li2 = document.createElement(`li`);
+                    li2.classList.add(`recommend-li`);
+                    li2.innerHTML = `<a href="anzan12.html">キリがいい数で計算してから調整する暗算の練習（かけ算）</a>`;
+                    $recommendList.appendChild(li2);
+                };
+                if(mistakesR[j] == 3){
+                    let li3 = document.createElement(`li`);
+                    li3.classList.add(`recommend-li`);
+                    li3.innerHTML = `<a href="anzan15.html">先に10や100を作るかけ算の練習</a>`;
+                    $recommendList.appendChild(li3);
+                };
+                if(mistakesR[j] == 4){
+                    let li4 = document.createElement(`li`);
+                    li4.classList.add(`recommend-li`);
+                    li4.innerHTML = `<a href="anzan17.html">先にまとめるかけ算の練習</a>`;
+                    $recommendList.appendChild(li4);
+                };
+                if(mistakesR[j] == 5){
+                    let li5 = document.createElement(`li`);
+                    li5.classList.add(`recommend-li`);
+                    li5.innerHTML = `<a href="anzan13.html">大体の平均値を基準に調整する暗算の練習</a>`;
+                    $recommendList.appendChild(li5);
+                };
+            };
+        }; 
     };
 
     function closing(){
         audio2.play();
         $progress.value = 1;
-        defaultdisplay();
+        $kekka.innerText = `【正解数：` + seikaiNum + `問/` + countMax + `問】`;
+        displayrecommend(mistakes);
+        recommenddisplay();
         defaultlet();
-        alert(`クリアしました`);
+        //alert(`クリアしました`);
         clearInterval(timer1);
     };
 
@@ -139,18 +222,6 @@ function anzan_basic(){
             case 5:
                 setup5();
                 break;
-            case 6:
-                setup6();
-                break;
-            case 7:
-                setup7();
-                break;
-            case 8:
-                setup8();
-                break;
-            case 9:
-                setup9();
-                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -164,9 +235,10 @@ function anzan_basic(){
                 $progress.value = count / countMax;
             }, 500);
             count++;
+            seikaiNum++;
             clearInterval(timer1);
             if (count < countMax){
-                switchSetup(randoms[count] % 10);
+                switchSetup(randoms[count] % 6);
             } else {
                 closing();
             };
@@ -174,80 +246,9 @@ function anzan_basic(){
     };
 
     function setup0(){
-        $mondai0.innerText = `暗算で前から計算しましょう`;
-        n12 = getRandom(2, 9);
-        while (n12 == nb){ //同じ問題が出てこないようにする
-            n12 = getRandom(2, 9);
-        };
-        n12 = getRandom(2, 9);
-        a2 = getRandom(1, n12 - 1);
-        n11 = getRandom(2, 9);
-        n21 = getRandom(2, 9);
-        a = (n11 + n21 + 1) * 10 + a2;
-        n1 = n11 * 10 + n12;
-        n22 = a2 + 10 - n12;
-        n2 = n21 * 10 + n22;
-        $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        nb = n12; //同じ問題が出てこないようにする
-    };
-
-    function setup1(){
-        $mondai0.innerText = `暗算で前から計算しましょう`;
-        n11 = getRandom(4, 9);
-        while (n11 == nb){ //同じ問題が出てこないようにする
-            n11 = getRandom(4, 9);
-        };
-        n21 = getRandom(2, n11 - 2);
-        n12 = getRandom(0, 8);
-        n22 = getRandom (n12 + 1, 9);
-        n1 = n11 * 10 + n12;
-        n2 = n21 * 10 + n22;
-        a = n1 - n2;
-        $mondai.innerText = n1 + `－` + n2 + `＝`;
-        nb = n11; //同じ問題が出てこないようにする
-    };
-
-    function setup2(){
-        $mondai0.innerText = `暗算で前から計算しましょう`;
-        n2 = getRandom(2, 9);
-        while (n2 == nb){ //同じ問題が出てこないようにする
-            n2 = getRandom(2, 9);
-        };
-        n11 = getRandom(2, 9);
-        n12 = getRandom(2, 9);
-        n1 = n11 * 10 + n12;
-        a = n1 * n2;
-        $mondai.innerText = n1 + `×` + n2 + `＝`;
-        nb = n2; //同じ問題が出てこないようにする
-    };
-
-    function setup3(){
-        $mondai0.innerText = `暗算で前から計算しましょう`;
-        n2 = getRandom(1, 9);
-        while (n2 == nb){ //同じ問題が出てこないようにする
-            n2 = getRandom(1, 9);
-        };
-        n1 = getRandom(1, 8);
-        a = 100 - n1 * 10 - n2;
-        $mondai.innerText = 100 + `－` + (100 - a) + `＝`;
-        nb = n2; //同じ問題が出てこないようにする
-    };
-
-    function setup4(){
-        $mondai0.innerText = `暗算で計算しましょう`;
-        n1 = getRandom(11, 19);
-        while (n1 == nb){ //同じ問題が出てこないようにする
-            n1 = getRandom(11, 19);
-        };
-        a = n1 ** 2;
-        $mondai.innerText = n1 + `×` + n1 + `＝`;
-        nb = n1; //同じ問題が出てこないようにする
-    };
-
-    function setup5(){
         $mondai0.innerText = `工夫して暗算で計算しましょう`;
         n1 = getRandom(2, 7) * 10 + getRandom(6, 9);
-        while (n1 == nb){ //同じ問題が出てこないようにする
+        while (n1 == nb){
             n1 = getRandom(2, 7) * 10 + getRandom(6, 9);
         };
         n2 = 100 - n1;
@@ -264,13 +265,13 @@ function anzan_basic(){
             default:
                 alert(`リロードして下さい`);
         };
-        nb = n1; //同じ問題が出てこないようにする
+        nb = n1;
     };
 
-    function setup6(){
+    function setup1(){
         $mondai0.innerText = `工夫して暗算で計算しましょう`;
         n1 = getRandom(1, 4) * 100;
-        while (n1 == nb){ //同じ問題が出てこないようにする
+        while (n1 == nb){
             n1 = getRandom(1, 4) * 100;
         };
         n12 = getRandom(1, 2);
@@ -287,59 +288,51 @@ function anzan_basic(){
             default:
                 alert(`リロードして下さい`);
         };
-        nb = n1; //同じ問題が出てこないようにする
+        nb = n1;
     };
 
-    function setup7(){
+    function setup2(){
         $mondai0.innerText = `工夫して暗算で計算しましょう`;
         n1 = getRandom(3, 9) * 10;
-        while (n1 == nb){ //同じ問題が出てこないようにする
+        while (n1 == nb){
             n1 = getRandom(3, 9) * 10;
         };
         n2 = getRandom(3, 9);
         n11 = getRandom(1, 2);
         a = (n1 - n11) * n2;
         $mondai.innerText = (n1 - n11) + `×` + n2 + `＝`;
-        nb = n1; //同じ問題が出てこないようにする
+        nb = n1;
     };
 
-    function setup8(){
+    function setup3(){
         $mondai0.innerText = `工夫して暗算で計算しましょう`;
         p = getRandom(1, 2);
         if (p == 1){
             n3 = getRandom(6, 19);
-            while (n3 == nb){ //同じ問題が出てこないようにする
+            while (n3 == nb || n3 % 5 == 0){
                 n3 = getRandom(6, 19);
             };
             n1 = n3 * 2;
-            while(n1 % 5 == 0){
-                n3 = getRandom(6, 19);
-                n1 = n3 * 2;
-            };
             a = n1 * 5;
             n2 = 5;
         } else {
             n3 = getRandom(3, 9);
-            while (n3 == nb){ //同じ問題が出てこないようにする
+            while (n3 == nb || n3 % 5 == 0){
                 n3 = getRandom(3, 9);
             };
             n1 = n3 * 4;
-            while(n1 % 5 == 0){
-                n3 = getRandom(3, 9);
-                n1 = n3 * 4;
-            };
             a = n1 * 25;
             n2 = 25;
         };
         $mondai.innerText = n1 + `×` + n2 + `＝`;
-        nb = n3; //同じ問題が出てこないようにする
+        nb = n3;
     };
 
-    function setup9(){
+    function setup4(){
         $mondai0.innerText = `工夫して暗算で計算しましょう`;
         p = getRandom(1, 2);
         n1 = getRandom(1, 3) * 10;
-        while (n1 == nb){ //同じ問題が出てこないようにする
+        while (n1 == nb){
             n1 = getRandom(1, 3) * 10;
         };
         n2 = getRandom(2, 9);
@@ -358,7 +351,28 @@ function anzan_basic(){
             default:
                 alert(`リロードして下さい`);
         };
-        nb = n1; //同じ問題が出てこないようにする
+        nb = n1;
+    };
+
+    function setup5(){
+        $mondai0.innerText = `工夫して暗算で計算しましょう`;
+        n1 = getRandom(1, 3) * 10;
+        while (n1 == nb){
+            n1 = getRandom(1, 3) * 10;
+        };
+        a = n1 * 3;
+        for (let i5 = 0; i5 < 3; i5++){
+            p = Math.random(0, 1);
+            if (p > 0.5){
+                p = 1;
+            } else {
+                p = -1;
+            };
+            n4[i5] = p * getRandom(1, 3);
+            a = a + n4[i5];
+        };
+        $mondai.innerText = (n1 + n4[0]) + `＋` + (n1 + n4[1]) + `＋` + (n1 + n4[2]) + `＝`;
+        nb = n1;
     };
 
     $kotae.addEventListener("input", () => {
@@ -370,7 +384,7 @@ function anzan_basic(){
         defaultlet();
         $progress.value = 0;
         generateRandoms();
-        switchSetup(randoms[0] % 10);
+        switchSetup(randoms[0] % 6);
     });
     
     $eraseBtn.addEventListener("click", () => {
@@ -380,9 +394,17 @@ function anzan_basic(){
     $resetBtn.addEventListener("click", () => {
         defaultdisplay();
         defaultlet();
+        defaultrecommend();
         $progress.value = 0;
     });
     
+    $backToStartBtn.addEventListener("click", () => {
+        defaultdisplay();
+        defaultlet();
+        defaultrecommend();
+        $progress.value = 0;
+    });
+
 };
     
 anzan_basic();
