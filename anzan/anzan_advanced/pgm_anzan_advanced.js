@@ -1,7 +1,7 @@
-function anzan_keisan(){
+function anzan_basic2(){
     
     //1～countMaxまでのランダム配列（randoms）の生成
-    let countMax = 10;
+    let countMax = 12;
     let randoms = [];
 
     function getRandom(min, max){
@@ -40,20 +40,23 @@ function anzan_keisan(){
     
     let count = 0;
     let seikaiNum = 0;
+    let n = 0;
     let n1 = 0;
-    let nb = 0;
     let n11 = 0;
     let n12 = 0;
     let n2 = 0;
     let n21 = 0;
     let n22 = 0;
+    let n3 = 0;
+    let n4 = [];
     let a = 0;
-    let a2 = 0;
+    let p = 0;
+    let nb = 0;
     let tb = 1;
 
     let mistakes = [];
     let mistakesR = [];
-
+    
     //timerBar↓
     let timer1;
 
@@ -61,13 +64,13 @@ function anzan_keisan(){
         tb = tb - 500/10000;
         $timerBar.value = tb;
         if (tb < 0){
-            mistakes.push(randoms[count] % 5);
+            mistakes.push(randoms[count] % 6);
             clearInterval(timer1);
             $kotae.value = "";
             count++;
             $progress.value = count / countMax;
             if (count < countMax){
-                switchSetup(randoms[count] % 5);
+                switchSetup(randoms[count] % 6);
             } else {
                 closing();
             };
@@ -83,14 +86,17 @@ function anzan_keisan(){
     function defaultlet(){
         count = 0;
         seikaiNum = 0;
+        n = 0;
         n1 = 0;
         n11 = 0;
         n12 = 0;
         n2 = 0;
         n21 = 0;
         n22 = 0;
+        n3 = 0;
+        n4.length = 0;
         a = 0;
-        a2 = 0;
+        p = 0;
         randoms.length = 0;
         mistakes.length = 0;
         mistakesR.length = 0;
@@ -154,32 +160,38 @@ function anzan_keisan(){
                 if(mistakesR[j] == 0){
                     let li0 = document.createElement(`li`);
                     li0.classList.add(`recommend-li`);
-                    li0.innerHTML = `<a href="anzan7.html">足し算を「前」から計算する暗算練習ドリル</a>`;
+                    li0.innerHTML = `<a href="anzan14.html">順番を工夫する足し算の練習</a>`;
                     $recommendList.appendChild(li0);
                 };
                 if(mistakesR[j] == 1){
                     let li1 = document.createElement(`li`);
                     li1.classList.add(`recommend-li`);
-                    li1.innerHTML = `<a href="anzan9.html">引き算を「前」から計算する暗算練習ドリル</a>`;
+                    li1.innerHTML = `<a href="anzan11.html">キリがいい数で計算してから調整する暗算の練習（足し算・引き算）</a>`;
                     $recommendList.appendChild(li1);
                 };
                 if(mistakesR[j] == 2){
                     let li2 = document.createElement(`li`);
                     li2.classList.add(`recommend-li`);
-                    li2.innerHTML = `<a href="anzan8.html">かけ算を「前」から計算する暗算練習ドリル</a>`;
+                    li2.innerHTML = `<a href="anzan12.html">キリがいい数で計算してから調整する暗算の練習（かけ算）</a>`;
                     $recommendList.appendChild(li2);
                 };
                 if(mistakesR[j] == 3){
                     let li3 = document.createElement(`li`);
                     li3.classList.add(`recommend-li`);
-                    li3.innerHTML = `<a href="anzan6.html">100・1000からの引き算の暗算練習ドリル</a>`;
+                    li3.innerHTML = `<a href="anzan15.html">先に10や100を作るかけ算の練習</a>`;
                     $recommendList.appendChild(li3);
                 };
                 if(mistakesR[j] == 4){
                     let li4 = document.createElement(`li`);
                     li4.classList.add(`recommend-li`);
-                    li4.innerHTML = `<a href="anzan3.html">11から20までの同じ数を2回かけるかけ算</a>`;
+                    li4.innerHTML = `<a href="anzan17.html">先にまとめるかけ算の練習</a>`;
                     $recommendList.appendChild(li4);
+                };
+                if(mistakesR[j] == 5){
+                    let li5 = document.createElement(`li`);
+                    li5.classList.add(`recommend-li`);
+                    li5.innerHTML = `<a href="anzan13.html">大体の平均値を基準に調整する足し算の練習</a>`;
+                    $recommendList.appendChild(li5);
                 };
             };
         }; 
@@ -214,6 +226,9 @@ function anzan_keisan(){
             case 4:
                 setup4();
                 break;
+            case 5:
+                setup5();
+                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -230,7 +245,7 @@ function anzan_keisan(){
             seikaiNum++;
             clearInterval(timer1);
             if (count < countMax){
-                switchSetup(randoms[count] % 5);
+                switchSetup(randoms[count] % 6);
             } else {
                 closing();
             };
@@ -238,80 +253,161 @@ function anzan_keisan(){
     };
 
     function setup0(){
-        $mondai0.innerText = `暗算で「前」から計算しましょう`;
-        n12 = getRandom(2, 9);
-        while (n12 == nb){
-            n12 = getRandom(2, 9);
+        $mondai0.innerText = `工夫して暗算で計算しましょう`;
+        n1 = getRandom(2, 7) * 10 + getRandom(6, 9);
+        while (nb == n1){
+            n1 = getRandom(2, 7) * 10 + getRandom(6, 9);
         };
-        n12 = getRandom(2, 9);
-        a2 = getRandom(1, n12 - 1);
-        n11 = getRandom(2, 9);
-        n21 = getRandom(2, 9);
-        a = (n11 + n21 + 1) * 10 + a2;
-        n1 = n11 * 10 + n12;
-        n22 = a2 + 10 - n12;
-        n2 = n21 * 10 + n22;
-        $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        nb = n12;
+        n = getRandom(1, 5) * 100;
+        n2 = n - n1;
+        n3 = getRandom(0, 2) * 100 + getRandom(2, 7) * 10 + getRandom(5, 9);
+        a = n + n3;
+        p = getRandom(1, 4);
+        switch(p){
+            case 1:
+                $mondai.innerText = n1 + `＋` + n3 + `＋` + n2 + `＝`;
+                break;
+            case 2:
+                $mondai.innerText = n3 + `＋` + n1 + `＋` + n2 + `＝`;
+                break;
+            case 3:
+                $mondai.innerText = n2 + `＋` + n3 + `＋` + n1 + `＝`;
+                break;
+            case 4:
+                $mondai.innerText = n3 + `＋` + n2 + `＋` + n1 + `＝`;
+                break;
+            default:
+                alert(`リロードして下さい`);
+        };
+        nb = n1;
     };
 
     function setup1(){
-        $mondai0.innerText = `暗算で「前」から計算しましょう`;
-        n11 = getRandom(4, 9);
-        while (n11 == nb){
-            n11 = getRandom(4, 9);
+        $mondai0.innerText = `工夫して暗算で計算しましょう`;
+        p = getRandom(1, 4);
+        while (p == nb){
+            p = getRandom(1, 4);
         };
-        n21 = getRandom(2, n11 - 2);
-        n12 = getRandom(0, 8);
-        n22 = getRandom (n12 + 1, 9);
-        n1 = n11 * 10 + n12;
-        n2 = n21 * 10 + n22;
-        a = n1 - n2;
-        $mondai.innerText = n1 + `－` + n2 + `＝`;
-        nb = n11;
+        n1 = getRandom(5, 9);
+        n2 = getRandom(3, n1 - 2);
+        n1 = n1 * 100;
+        n2 = n2 * 100;
+        n22 = getRandom(1, 3);
+        if (p == 1){
+            a = n1 - (n2 - n22);
+            $mondai.innerText = n1 + `－` + (n2 - n22) + `＝`;
+        } else if (p == 2){
+            a = n1 - (n2 + n22);
+            $mondai.innerText = n1 + `－` + (n2 + n22) + `＝`;
+        } else {
+            n12 = getRandom(1, 3);
+            a = (n1 + n12) - (n2 - n22);
+            $mondai.innerText = (n1 + n12) + `－` + (n2 - n22) + `＝`;
+        };
+        nb = p;
     };
 
     function setup2(){
-        $mondai0.innerText = `暗算で「前」から計算しましょう`;
-        n2 = getRandom(2, 9);
-        while (n2 == nb){
-            n2 = getRandom(2, 9);
+        $mondai0.innerText = `工夫して暗算で計算しましょう`;
+        n1 = getRandom(2, 9) * 100;
+        n12 = getRandom(1, 2);
+        n2 = getRandom(3, 9);
+        a = (n1 - n12) * n2;
+        while (a == nb){
+            n1 = getRandom(2, 9) * 100;
+            n12 = getRandom(1, 2);
+            n2 = getRandom(3, 9);
+            a = (n1 - n12) * n2;
         };
-        n11 = getRandom(2, 9);
-        n12 = getRandom(2, 9);
-        n1 = n11 * 10 + n12;
-        a = n1 * n2;
-        $mondai.innerText = n1 + `×` + n2 + `＝`;
-        nb = n2;
+        $mondai.innerText = (n1 - n12) + `×` + n2 + `＝`;
+        nb = a;
     };
 
     function setup3(){
-        $mondai0.innerText = `暗算で「前」から計算しましょう`;
-        n2 = getRandom(1, 9);
-        while (n2 == nb){
-            n2 = getRandom(1, 9);
+        $mondai0.innerText = `工夫して暗算で計算しましょう`;
+        p = getRandom(1, 3);
+        while(p == nb){
+            p = getRandom(1, 3);
         };
-        let p = getRandom(1, 2);
-        if (p == 1){
-            n1 = getRandom(1, 8);
-            a = 100 - n1 * 10 - n2;
-            $mondai.innerText = 100 + `－` + (100 - a) + `＝`;
-        } else {
-            n1 = getRandom(1, 99);
-            a = 1000 - n1 * 10 - n2;
-            $mondai.innerText = 1000 + `－` + (1000 - a) + `＝`;
+        switch(p){
+            case 1:
+                n1 = 5;
+                n2 = getRandom(1, 3) * 2;
+                n3 = getRandom(0, 1) * 2 + 7;
+                break;
+            case 2:
+                n1 = 15;
+                n2 = getRandom(1, 3) * 2;
+                n3 = getRandom(0, 1) * 2 + 7;
+                break;
+            case 3:
+                n1 = 25;
+                n2 = getRandom(1, 3) * 4;
+                n3 = getRandom(1, 4) * 2 + 1;
+                while(n3 % 5 == 0){
+                    n3 = getRandom(1, 4) * 2 + 1;
+                };
+                break;
+            default:
+                alert(`リロードして下さい`);
         };
-        nb = n2;
+        a = n1 * n2 * n3;
+        let q = getRandom(1, 4);
+        switch(q){
+            case 1:
+                $mondai.innerText = n1 + `×` + n3 + `×` + n2 + `＝`;
+                break;
+            case 2:
+                $mondai.innerText = n3 + `×` + n1 + `×` + n2 + `＝`;
+                break;
+            case 3:
+                $mondai.innerText = n3 + `×` + n2 + `×` + n1 + `＝`;
+                break;
+            case 4:
+                $mondai.innerText = n2 + `×` + n3 + `×` + n1 + `＝`;
+                break;
+            default:
+                alert(`リロードして下さい`);
+        };
+        nb = p;
     };
 
     function setup4(){
-        $mondai0.innerText = `暗算で計算しましょう`;
-        n1 = getRandom(11, 19);
-        while (n1 == nb){
-            n1 = getRandom(11, 19);
+        $mondai0.innerText = `工夫して暗算で計算しましょう`;
+        p = getRandom(1, 3);
+        while(p == nb){
+            p = getRandom(1, 3);
         };
-        a = n1 ** 2;
-        $mondai.innerText = n1 + `×` + n1 + `＝`;
+        n1 = getRandom(2, 5) * 10;
+        n2 = getRandom(6, 15);
+        n11 = getRandom(2, n1 - 2);
+        n12 = n1 - n11;
+        n21 = getRandom(2, n2 - 2);
+        n22 = n2 - n21;
+        a = n1 * n2;
+        $mondai.innerText = n11 + `×` + n21 + `＋` + n11 + `×` + n22 + `＋` + n12 + `×` + n2 + `＝`;
+        nb = p;
+    };
+
+    function setup5(){
+        $mondai0.innerText = `工夫して暗算で計算しましょう`;
+        n = 100;
+        a = n * 5;
+        n1 = getRandom(3, 5);
+        while (n1 == nb){
+            n1 = getRandom(3, 5);
+        };
+        for (let i = 0; i < 5; i++){
+            p = Math.random(0, 1);
+            if (p > 0.5){
+                p = 1;
+            } else {
+                p = -1;
+            };
+            n4[i] = p * getRandom(1, n1);
+                a = a + n4[i];
+        };
+        $mondai.innerText = (n + n4[0]) + `＋` + (n + n4[1]) + `＋` + (n + n4[2]) + `＋` + (n + n4[3]) + `＋` + (n + n4[4]) +`＝`;
         nb = n1;
     };
 
@@ -324,7 +420,7 @@ function anzan_keisan(){
         defaultlet();
         $progress.value = 0;
         generateRandoms();
-        switchSetup(randoms[0] % 5);
+        switchSetup(randoms[0] % 6);
     });
     
     $eraseBtn.addEventListener("click", () => {
@@ -337,14 +433,14 @@ function anzan_keisan(){
         defaultrecommend();
         $progress.value = 0;
     });
-
+    
     $backToStartBtn.addEventListener("click", () => {
         defaultdisplay();
         defaultlet();
         defaultrecommend();
         $progress.value = 0;
     });
-    
+
 };
     
-anzan_keisan();
+anzan_basic2();

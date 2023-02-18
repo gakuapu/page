@@ -118,7 +118,7 @@ function anzan13(){
                 } else {
                     p = -1;
                 };
-                n1[i] = p * getRandom(1, 9);
+                n1[i] = p * getRandom(1, 3);
                 a = a + n1[i];
             };
             $mondai.innerText = (n + n1[0]) + `＋` + (n + n1[1]) + `＋` + (n + n1[2]) + `＋` + (n + n1[3]) + `＋` + (n + n1[4]) + `＝`;

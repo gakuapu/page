@@ -82,6 +82,7 @@ function anzan_basic(){
 
     function defaultlet(){
         count = 0;
+        seikaiNum = 0;
         n1 = 0;
         n11 = 0;
         n12 = 0;
@@ -183,7 +184,7 @@ function anzan_basic(){
                 if(mistakesR[j] == 5){
                     let li5 = document.createElement(`li`);
                     li5.classList.add(`recommend-li`);
-                    li5.innerHTML = `<a href="anzan13.html">大体の平均値を基準に調整する暗算の練習</a>`;
+                    li5.innerHTML = `<a href="anzan13.html">大体の平均値を基準に調整する足し算の練習</a>`;
                     $recommendList.appendChild(li5);
                 };
             };
