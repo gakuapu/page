@@ -64,8 +64,8 @@ function anzan_basic(){
             mistakes.push(randoms[count] % 6);
             clearInterval(timer1);
             $kotae.value = "";
-            $progress.value = count / countMax;
             count++;
+            $progress.value = count / countMax;
             if (count < countMax){
                 switchSetup(randoms[count] % 6);
             } else {
