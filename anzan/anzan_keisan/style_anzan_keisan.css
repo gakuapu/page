@@ -1,0 +1,28 @@
+#kotae,
+#timer-bar,
+#progress,
+#erase-btn,
+#reset-btn,
+#back-to-start-btn {
+    display: none;
+}
+
+#kotae {
+    width: 60px;
+    height: 35px;
+    font-size: 20px;
+    font-family: serif;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#mondai0,
+#kekka,
+#recommend,
+.recommend-li {
+    font-size: 18px;
+}
+
+#recommend-list {
+    margin-top: 5px; 
+}
