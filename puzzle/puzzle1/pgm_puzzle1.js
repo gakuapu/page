@@ -122,13 +122,13 @@ function puzzle1(){
             n[3] = Math.abs(n[0] + n[1] + n[2] - 10);
         } else {
             n[3] = Math.abs(n[0] + n[1] - n[2] - 10);
-            while(n[3] == 0){
-                n[2] = getRandom(1, 9);
-                if (n[0] + n[1] + n[2] < 20) {
-                    n[3] = Math.abs(n[0] + n[1] + n[2] - 10);
-                } else {
-                    n[3] = Math.abs(n[0] + n[1] - n[2] - 10);
-                };
+        };
+        while(n[3] == 0){
+            n[2] = getRandom(1, 9);
+            if (n[0] + n[1] + n[2] < 20) {
+                n[3] = Math.abs(n[0] + n[1] + n[2] - 10);
+            } else {
+                n[3] = Math.abs(n[0] + n[1] - n[2] - 10);
             };
         };
         generateRandoms(); //数字ボタンのシャッフル
@@ -150,13 +150,13 @@ function puzzle1(){
                     n[3] = Math.abs(n[0] + n[1] + n[2] - 10);
                 } else {
                     n[3] = Math.abs(n[0] + n[1] - n[2] - 10);
-                    while(n[3] == 0){
-                        n[2] = getRandom(1, 9);
-                        if (n[0] + n[1] + n[2] < 20) {
-                            n[3] = Math.abs(n[0] + n[1] + n[2] - 10);
-                        } else {
-                            n[3] = Math.abs(n[0] + n[1] - n[2] - 10);
-                        };
+                };
+                while(n[3] == 0){
+                    n[2] = getRandom(1, 9);
+                    if (n[0] + n[1] + n[2] < 20) {
+                        n[3] = Math.abs(n[0] + n[1] + n[2] - 10);
+                    } else {
+                        n[3] = Math.abs(n[0] + n[1] - n[2] - 10);
                     };
                 };
                 break;
