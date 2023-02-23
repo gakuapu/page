@@ -299,8 +299,6 @@ function puzzle1(){
         $num2Btn.value = n[randoms[1]];
         $num3Btn.value = n[randoms[2]];
         $num4Btn.value = n[randoms[3]];
-        console.log(p);
-        console.log(n);
     };
 
     function Eval(val){ //文字列を数式化
