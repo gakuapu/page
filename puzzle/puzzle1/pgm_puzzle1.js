@@ -1,5 +1,5 @@
 function puzzle1(){
-    
+
     //0～3までのランダム配列（randoms）の生成
     let randoms = [];
 
@@ -109,6 +109,9 @@ function puzzle1(){
             case "2":
                 step2Setup();
                 break;
+            case "3":
+                step3Setup();
+                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -123,7 +126,7 @@ function puzzle1(){
         } else {
             n[3] = Math.abs(n[0] + n[1] - n[2] - 10);
         };
-        while(n[3] == 0){
+        while(n[3] == 0 || n[0] + n[1] + n[2] + n[3] == 10){
             n[2] = getRandom(1, 9);
             if (n[0] + n[1] + n[2] < 20) {
                 n[3] = Math.abs(n[0] + n[1] + n[2] - 10);
@@ -151,7 +154,7 @@ function puzzle1(){
                 } else {
                     n[3] = Math.abs(n[0] + n[1] - n[2] - 10);
                 };
-                while(n[3] == 0){
+                while(n[3] == 0 || n[0] + n[1] + n[2] + n[3] == 10){
                     n[2] = getRandom(1, 9);
                     if (n[0] + n[1] + n[2] < 20) {
                         n[3] = Math.abs(n[0] + n[1] + n[2] - 10);
@@ -161,8 +164,11 @@ function puzzle1(){
                 };
                 break;
             case 2:
-                const nstep2case2 = [[1, 1, 2, 5], [1, 1, 3, 3], [1, 2, 2, 4], [1, 2, 2 ,6], [1, 2, 6, 8], [1, 2, 8, 9], [1, 3, 5, 5], [1, 4, 4, 6], [2, 2, 2, 2], [2, 2, 2, 3]];
-                n = nstep2case2[getRandom(0, (nstep2case2.length - 1))];
+                let nstep2case2 = [
+                    [1, 1, 2, 5], [1, 1, 3, 3], [1, 2, 2, 4], [1, 2, 2 ,6], [1, 2, 6, 8], [1, 2, 8, 9], [1, 3, 5, 5], [1, 4, 4, 6], [2, 2, 2, 2], [2, 2, 2, 3], [2, 2, 2, 7], [2, 2, 3, 8], [2, 2, 4, 9], [2, 3, 4, 4], [2, 3, 4, 6]
+                ];
+                let t = getRandom(0, 14);
+                n = nstep2case2[t];
                 break;
             case 3:
                 q = getRandom(0, 9);
@@ -289,6 +295,218 @@ function puzzle1(){
                         break;
                     default:
                         alert(`リロードして下さい`);
+                };
+                break; 
+            default:
+                alert(`リロードして下さい`);
+        };
+        generateRandoms(); //数字ボタンのシャッフル
+        $num1Btn.value = n[randoms[0]];
+        $num2Btn.value = n[randoms[1]];
+        $num3Btn.value = n[randoms[2]];
+        $num4Btn.value = n[randoms[3]];
+    };
+
+    function step3Setup(){
+        $kakeruBtn.style.display = "inline-block";
+        $waruBtn.style.display = "inline-block";
+        p = getRandom(1, 6);
+        switch(p){
+            case 1:
+                n[0] = getRandom(1, 9);
+                n[1] = getRandom(1, 9);
+                n[2] = getRandom(1, 9);
+                if (n[0] + n[1] + n[2] < 20) {
+                    n[3] = Math.abs(n[0] + n[1] + n[2] - 10);
+                } else {
+                    n[3] = Math.abs(n[0] + n[1] - n[2] - 10);
+                };
+                while(n[3] == 0 || n[0] + n[1] + n[2] + n[3] == 10){
+                    n[2] = getRandom(1, 9);
+                    if (n[0] + n[1] + n[2] < 20) {
+                        n[3] = Math.abs(n[0] + n[1] + n[2] - 10);
+                    } else {
+                        n[3] = Math.abs(n[0] + n[1] - n[2] - 10);
+                    };
+                };
+                break;
+            case 2:
+                let nstep2case2 = [
+                    [1, 1, 2, 5], [1, 1, 3, 3], [1, 2, 2, 4], [1, 2, 2 ,6], [1, 2, 6, 8], [1, 2, 8, 9], [1, 3, 5, 5], [1, 4, 4, 6], [2, 2, 2, 2], [2, 2, 2, 3], [2, 2, 2, 7], [2, 2, 3, 8], [2, 2, 4, 9], [2, 3, 4, 4], [2, 3, 4, 6]
+                ];
+                let t = getRandom(0, 14);
+                n = nstep2case2[t];
+                break;
+            case 3:
+                q = getRandom(0, 9);
+                r = getRandom(1, 2);
+                n[0] = getRandom(1, 9);
+                while(n[0] == q){
+                    n[0] = getRandom(1, 9);
+                };
+                n[1] = Math.abs(q - n[0]);
+                switch(q){
+                    case 0:
+                        n[2] = 2;
+                        n[3] = 5;
+                        break;
+                    case 1:
+                        if (r == 1){
+                            n[2] = 1;
+                            n[3] = 9;
+                        } else {
+                            n[2] = 3;
+                            n[3] = 3;
+                        };
+                        break;
+                    case 2:
+                        if (r == 1){
+                            n[2] = 1;
+                            n[3] = 8;
+                        } else {
+                            n[2] = 2;
+                            n[3] = 4;
+                        };
+                        break;
+                    case 3:
+                        n[2] = 1;
+                        n[3] = 7;
+                        break;
+                    case 4:
+                        if (r == 1){
+                            n[2] = 1;
+                            n[3] = 6;
+                        } else {
+                            n[2] = 2;
+                            n[3] = 3;
+                        };
+                        break;
+                    case 5:
+                        n[2] = 1;
+                        n[3] = 5;
+                        break;
+                    case 6:
+                        if (r == 1){
+                            n[2] = 1;
+                            n[3] = 4;
+                        } else {
+                            n[2] = 2;
+                            n[3] = 2;
+                        };
+                        break;
+                    case 7:
+                        n[2] = 1;
+                        n[3] = 3;
+                        break;
+                    case 8:
+                        n[2] = 1;
+                        n[3] = 2;
+                        break;
+                    case 9:
+                        n[2] = 1;
+                        n[3] = 1;
+                        break;
+                    default:
+                        alert(`リロードして下さい`);
+                };
+                break;
+            case 4:
+                q = getRandom(1, 4);
+                r = getRandom(1, 2);
+                n[0] = getRandom(1, 9);
+                while(n[0] == q * 2){
+                    n[0] = getRandom(1, 9);
+                };
+                n[1] = Math.abs(q * 2 - n[0]);
+                switch(q){
+                    case 1:
+                        if (r == 1){
+                            n[2] = 2;
+                            n[3] = 6;
+                        } else {
+                            n[2] = 3;
+                            n[3] = 4;
+                        };
+                        break;
+                    case 2:
+                        if (r == 1){
+                            n[2] = 2;
+                            n[3] = 7;
+                        } else {
+                            n[0] = getRandom(1, 9);
+                            while(n[0] == 5){
+                                n[0] = getRandom(1, 9);
+                            };
+                            n[1] = Math.abs(5 - n[0]);
+                            n[2] = 3;
+                            n[3] = 5;
+                        };
+                        break;
+                    case 3:
+                        if (r == 1){
+                            n[2] = 2;
+                            n[3] = 8;
+                        } else {
+                            n[2] = 4;
+                            n[3] = 4;
+                        };
+                        break;
+                    case 4:
+                        if (r == 1){
+                            n[2] = 2;
+                            n[3] = 9;
+                        } else {
+                            n[2] = 3;
+                            n[3] = 6;
+                        };
+                        break;
+                    default:
+                        alert(`リロードして下さい`);
+                };
+            case 5:
+                let nstep3case5 = [
+                    [1, 2, 4, 8], [1, 3, 5, 6], [1, 3, 7, 9], [1, 4, 8, 8], [2, 2, 4, 4], [2, 2, 5, 8], [2, 2, 7, 8], [2, 3, 6, 6], [2, 4, 4, 7], [2, 4, 6, 8], [2, 4, 8, 9], [2, 5, 5, 6], [3, 4, 4, 8], [3, 4, 6, 7], [3, 5, 5, 9], [3, 6, 6, 8], [4, 4, 7, 8], [4, 8, 8, 9]
+                ];
+                let u = getRandom(0, 17);
+                n = nstep3case5[u];
+                break;
+            case 6:
+                q = getRandom(1, 3);
+                r = getRandom(2, 4);
+                switch(q){
+                    case 1:
+                        n[0] = getRandom(1, 10 - r - 1);
+                        n[1] = 10 - r - n[0];
+                        break;
+                    case 2:
+                        n[0] = getRandom(10 - r + 1, 9);
+                        n[1] = n[0] + r - 10;
+                        break;
+                    case 3:
+                        n[0] = getRandom(r + 1, 9);
+                        n[1] = 10 + r - n[0];
+                        break;
+                    default:
+                        alert(`リロードして下さい`);
+                };
+                if (r == 2){
+                    let s = getRandom(1, 3);
+                    if (s == 1){
+                        n[2] = 4;
+                        n[3] = 2;
+                    } else if (s == 2){
+                        n[2] = 6;
+                        n[3] = 3;
+                    } else {
+                        n[2] = 8;
+                        n[3] = 4;
+                    };
+                } else if (r == 3){
+                    n[2] = 9;
+                    n[3] = 3;
+                } else {
+                    n[2] = 8;
+                    n[3] = 2;
                 };
                 break; 
             default:
