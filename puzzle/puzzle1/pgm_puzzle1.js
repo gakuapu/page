@@ -112,6 +112,9 @@ function puzzle1() {
             case "3":
                 step3Setup();
                 break;
+            case "4":
+                step4Setup();
+                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -321,6 +324,34 @@ function puzzle1() {
         };
     };
 
+    function step4case7contents() {
+        n[0] = getRandom(1, 9);
+        n[1] = 10 - n[0];
+        n[2] = getRandom(2, 9);
+        n[3] = n[2] - 1;
+    };
+
+    function step4case8contents() {
+        n[0] = getRandom(1, 9);
+        while (n[0] == 5) {
+            n[0] = getRandom(1, 9);
+        };
+        if (n[0] < 5) {
+            n[1] = 5 - n[0];
+        } else {
+            n[1] = n[0] - 5;
+        };
+        n[2] = getRandom(3, 9);
+        n[3] = n[2] - 2;
+    };
+
+    function step4case9contents() {
+        n[0] = 2;
+        n[1] = getRandom(7, 9);
+        n[2] = getRandom(4, 9);
+        n[3] = 20 - n[1] - n[2];
+    };
+
     //
 
     function step1Setup() {
@@ -380,6 +411,50 @@ function puzzle1() {
                 break;
             case 6:
                 step3case6contents();
+                break;
+            default:
+                alert(`リロードして下さい`);
+        };
+        generateRandoms(); //数字ボタンのシャッフル
+        $num1Btn.value = n[randoms[0]];
+        $num2Btn.value = n[randoms[1]];
+        $num3Btn.value = n[randoms[2]];
+        $num4Btn.value = n[randoms[3]];
+    };
+
+    function step4Setup() {
+        $kakeruBtn.style.display = "inline-block";
+        $waruBtn.style.display = "inline-block";
+        $kakko1Btn.style.display = "inline-block";
+        $kakko2Btn.style.display = "inline-block";
+        p = getRandom(1, 9);
+        switch (p) {
+            case 1:
+                step1contents();
+                break;
+            case 2:
+                step2case2contents();
+                break;
+            case 3:
+                step2case3contents();
+                break;
+            case 4:
+                step2case4contents();
+                break;
+            case 5:
+                step3case5contents();
+                break;
+            case 6:
+                step3case6contents();
+                break;
+            case 7:
+                step4case7contents();
+                break;
+            case 8:
+                step4case8contents();
+                break;
+            case 9:
+                step4case9contents();
                 break;
             default:
                 alert(`リロードして下さい`);
