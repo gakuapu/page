@@ -44,6 +44,7 @@ function puzzle2() {
     const $passBtn = document.getElementById("pass-btn");
 
     let n = [];
+    let a = 0;
     let shikiInput = "";
     let numclick = 0;
 

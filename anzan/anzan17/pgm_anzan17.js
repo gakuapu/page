@@ -204,10 +204,10 @@ function anzan17(){
 
     function step3Setup(){
         if (count < mondaiNum){
-            pb = p;
-            p = getRandom(1, 3);
-            while(p == pb){
-                p = getRandom(1, 3);
+            pb = n1;
+            n1 = getRandom(2, 5) * 10;
+            while(n1 == pb){
+                n1 = getRandom(2, 5) * 10;
             };
             n1 = getRandom(2, 5) * 10;
             n2 = getRandom(6, 15);

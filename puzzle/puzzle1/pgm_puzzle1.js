@@ -46,11 +46,7 @@ function puzzle1() {
     const $stopBtn = document.getElementById("stop-btn");
 
     let n = [];
-    //let n1 = 0;
-    //let n2 = 0;
-    //let n3 = 0;
-    //let n4 = 0;
-    //let a = "";
+    let a = "";
     let p = 0;
     let q = 0;
     let r = 0;
