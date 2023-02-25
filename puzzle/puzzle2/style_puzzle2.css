@@ -1,0 +1,63 @@
+#check-btn,
+#reset-btn,
+#pass-btn,
+#stop-btn {
+    display: none;
+}
+
+.num-btn {
+    width: 72px;
+    height: 45px;
+    background-color: white;
+    border: thin solid dimgray;
+    border-radius: 0px;
+    font-size: 24px;
+    font-family: serif;
+    color: black;
+    margin-top:10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
+    display: none;
+
+    /* reset */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.cal-btn {
+    width: 46px;
+    height: 45px;
+    background-color: whitesmoke;
+    border: thin solid dimgray;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: serif;
+    color: black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: none;
+
+    /* reset */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#shikispace {
+    color: lightgray;
+    display: none;
+}
+
+#mondai {
+    font-size: 20px;
+    display: none;
+}
+
+.btn {
+    margin-bottom: 10px;
+}

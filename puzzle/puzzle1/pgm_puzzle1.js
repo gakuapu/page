@@ -352,6 +352,15 @@ function puzzle1() {
         n[3] = 20 - n[1] - n[2];
     };
 
+    function step4case10contents() {
+        let nstep4case10 = [
+            [1, 1, 1, 4], [1, 1, 1, 5], [1, 1, 1, 6], [1, 1, 2, 3], [1, 1, 4, 9],
+            [1, 2, 2, 3], [1, 5, 5, 5], [1, 5, 6, 6], [1, 2, 2, 2], [1, 4, 4, 5],
+            [1, 5, 5, 6], [2, 2, 2, 6], [2, 2, 3, 5], [2, 3, 3, 4], [3, 3, 3, 5]
+        ];
+        n = nstep4case10[getRandom(0, (nstep4case10.length - 1))];
+    };
+
     //
 
     function step1Setup() {
@@ -427,7 +436,7 @@ function puzzle1() {
         $waruBtn.style.display = "inline-block";
         $kakko1Btn.style.display = "inline-block";
         $kakko2Btn.style.display = "inline-block";
-        p = getRandom(1, 9);
+        p = getRandom(1, 10);
         switch (p) {
             case 1:
                 step1contents();
@@ -455,6 +464,9 @@ function puzzle1() {
                 break;
             case 9:
                 step4case9contents();
+                break;
+            case 10:
+                step4case10contents();
                 break;
             default:
                 alert(`リロードして下さい`);
