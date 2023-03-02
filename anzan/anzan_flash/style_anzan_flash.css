@@ -1,0 +1,28 @@
+#erase-btn,
+#reset-btn,
+#kotae,
+#check-btn,
+#progress {
+    display: none;
+}
+
+#mondai1 {
+    width: 60px;
+    font-size: 40px;
+    text-align: center;
+    display: none;
+}
+
+#mondaispace {
+    font-size: 40px;
+    color: lightgray;
+    margin: 0;
+    display: none;
+}
+
+#mondai0,
+#kekka1,
+#kekka2 {
+    display: none;
+    font-size: 20px;
+}

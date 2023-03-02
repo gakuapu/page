@@ -13,67 +13,63 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>九九の確認テスト | 算数＆計算ドリル 学アプ</title>
+    <title>フラッシュ暗算にチャレンジ | 算数＆計算ドリル 学アプ</title>
     <link rel="icon" href="favicon.ico">
     <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="2nen\kuku2\style_kuku2.css">
+    <link rel="stylesheet" href="anzan\anzan_flash\style_anzan_flash.css">
 </head>
 <main>
 <body>
 
     <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
     <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
+    <audio id="audio3" src="machigaion2.mp3" preload="auto"></audio>
 
     <div>
-        <select id="dan">
-            <option value="1">1のだん</option>
-            <option value="2">2のだん</option>
-            <option value="3">3のだん</option>
-            <option value="4">4のだん</option>
-            <option value="5">5のだん</option>
-            <option value="6">6のだん</option>
-            <option value="7">7のだん</option>
-            <option value="8">8のだん</option>
-            <option value="9">9のだん</option>
+        <select id="kuchi">
+            <option value="3">3口（個）</option>
+            <option value="5">5口（個）</option>
+            <option value="7">7口（個）</option>
+        </select>
+
+        <select id="hayasa">
+            <option value="1500">おそめ(1.5秒)</option>
+            <option value="1000">ふつう(1秒)</option>
+            <option value="800">はやめ(0.8秒)</option>
         </select>
     </div>
 
     <input type="button" id="start-btn" class="btn" value="スタート">
 
-    <div id="dantitle"></div>
-    <div id="mondai"></div>
+    <div id="mondai0">合計はいくつ?</div>
+
+    <div>
+        <a id="mondaispace">|</a>
+        <a id="mondai1"></a>
+    </div>
 
     <input id="kotae" class="kotae" type="tel">
+    <input type="button" id="check-btn" class="btn" value="＝">
+    <progress id="progress" value="0"></progress>
 
     <div>
         <input type="button" id="erase-btn" class="btn" value="けす">
         <input type="button" id="reset-btn" class="btn" value="リセット">
     </div>
 
-    <p id="recordtitle">九九の学習データ</p>
-    <ul class="recordlist">
-        <li>1のだん　<a class="r"></a></li>
-        <li>2のだん　<a class="r"></a></li>
-        <li>3のだん　<a class="r"></a></li>
-        <li>4のだん　<a class="r"></a></li>
-        <li>5のだん　<a class="r"></a></li>
-        <li>6のだん　<a class="r"></a></li>
-        <li>7のだん　<a class="r"></a></li>
-        <li>8のだん　<a class="r"></a></li>
-        <li>9のだん　<a class="r"></a></li>
-    </ul>
+    <div id="kekka1"></div>
+    <div id="kekka2"></div>
 
-    <script src="2nen\kuku2\pgm_kuku2.js"></script>
-    <h1 class="footer-container2">九九の確認ドリル</h1>
-    <p><a class="footer-container2" href="kuku.html">九九の練習をする</a></p>
-    <p><a class="footer-container2" href="kuku4.html">3×5と5×3はどうして同じこたえ？</a></p>
+    <script src="anzan\anzan_flash\pgm_anzan_flash.js"></script>
+    <br>
+    <h1 class="footer-container2">フラッシュ暗算にチャレンジ</h1>
 
     <nav>
-        <ol class="pankuzu">
+        <ul class="pankuzu">
             <li><a href="top.html">トップ</a></li>
-            <li><a href="2nen.html">小学2年生の算数</a></li>
-        </ol>
+            <li><a href="anzan.html">暗算トレーニング</a></li>
+        </ul>
     </nav>
 </main>
 
