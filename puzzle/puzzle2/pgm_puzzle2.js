@@ -41,12 +41,17 @@ function puzzle2() {
     const $checkBtn = document.getElementById("check-btn");
     const $resetBtn = document.getElementById("reset-btn");
 
+    const $progress = document.getElementById("progress");
+
     const $passBtn = document.getElementById("pass-btn");
+    const $stopBtn = document.getElementById("stop-btn");
 
     let n = [];
     let a = 0;
+    let seikaiNum = 0;
     let shikiInput = "";
     let numclick = 0;
+    let nb = 0;
 
     function switchdisplay() {
         $startBtn.style.display = "none";
@@ -64,7 +69,9 @@ function puzzle2() {
         $kakko2Btn.style.display = "inline-block";
         $checkBtn.style.display = "inline-block";
         $resetBtn.style.display = "inline-block";
+        $progress.style.display = "block";
         $passBtn.style.display = "inline-block";
+        $stopBtn.style.display = "inline-block";
     };
 
     function defaultlet() {
@@ -73,7 +80,11 @@ function puzzle2() {
         resetShiki();
     };
 
-    /*
+    function defaultlet2() {
+        $progress.value = 0;
+        seikaiNum = 0;
+    };
+
     function defaultdisplay() {
         $startBtn.style.display = "block";
         $mondai.style.display = "none";
@@ -90,9 +101,10 @@ function puzzle2() {
         $kakko2Btn.style.display = "none";
         $checkBtn.style.display = "none";
         $resetBtn.style.display = "none";
+        $progress.style.display = "none";
         $passBtn.style.display = "none";
+        $stopBtn.style.display = "none";
     };
-    */
 
     function setup() {
         let ncase = [
@@ -138,6 +150,7 @@ function puzzle2() {
         $shiki.innerText = "";
         a = "";
         numclick = 0;
+        nb = 0;
         numBtnUnselected($num1Btn);
         numBtnUnselected($num2Btn);
         numBtnUnselected($num3Btn);
@@ -148,6 +161,7 @@ function puzzle2() {
         if (numclick == 0) {
             numBtnSelected($num1Btn);
             numclick = 1;
+            nb++;
         } else {
             alert(`数字は続けて入れられません`);
         };
@@ -157,6 +171,7 @@ function puzzle2() {
         if (numclick == 0) {
             numBtnSelected($num2Btn);
             numclick = 1;
+            nb++;
         } else {
             alert(`数字は続けて入れられません`);
         };
@@ -166,6 +181,7 @@ function puzzle2() {
         if (numclick == 0) {
             numBtnSelected($num3Btn);
             numclick = 1;
+            nb++;
         } else {
             alert(`数字は続けて入れられません`);
         };
@@ -175,6 +191,7 @@ function puzzle2() {
         if (numclick == 0) {
             numBtnSelected($num4Btn);
             numclick = 1;
+            nb++;
         } else {
             alert(`数字は続けて入れられません`);
         };
@@ -216,25 +233,44 @@ function puzzle2() {
         numclick = 0;
     });
 
+    function closing(){
+        audio2.play();
+        alert(`10問正解しました！`);
+        defaultlet();
+        defaultlet2();
+        defaultdisplay();
+    };
+
     $checkBtn.addEventListener("click", () => {
-        try {
-            a = Eval(shikiInput);
-        } catch (e) {
+        if (nb < 4) {
             audio3.play();
-            alert(`正しい式になっていません`);
-        };
-        a = Eval(shikiInput);
-        if (a == 10) {
-            setTimeout(() => {
-                audio1.play();
-                defaultlet();
-                setup();
-            }, 500);
+            alert(`数字が4つ使われていません`);
         } else {
-            setTimeout(() => {
+            try {
+                a = Eval(shikiInput);
+            } catch (e) {
                 audio3.play();
-                alert(`10になっていません`);
-            }, 500);
+                alert(`正しい式になっていません`);
+            };
+            a = Eval(shikiInput);
+            if (a == 10) {
+                setTimeout(() => {
+                    audio1.play();
+                }, 500);
+                seikaiNum++;
+                $progress.value = seikaiNum / 10;
+                if (seikaiNum < 10){
+                    defaultlet();
+                    setup();
+                } else {
+                    closing();
+                };
+            } else {
+                setTimeout(() => {
+                    audio3.play();
+                    alert(`10になっていません`);
+                }, 500);
+            };
         };
     });
 
@@ -250,6 +286,12 @@ function puzzle2() {
     $passBtn.addEventListener("click", () => {
         defaultlet();
         setup();
+    });
+
+    $stopBtn.addEventListener("click", () => {
+        defaultlet();
+        defaultlet2();
+        defaultdisplay();
     });
 
 };

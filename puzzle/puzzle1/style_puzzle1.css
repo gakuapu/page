@@ -1,7 +1,8 @@
 #check-btn,
 #reset-btn,
 #pass-btn,
-#stop-btn {
+#stop-btn,
+#progress {
     display: none;
 }
 
