@@ -27,7 +27,7 @@ function heikin1(){
     let k2v = ""; //0xとxを区別
     let p = 0;
     let pb = 0;
-    let mondaiNum = 8;
+    let mondaiNum = 5;
     
     function getRandom(min, max){
         let randomNum = Math.floor(Math.random() * (max + 1 - min)) + min;
@@ -290,8 +290,6 @@ function heikin1(){
                     };
                     n1 = n1 / 10;
                     n2 = n2 / 10;
-                    console.log(a1);
-                    console.log(a2);
                     $mondai.innerText +=  `1回目は` + n1 + `秒、2回目は` + n2;
                     break;
                 case 2:
@@ -320,8 +318,6 @@ function heikin1(){
                     n2 = n2 / 10;
                     n3 = n3 / 10;
                     n4 = n4 / 10;
-                    console.log(a1);
-                    console.log(a2);
                     $mondai.innerText +=  `4回の記録が` + n1 + `秒、` + n2 + `秒、` + n3 + `秒、` + n4;
                     break;
                 default:
