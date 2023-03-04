@@ -13,27 +13,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小学4年生のがい数(およその数) | 算数＆計算ドリル 学アプ</title>
+    <title>小学5年生の平均 | 算数＆計算ドリル 学アプ</title>
     <link rel="icon" href="favicon.ico">
     <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="4nen\gaisuu1\style_gaisuu1.css">
+    <link rel="stylesheet" href="5nen\heikin1\style_heikin1.css">
+    <link rel="stylesheet" href="public\keisanmemo\public_keisanmemo.css">
 </head>
 <main>
 <body>
 
     <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
     <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
-    <audio id="audio3" src="machigaion2.mp3" preload="auto"></audio>
 
     <div>
         <select id="step">
-            <option value="1">四捨五入1</option>
-            <option value="2">四捨五入2</option>
-            <option value="3">切り上げ1</option>
-            <option value="4">切り上げ2</option>
-            <option value="5">切り捨て1</option>
-            <option value="6">切り捨て2</option>
+            <option value="1">ステップ1</option>
+            <option value="2">ステップ2</option>
+            <option value="3">ステップ3</option>
+            <option value="4">ステップ4</option>
         </select>
     </div>
 
@@ -45,14 +43,25 @@
 
     <div>
         <input id="kotae1" class="kotae" type="tel">
-        <a id="unit"></a>
+        <a id="dot"></a>
         <input id="kotae2" class="kotae" type="tel">
+        <a id="unit"></a>
     <div>
 
-    <div>
-        <input type="button" id="check-btn" class="btn" value="答え合わせ">
-    </div>
-    
+    <!--計算メモモジュール（↓＋css）-->
+    <input id="memohyoji" type="button" class="btn" value="計算メモを表示">
+    <input id="memoclear" type="button" class="btn" value="計算メモ非表示">
+    <table id="memotable">
+        <tr id = "mt1"></tr>
+        <tr id = "mt2"></tr>
+        <tr id = "mt3"></tr>
+        <tr id = "mt4"></tr>
+        <tr id = "mt5"></tr>
+        <tr id = "mt6"></tr>
+    </table>
+    <script src="public\keisanmemo\public_keisanmemo.js"></script>
+    <!--計算メモモジュール-->
+
     <div>
         <progress id="progress" value="0"></progress>
     </div>
@@ -62,29 +71,26 @@
         <input type="button" id="reset-btn" class="btn" value="リセット">
     </div>
 
-    <div>
-        <input type="button" id="hint-btn" class="btn" value="答えを見る">
-        <div id="hint"></div>
-    </div>
-
-    <script src="4nen\gaisuu1\pgm_gaisuu1.js"></script>
+    <script src="5nen\heikin1\pgm_heikin1.js"></script>
     <br>
-    <h1 class="footer-container2">がい数(およその数)の練習ドリル</h1>
+    <h1 class="footer-container2">平均の計算ドリル</h1>
     <ul class="footer-container2">
-        <li>四捨五入1</li>
-        <li>四捨五入2</li>
-        <li>切り上げ1</li>
-        <li>切り上げ2</li>
-        <li>切り捨て1</li>
-        <li>切り捨て2</li>
+        <li>ステップ1：答えが整数になる平均の計算</li>
+        <li>ステップ2：答えが小数になる平均の計算</li>
+        <li>ステップ3：小数の平均の計算</li>
+        <li>ステップ4：平均から合計を計算する</li>
     </ul>
-    <p><a class="footer-container2" href="gaisuu2.html">【解説】がい数・四捨五入・切り捨て・切り上げ</a></p>
-    <p><a class="footer-container2" href="shousuu5.html">小数の四捨五入の練習ドリル</a></p>
+
+    <hr class="dotted">
+
+    <h2 class="footer-container2">【計算のヒント】</h2>
+        <p class="menutxt">平均＝合計÷個数<br>
+        合計＝平均×個数</p>
 
     <nav>
         <ol class="pankuzu">
             <li><a href="top.html">トップ</a></li>
-            <li><a href="4nen.html">小学4年生の算数</a></li>
+            <li><a href="5nen.html">小学5年生の算数</a></li>
         </ol>
     </nav>
 </main>
