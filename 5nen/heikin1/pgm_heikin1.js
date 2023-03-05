@@ -130,68 +130,68 @@ function heikin1(){
             while (p == pb){
                 p = getRandom(2, 4);
             };
-            n1 = getRandom(70, 100);
+            n1 = getRandom(80, 100);
             $mondai.innerText = `テストを` + p + `回受けました。`;
             switch(p){
                 case 2:
                     if (n1 % 2 == 0){
-                        n2 = getRandom(35, 50) * 2;
+                        n2 = getRandom(40, 50) * 2;
                         while (n2 == n1) {
-                            n2 = getRandom(35, 50) * 2;
+                            n2 = getRandom(40, 50) * 2;
                         };
                         a1 = (n1 + n2) / 2;
                     } else {
-                        n2 = getRandom(35, 49) * 2 + 1;
+                        n2 = getRandom(40, 49) * 2 + 1;
                         while (n2 == n1) {
-                            n2 = getRandom(35, 49) * 2 + 1;
+                            n2 = getRandom(40, 49) * 2 + 1;
                         };
                     };
                     a1 = (n1 + n2) / 2;
                     $mondai.innerText += `1回目が` + n1 + `点、2回目が` + n2;
                     break;
                 case 3:
-                    n2 = getRandom(70, 100);
+                    n2 = getRandom(80, 100);
                     if ((n1 + n2) % 3 == 0){
-                        n3 = getRandom(24, 33) * 3;
+                        n3 = getRandom(27, 33) * 3;
                         while (n3 == n2) {
-                            n3 = getRandom(24, 33) * 3;
+                            n3 = getRandom(27, 33) * 3;
                         };
                     } else if ((n1 + n2) % 3 == 1){
-                        n3 = getRandom(23, 32) * 3 + 2;
+                        n3 = getRandom(26, 32) * 3 + 2;
                         while (n3 == n2) {
-                            n3 = getRandom(23, 32) * 3 + 2;
+                            n3 = getRandom(26, 32) * 3 + 2;
                         };
                     } else {
-                        n3 = getRandom(23, 33) * 3 + 1;
+                        n3 = getRandom(27, 33) * 3 + 1;
                         while (n3 == n2) {
-                            n3 = getRandom(23, 33) * 3 + 1;
+                            n3 = getRandom(27, 33) * 3 + 1;
                         };
                     };
                     a1 = (n1 + n2 + n3) / 3;
                     $mondai.innerText +=  `1回目が` + n1 + `点、2回目が` + n2 + `点、3回目が` + n3;
                     break;
                 case 4:
-                    n2 = getRandom(70, 100);
-                    n3 = getRandom(70, 100);
+                    n2 = getRandom(80, 100);
+                    n3 = getRandom(80, 100);
                     if ((n1 + n2 + n3) % 4 == 0){
-                        n4 = getRandom(18, 25) * 4;
+                        n4 = getRandom(20, 25) * 4;
                         while (n4 == n3) {
-                            n4 = getRandom(18, 25) * 4;
+                            n4 = getRandom(20, 25) * 4;
                         };
                     } else if ((n1 + n2 + n3) % 4 == 1){
-                        n4 = getRandom(17, 24) * 4 + 3;
+                        n4 = getRandom(20, 24) * 4 + 3;
                         while (n4 == n3) {
-                            n4 = getRandom(17, 24) * 4 + 3;
+                            n4 = getRandom(20, 24) * 4 + 3;
                         };
                     } else if ((n1 + n2 + n3) % 4 == 2){
-                        n4 = getRandom(17, 24) * 4 + 2;
+                        n4 = getRandom(20, 24) * 4 + 2;
                         while (n4 == n3) {
-                            n4 = getRandom(17, 24) * 4 + 2;
+                            n4 = getRandom(20, 24) * 4 + 2;
                         };
                     } else {
-                        n4 = getRandom(18, 24) * 4 + 1;
+                        n4 = getRandom(20, 24) * 4 + 1;
                         while (n4 == n3) {
-                            n4 = getRandom(18, 24) * 4 + 1;
+                            n4 = getRandom(20, 24) * 4 + 1;
                         };
                     };
                     a1 = (n1 + n2 + n3 + n4) / 4;
@@ -216,13 +216,13 @@ function heikin1(){
             while (p == pb){
                 p = getRandom(1, 2);
             };
-            n1 = getRandom(70, 100);
-            n2 = getRandom(70, 100);
+            n1 = getRandom(80, 100);
+            n2 = getRandom(80, 100);
             $mondai.innerText = `テストを` + p * 2 + `回受けました。`;
             switch(p){
                 case 1:
                     while (n2 == n1 || (n1 + n2) % 2 == 0) {
-                        n2 = getRandom(70, 100);
+                        n2 = getRandom(80, 100);
                     };
                     a1 = Math.floor((n1 + n2) / 2);
                     a2 = 5;
@@ -230,10 +230,10 @@ function heikin1(){
                     $mondai.innerText +=  `1回目が` + n1 + `点、2回目が` + n2;
                     break;
                 case 2:
-                    n3 = getRandom(70, 100);
-                    n4 = getRandom(70, 100);
+                    n3 = getRandom(80, 100);
+                    n4 = getRandom(80, 100);
                     while (n4 == n3 || (n1 + n2 + n3 + n4) % 4 == 0) {
-                        n4 = getRandom(70, 100);
+                        n4 = getRandom(80, 100);
                     };
                     a1 = Math.floor((n1 + n2 + n3 + n4) / 4);
                     a2 = (n1 + n2 + n3 + n4) * 100 / 4 - a1 * 100;
