@@ -79,6 +79,7 @@ function anzan_basic2(){
 
     function moveTimerBar(){
         tb = 1;
+        $timerBar.value = tb;
         timer1 = setInterval(insideTimer1, 500);
     };
     //timerBar↑

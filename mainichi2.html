@@ -13,11 +13,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小学3年生のかけ算2 | 算数＆計算ドリル 学アプ</title>
+    <title>毎日計算ドリル：小学3年生の算数 | 算数＆計算ドリル 学アプ</title>
     <link rel="icon" href="favicon.ico">
-    <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
+    <meta name="description" content="暗算のコツが学べて計算が速くなる、無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="3nen\kakeru2\style_kakeru2.css">
+    <link rel="stylesheet" href="anzan\mainichi2\style_mainichi2.css">
     <link rel="stylesheet" href="public\keisanmemo\public_keisanmemo.css">
 </head>
 <main>
@@ -27,24 +27,18 @@
     <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
 
     <div>
-        <select id="step">
-            <option value="1">ステップ1</option>
-            <option value="2">ステップ2</option>
-            <option value="3">ステップ3</option>
-            <option value="4">ステップ4</option>
-            <option value="5">ステップ5</option>
-        </select>
-    </div>
-
-    <div>
         <input type="button" id="start-btn" class="btn" value="スタート">
     </div>
 
     <div id="mondai"></div>
 
-    <input id="kotae" class="kotae" type="tel">
+    <div>
+        <input id="kotae1" class="kotae" type="tel">
+        <a id="k2k"></a>
+        <input id="kotae2" class="kotae" type="tel">
+    <div>
 
-    <!--計算メモ（↓＋css）-->
+    <!--計算メモモジュール（↓＋css）-->
     <input id="memohyoji" type="button" class="btn" value="計算メモを表示">
     <input id="memoclear" type="button" class="btn" value="計算メモ非表示">
     <table id="memotable">
@@ -56,7 +50,11 @@
         <tr id = "mt6"></tr>
     </table>
     <script src="public\keisanmemo\public_keisanmemo.js"></script>
-    <!--計算メモ-->
+    <!--計算メモモジュール-->
+
+    <div>
+        <progress id="timer-bar" value="1"></progress>
+    </div>
 
     <div>
         <progress id="progress" value="0"></progress>
@@ -67,22 +65,23 @@
         <input type="button" id="reset-btn" class="btn" value="リセット">
     </div>
 
-    <script src="3nen\kakeru2\pgm_kakeru2.js"></script>
+    <div id="kekka"></div>
+    <div id="recommend"></div>
+    <ul id="recommend-list"></ul>
+
+    <div>
+        <input type="button" id="back-to-start-btn" class="btn" value="スタートに戻る">
+    </div>
+
+    <script src="anzan\mainichi2\pgm_mainichi2.js"></script>
     <br>
-    <h1 class="footer-container2">小学3年生のかけ算ドリル2</h1>
-    <ul class="footer-container2">
-        <li>ステップ1：2けた×2けたのかけ算1</li>
-        <li>ステップ2：2けた×2けたのかけ算2</li>
-        <li>ステップ3：2けた×2けたのかけ算3</li>
-        <li>ステップ4：3けた×2けたのかけ算1</li>
-        <li>ステップ5：3けた×2けたのかけ算2</li>
-    </ul>
-    <p><a class="footer-container2" href="kakeru1.html">2けた×1けたのかけ算へ</a></p>
+    <h1 class="footer-container2">毎日計算ドリル：小学3年生の算数</h1>
 
     <nav>
         <ol class="pankuzu">
             <li><a href="top.html">トップ</a></li>
-            <li><a href="3nen.html">小学3年生の算数</a></li>
+            <li><a href="anzan.html">暗算トレーニング</a></li>
+            <li><a href="anzan_mainichi.html">毎日計算ドリル【学年別】</a></li>
         </ol>
     </nav>
 </main>
