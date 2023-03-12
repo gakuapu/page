@@ -448,10 +448,10 @@ function mainichi2() {
             k2v = ""; //0xとxを区別
             $memoClearBtn.style.display = "none";//計算メモ
             $memoTable.style.display = "none";//計算メモ
+            $kotae1.value = "";
+            $kotae2.value = "";
             setTimeout(() => {
                 audio1.play();
-                $kotae1.value = "";
-                $kotae2.value = "";
                 $progress.value = count / countMax;
             }, 500);
             count++;
