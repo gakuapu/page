@@ -263,7 +263,7 @@ function mainichi2() {
 
     function setup0() {
         $kotae2.style.display = "inline-block";
-        $kotae2.style.display = "";
+        $kotae2.value = "";
         $k2k.innerText = "あまり";
         n1 = getRandom(2, 9);
         while (n1 == pb) {
@@ -327,7 +327,7 @@ function mainichi2() {
 
     function setup4() {
         $kotae2.style.display = "inline-block";
-        $kotae2.style.display = "";
+        $kotae2.value = "";
         $k2k.innerText = ".";
         p = getRandom(1, 2);
         while (p == pb) {
