@@ -61,7 +61,7 @@ function mainichi3() {
     let timer1;
 
     function insideTimer1() {
-        tb = tb - 2000 / 20000; //6
+        tb = tb - 2000 / 60000;
         $timerBar.value = tb;
         if (tb < 0) {
             mistakes.push(randoms[count]);
