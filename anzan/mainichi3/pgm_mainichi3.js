@@ -1,7 +1,7 @@
-function mainichi2() {
+function mainichi3() {
 
     //1～countMaxまでのランダム配列（randoms）の生成
-    let countMax = 14;
+    let countMax = 8;
     let randoms = [];
 
     function getRandom(min, max) {
@@ -10,9 +10,9 @@ function mainichi2() {
     };
 
     function generateRandoms() {
-        for (let i = 1; i <= countMax; i++) {
+        for (let i = 0; i < countMax; i++) {
             while (true) {
-                let rtmp = getRandom(1, countMax);
+                let rtmp = getRandom(0, countMax - 1);
                 if (!randoms.includes(rtmp)) {
                     randoms.push(rtmp);
                     break;
@@ -46,8 +46,6 @@ function mainichi2() {
     let count = 0;
     let seikaiNum = 0;
     let n1 = 0;
-    let n11 = 0;
-    let n12 = 0;
     let n2 = 0;
     let n3 = 0;
     let a1 = 0;
@@ -55,20 +53,18 @@ function mainichi2() {
     let k2v = ""; //0xとxを区別
     let p = 0;
     let q = 0;
-    let pb = 0;
     let tb = 1;
 
     let mistakes = [];
-    let mistakesR = [];
 
     //timerBar↓
     let timer1;
 
     function insideTimer1() {
-        tb = tb - 2000 / 60000;
+        tb = tb - 2000 / 20000; //6
         $timerBar.value = tb;
         if (tb < 0) {
-            mistakes.push(randoms[count] % 7);
+            mistakes.push(randoms[count]);
             clearInterval(timer1);
             $kotae1.value = "";
             $kotae2.value = "";
@@ -78,7 +74,7 @@ function mainichi2() {
             count++;
             $progress.value = count / countMax;
             if (count < countMax) {
-                switchSetup(randoms[count] % 7);
+                switchSetup(randoms[count]);
             } else {
                 closing();
             };
@@ -96,8 +92,6 @@ function mainichi2() {
         count = 0;
         seikaiNum = 0;
         n1 = 0;
-        n11 = 0;
-        n12 = 0;
         n2 = 0;
         n3 = 0;
         a1 = 0;
@@ -105,10 +99,8 @@ function mainichi2() {
         k2v = ""; //0xとxを区別
         p = 0;
         q = 0;
-        pb = 0;
         randoms.length = 0;
         mistakes.length = 0;
-        mistakesR.length = 0;
         $kotae1.value = "";
         $kotae2.value = "";
         $mondai.innerText = "";
@@ -173,50 +165,55 @@ function mainichi2() {
             $recommend.innerText = `全問正解！`;
         } else {
             $recommend.innerText = `まちがえた問題の練習ドリル`;
-            mistakesR = mt.filter((element, index) => mt.indexOf(element) === index); //mistakesから重複排除
-            mistakesR.sort(asc); //昇順に並べ替え
-            for (let j = 0; j < mistakesR.length; j++) {
-                if (mistakesR[j] == 0) {
+            mt.sort(asc); //昇順に並べ替え
+            for (let j = 0; j < mt.length; j++) {
+                if (mt[j] == 0) {
                     let li0 = document.createElement(`li`);
                     li0.classList.add(`recommend-li`);
-                    li0.innerHTML = `<a href="waru1.html">小学3年生の割り算</a>`;
+                    li0.innerHTML = `<a href="waru4.html">割り切れる整数の割り算</a>`;
                     $recommendList.appendChild(li0);
                 };
-                if (mistakesR[j] == 1) {
+                if (mt[j] == 1) {
                     let li1 = document.createElement(`li`);
                     li1.classList.add(`recommend-li`);
-                    li1.innerHTML = `<a href="tasuhiku9.html">小学3年生の足し算</a>`;
+                    li1.innerHTML = `<a href="waru4.html">あまりのある整数の割り算</a>`;
                     $recommendList.appendChild(li1);
                 };
-                if (mistakesR[j] == 2) {
+                if (mt[j] == 2) {
                     let li2 = document.createElement(`li`);
                     li2.classList.add(`recommend-li`);
-                    li2.innerHTML = `<a href="tasuhiku9.html">小学3年生の引き算</a>`;
+                    li2.innerHTML = `<a href="shousuu2.html">小数の足し算</a>`;
                     $recommendList.appendChild(li2);
                 };
-                if (mistakesR[j] == 3) {
+                if (mt[j] == 3) {
                     let li3 = document.createElement(`li`);
                     li3.classList.add(`recommend-li`);
-                    li3.innerHTML = `<a href="kakeru2.html">小学3年生のかけ算</a>`;
+                    li3.innerHTML = `<a href="shousuu3.html">小数の引き算</a>`;
                     $recommendList.appendChild(li3);
                 };
-                if (mistakesR[j] == 4) {
+                if (mt[j] == 4) {
                     let li4 = document.createElement(`li`);
                     li4.classList.add(`recommend-li`);
-                    li4.innerHTML = `<a href="shousuu1.html">小学3年生の小数の計算</a>`;
+                    li4.innerHTML = `<a href="shousuu4.html">小数のかけ算</a>`;
                     $recommendList.appendChild(li4);
                 };
-                if (mistakesR[j] == 5) {
+                if (mt[j] == 5) {
                     let li5 = document.createElement(`li`);
                     li5.classList.add(`recommend-li`);
-                    li5.innerHTML = `<a href="gyakusan1.html">足し算・引き算の逆算</a>`;
+                    li5.innerHTML = `<a href="shousuu6.html">割り切れる小数の割り算</a>`;
                     $recommendList.appendChild(li5);
                 };
-                if (mistakesR[j] == 6) {
+                if (mt[j] == 6) {
                     let li6 = document.createElement(`li`);
                     li6.classList.add(`recommend-li`);
-                    li6.innerHTML = `<a href="gyakusan1.html">かけ算・割り算の逆算</a>`;
+                    li6.innerHTML = `<a href="shousuu7.html">割り進める小数の割り算</a>`;
                     $recommendList.appendChild(li6);
+                };
+                if (mt[j] == 7) {
+                    let li7 = document.createElement(`li`);
+                    li7.classList.add(`recommend-li`);
+                    li7.innerHTML = `<a href="keisanrule1.html">計算のルール</a>`;
+                    $recommendList.appendChild(li7);
                 };
             };
         };
@@ -257,191 +254,271 @@ function mainichi2() {
             case 6:
                 setup6();
                 break;
+            case 7:
+                setup7();
+                break;
             default:
                 alert(`リロードして下さい`);
         };
     };
 
     function setup0() {
-        $kotae2.style.display = "inline-block";
-        $k2k.innerText = "あまり";
-        n1 = getRandom(2, 9);
-        while (n1 == pb) {
-            n1 = getRandom(2, 9);
+        $kotae2.style.display = "none";
+        $k2k.innerText = "";
+        a2 = ""
+        p = getRandom(1, 5);
+        n1 = p * 10 + getRandom(1, 9);
+        if (n1 < 20) {
+            a1 = getRandom(11, 52);
+        } else if (n1 < 30) {
+            a1 = getRandom(11, 34);
+        } else if (n1 < 40) {
+            a1 = getRandom(11, 25);
+        } else if (n1 < 50) {
+            a1 = getRandom(11, 20);
+        } else {
+            a1 = getRandom(11, 16);
         };
-        a1 = getRandom(10, 19);
-        a2 = getRandom(1, n1 - 1);
-        n2 = n1 * a1 + a2;
-        a2 = a2 + 10; //0xとxを区別
+        n2 = n1 * a1;
         $mondai.innerText = n2 + `÷` + n1 + `＝`;
-        pb = n1;
     };
 
     function setup1() {
-        $kotae2.style.display = "none";
-        $k2k.innerText = "";
-        a2 = "";
-        a1 = getRandom(2, 9);
-        n3 = getRandom(1, 98);
-        while (n3 == pb) {
-            n3 = getRandom(1, 98);
+        $kotae2.style.display = "inline-block";
+        $k2k.innerText = "あまり";
+        p = getRandom(1, 5);
+        n1 = p * 10 + getRandom(1, 9);
+        if (n1 < 20) {
+            a1 = getRandom(11, 52);
+        } else if (n1 < 30) {
+            a1 = getRandom(11, 34);
+        } else if (n1 < 40) {
+            a1 = getRandom(11, 25);
+        } else if (n1 < 50) {
+            a1 = getRandom(11, 20);
+        } else {
+            a1 = getRandom(11, 16);
         };
-        n11 = getRandom(0, a1 - 1);
-        n12 = getRandom(n3 + 1, 99);
-        n1 = n11 * 100 + n12;
-        a1 = a1 * 100 + n3;
-        n2 = a1 - n1;
-        $mondai.innerText = n1 + `＋` + n2 + `＝`;
-        pb = n3;
+        n3 = Math.min(999 - n1 * a1, n1 - 1);
+        a2 = getRandom(1, n3);
+        n2 = n1 * a1 + a2;
+        $mondai.innerText = n2 + `÷` + n1 + `＝`;
+        if (a2 < 10) { //0xとxを区別
+            a2 = a2 + 10;
+        } else {
+            a2 = a2 + 100;
+        };
     };
 
     function setup2() {
-        $kotae2.style.display = "none";
-        $k2k.innerText = "";
-        a2 = "";
-        n11 = getRandom(2, 9);
-        n12 = getRandom(1, 98);
-        while (n12 == pb) {
-            n12 = getRandom(1, 98);
-        };
-        n1 = n11 * 100 + n12;
-        a1 = getRandom(0, n11 - 1) * 100 + getRandom(n12 + 1, 99);
-        n2 = n1 - a1;
-        $mondai.innerText = n1 + `－` + n2 + `＝`;
-        pb = n12;
-    };
-
-    function setup3() {
-        $kotae2.style.display = "none";
-        $k2k.innerText = "";
-        a2 = "";
-        n1 = getRandom(2, 9) * 10 + getRandom(1, 9);
-        while (n1 == pb) {
-            n1 = getRandom(2, 9) * 10 + getRandom(1, 9);
-        };
-        n2 = getRandom(2, 9) * 10 + getRandom(1, 9);
-        a1 = n1 * n2;
-        $mondai.innerText = n1 + `×` + n2 + `＝`;
-        pb = n1;
-    };
-
-    function setup4() {
         $kotae2.style.display = "inline-block";
         $k2k.innerText = ".";
         p = getRandom(1, 2);
-        while (p == pb) {
-            p = getRandom(1, 2);
+        n1 = getRandom(0, 9) * 10 + getRandom(1, 9);
+        n2 = getRandom(0, 99) * 10 + getRandom(1, 9);
+        a1 = Math.floor(((n1 * 10) + n2) / 100);
+        a2 = (n1 * 10) + n2 - a1 * 100;
+        a2 = a2 + 100; //0xとxを区別
+        n1 = n1 / 10;
+        n2 = n2 / 100;
+        if (p == 1) {
+            $mondai.innerText = n1 + `＋` + n2 + `＝`;
+        } else {
+            $mondai.innerText = n2 + `＋` + n1 + `＝`;
         };
+    };
+
+    function setup3() {
+        $kotae2.style.display = "inline-block";
+        $k2k.innerText = ".";
+        p = getRandom(1, 3);
         switch (p) {
             case 1:
-                a1 = getRandom(1, 9);
-                n1 = getRandom(0, a1 - 1);
-                q = getRandom(1, 3);
-                if (q == 1) {
-                    $k2k.innerText = "";
-                    $kotae2.style.display = "none";
-                    a2 = "";
-                    n3 = getRandom(1, 9);
-                    n2 = (a1 * 10 - (n1 * 10 + n3)) / 10;
-                } else {
-                    n3 = getRandom(2, 9);
-                    a2 = getRandom(1, n3 - 1);
-                    n2 = (a1 * 10 + a2 - (n1 * 10 + n3)) / 10;
-                    a2 = a2 + 10; //0xとxを区別
-                };
-                n1 = n1 + n3 / 10;
-                $mondai.innerText = n1 + `＋` + n2 + `＝`;
+                n1 = getRandom(1, 9);
+                n2 = getRandom(0, n1 - 1);
+                n1 = n1 * 100;
+                n2 = n2 * 100 + getRandom(0, 9) * 10 + getRandom(1, 9);
                 break;
             case 2:
-                a2 = getRandom(2, 9);
-                n3 = getRandom(0, a2 - 1);
-                a1 = getRandom(0, 8);
-                n1 = getRandom(a1 + 1, 9);
-                n2 = (n1 * 10 + n3 - (a1 * 10 + a2)) / 10;
-                n1 = n1 + n3 / 10;
-                $mondai.innerText = n1 + `－` + n2 + `＝`;
-                a2 = a2 + 10; //0xとxを区別
+                n1 = getRandom(1, 99);
+                n2 = getRandom(0, n1 - 1);
+                n1 = n1 * 10;
+                n2 = n2 * 10 + getRandom(1, 9);
+                break;
+            case 3:
+                n1 = getRandom(2, 99);
+                n2 = getRandom(1, n1 - 1);
+                while (n2 % 10 == 0) {
+                    n2 = getRandom(0, n1 - 1);
+                };
+                n1 = n1 * 10 + getRandom(1, 9);
+                n2 = n2 * 10;
                 break;
             default:
                 alert(`リロードして下さい`);
         };
-        pb = p;
+        a1 = Math.floor((n1 - n2) / 100);
+        a2 = (n1 - n2) - a1 * 100;
+        a2 = a2 + 100; //0xとxを区別
+        n1 = n1 / 100;
+        n2 = n2 / 100;
+        $mondai.innerText = n1 + `－` + n2 + `＝`;
+    };
+
+    function setup4() {
+        n2 = getRandom(11, 30);
+        p = getRandom(1, 2);
+        switch (p) {
+            case 1:
+                n1 = getRandom(0, 9) * 10 + getRandom(2, 9);
+                break;
+            case 2:
+                n1 = getRandom(1, 4) * 100 + getRandom(0, 9) * 10 + getRandom(1, 9);
+                break;
+            default:
+                alert(`リロードして下さい`);
+        };
+        n3 = n1 * n2;
+        if (n3 % 100 == 0) {
+            $kotae2.style.display = "none";
+            $k2k.innerText = "";
+            a2 = "";
+            a1 = n3 / 100;
+        } else {
+            $kotae2.style.display = "inline-block";
+            $k2k.innerText = ".";
+            if (n3 % 10 == 0) {
+                a1 = Math.floor(n3 / 100);
+                a2 = (n3 - a1 * 100) / 10;
+                a2 = a2 + 10; //0xとxを区別
+            } else {
+                a1 = Math.floor(n3 / 100);
+                a2 = n3 - a1 * 100;
+                a2 = a2 + 100; //0xとxを区別
+            };
+        };
+        n1 = n1 / 100;
+        $mondai.innerText = n1 + `×` + n2 + `＝`;
     };
 
     function setup5() {
-        $kotae2.style.display = "none";
-        $k2k.innerText = "";
-        a2 = "";
-        p = getRandom(1, 3);
-        while (p == pb) {
-            p = getRandom(1, 3);
-        };
+        $kotae2.style.display = "inline-block";
+        $k2k.innerText = ".";
+        p = getRandom(1, 2);
+        n2 = getRandom(1, 2) * 10 + getRandom(1, 9);
         switch (p) {
             case 1:
-                n2 = getRandom(1, 9) * 10 + getRandom(1, 9);
-                a1 = getRandom(1, 9) * 10 + getRandom(1, 9);
-                n1 = n2 + a1;
-                q = getRandom(0, 1);
-                if (q == 0) {
-                    $mondai.innerText = n2 + `＋□` + `＝` + n1;
-                } else {
-                    $mondai.innerText = `□＋` + n2 + `＝` + n1;
+                a2 = getRandom(2, 9);
+                n1 = n2 * a2;
+                while (n1 % 10 == 0) {
+                    a2 = getRandom(2, 9);
+                    n1 = n2 * a2;
                 };
+                a1 = 0;
                 break;
             case 2:
-                n1 = getRandom(1, 9) * 10 + getRandom(1, 9);
-                a1 = getRandom(1, 9) * 10 + getRandom(1, 9);
-                n2 = n1 + a1;
-                $mondai.innerText = n2 + `－□` + `＝` + n1;
-                break;
-            case 3:
-                n1 = getRandom(1, 9) * 10 + getRandom(1, 9);
-                n2 = getRandom(1, 9) * 10 + getRandom(1, 9);
-                a1 = n1 + n2;
-                $mondai.innerText = `□－` + n2 + `＝` + n1;
+                n3 = getRandom(1, 4) * 10 + getRandom(1, 9);
+                n1 = n2 * n3;
+                while (n1 % 10 == 0) {
+                    n3 = getRandom(1, 4) * 10 + getRandom(1, 9);
+                    n1 = n2 * n3;
+                };
+                a1 = Math.floor(n3 / 100);
+                a2 = n3 - (a1 * 100);
                 break;
             default:
                 alert(`リロードして下さい`);
         };
-        pb = p;
+        a2 = a2 + 100; //0xとxを区別
+        n1 = n1 / 100;
+        $mondai.innerText = n1 + `÷` + n2 + `＝`;
     };
 
     function setup6() {
+        let istep6 = 0;
+        $kotae2.style.display = "inline-block";
+        $k2k.innerText = ".";
+        n2 = getRandom(0, 1) + 4;
+        n1 = getRandom(0, 9) * 10 + getRandom(1, 9);
+        while (n1 % n2 == 0) {
+            n1 = getRandom(0, 9) * 10 + getRandom(1, 9);
+        };
+        a1 = Math.floor((n1 / n2) / 10);
+        a2 = n1 * 100 / n2 - a1 * 1000;
+        while (a2 % 10 == 0) {
+            a2 = a2 / 10;
+            istep6++;
+        };
+        n1 = n1 / 10;
+        a2 = a2 + 10 ** (3 - istep6); //0xとxを区別
+        $mondai.innerText = n1 + `÷` + n2 + `＝`;
+    };
+
+    function setup7() {
+        let n4 = 0;
         $kotae2.style.display = "none";
         $k2k.innerText = "";
         a2 = "";
-        p = getRandom(1, 3);
-        while (p == pb) {
-            p = getRandom(1, 3);
-        };
+        p = getRandom(1, 4);
+        n1 = getRandom(11, 29);
         switch (p) {
             case 1:
-                n1 = getRandom(2, 9);
-                a1 = getRandom(6, 15);
-                n2 = n1 * a1;
-                q = getRandom(0, 1);
-                if (q == 0) {
-                    $mondai.innerText = n1 + `×□＝` + n2;
+                n2 = getRandom(2, 9);
+                n3 = getRandom(2, 9);
+                n4 = getRandom(2, 9);
+                q = getRandom(1, 2);
+                if (q == 1) {
+                    a1 = n1 + n2;
+                    $mondai.innerText = n1 + `＋` + n2 * (n3 + n4) + `÷(` + n3 + `＋` + n4 + `)＝`;
                 } else {
-                    $mondai.innerText = `□×` + n1 + `＝` + n2;
+                    a1 = n1 - n2;
+                    $mondai.innerText = n1 + `－` + n2 * (n3 + n4) + `÷(` + n3 + `＋` + n4 + `)＝`;
                 };
                 break;
             case 2:
                 n2 = getRandom(2, 9);
-                a1 = getRandom(6, 15);
-                n1 = n2 * a1;
-                $mondai.innerText = n1 + `÷□＝` + n2;
+                n3 = getRandom(4, 11);
+                n4 = getRandom(2, n3 - 2);
+                q = getRandom(1, 2);
+                if (q == 1) {
+                    a1 = n1 + n2;
+                    $mondai.innerText = n1 + `＋` + n2 * (n3 - n4) + `÷(` + n3 + `－` + n4 + `)＝`;
+                } else {
+                    a1 = n1 - n2;
+                    $mondai.innerText = n1 + `－` + n2 * (n3 - n4) + `÷(` + n3 + `－` + n4 + `)＝`;
+                };
                 break;
             case 3:
                 n2 = getRandom(2, 9);
-                n1 = getRandom(6, 15);
-                a1 = n1 * n2;
-                $mondai.innerText = `□÷` + n1 + `＝` + n2;
+                n3 = getRandom(2, 5);
+                n4 = getRandom(2, 5);
+                q = getRandom(1, 2);
+                if (q == 1) {
+                    a1 = n1 + n2 * (n3 + n4);
+                    $mondai.innerText = n1 + `＋` + n2 + `×(` + n3 + `＋` + n4 + `)＝`;
+                } else {
+                    n1 = n2 * (n3 + n4) + getRandom(2, 19);
+                    a1 = n1 - n2 * (n3 + n4);
+                    $mondai.innerText = n1 + `－` + n2 + `×(` + n3 + `＋` + n4 + `)＝`;
+                };
+                break;
+            case 4:
+                n2 = getRandom(2, 9);
+                n3 = getRandom(4, 11);
+                n4 = getRandom(2, n3 - 2);
+                q = getRandom(1, 2);
+                if (q == 1) {
+                    a1 = n1 + n2 * (n3 - n4);
+                    $mondai.innerText = n1 + `＋` + n2 + `×(` + n3 + `－` + n4 + `)＝`;
+                } else {
+                    a1 = getRandom(2, 19);
+                    n1 = n2 * (n3 - n4) + a1;
+                    $mondai.innerText = n1 + `－` + n2 + `×(` + n3 + `－` + n4 + `)＝`;
+                };
                 break;
             default:
                 alert(`リロードして下さい`);
         };
-        pb = p;
     };
 
     function checkAnswer() {
@@ -459,7 +536,7 @@ function mainichi2() {
             seikaiNum++;
             clearInterval(timer1);
             if (count < countMax) {
-                switchSetup(randoms[count] % 7);
+                switchSetup(randoms[count]);
             } else {
                 closing();
             };
@@ -485,7 +562,7 @@ function mainichi2() {
         defaultlet();
         $progress.value = 0;
         generateRandoms();
-        switchSetup(randoms[0] % 7);
+        switchSetup(randoms[0]);
     });
 
     $eraseBtn.addEventListener("click", () => {
@@ -510,4 +587,4 @@ function mainichi2() {
 
 };
 
-mainichi2();
+mainichi3();
