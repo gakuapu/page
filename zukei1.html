@@ -13,11 +13,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小学5年生の平均の計算ドリル | 算数＆計算ドリル 学アプ</title>
+    <title>多角形の性質 | 算数＆計算ドリル 学アプ</title>
     <link rel="icon" href="favicon.ico">
     <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="5nen\heikin1\style_heikin1.css">
+    <link rel="stylesheet" href="5nen\zukei1\style_zukei1.css">
     <link rel="stylesheet" href="public\keisanmemo\public_keisanmemo.css">
 </head>
 <main>
@@ -43,9 +43,7 @@
 
     <div>
         <input id="kotae1" class="kotae" type="tel">
-        <a id="dot"></a>
-        <input id="kotae2" class="kotae" type="tel">
-        <a id="unit"></a>
+        <a id="unit">
     <div>
 
     <!--計算メモモジュール（↓＋css）-->
@@ -71,24 +69,44 @@
         <input type="button" id="reset-btn" class="btn" value="リセット">
     </div>
 
-    <script src="5nen\heikin1\pgm_heikin1.js"></script>
+    <script src="5nen\zukei1\pgm_zukei1.js"></script>
     <br>
-    <h1 class="footer-container2">平均の計算ドリル</h1>
+    <h1 class="footer-container2">多角形の性質</h1>
     <ul class="footer-container2">
-        <li>ステップ1：答えが整数になる平均の計算</li>
-        <li>ステップ2：答えが小数になる平均の計算</li>
-        <li>ステップ3：小数の平均の計算</li>
-        <li>ステップ4：平均から合計を計算する</li>
+        <li>ステップ1：多角形の内角の和の計算</li>
+        <li>ステップ2：正多角形の内角の大きさの計算</li>
+        <li>ステップ3：正多角形の外角の大きさの計算</li>
+        <li>ステップ4：多角形の対角線の本数の計算</li>
     </ul>
 
     <hr class="dotted">
+    <h2 class="footer-container2">ヒント：</h2>
 
-    <h2 class="footer-container2">【平均とは】</h2>
-    <p class="menutxt">いくつかのバラバラな数字の合計を個数で割って、バラバラな数字を平らに均した（たいらにならした）もの</p>
+    <h2 class="footer-container2">【n角形の1つの頂点から引ける対角線の数は、n－3本】</h2>
+    <p class="menutxt">自分＋となりの2つの頂点には対角線は引けないので、n－3本になります。</p>
+    <p class="menutxt">例：四角形は1本、五角形は2本、六角形は3本</p>
+    <br class="space">
 
-    <h2 class="footer-container2">【計算のヒント】</h2>
-    <p class="menutxt">平均＝合計÷個数<br>
-    合計＝平均×個数</p>
+    <h2 class="footer-container2">【n角形の内角の和は、(n－2)×180°】</h2>
+    <p class="menutxt">多角形の1つの頂点から対角線を引くと「対角線の本数＋1」個の三角形ができます。<br>
+    三角形の内角の和は180°なので、n角形の内角の和は「対角線の本数＋1」×180＝(n－2)×180°になります。</p>
+    <p class="menutxt">例：四角形は(4－2)×180＝360°、五角形は(5－2)×180＝540°、六角形は(6－2)×180＝720°</p>
+    <br>
+
+    <h2 class="footer-container2">【正n角形の1つの頂点の内角の大きさは、(n－2)×180°÷n】</h2>
+    <p class="menutxt">正多角形の各頂点の内角は同じ大きさなので、内角の和を頂点の数で割ると計算できます。</p>
+    <p class="menutxt">例：正四角形(正方形)は360÷4＝90°、正五角形は540÷5＝108°、正六角形は720÷6＝120°</p>
+    <br>
+
+    <h2 class="footer-container2">【正n角形の1つの頂点の「外角」の大きさは、360°÷n】</h2>
+    <p class="menutxt">多角形の外角の和はいつも360°、正多角形の各頂点の外角は同じ大きさなので、360を頂点の数で割ると計算できます。</p>
+    <p class="menutxt">例：正四角形(正方形)は360÷4＝90°、正五角形は360÷5＝72°、正六角形は360÷6＝60°</p>
+    <br>
+
+    <h2 class="footer-container2">【n角形の全ての対角線の数は、(n－3)×n÷2本】</h2>
+    <p class="menutxt">1つの頂点から引ける対角線の数はn－3本、頂点はn個あるので、(n－3)×n本、<br>
+    ただし、自分から相手に引いた対角線（例えば頂点A⇒頂点D）と、相手から自分に引いた対角線（頂点D⇒頂点A）をそれぞれ数えて（同じ対角線を2回数えて）しまうので、最後に2で割る必要があります。</p>
+    <p class="menutxt">例：四角形は(4－3)×4÷2＝2本、五角形は(5－3)×5÷2＝5本、六角形は(6－3)×6÷2＝9本</p>
 
     <nav>
         <ol class="pankuzu">
