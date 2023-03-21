@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-XKL20YHCTB');
+        </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>素因数分解チャレンジ | 算数＆計算ドリル 学アプ</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="算数パズルで楽しく算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="puzzle\puzzle3\style_puzzle3.css">
+</head>
+<main>
+<body>
+
+    <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
+    <audio id="audio3" src="machigaion2.mp3" preload="auto"></audio>
+
+    <div>
+        <select id="level">
+            <option value="1">☆</option>
+            <option value="2">☆☆</option>
+            <option value="3">☆☆☆</option>
+            <option value="4">☆☆☆☆</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="button" id="start-btn" class="btn" value="スタート">
+    </div>
+
+    <div id="mondai"></div>
+    <div>
+        <a id="shikispace">| </a>
+        <a id="shiki"></a>
+    </div>
+
+    <div>
+        <input type="button" id="2-btn" class="num-btn" value="2">
+        <input type="button" id="3-btn" class="num-btn" value="3">
+        <input type="button" id="5-btn" class="num-btn" value="5">
+        <input type="button" id="7-btn" class="num-btn" value="7">
+        <input type="button" id="11-btn" class="num-btn" value="11">
+        <input type="button" id="13-btn" class="num-btn" value="13">
+    </div>
+
+    <div>
+        <input type="button" id="check-btn" class="btn" value="＝">
+        <input type="button" id="erase-btn" class="btn" value="けす">
+    </div>
+
+    <div>
+        <progress id="timer-bar" value="1"></progress>
+    </div>
+
+    <div>
+        <input type="button" id="stop-btn" class="btn" value="やめる">
+    </div>
+
+    <div id="seikaisuu"></div>
+
+    <script src="puzzle\puzzle3\pgm_puzzle3.js"></script>
+    <br>
+    <h1 class="footer-container2">素因数分解チャレンジ</h1>
+
+    <nav>
+        <ul class="pankuzu">
+            <li><a href="top.html">トップ</a></li>
+            <li><a href="puzzle.html">算数パズル</a></li>
+        </ul>
+    </nav>
+</main>
+
+<footer class="footer-container">
+    <hr>
+    <p>算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで、全学年向け</p>
+    <p>Copyright(C) 2022- All Rights Reserved</p>
+    <a class="footer-container2" href="aboutus.html">当サイトについて</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,41 @@
+#mondai,
+#check-btn,
+#erase-btn,
+#timer-bar,
+#stop-btn {
+    display: none;
+}
+
+.num-btn {
+    width: 46px;
+    height: 45px;
+    background-color: whitesmoke;
+    border: thin solid dimgray;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: serif;
+    color: black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: none;
+
+    /* reset */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#shikispace {
+    color: lightgray;
+    display: none;
+}
+
+.btn {
+    margin-bottom: 10px;
+}
+
+#seikaisuu {
+    font-size: 18px;
+}
