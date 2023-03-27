@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-XKL20YHCTB');
+        </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四角形の性質の練習ドリル | 算数＆計算ドリル 学アプ</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="算数パズルで楽しく算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="4nen\zukei3\style_zukei3.css">
+</head>
+<main>
+<body>
+
+    <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
+    <audio id="audio3" src="machigaion2.mp3" preload="auto"></audio>
+
+    <div>
+        <select id="step">
+            <option value="1">角・辺の性質</option>
+            <option value="2">対角線の性質</option>
+            <option value="3">四角形の関係</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="button" id="start-btn" class="btn" value="スタート">
+    </div>
+
+    <div id="mondai0">次の性質が「必ず」当てはまる四角形はどれ?</div>
+    <div id="mondai"></div>
+
+    <div>
+        <input type="button" id="sq1-btn" class="sq-btn" value="正方形">
+        <input type="button" id="sq2-btn" class="sq-btn" value="長方形">
+        <input type="button" id="sq3-btn" class="sq-btn" value="ひし形">
+    </div>
+    <div>
+        <input type="button" id="sq4-btn" class="sq-btn" value="平行四辺形">
+        <input type="button" id="sq5-btn" class="sq-btn" value="台形">
+        <input type="button" id="sq6-btn" class="sq-btn" value="四角形">
+    </div>
+    <br>
+    <div>
+        <input type="button" id="check-btn" class="btn" value="答え合わせ">
+        <input type="button" id="erase-btn" class="btn" value="元にもどす">
+    </div>
+
+    <div>
+        <input type="button" id="next-btn" class="btn" value="次へ">
+    </div>
+
+    <div>
+        <progress id="progress" value="0"></progress>
+    </div>
+
+    <div>
+        <input type="button" id="stop-btn" class="btn" value="やめる">
+    </div>
+
+    <div id="seikai0">【答え】</div>
+    <div id="seikai"></div>
+
+    <script src="4nen\zukei3\pgm_zukei3.js"></script>
+    <h1 class="footer-container2">四角形の性質の練習ドリル</h1>
+
+    <hr class="dotted">
+    <h2 class="footer-container2">【台形】</h2>
+        <ul class="footer-container2">
+            <li>向かい合う1組の辺が平行な四角形</li>
+        </ul>
+
+    <h2 class="footer-container2">【平行四辺形】</h2>
+        <ul class="footer-container2">
+            <li>向かい合う2組の辺がそれぞれ平行な四角形</li>
+            <li>向かい合う辺の長さは等しく、向かい合う角の大きさも等しい</li>
+            <li>2本の対角線はそれぞれの真ん中で交わる
+            <li>「平行四辺形」は必ず「台形」（「台形」は「平行四辺形」でない時もある）</li>
+        </ul>
+    
+    <h2 class="footer-container2">【ひし形】</h2>
+        <ul class="footer-container2">
+            <li>4つの辺の長さが全て等しい四角形</li>
+            <li>2本の対角線は垂直に交わる
+            <li>「ひし形」は必ず「平行四辺形」（「平行四辺形」は「ひし形」でない時もある）</li>
+        </ul>
+    
+    <h2 class="footer-container2">【長方形】</h2>
+        <ul class="footer-container2">
+            <li>4つの角の大きさが全て等しい（全て直角の）四角形</li>
+            <li>2本の対角線は同じ長さ
+            <li>「長方形」は必ず「平行四辺形」（「平行四辺形」は「長方形」でない時もある）</li>
+        </ul>
+
+    <h2 class="footer-container2">【正方形】</h2>
+        <ul class="footer-container2">
+            <li>4つの辺の長さが全て等しく、4つの角の大きさが全て等しい（全て直角の）四角形</li>
+            <li>「正方形」は必ず「長方形」であり、必ず「ひし形」</li>
+        </ul>
+
+    <nav>
+        <ol class="pankuzu">
+            <li><a href="top.html">トップ</a></li>
+            <li><a href="4nen.html">小学4年生の算数</a></li>
+        </ol>
+    </nav>
+</main>
+
+<footer class="footer-container">
+    <hr>
+    <p>算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで、全学年向け</p>
+    <p>Copyright(C) 2022- All Rights Reserved</p>
+    <a class="footer-container2" href="aboutus.html">当サイトについて</a>
+</footer>
+</body>
+</html>
