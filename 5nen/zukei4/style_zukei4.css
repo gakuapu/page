@@ -1,0 +1,32 @@
+#kotae1,
+#kotae2,
+#erase-btn,
+#reset-btn,
+#progress {
+    display: none;
+}
+
+#mondai,
+#dot {
+    font-size: 20px;
+}
+
+#kotae1,
+#kotae2 {
+    width: 45px;
+    height: 35px;
+    font-size: 20px;
+    font-family: serif;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#mondai0 {
+    font-size: 16px;
+    display: none;
+}
+
+#unit {
+    font-size: 20px;
+    display: none;
+}
