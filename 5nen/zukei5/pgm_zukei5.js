@@ -1,4 +1,4 @@
-function zukei1(){
+function zukei5(){
     
     const $step = document.getElementById("step");
     const $startBtn = document.getElementById("start-btn");
@@ -6,21 +6,16 @@ function zukei1(){
     const $resetBtn = document.getElementById("reset-btn");
 
     const $mondai = document.getElementById("mondai");
-    const $kotae1 = document.getElementById("kotae1");
-    const $unit = document.getElementById("unit");
+    const $kotae = document.getElementById("kotae");
     
     const $progress = document.getElementById("progress");
-
-    const $memoHyojiBtn = document.getElementById("memohyoji");//計算メモ
-    const $memoClearBtn = document.getElementById("memoclear");//計算メモ
-    const $memoTable = document.getElementById("memotable");//計算メモ
     
     let count = 0;
     let n = 0;
-    let nt = "";
     let nb = 0;
-    let a1 = 0;
-    let mondaiNum = 5;
+    let a = 0;
+    let nt = "";
+    let mondaiNum = 8;
     
     function getRandom(min, max){
         let randomNum = Math.floor(Math.random() * (max + 1 - min)) + min;
@@ -31,15 +26,14 @@ function zukei1(){
         count = 0;
         n = 0;
         nb = 0;
-        a1 = 0;
-        $kotae1.value = "";
-        $unit.innerText = "";
+        a = 0;
+        p = 0;
+        $kotae.value = "";
         $mondai.innerText = "";
     };
 
     function switchdisplay(){
-        $kotae1.style.display = "inline-block"; 
-        $unit.innerText = "";
+        $kotae.style.display = "inline-block"; 
         $progress.style.display = "block";
         $eraseBtn.style.display = "inline-block";
         $resetBtn.style.display = "inline-block";
@@ -48,14 +42,10 @@ function zukei1(){
     };
 
     function defaultdisplay(){
-        $kotae1.style.display = "none";
-        $unit.innerText = "";
+        $kotae.style.display = "none";
         $progress.style.display = "none";
         $eraseBtn.style.display = "none";
         $resetBtn.style.display = "none";
-        $memoHyojiBtn.style.display = "none";//計算メモ
-        $memoClearBtn.style.display = "none";//計算メモ
-        $memoTable.style.display = "none";//計算メモ
         $step.style.display = "block";
         $startBtn.style.display = "block";
     };
@@ -69,7 +59,6 @@ function zukei1(){
     };
 
     function switchSetup(stepValue){
-        $memoHyojiBtn.style.display = "block";//計算メモ
         switch(stepValue){
             case "1":
                 step1Setup();
@@ -89,12 +78,10 @@ function zukei1(){
     };
 
     function checkAnswer(){
-        if ($kotae1.value == a1) {
-            $memoClearBtn.style.display = "none";//計算メモ
-            $memoTable.style.display = "none";//計算メモ
+        if ($kotae.value == a) {
             setTimeout(() => {
                 audio1.play();
-                $kotae1.value = "";
+                $kotae.value = "";
                 $progress.value = count / mondaiNum;
             }, 500);
             count++;
@@ -104,6 +91,12 @@ function zukei1(){
 
     function nConvertText(n){
         switch(n){
+            case 3:
+                nt = "三";
+                break;
+            case 4:
+                nt = "四";
+                break;
             case 5:
                 nt = "五";
                 break;
@@ -119,9 +112,6 @@ function zukei1(){
             case 9:
                 nt = "九";
                 break;
-            case 10:
-                nt = "十";
-                break;
             default:
                 alert(`リロードして下さい`);
         };
@@ -129,15 +119,14 @@ function zukei1(){
 
     function step1Setup(){
         if (count < mondaiNum){
-            $unit.innerText = "°";
             nb = n;
-            n = getRandom(5, 10);
+            n = getRandom(3, 9);
             while (n == nb){
-                n = getRandom(5, 10);
+                n = getRandom(3, 9);
             };
             nConvertText(n);
-            a1 = (n - 2) * 180;
-            $mondai.innerText = nt + `角形の内角の和は?`;
+            a = n + 2;
+            $mondai.innerText = nt + `角柱の面の数は?`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -145,15 +134,14 @@ function zukei1(){
 
     function step2Setup(){
         if (count < mondaiNum){
-            $unit.innerText = "°";
             nb = n;
-            n = getRandom(5, 10);
-            while (n == nb || 360 % n != 0) {
-                n = getRandom(5, 10);
+            n = getRandom(3, 9);
+            while (n == nb){
+                n = getRandom(3, 9);
             };
             nConvertText(n);
-            a1 = (n - 2) * 180 / n;
-            $mondai.innerText = `正` + nt + `角形の1つの頂点の内角の大きさは?`;
+            a = n * 2;
+            $mondai.innerText = nt + `角柱の頂点の数は?`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -161,15 +149,14 @@ function zukei1(){
 
     function step3Setup(){
         if (count < mondaiNum){
-            $unit.innerText = "°";
             nb = n;
-            n = getRandom(5, 10);
-            while (n == nb || 360 % n != 0) {
-                n = getRandom(5, 10);
+            n = getRandom(3, 9);
+            while (n == nb){
+                n = getRandom(3, 9);
             };
             nConvertText(n);
-            a1 = 360 / n;
-            $mondai.innerText = `正` + nt + `角形の1つの頂点の外角の大きさは?`;
+            a = n * 3;
+            $mondai.innerText = nt + `角柱の辺の数は?`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -177,21 +164,35 @@ function zukei1(){
 
     function step4Setup(){
         if (count < mondaiNum){
-            $unit.innerText = "本";
-            nb = n;
-            n = getRandom(5, 10);
-            while (n == nb){
-                n = getRandom(5, 10);
+            nb = p;
+            p = getRandom(1, 3);
+            while (p == nb){
+                p = getRandom(1, 3);
             };
+            n = getRandom(3, 9);
             nConvertText(n);
-            a1 = (n - 3) * n / 2;
-            $mondai.innerText = nt + `角形の対角線の総数は?`;
+            switch (p) {
+                case 1:
+                    a = n + 2;
+                    $mondai.innerText = nt + `角柱の面の数は?`;
+                    break;
+                case 2:
+                    a = n * 2;
+                    $mondai.innerText = nt + `角柱の頂点の数は?`;
+                    break;
+                case 3:
+                    a = n * 3;
+                    $mondai.innerText = nt + `角柱の辺の数は?`;
+                    break;
+                default:
+                    alert (`リロードして下さい`);
+            };
         } else if (count == mondaiNum){
             closing();
         };
     };
 
-    $kotae1.addEventListener("input", () => {
+    $kotae.addEventListener("input", () => {
         checkAnswer();
     });
 
@@ -203,7 +204,7 @@ function zukei1(){
     });
     
     $eraseBtn.addEventListener("click", () => {
-        $kotae1.value = "";
+        $kotae.value = "";
     });
     
     $resetBtn.addEventListener("click", () => {
@@ -214,4 +215,4 @@ function zukei1(){
     
 };
     
-zukei1();
+zukei5();

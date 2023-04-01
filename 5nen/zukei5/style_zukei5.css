@@ -1,0 +1,19 @@
+#kotae,
+#progress,
+#erase-btn,
+#reset-btn {
+    display: none;
+}
+
+#mondai{
+    font-size: 20px;
+}
+
+#kotae {
+    width: 45px;
+    height: 35px;
+    font-size: 20px;
+    font-family: serif;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
