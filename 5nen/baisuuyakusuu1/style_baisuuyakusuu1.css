@@ -1,0 +1,14 @@
+#kotae,
+#progress,
+#erase-btn,
+#reset-btn {
+    display: none;
+}
+
+#mondai {
+    font-size: 20px;
+}
+
+#hint {
+    font-size: 16px;
+}
