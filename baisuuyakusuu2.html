@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-XKL20YHCTB');
+        </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小学5年生の約数・公約数・最大公約数の練習ドリル | 算数＆計算ドリル 学アプ</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロード不要">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="5nen\baisuuyakusuu2\style_baisuuyakusuu2.css">
+    <link rel="stylesheet" href="public\keisanmemo\public_keisanmemo.css">
+</head>
+<main>
+<body>
+
+    <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
+
+    <div>
+        <select id="step">
+            <option value="1">ステップ1</option>
+            <option value="2">ステップ2</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="button" id="start-btn" class="btn" value="スタート">
+    </div>
+
+    <div id="mondai"></div>
+
+    <input id="kotae" class="kotae" type="tel">
+
+    <!--計算メモモジュール（↓＋css）-->
+    <input id="memohyoji" type="button" class="btn" value="計算メモを表示">
+    <input id="memoclear" type="button" class="btn" value="計算メモ非表示">
+    <table id="memotable">
+        <tr id = "mt1"></tr>
+        <tr id = "mt2"></tr>
+        <tr id = "mt3"></tr>
+        <tr id = "mt4"></tr>
+        <tr id = "mt5"></tr>
+        <tr id = "mt6"></tr>
+    </table>
+    <script src="public\keisanmemo\public_keisanmemo.js"></script>
+    <!--計算メモモジュール-->
+
+    <div>
+        <progress id="progress" value="0"></progress>
+    </div>
+
+    <div>
+        <input type="button" id="erase-btn" class="btn" value="けす">
+        <input type="button" id="reset-btn" class="btn" value="リセット">
+    </div>
+
+    <script src="5nen\baisuuyakusuu2\pgm_baisuuyakusuu2.js"></script>
+    <br>
+    <h1 class="footer-container2">約数・公約数・最大公約数とは?</h1>
+    <ul class="footer-container2">
+        <li>ステップ1：約数の練習問題</li>
+        <li>ステップ2：公約数・最大公約数の練習問題</li>
+    </ul>
+
+    <hr class="dotted">
+
+    <h2 class="footer-container2">【約数とは】</h2>
+    <p class="menutxt">ある数「〇」を割り切れる整数を「〇の約数」と言います。</p>
+    <p class="menutxt">例：12の約数⇒1, 2, 3, 4, 6, 12</p>
+    <p class="menutxt">1と〇自身は必ず〇の約数になります。<br>
+    (1と〇は、必ず〇を割り切れるため)</p>
+
+    <h2 class="footer-container2">【約数の求め方】</h2>
+    <p class="menutxt">「〇＝□×△」のかけ算で表せる場合、□と△は、〇の約数になります。<br>
+    （□も△も、〇を割り切れるため：〇÷□＝△、〇÷△＝□）<br>
+    この性質を使うと、約数を効率的に見つけられます。</p>
+    <p class="menutxt">例：12の約数⇒12＝1×12、2×6、3×4なので、12の約数は「1, 2, 3, 4, 6, 12」の6個<br>
+    例：16の約数⇒16＝1×16、2×8、4×4なので、16の約数は「1, 2, 4, 8, 16」の5個<br>
+    例：7の約数⇒7＝1×7なので、7の約数は「1, 7」の2個</p>
+    <p class="menutxt">かけ算の1つ目の数(□)を1から始めて、1つ目の数(□)が2つ目の数(△)を超えるまで増やしながら約数をさがすのが効率的です。</p>
+
+    <h2 class="footer-container2">【素数とは】</h2>
+    <p class="menutxt">約数が1とある数「〇」自身の2つしかない整数を「素数」と言います。</p>
+    <p class="menutxt">例：7の約数は1と7自身の2つしかないため、7は素数</p>
+    <p class="menutxt">なお、1は、約数が「1」の1つしかないため、素数ではありません。</p>
+
+    <h2 class="footer-container2">【公約数とは】</h2>
+    <p class="menutxt">ある数「〇」の約数であり、ある数「●」の約数でもある数を「〇と●の公約数」と言います。<br>
+    「公約数」の「公」は、「共通の」という意味です。</p>
+    <p class="menutxt">例：12と18の公約数⇒「1, 2, 3, 6」の4つ</p>
+
+    <h2 class="footer-container2">【公約数の求め方】</h2>
+    <p class="menutxt">求める方法はいくつかありますが、2つの数の約数を全て求めて調べるのではなく、例えば「一方の数（特に約数が少ない方の数）の約数が、もう1つの数の約数になっているか(割り切れるか)」を調べて見つける方法があります。</p>
+    <p class="menutxt">例：16と36の公約数の求め方：<br>
+    16の約数⇒16＝1×16, 2×8, 4×4なので、16の約数は「1, 2, 4, 8, 16」の5つ。このうち、36を割り切れるは「1, 2, 4」の3つ</p>
+
+    <h2 class="footer-container2">【最大公約数とは】</h2>
+    <p class="menutxt">一番大きい公約数のことです。<br>
+    例：12と18の公約数は「1, 2, 3, 6」、最大公約数は「6」</p>
+    <p class="menutxt">なお、公約数は「最大公約数の約数」になります。</p>
+
+    <h2 class="footer-container2">【「互いに素（たがいにそ）」とは】</h2>
+    <p class="menutxt">公約数が「1」しかない場合を「互いに素（たがいにそ）」と言います。</p>
+    <p class="menutxt">例：14と15は、公約数が「1」だけのため、互いに素</p>
+
+    <nav>
+        <ol class="pankuzu">
+            <li><a href="top.html">トップ</a></li>
+            <li><a href="5nen.html">小学5年生の算数</a></li>
+        </ol>
+    </nav>
+</main>
+
+<footer class="footer-container">
+    <hr>
+    <p>算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで、全学年向け</p>
+    <p>Copyright(C) 2022- All Rights Reserved</p>
+    <a class="footer-container2" href="aboutus.html">当サイトについて</a>
+</footer>
+</body>
+</html>

@@ -1,4 +1,4 @@
-function baisuuyakusuu1(){
+function baisuuyakusuu2(){
     
     const $step = document.getElementById("step");
     const $startBtn = document.getElementById("start-btn");
@@ -6,7 +6,6 @@ function baisuuyakusuu1(){
     const $resetBtn = document.getElementById("reset-btn");
 
     const $mondai = document.getElementById("mondai");
-    const $hint = document.getElementById("hint");
     const $kotae = document.getElementById("kotae");
     
     const $progress = document.getElementById("progress");
@@ -16,11 +15,15 @@ function baisuuyakusuu1(){
     const $memoTable = document.getElementById("memotable");//計算メモ
 
     let count = 0;
+    let n11 = 0;
+    let n12 = 0;
     let n1 = 0;
     let n2 = 0;
     let n3 = 0;
-    let n4 = 0;
     let n5 = 0;
+    let n21 = 0;
+    let n31 = 0;
+    let n51 = 0;
     let nb = 0;
     let a = 0;
     let p = 0;
@@ -33,17 +36,20 @@ function baisuuyakusuu1(){
     
     function defaultlet(){
         count = 0;
+        n11 = 0;
+        n12 = 0;
         n1 = 0;
         n2 = 0;
         n3 = 0;
-        n4 = 0;
         n5 = 0;
+        n21 = 0;
+        n31 = 0;
+        n51 = 0;
         nb = 0;
         a = 0;
         p = 0;
         $kotae.value = "";
         $mondai.innerText = "";
-        $hint.innerText = "";
     };
 
     function switchdisplay(){
@@ -75,17 +81,45 @@ function baisuuyakusuu1(){
         alert(`クリアしました`);
     };
 
+    function generateNum(){
+        n2 = getRandom(0, 2);
+        switch (n2) {
+            case 2:
+                n3 = getRandom(0, 1);
+                n5 = getRandom(0, 1 - n3);
+                break;
+            case 1:
+                n3 = getRandom(0, 2);
+                if (n3 == 0) {
+                    n5 = 1;
+                } else {
+                    n5 = getRandom(0, 2 - n3);
+                };
+                break;
+            case 0:
+                n3 = getRandom(0, 2);
+                if (n3 == 0) {
+                    n5 = 2;
+                } else {
+                    n5 = getRandom(2 - n3, 1);
+                };
+                break;
+            default:
+                alert(`リロードして下さい`);
+        };
+    };
+
     function step1Setup(){
-        $memoHyojiBtn.style.display = "none"
         if (count < mondaiNum){
-            nb = n1;
-            n1 = getRandom(2, 9); 
-            while (n1 == nb) {
-                n1 = getRandom(2, 9); 
+            nb = n11;
+            generateNum();
+            n11 = (2 ** n2) * (3 ** n3) * (5 ** n5);
+            while (n11 == nb) {
+                generateNum();
+                n11 = (2 ** n2) * (3 ** n3) * (5 ** n5);
             };
-            n2 = getRandom(3, 9);
-            a = n1 * n2;
-            $mondai.innerText = n1 + `の倍数のうち、小さい方から` + n2 + `番目の数は?`;
+            a = (n2 + 1) * (n3 + 1) * (n5 + 1);
+            $mondai.innerText = n11 + `の約数は何個?`;
         } else if (count == mondaiNum){
             closing();
         };
@@ -93,81 +127,37 @@ function baisuuyakusuu1(){
 
     function step2Setup(){
         if (count < mondaiNum){
-            nb = n1;
-            n1 = getRandom(1, 3); 
-            while (n1 == nb) {
-                n1 = getRandom(1, 3); 
+            nb = p;
+            p = getRandom(0, 1);
+            while (p == nb) {
+                p = getRandom(0, 1);
             };
-            n2 = 2 + getRandom(0, 1);
-            n3 = 3 + getRandom(0, 1) * 2;
-            while (n3 == n2) {
-                n3 = 3 + getRandom(0, 1) * 2;
+            generateNum();
+            n11 = (2 ** n2) * (3 ** n3) * (5 ** n5);
+            n21 = n2;
+            n31 = n3;
+            n51 = n5;
+            generateNum();
+            n12 = (2 ** n2) * (3 ** n3) * (5 ** n5);
+            while (n12 == n11) {
+                generateNum();
+                n12 = (2 ** n2) * (3 ** n3) * (5 ** n5);
             };
-            p = getRandom(1, 3);
-            if (p == 1) {
-                n2 = n2 * n1;
-            } else if (p == 2) {
-                n3 = n3 * n1;
+            n2 = Math.min(n2, n21);
+            n3 = Math.min(n3, n31);
+            n5 = Math.min(n5, n51);
+            if (n12 < n11) {
+                n1 = n11;
+                n11 = n12;
+                n12 = n1;
+            };
+            if (p == 0) {
+                $mondai.innerText = `(` + n11 + `, ` + n12 + `)の最大公約数はいくつ?`;
+                a = (2 ** n2) * (3 ** n3) * (5 ** n5);
             } else {
-                n2 = n2 * n1;
-                n3 = n3 * n1;
+                $mondai.innerText = `(` + n11 + `, ` + n12 + `)の公約数は何個?`;
+                a = (n2 + 1) * (n3 + 1) * (n5 + 1);
             };
-            $mondai.innerText = n2 + `と` + n3 + `の最小公倍数は?`;
-            a = n2 * n3;
-            n4 = 1;
-            while (n2 % 2 == 0 && n3 % 2 == 0) {
-                n4 = n4 * 2;
-                n2 = n2 / 2;
-                n3 = n3 / 2;
-            };
-            while (n2 % 3 == 0 && n3 % 3 == 0) {
-                n4 = n4 * 3;
-                n2 = n2 / 3;
-                n3 = n3 / 3;
-            };
-            a = a / n4;
-        } else if (count == mondaiNum){
-            closing();
-        };
-    };
-
-    function step3Setup(){
-        $hint.innerText = `ヒント：まず最小公倍数を計算しよう`;
-        if (count < mondaiNum){
-            nb = n1;
-            n1 = getRandom(1, 3); 
-            while (n1 == nb) {
-                n1 = getRandom(1, 3); 
-            };
-            n2 = 2 + getRandom(0, 1);
-            n3 = 3 + getRandom(0, 1) * 2;
-            while (n3 == n2) {
-                n3 = 3 + getRandom(0, 1) * 2;
-            };
-            p = getRandom(1, 3);
-            if (p == 1) {
-                n2 = n2 * n1;
-            } else if (p == 2) {
-                n3 = n3 * n1;
-            } else {
-                n2 = n2 * n1;
-                n3 = n3 * n1;
-            };
-            n5 = getRandom(2, 5);
-            $mondai.innerText = n2 + `と` + n3 + `の公倍数のうち、小さい方から` + n5 + `番目の数は?`;
-            a = n2 * n3;
-            n4 = 1;
-            while (n2 % 2 == 0 && n3 % 2 == 0) {
-                n4 = n4 * 2;
-                n2 = n2 / 2;
-                n3 = n3 / 2;
-            };
-            while (n2 % 3 == 0 && n3 % 3 == 0) {
-                n4 = n4 * 3;
-                n2 = n2 / 3;
-                n3 = n3 / 3;
-            };
-            a = a * n5 / n4;
         } else if (count == mondaiNum){
             closing();
         };
@@ -181,9 +171,6 @@ function baisuuyakusuu1(){
                 break;
             case "2":
                 step2Setup();
-                break;
-            case "3":
-                step3Setup();
                 break;
             default:
                 alert(`リロードして下さい`);
@@ -223,4 +210,4 @@ function baisuuyakusuu1(){
     
 };
     
-baisuuyakusuu1();
+baisuuyakusuu2();
