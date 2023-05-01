@@ -19,7 +19,6 @@ function bunsuu2(){
     const $ia = document.getElementById("ia");
     const $bunsuua = document.getElementById("bunsuua");
     const $ca = document.getElementById("ca");
-    const $hrkotae = document.getElementById("hrkotae");
     const $ma = document.getElementById("ma");
     
     const $progress = document.getElementById("progress");

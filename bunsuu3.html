@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-XKL20YHCTB');
+        </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小学5年生の分数の計算ドリル：基本問題 | 算数＆計算ドリル 学アプ</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで全学年向け。ブラウザで動くのでダウンロードも不要">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="5nen\bunsuu3\style_bunsuu3.css">
+    <link rel="stylesheet" href="public\keisanmemo\public_keisanmemo.css">
+</head>
+<main>
+<body>
+
+    <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
+
+    <div>
+        <select id="step">
+            <option value="1">ステップ1</option>
+            <option value="2">ステップ2</option>
+            <option value="3">ステップ3</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="button" id="start-btn" class="btn" value="スタート">
+    </div>
+
+    <!--spanタグの間の隙間の処理：改行をコメントアウト-->
+
+    <div id="mondai0"></div>
+
+    <div id="mondaikotae">
+        <a id="i1" class="seisuu"></a>
+        <span id="bunsuu1" class="bunsuu">
+            <div id="c1" class="child"></div>
+            <div id="m1" class="mother"></div>
+        </span><!--
+        --><a id="kigou1" class="kigou"></a><!--
+        --><a id="i2" class="seisuu"></a>
+        <span id="bunsuu2" class="bunsuu">
+            <div id="c2" class="child"></div>
+            <div id="m2" class="mother"></div>
+        </span><!--
+        --><a id="kigou2" class="kigou">＝</a>
+        <input id="ia" class="kotae" type="tel">
+        <div id="bunsuua" class="bunsuu">
+            <input id="ca" class="kotae" type="tel">
+            <hr id="hrkotae">
+            <input id="ma" class="kotae" type="tel">
+            <div id="m3" class="mother"></div>
+        </div>
+    </div>
+
+    <!--計算メモモジュール（↓＋css）-->
+    <input id="memohyoji" type="button" class="btn" value="計算メモを表示">
+    <input id="memoclear" type="button" class="btn" value="計算メモ非表示">
+    <table id="memotable">
+        <tr id = "mt1"></tr>
+        <tr id = "mt2"></tr>
+        <tr id = "mt3"></tr>
+        <tr id = "mt4"></tr>
+        <tr id = "mt5"></tr>
+        <tr id = "mt6"></tr>
+    </table>
+    <script src="public\keisanmemo\public_keisanmemo.js"></script>
+    <!--計算メモモジュール-->
+
+    <div>
+        <progress id="progress" value="0"></progress>
+    </div>
+
+    <div>
+        <input type="button" id="erase-btn" class="btn" value="けす">
+        <input type="button" id="reset-btn" class="btn" value="リセット">
+    </div>
+
+    <script src="5nen\bunsuu3\pgm_bunsuu3.js"></script>
+    <br>
+    <h1 class="footer-container2">小学5年生の分数の計算ドリル：基本問題</h1>
+    <ul class="footer-container2">
+        <li>ステップ1：約分・通分の練習</li>
+        <li>ステップ2：分数の足し算</li>
+        <li>ステップ3：分数の引き算</li>
+    </ul>
+
+    <hr class="dotted">
+
+    <h2 class="footer-container2">【分数の足し算・引き算の方法】</h2>
+        <p class="menutxt">① 通分する：分母を公倍数にそろえる。元の分数と大きさが変わらないように分子を調整する</p>
+        <p class="menutxt">② 足し算・引き算をする</p>
+        <p class="menutxt">③ 約分する：分母ができるだけ小さい分数になおす</p>
+
+    <nav>
+        <ol class="pankuzu">
+            <li><a href="top.html">トップ</a></li>
+            <li><a href="5nen.html">小学5年生の算数</a></li>
+        </ol>
+    </nav>
+</main>
+
+<footer class="footer-container">
+    <hr>
+    <p>算数も計算も得意に。暗算と自動丸付けでさくさく進める無料の算数・計算ドリルアプリ。小学校1年生から6年生まで、全学年向け</p>
+    <p>Copyright(C) 2022- All Rights Reserved</p>
+    <a class="footer-container2" href="aboutus.html">当サイトについて</a>
+</footer>
+</body>
+</html>
