@@ -13,10 +13,6 @@ function gyakusan1(){
     let count = 0;
     let n1 = 0;
     let n2 = 0;
-    let n3 = 0;
-    let n4 = 0;
-    let n5 = 0;
-    let n6 = 0;
     let a = 0;
     let p = 0;
     let pb = 0;
@@ -31,10 +27,6 @@ function gyakusan1(){
         count = 0;
         n1 = 0;
         n2 = 0;
-        n3 = 0;
-        n4 = 0;
-        n5 = 0;
-        n6 = 0;
         a = 0;
         p = 0;
         pb = 0;

@@ -13,57 +13,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中学受験の算数：植木算（基本ドリル）| 算数＆計算ドリル 学アプ</title>
+    <title>塾の準備：□を求める問題1 | 算数＆計算ドリル 学アプ</title>
     <link rel="icon" href="favicon.ico">
     <meta name="description" content="中学受験のための無料の算数・計算ドリルアプリ。これから塾に入るヒトから、もう塾に入って中学受験の勉強をしているヒトまで。ブラウザで動くのでダウンロード不要">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="juken\uekizan1\style_uekizan1.css">
+    <link rel="stylesheet" href="juken\juku\juku1.css">
 </head>
 <main>
 <body>
 
     <audio id="audio1" src="seikaion.mp3" preload="auto"></audio>
-    <audio id="audio2" src="clearon.mp3" preload="auto"></audio>
-
-    <div>
-        <select id="step">
-            <option value="1">パターン1</option>
-            <option value="2">パターン2</option>
-            <option value="3">パターン3</option>
-            <option value="4">ミックス</option>
-        </select>
-    </div>
 
     <div>
         <input type="button" id="start-btn" class="btn" value="スタート">
-        <input type="button" id="hint-btn" class="btn" value="ヒント">
     </div>
 
     <div id="mondai"></div>
-    <div id="hint"></div>
 
-    <input id="kotae" class="kotae" type="tel">
+    <div>
+        <input id="kotae" class="kotae" type="tel">
+    <div>
 
     <div>
         <progress id="progress" value="0"></progress>
     </div>
 
     <div>
+        <input type="button" id="check-btn" class="btn" value="次へ">
         <input type="button" id="erase-btn" class="btn" value="けす">
-        <input type="button" id="reset-btn" class="btn" value="リセット">
     </div>
 
-    <script src="juken\uekizan1\pgm_uekizan1.js"></script>
+    <div>
+        <input type="button" id="reset-btn" class="btn" value="やめる">
+    </div>
+
+    <div id="kekka"></div>
+    <div id="recommend"></div>
+    <ul id="recommend-list"></ul>
+
+    <div>
+        <input type="button" id="back-to-start-btn" class="btn" value="スタートに戻る">
+    </div>
+
+    <script src="juken\juku\juku1.js"></script>
     <br>
-    <h1 class="footer-container2">中学受験の算数：植木算（基本ドリル）</h1>
-
-    <ul class="footer-container2">
-        <li>パターン1：必要な木の本数の計算</li>
-        <li>パターン2：道の長さの計算</li>
-        <li>パターン3：木と木の間隔（かんかく）の計算</li>
-        <li>特訓ドリル（ミックス/ヒントなし）</li>
-    </ul>
-
+    <h1 class="footer-container2">じゅくのじゅんび：□を求める問題1</h1>
+    
     <nav>
         <ul class="pankuzu">
             <li><a href="top.html">トップ</a></li>
