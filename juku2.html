@@ -13,11 +13,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>塾の準備：□を求める問題1 | 算数＆計算ドリル 学アプ</title>
+    <title>文章題：おつりの計算 | 算数＆計算ドリル 学アプ</title>
     <link rel="icon" href="favicon.ico">
     <meta name="description" content="中学受験のための無料の算数・計算ドリルアプリ。これから塾に入るヒトから、もう塾に入って中学受験の勉強をしているヒトまで。ブラウザで動くのでダウンロード不要">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="juku\juku1\juku1.css">
+    <link rel="stylesheet" href="juku\juku2\juku2.css">
+    <link rel="stylesheet" href="public\keisanmemo\public_keisanmemo.css">
 </head>
 <main>
 <body>
@@ -32,7 +33,22 @@
 
     <div>
         <input id="kotae" class="kotae" type="tel">
+        <a id="unit">円</a>
     <div>
+
+<!--計算メモ（↓＋css）-->
+<input id="memohyoji" type="button" class="btn" value="計算メモを表示">
+<input id="memoclear" type="button" class="btn" value="計算メモ非表示">
+<table id="memotable">
+    <tr id = "mt1"></tr>
+    <tr id = "mt2"></tr>
+    <tr id = "mt3"></tr>
+    <tr id = "mt4"></tr>
+    <tr id = "mt5"></tr>
+    <tr id = "mt6"></tr>
+</table>
+<script src="public\keisanmemo\public_keisanmemo.js"></script>
+<!--計算メモ-->
 
     <div>
         <progress id="progress" value="0"></progress>
@@ -55,9 +71,9 @@
         <input type="button" id="back-to-start-btn" class="btn" value="スタートに戻る">
     </div>
 
-    <script src="juku\juku1\juku1.js"></script>
+    <script src="juku\juku2\juku2.js"></script>
     <br>
-    <h1 class="footer-container2">じゅくのじゅんび：□を求める問題1</h1>
+    <h1 class="footer-container2">じゅくのじゅんび：おつりを計算する文章題</h1>
     
     <nav>
         <ul class="pankuzu">
