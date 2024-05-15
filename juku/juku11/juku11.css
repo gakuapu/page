@@ -1,0 +1,36 @@
+#unit0,
+#kotae1,
+#unit1,
+#kotae2,
+#unit2,
+#progress,
+#check-btn,
+#erase-btn,
+#reset-btn,
+#back-to-start-btn {
+    display: none;
+}
+
+#kotae1,
+#kotae2 {
+    width: 45px;
+    height: 35px;
+    font-size: 20px;
+    font-family: serif;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#kekka,
+#recommend,
+#mondai,
+#unit0,
+#unit1,
+#unit2 {
+    font-size: 18px;
+}
+
+#recommend-list {
+    margin-top: 5px;
+    font-size: 18px 
+}
