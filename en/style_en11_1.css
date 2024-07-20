@@ -1,0 +1,27 @@
+#mainbox {
+    width: 270px;
+    height: 180px;
+    font-size: 24px;
+    list-style: none;
+    padding: 0.5em;
+    border: thin solid dimgray;
+    margin-top: 0.1em;
+    border-radius: 4px;
+    display: none;
+}
+
+#wordtable {
+    width: 270px;
+    font-size: 16px;
+    list-style: none;
+    padding: 0.5em;
+    border: thin solid dimgray;
+    margin-top: 0.1em;
+    border-radius: 4px;
+}
+
+#ok-btn,
+#again-btn,
+#appear-btn {
+    display: none;
+}

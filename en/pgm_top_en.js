@@ -1,4 +1,5 @@
 function topen() {
+    
     const $grade = document.getElementById("grade");
     const $step = document.getElementById("step");
     const $startBtn = document.getElementById("start-btn");
