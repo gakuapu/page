@@ -6,7 +6,7 @@ function topen() {
     let dref = "";
 
     $startBtn.addEventListener("click", () => {
-        dref = "https://gakuapu.github.io/page/" + $grade.value + "_" + $step.value + ".html";
+        dref = "https://gakuapu.github.io/page/en" + $grade.value + "_" + $step.value + ".html";
         window.location.href = dref;
     });
 
