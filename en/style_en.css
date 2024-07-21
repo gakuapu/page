@@ -1,17 +1,26 @@
-#mainbox {
-    width: 270px;
-    height: 180px;
-    font-size: 24px;
-    list-style: none;
-    padding: 0.5em;
+#mainflame {
+    width: 350px;
+    height: 200px;
     border: thin solid dimgray;
-    margin-top: 0.1em;
     border-radius: 4px;
     display: none;
 }
 
+#mainbox {
+    width: 280px;
+    height: 120px;
+    font-size: 24px;
+    text-align: center;
+    list-style: none;
+    padding: 0.5em;
+    /* border: thin solid dimgray; */
+    margin-top: 0.1em;
+    /* border-radius: 4px; */
+    display: none;
+}
+
 #wordtable {
-    width: 270px;
+    width: 306px;
     font-size: 16px;
     list-style: none;
     padding: 0.5em;
@@ -20,6 +29,7 @@
     border-radius: 4px;
 }
 
+#comp,
 #ok-btn,
 #again-btn,
 #appear-btn {

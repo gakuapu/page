@@ -17,7 +17,7 @@
     <link rel="icon" href="favicon.ico">
     <meta name="description" content="中学生向けの無料の英単語帳アプリ。中学で習う1500英単語をカバー。ブラウザで動くのでダウンロード不要">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="en\style_en11_1.css">
+    <link rel="stylesheet" href="en\style_en.css">
 </head>
 <body>
 
@@ -29,34 +29,54 @@
 
         <div>
             <input type="button" id="startE-btn" class="btn" value="英語 ⇒ 日本語">
-        </div>
-        <div>
             <input type="button" id="startJ-btn" class="btn" value="日本語 ⇒ 英語">
         </div>
 
-        <p id="mainbox"></p>
+        <p id="comp">Completed!</p>
+
+        <div id="mainflame">
+
+        <div id="mainbox"></div>
 
         <div>
             <input type="button" id="ok-btn" class="btn" value="覚えた">
             <input type="button" id="again-btn" class="btn" value="もう1回">
         </div>
 
-        <p>今回学習する英単語一覧</p>
+        </div>
+
+        <hr class="dotted">
 
         <div>
+            <a class="subtoph2">【今回の英単語一覧】</a>
             <input type="button" id="hide-btn" class="btn" value="隠す">
             <input type="button" id="appear-btn" class="btn" value="表示する">
         </div>
 
-        <ul id="wordtable">
-            <li><a id="we1" class="word">one</a><a id="wj1" class="word">いち</a></li>
-            <li><a id="we2" class="word">two</a><a id="wj2" class="word">に</a></li>
-            <li><a id="we3" class="word">three</a><a id="wj3" class="word">さん</a></li>
-            <li><a id="we4" class="word">four</a><a id="wj4" class="word">よん</a></li>
-            <li><a id="we5" class="word">five</a><a id="wj5" class="word">ご</a></li>
-        </ul>
+        <table id="wordtable">
+            <tr>
+                <td>one</td>
+                <td>いち</td>
+            </tr>
+            <tr>
+                <td>two</td>
+                <td>に</td>
+            </tr>
+            <tr>
+                <td>three</td>
+                <td>さん</td>
+            </tr>
+            <tr>
+                <td>four</td>
+                <td>よん</td>
+            </tr>
+            <tr>
+                <td>five</td>
+                <td>ご</td>
+            </tr>
+        </table>
 
-        <script src="en\pgm_en11_1.js"></script>
+        <script src="en\pgm_en.js"></script>
     </main>
 
     <footer class="footer-container">
