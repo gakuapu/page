@@ -1,38 +1,85 @@
-#mainflame {
-    width: 350px;
-    height: 200px;
+#mainbox {
+    width: 340px;
+    height: 120px;
+    font-size: 28px;
+    text-align: center;
     border: thin solid dimgray;
     border-radius: 4px;
-    display: none;
-}
-
-#mainbox {
-    width: 280px;
-    height: 120px;
-    font-size: 24px;
-    text-align: center;
-    list-style: none;
-    padding: 0.5em;
-    /* border: thin solid dimgray; */
     margin-top: 0.1em;
-    /* border-radius: 4px; */
     display: none;
+    padding-top: 0.5em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #wordtable {
-    width: 306px;
+    width: 340px;
     font-size: 16px;
     list-style: none;
-    padding: 0.5em;
-    border: thin solid dimgray;
+    text-align: center;
     margin-top: 0.1em;
-    border-radius: 4px;
+    word-break: break-word;
+}
+
+#wordtable tr:nth-child(odd) td {
+	background: whitesmoke;
+}
+
+#progress {
+    width: 340px;
+}
+
+#comp {
+    font-size: 28px;
 }
 
 #stop-btn,
 #comp,
-#ok-btn,
-#again-btn,
+#progress,
 #appear-btn {
     display: none;
+}
+
+#turn-btn,
+#again-btn {
+    visibility: hidden;
+}
+
+#top-btn,
+#stop-btn,
+#lng,
+#mode,
+#start-btn,
+#turn-btn,
+#again-btn {
+    width: 160px;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+#start-btn {
+    background-color: gainsboro;
+}
+
+#hide-btn,
+#appear-btn {
+    width: 100px;
+}
+
+#turn-btn,
+#again-btn {
+    height: 60px;
+    margin-top: 10px;
+}
+
+#again-btn {
+    color: white;
+    background-color: dodgerblue;
+    border-color: dodgerblue;
+}
+
+#stop-btn {
+    margin-bottom: 10px;
 }

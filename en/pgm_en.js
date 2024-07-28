@@ -6,15 +6,16 @@ function en1() {
     const $mode = document.getElementById("mode");
     const $startBtn = document.getElementById("start-btn");
     const $mainbox = document.getElementById("mainbox");
-    const $mainflame = document.getElementById("mainflame");
     const $comp = document.getElementById("comp");
-    const $okBtn = document.getElementById("ok-btn");
+    const $turnBtn = document.getElementById("turn-btn");
     const $againBtn = document.getElementById("again-btn");
+    const $progress = document.getElementById("progress");
     const $hideBtn = document.getElementById("hide-btn");
     const $appearBtn = document.getElementById("appear-btn");
     const $wordtable = document.getElementById("wordtable");
 
-    let currentlng = 0; //EtoJなら0, JtoEなら1
+    let startlng = 0;
+    let currentlng = 0;
     let mode = 0;
     let cardnum = 0;
     let cardnumMax = 0;
@@ -39,16 +40,17 @@ function en1() {
     };
 
     function defaultdisplay () {
-        $mainflame.style.display = "none";
         $mainbox.style.display = "none";
         $stopBtn.style.display = "none";
         $topBtn.style.display = "block";
-        $okBtn.style.display = "none";
-        $againBtn.style.display = "none";
+        $turnBtn.style.visibility = "hidden";
+        $againBtn.style.visibility = "hidden";
+        $progress.style.display = "none";
         $lng.style.display = "inline-block";
         $mode.style.display = "inline-block";
         $startBtn.style.display = "block";
         $comp.style.display = "none";
+        startlng = 0;
         currentlng = 0;
         mode = 0;
         cardnum = 0;
@@ -56,6 +58,7 @@ function en1() {
         tgttext = "";
         tgtnum = 0;
         worddata.length = 0;
+        $progress.value = 0;
     };
  
     $stopBtn.addEventListener("click", () => {
@@ -78,6 +81,7 @@ function en1() {
             $mainbox.innerText = worddata[cardnum][0];
         };
         cardnum++;
+        $progress.value = cardnum / cardnumMax;
         if (cardnum < cardnumMax) {
             setTimeout (modesetup2a, 3000 / mode);
         } else {
@@ -87,63 +91,66 @@ function en1() {
 
     function modesetup () {
         if (mode != 0) {
-            $againBtn.style.display = "inline-block"
+            $againBtn.style.visibility = "visible"
             modesetup2a ();
         };
     };
 
-    $mainbox.addEventListener("click", () => { //こっちを次に進むにする
-        if (mode == 0) {
-            $okBtn.style.display = "inline-block";
-            $againBtn.style.display = "inline-block";
-            if (currentlng == 0) {
-                $mainbox.innerText = worddata[cardnum][1];
-                currentlng = 1;
-            } else {
-                $mainbox.innerText = worddata[cardnum][0];
-                currentlng = 0;
-            };
+    $turnBtn.addEventListener("click", () => {
+        if (currentlng == 0) {
+            $mainbox.innerText = worddata[cardnum][1];
+            currentlng = 1;
+        } else {
+            $mainbox.innerText = worddata[cardnum][0];
+            currentlng = 0;
         };
     });
 
     $startBtn.addEventListener("click", () => {
         gettable ();
-        console.log(worddata);
+        cardnumMax = worddata.length;
         mode = $mode.value;
-        $mainflame.style.display = "block";
+        startlng = $lng.value;
+        currentlng = startlng;
         $mainbox.style.display = "block";
         $startBtn.style.display = "none";
         $topBtn.style.display = "none";
         $stopBtn.style.display = "block";
         $comp.style.display = "none";
-        $okBtn.style.display = "none";
-        $againBtn.style.display = "none";
+        $turnBtn.style.visibility = "hidden";
+        $againBtn.style.visibility = "hidden";
+        $progress.style.display = "block";
         $lng.style.display = "none";
         $mode.style.display = "none";
-        if ($lng.value == 0) {
-            $mainbox.innerText = worddata[0][0];
-        } else {
-            $mainbox.innerText = worddata[0][1];
-        };
-        currentlng = $lng.value;
-        cardnumMax = worddata.length;
+        $mainbox.innerText = worddata[0][startlng];
+        $progress.value = 0;
         modesetup ();
     });
 
-    $okBtn.addEventListener("click", () => {
-        $okBtn.style.display = "none";
-        $againBtn.style.display = "none";
-        cardnum++;
-        cardnumMax = worddata.length;
-        if (cardnum == cardnumMax) {
-            compdisplay ();
-        } else {
-            if ($lng.value == 0) {
-                $mainbox.innerText = worddata[cardnum][0];
-                currentlng = 0;
+    $mainbox.addEventListener("click", () => {
+        if (mode == 0) {
+            if (currentlng == startlng) {
+                $turnBtn.style.visibility = "visible";
+                $againBtn.style.visibility = "visible";
+                if (startlng == 0) {
+                    $mainbox.innerText = worddata[cardnum][1];
+                    currentlng = 1;
+                } else {
+                    $mainbox.innerText = worddata[cardnum][0];
+                    currentlng = 0;
+                };
             } else {
-                $mainbox.innerText = worddata[cardnum][1];
-                currentlng = 1;
+                $turnBtn.style.visibility = "hidden";
+                $againBtn.style.visibility = "hidden";
+                cardnum++;
+                cardnumMax = worddata.length;
+                $progress.value = cardnum / cardnumMax;
+                if (cardnum == cardnumMax) {
+                    compdisplay ();
+                } else {
+                    $mainbox.innerText = worddata[cardnum][startlng];
+                    currentlng = startlng;
+                };
             };
         };
     });
@@ -163,23 +170,17 @@ function en1() {
             worddata.push(worddata[cardnum]);
             cardnum++;
             cardnumMax = worddata.length;
-            $okBtn.style.display = "none";
-            $againBtn.style.display = "none";
-            if ($lng.value == 0) {
-                $mainbox.innerText = worddata[cardnum][0];
-                currentlng = 0;
-            } else {
-                $mainbox.innerText = worddata[cardnum][1];
-                currentlng = 1;
-            };
+            $progress.value = cardnum / cardnumMax;
+            $turnBtn.style.visibility = "hidden";
+            $againBtn.style.visibility = "hidden";
+            $mainbox.innerText = worddata[cardnum][startlng];
+            currentlng = startlng;
         } else {
             tgttext = $mainbox.innerText;
-            console.log(tgttext);
             tgtnum = findRow (worddata, tgttext);
-            console.log(tgtnum);
             worddata.push(worddata[tgtnum]);
-            console.log(worddata);
             cardnumMax = worddata.length;
+            $progress.value = cardnum / cardnumMax;
         };
     });
 
