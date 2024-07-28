@@ -70,12 +70,14 @@
     width: 100px;
 }
 
+#start-btn,
 #turn-btn,
 #again-btn {
     height: 60px;
     margin-top: 10px;
 }
 
+#start-btn,
 #again-btn {
     color: white;
     background-color: dodgerblue;
