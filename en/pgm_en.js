@@ -30,6 +30,14 @@ function en1() {
         };
     };
 
+    function shuffleArray (array) {
+        for (let ali = array.length - 1; ali > 0; ali--) {
+            const alj = Math.floor(Math.random() * (ali + 1));
+            [array[ali], array[alj]] =  [array[alj], array[ali]];
+        };
+        return array;
+    };
+
     $topBtn.addEventListener("click", () => {
         window.location.href = "https://gakuapu.github.io/page/top_en.html";
     });
@@ -83,9 +91,9 @@ function en1() {
         cardnum++;
         $progress.value = cardnum / cardnumMax;
         if (cardnum < cardnumMax) {
-            setTimeout (modesetup2a, 3000 / mode);
+            setTimeout (modesetup2a, 2000 / mode);
         } else {
-            setTimeout(() => compdisplay(), 3000 / mode);
+            setTimeout(() => compdisplay(), 2000 / mode);
         };
     };
 
@@ -108,6 +116,7 @@ function en1() {
 
     $startBtn.addEventListener("click", () => {
         gettable ();
+        worddata = shuffleArray (worddata);
         cardnumMax = worddata.length;
         mode = $mode.value;
         startlng = $lng.value;
