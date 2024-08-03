@@ -1,6 +1,7 @@
 function en1() {
     
     const $topBtn = document.getElementById("top-btn");
+    const $nextBtn = document.getElementById("next-btn");
     const $stopBtn = document.getElementById("stop-btn");
     const $lng = document.getElementById("lng");
     const $mode = document.getElementById("mode");
@@ -50,7 +51,8 @@ function en1() {
     function defaultdisplay () {
         $mainbox.style.display = "none";
         $stopBtn.style.display = "none";
-        $topBtn.style.display = "block";
+        $topBtn.style.display = "inline-block";
+        $nextBtn.style.display = "inline-block";
         $turnBtn.style.visibility = "hidden";
         $againBtn.style.visibility = "hidden";
         $progress.style.display = "none";
@@ -124,6 +126,7 @@ function en1() {
         $mainbox.style.display = "block";
         $startBtn.style.display = "none";
         $topBtn.style.display = "none";
+        $nextBtn.style.display = "none";
         $stopBtn.style.display = "block";
         $comp.style.display = "none";
         $turnBtn.style.visibility = "hidden";
