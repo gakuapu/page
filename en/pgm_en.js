@@ -40,7 +40,8 @@ function en1() {
     };
 
     $topBtn.addEventListener("click", () => {
-        window.location.href = "https://gakuapu.github.io/page/top_en.html";
+        //window.location.href = "https://gakuapu.github.io/page/top_en.html";
+        window.location.href = "top_en.html";
     });
 
     function compdisplay () {
