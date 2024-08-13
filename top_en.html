@@ -18,6 +18,7 @@
     <meta name="description" content="無料の中学生英単語帳アプリ。英検・TOEIC・TOEFL対策の勉強にも使える、中学で習う約2000英単語をカバー。ブラウザで動くのでダウンロード不要">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="en\style_en.css">
+    <link rel="stylesheet" href="en\style_top_en.css">
 
 </head>
 <body>
@@ -29,30 +30,54 @@
     <main>
         <h2>小学生～中学1年生の英単語：600語</h2>
 
+        <div class="container1">
             <div>
-                <select id="grade1">
-                    <option value="11">中学1年生(1)</option>
-                    <option value="12">中学1年生(2)</option>
-                    <option value="13">中学1年生(3)</option>
-                </select>
+                <div class="subtitle1">英単語帳</div>
+                <div>
+                    <select id="grade1">
+                        <option value="11">中学1年生(1)</option>
+                        <option value="12">中学1年生(2)</option>
+                        <option value="13">中学1年生(3)</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="step1">
+                        <option value="1">第1回</option>
+                        <option value="2">第2回</option>
+                        <option value="3">第3回</option>
+                        <option value="4">第4回</option>
+                        <option value="5">第5回</option>
+                        <option value="6">第6回</option>
+                        <option value="7">第7回</option>
+                        <option value="8">第8回</option>
+                        <option value="9">第9回</option>
+                        <option value="10">第10回</option>
+                    </select>
+                </div>
+                <input type="button" id="start-btn1" class="btn" value="スタート">
             </div>
-
+            <div class="spacer1"></div>
             <div>
-                <select id="step1">
-                    <option value="1">第1回</option>
-                    <option value="2">第2回</option>
-                    <option value="3">第3回</option>
-                    <option value="4">第4回</option>
-                    <option value="5">第5回</option>
-                    <option value="6">第6回</option>
-                    <option value="7">第7回</option>
-                    <option value="8">第8回</option>
-                    <option value="9">第9回</option>
-                    <option value="10">第10回</option>
-                </select>
+                <div class="subtitle2">確認テスト</div>
+                <div>
+                    <select id="grade1t">
+                        <option value="11t">中学1年生(1)</option>
+                        <option value="12t">中学1年生(2)</option>
+                        <option value="13t">中学1年生(3)</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="step1t">
+                        <option value="1t">第1～2回</option>
+                        <option value="2t">第3～4回</option>
+                        <option value="3t">第5～6回</option>
+                        <option value="4t">第7～8回</option>
+                        <option value="5t">第9～10回</option>
+                    </select>
+                </div>
+                <input type="button" id="start-btn1t" class="btn" value="スタート">
             </div>
-
-            <input type="button" id="start-btn1" class="btn" value="スタート">
+        </div>
 
         <hr class="dotted">
 

@@ -55,8 +55,6 @@
 #lng,
 #mode,
 #start-btn,
-#start-btn1,
-#start-btn2,
 #turn-btn,
 #again-btn {
     width: 150px;
@@ -64,9 +62,7 @@
     margin-right: 10px;
 }
 
-#start-btn,
-#start-btn1,
-#start-btn2 {
+#start-btn {
     background-color: gainsboro;
 }
 
@@ -76,8 +72,6 @@
 }
 
 #start-btn,
-#start-btn1,
-#start-btn2,
 #turn-btn,
 #again-btn {
     height: 60px;
@@ -85,8 +79,6 @@
 }
 
 #start-btn,
-#start-btn1,
-#start-btn2,
 #again-btn {
     color: white;
     background-color: dodgerblue;
