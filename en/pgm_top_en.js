@@ -20,6 +20,15 @@ function topen() {
         window.location.href = dref;
     });
 
+    const $grade3 = document.getElementById("grade3");
+    const $step3 = document.getElementById("step3");
+    const $startBtn3 = document.getElementById("start-btn3");
+
+    $startBtn3.addEventListener("click", () => {
+        dref = "en" + $grade3.value + "_" + $step3.value + ".html";
+        window.location.href = dref;
+    });
+
 };
 
 topen();

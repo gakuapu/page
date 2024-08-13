@@ -27,8 +27,10 @@
     border-color: dodgerblue;
 }
 
+.subtitle2,
 #start-btn1t,
-.subtitle2 {
+#start-btn2t,
+#start-btn3t {
     background-color: darkorange;
     border-color: darkorange;
 }
