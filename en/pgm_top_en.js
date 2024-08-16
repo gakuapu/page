@@ -29,6 +29,15 @@ function topen() {
         window.location.href = dref;
     });
 
+    const $grade2t = document.getElementById("grade2t");
+    const $step2t = document.getElementById("step2t");
+    const $startBtn2t = document.getElementById("start-btn2t");
+
+    $startBtn2t.addEventListener("click", () => {
+        dref = "en" + $grade2t.value + "_" + $step2t.value + ".html";
+        window.location.href = dref;
+    });
+
     const $grade3 = document.getElementById("grade3");
     const $step3 = document.getElementById("step3");
     const $startBtn3 = document.getElementById("start-btn3");
@@ -38,6 +47,15 @@ function topen() {
         window.location.href = dref;
     });
 
+    const $grade3t = document.getElementById("grade3t");
+    const $step3t = document.getElementById("step3t");
+    const $startBtn3t = document.getElementById("start-btn3t");
+
+    $startBtn3t.addEventListener("click", () => {
+        dref = "en" + $grade3t.value + "_" + $step3t.value + ".html";
+        window.location.href = dref;
+    });
+    
 };
 
 topen();
