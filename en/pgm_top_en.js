@@ -11,6 +11,15 @@ function topen() {
         window.location.href = dref;
     });
 
+    const $grade1t = document.getElementById("grade1t");
+    const $step1t = document.getElementById("step1t");
+    const $startBtn1t = document.getElementById("start-btn1t");
+
+    $startBtn1t.addEventListener("click", () => {
+        dref = "en" + $grade1t.value + "_" + $step1t.value + ".html";
+        window.location.href = dref;
+    });
+
     const $grade2 = document.getElementById("grade2");
     const $step2 = document.getElementById("step2");
     const $startBtn2 = document.getElementById("start-btn2");

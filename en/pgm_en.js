@@ -6,6 +6,7 @@ function en1() {
     const $lng = document.getElementById("lng");
     const $mode = document.getElementById("mode");
     const $startBtn = document.getElementById("start-btn");
+    const $testBtn = document.getElementById("test-btn");
     const $mainbox = document.getElementById("mainbox");
     const $comp = document.getElementById("comp");
     const $turnBtn = document.getElementById("turn-btn");
@@ -60,6 +61,7 @@ function en1() {
         $lng.style.display = "inline-block";
         $mode.style.display = "inline-block";
         $startBtn.style.display = "block";
+        $testBtn.style.display = "block";
         $comp.style.display = "none";
         startlng = 0;
         currentlng = 0;
@@ -126,6 +128,7 @@ function en1() {
         currentlng = startlng;
         $mainbox.style.display = "block";
         $startBtn.style.display = "none";
+        $testBtn.style.display = "none";
         $topBtn.style.display = "none";
         $nextBtn.style.display = "none";
         $stopBtn.style.display = "block";

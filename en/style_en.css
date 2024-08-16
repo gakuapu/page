@@ -55,6 +55,7 @@
 #lng,
 #mode,
 #start-btn,
+#test-btn,
 #turn-btn,
 #again-btn {
     width: 150px;
@@ -64,6 +65,10 @@
 
 #start-btn {
     background-color: gainsboro;
+}
+
+#test-btn {
+    margin-top: 20px;
 }
 
 #hide-btn,
