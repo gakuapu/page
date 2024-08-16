@@ -1,0 +1,123 @@
+#mainbox {
+    width: 340px;
+    height: 50px;
+    font-size: 24px;
+    text-align: center;
+    border: thin solid dimgray;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: none;
+    padding-top: 0.5em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#answerbox {
+    width: 340px;
+    height: 50px;
+    font-size: 24px;
+    text-align: center;
+    border: thin solid dimgray;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-bottom:10px;
+    display: none;
+    padding-top: 0.5em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#wordtable {
+    width: 340px;
+    font-size: 16px;
+    list-style: none;
+    text-align: center;
+    margin-top: 0.1em;
+    word-break: break-word;
+}
+
+#wordtable tr:nth-child(odd) td {
+	background: #fff4ea;
+}
+
+#wordtable td {
+	padding-left: 15px;
+    padding-right: 15px;
+}
+
+#progress {
+    width: 340px;
+}
+
+#resultmsg {
+    font-size: 20px;
+}
+
+#stop-btn,
+#mainbox,
+#answerbox,
+#erase-btn,
+#check-btn,
+#progress,
+#resultmsg,
+#wordtable {
+    display: none;
+}
+
+#top-btn,
+#next-btn,
+#stop-btn,
+#start-btn,
+#erase-btn,
+#check-btn {
+    width: 150px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#start-btn {
+    height: 60px;
+    margin-top: 10px;
+    color: black;
+    background-color: #ffbf7f;
+    border-color: darkorange;
+}
+
+#check-btn {
+    color: black;
+    background-color: #ffbf7f;
+    border-color: darkorange;
+}
+
+#stop-btn {
+    margin-bottom: 15px;
+}
+
+.char-btn {
+    width: 46px;
+    height: 45px;
+    background-color: #fff4ea;
+    border: thin solid darkorange;
+    border-radius: 5px;
+    font-size: 22px;
+    font-family: serif;
+    color: black;
+    margin: 5px 0px 5px 5px;
+    display: none;
+
+    /* reset */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#progress::-webkit-progress-value {
+    background-color: darkorange;
+}
