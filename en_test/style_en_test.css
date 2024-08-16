@@ -94,20 +94,26 @@
     border-color: darkorange;
 }
 
+#erase-btn,
+#check-btn {
+    height: 60px;
+}
+
 #stop-btn {
     margin-bottom: 15px;
 }
 
 .char-btn {
-    width: 46px;
+    width: 45px;
     height: 45px;
     background-color: #fff4ea;
     border: thin solid darkorange;
     border-radius: 5px;
-    font-size: 22px;
+    font-size: 20px;
     font-family: serif;
+    text-align: center;
     color: black;
-    margin: 5px 0px 5px 5px;
+    margin: 5px 0px 5px 4px;
     display: none;
 
     /* reset */
