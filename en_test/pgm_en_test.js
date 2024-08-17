@@ -321,7 +321,7 @@ function entest() {
             $resultmsg.style.display = "block";
             defaultdisplay ();
             if (seikainum == mondainum) {
-                $resultmsg.innerText = "前問正解！";
+                $resultmsg.innerText = "全問正解！";
             } else {
                 $resultmsg.innerText = "【今回間違えた英単語】";
                 resultdata.forEach(rowData => {
