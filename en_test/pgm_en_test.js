@@ -116,7 +116,7 @@ function entest() {
     };
 
     $checkBtn.addEventListener ("click", () => {
-        if (testdata[count][0] == answerText) {
+        if (testdata[count][0].toLowerCase() == answerText) {
             seikainum++;
         } else {
             resultdata.push([testdata[count][0], testdata[count][1]]);
