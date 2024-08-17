@@ -1,7 +1,5 @@
 function entest() {
     
-    const $topBtn = document.getElementById("top-btn");
-    const $nextBtn = document.getElementById("next-btn");
     const $stopBtn = document.getElementById("stop-btn");
 
     const $startBtn = document.getElementById("start-btn");
@@ -53,14 +51,8 @@ function entest() {
         return shuffle(selectedElements);
     }; 
 
-    $topBtn.addEventListener("click", () => {
-        window.location.href = "top_en.html";
-    });
-
     function defaultdisplay () {
         $startBtn.style.display = "block";
-        $topBtn.style.display = "inline-block";
-        $nextBtn.style.display = "inline-block";
         $stopBtn.style.display = "none";
         $mainbox.style.display = "none";
         $answerbox.style.display = "none";
@@ -351,8 +343,6 @@ function entest() {
         $originlist = $list.slice();
         testdata = getTestdata($originlist, mondainum);
         $startBtn.style.display = "none";
-        $topBtn.style.display = "none";
-        $nextBtn.style.display = "none";
         $stopBtn.style.display = "block";
         $mainbox.style.display = "block";
         $answerbox.style.display = "block";

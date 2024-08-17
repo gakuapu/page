@@ -1,12 +1,9 @@
 function en1() {
     
-    const $topBtn = document.getElementById("top-btn");
-    const $nextBtn = document.getElementById("next-btn");
     const $stopBtn = document.getElementById("stop-btn");
     const $lng = document.getElementById("lng");
     const $mode = document.getElementById("mode");
     const $startBtn = document.getElementById("start-btn");
-    const $testBtn = document.getElementById("test-btn");
     const $mainbox = document.getElementById("mainbox");
     const $comp = document.getElementById("comp");
     const $turnBtn = document.getElementById("turn-btn");
@@ -40,11 +37,6 @@ function en1() {
         return array;
     };
 
-    $topBtn.addEventListener("click", () => {
-        //window.location.href = "https://gakuapu.github.io/page/top_en.html";
-        window.location.href = "top_en.html";
-    });
-
     function compdisplay () {
         defaultdisplay ();
         $comp.style.display = "block";
@@ -53,15 +45,12 @@ function en1() {
     function defaultdisplay () {
         $mainbox.style.display = "none";
         $stopBtn.style.display = "none";
-        $topBtn.style.display = "inline-block";
-        $nextBtn.style.display = "inline-block";
         $turnBtn.style.visibility = "hidden";
         $againBtn.style.visibility = "hidden";
         $progress.style.display = "none";
         $lng.style.display = "inline-block";
         $mode.style.display = "inline-block";
         $startBtn.style.display = "block";
-        $testBtn.style.display = "block";
         $comp.style.display = "none";
         startlng = 0;
         currentlng = 0;
@@ -128,9 +117,6 @@ function en1() {
         currentlng = startlng;
         $mainbox.style.display = "block";
         $startBtn.style.display = "none";
-        $testBtn.style.display = "none";
-        $topBtn.style.display = "none";
-        $nextBtn.style.display = "none";
         $stopBtn.style.display = "block";
         $comp.style.display = "none";
         $turnBtn.style.visibility = "hidden";
