@@ -143,11 +143,13 @@ function entest() {
                 $progress.value = count / mondainum;
                 setup();
             } else {
-                if (splitword.includes("l") && ! splitword.includes("r")) {
-                    splitword.push("r");
-                };
-                if (splitword.includes("r") && ! splitword.includes("l")) {
-                    splitword.push("l");
+                if (splitword.length < 6) {
+                    if (splitword.includes("l") && ! splitword.includes("r")) {
+                        splitword.push("r");
+                    };
+                    if (splitword.includes("r") && ! splitword.includes("l")) {
+                        splitword.push("l");
+                    };
                 };
                 if (splitword.length < 6) {
                     if (splitword.includes("m") && ! splitword.includes("n")) {
