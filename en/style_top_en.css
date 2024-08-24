@@ -39,4 +39,25 @@
     width: 20px;
 }
 
+#howtouse1 {
+    width: 340px;
+    padding: 0.4em;
+    background: aliceblue;
+    border-left: solid 5px dodgerblue;
+}
+
+#howtouse2 {
+    width: 340px;
+    padding: 0.4em;
+    background: #ffbf7f;
+    border-left: solid 5px darkorange;
+}
+
+#howtouse3 {
+    width: 340px;
+    padding: 0.4em;
+    background: whitesmoke;
+    border-left: solid 5px dimgray;
+}
+
 
