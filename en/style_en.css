@@ -36,6 +36,7 @@
 }
 
 #stop-btn,
+#sound-btn,
 #comp,
 #progress,
 #appear-btn {
@@ -50,6 +51,7 @@
 #grade,
 #step,
 #stop-btn,
+#sound-btn,
 #lng,
 #mode,
 #start-btn,
@@ -81,6 +83,13 @@
     border-color: dodgerblue;
 }
 
-#stop-btn {
+#stop-btn,
+#sound-btn {
     margin-bottom: 10px;
+}
+
+#sound-btn {
+    color: black;
+    background-color: aliceblue;
+    border-color: dodgerblue;
 }

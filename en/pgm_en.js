@@ -1,6 +1,7 @@
 function en1() {
     
     const $stopBtn = document.getElementById("stop-btn");
+    const $soundBtn = document.getElementById("sound-btn");
     const $lng = document.getElementById("lng");
     const $mode = document.getElementById("mode");
     const $startBtn = document.getElementById("start-btn");
@@ -19,7 +20,9 @@ function en1() {
     let cardnum = 0;
     let cardnumMax = 0;
     let tgttext = "";
+    let pronouncetext = "";
     let tgtnum = 0;
+    let soundonoff = 0;
 
     let worddata = [];
 
@@ -45,6 +48,8 @@ function en1() {
     function defaultdisplay () {
         $mainbox.style.display = "none";
         $stopBtn.style.display = "none";
+        $soundBtn.style.display = "none";
+        $soundBtn.style.color = "black";
         $turnBtn.style.visibility = "hidden";
         $againBtn.style.visibility = "hidden";
         $progress.style.display = "none";
@@ -58,11 +63,34 @@ function en1() {
         cardnum = 0;
         cardnumMax = 0;
         tgttext = "";
+        pronouncetext = "";
+        soundonoff = 0;
         tgtnum = 0;
         worddata.length = 0;
         $progress.value = 0;
     };
  
+    function pronounce () {
+        pronouncetext = worddata[cardnum][0];
+        const utterance = new SpeechSynthesisUtterance (pronouncetext);
+        utterance.lang = "en-US";
+        window.speechSynthesis.speak(utterance);
+    };
+
+    $soundBtn.addEventListener("click", () => {
+        if (mode == 0) {
+            pronounce ();
+        } else {
+            if (soundonoff == 1) {
+                soundonoff = 0;
+                $soundBtn.style.color = "black";
+            } else {
+                soundonoff = 1;
+                $soundBtn.style.color = "lightgray";
+            };
+        };
+    });
+
     $stopBtn.addEventListener("click", () => {
         defaultdisplay ();
     });
@@ -70,6 +98,9 @@ function en1() {
     function modesetup2a () {
         if ($lng.value == 0) {
             $mainbox.innerText = worddata[cardnum][0];
+            if (soundonoff == 0) { //
+                pronounce ();
+            };
         } else {
             $mainbox.innerText = worddata[cardnum][1];
         };
@@ -81,6 +112,9 @@ function en1() {
             $mainbox.innerText = worddata[cardnum][1];
         } else {
             $mainbox.innerText = worddata[cardnum][0];
+            if (soundonoff == 0) { //
+                pronounce ();
+            };
         };
         cardnum++;
         $progress.value = cardnum / cardnumMax;
@@ -94,6 +128,8 @@ function en1() {
     function modesetup () {
         if (mode != 0) {
             $againBtn.style.visibility = "visible"
+            $soundBtn.style.color = "lightgray";
+            soundonoff = 1;
             modesetup2a ();
         };
     };
@@ -117,7 +153,8 @@ function en1() {
         currentlng = startlng;
         $mainbox.style.display = "block";
         $startBtn.style.display = "none";
-        $stopBtn.style.display = "block";
+        $stopBtn.style.display = "inline-block";
+        $soundBtn.style.display = "inline-block";
         $comp.style.display = "none";
         $turnBtn.style.visibility = "hidden";
         $againBtn.style.visibility = "hidden";
@@ -144,6 +181,8 @@ function en1() {
             } else {
                 $turnBtn.style.visibility = "hidden";
                 $againBtn.style.visibility = "hidden";
+                if (startlng == 0) {
+                };
                 cardnum++;
                 cardnumMax = worddata.length;
                 $progress.value = cardnum / cardnumMax;
