@@ -59,6 +59,7 @@
 }
 
 #stop-btn,
+#sound-btn,
 #mainbox,
 #answerbox,
 #erase-btn,
@@ -70,6 +71,7 @@
 }
 
 #stop-btn,
+#sound-btn,
 #start-btn,
 #erase-btn,
 #check-btn {
@@ -97,7 +99,8 @@
     height: 60px;
 }
 
-#stop-btn {
+#stop-btn,
+#sound-btn {
     margin-bottom: 15px;
 }
 
@@ -125,4 +128,10 @@
 
 #progress::-webkit-progress-value {
     background-color: darkorange;
+}
+
+#sound-btn {
+    color: black;
+    background-color: #fff4ea;
+    border-color: darkorange;
 }

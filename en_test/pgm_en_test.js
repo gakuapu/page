@@ -1,6 +1,7 @@
 function entest() {
     
     const $stopBtn = document.getElementById("stop-btn");
+    const $soundBtn = document.getElementById("sound-btn");
 
     const $startBtn = document.getElementById("start-btn");
 
@@ -32,6 +33,7 @@ function entest() {
     let seikainum = 0;
     let count = 0;
     let answerText = "";
+    let pronouncetext = "";
 
     let $originlist = [];
     let testdata = [];
@@ -54,6 +56,7 @@ function entest() {
     function defaultdisplay () {
         $startBtn.style.display = "block";
         $stopBtn.style.display = "none";
+        $soundBtn.style.display = "none";
         $mainbox.style.display = "none";
         $answerbox.style.display = "none";
         $char1.style.display = "none";
@@ -81,6 +84,7 @@ function entest() {
         $char5.value = "";
         $char6.value = "";
         answerText = "";
+        pronouncetext = "";
         $answerbox.innerText = "";
         $mainbox.innerText = "";
         count = 0;
@@ -95,6 +99,13 @@ function entest() {
         };
         seikainum = 0;
     };
+
+    $soundBtn.addEventListener("click", () => {
+        pronouncetext = testdata[count][0];
+        const utterance = new SpeechSynthesisUtterance (pronouncetext);
+        utterance.lang = "en-US";
+        window.speechSynthesis.speak(utterance);
+    });
 
     $stopBtn.addEventListener("click", () => {
         defaultdisplay ();
@@ -345,7 +356,8 @@ function entest() {
         $originlist = $list.slice();
         testdata = getTestdata($originlist, mondainum);
         $startBtn.style.display = "none";
-        $stopBtn.style.display = "block";
+        $stopBtn.style.display = "inline-block";
+        $soundBtn.style.display = "inline-block";
         $mainbox.style.display = "block";
         $answerbox.style.display = "block";
         $char1.style.display = "inline-block";

@@ -98,7 +98,7 @@ function en1() {
     function modesetup2a () {
         if ($lng.value == 0) {
             $mainbox.innerText = worddata[cardnum][0];
-            if (soundonoff == 0) { //
+            if (soundonoff == 0) {
                 pronounce ();
             };
         } else {
@@ -112,7 +112,7 @@ function en1() {
             $mainbox.innerText = worddata[cardnum][1];
         } else {
             $mainbox.innerText = worddata[cardnum][0];
-            if (soundonoff == 0) { //
+            if (soundonoff == 0) {
                 pronounce ();
             };
         };
