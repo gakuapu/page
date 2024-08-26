@@ -50,11 +50,30 @@
     padding-right: 15px;
 }
 
+#wordtable2 {
+    width: 340px;
+    font-size: 16px;
+    list-style: none;
+    text-align: center;
+    margin-top: 0.1em;
+    word-break: break-word;
+}
+
+#wordtable2 tr:nth-child(odd) td {
+	background: #fff4ea;
+}
+
+#wordtable2 td {
+	padding-left: 15px;
+    padding-right: 15px;
+}
+
 #progress {
     width: 340px;
 }
 
-#resultmsg {
+#resultmsg,
+#resultmsg2 {
     font-size: 20px;
 }
 
@@ -66,7 +85,9 @@
 #check-btn,
 #progress,
 #resultmsg,
-#wordtable {
+#resultmsg2,
+#wordtable,
+#wordtable2 {
     display: none;
 }
 

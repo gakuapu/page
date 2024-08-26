@@ -27,7 +27,9 @@ function entest() {
     const $progress = document.getElementById("progress");
 
     const $resultmsg = document.getElementById("resultmsg");
+    const $resultmsg2 = document.getElementById("resultmsg2");
     const $wordtable = document.getElementById("wordtable");
+    const $wordtable2 = document.getElementById("wordtable2");
 
     const mondainum = 10;
     let seikainum = 0;
@@ -39,6 +41,7 @@ function entest() {
     let testdata = [];
     let splitword = [];
     let resultdata = [];
+    let resultdata2 = [];
 
     function shuffle (array) {
         for (let ali = array.length - 1; ali > 0; ali--) {
@@ -97,6 +100,12 @@ function entest() {
         while ($wordtable.rows.length > 0) {
             $wordtable.deleteRow(0);
         };
+        $resultmsg2.style.display = "none";
+        $wordtable2.style.display = "none";
+        resultdata2.length = 0;
+        while ($wordtable2.rows.length > 0) {
+            $wordtable2.deleteRow(0);
+        };
         seikainum = 0;
     };
 
@@ -128,6 +137,7 @@ function entest() {
 
     $checkBtn.addEventListener ("click", () => {
         if (testdata[count][0].toLowerCase() == answerText) {
+            resultdata2.push([testdata[count][0], testdata[count][1]]);
             seikainum++;
         } else {
             resultdata.push([testdata[count][0], testdata[count][1]]);
@@ -348,6 +358,20 @@ function entest() {
                 $wordtable.style.display = "block";
                 });
             };
+            if (seikainum > 0) {
+                $resultmsg2.style.display = "block";
+                $resultmsg2.innerText = "【今回正解した英単語】";
+            };
+            resultdata2.forEach(rowData2 => {
+                const row2 = document.createElement("tr");
+                rowData2.forEach(cellData2 => {
+                    const cell2 = document.createElement("td");
+                    cell2.textContent = cellData2;
+                    row2.appendChild(cell2);
+                });
+                $wordtable2.appendChild(row2);
+                $wordtable2.style.display = "block";
+            });
         };
     };
 
