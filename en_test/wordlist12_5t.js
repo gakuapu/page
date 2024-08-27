@@ -1,0 +1,22 @@
+const $list = [
+    ["name", "名前/～に名付ける"],
+    ["night", "夜"],
+    ["number", "数、番号"],
+    ["paper", "紙"],
+    ["park", "公園"],
+    ["parent", "親"],
+    ["people", "人々"],
+    ["person", "人"],
+    ["question", "質問、問題"],
+    ["river", "川"],
+    ["room", "部屋"],
+    ["school", "学校"],
+    ["science", "科学、理科"],
+    ["sea", "海"],
+    ["shop", "店"],
+    ["sister", "姉妹"],
+    ["sky", "空"],
+    ["song", "歌"],
+    ["station", "駅"],
+    ["street", "通り"]
+];
