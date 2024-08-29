@@ -1,0 +1,22 @@
+const $list = [
+    ["ant", "蟻"],
+    ["aquarium", "水族館"],
+    ["beach", "浜"],
+    ["bear", "熊"],
+    ["body", "体"],
+    ["bread", "パン"],
+    ["card", "カード"],
+    ["carrot", "ニンジン"],
+    ["castle", "城"],
+    ["cherry", "さくらんぼ"],
+    ["chicken", "鶏肉"],
+    ["chocolate", "チョコレート"],
+    ["circle", "丸 / 丸い"],
+    ["classroom", "教室"],
+    ["clock", "時計"],
+    ["company", "会社"],
+    ["computer", "コンピューター"],
+    ["convenience store", "コンビニ"],
+    ["corn", "トウモロコシ"],
+    ["cow", "牛"]
+];
