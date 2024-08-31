@@ -5,7 +5,6 @@ const $list = [
     ["pineapple", "パイナップル"],
     ["pizza", "ピザ"],
     ["plan", "計画 / ～を計画する"],
-    ["playground", "校庭"],
     ["program", "プログラム、番組"],
     ["queen", "女王"],
     ["radish", "大根"],
