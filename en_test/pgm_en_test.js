@@ -159,6 +159,7 @@ function entest() {
             $mainbox.innerText = testdata[count][1];
             splitword = split (testdata[count][0]);
             if (splitword.length > 6) {
+                console.log(testdata[count][0]);
                 seikainum++;
                 count++;
                 $progress.value = count / mondainum;
