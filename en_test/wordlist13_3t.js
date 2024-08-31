@@ -1,0 +1,22 @@
+const $list = [
+    ["hair", "髪"],
+    ["hamburger", "ハンバーガー"],
+    ["human", "人間"],
+    ["ink", "インク"],
+    ["internet", "インターネット"],
+    ["juice", "ジュース"],
+    ["knee", "ひざ"],
+    ["koala", "コアラ"],
+    ["lake", "湖"],
+    ["left", "左"],
+    ["leg", "脚"],
+    ["lettuce", "レタス"],
+    ["magnet", "磁石"],
+    ["melon", "メロン"],
+    ["mushroom", "キノコ"],
+    ["newspaper", "新聞"],
+    ["north", "北"],
+    ["nuts", "ナッツ"],
+    ["pants", "ズボン"],
+    ["party", "パーティー"]
+];
