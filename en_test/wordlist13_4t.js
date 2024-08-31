@@ -1,0 +1,22 @@
+const $list = [
+    ["fast", "速い"],
+    ["slow", "遅い(速さ)"],
+    ["early", "早い"],
+    ["quick", "素早い"],
+    ["late", "遅い(時間)"],
+    ["different", "異なる"],
+    ["same", "同じ"],
+    ["strong", "強い"],
+    ["weak", "弱い"],
+    ["happy", "幸せな"],
+    ["sorry", "気の毒な/かわいそうな"],
+    ["popular", "人気のある"],
+    ["favorite", "お気に入りの/お気に入り"],
+    ["famous", "有名な"],
+    ["important", "重要な"],
+    ["useful", "役立つ"],
+    ["interesting", "面白い"],
+    ["delicious", "おいしい"],
+    ["hungry", "空腹の"],
+    ["thirsty", "喉が渇いた"]
+];
