@@ -1,0 +1,22 @@
+const $list = [
+    ["crayon", "クレヨン"],
+    ["cucumber", "きゅうり"],
+    ["dentist", "歯医者"],
+    ["department store", "デパート"],
+    ["desk", "机"],
+    ["dessert", "デザート"],
+    ["duck", "アヒル"],
+    ["east", "東"],
+    ["elephant", "象"],
+    ["energy", "エネルギー"],
+    ["fire fighter", "消防士"],
+    ["fire station", "消防署"],
+    ["foot", "足"],
+    ["fox", "キツネ"],
+    ["frog", "カエル"],
+    ["gas station", "ガソリンスタンド"],
+    ["gloves", "手袋"],
+    ["goat", "ヤギ"],
+    ["gorilla", "ゴリラ"],
+    ["gym", "体育館"]
+];
