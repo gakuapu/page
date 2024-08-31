@@ -2,7 +2,6 @@ const $list = [
     ["crayon", "クレヨン"],
     ["cucumber", "きゅうり"],
     ["dentist", "歯医者"],
-    ["department store", "デパート"],
     ["desk", "机"],
     ["dessert", "デザート"],
     ["duck", "アヒル"],
