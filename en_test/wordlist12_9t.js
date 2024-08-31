@@ -16,7 +16,6 @@ const $list = [
     ["clock", "時計"],
     ["company", "会社"],
     ["computer", "コンピューター"],
-    ["convenience store", "コンビニ"],
     ["corn", "トウモロコシ"],
     ["cow", "牛"]
 ];
