@@ -15,8 +15,5 @@ const $list = [
     ["festival", "祭り"],
     ["future", "未来、将来"],
     ["game", "ゲーム、試合"],
-    ["grandchild", "孫"],
-    ["grandfather", "祖父"],
-    ["grandmother", "祖母"],
     ["history", "歴史"],
 ];
