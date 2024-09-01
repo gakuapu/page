@@ -53,7 +53,10 @@
     border-left: solid 5px darkorange;
 }
 
-#howtouse3 {
+#howtouse3,
+#howtouse4,
+#howtouse5
+ {
     width: 330px;
     padding: 0.4em;
     background: whitesmoke;
