@@ -1,0 +1,22 @@
+const $list = [
+    ["hour", "時間(1時間)"],
+    ["idea", "アイディア"],
+    ["information", "情報"],
+    ["job", "仕事"],
+    ["language", "言語"],
+    ["life", "生活 / 人生 / 命"],
+    ["member", "メンバー"],
+    ["minute", "分"],
+    ["month", "月(1か月)"],
+    ["noon", "昼 / 正午"],
+    ["part", "部分"],
+    ["player", "プレーヤー"],
+    ["problem", "問題"],
+    ["restaurant", "レストラン"],
+    ["robot", "ロボット"],
+    ["second", "秒"],
+    ["son", "息子"],
+    ["space", "空間 / 宇宙"],
+    ["uncle", "おじ"],
+    ["volunteer", "ボランティア"]
+];
