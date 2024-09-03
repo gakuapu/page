@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中学2年の英単語 1-4｜無料中学英単語ドリルアプリ【学アプ中学英単語】</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="無料の中学生英単語帳ドリルアプリ。英検の勉強にも使える、中学で習う約2000英単語を発音音声付きの英単語帳とスペルテストでマスターしよう。ブラウザで動くのでダウンロード不要">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="en\style_en.css">
+</head>
+<body>
+    <header>
+        <h1>無料中学英単語アプリ：学アプ中学英単語</h1>
+        <hr>
+    </header>
+
+    <main>
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+            <input type="button" id="sound-btn" class="btn" value="発音(β版)"> <!-- -->
+        </div>
+
+        <div>
+            <select id="lng">
+                <option value="0">英語 ➡ 日本語</option>
+                <option value="1">日本語 ➡ 英語</option>
+            </select>
+            <select id="mode">
+                <option value="0">自分でめくる</option>
+                <option value="1">自動：おそめ</option>
+                <option value="2">自動：はやめ</option>
+            </select>
+        </div>
+
+        <input type="button" id="start-btn" class="btn" value="スタート">
+
+        <p id="comp">COMPLETED!</p>
+
+        <div id="mainbox"></div>
+
+        <div>
+            <input type="button" id="turn-btn" class="btn" value="裏返す">
+            <input type="button" id="again-btn" class="btn" value="？">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <hr class="dotted">
+
+        <p class="subtoph2"> ＞ <a href="en21_4t.html">英単語テストへ</a></p>
+        <p class="subtoph2"> ＞ <a href="en21_5.html">次に進む</a></p>
+        <p class="subtoph2"> ＞ <a href="top_en.html">トップにもどる</a></p>
+
+        <hr class="dotted">
+
+        <h2 class="subtoph2">【中学2年の英単語 1-4】</h2>
+        <div>
+            <input type="button" id="hide-btn" class="btn" value="かくす">
+            <input type="button" id="appear-btn" class="btn" value="表示">
+        </div>
+
+        <table id="wordtable">
+            <tr>
+                <td>be</td>
+                <td>am, are, isの元の形</td>
+            </tr>
+            <tr>
+                <td>be able to ...</td>
+                <td>～できる</td>
+            </tr>
+            <tr>
+                <td>will</td>
+                <td>～だろう(未来)</td>
+            </tr>
+            <tr>
+                <td>may</td>
+                <td>～してもよい(許可)<br>～かもしれない</td>
+            </tr>
+            <tr>
+                <td>must</td>
+                <td>～しなければならない<br>～にちがいない</td>
+            </tr>
+            <tr>
+                <td>should</td>
+                <td>～すべきだ</td>
+            </tr>
+            <tr>
+                <td>was</td>
+                <td>am, isの過去形</td>
+            </tr>
+            <tr>
+                <td>were</td>
+                <td>areの過去形</td>
+            </tr>
+            <tr>
+                <td>did</td>
+                <td>doの過去形(～した)</td>
+            </tr>
+            <tr>
+                <td>could</td>
+                <td>canの過去形(～できた)</td>
+            </tr>
+            <tr>
+                <td>would</td>
+                <td>willの過去形(～だっただろう)</td>
+            </tr>
+            <tr>
+                <td>however</td>
+                <td>しかしながら</td>
+            </tr>
+            <tr>
+                <td>then</td>
+                <td>その時<br>それでは</td>
+            </tr>
+            <tr>
+                <td>than ...</td>
+                <td>～よりも</td>
+            </tr>
+            <tr>
+                <td>still</td>
+                <td>いまだに</td>
+            </tr>
+            <tr>
+                <td>thing</td>
+                <td>もの、こと
+                </td>
+            </tr>
+            <tr>
+                <td>something</td>
+                <td>何か</td>
+            </tr>
+            <tr>
+                <td>anything</td>
+                <td>(疑問文)何か<br>(否定文)全く～ない<br>(肯定文)何でも</td>
+            </tr>
+            <tr>
+                <td>nothing</td>
+                <td>何もない</td>
+            </tr>
+            <tr>
+                <td>too ...</td>
+                <td>～過ぎる</td>
+            </tr>
+        </table>
+
+        <hr class="dotted">
+        <h2 class="menutxt">＜使い方｜英単語帳＞</h2>
+            <ul class="menutxt">
+                <li>1セット20単語ずつ。隙間時間にコツコツ英単語を学習できます</li>
+                <li>英単語カードをめくるにはカードをクリック。<br>
+                    めくった状態で英単語カードをクリックすると、次の英単語に進みます</li>
+                <li>「？ボタン」をクリックすると、単語帳の一番後ろにそのカードが追加されます。<br>
+                    分からなかった英単語は、もう1回復習しましょう</li>
+                <li>英単語カードの順番は毎回自動でシャッフル</li>
+                <li>英単語帳で学習したら確認テストへ。<br>
+                    英単語をマスターできたか、スペルレベルでチェックしましょう</li>
+            </ul>
+
+        <script src="en\pgm_en.js"></script>
+    </main>
+
+    <footer class="footer-container">
+        <br>
+        <hr>
+        <p>無料の中学生英単語帳ドリルアプリ。英検の勉強にも使える、中学で習う約2000英単語を発音音声付きの英単語帳とスペルテストでマスターしよう。ブラウザで動くのでダウンロード不要</p>
+        <p>Copyright(C) 2022- All Rights Reserved</p>
+    </footer>
+</body>
+</html>
