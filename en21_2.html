@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中学2年の英単語 1-2｜無料中学英単語ドリルアプリ【学アプ中学英単語】</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="無料の中学生英単語帳ドリルアプリ。英検の勉強にも使える、中学で習う約2000英単語を発音音声付きの英単語帳とスペルテストでマスターしよう。ブラウザで動くのでダウンロード不要のおすすめ英語アプリ">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="en\style_en.css">
+</head>
+<body>
+    <header>
+        <h1>無料中学英単語アプリ：学アプ中学英単語</h1>
+        <hr>
+    </header>
+
+    <main>
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+            <input type="button" id="sound-btn" class="btn" value="発音(β版)"> <!-- -->
+        </div>
+
+        <div>
+            <select id="lng">
+                <option value="0">英語 ➡ 日本語</option>
+                <option value="1">日本語 ➡ 英語</option>
+            </select>
+            <select id="mode">
+                <option value="0">自分でめくる</option>
+                <option value="1">自動：おそめ</option>
+                <option value="2">自動：はやめ</option>
+            </select>
+        </div>
+
+        <input type="button" id="start-btn" class="btn" value="スタート">
+
+        <p id="comp">COMPLETED!</p>
+
+        <div id="mainbox"></div>
+
+        <div>
+            <input type="button" id="turn-btn" class="btn" value="裏返す">
+            <input type="button" id="again-btn" class="btn" value="？">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <hr class="dotted">
+
+        <p class="subtoph2"> ＞ <a href="en21_2t.html">英単語テストへ</a></p>
+        <p class="subtoph2"> ＞ <a href="en21_3.html">次に進む</a></p>
+        <p class="subtoph2"> ＞ <a href="top_en.html">トップにもどる</a></p>
+
+        <hr class="dotted">
+
+        <h2 class="subtoph2">【中学2年の英単語 1-2】</h2>
+        <div>
+            <input type="button" id="hide-btn" class="btn" value="かくす">
+            <input type="button" id="appear-btn" class="btn" value="表示">
+        </div>
+
+        <table id="wordtable">
+            <tr>
+                <td>agree</td>
+                <td>賛成する、同意する</td>
+            </tr>
+            <tr>
+                <td>arrive</td>
+                <td>到着する</td>
+            </tr>
+            <tr>
+                <td>break</td>
+                <td>～を壊す<br>休憩</td>
+            </tr>
+            <tr>
+                <td>brush</td>
+                <td>～をみがく</td>
+            </tr>
+            <tr>
+                <td>build</td>
+                <td>～を建てる</td>
+            </tr>
+            <tr>
+                <td>carry</td>
+                <td>～を運ぶ、～を持ち歩く</td>
+            </tr>
+            <tr>
+                <td>catch</td>
+                <td>～を捕る、～を捕まえる</td>
+            </tr>
+            <tr>
+                <td>check</td>
+                <td>～を確認する<br>チェック</td>
+            </tr>
+            <tr>
+                <td>close</td>
+                <td>～を閉める<br>親しい、近しい</td>
+            </tr>
+            <tr>
+                <td>continue</td>
+                <td>～を続ける、続く</td>
+            </tr>
+            <tr>
+                <td>cook</td>
+                <td>料理する</td>
+            </tr>
+            <tr>
+                <td>cry</td>
+                <td>泣く、叫ぶ</td>
+            </tr>
+            <tr>
+                <td>dance</td>
+                <td>踊る</td>
+            </tr>
+            <tr>
+                <td>develop</td>
+                <td>～を開発する<br>～を発展させる</td>
+            </tr>
+            <tr>
+                <td>die</td>
+                <td>死ぬ</td>
+            </tr>
+            <tr>
+                <td>draw</td>
+                <td>～を描く、～を引く</td>
+            </tr>
+            <tr>
+                <td>explain</td>
+                <td>～を説明する</td>
+            </tr>
+            <tr>
+                <td>fall</td>
+                <td>落ちる</td>
+            </tr>
+            <tr>
+                <td>fly</td>
+                <td>飛ぶ</td>
+            </tr>
+            <tr>
+                <td>follow</td>
+                <td>～にしたがう<br>～に付いて行く</td>
+            </tr>
+        </table>
+
+        <hr class="dotted">
+        <h2 class="menutxt">＜使い方｜英単語帳＞</h2>
+            <ul class="menutxt">
+                <li>1セット20単語ずつ。隙間時間にコツコツ英単語を学習できます</li>
+                <li>英単語カードをめくるにはカードをクリック。<br>
+                    めくった状態で英単語カードをクリックすると、次の英単語に進みます</li>
+                <li>「？ボタン」をクリックすると、単語帳の一番後ろにそのカードが追加されます。<br>
+                    分からなかった英単語は、もう1回復習しましょう</li>
+                <li>英単語カードの順番は毎回自動でシャッフル</li>
+                <li>英単語帳で学習したら確認テストへ。<br>
+                    英単語をマスターできたか、スペルレベルでチェックしましょう</li>
+            </ul>
+
+        <script src="en\pgm_en.js"></script>
+    </main>
+
+    <footer class="footer-container">
+        <br>
+        <hr>
+        <p>無料の中学生英単語帳ドリルアプリ。英検の勉強にも使える、中学で習う約2000英単語を発音音声付きの英単語帳とスペルテストでマスターしよう。ブラウザで動くのでダウンロード不要のおすすめ英語アプリ</p>
+        <p>Copyright(C) 2022- All Rights Reserved</p>
+    </footer>
+</body>
+</html>
