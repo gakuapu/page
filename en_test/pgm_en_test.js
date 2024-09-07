@@ -112,8 +112,17 @@ function entest() {
     $soundBtn.addEventListener("click", () => {
         pronouncetext = testdata[count][0];
         const utterance = new SpeechSynthesisUtterance (pronouncetext);
-        utterance.lang = "en-US";
-        window.speechSynthesis.speak(utterance);
+        utterance.rate = 0.9;
+        function setVoiceAndSpeak () {
+            const voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
+                window.speechSynthesis.speak(utterance);
+            } else {
+                setTimeout(setVoiceAndSpeak, 100);
+            };
+        };
+        setVoiceAndSpeak();
     });
 
     $stopBtn.addEventListener("click", () => {

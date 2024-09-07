@@ -73,8 +73,17 @@ function en1() {
     function pronounce () {
         pronouncetext = worddata[cardnum][0];
         const utterance = new SpeechSynthesisUtterance (pronouncetext);
-        utterance.lang = "en-US";
-        window.speechSynthesis.speak(utterance);
+        utterance.rate = 0.9;
+        function setVoiceAndSpeak () {
+            const voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
+                window.speechSynthesis.speak(utterance);
+            } else {
+                setTimeout(setVoiceAndSpeak, 100);
+            };
+        };
+        setVoiceAndSpeak();
     };
 
     $soundBtn.addEventListener("click", () => {
