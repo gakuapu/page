@@ -112,7 +112,6 @@ function entest() {
     $soundBtn.addEventListener("click", () => {
         pronouncetext = testdata[count][0];
         const utterance = new SpeechSynthesisUtterance (pronouncetext);
-        utterance.rate = 0.9;
         function setVoiceAndSpeak () {
             const voices = window.speechSynthesis.getVoices();
             if (voices.length > 0) {
