@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中学1年の英単語(2) 第1～5回｜無料中学英単語ドリルアプリ【学アプ中学英単語】</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="無料の中学生英単語帳ドリルアプリ。英検の勉強にも使える、中学で習う約2000英単語を発音音声付きの英単語帳とスペルテストでマスターしよう。ブラウザで動くのでダウンロード不要のおすすめ英語アプリ">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="en_auto\style_en_auto.css">
+</head>
+<body>
+    <header>
+        <h1><a id="page_top">自動再生モード：学アプ中学英単語</a></h1>
+        <hr>
+    </header>
+
+    <main>
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+        </div>
+
+        <div>
+            <select id="sound">
+                <option value="0">発音あり(β)</option>
+                <option value="1">発音なし</option>
+            </select>
+            <select id="speed">
+                <option value="1">はやさ：普通</option>
+                <option value="2">はやさ：速め</option>
+            </select>
+        </div>
+        <div>
+            <select id="lng">
+                <option value="0">英語 ➡ 日本語</option>
+                <option value="1">日本語 ➡ 英語</option>
+            </select>
+            <select id="order">
+                <option value="0">順番通り</option>
+                <option value="1">シャッフル</option>
+            </select>
+        </div>
+
+        <input type="button" id="start-btn" class="btn" value="再生">
+
+        <p id="comp">COMPLETED!</p>
+
+        <div id="mainbox"></div>
+
+        <div>
+            <input type="button" id="again-btn" class="btn" value="？">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <hr class="dotted">
+
+        <p class="subtoph2"> ＞ <a href="en_auto14.html">次に進む</a></p>
+        <p class="subtoph2"> ＞ <a href="en_auto.html">自動再生トップへ</a></p>
+        <p class="subtoph2"> ＞ <a href="top_en.html">トップにもどる</a></p>
+
+        <hr class="dotted">
+
+        <h2 class="subtoph2">【中学1年の英単語(2) 第1～5回】</h2> 
+
+        <table id="wordtable">
+            <tr>
+                <td>afternoon</td>
+                <td>午後</td>
+            </tr>
+            <tr>
+                <td>animal</td>
+                <td>動物</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>バッグ</td>
+            </tr>
+            <tr>
+                <td>bike</td>
+                <td>自転車</td>
+            </tr>
+            <tr>
+                <td>bird</td>
+                <td>鳥</td>
+            </tr>
+            <tr>
+                <td>birthday</td>
+                <td>誕生日</td>
+            </tr>
+            <tr>
+                <td>book</td>
+                <td>本</td>
+            </tr>
+            <tr>
+                <td>boy</td>
+                <td>男の子</td>
+            </tr>
+            <tr>
+                <td>brother</td>
+                <td>兄弟</td>
+            </tr>
+            <tr>
+                <td>bus</td>
+                <td>バス</td>
+            </tr>
+            <tr>
+                <td>car</td>
+                <td>車</td>
+            </tr>
+            <tr>
+                <td>class</td>
+                <td>クラス、授業</td>
+            </tr>
+            <tr>
+                <td>club</td>
+                <td>クラブ</td>
+            </tr>
+            <tr>
+                <td>country</td>
+                <td>国</td>
+            </tr>
+            <tr>
+                <td>day</td>
+                <td>日<br>日中</td>
+            </tr>
+            <tr>
+                <td>doctor</td>
+                <td>医者<br>博士</td>
+            </tr>
+            <tr>
+                <td>dog</td>
+                <td>犬</td>
+            </tr>
+            <tr>
+                <td>dream</td>
+                <td>夢<br>夢を見る</td>
+            </tr>
+            <tr>
+                <td>English</td>
+                <td>英語(の)</td>
+            </tr>
+            <tr>
+                <td>family</td>
+                <td>家族</td>
+            </tr>
+            <tr>
+                <td>make</td>
+                <td>～を作る</td>
+            </tr>
+            <tr>
+                <td>mean</td>
+                <td>～を意味する</td>
+            </tr>
+            <tr>
+                <td>meet</td>
+                <td>～に会う</td>
+            </tr>
+            <tr>
+                <td>need</td>
+                <td>～が必要だ</td>
+            </tr>
+            <tr>
+                <td>open</td>
+                <td>～を開ける<br>開いている</td>
+            </tr>
+            <tr>
+                <td>play</td>
+                <td>遊ぶ<br>(スポーツ)をする<br>(楽器)を演奏する</td>
+            </tr>
+            <tr>
+                <td>practice</td>
+                <td>～を練習する<br>練習</td>
+            </tr>
+            <tr>
+                <td>put</td>
+                <td>～を置く</td>
+            </tr>
+            <tr>
+                <td>read</td>
+                <td>～を読む</td>
+            </tr>
+            <tr>
+                <td>remember</td>
+                <td>～を覚えている<br>～を思い出す</td>
+            </tr>
+            <tr>
+                <td>run</td>
+                <td>走る</td>
+            </tr>
+            <tr>
+                <td>say</td>
+                <td>言う</td>
+            </tr>
+            <tr>
+                <td>see</td>
+                <td>～を見る<br>～に会う</td>
+            </tr>
+            <tr>
+                <td>send</td>
+                <td>～を送る</td>
+            </tr>
+            <tr>
+                <td>show</td>
+                <td>～を見せる</td>
+            </tr>
+            <tr>
+                <td>sing</td>
+                <td>～を歌う</td>
+            </tr>
+            <tr>
+                <td>sit</td>
+                <td>座る</td>
+            </tr>
+            <tr>
+                <td>sleep</td>
+                <td>眠る<br>眠り</td>
+            </tr>
+            <tr>
+                <td>smile</td>
+                <td>笑う<br>ほほえみ</td>
+            </tr>
+            <tr>
+                <td>speak</td>
+                <td>～を話す</td>
+            </tr>
+            <tr>
+                <td>father</td>
+                <td>父</td>
+            </tr>
+            <tr>
+                <td>flower</td>
+                <td>花</td>
+            </tr>
+            <tr>
+                <td>food</td>
+                <td>食べ物</td>
+            </tr>
+            <tr>
+                <td>friend</td>
+                <td>友達</td>
+            </tr>
+            <tr>
+                <td>girl</td>
+                <td>女の子</td>
+            </tr>
+            <tr>
+                <td>group</td>
+                <td>グループ</td>
+            </tr>
+            <tr>
+                <td>hand</td>
+                <td>手</td>
+            </tr>
+            <tr>
+                <td>home</td>
+                <td>家<br>家に</td>
+            </tr>
+            <tr>
+                <td>house</td>
+                <td>家</td>
+            </tr>
+            <tr>
+                <td>Japan</td>
+                <td>日本</td>
+            </tr>
+            <tr>
+                <td>letter</td>
+                <td>手紙</td>
+            </tr>
+            <tr>
+                <td>library</td>
+                <td>図書館</td>
+            </tr>
+            <tr>
+                <td>light</td>
+                <td>光、明かり<br>明るい<br>軽い</td>
+            </tr>
+            <tr>
+                <td>lunch</td>
+                <td>昼食</td>
+            </tr>
+            <tr>
+                <td>man</td>
+                <td>男性</td>
+            </tr>
+            <tr>
+                <td>money</td>
+                <td>お金</td>
+            </tr>
+            <tr>
+                <td>morning</td>
+                <td>朝</td>
+            </tr>
+            <tr>
+                <td>mother</td>
+                <td>母</td>
+            </tr>
+            <tr>
+                <td>mountain</td>
+                <td>山</td>
+            </tr>
+            <tr>
+                <td>music</td>
+                <td>音楽</td>
+            </tr>
+            <tr>
+                <td>from ...</td>
+                <td>～から</td>
+            </tr>
+            <tr>
+                <td>to ...</td>
+                <td>～に</td>
+            </tr>
+            <tr>
+                <td>in ...</td>
+                <td>～の中に</td>
+            </tr>
+            <tr>
+                <td>on ...</td>
+                <td>～の上に<br>～に(時間)</td>
+            </tr>
+            <tr>
+                <td>at ...</td>
+                <td>～で(場所)<br>～に(時間)</td>
+            </tr>
+            <tr>
+                <td>of ...</td>
+                <td>～の</td>
+            </tr>
+            <tr>
+                <td>before ...</td>
+                <td>～の前に</td>
+            </tr>
+            <tr>
+                <td>after ...</td>
+                <td>～の後に</td>
+            </tr>
+            <tr>
+                <td>for ...</td>
+                <td>～のために<br>～の間(期間)</td>
+            </tr>
+            <tr>
+                <td>during ...</td>
+                <td>～の間(期間)</td>
+            </tr>
+            <tr>
+                <td>about ...</td>
+                <td>～について<br>大体、約</td>
+            </tr>
+            <tr>
+                <td>with ...</td>
+                <td>～と一緒に<br>～で(道具)</td>
+            </tr>
+            <tr>
+                <td>without ...</td>
+                <td>～なしで</td>
+            </tr>
+            <tr>
+                <td>by ...</td>
+                <td>～を使って(手段)<br>～までに(期限)<br>～のそばに</td>
+            </tr>
+            <tr>
+                <td>near ...</td>
+                <td>～の近くに</td>
+            </tr>
+            <tr>
+                <td>over ...</td>
+                <td>～の上に</td>
+            </tr>
+            <tr>
+                <td>under ...</td>
+                <td>～の下に</td>
+            </tr>
+            <tr>
+                <td>into ...</td>
+                <td>～の中に</td>
+            </tr>
+            <tr>
+                <td>between ...</td>
+                <td>(2つの)～の間</td>
+            </tr>
+            <tr>
+                <td>among ...</td>
+                <td>(3つ以上の)～の間</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>名前<br>～に名前をつける</td>
+            </tr>
+            <tr>
+                <td>night</td>
+                <td>夜</td>
+            </tr>
+            <tr>
+                <td>number</td>
+                <td>数、番号</td>
+            </tr>
+            <tr>
+                <td>paper</td>
+                <td>紙</td>
+            </tr>
+            <tr>
+                <td>park</td>
+                <td>公園</td>
+            </tr>
+            <tr>
+                <td>parent</td>
+                <td>親</td>
+            </tr>
+            <tr>
+                <td>people</td>
+                <td>人々</td>
+            </tr>
+            <tr>
+                <td>person</td>
+                <td>人</td>
+            </tr>
+            <tr>
+                <td>question</td>
+                <td>質問、問題</td>
+            </tr>
+            <tr>
+                <td>river</td>
+                <td>川</td>
+            </tr>
+            <tr>
+                <td>room</td>
+                <td>部屋</td>
+            </tr>
+            <tr>
+                <td>school</td>
+                <td>学校</td>
+            </tr>
+            <tr>
+                <td>science</td>
+                <td>科学、理科</td>
+            </tr>
+            <tr>
+                <td>sea</td>
+                <td>海</td>
+            </tr>
+            <tr>
+                <td>shop</td>
+                <td>店</td>
+            </tr>
+            <tr>
+                <td>sister</td>
+                <td>姉妹</td>
+            </tr>
+            <tr>
+                <td>sky</td>
+                <td>空</td>
+            </tr>
+            <tr>
+                <td>song</td>
+                <td>歌</td>
+            </tr>
+            <tr>
+                <td>station</td>
+                <td>駅</td>
+            </tr>
+            <tr>
+                <td>street</td>
+                <td>通り</td>
+            </tr>
+        </table>
+
+        <hr class="dotted">
+        <h2 class="menutxt">＜使い方｜自動再生＆聞き流し＞</h2>
+            <ul class="menutxt">
+                <li>操作不要で英単語カードをめくる自動再生＆聞き流しモードです。<br>
+                    カードをめくるスピードの調整もできます</li>
+                <li>1セット100単語ずつ。隙間時間にコツコツ英単語を覚えられます</li>
+                <li>英単語の読み上げ機能付き。<br>
+                    英単語のスペルだけでなく発音・音声もしっかりマスター</li>
+                <li>「？ボタン」をクリックすると、単語帳の一番後ろにそのカードが追加されます。<br>
+                    自信がない英単語を効率よく重点的に学習できます</li>
+                <li>英単語カードの順番のシャッフル機能付き。<br>
+                    カードの順番で覚えてしまうことを防ぎます</li>
+                <li>「英語➡日本語」も「日本語➡英語」の切り替えもできます</li>
+            </ul>
+
+        <script src="en_auto\pgm_en_auto.js"></script>
+    </main>
+
+    <footer class="footer-container">
+        <br>
+        <hr>
+        <p>無料の中学生英単語帳ドリルアプリ。英検の勉強にも使える、中学で習う約2000英単語を発音音声付きの英単語帳とスペルテストでマスターしよう。ブラウザで動くのでダウンロード不要のおすすめ英語アプリ</p>
+        <p>Copyright(C) 2022- All Rights Reserved</p>
+        <a href="#page_top" class="page_top_btn">▲</a>
+    </footer>
+</body>
+</html>
