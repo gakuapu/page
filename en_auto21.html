@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中学2年の英単語(1) 第1～5回｜無料中学英単語ドリルアプリ【学アプ中学英単語】</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="無料の中学生英単語帳ドリルアプリ。英検の勉強にも使える、中学で習う約2000英単語を発音音声付きの英単語帳とスペルテストでマスターしよう。ブラウザで動くのでダウンロード不要のおすすめ英語アプリ">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="en_auto\style_en_auto.css">
+</head>
+<body>
+    <header>
+        <h1><a id="page_top">自動再生モード：学アプ中学英単語</a></h1>
+        <hr>
+    </header>
+
+    <main>
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+        </div>
+
+        <div>
+            <select id="sound">
+                <option value="0">発音あり(β)</option>
+                <option value="1">発音なし</option>
+            </select>
+            <select id="speed">
+                <option value="1">はやさ：普通</option>
+                <option value="2">はやさ：速め</option>
+            </select>
+        </div>
+        <div>
+            <select id="lng">
+                <option value="0">英語 ➡ 日本語</option>
+                <option value="1">日本語 ➡ 英語</option>
+            </select>
+            <select id="order">
+                <option value="0">順番通り</option>
+                <option value="1">シャッフル</option>
+            </select>
+        </div>
+
+        <input type="button" id="start-btn" class="btn" value="再生">
+
+        <p id="comp">COMPLETED!</p>
+
+        <div id="mainbox"></div>
+
+        <div>
+            <input type="button" id="again-btn" class="btn" value="？">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <hr class="dotted">
+
+        <p class="subtoph2"> ＞ <a href="en_auto22.html">次に進む</a></p>
+        <p class="subtoph2"> ＞ <a href="en_auto.html">自動再生トップへ</a></p>
+        <p class="subtoph2"> ＞ <a href="top_en.html">トップにもどる</a></p>
+
+        <hr class="dotted">
+
+        <h2 class="subtoph2">【中学2年の英単語(1) 第1～5回】</h2> 
+
+        <table id="wordtable">
+            <tr>
+                <td>activity</td>
+                <td>活動</td>
+            </tr>
+            <tr>
+                <td>aunt</td>
+                <td>おば</td>
+            </tr>
+            <tr>
+                <td>child</td>
+                <td>子供</td>
+            </tr>
+            <tr>
+                <td>children</td>
+                <td>子供たち(複数形)</td>
+            </tr>
+            <tr>
+                <td>city</td>
+                <td>都市、市</td>
+            </tr>
+            <tr>
+                <td>cousin</td>
+                <td>いとこ</td>
+            </tr>
+            <tr>
+                <td>course</td>
+                <td>コース</td>
+            </tr>
+            <tr>
+                <td>culture</td>
+                <td>カルチャー、文化</td>
+            </tr>
+            <tr>
+                <td>daughter</td>
+                <td>娘</td>
+            </tr>
+            <tr>
+                <td>evening</td>
+                <td>夕方、夜</td>
+            </tr>
+            <tr>
+                <td>event</td>
+                <td>イベント、出来事</td>
+            </tr>
+            <tr>
+                <td>example</td>
+                <td>例</td>
+            </tr>
+            <tr>
+                <td>experience</td>
+                <td>経験<br>～を経験する</td>
+            </tr>
+            <tr>
+                <td>festival</td>
+                <td>祭り</td>
+            </tr>
+            <tr>
+                <td>future</td>
+                <td>未来、将来</td>
+            </tr>
+            <tr>
+                <td>game</td>
+                <td>ゲーム、試合</td>
+            </tr>
+            <tr>
+                <td>grandchild</td>
+                <td>孫</td>
+            </tr>
+            <tr>
+                <td>grandfather</td>
+                <td>祖父</td>
+            </tr>
+            <tr>
+                <td>grandmother</td>
+                <td>祖母</td>
+            </tr>
+            <tr>
+                <td>history</td>
+                <td>歴史</td>
+            </tr>
+            <tr>
+                <td>agree</td>
+                <td>賛成する、同意する</td>
+            </tr>
+            <tr>
+                <td>arrive</td>
+                <td>到着する</td>
+            </tr>
+            <tr>
+                <td>break</td>
+                <td>～を壊す<br>休憩</td>
+            </tr>
+            <tr>
+                <td>brush</td>
+                <td>～をみがく</td>
+            </tr>
+            <tr>
+                <td>build</td>
+                <td>～を建てる</td>
+            </tr>
+            <tr>
+                <td>carry</td>
+                <td>～を運ぶ、～を持ち歩く</td>
+            </tr>
+            <tr>
+                <td>catch</td>
+                <td>～を捕る、～を捕まえる</td>
+            </tr>
+            <tr>
+                <td>check</td>
+                <td>～を確認する<br>チェック</td>
+            </tr>
+            <tr>
+                <td>close</td>
+                <td>～を閉める<br>親しい、近しい</td>
+            </tr>
+            <tr>
+                <td>continue</td>
+                <td>～を続ける、続く</td>
+            </tr>
+            <tr>
+                <td>cook</td>
+                <td>料理する</td>
+            </tr>
+            <tr>
+                <td>cry</td>
+                <td>泣く、叫ぶ</td>
+            </tr>
+            <tr>
+                <td>dance</td>
+                <td>踊る</td>
+            </tr>
+            <tr>
+                <td>develop</td>
+                <td>～を開発する<br>～を発展させる</td>
+            </tr>
+            <tr>
+                <td>die</td>
+                <td>死ぬ</td>
+            </tr>
+            <tr>
+                <td>draw</td>
+                <td>～を描く、～を引く</td>
+            </tr>
+            <tr>
+                <td>explain</td>
+                <td>～を説明する</td>
+            </tr>
+            <tr>
+                <td>fall</td>
+                <td>落ちる</td>
+            </tr>
+            <tr>
+                <td>fly</td>
+                <td>飛ぶ</td>
+            </tr>
+            <tr>
+                <td>follow</td>
+                <td>～にしたがう<br>～に付いて行く</td>
+            </tr>
+            <tr>
+                <td>hour</td>
+                <td>時間(1時間)</td>
+            </tr>
+            <tr>
+                <td>idea</td>
+                <td>アイディア</td>
+            </tr>
+            <tr>
+                <td>information</td>
+                <td>情報</td>
+            </tr>
+            <tr>
+                <td>job</td>
+                <td>仕事</td>
+            </tr>
+            <tr>
+                <td>language</td>
+                <td>言語</td>
+            </tr>
+            <tr>
+                <td>life</td>
+                <td>生活<br>人生<br>命</td>
+            </tr>
+            <tr>
+                <td>member</td>
+                <td>メンバー</td>
+            </tr>
+            <tr>
+                <td>minute</td>
+                <td>分</td>
+            </tr>
+            <tr>
+                <td>month</td>
+                <td>月(1か月)</td>
+            </tr>
+            <tr>
+                <td>noon</td>
+                <td>昼<br>正午</td>
+            </tr>
+            <tr>
+                <td>part</td>
+                <td>部分、パート</td>
+            </tr>
+            <tr>
+                <td>player</td>
+                <td>プレーヤー</td>
+            </tr>
+            <tr>
+                <td>problem</td>
+                <td>問題</td>
+            </tr>
+            <tr>
+                <td>restaurant</td>
+                <td>レストラン</td>
+            </tr>
+            <tr>
+                <td>robot</td>
+                <td>ロボット</td>
+            </tr>
+            <tr>
+                <td>second</td>
+                <td>秒</td>
+            </tr>
+            <tr>
+                <td>son</td>
+                <td>息子</td>
+            </tr>
+            <tr>
+                <td>space</td>
+                <td>空間<br>宇宙</td>
+            </tr>
+            <tr>
+                <td>uncle</td>
+                <td>おじ</td>
+            </tr>
+            <tr>
+                <td>volunteer</td>
+                <td>ボランティア</td>
+            </tr>
+            <tr>
+                <td>be</td>
+                <td>am, are, isの元の形</td>
+            </tr>
+            <tr>
+                <td>be able to ...</td>
+                <td>～できる</td>
+            </tr>
+            <tr>
+                <td>will</td>
+                <td>～だろう(未来)</td>
+            </tr>
+            <tr>
+                <td>may</td>
+                <td>～してもよい(許可)<br>～かもしれない</td>
+            </tr>
+            <tr>
+                <td>must</td>
+                <td>～しなければならない<br>～にちがいない</td>
+            </tr>
+            <tr>
+                <td>should</td>
+                <td>～すべきだ</td>
+            </tr>
+            <tr>
+                <td>was</td>
+                <td>am, isの過去形</td>
+            </tr>
+            <tr>
+                <td>were</td>
+                <td>areの過去形</td>
+            </tr>
+            <tr>
+                <td>did</td>
+                <td>doの過去形(～した)</td>
+            </tr>
+            <tr>
+                <td>could</td>
+                <td>canの過去形(～できた)</td>
+            </tr>
+            <tr>
+                <td>would</td>
+                <td>willの過去形<br>(～だっただろう)</td>
+            </tr>
+            <tr>
+                <td>however</td>
+                <td>しかしながら</td>
+            </tr>
+            <tr>
+                <td>then</td>
+                <td>その時<br>それでは</td>
+            </tr>
+            <tr>
+                <td>than ...</td>
+                <td>～よりも</td>
+            </tr>
+            <tr>
+                <td>still</td>
+                <td>いまだに</td>
+            </tr>
+            <tr>
+                <td>thing</td>
+                <td>もの、こと</td>
+            </tr>
+            <tr>
+                <td>something</td>
+                <td>何か</td>
+            </tr>
+            <tr>
+                <td>anything</td>
+                <td>(疑問文)何か<br>(否定文)全く～ない<br>(肯定文)何でも</td>
+            </tr>
+            <tr>
+                <td>nothing</td>
+                <td>何もない</td>
+            </tr>
+            <tr>
+                <td>too ...</td>
+                <td>～過ぎる</td>
+            </tr>
+            <tr>
+                <td>autumn</td>
+                <td>秋</td>
+            </tr>
+            <tr>
+                <td>baseball</td>
+                <td>野球</td>
+            </tr>
+            <tr>
+                <td>basketball</td>
+                <td>バスケットボール</td>
+            </tr>
+            <tr>
+                <td>building</td>
+                <td>建物</td>
+            </tr>
+            <tr>
+                <td>care</td>
+                <td>世話、注意<br>～を気にかける</td>
+            </tr>
+            <tr>
+                <td>college</td>
+                <td>大学</td>
+            </tr>
+            <tr>
+                <td>earth</td>
+                <td>地球</td>
+            </tr>
+            <tr>
+                <td>elementary school</td>
+                <td>小学校</td>
+            </tr>
+            <tr>
+                <td>fall</td>
+                <td>秋</td>
+            </tr>
+            <tr>
+                <td>forest</td>
+                <td>森</td>
+            </tr>
+            <tr>
+                <td>high school</td>
+                <td>高校</td>
+            </tr>
+            <tr>
+                <td>Japanese</td>
+                <td>日本人・日本語<br>日本・日本人・日本語の</td>
+            </tr>
+            <tr>
+                <td>junior high school</td>
+                <td>中学校</td>
+            </tr>
+            <tr>
+                <td>map</td>
+                <td>地図</td>
+            </tr>
+            <tr>
+                <td>math</td>
+                <td>数学</td>
+            </tr>
+            <tr>
+                <td>message</td>
+                <td>メッセージ</td>
+            </tr>
+            <tr>
+                <td>movie</td>
+                <td>映画</td>
+            </tr>
+            <tr>
+                <td>museum</td>
+                <td>博物館、美術館</td>
+            </tr>
+            <tr>
+                <td>plant</td>
+                <td>植物</td>
+            </tr>
+            <tr>
+                <td>road</td>
+                <td>道路</td>
+            </tr>
+        </table>
+
+        <hr class="dotted">
+        <h2 class="menutxt">＜使い方｜自動再生＆聞き流し＞</h2>
+            <ul class="menutxt">
+                <li>操作不要で英単語カードをめくる自動再生＆聞き流しモードです。<br>
+                    カードをめくるスピードの調整もできます</li>
+                <li>1セット100単語ずつ。隙間時間にコツコツ英単語を覚えられます</li>
+                <li>英単語の読み上げ機能付き。<br>
+                    英単語のスペルだけでなく発音・音声もしっかりマスター</li>
+                <li>「？ボタン」をクリックすると、単語帳の一番後ろにそのカードが追加されます。<br>
+                    自信がない英単語を効率よく重点的に学習できます</li>
+                <li>英単語カードの順番のシャッフル機能付き。<br>
+                    カードの順番で覚えてしまうことを防ぎます</li>
+                <li>「英語➡日本語」も「日本語➡英語」の切り替えもできます</li>
+            </ul>
+
+        <script src="en_auto\pgm_en_auto.js"></script>
+    </main>
+
+    <footer class="footer-container">
+        <br>
+        <hr>
+        <p>無料の中学生英単語帳ドリルアプリ。英検の勉強にも使える、中学で習う約2000英単語を発音音声付きの英単語帳とスペルテストでマスターしよう。ブラウザで動くのでダウンロード不要のおすすめ英語アプリ</p>
+        <p>Copyright(C) 2022- All Rights Reserved</p>
+        <a href="#page_top" class="page_top_btn">▲</a>
+    </footer>
+</body>
+</html>
