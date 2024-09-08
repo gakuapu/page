@@ -17,6 +17,7 @@ function en1() {
     let startlng = 0;
     let currentlng = 0;
     let mode = 0;
+    let speed = 0;
     let cardnum = 0;
     let cardnumMax = 0;
     let tgttext = "";
@@ -60,6 +61,7 @@ function en1() {
         startlng = 0;
         currentlng = 0;
         mode = 0;
+        speed = 0;
         cardnum = 0;
         cardnumMax = 0;
         tgttext = "";
@@ -113,7 +115,7 @@ function en1() {
         } else {
             $mainbox.innerText = worddata[cardnum][1];
         };
-        setTimeout (modesetup2b, 3000 / mode);
+        setTimeout (modesetup2b, 2000 / speed);
     };
 
     function modesetup2b () {
@@ -128,9 +130,9 @@ function en1() {
         cardnum++;
         $progress.value = cardnum / cardnumMax;
         if (cardnum < cardnumMax) {
-            setTimeout (modesetup2a, 2000 / mode);
+            setTimeout (modesetup2a, 2000 / speed);
         } else {
-            setTimeout(() => compdisplay(), 2000 / mode);
+            setTimeout(() => compdisplay(), 2000 / speed);
         };
     };
 
@@ -158,6 +160,11 @@ function en1() {
         worddata = shuffleArray (worddata);
         cardnumMax = worddata.length;
         mode = $mode.value;
+        if (mode == 1) {
+            speed = 1;
+        } else if (mode == 2) {
+            speed = 1.5;
+        };
         startlng = $lng.value;
         currentlng = startlng;
         $mainbox.style.display = "block";

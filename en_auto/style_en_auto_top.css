@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.column {
+    flex: 1;
+    width: 240px;
+    padding: 10px;
+    margin: 5px;
+    box-sizing: border-box;
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    background-color: dodgerblue;
+    border-color: dodgerblue;
+    border: thin solid;
+    border-radius: 4px;
+}
+
+.alinkstyle {
+    text-decoration: none;
+}
+
+@media (max-width: 767px) {
+    .column {
+        width: 240px;
+    }
+}
+
+#howtouse1 {
+    width: 330px;
+    padding: 0.4em;
+    background: aliceblue;
+    border-left: solid 5px dodgerblue;
+}
+
+
