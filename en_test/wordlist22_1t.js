@@ -4,7 +4,6 @@ const $list = [
     ["concert", "コンサート"],
     ["dictionary", "辞書"],
     ["donut", "ドーナツ"],
-    ["everything", "何でも"],
     ["farm", "農場"],
     ["floor", "床 / ～階"],
     ["garden", "庭"],
