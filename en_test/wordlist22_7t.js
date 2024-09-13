@@ -1,0 +1,22 @@
+const $list = [
+    ["guitar", "ギター"],
+    ["heart", "心臓、心"],
+    ["holiday", "休日"],
+    ["hotel", "ホテル"],
+    ["ice", "氷"],
+    ["key", "カギ"],
+    ["kid", "子供"],
+    ["kitchen", "キッチン"],
+    ["lady", "女性"],
+    ["magazine", "雑誌"],
+    ["market", "市場"],
+    ["meal", "食事"],
+    ["meat", "肉"],
+    ["musician", "ミュージシャン"],
+    ["page", "ページ"],
+    ["pain", "痛み、苦痛"],
+    ["photograph", "写真"],
+    ["picnic", "ピクニック"],
+    ["pocket", "ポケット"],
+    ["pond", "池"]
+];
