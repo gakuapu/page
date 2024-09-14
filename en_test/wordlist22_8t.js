@@ -9,7 +9,7 @@ const $list = [
     ["discover", "～を発見する"],
     ["excuse", "～を許す / 言い訳"],
     ["improve", "～を改善する"],
-    ["introduce", "～を紹介する/～を導入する"],
+    ["introduce", "～を紹介する / ～を導入する"],
     ["kill", "～を殺す"],
     ["laugh", "笑う"],
     ["lend", "～を貸す"],
