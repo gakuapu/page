@@ -1,0 +1,22 @@
+const $list = [
+    ["accident", "事故 / 偶然"],
+    ["adult", "大人"],
+    ["advertisement", "広告"],
+    ["amount", "量 / 総額"],
+    ["bathroom", "浴室、トイレ"],
+    ["bill", "紙幣"],
+    ["bottle", "ビン"],
+    ["brain", "脳"],
+    ["business", "ビジネス、仕事"],
+    ["button", "ボタン"],
+    ["cause", "原因/～の原因となる"],
+    ["century", "世紀"],
+    ["Christmas", "クリスマス"],
+    ["climate", "気候"],
+    ["cloth", "布"],
+    ["court", "コート / 法廷"],
+    ["danger", "危険"],
+    ["death", "死"],
+    ["design", "デザイン、設計/～をデザインする"],
+    ["difference", "違い"]
+];
