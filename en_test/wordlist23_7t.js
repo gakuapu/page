@@ -1,0 +1,22 @@
+const $list = [
+    ["education", "教育"],
+    ["electricity", "電気"],
+    ["elevator", "エレベーター"],
+    ["environment", "環境"],
+    ["fashion", "ファッション、流行"],
+    ["garbage", "ゴミ"],
+    ["hero", "ヒーロー、英雄"],
+    ["land", "土地、陸 / 着陸する"],
+    ["leader", "リーダー"],
+    ["meaning", "意味"],
+    ["memory", "記憶"],
+    ["menu", "メニュー"],
+    ["middle", "真ん中、中間"],
+    ["million", "百万"],
+    ["mirror", "鏡"],
+    ["ocean", "大海"],
+    ["opinion", "意見"],
+    ["owner", "所有者"],
+    ["prize", "賞"],
+    ["product", "製品、作物"]
+];
