@@ -1,0 +1,21 @@
+const $list = [
+    ["project", "プロジェクト"],
+    ["promise", "約束 / ～を約束する"],
+    ["report", "報告 / ～を報告する"],
+    ["research", "調査、研究"],
+    ["result", "結果"],
+    ["schedule", "スケジュール"],
+    ["situation", "状況"],
+    ["stadium", "スタジアム、競技場"],
+    ["staff", "スタッフ"],
+    ["stage", "ステージ、舞台"],
+    ["stairs", "階段"],
+    ["success", "成功"],
+    ["task", "仕事、タスク"],
+    ["technology", "テクノロジー(科学技術)"],
+    ["title", "タイトル、題名"],
+    ["total", "合計"],
+    ["tourist", "観光客"],
+    ["trouble", "トラブル、問題"],
+    ["visitor", "訪問者"]
+];
