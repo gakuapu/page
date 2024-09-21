@@ -6,7 +6,7 @@ const $list = [
     ["result", "結果"],
     ["schedule", "スケジュール"],
     ["situation", "状況"],
-    ["stadium", "スタジアム、競技場"],
+    ["Spanish", "スペイン語/人、スペインの"],
     ["staff", "スタッフ"],
     ["stage", "ステージ、舞台"],
     ["stairs", "階段"],

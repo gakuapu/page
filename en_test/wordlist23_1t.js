@@ -10,7 +10,7 @@ const $list = [
     ["butter", "バター"],
     ["camp", "キャンプ(する)"],
     ["cheese", "チーズ"],
-    ["church", "教会"],
+    ["Chinese", "中国語/中国人/中国の"],
     ["finger", "指"],
     ["football", "フットボール"],
     ["gas", "ガス、気体"],

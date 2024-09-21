@@ -4,7 +4,7 @@ const $list = [
     ["elevator", "エレベーター"],
     ["environment", "環境"],
     ["fashion", "ファッション、流行"],
-    ["garbage", "ゴミ"],
+    ["French", "フランス語/人、フランスの"],
     ["hero", "ヒーロー、英雄"],
     ["land", "土地、陸 / 着陸する"],
     ["leader", "リーダー"],
