@@ -1,0 +1,22 @@
+const $list = [
+    ["loud", "(声/音が)大きい"],
+    ["main", "主な、主要な"],
+    ["original", "独自の、最初の"],
+    ["personal", "個人的な"],
+    ["powerful", "力強い"],
+    ["rainy", "雨降りの"],
+    ["serious", "重大な、真剣な"],
+    ["several", "いくつかの"],
+    ["shy", "内気な、恥ずかしがり屋の"],
+    ["silent", "静かな"],
+    ["similar", "似ている、同様の"],
+    ["simple", "単純な"],
+    ["smart", "賢い"],
+    ["social", "社会的な"],
+    ["sunny", "晴れた"],
+    ["surprising", "驚くべき"],
+    ["traditional", "伝統的な"],
+    ["unfair", "不公平な、不正な"],
+    ["various", "様々な"],
+    ["wild", "野生の"]
+];
