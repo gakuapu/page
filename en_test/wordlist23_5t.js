@@ -1,7 +1,6 @@
 const $list = [
     ["accident", "事故 / 偶然"],
     ["adult", "大人"],
-    ["advertisement", "広告"],
     ["amount", "量 / 総額"],
     ["bathroom", "浴室、トイレ"],
     ["bill", "紙幣"],
@@ -17,6 +16,6 @@ const $list = [
     ["court", "コート / 法廷"],
     ["danger", "危険"],
     ["death", "死"],
-    ["design", "デザイン、設計/～をデザインする"],
+    ["design", "デザイン/～を設計する"],
     ["difference", "違い"]
 ];

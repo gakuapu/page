@@ -12,7 +12,6 @@ const $list = [
     ["stairs", "階段"],
     ["success", "成功"],
     ["task", "仕事、タスク"],
-    ["technology", "テクノロジー(科学技術)"],
     ["title", "タイトル、題名"],
     ["total", "合計"],
     ["tourist", "観光客"],
