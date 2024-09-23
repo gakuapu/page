@@ -1,0 +1,21 @@
+const $list = [
+    ["advantage", "利点、有利な立場"],
+    ["adventure", "冒険"],
+    ["architect", "建築家"],
+    ["astronaut", "宇宙飛行士"],
+    ["calligraphy", "書道"],
+    ["carpenter", "大工"],
+    ["effort", "努力"],
+    ["glacier", "氷河"],
+    ["government", "政府"],
+    ["host", "主催者"],
+    ["insect", "昆虫"],
+    ["journalist", "記者、ジャーナリスト"],
+    ["kangaroo", "カンガルー"],
+    ["kilogram", "キログラム"],
+    ["kilometer", "キロメートル"],
+    ["laughter", "笑い"],
+    ["law", "法律"],
+    ["motto", "標語、モットー"],
+    ["nation", "国家"]
+];
