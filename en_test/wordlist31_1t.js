@@ -15,7 +15,6 @@ const $list = [
     ["drum", "ドラム、太鼓"],
     ["garbage", "ゴミ"],
     ["fan", "ファン、扇/うちわ"],
-    ["friendship", "友情"],
     ["hole", "穴"],
     ["importance", "重要性"],
     ["joke", "ジョーク、冗談"]

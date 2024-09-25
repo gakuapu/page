@@ -5,7 +5,7 @@ const $list = [
     ["somewhere", "どこかに/で"],
     ["anywhere", "どこでも"],
     ["anytime", "いつでも"],
-    ["either", "～もまた(ない)、どちらか/でも"],
+    ["either", "～もまた(ない)、どちらか"],
     ["neither", "どちらも～ない"],
     ["ahead", "前方に"],
     ["overseas", "海外・外国へ/に"],

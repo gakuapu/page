@@ -138,8 +138,8 @@ function en1() {
     function modesetup () {
         if (mode != 0) {
             $againBtn.style.visibility = "visible"
-            $soundBtn.style.color = "lightgray";
-            soundonoff = 1;
+            $soundBtn.style.color = "black";
+            soundonoff = 0;
             modesetup2a ();
         };
     };

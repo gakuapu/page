@@ -3,7 +3,6 @@ const $list = [
     ["adventure", "冒険"],
     ["architect", "建築家"],
     ["astronaut", "宇宙飛行士"],
-    ["calligraphy", "書道"],
     ["carpenter", "大工"],
     ["effort", "努力"],
     ["glacier", "氷河"],
