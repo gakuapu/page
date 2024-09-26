@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中学3年・英検3級の英単語(1) 第1～5回｜無料中学英単語ドリルアプリ【学アプ英単語】</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="英検の勉強にも役立つ無料の中学英単語ドリルのアプリ。中学で学習する約2000英単語(英検3～5級)を発音付きの英単語帳とスペルテストでマスターできる。ダウンロード不要のおすすめ英語アプリ">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="en_auto\style_en_auto.css">
+</head>
+<body>
+    <header>
+        <h1><a id="page_top">自動再生｜無料中学英単語アプリ</a></h1>
+        <hr>
+    </header>
+
+    <main>
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+        </div>
+
+        <div>
+            <select id="sound">
+                <option value="0">発音あり(β)</option>
+                <option value="1">発音なし</option>
+            </select>
+            <select id="speed">
+                <option value="1">はやさ：普通</option>
+                <option value="2">はやさ：速め</option>
+            </select>
+        </div>
+        <div>
+            <select id="lng">
+                <option value="0">英語 ➡ 日本語</option>
+                <option value="1">日本語 ➡ 英語</option>
+            </select>
+            <select id="order">
+                <option value="0">順番通り</option>
+                <option value="1">シャッフル</option>
+            </select>
+        </div>
+
+        <input type="button" id="start-btn" class="btn" value="再生">
+
+        <p id="comp">COMPLETED!</p>
+
+        <div id="mainbox"></div>
+
+        <div>
+            <input type="button" id="again-btn" class="btn" value="？">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <hr class="dotted">
+
+        <p class="subtoph2"> ＞ <a href="en_auto32.html">次に進む</a></p>
+        <p class="subtoph2"> ＞ <a href="en_auto.html">自動再生トップへ</a></p>
+        <p class="subtoph2"> ＞ <a href="top_en.html">トップにもどる</a></p>
+
+        <hr class="dotted">
+
+        <h2 class="subtoph2">中学3年/英検3級の英単語(1) 第1～5回</h2> 
+
+        <table id="wordtable">
+            <tr>
+                <td>advice</td>
+                <td>アドバイス、忠告</td>
+            </tr>
+            <tr>
+                <td>animation</td>
+                <td>アニメ、動画</td>
+            </tr>
+            <tr>
+                <td>band</td>
+                <td>バンド、楽団</td>
+            </tr>
+            <tr>
+                <td>case</td>
+                <td>場合<br>箱</td>
+            </tr>
+            <tr>
+                <td>champion</td>
+                <td>優勝者、チャンピオン</td>
+            </tr>
+            <tr>
+                <td>church</td>
+                <td>教会</td>
+            </tr>
+            <tr>
+                <td>chef</td>
+                <td>シェフ</td>
+            </tr>
+            <tr>
+                <td>choice</td>
+                <td>選択</td>
+            </tr>
+            <tr>
+                <td>clerk</td>
+                <td>店員、係員</td>
+            </tr>
+            <tr>
+                <td>coach</td>
+                <td>コーチ</td>
+            </tr>
+            <tr>
+                <td>comic</td>
+                <td>コミック</td>
+            </tr>
+            <tr>
+                <td>custom</td>
+                <td>習慣</td>
+            </tr>
+            <tr>
+                <td>difficulty</td>
+                <td>困難、苦労</td>
+            </tr>
+            <tr>
+                <td>drum</td>
+                <td>ドラム、太鼓</td>
+            </tr>
+            <tr>
+                <td>garbage</td>
+                <td>ゴミ</td>
+            </tr>
+            <tr>
+                <td>fan</td>
+                <td>ファン<br>扇/うちわ</td>
+            </tr>
+            <tr>
+                <td>friendship</td>
+                <td>友情</td>
+            </tr>
+            <tr>
+                <td>hole</td>
+                <td>穴</td>
+            </tr>
+            <tr>
+                <td>importance</td>
+                <td>重要性</td>
+            </tr>
+            <tr>
+                <td>joke</td>
+                <td>ジョーク、冗談</td>
+            </tr>
+            <tr>
+                <td>level</td>
+                <td>高さ<br>水平</td>
+            </tr>
+            <tr>
+                <td>luck</td>
+                <td>運</td>
+            </tr>
+            <tr>
+                <td>mask</td>
+                <td>マスク</td>
+            </tr>
+            <tr>
+                <td>neck</td>
+                <td>首</td>
+            </tr>
+            <tr>
+                <td>painting</td>
+                <td>絵画</td>
+            </tr>
+            <tr>
+                <td>plate</td>
+                <td>皿</td>
+            </tr>
+            <tr>
+                <td>pleasure</td>
+                <td>喜び</td>
+            </tr>
+            <tr>
+                <td>postcard</td>
+                <td>はがき</td>
+            </tr>
+            <tr>
+                <td>pot</td>
+                <td>なべ</td>
+            </tr>
+            <tr>
+                <td>stadium</td>
+                <td>スタジアム、競技場</td>
+            </tr>
+            <tr>
+                <td>sale</td>
+                <td>セール</td>
+            </tr>
+            <tr>
+                <td>sightseeing</td>
+                <td>観光</td>
+            </tr>
+            <tr>
+                <td>size</td>
+                <td>サイズ</td>
+            </tr>
+            <tr>
+                <td>snack</td>
+                <td>軽食、おやつ</td>
+            </tr>
+            <tr>
+                <td>social studies</td>
+                <td>社会科</td>
+            </tr>
+            <tr>
+                <td>socks</td>
+                <td>靴下</td>
+            </tr>
+            <tr>
+                <td>toast</td>
+                <td>トースト</td>
+            </tr>
+            <tr>
+                <td>toy</td>
+                <td>おもちゃ</td>
+            </tr>
+            <tr>
+                <td>war</td>
+                <td>戦争</td>
+            </tr>
+            <tr>
+                <td>winner</td>
+                <td>勝者</td>
+            </tr>
+            <tr>
+                <td>amaze</td>
+                <td>～を驚かせる</td>
+            </tr>
+            <tr>
+                <td>assist</td>
+                <td>～を助ける<br>手助け</td>
+            </tr>
+            <tr>
+                <td>cheer</td>
+                <td>～を元気づける/応援する</td>
+            </tr>
+            <tr>
+                <td>contact</td>
+                <td>～に連絡する</td>
+            </tr>
+            <tr>
+                <td>connect</td>
+                <td>～を繋げる</td>
+            </tr>
+            <tr>
+                <td>cost</td>
+                <td>(費用/金額)が掛かる</td>
+            </tr>
+            <tr>
+                <td>greet</td>
+                <td>～に挨拶する</td>
+            </tr>
+            <tr>
+                <td>influence</td>
+                <td>～に影響を与える<br>影響(力)</td>
+            </tr>
+            <tr>
+                <td>interview</td>
+                <td>～にインタビュー<br>～を面接する<br>インタビュー/面接</td>
+            </tr>
+            <tr>
+                <td>lead</td>
+                <td>～を導く/指揮する<br>先頭に立つ<br>先頭</td>
+            </tr>
+            <tr>
+                <td>miss</td>
+                <td>し損なう<br>～がいなくてさみしい</td>
+            </tr>
+            <tr>
+                <td>pardon</td>
+                <td>～を許す<br>許すこと</td>
+            </tr>
+            <tr>
+                <td>place</td>
+                <td>～を置く/並べる<br>場所/所</td>
+            </tr>
+            <tr>
+                <td>reduce</td>
+                <td>～を減らす</td>
+            </tr>
+            <tr>
+                <td>reply</td>
+                <td>返事をする、答える<br>返事/回答</td>
+            </tr>
+            <tr>
+                <td>recycle</td>
+                <td>～をリサイクルする<br>リサイクル</td>
+            </tr>
+            <tr>
+                <td>rest</td>
+                <td>休憩する<br>休み<br>残り</td>
+            </tr>
+            <tr>
+                <td>reuse</td>
+                <td>～を再利用する<br>再利用</td>
+            </tr>
+            <tr>
+                <td>shock</td>
+                <td>～にショックを与える<br>ショック</td>
+            </tr>
+            <tr>
+                <td>surprise</td>
+                <td>～を驚かせる</td>
+            </tr>
+            <tr>
+                <td>be proud of ...</td>
+                <td>～を誇りに思う</td>
+            </tr>
+            <tr>
+                <td>brave</td>
+                <td>勇敢な</td>
+            </tr>
+            <tr>
+                <td>blind</td>
+                <td>目の不自由な</td>
+            </tr>
+            <tr>
+                <td>eastern</td>
+                <td>東の、東部の</td>
+            </tr>
+            <tr>
+                <td>international</td>
+                <td>国際的な</td>
+            </tr>
+            <tr>
+                <td>junior</td>
+                <td>年下の<br>下級の</td>
+            </tr>
+            <tr>
+                <td>mysterious</td>
+                <td>不思議な、不可解な</td>
+            </tr>
+            <tr>
+                <td>national</td>
+                <td>国の、国民の</td>
+            </tr>
+            <tr>
+                <td>native</td>
+                <td>生まれつきの</td>
+            </tr>
+            <tr>
+                <td>northern</td>
+                <td>北の、北部の</td>
+            </tr>
+            <tr>
+                <td>plastic</td>
+                <td>プラスチック/ビニールの<br>プラスチック</td>
+            </tr>
+            <tr>
+                <td>public</td>
+                <td>公共の、公の</td>
+            </tr>
+            <tr>
+                <td>senior</td>
+                <td>年上の<br>上級の</td>
+            </tr>
+            <tr>
+                <td>snowy</td>
+                <td>雪の</td>
+            </tr>
+            <tr>
+                <td>solar</td>
+                <td>太陽の</td>
+            </tr>
+            <tr>
+                <td>southern</td>
+                <td>南の、南部の</td>
+            </tr>
+            <tr>
+                <td>unique</td>
+                <td>独特の、珍しい</td>
+            </tr>
+            <tr>
+                <td>used</td>
+                <td>中古の</td>
+            </tr>
+            <tr>
+                <td>western</td>
+                <td>西の、西部の<br>西洋/欧米の</td>
+            </tr>
+            <tr>
+                <td>whole</td>
+                <td>全体の、全ての</td>
+            </tr>
+            <tr>
+                <td>attention</td>
+                <td>注意、注目</td>
+            </tr>
+            <tr>
+                <td>billion</td>
+                <td>10億</td>
+            </tr>
+            <tr>
+                <td>bomb</td>
+                <td>爆弾</td>
+            </tr>
+            <tr>
+                <td>cafeteria</td>
+                <td>カフェテリア、学食</td>
+            </tr>
+            <tr>
+                <td>career</td>
+                <td>経歴、職業</td>
+            </tr>
+            <tr>
+                <td>customer</td>
+                <td>顧客</td>
+            </tr>
+            <tr>
+                <td>championship</td>
+                <td>大会<br>優勝</td>
+            </tr>
+            <tr>
+                <td>charity</td>
+                <td>チャリティー、慈善</td>
+            </tr>
+            <tr>
+                <td>character</td>
+                <td>性格/特色<br>人物<br>文字</td>
+            </tr>
+            <tr>
+                <td>convenience</td>
+                <td>便利さ</td>
+            </tr>
+            <tr>
+                <td>corner</td>
+                <td>コーナー、曲がり角</td>
+            </tr>
+            <tr>
+                <td>crane</td>
+                <td>鶴</td>
+            </tr>
+            <tr>
+                <td>date</td>
+                <td>日付</td>
+            </tr>
+            <tr>
+                <td>designer</td>
+                <td>デザイナー、設計者</td>
+            </tr>
+            <tr>
+                <td>dolphin</td>
+                <td>イルカ</td>
+            </tr>
+            <tr>
+                <td>dome</td>
+                <td>ドーム</td>
+            </tr>
+            <tr>
+                <td>gram</td>
+                <td>グラム</td>
+            </tr>
+            <tr>
+                <td>headache</td>
+                <td>頭痛</td>
+            </tr>
+            <tr>
+                <td>industry</td>
+                <td>産業</td>
+            </tr>
+            <tr>
+                <td>interest</td>
+                <td>興味、関心<br>利子</td>
+            </tr>
+        </table>
+
+        <hr class="dotted">
+        <h2 class="menutxt">＜使い方｜自動再生＆聞き流し＞</h2>
+            <ul class="menutxt">
+                <li>操作不要で英単語カードをめくる自動再生＆聞き流しモードです。<br>
+                    カードをめくるスピードの調整もできます</li>
+                <li>1セット100単語ずつ。隙間時間にコツコツ英単語を覚えられます</li>
+                <li>英単語の読み上げ機能付き。<br>
+                    英単語のスペルだけでなく発音・音声もしっかりマスター</li>
+                <li>「？ボタン」をクリックすると、単語帳の一番後ろにそのカードが追加されます。<br>
+                    自信がない英単語を効率よく重点的に学習できます</li>
+                <li>英単語カードの順番のシャッフル機能付き。<br>
+                    カードの順番で覚えてしまうことを防ぎます</li>
+                <li>「英語➡日本語」も「日本語➡英語」の切り替えもできます</li>
+            </ul>
+
+        <script src="en_auto\pgm_en_auto.js"></script>
+    </main>
+
+    <footer class="footer-container">
+        <br>
+        <hr>
+        <p>英検の勉強にも役立つ無料の中学英単語ドリルのアプリ。中学で学習する約2000英単語(英検3～5級)を発音付きの英単語帳とスペルテストでマスターできる。ダウンロード不要のおすすめ英語アプリ</p>
+        <p>Copyright(C) 2022- All Rights Reserved</p>
+        <a href="#page_top" class="page_top_btn">▲</a>
+    </footer>
+</body>
+</html>
