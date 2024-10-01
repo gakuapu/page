@@ -2,7 +2,7 @@ const $list = [
     ["officer", "役人"],
     ["pamphlet", "パンフレット"],
     ["patient", "患者/病人、辛抱強い"],
-    ["period", "時代"],
+    ["period", "時代 / 期間"],
     ["pollution", "汚染"],
     ["purpose", "目的"],
     ["rhythm", "リズム"],
