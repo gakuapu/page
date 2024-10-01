@@ -1,11 +1,11 @@
 const $list = [
-    ["shrine", "神社"],
     ["snake", "ヘビ"],
     ["south", "南"],
     ["square", "正方形"],
     ["stapler", "ホッチキス"],
     ["strawberry", "イチゴ"],
     ["sweater", "セーター"],
+    ["teenager", "ティーンネイジャー"],
     ["teeth", "歯(複数形)"],
     ["telephone", "電話"],
     ["temple", "寺"],
