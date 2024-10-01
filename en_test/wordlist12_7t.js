@@ -1,6 +1,6 @@
 const $list = [
-    ["scientist", "科学者"],
     ["story", "ストーリー、話"],
+    ["street", "通り"],
     ["student", "学生"],
     ["tea", "紅茶"],
     ["teacher", "先生"],

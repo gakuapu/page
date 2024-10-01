@@ -1,6 +1,6 @@
 const $list = [
     ["ant", "蟻"],
-    ["aquarium", "水族館"],
+    ["bakery", "パン屋"],
     ["beach", "浜"],
     ["bear", "熊"],
     ["body", "体"],
@@ -11,11 +11,11 @@ const $list = [
     ["cherry", "さくらんぼ"],
     ["chicken", "鶏肉"],
     ["chocolate", "チョコレート"],
-    ["circle", "丸 / 丸い"],
     ["classroom", "教室"],
     ["clock", "時計"],
-    ["company", "会社"],
     ["computer", "コンピューター"],
+    ["cookie", "クッキー"],
+    ["conversation", "会話"],
     ["corn", "トウモロコシ"],
     ["cow", "牛"]
 ];

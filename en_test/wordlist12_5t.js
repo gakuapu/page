@@ -17,6 +17,6 @@ const $list = [
     ["sister", "姉妹"],
     ["sky", "空"],
     ["song", "歌"],
-    ["station", "駅"],
-    ["street", "通り"]
+    ["stamp", "切手"],
+    ["station", "駅"]
 ];
