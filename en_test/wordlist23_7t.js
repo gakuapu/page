@@ -1,13 +1,15 @@
 const $list = [
-    ["education", "教育"],
     ["electricity", "電気"],
     ["elevator", "エレベーター"],
+    ["energy", "エネルギー"],
     ["environment", "環境"],
     ["fashion", "ファッション、流行"],
     ["French", "フランス語/人、フランスの"],
+    ["god", "神"],
     ["hero", "ヒーロー、英雄"],
-    ["land", "土地、陸 / 着陸する"],
+    ["human", "人間"],
     ["leader", "リーダー"],
+    ["magnet", "磁石"],
     ["meaning", "意味"],
     ["memory", "記憶"],
     ["menu", "メニュー"],
@@ -16,7 +18,5 @@ const $list = [
     ["mirror", "鏡"],
     ["ocean", "大海"],
     ["opinion", "意見"],
-    ["owner", "所有者"],
-    ["prize", "賞"],
-    ["product", "製品、作物"]
+    ["prize", "賞"]
 ];
