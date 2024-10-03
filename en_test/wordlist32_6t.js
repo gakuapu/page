@@ -1,0 +1,21 @@
+const $list = [
+    ["neighbor", "隣人"],
+    ["owner", "所有者"],
+    ["pack", "箱/パック、～を詰める"],
+    ["poem", "詩"],
+    ["population", "人口"],
+    ["programmer", "プログラマー"],
+    ["sadness", "悲しみ"],
+    ["seed", "種"],
+    ["shelf", "棚"],
+    ["situation", "状況"],
+    ["smoke", "煙 / タバコを吸う"],
+    ["spell", "スペル、つづり"],
+    ["style", "型、スタイル"],
+    ["tear", "涙"],
+    ["technology", "テクノロジー(科学技術)"],
+    ["tie", "ネクタイ"],
+    ["trade", "貿易/取引、取引する"],
+    ["victory", "勝利"],
+    ["wire", "針金、ワイヤー"]
+];
