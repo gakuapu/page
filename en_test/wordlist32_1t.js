@@ -1,0 +1,22 @@
+const $list = [
+    ["action", "行為、行動"],
+    ["actor", "役者"],
+    ["address", "住所"],
+    ["apartment", "アパート"],
+    ["balance", "バランス"],
+    ["base", "基礎"],
+    ["bill", "紙幣"],
+    ["block", "ブロック/区画/～をふさぐ"],
+    ["cent", "セント"],
+    ["challenge", "挑戦/課題/～に挑戦する"],
+    ["cycling", "サイクリング"],
+    ["dining", "食事"],
+    ["disease", "病気"],
+    ["dress", "ドレス / 服装"],
+    ["ending", "エンディング、終わり"],
+    ["fee", "料金"],
+    ["fever", "熱"],
+    ["fork", "フォーク"],
+    ["gentleman", "紳士"],
+    ["habit", "習慣、くせ"]
+];
