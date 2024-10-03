@@ -17,5 +17,5 @@ const $list = [
     ["humor", "ユーモア"],
     ["injury", "けが"],
     ["lamp", "ランプ、灯り"],
-    ["movement", "動き / (社会的)運動"]
+    ["movement", "動き / 社会運動"]
 ];
