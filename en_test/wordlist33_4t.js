@@ -5,7 +5,6 @@ const $list = [
     ["basic", "基本的な、基礎の"],
     ["broad", "広い"],
     ["central", "中央の"],
-    ["comfortable", "快適な、気持ちいい"],
     ["correct", "正確な"],
     ["creative", "創造的な"],
     ["dirty", "汚い"],
