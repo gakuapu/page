@@ -2,7 +2,6 @@ const $list = [
     ["principal", "校長 / 主な"],
     ["purse", "財布(小銭入れ)"],
     ["rate", "割合、率"],
-    ["relationship", "関係性"],
     ["role", "役割"],
     ["shell", "貝殻"],
     ["source", "大元、源、出所"],

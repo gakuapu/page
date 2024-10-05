@@ -6,7 +6,6 @@ const $list = [
     ["birth", "誕生"],
     ["blood", "血"],
     ["bowl", "ボウル、お椀"],
-    ["brightness", "明るさ"],
     ["candle", "ろうそく"],
     ["chain", "鎖、チェーン"],
     ["copy", "コピー/～をコピーする"],
