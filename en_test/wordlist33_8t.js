@@ -1,0 +1,22 @@
+const $list = [
+    ["anger", "怒り"],
+    ["average", "平均(の)"],
+    ["bamboo", "竹"],
+    ["bone", "骨"],
+    ["border", "境界、国境"],
+    ["branch", "枝"],
+    ["ceiling", "天井"],
+    ["code", "記号、暗号"],
+    ["conclusion", "結論"],
+    ["condition", "状況 / 条件"],
+    ["condominium", "マンション"],
+    ["connection", "接続、繋がり"],
+    ["content", "内容、中身"],
+    ["costume", "衣装"],
+    ["cotton", "綿"],
+    ["cough", "せき"],
+    ["cushion", "クッション"],
+    ["distance", "距離"],
+    ["dot", "点"],
+    ["drill", "訓練"]
+];
