@@ -1,0 +1,21 @@
+const $list = [
+    ["ability", "能力"],
+    ["audience", "聴衆"],
+    ["award", "賞"],
+    ["bit", "少量、少し"],
+    ["bottom", "底"],
+    ["breath", "呼吸、息"],
+    ["cardboard", "段ボール、ボール紙"],
+    ["chest", "胸"],
+    ["chorus", "合唱"],
+    ["crow", "カラス"],
+    ["damage", "損害/被害、～に被害を与える"],
+    ["development", "開発 / 発展"],
+    ["dust", "ちり、ほこり"],
+    ["effect", "効果"],
+    ["engine", "エンジン"],
+    ["fear", "怖れ"],
+    ["fisherman", "漁師"],
+    ["jungle", "ジャングル"],
+    ["manager", "マネージャー"]
+];
