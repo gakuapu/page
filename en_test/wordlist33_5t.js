@@ -9,7 +9,7 @@ const $list = [
     ["chest", "胸"],
     ["chorus", "合唱"],
     ["crow", "カラス"],
-    ["damage", "損害/被害、～に被害を与える"],
+    ["damage", "損害/～に損害を与える"],
     ["development", "開発 / 発展"],
     ["dust", "ちり、ほこり"],
     ["effect", "効果"],
