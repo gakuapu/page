@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中学3年・英検3級の英単語(3) 第1～5回｜無料中学英単語ドリルアプリ【学アプ英単語】</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="英検の勉強にも役立つ無料の中学英単語ドリルのアプリ。中学で学習する約2000英単語(英検3～5級)を発音付きの英単語帳とスペルテストでマスターできる。ダウンロード不要のおすすめ英語アプリ">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="en_auto\style_en_auto.css">
+</head>
+<body>
+    <header>
+        <h1><a id="page_top">自動再生｜無料中学英単語アプリ</a></h1>
+        <hr>
+    </header>
+
+    <main>
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+        </div>
+
+        <div>
+            <select id="sound">
+                <option value="0">発音あり(β)</option>
+                <option value="1">発音なし</option>
+            </select>
+            <select id="speed">
+                <option value="1">はやさ：普通</option>
+                <option value="2">はやさ：速め</option>
+            </select>
+        </div>
+        <div>
+            <select id="lng">
+                <option value="0">英語 ➡ 日本語</option>
+                <option value="1">日本語 ➡ 英語</option>
+            </select>
+            <select id="order">
+                <option value="0">順番通り</option>
+                <option value="1">シャッフル</option>
+            </select>
+        </div>
+
+        <input type="button" id="start-btn" class="btn" value="再生">
+
+        <p id="comp">COMPLETED!</p>
+
+        <div id="mainbox"></div>
+
+        <div>
+            <input type="button" id="again-btn" class="btn" value="？">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <hr class="dotted">
+
+        <p class="subtoph2"> ＞ <a href="en_auto36.html">次に進む</a></p>
+        <p class="subtoph2"> ＞ <a href="en_auto.html">自動再生トップへ</a></p>
+        <p class="subtoph2"> ＞ <a href="top_en.html">トップにもどる</a></p>
+
+        <hr class="dotted">
+
+        <h2 class="subtoph2">中学3年/英検3級の英単語(3) 第1～5回</h2> 
+
+        <table id="wordtable">
+            <tr>
+                <td>bar</td>
+                <td>棒<br>バー(酒場)</td>
+            </tr>
+            <tr>
+                <td>bean</td>
+                <td>豆</td>
+            </tr>
+            <tr>
+                <td>bee</td>
+                <td>ハチ</td>
+            </tr>
+            <tr>
+                <td>beginning</td>
+                <td>始まり</td>
+            </tr>
+            <tr>
+                <td>birth</td>
+                <td>誕生</td>
+            </tr>
+            <tr>
+                <td>blood</td>
+                <td>血</td>
+            </tr>
+            <tr>
+                <td>bowl</td>
+                <td>ボウル、お椀</td>
+            </tr>
+            <tr>
+                <td>brightness</td>
+                <td>明るさ</td>
+            </tr>
+            <tr>
+                <td>candle</td>
+                <td>ろうそく</td>
+            </tr>
+            <tr>
+                <td>chain</td>
+                <td>鎖、チェーン</td>
+            </tr>
+            <tr>
+                <td>copy</td>
+                <td>コピー<br>～をコピーする</td>
+            </tr>
+            <tr>
+                <td>couple</td>
+                <td>ひと組<br>夫婦/カップル</td>
+            </tr>
+            <tr>
+                <td>discussion</td>
+                <td>議論</td>
+            </tr>
+            <tr>
+                <td>factory</td>
+                <td>工場</td>
+            </tr>
+            <tr>
+                <td>female</td>
+                <td>女性(の)</td>
+            </tr>
+            <tr>
+                <td>foreigner</td>
+                <td>外国人</td>
+            </tr>
+            <tr>
+                <td>form</td>
+                <td>形<br>形式<br>～を形づくる</td>
+            </tr>
+            <tr>
+                <td>goods</td>
+                <td>品物</td>
+            </tr>
+            <tr>
+                <td>grass</td>
+                <td>草、芝生</td>
+            </tr>
+            <tr>
+                <td>guest</td>
+                <td>ゲスト、客</td>
+            </tr>
+            <tr>
+                <td>hill</td>
+                <td>丘</td>
+            </tr>
+            <tr>
+                <td>land</td>
+                <td>土地<br>陸<br>着陸する</td>
+            </tr>
+            <tr>
+                <td>leaf</td>
+                <td>葉</td>
+            </tr>
+            <tr>
+                <td>list</td>
+                <td>リスト</td>
+            </tr>
+            <tr>
+                <td>male</td>
+                <td>男性(の)</td>
+            </tr>
+            <tr>
+                <td>quarter</td>
+                <td>4分の1</td>
+            </tr>
+            <tr>
+                <td>record</td>
+                <td>記録<br>～を記録する</td>
+            </tr>
+            <tr>
+                <td>safety</td>
+                <td>安全</td>
+            </tr>
+            <tr>
+                <td>secret</td>
+                <td>秘密(の)</td>
+            </tr>
+            <tr>
+                <td>service</td>
+                <td>サービス</td>
+            </tr>
+            <tr>
+                <td>society</td>
+                <td>社会</td>
+            </tr>
+            <tr>
+                <td>stew</td>
+                <td>シチュー</td>
+            </tr>
+            <tr>
+                <td>stress</td>
+                <td>ストレス<br>強調</td>
+            </tr>
+            <tr>
+                <td>taste</td>
+                <td>味<br>～を味わう</td>
+            </tr>
+            <tr>
+                <td>topic</td>
+                <td>トピック、話題</td>
+            </tr>
+            <tr>
+                <td>training</td>
+                <td>トレーニング</td>
+            </tr>
+            <tr>
+                <td>understanding</td>
+                <td>理解</td>
+            </tr>
+            <tr>
+                <td>wine</td>
+                <td>ワイン</td>
+            </tr>
+            <tr>
+                <td>yard</td>
+                <td>庭<br>ヤード(0.9m)</td>
+            </tr>
+            <tr>
+                <td>zone</td>
+                <td>ゾーン、地帯</td>
+            </tr>
+            <tr>
+                <td>attack</td>
+                <td>～を攻撃する<br>攻撃</td>
+            </tr>
+            <tr>
+                <td>bark</td>
+                <td>吠える</td>
+            </tr>
+            <tr>
+                <td>beat</td>
+                <td>～を打ち負かす</td>
+            </tr>
+            <tr>
+                <td>bite</td>
+                <td>～をかむ</td>
+            </tr>
+            <tr>
+                <td>cure</td>
+                <td>～を治す</td>
+            </tr>
+            <tr>
+                <td>deliver</td>
+                <td>～を届ける</td>
+            </tr>
+            <tr>
+                <td>breathe</td>
+                <td>呼吸する</td>
+            </tr>
+            <tr>
+                <td>confuse</td>
+                <td>～を混乱させる</td>
+            </tr>
+            <tr>
+                <td>exchange</td>
+                <td>～を交換する</td>
+            </tr>
+            <tr>
+                <td>expect</td>
+                <td>～を期待する<br>～を予想する</td>
+            </tr>
+            <tr>
+                <td>force</td>
+                <td>～に強制する<br>無理に～させる<br>力</td>
+            </tr>
+            <tr>
+                <td>hide</td>
+                <td>隠れる<br>～を隠す</td>
+            </tr>
+            <tr>
+                <td>invent</td>
+                <td>～を発明する</td>
+            </tr>
+            <tr>
+                <td>offer</td>
+                <td>～を提供する<br>申し出/オファー</td>
+            </tr>
+            <tr>
+                <td>quit</td>
+                <td>～をやめる</td>
+            </tr>
+            <tr>
+                <td>remain</td>
+                <td>残る<br>～のままである</td>
+            </tr>
+            <tr>
+                <td>repair</td>
+                <td>～を修理する<br>修理</td>
+            </tr>
+            <tr>
+                <td>separate</td>
+                <td>～を分ける</td>
+            </tr>
+            <tr>
+                <td>steal</td>
+                <td>～を盗む</td>
+            </tr>
+            <tr>
+                <td>succeed in ...</td>
+                <td>～に成功する</td>
+            </tr>
+            <tr>
+                <td>asleep</td>
+                <td>眠っている</td>
+            </tr>
+            <tr>
+                <td>active</td>
+                <td>活発な、アクティブな</td>
+            </tr>
+            <tr>
+                <td>alive</td>
+                <td>生きている</td>
+            </tr>
+            <tr>
+                <td>basic</td>
+                <td>基本的な、基礎の</td>
+            </tr>
+            <tr>
+                <td>be scared of ...</td>
+                <td>～が怖い</td>
+            </tr>
+            <tr>
+                <td>broad</td>
+                <td>広い</td>
+            </tr>
+            <tr>
+                <td>central</td>
+                <td>中央の</td>
+            </tr>
+            <tr>
+                <td>comfortable</td>
+                <td>快適な、気持ちいい</td>
+            </tr>
+            <tr>
+                <td>correct</td>
+                <td>正確な</td>
+            </tr>
+            <tr>
+                <td>creative</td>
+                <td>創造的な</td>
+            </tr>
+            <tr>
+                <td>dirty</td>
+                <td>汚い</td>
+            </tr>
+            <tr>
+                <td>dry</td>
+                <td>乾いている</td>
+            </tr>
+            <tr>
+                <td>fat</td>
+                <td>太った</td>
+            </tr>
+            <tr>
+                <td>honest</td>
+                <td>正直な</td>
+            </tr>
+            <tr>
+                <td>narrow</td>
+                <td>(幅が)せまい</td>
+            </tr>
+            <tr>
+                <td>polite</td>
+                <td>礼儀正しい、丁寧な</td>
+            </tr>
+            <tr>
+                <td>tough</td>
+                <td>困難な</td>
+            </tr>
+            <tr>
+                <td>unhappy</td>
+                <td>悲しい、不幸な</td>
+            </tr>
+            <tr>
+                <td>wet</td>
+                <td>濡れている</td>
+            </tr>
+            <tr>
+                <td>wise</td>
+                <td>賢い</td>
+            </tr>
+            <tr>
+                <td>ability</td>
+                <td>能力</td>
+            </tr>
+            <tr>
+                <td>audience</td>
+                <td>聴衆</td>
+            </tr>
+            <tr>
+                <td>award</td>
+                <td>賞</td>
+            </tr>
+            <tr>
+                <td>bit</td>
+                <td>少量、少し</td>
+            </tr>
+            <tr>
+                <td>bottom</td>
+                <td>底</td>
+            </tr>
+            <tr>
+                <td>breath</td>
+                <td>呼吸、息</td>
+            </tr>
+            <tr>
+                <td>cardboard</td>
+                <td>段ボール、ボール紙</td>
+            </tr>
+            <tr>
+                <td>chest</td>
+                <td>胸</td>
+            </tr>
+            <tr>
+                <td>chorus</td>
+                <td>合唱</td>
+            </tr>
+            <tr>
+                <td>crow</td>
+                <td>カラス</td>
+            </tr>
+            <tr>
+                <td>damage</td>
+                <td>ダメージ/損害/被害<br>～にダメージを与える</td>
+            </tr>
+            <tr>
+                <td>development</td>
+                <td>開発<br>発展</td>
+            </tr>
+            <tr>
+                <td>dust</td>
+                <td>ちり、ほこり</td>
+            </tr>
+            <tr>
+                <td>effect</td>
+                <td>効果</td>
+            </tr>
+            <tr>
+                <td>engine</td>
+                <td>エンジン</td>
+            </tr>
+            <tr>
+                <td>fear</td>
+                <td>怖れ</td>
+            </tr>
+            <tr>
+                <td>fisherman</td>
+                <td>漁師</td>
+            </tr>
+            <tr>
+                <td>greenhouse gas</td>
+                <td>温室効果ガス</td>
+            </tr>
+            <tr>
+                <td>jungle</td>
+                <td>ジャングル</td>
+            </tr>
+            <tr>
+                <td>manager</td>
+                <td>マネージャー</td>
+            </tr>
+        </table>
+
+        <hr class="dotted">
+        <h2 class="menutxt">＜使い方｜自動再生＆聞き流し＞</h2>
+            <ul class="menutxt">
+                <li>操作不要で英単語カードをめくる自動再生＆聞き流しモードです。<br>
+                    カードをめくるスピードの調整もできます</li>
+                <li>1セット100単語ずつ。隙間時間にコツコツ英単語を覚えられます</li>
+                <li>英単語の読み上げ機能付き。<br>
+                    英単語のスペルだけでなく発音・音声もしっかりマスター</li>
+                <li>「？ボタン」をクリックすると、単語帳の一番後ろにそのカードが追加されます。<br>
+                    自信がない英単語を効率よく重点的に学習できます</li>
+                <li>英単語カードの順番のシャッフル機能付き。<br>
+                    カードの順番で覚えてしまうことを防ぎます</li>
+                <li>「英語➡日本語」も「日本語➡英語」の切り替えもできます</li>
+            </ul>
+
+        <script src="en_auto\pgm_en_auto.js"></script>
+    </main>
+
+    <footer class="footer-container">
+        <br>
+        <hr>
+        <p>英検の勉強にも役立つ無料の中学英単語ドリルのアプリ。中学で学習する約2000英単語(英検3～5級)を発音付きの英単語帳とスペルテストでマスターできる。ダウンロード不要のおすすめ英語アプリ</p>
+        <p>Copyright(C) 2022- All Rights Reserved</p>
+        <a href="#page_top" class="page_top_btn">▲</a>
+    </footer>
+</body>
+</html>
