@@ -43,7 +43,15 @@ function topen() {
     const $startBtn3 = document.getElementById("start-btn3");
 
     $startBtn3.addEventListener("click", () => {
-        dref = "en" + $grade3.value + "_" + $step3.value + ".html";
+        if ($grade3.value == "34") {
+            if ($step3.value == "8" || $step3.value == "9" || $step3.value == "10") {
+                dref = "en" + $grade3.value + "_7.html";
+            } else {
+                dref = "en" + $grade3.value + "_" + $step3.value + ".html";
+            };
+        } else {
+            dref = "en" + $grade3.value + "_" + $step3.value + ".html";
+        };
         window.location.href = dref;
     });
 
@@ -52,7 +60,15 @@ function topen() {
     const $startBtn3t = document.getElementById("start-btn3t");
 
     $startBtn3t.addEventListener("click", () => {
-        dref = "en" + $grade3t.value + "_" + $step3t.value + ".html";
+        if ($grade3t.value == "34") {
+            if ($step3t.value == "8t" || $step3t.value == "9t" || $step3t.value == "10t") {
+                dref = "en" + $grade3t.value + "_7t.html";
+            } else {
+                dref = "en" + $grade3t.value + "_" + $step3t.value + ".html";
+            };
+        } else {
+            dref = "en" + $grade3t.value + "_" + $step3t.value + ".html";
+        };
         window.location.href = dref;
     });
     
