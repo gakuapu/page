@@ -1,0 +1,22 @@
+const $list = [
+    ["object", "物体 / 目的"],
+    ["operation", "操作、運営"],
+    ["orchestra", "オーケストラ"],
+    ["oxygen", "酸素"],
+    ["prefecture", "県"],
+    ["pressure", "プレッシャー、圧力"],
+    ["scenery", "風景、景色"],
+    ["sculpture", "彫刻"],
+    ["sight", "光景 / 視力"],
+    ["statue", "像、彫刻"],
+    ["stuff", "もの"],
+    ["surface", "表面"],
+    ["theme", "テーマ、主題"],
+    ["tragedy", "悲劇"],
+    ["transportation", "輸送機関"],
+    ["trophy", "トロフィー"],
+    ["veterinarian", "獣医"],
+    ["volcano", "火山"],
+    ["wildlife", "野生動物"],
+    ["windmill", "風車"]
+];
