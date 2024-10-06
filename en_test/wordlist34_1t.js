@@ -1,5 +1,4 @@
 const $list = [
-    ["advertisement", "広告"],
     ["athlete", "アスリート、運動選手"],
     ["barrier", "障壁"],
     ["carbon", "炭素"],

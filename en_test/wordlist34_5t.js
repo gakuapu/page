@@ -12,7 +12,6 @@ const $list = [
     ["cancer", "がん"],
     ["collection", "コレクション/収集"],
     ["competition", "競争、コンペ"],
-    ["craftsperson", "職人"],
     ["crop", "農作物"],
     ["democracy", "民主主義"],
     ["demonstration", "デモンストレーション"],
