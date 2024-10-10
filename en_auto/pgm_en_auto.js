@@ -1,5 +1,9 @@
 function enAuto() {
     
+    function isIOS () {
+        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    };
+
     const $stopBtn = document.getElementById("stop-btn");
     const $sound = document.getElementById("sound");
     const $speed = document.getElementById("speed");
@@ -76,6 +80,9 @@ function enAuto() {
             const voices = window.speechSynthesis.getVoices();
             if (voices.length > 0) {
                 utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
+                if (isIOS()) {
+                    utterance.voice = voices.find(voice => voice.name === "Samantha");
+                };
                 window.speechSynthesis.speak(utterance);
             } else {
                 setTimeout(setVoiceAndSpeak, 100);
