@@ -1,5 +1,9 @@
 function enWord() {
 
+    function isIOS () {
+        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    };
+
     $script1 = document.getElementById("script1");
     $sound1 = document.getElementById("sound1");
     $translation1a = document.getElementById("translation1a");
@@ -12,6 +16,9 @@ function enWord() {
             const voices = window.speechSynthesis.getVoices();
             if (voices.length > 0) {
                 utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
+                if (isIOS()) {
+                    utterance.voice = voices.find(voice => voice.name === "Samantha");
+                };
                 window.speechSynthesis.speak(utterance);
             } else {
                 setTimeout(setVoiceAndSpeak, 100);
