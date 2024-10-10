@@ -1,0 +1,77 @@
+.container-head {
+    width: 674px;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    background-color: dodgerblue;
+    border-color: dodgerblue;  
+}
+
+.container {
+    display: flex;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.box {
+    width: 320px;
+    padding: 5px;
+    margin: 10px 20px 0px 0px;
+    font-size: 18px;
+    border: thin solid dimgray;
+}
+
+.box11,
+.box21a,
+.box21b {
+    height: 205px;
+}
+
+.box21a {
+    text-align: center;
+}
+
+.box21b {
+    display: none;
+}
+
+.box12,
+.box22 {
+    height: 30px;
+    text-align: center;
+}
+
+.box12 {
+    cursor: pointer;
+    background-color: aliceblue;
+    border-color: dodgerblue;
+    border-radius: 4px;
+}
+
+.box22 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#howtouse1 {
+    width: 330px;
+    padding: 0.4em;
+    background: aliceblue;
+    border-left: solid 5px dodgerblue;
+}
+
+@media (max-width: 767px) {
+    .container-head {
+        width: 322px;
+    }
+    .container {
+        flex-direction: column;
+    }
+}
+
