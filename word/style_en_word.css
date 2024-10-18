@@ -27,17 +27,16 @@
     border: thin solid dimgray;
 }
 
-.box11,
+.box11a,
+.box11b,
 .box21a,
 .box21b {
     height: 205px;
 }
 
+.box11a,
 .box21a {
     text-align: center;
-}
-
-.box21b {
     display: none;
 }
 
@@ -54,16 +53,17 @@
     border-radius: 4px;
 }
 
+.box0 {
+    cursor: pointer;
+    background-color: whitesmoke;
+    border-color: dimgray;
+    border-radius: 4px;
+    text-align: center;
+}
+
 .box22 {
     font-size: 20px;
     font-weight: bold;
-}
-
-#howtouse1 {
-    width: 330px;
-    padding: 0.4em;
-    background: aliceblue;
-    border-left: solid 5px dodgerblue;
 }
 
 @media (max-width: 767px) {
