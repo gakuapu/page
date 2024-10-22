@@ -1,4 +1,4 @@
-function entimetrial() {
+function enta() {
 
     const $startBtn = document.getElementById("start-btn");
     const $stopBtn = document.getElementById("stop-btn");
@@ -240,4 +240,4 @@ function moveTimerBar () {
 
 };
 
-entimetrial();
+enta();
