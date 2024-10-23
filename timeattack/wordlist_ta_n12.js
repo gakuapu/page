@@ -27,7 +27,6 @@ const $list = [
     ["girl", "女の子"],
     ["group", "グループ"],
     ["hand", "手"],
-    ["home", "家(に)"], //要移動
     ["house", "家"],
     ["Japan", "日本"],
     ["letter", "手紙"],
