@@ -15,5 +15,5 @@ const $list = [
     ["festival", "祭り"],
     ["future", "未来、将来"],
     ["game", "ゲーム、試合"],
-    ["history", "歴史"],
+    ["history", "歴史"]
 ];
