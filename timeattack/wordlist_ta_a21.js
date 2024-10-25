@@ -32,7 +32,6 @@ const $list = [
     ["lucky", "幸運な"],
     ["perfect", "完全な"],
     ["possible", "可能な"],
-    ["pretty", "かわいい / (副詞)かなり"],
     ["quiet", "静かな"],
     ["ready", "準備ができている"],
     ["real", "現実の、本当の"],

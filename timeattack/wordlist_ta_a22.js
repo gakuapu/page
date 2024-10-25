@@ -32,11 +32,11 @@ const $list = [
     ["smart", "賢い"],
     ["social", "社会的な"],
     ["sunny", "晴れた"],
-    ["surprising", "驚くべき"], //次に移動
     ["traditional", "伝統的な"],
     ["unfair", "不公平な、不正な"],
     ["various", "様々な"],
     ["wild", "野生の"],
     ["a lot of", "たくさんの"],
-    ["be interested in", "～に興味がある"]
+    ["be interested in", "～に興味がある"],
+    ["pretty", "かわいい / (副詞)かなり"]
 ];

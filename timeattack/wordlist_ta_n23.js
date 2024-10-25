@@ -38,5 +38,6 @@ const $list = [
     ["vacation", "休暇"],
     ["village", "村"],
     ["weekend", "週末"],
-    ["yen", "日本円"]
+    ["yen", "日本円"],
+    ["university", "大学"]
 ];

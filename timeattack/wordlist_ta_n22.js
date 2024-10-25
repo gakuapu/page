@@ -33,7 +33,6 @@ const $list = [
     ["taxi", "タクシー"],
     ["tennis", "テニス"],
     ["theater", "映画館、劇場"],
-    ["university", "大学"],
     ["volleyball", "バレーボール"],
     ["way", "道 / 方法"],
     ["winter", "冬"],
