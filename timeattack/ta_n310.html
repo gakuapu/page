@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英単語3択タイムトライアル：中学3年・英検3級の名詞(10)｜無料中学英単語ドリルアプリ</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="英検の勉強にも役立つ無料の中学英単語ドリルのアプリ。中学で学習する約2000英単語(英検3～5級)を発音付きの英単語帳とスペルテストでマスターできる。ダウンロード不要のおすすめ英語アプリ">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_en_timeattack.css">
+</head>
+<body>
+    <audio id="audio2" src="../machigaion.mp3" preload="auto"></audio>
+
+    <header>
+        <h1>3択クイズ｜無料中学英単語アプリ</h1>
+        <hr>
+    </header>
+
+    <main>
+        <div>
+            <input type="button" id="start-btn" class="btn" value="スタート">
+        </div>
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+        </div>
+
+        <select id="lng">
+            <option value="0">日本語 ➡ 英語</option>
+            <option value="1">英語 ➡ 日本語</option>
+        </select>
+
+        <div>
+            <progress id="timer-bar" value="0"></progress>
+        </div>
+
+        <p id="mondaicount" class="subtoph2"></p>
+
+        <div id="mainbox"></div>
+
+        <div class="answerbox" id="answerbox1"></div>
+        <div class="answerbox" id="answerbox2"></div>
+        <div class="answerbox" id="answerbox3"></div>
+
+        <p id="resultmsg" class="subtoph2"></p>
+        <table id="wrongwordtable">
+        </table>
+
+        <hr class="dotted">
+        <h2 class="subtoph2">【中学3年・英検3級の名詞：レベル10】</h2>
+        <p class="menutxt">英単語の3択クイズがランダムに30問出題されます。制限時間は60秒です。完走＆全問正解目指して頑張りましょう！</p>
+
+        <hr class="dotted">
+        <p class="subtoph2">＜英単語帳＞</p>
+        <ul>
+            <li class="topli"><a href="../en34_1.html">中学3年・英検3級の英単語 4-1</a></li>
+            <li class="topli"><a href="../en34_2.html">中学3年・英検3級の英単語 4-2</a></li>
+        </ul>
+
+        <hr class="dotted">
+        <p class="subtoph2"> ＞ <a href="ta_n311.html">次に進む</a></p>
+        <p class="subtoph2"> ＞ <a href="../en_timeattack.html">英単語3択クイズトップ</a></p>
+        <p class="subtoph2"> ＞ <a href="../top_en.html">トップにもどる</a></p>
+
+        <script src="wordlist_ta_n310.js"></script>
+        <script src="pgm_en_timeattack.js"></script>
+    </main>
+
+    <footer class="footer-container">
+        <br>
+        <hr>
+        <p>英検の勉強にも役立つ無料の中学英単語ドリルのアプリ。中学で学習する約2000英単語(英検3～5級)を発音付きの英単語帳とスペルテストでマスターできる。ダウンロード不要のおすすめ英語アプリ</p>
+        <p>Copyright(C) 2022- All Rights Reserved</p>
+    </footer>
+</body>
+</html>
