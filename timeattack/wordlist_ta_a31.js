@@ -42,5 +42,6 @@ const $list = [
     ["worried", "心配している"],
     ["hopeless", "絶望した、望みのない"],
     ["normal", "通常の"],
-    ["tiny", "小さい"]
+    ["tiny", "小さい"],
+    ["unhappy", "悲しい、不幸な"]
 ];

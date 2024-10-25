@@ -14,7 +14,6 @@ const $list = [
     ["narrow", "(幅が)せまい"],
     ["polite", "礼儀正しい、丁寧な"],
     ["tough", "困難な"],
-    ["unhappy", "悲しい、不幸な"],
     ["wet", "濡れている"],
     ["wise", "賢い"],
     ["comfortable", "快適な、気持ちいい"],
