@@ -24,7 +24,7 @@ const $list = [
     ["elderly", "年配の"],
     ["elementary", "基本の、初級の"],
     ["equal", "平等な、等しい"],
-    ["homesick", "ホームシック(の)"],
+    ["homesick", "ホームシックの"],
     ["huge", "巨大な"],
     ["impressive", "印象的な、感動的な"],
     ["living", "生きている"],

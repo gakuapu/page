@@ -33,7 +33,6 @@ const $list = [
     ["ridiculous", "ばかげた、愚かな"],
     ["skillful", "技術のある、熟練した"],
     ["terrible", "恐ろしい / ひどい"],
-    ["usual", "いつもの"],
     ["wooden", "木の、木製の"],
     ["ancient", "古代の"],
     ["artificial", "人工の"],
