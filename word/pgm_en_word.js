@@ -6,6 +6,8 @@ function enWord() {
 
     $hideBtn = document.getElementById("hide");
 
+    $speed = document.getElementById("speed");
+
     $script1a = document.getElementById("script1a");
     $script1b = document.getElementById("script1b");
     $sound1 = document.getElementById("sound1");
@@ -41,6 +43,7 @@ function enWord() {
                 if (isIOS()) {
                     utterance.voice = voices.find(voice => voice.name === "Samantha");
                 };
+                utterance.rate = $speed.value;
                 window.speechSynthesis.speak(utterance);
             } else {
                 setTimeout(setVoiceAndSpeak, 100);
@@ -79,6 +82,7 @@ function enWord() {
                 if (isIOS()) {
                     utterance.voice = voices.find(voice => voice.name === "Samantha");
                 };
+                utterance.rate = $speed.value;
                 window.speechSynthesis.speak(utterance);
             } else {
                 setTimeout(setVoiceAndSpeak, 100);
@@ -117,6 +121,7 @@ function enWord() {
                 if (isIOS()) {
                     utterance.voice = voices.find(voice => voice.name === "Samantha");
                 };
+                utterance.rate = $speed.value;
                 window.speechSynthesis.speak(utterance);
             } else {
                 setTimeout(setVoiceAndSpeak, 100);
@@ -155,6 +160,7 @@ function enWord() {
                 if (isIOS()) {
                     utterance.voice = voices.find(voice => voice.name === "Samantha");
                 };
+                utterance.rate = $speed.value;
                 window.speechSynthesis.speak(utterance);
             } else {
                 setTimeout(setVoiceAndSpeak, 100);

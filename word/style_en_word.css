@@ -23,7 +23,7 @@
     width: 320px;
     padding: 5px;
     margin: 10px 20px 0px 0px;
-    font-size: 18px;
+    font-size: 16px;
     border: thin solid dimgray;
 }
 
@@ -75,3 +75,8 @@
     }
 }
 
+#speed {
+    width: 332px;
+    margin-top: 10px;
+    text-align: center;
+}
