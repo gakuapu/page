@@ -46,7 +46,6 @@ const $list = [
     ["pressure", "プレッシャー、圧力"],
     ["sculpture", "彫刻"],
     ["sight", "光景 / 視力"],
-    ["statue", "像、彫刻"],
     ["stuff", "もの"],
     ["surface", "表面"],
     ["theme", "テーマ、主題"],

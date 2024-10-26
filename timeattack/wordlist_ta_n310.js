@@ -40,7 +40,8 @@ const $list = [
     ["renewable energy", "再生可能エネルギー"],
     ["dot", "点"],
     ["object", "物体 / 目的"],
-    ["scenery", "風景、景色"]
+    ["scenery", "風景、景色"],
+    ["statue", "像、彫刻"]
 ];
 
 
