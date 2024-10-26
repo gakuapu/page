@@ -38,7 +38,9 @@ const $list = [
     ["vote", "投票 / ～に投票する"],
     ["hay fever", "花粉症"],
     ["renewable energy", "再生可能エネルギー"],
-    ["dot", "点"]
+    ["dot", "点"],
+    ["object", "物体 / 目的"],
+    ["scenery", "風景、景色"]
 ];
 
 
