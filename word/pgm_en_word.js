@@ -52,10 +52,6 @@ function enWord() {
         setVoiceAndSpeak();
     });
 
-    $sound1.addEventListener("click", () => {
-        speak ($script1b.innerText);
-    });
-
     $script1a.addEventListener("click", () => {
         $script1a.style.display = "none";
         $script1b.style.display = "block";
