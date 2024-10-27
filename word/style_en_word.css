@@ -75,8 +75,11 @@
     }
 }
 
+#hide {
+    width: 230px;
+}
+
 #speed {
-    width: 332px;
+    width: 242px;
     margin-top: 10px;
-    text-align: center;
 }
