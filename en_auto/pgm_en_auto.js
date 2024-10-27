@@ -24,7 +24,6 @@ function enAuto() {
     let cardnum = 0;
     let cardnumMax = 0;
     let tgttext = "";
-    let pronouncetext = "";
     let tgtnum = 0;
 
     let worddata = [];
@@ -67,16 +66,14 @@ function enAuto() {
         cardnum = 0;
         cardnumMax = 0;
         tgttext = "";
-        pronouncetext = "";
         tgtnum = 0;
         worddata.length = 0;
         $progress.value = 0;
     };
  
-    function pronounce () {
-        pronouncetext = worddata[cardnum][0];
+    function pronounce (text) {
         window.speechSynthesis.cancel(); //added
-        const utterance = new SpeechSynthesisUtterance (pronouncetext);
+        const utterance = new SpeechSynthesisUtterance (text);
         function setVoiceAndSpeak () {
             const voices = window.speechSynthesis.getVoices();
             if (voices.length > 0) {
@@ -84,21 +81,6 @@ function enAuto() {
                 if (isIOS()) {
                     utterance.voice = voices.find(voice => voice.name === "Samantha");
                 };
-                window.speechSynthesis.speak(utterance);
-            } else {
-                setTimeout(setVoiceAndSpeak, 100);
-            };
-        };
-        setVoiceAndSpeak();
-    };
-
-    function pronounce1st () { //test
-        window.speechSynthesis.cancel(); //added
-        const utterance = new SpeechSynthesisUtterance ("");
-        function setVoiceAndSpeak () {
-            const voices = window.speechSynthesis.getVoices();
-            if (voices.length > 0) {
-                utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
                 window.speechSynthesis.speak(utterance);
             } else {
                 setTimeout(setVoiceAndSpeak, 100);
@@ -115,7 +97,7 @@ function enAuto() {
         if ($lng.value == 0) {
             $mainbox.innerText = worddata[cardnum][0];
             if (sound == 0) {
-                pronounce ();
+                pronounce (worddata[cardnum][0]);
             };
         } else {
             $mainbox.innerText = worddata[cardnum][1];
@@ -129,7 +111,7 @@ function enAuto() {
         } else {
             $mainbox.innerText = worddata[cardnum][0];
             if (sound == 0) {
-                pronounce ();
+                pronounce (worddata[cardnum][0]);
             };
         };
         cardnum++;
@@ -168,8 +150,8 @@ function enAuto() {
         $order.style.display = "none";
         $mainbox.innerText = worddata[0][startlng];
         $progress.value = 0;
-        pronounce1st(); //test
-        setup1 ();
+        pronounce(""); //test
+        window.setTimeout(setup1, 500);
     });
 
     function findRow (worddata, tgttext) {

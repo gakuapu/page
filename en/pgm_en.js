@@ -25,7 +25,6 @@ function en1() {
     let cardnum = 0;
     let cardnumMax = 0;
     let tgttext = "";
-    let pronouncetext = "";
     let tgtnum = 0;
     let soundonoff = 0;
 
@@ -69,17 +68,15 @@ function en1() {
         cardnum = 0;
         cardnumMax = 0;
         tgttext = "";
-        pronouncetext = "";
         soundonoff = 0;
         tgtnum = 0;
         worddata.length = 0;
         $progress.value = 0;
     };
  
-    function pronounce () {
-        pronouncetext = worddata[cardnum][0];
+    function pronounce (text) {
         window.speechSynthesis.cancel(); //added
-        const utterance = new SpeechSynthesisUtterance (pronouncetext);
+        const utterance = new SpeechSynthesisUtterance (text);
         function setVoiceAndSpeak () {
             const voices = window.speechSynthesis.getVoices();
             if (voices.length > 0) {
@@ -95,24 +92,9 @@ function en1() {
         setVoiceAndSpeak();
     };
 
-    function pronounce1st () { //test
-        window.speechSynthesis.cancel(); //added
-        const utterance = new SpeechSynthesisUtterance ("");
-        function setVoiceAndSpeak () {
-            const voices = window.speechSynthesis.getVoices();
-            if (voices.length > 0) {
-                utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
-                window.speechSynthesis.speak(utterance);
-            } else {
-                setTimeout(setVoiceAndSpeak, 100);
-            };
-        };
-        setVoiceAndSpeak();
-    };
-
     $soundBtn.addEventListener("click", () => {
         if (mode == 0) {
-            pronounce ();
+            pronounce (worddata[cardnum][0]);
         } else {
             if (soundonoff == 1) {
                 soundonoff = 0;
@@ -132,7 +114,7 @@ function en1() {
         if ($lng.value == 0) {
             $mainbox.innerText = worddata[cardnum][0];
             if (soundonoff == 0) {
-                pronounce ();
+                pronounce (worddata[cardnum][0]);
             };
         } else {
             $mainbox.innerText = worddata[cardnum][1];
@@ -146,7 +128,7 @@ function en1() {
         } else {
             $mainbox.innerText = worddata[cardnum][0];
             if (soundonoff == 0) {
-                pronounce ();
+                pronounce (worddata[cardnum][0]);
             };
         };
         cardnum++;
@@ -201,8 +183,8 @@ function en1() {
         $mode.style.display = "none";
         $mainbox.innerText = worddata[0][startlng];
         $progress.value = 0;
-        pronounce1st(); //test
-        modesetup ();
+        pronounce(""); //test
+        window.setTimeout(modesetup, 500);
     });
 
     $mainbox.addEventListener("click", () => {

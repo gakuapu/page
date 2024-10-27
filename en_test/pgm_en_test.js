@@ -39,7 +39,6 @@ function entest() {
     let seikainum = 0;
     let count = 0;
     let answerText = "";
-    let pronouncetext = "";
 
     let $originlist = [];
     let testdata = [];
@@ -91,7 +90,6 @@ function entest() {
         $char5.value = "";
         $char6.value = "";
         answerText = "";
-        pronouncetext = "";
         $answerbox.innerText = "";
         $mainbox.innerText = "";
         count = 0;
@@ -114,9 +112,12 @@ function entest() {
     };
 
     $soundBtn.addEventListener("click", () => {
-        pronouncetext = testdata[count][0];
-        window.speechSynthesis.cancel(); //added
-        const utterance = new SpeechSynthesisUtterance (pronouncetext);
+        pronounce (testdata[count][0]);
+    });
+
+    function pronounce (text) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance (text);
         function setVoiceAndSpeak () {
             const voices = window.speechSynthesis.getVoices();
             if (voices.length > 0) {
@@ -124,21 +125,6 @@ function entest() {
                 if (isIOS()) {
                     utterance.voice = voices.find(voice => voice.name === "Samantha");
                 };
-                window.speechSynthesis.speak(utterance);
-            } else {
-                setTimeout(setVoiceAndSpeak, 100);
-            };
-        };
-        setVoiceAndSpeak();
-    });
-
-    function pronounce1st () { //test
-        window.speechSynthesis.cancel(); //added
-        const utterance = new SpeechSynthesisUtterance ("");
-        function setVoiceAndSpeak () {
-            const voices = window.speechSynthesis.getVoices();
-            if (voices.length > 0) {
-                utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
                 window.speechSynthesis.speak(utterance);
             } else {
                 setTimeout(setVoiceAndSpeak, 100);
@@ -433,7 +419,7 @@ function entest() {
         $progress.value = 0;
         $resultmsg.style.display = "none";
         $wordtable.style.display = "none";
-        pronounce1st (); //test
+        pronounce (""); //test
         setup ();
     });
 
