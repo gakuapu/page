@@ -34,7 +34,49 @@ function enWord() {
         $translation4b.style.display = "none";
     });
 
+
+    function speakText (text) {
+        window.speechSynthesis.cancel(); //added
+        let utterance = new SpeechSynthesisUtterance (text);
+        function setVoiceAndSpeak () {
+            const voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
+                if (isIOS()) {
+                    utterance.voice = voices.find(voice => voice.name === "Samantha");
+                };
+                utterance.rate = $speed.value;
+                window.speechSynthesis.speak(utterance);      
+            } else {
+                setTimeout(setVoiceAndSpeak, 500);
+            };
+        };
+        setVoiceAndSpeak();
+    };
+
+    function pronounce1st () { //test
+        window.speechSynthesis.cancel(); //added
+        const utterance = new SpeechSynthesisUtterance ("");
+        function setVoiceAndSpeak () {
+            const voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
+                window.speechSynthesis.speak(utterance);
+            } else {
+                setTimeout(setVoiceAndSpeak, 100);
+            };
+        };
+        setVoiceAndSpeak();
+    };
+
     $sound1.addEventListener("click", () => {
+        pronounce1st (); //test
+        speakText ($script1b.innerText);
+    });
+
+    /*
+    $sound1.addEventListener("click", () => {
+        window.speechSynthesis.cancel();
         let utterance = new SpeechSynthesisUtterance ($script1b.innerText);
         function setVoiceAndSpeak () {
             const voices = window.speechSynthesis.getVoices();
@@ -44,14 +86,15 @@ function enWord() {
                     utterance.voice = voices.find(voice => voice.name === "Samantha");
                 };
                 utterance.rate = $speed.value;
-                window.speechSynthesis.speak(utterance);
+                window.speechSynthesis.speak(utterance);      
             } else {
-                setTimeout(setVoiceAndSpeak, 100);
+                setTimeout(setVoiceAndSpeak, 500);
             };
         };
         setVoiceAndSpeak();
     });
-
+    */
+    
     $script1a.addEventListener("click", () => {
         $script1a.style.display = "none";
         $script1b.style.display = "block";
@@ -74,21 +117,8 @@ function enWord() {
     $answer2 = document.getElementById("answer2");
     
     $sound2.addEventListener("click", () => {
-        let utterance = new SpeechSynthesisUtterance ($script2b.innerText);
-        function setVoiceAndSpeak () {
-            const voices = window.speechSynthesis.getVoices();
-            if (voices.length > 0) {
-                utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
-                if (isIOS()) {
-                    utterance.voice = voices.find(voice => voice.name === "Samantha");
-                };
-                utterance.rate = $speed.value;
-                window.speechSynthesis.speak(utterance);
-            } else {
-                setTimeout(setVoiceAndSpeak, 100);
-            };
-        };
-        setVoiceAndSpeak();
+        pronounce1st (); //test
+        speakText ($script2b.innerText);
     });
 
     $script2a.addEventListener("click", () => {
@@ -113,21 +143,8 @@ function enWord() {
     $answer3 = document.getElementById("answer3");
     
     $sound3.addEventListener("click", () => {
-        let utterance = new SpeechSynthesisUtterance ($script3b.innerText);
-        function setVoiceAndSpeak () {
-            const voices = window.speechSynthesis.getVoices();
-            if (voices.length > 0) {
-                utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
-                if (isIOS()) {
-                    utterance.voice = voices.find(voice => voice.name === "Samantha");
-                };
-                utterance.rate = $speed.value;
-                window.speechSynthesis.speak(utterance);
-            } else {
-                setTimeout(setVoiceAndSpeak, 100);
-            };
-        };
-        setVoiceAndSpeak();
+        pronounce1st (); //test
+        speakText ($script3b.innerText);
     });
 
     $script3a.addEventListener("click", () => {
@@ -152,21 +169,8 @@ function enWord() {
     $answer4 = document.getElementById("answer4");
     
     $sound4.addEventListener("click", () => {
-        let utterance = new SpeechSynthesisUtterance ($script4b.innerText);
-        function setVoiceAndSpeak () {
-            const voices = window.speechSynthesis.getVoices();
-            if (voices.length > 0) {
-                utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
-                if (isIOS()) {
-                    utterance.voice = voices.find(voice => voice.name === "Samantha");
-                };
-                utterance.rate = $speed.value;
-                window.speechSynthesis.speak(utterance);
-            } else {
-                setTimeout(setVoiceAndSpeak, 100);
-            };
-        };
-        setVoiceAndSpeak();
+        pronounce1st (); //test
+        speakText ($script4b.innerText);
     });
 
     $script4a.addEventListener("click", () => {

@@ -115,6 +115,7 @@ function entest() {
 
     $soundBtn.addEventListener("click", () => {
         pronouncetext = testdata[count][0];
+        window.speechSynthesis.cancel(); //added
         const utterance = new SpeechSynthesisUtterance (pronouncetext);
         function setVoiceAndSpeak () {
             const voices = window.speechSynthesis.getVoices();
@@ -130,6 +131,21 @@ function entest() {
         };
         setVoiceAndSpeak();
     });
+
+    function pronounce1st () { //test
+        window.speechSynthesis.cancel(); //added
+        const utterance = new SpeechSynthesisUtterance ("");
+        function setVoiceAndSpeak () {
+            const voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
+                window.speechSynthesis.speak(utterance);
+            } else {
+                setTimeout(setVoiceAndSpeak, 100);
+            };
+        };
+        setVoiceAndSpeak();
+    };
 
     $stopBtn.addEventListener("click", () => {
         defaultdisplay ();
@@ -417,6 +433,7 @@ function entest() {
         $progress.value = 0;
         $resultmsg.style.display = "none";
         $wordtable.style.display = "none";
+        pronounce1st (); //test
         setup ();
     });
 

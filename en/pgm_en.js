@@ -78,6 +78,7 @@ function en1() {
  
     function pronounce () {
         pronouncetext = worddata[cardnum][0];
+        window.speechSynthesis.cancel(); //added
         const utterance = new SpeechSynthesisUtterance (pronouncetext);
         function setVoiceAndSpeak () {
             const voices = window.speechSynthesis.getVoices();
@@ -86,6 +87,21 @@ function en1() {
                 if (isIOS()) {
                     utterance.voice = voices.find(voice => voice.name === "Samantha");
                 };
+                window.speechSynthesis.speak(utterance);
+            } else {
+                setTimeout(setVoiceAndSpeak, 100);
+            };
+        };
+        setVoiceAndSpeak();
+    };
+
+    function pronounce1st () { //test
+        window.speechSynthesis.cancel(); //added
+        const utterance = new SpeechSynthesisUtterance ("");
+        function setVoiceAndSpeak () {
+            const voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                utterance.voice = voices.find(voice => voice.lang === "en-US") || voices[0];
                 window.speechSynthesis.speak(utterance);
             } else {
                 setTimeout(setVoiceAndSpeak, 100);
@@ -185,6 +201,7 @@ function en1() {
         $mode.style.display = "none";
         $mainbox.innerText = worddata[0][startlng];
         $progress.value = 0;
+        pronounce1st(); //test
         modesetup ();
     });
 
