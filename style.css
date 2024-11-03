@@ -188,10 +188,10 @@ nav {
 .en-sidebar-container {
     position:fixed;
     top: 0;
-    right: -370px;
+    right: -380px;
     width: 350px;
     height: 100%;
-    background-color: dimgray;
+    background-color: lightgray;
     color: black;
     padding: 20px;
     transition: right 0.3s ease;
@@ -204,14 +204,16 @@ nav {
 }
 
 .en-menu-toggle {
-    font-size: 1.5em;
-    cursor: pointer;
-    padding: 0px;
-    background-color: dodgerblue;
-    color: white;
     position: fixed;
-    bottom: 0;
-    left: 0;
+    background-color: dodgerblue;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    bottom: 5px;
+    right: 5px;
     z-index: 10;
 }
 
