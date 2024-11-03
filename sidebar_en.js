@@ -6,32 +6,32 @@ function sidebarEN () {
         document.getElementById("en-sidebar-container").innerHTML = html;
     })
 
-    $enLinkContainer1 = document.getElementById("en-link-container1");
-    $enLinkContainer2 = document.getElementById("en-link-container2");
-    $enLinkContainer3 = document.getElementById("en-link-container3");
-    $enLinkContainer4 = document.getElementById("en-link-container4");
+    const $enLinkContainer1 = document.getElementById("en-link-container1");
+    const $enLinkContainer2 = document.getElementById("en-link-container2");
+    const $enLinkContainer3 = document.getElementById("en-link-container3");
+    const $enLinkContainer4 = document.getElementById("en-link-container4");
     let p_ensb = Math.floor(Math.random()) * 4;
 
     switch (p_ensb) {
-        case "0":
+        case 0:
             $enLinkContainer1.style.display = "block";
             $enLinkContainer2.style.display = "none";
             $enLinkContainer3.style.display = "none";
             $enLinkContainer4.style.display = "none";
             break;
-        case "1":
+        case 1:
             $enLinkContainer1.style.display = "none";
             $enLinkContainer2.style.display = "block";
             $enLinkContainer3.style.display = "none";
             $enLinkContainer4.style.display = "none";
             break;
-        case "2":
+        case 2:
             $enLinkContainer1.style.display = "none";
             $enLinkContainer2.style.display = "none";
             $enLinkContainer3.style.display = "block";
             $enLinkContainer4.style.display = "none";
             break;
-        case "3":
+        case 3:
             $enLinkContainer1.style.display = "none";
             $enLinkContainer2.style.display = "none";
             $enLinkContainer3.style.display = "none";
