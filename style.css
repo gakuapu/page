@@ -184,10 +184,35 @@ nav {
     right: 5px;
 }
 
-/*en-sidebar*/
-#en-sidebar {
+/*enサイドバー*/
+.en-sidebar-container {
+    position:fixed;
+    top: 0;
+    right: -350px;
     width: 350px;
-    background-color: dimgray;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    font-size: 18px;
+}
+
+.en-sidebar-visible {
+    right: 0;
+}
+
+.en-menu-toggle {
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 10px;
+    background-color: dodgerblue;
+    color: white;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 10;
 }
 
 #en-sidebar ul {
@@ -197,7 +222,7 @@ nav {
 
 #en-sidebar ul li {
     text-align: center;
-    border-bottom: solid 1px white;
+    border-bottom: solid 1px black;
 }
 
 #en-sidebar ul li a {
