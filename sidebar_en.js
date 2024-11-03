@@ -1,5 +1,11 @@
 function sidebarEN () {
 
+    fetch("https://gakuapu.github.io/page/sidebar_en.html")
+    .then(response => response.text())
+    .then(html => {
+        document.getElementById("en-sidebar-container").innerHTML = html;
+    })
+
     const mobileOnlyLinks_EN = [
         `
         <a href="https://px.a8.net/svt/ejp?a8mat=3ZFLL0+37I6GA+46O6+C2GFL" rel="nofollow">
@@ -46,13 +52,7 @@ function sidebarEN () {
 
     const randomIndex_EN = Math.floor(Math.random() * linksToShow_EN.length);
     const randomLink_EN = linksToShow_EN[randomIndex_EN];
-
-    fetch("https://gakuapu.github.io/page/sidebar_en.html")
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById("en-sidebar-container").innerHTML = html;
-        })
-
+    
     document.getElementById("en-random-link-container").innerHTML = randomLink_EN;
 
     document.getElementById("en-menu-toggle").addEventListener("click", () => {
