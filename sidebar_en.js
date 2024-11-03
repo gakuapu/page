@@ -12,7 +12,7 @@ function sidebarEN () {
         '<a href="https://px.a8.net/svt/ejp?a8mat=3ZFLL0+48F1YI+320A+65U41" rel="nofollow"><img border="0" width="300" height="250" alt="" src="https://www21.a8.net/svt/bgt?aid=240912900256&wid=004&eno=01&mid=s00000014257001035000&mc=1"></a><img border="0" width="1" height="1" src="https://www10.a8.net/0.gif?a8mat=3ZFLL0+48F1YI+320A+65U41" alt=""></img>'
     ];
 
-    const isMobile_EN = window.matchMedia("(max-window: 1024px)").matches; 
+    const isMobile_EN = window.matchMedia("(max-width: 1024px)").matches; 
 
     const linksToShow_EN = isMobile_EN ? mobileOnlyLinks_EN.concat(allDeviceLinks_EN) : allDeviceLinks_EN;
 
