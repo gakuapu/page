@@ -192,8 +192,8 @@ nav {
     width: 350px;
     height: 100%;
     background-color: white;
-    border-left: solid 1px silver; 
-    color: black;
+    border-left: solid 1px lightgray; 
+    color: dimgray;
     padding: 0px 10px;
     transition: right 0.3s ease;
     overflow-y: auto;
@@ -225,7 +225,7 @@ nav {
 
 #en-sidebar ul li {
     text-align: center;
-    border-bottom: solid 1px silver;
+    border-bottom: dotted 1px lightgray;
     text-decoration: none;
     color: black;
     padding: 5px 0px;
@@ -234,6 +234,13 @@ nav {
 #en-sidebar ul li a {
     text-decoration: none;
     color: black;
+}
+
+.en-sp {
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
 }
 
 
