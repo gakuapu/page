@@ -188,10 +188,11 @@ nav {
 .en-sidebar-container {
     position:fixed;
     top: 0;
-    right: -380px;
+    right: -371px;
     width: 350px;
     height: 100%;
-    background-color: lightgray;
+    background-color: white;
+    border-left: solid 1px silver; 
     color: black;
     padding: 0px 10px;
     transition: right 0.3s ease;
@@ -200,7 +201,7 @@ nav {
 }
 
 .en-sidebar-visible {
-    right: -20px;
+    right: 0px;
 }
 
 .en-menu-toggle {
@@ -208,12 +209,12 @@ nav {
     background-color: dodgerblue;
     text-align: center;
     color: white;
-    font-size: 20px;
+    font-size: 26px;
     text-decoration: none;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 0 8px;
     bottom: 5px;
-    right: 5px;
+    left: 5px;
     z-index: 10;
 }
 
@@ -224,10 +225,10 @@ nav {
 
 #en-sidebar ul li {
     text-align: center;
-    border-bottom: solid 1px white;
+    border-bottom: solid 1px silver;
     text-decoration: none;
     color: black;
-    padding: 0px 5px;
+    padding: 5px 0px;
 }
 
 #en-sidebar ul li a {
