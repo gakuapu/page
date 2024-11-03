@@ -183,3 +183,27 @@ nav {
     bottom: 5px;
     right: 5px;
 }
+
+/*en-sidebar*/
+#en-sidebar {
+    width: 350px;
+    height: 100%;
+    color: dimgray;
+}
+
+#en-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#en-sidebar ul li {
+    text-align: center;
+    border-bottom: solid 1px white;
+}
+
+#en-sidebar ul li a {
+    text-decoration: none;
+}
+
+
+
