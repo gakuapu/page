@@ -187,8 +187,7 @@ nav {
 /*en-sidebar*/
 #en-sidebar {
     width: 350px;
-    height: 100%;
-    color: dimgray;
+    background-color: dimgray;
 }
 
 #en-sidebar ul {
