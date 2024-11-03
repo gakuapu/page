@@ -221,6 +221,7 @@ nav {
 #en-sidebar ul {
     list-style-type: none;
     padding: 0;
+    margin-bottom: 0;
 }
 
 #en-sidebar ul li {
