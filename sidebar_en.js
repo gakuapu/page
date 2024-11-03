@@ -6,7 +6,6 @@ function sidebarEN () {
             document.getElementById("en-sidebar-container").innerHTML = html;
         })
 
-
     document.getElementById("en-menu-toggle").addEventListener("click", () => {
         const $enSidebar = document.getElementById("en-sidebar-container");
         $enSidebar.classList.toggle("en-sidebar-visible");
