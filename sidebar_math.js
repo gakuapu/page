@@ -35,8 +35,8 @@ function sidebarMath () {
     };
 
     document.getElementById("math-menu-toggle").addEventListener("click", () => {
-        const $enSidebar = document.getElementById("math-sidebar-container");
-        $enSidebar.classList.toggle("math-sidebar-visible");
+        const $SidebarMath = document.getElementById("math-sidebar-container");
+        $SidebarMath.classList.toggle("math-sidebar-visible");
     });
 
 };
