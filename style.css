@@ -247,5 +247,73 @@ nav {
     text-align: center;
 }
 
+/*mathサイドバー*/
+.math-sidebar-container {
+    position:fixed;
+    top: 0;
+    right: -371px;
+    width: 350px;
+    height: 100%;
+    background-color: white;
+    border-left: solid 1px lightgray; 
+    color: dimgray;
+    padding: 0px 10px;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    font-size: 18px;
+}
+
+.math-sidebar-visible {
+    right: 0px;
+}
+
+.math-menu-toggle {
+    position: fixed;
+    background-color: dimgray;
+    opacity: 90%;
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0 8px;
+    bottom: 5px;
+    left: 5px;
+    z-index: 10;
+}
+
+#math-top,
+#math-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+#math-top,
+.sb-grade1,
+.sb-grade2,
+#math-sidebar ul li {
+    text-align: center;
+    border-bottom: dotted 1px lightgray;
+    text-decoration: none;
+    color: black;
+    padding: 5px 0px;
+}
+
+#math-sidebar ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.math-sp {
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+
+
 
 
