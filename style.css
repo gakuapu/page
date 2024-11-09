@@ -284,6 +284,7 @@ nav {
 
 #math-top {
     margin-top: 5px;
+    margin-bottom: 0;
     text-align: center;
     border-bottom: dotted 1px lightgray;
     padding: 5px 0px;
@@ -294,27 +295,29 @@ nav {
     color: black;
 }
 
-#math-sidebar ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
 .sb-grade1 {
     border-bottom: dotted 1px lightgray;
+    margin: 0;
 }
 
 .sb-grade2,
 .sb-grade3 {
     width: 170px;
     text-align: center;
+    padding: 5px 0px;
+    display: inline-block;
     text-decoration: none;
     color: black;
-    padding: 5px 0px;
 }
 
 .sb-grade2 {
     border-right: dotted 1px lightgray;
+}
+
+#math-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 #math-sidebar ul li {
