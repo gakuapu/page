@@ -300,8 +300,23 @@ nav {
     margin: 0;
 }
 
-.sb-grade1,
+.sb-grade1 {
+    border-bottom: dotted 1px lightgray;
+}
+
 .sb-grade2,
+.sb-grade3 {
+    width: 170px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    padding: 5px 0px;
+}
+
+.sb-grade2 {
+    border-right: dotted 1px lightgray;
+}
+
 #math-sidebar ul li {
     text-align: center;
     border-bottom: dotted 1px lightgray;
