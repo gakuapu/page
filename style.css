@@ -305,10 +305,9 @@ nav {
     width: 170px;
     text-align: center;
     padding: 5px 0px;
-    display: inline-block;
     text-decoration: none;
     color: black;
-    display: inline;
+    display: flex;
 }
 
 .sb-grade2 {
