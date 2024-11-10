@@ -347,7 +347,100 @@ nav {
     text-align: center;
 }
 
+/*pa api↓*/
 
+.paapi5-pa-ad-unit {
+    border: 1px solid #eee;
+    margin:2px;
+    position: relative;
+    overflow: hidden;
+    padding: 5px 5px;
+    line-height: 1.1em;
+}
+
+.paapi5-pa-ad-unit * {
+    box-sizing: content-box;
+    box-shadow: none;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+}
+
+.paapi5-pa-ad-unit.pull-left {
+    float: left;
+}
+
+.paapi5-pa-ad-unit.pull-right {
+    float: right;
+}
+
+.paapi5-pa-ad-unit a {
+    box-shadow: none !important;
+}
+
+.paapi5-pa-ad-unit a:hover {
+    color: #c45500;
+}
+
+.paapi5-pa-product-container {
+    width: 300px;
+    height: 240px;
+}
+
+.paapi5-pa-product-image {
+    display: table;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.paapi5-pa-product-image-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.paapi5-pa-product-image-link {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.paapi5-pa-product-image-source {
+    max-width: 150px;
+    max-height: 150px;
+    vertical-align: bottom;
+}
+
+.paapi5-pa-product-details {
+    display: inline-block;
+    max-width: 100%;
+    margin-top: 11px;
+    text-align: center;
+    width: 100%;
+}
+
+.paapi5-pa-ad-unit .paapi5-pa-product-title a {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    color: #0066c0;
+    text-decoration: none;
+    margin-bottom: 3px;
+}
+
+.paapi5-pa-ad-unit .paapi5-pa-product-title a:hover {
+    text-decoration: underline;
+    color: #c45500;
+}
+
+.paapi5-pa-ad-unit.no-truncate .paapi5-pa-product-title a {
+    text-overflow: initial;
+    white-space: initial;
+}
+
+/*pa api↑*/
 
 
 
