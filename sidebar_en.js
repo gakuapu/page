@@ -40,8 +40,8 @@ function sidebarEN () {
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://www.amazon.co.jp/dp/B0CWZ7X7CQ?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank"></a>
-                            <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51lSQKbWfpL._SL500_.jpg" alt="N/A">
+                            <a class="paapi5-pa-product-image-link" href="https://www.amazon.co.jp/dp/B0CWZ7X7CQ?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">
+                            <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51lSQKbWfpL._SL500_.jpg" alt="N/A"></a>
                         </div>
                     </div>
                     <div class="paapi5-pa-product-details">
