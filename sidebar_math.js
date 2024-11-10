@@ -169,6 +169,24 @@ function sidebarMath () {
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
+                            <a class="paapi5-pa-product-image-link" href="https://www.amazon.co.jp/dp/4863463421?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">
+                            <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51sl1M9fK4L._SL500_.jpg" alt="N/A"></a>
+                        </div>
+                    </div>
+                    <div class="paapi5-pa-product-details">
+                        <div class="paapi5-pa-product-title">
+                            <a class="paap5-pa-product-title-link" href="https://www.amazon.co.jp/dp/4863463421?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">【Amazon】改訂版 理科コアプラス (サピックスメソッド)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+            ,
+            `
+            <div class="paapi5-pa-ad-unit pull-left">
+                <div class="paapi5-pa-product-container">
+                    <div class="paapi5-pa-product-image">
+                        <div class="paapi5-pa-product-image-wrapper">
                             <a class="paapi5-pa-product-image-link" href="https://www.amazon.co.jp/dp/4799329332?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">
                             <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51MLFYGmPuL._SL500_.jpg" alt="N/A"></a>
                         </div>
