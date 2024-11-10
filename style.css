@@ -354,7 +354,7 @@ nav {
     border: 1px solid #eee;
     margin:2px;
     position: relative;
-    overflow: hidden;
+    /*overflow: hidden;*/
     padding: 5px 15px;
     line-height: 1.2em;
 }
@@ -385,7 +385,7 @@ nav {
 }
 
 .paapi5-pa-product-container {
-    width: 330px;
+    width: 320px;
     height: 240px;
 }
 
