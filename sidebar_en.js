@@ -18,35 +18,17 @@ function sidebarEN () {
 
         const alldeviceLinks_en = [
             `
-            <a href="https://px.a8.net/svt/ejp?a8mat=3ZFLL0+3B2S2Y+2NA+1ZNY35" rel="nofollow">
-            <img border="0" width="300" height="250" alt="" src="https://www26.a8.net/svt/bgt?aid=240912900200&wid=004&eno=01&mid=s00000000343012037000&mc=1"></a>
-            <img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=3ZFLL0+3B2S2Y+2NA+1ZNY35" alt="">
-            `
-            ,
-            `
-            <a href="https://px.a8.net/svt/ejp?a8mat=3ZFLL0+490HKA+1SVU+626XT" rel="nofollow">
-            <img border="0" width="300" height="250" alt="" src="https://www22.a8.net/svt/bgt?aid=240912900257&wid=004&eno=01&mid=s00000008409001018000&mc=1"></a>
-            <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=3ZFLL0+490HKA+1SVU+626XT" alt="">
-            `
-            ,
-            `
-            <a href="https://px.a8.net/svt/ejp?a8mat=3BMJQD+5YDLM+36T2+TV3PD" rel="nofollow">
-            <img border="0" width="300" height="250" alt="" src="https://www27.a8.net/svt/bgt?aid=200926309010&wid=002&eno=01&mid=s00000014879005016000&mc=1"></a>
-            <img border="0" width="1" height="1" src="https://www14.a8.net/0.gif?a8mat=3BMJQD+5YDLM+36T2+TV3PD" alt="">
-            `
-            ,
-            `
             <div class="paapi5-pa-ad-unit pull-left">
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://www.amazon.co.jp/dp/B0CWZ7X7CQ?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">
+                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/3Z6krQu" title="N/A" target="_blank">
                             <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51lSQKbWfpL._SL500_.jpg" alt="N/A"></a>
                         </div>
                     </div>
                     <div class="paapi5-pa-product-details">
                         <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://www.amazon.co.jp/dp/B0CWZ7X7CQ?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">【Amazon】ＮＨＫラジオ 中学生の基礎英語　レベル１ 2024年 11月号 ［雑誌］ (NＨＫテキスト)</a>
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/3Z6krQu" title="N/A" target="_blank">【Amazon】ＮＨＫラジオ 中学生の基礎英語　レベル１ 2024年 12月号 ［雑誌］ (NＨＫテキスト)</a>
                         </div>
                     </div>
                 </div>
@@ -58,13 +40,13 @@ function sidebarEN () {
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://www.amazon.co.jp/dp/4010937793?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">
+                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/4fQzEej" title="N/A" target="_blank">
                             <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51UpQ+zPzlL._SL500_.jpg" alt="N/A"></a>
                         </div>
                     </div>
                     <div class="paapi5-pa-product-details">
                         <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://www.amazon.co.jp/dp/4010937793?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">【Amazon】2024年度版 英検5級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/4fQzEej" title="N/A" target="_blank">【Amazon】2024年度版 英検5級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
                         </div>
                     </div>
                 </div>
@@ -76,13 +58,13 @@ function sidebarEN () {
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://www.amazon.co.jp/dp/4010937785?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">
+                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/48PZCfu" title="N/A" target="_blank">
                             <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51pHCQggz1L._SL500_.jpg" alt="N/A"></a>
                         </div>
                     </div>
                     <div class="paapi5-pa-product-details">
                         <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://www.amazon.co.jp/dp/4010937785?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">2024年度版 英検4級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/48PZCfu" title="N/A" target="_blank">2024年度版 英検4級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
                         </div>
                     </div>
                 </div>
@@ -94,13 +76,13 @@ function sidebarEN () {
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://www.amazon.co.jp/dp/4010937777?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">
+                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/3Cow8sY" title="N/A" target="_blank">
                             <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51Vt8+47DTL._SL500_.jpg" alt="N/A"></a>
                         </div>
                     </div>
                     <div class="paapi5-pa-product-details">
                         <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://www.amazon.co.jp/dp/4010937777?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">【Amazon】2024年度版 英検3級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/3Cow8sY" title="N/A" target="_blank">【Amazon】2024年度版 英検3級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
                         </div>
                     </div>
                 </div>
@@ -112,13 +94,13 @@ function sidebarEN () {
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://www.amazon.co.jp/dp/4041153719?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">
+                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/3O9yKxv" title="N/A" target="_blank">
                             <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/516tooLniWL._SL500_.jpg" alt="N/A"></a>
                         </div>
                     </div>
                     <div class="paapi5-pa-product-details">
                         <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://www.amazon.co.jp/dp/4041153719?tag=gakuapu-22&amp;linkCode=ogi&amp;th=1&amp;psc=1" title="N/A" target="_blank">【Amazon】角川まんが学習シリーズ 世界の歴史 3大特典つき全20巻+別巻2冊セット</a>
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/3O9yKxv" title="N/A" target="_blank">【Amazon】角川まんが学習シリーズ 世界の歴史 3大特典つき全20巻+別巻2冊セット</a>
                         </div>
                     </div>
                 </div>
