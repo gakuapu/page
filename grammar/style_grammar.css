@@ -1,0 +1,73 @@
+#stop-btn,
+#mondai,
+#spacer,
+#inputanswer,
+#word-btn-container,
+#retry-btn,
+#skip-btn,
+#progress,
+#resultmsg,
+#missed-list-table {
+    display: none;
+}
+
+#mondai,
+#inputanswer {
+    font-size: 20px;
+}
+
+#mondai {
+    margin-top: 10px;
+}
+
+#spacer {
+    font-size: 28px;
+    color: gainsboro;
+    margin: 5px 0;
+}
+
+.word-btn,
+#check-btn {
+    height: 40px;
+    background-color: aliceblue;
+    border: thin solid dodgerblue;
+    border-radius: 5px;
+    font-size: 18px;
+    font-family: serif;
+    text-align: center;
+    padding: 0 10px;
+    color: black;
+    margin: 10px 5px 10px 0;
+    
+    /* reset */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#check-btn {
+    width: 45px;
+    background-color: dodgerblue;
+    color: white;
+}
+
+#progress::-webkit-progress-value {
+    background-color: dodgerblue;
+}
+
+#missed-list-table {
+    width: 340px;
+    font-size: 16px;
+    list-style: none;
+    text-align: center;
+    margin-top: 0.1em;
+    word-break: break-word;
+}
+
+#missed-list-table tr:nth-child(6n-5) td,
+#missed-list-table tr:nth-child(6n-4) td,
+#missed-list-table tr:nth-child(6n-3) td {
+	background: aliceblue;
+}
