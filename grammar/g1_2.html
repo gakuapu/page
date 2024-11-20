@@ -17,9 +17,14 @@
     <link rel="icon" href="../favicon.ico">
     <meta name="description" content="英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_grammar.css">
 
 </head>
 <body>
+
+    <audio id="audio1" src="../seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="../machigaion2.mp3" preload="auto"></audio>
+
     <header>
         <h1><a id="page_top">一般動詞｜無料中学英文法アプリ</a></h1>
         <hr>
@@ -27,14 +32,53 @@
 
     <main>
 
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+            <input type="button" id="start-btn" class="btn" value="練習スタート">
+        </div>
+
+        <div id="mondai"></div>
+        <div>
+            <a id="spacer">|</a>
+            <a id="inputanswer"></a>
+        </div>
+
+        <div id="word-btn-container">
+            <input type="button" id="word1" class="word-btn">
+            <input type="button" id="word2" class="word-btn">
+            <input type="button" id="word3" class="word-btn">
+            <input type="button" id="word4" class="word-btn">
+            <input type="button" id="word5" class="word-btn">
+            <input type="button" id="word6" class="word-btn">
+            <input type="button" id="word7" class="word-btn">
+            <input type="button" id="word8" class="word-btn">
+            <input type="button" id="check-btn">
+        </div>
+
+        <div>
+            <input type="button" id="retry-btn" class="btn" value="やり直す">
+            <input type="button" id="skip-btn" class="btn" value="スキップ">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <p id="resultmsg" class="subtoph2"></p>
+
+        <table id="missed-list-table">
+        </table>
+
+        <hr class="dotted">
+
         <h2>【一般動詞】とは：</h2>
 
             <p class="menutxt">一般動詞は「be動詞」以外の動詞で、「走る」「食べる」「見る」など、何かをする「動作」を表します。</p>
 
         <h2>一般動詞の使い方と例文：</h2>
 
-            <p class="menutxt">日本語では、基本的に文の最後に「動詞」が来ます。（"主語" .... "動詞"。）
-                一方、英語では、"主語" "動詞" ...と、「be動詞」「一般動詞」とも、主語の次に動詞を置くのが基本形になります。</p>
+            <p class="menutxt">日本語では、基本的に文の最後に「動詞」が来ます。（"主語" .... "動詞"。）<br>
+                一方、英語では、"主語" "動詞" ...と、主語の次に動詞を置くのが基本形になります。</p>
                 <ul class="menutxt">
                     <li>I <b>play</b> soccer.（私はサッカーをします）</li>
                     <li>They <b>like</b> music. （彼らは音楽が好きです）</li>
@@ -56,8 +100,8 @@
                 </ul>
 
             <p class="menutxt"><b>疑問文｜</b>一般動詞の疑問文は、文の先頭に「Do」を置いて作ります。<br>
-            「Do」を文の最初に置くと、「～しますか」と質問する分になります。<br>
-            なお、文末は忘れずに「?」にしましょう。</p>
+            「Do」を文の最初に置くと、「～しますか」と質問する文になります。<br>
+            文末は忘れずに「?」にしましょう。</p>
                 <ul class="menutxt">
                     <li><b>Do</b> you play soccer?（あなたはサッカーをしますか?）</li>
                     <li><b>Do</b> they like music?（彼らは音楽が好きですか?）</li>
@@ -66,7 +110,7 @@
         <h2>英文法まとめ：一般動詞</h2>
 
             <ul class="menutxt">
-                <li>"主語" "動詞" ...が基本的な形。be動詞と一般動詞は繋げない（動詞は1つ）</li>
+                <li>"主語" "動詞" ...が基本的な形。be動詞と一般動詞はつなげない（動詞は1つ）</li>
                 <li>否定文では、「do not（don't）」を一般動詞の前に置く</li>
                 <li>疑問文では、「Do」を文の先頭に置く</li>
             </ul>
@@ -83,6 +127,8 @@
         <script src="../sidebar_en.js"></script>
         <!--ハンバーガーメニュー＆サイドバー↑(1階層下用)-->
 
+        <script src="mondai_g1_2.js"></script>
+        <script src="pgm_grammar.js"></script>
     </main>
 
     <footer class="footer-container">
