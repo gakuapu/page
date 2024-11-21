@@ -17,15 +17,57 @@
     <link rel="icon" href="../favicon.ico">
     <meta name="description" content="英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_grammar.css">
 
 </head>
 <body>
+
+    <audio id="audio1" src="../seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="../machigaion2.mp3" preload="auto"></audio>
+
     <header>
         <h1><a id="page_top">疑問詞｜無料中学英文法アプリ</a></h1>
         <hr>
     </header>
 
     <main>
+
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+            <input type="button" id="start-btn" class="btn" value="練習スタート">
+        </div>
+
+        <div id="mondai"></div>
+        <div>
+            <a id="spacer">|</a>
+            <a id="inputanswer"></a>
+        </div>
+
+        <div id="word-btn-container">
+            <input type="button" id="word1" class="word-btn">
+            <input type="button" id="word2" class="word-btn">
+            <input type="button" id="word3" class="word-btn">
+            <input type="button" id="word4" class="word-btn">
+            <input type="button" id="word5" class="word-btn">
+            <input type="button" id="word6" class="word-btn">
+            <input type="button" id="word7" class="word-btn">
+            <input type="button" id="word8" class="word-btn">
+            <input type="button" id="check-btn">
+        </div>
+
+        <div>
+            <input type="button" id="retry-btn" class="btn" value="やり直す">
+            <input type="button" id="skip-btn" class="btn" value="スキップ">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <p id="resultmsg" class="subtoph2"></p>
+
+        <table id="missed-list-table">
+        </table>
 
         <p class="subtoph2"> ＞ <a href="g1_5.html">次に進む</a></p>
         <p class="subtoph2"> ＞ <a href="../en_grammar.html">英文法トップ</a></p>
@@ -44,7 +86,7 @@
                     <li><b>Where</b>「どこで」</li>
                     <li><b>Why</b>「なぜ」</li>
                     <li><b>Whose</b>「誰の」</li>
-                    <li><b>How</b>「どう（やって）」「どのくらい」</li>
+                    <li><b>How</b>「どう」「どうやって」「どのくらい」</li>
                 </ul>
 
         <h2>疑問詞を使った疑問文の作り方：</h2>
@@ -53,7 +95,7 @@
 
         <h2>【基本の形】</h2>
 
-            <p class="menutxt"><b><u>＜一般動詞の場合＞ "疑問詞"＋"can/do"＋"主語"＋"一般動詞"：</u></b><br>
+            <p class="menutxt"><b><u>＜一般動詞の場合＞ "疑問詞"＋"do/can"＋"主語"＋"一般動詞"：</u></b><br>
                 通常の疑問文の先頭に疑問詞を置く（＋通常の疑問文からたずねたいことを消す）形になります。</p>
                     <ul class="menutxt">
                         <li>通常の疑問文：Do you want an apple?（あなたはリンゴが欲しいですか?）<br>
@@ -69,53 +111,49 @@
                             （通常の疑問文の先頭に疑問詞「What」を置き、通常の疑問文からたずねたいこと「a bird」を消す）</li>
                     </ul>
 
-        <h2>【形が少し変わる場合】</h2>
+        <h2>【形が少し変わる場合（1）：ひとかたまりにする場合】</h2>
 
-            <p class="menutxt"><b><u>「誰の～」を質問する場合｜"Whose＋名詞"＋...：</u></b><br>
-                「誰の～」を質問する場合は、「Whose＋名詞」でひとかたまりにします。あとは基本形と同じです。</p>
+            <p class="menutxt"><b><u>「何の～」「どちらの～」「誰の～」を質問する場合｜"What/Which/Whose＋名詞"＋...：</u></b><br>
+                「What/Which/Whose＋名詞」でひとかたまりにします。あとは基本形と同じです。</p>
                     <ul class="menutxt">
-                        <li><b>Whose chair</b> do you use? （あなたは<b>誰のイス</b>を使いますか?）</li>
+                        <li><b>What sports</b> do you like? （あなたは<b>何のスポーツ</b>が好きですか?）</li>
+                        <li><b>Which color</b> is your favorite? （<b>どちらの色</b>があなたのお気に入りですか?）</li>
                         <li><b>Whose cat</b> is this? （これは<b>誰のネコ</b>ですか?）</li>
                     </ul>
 
             <p class="menutxt"><b><u>「どのくらい」を質問する場合｜"How＋形容詞・副詞"＋...：</u></b><br>
-                「どのくらい」を質問する場合は、「How＋形容詞・副詞」でひとかたまりにします。あとは基本形と同じです。</p>
+                「How＋形容詞・副詞」でひとかたまりにします。あとは基本形と同じです。</p>
                     <ul class="menutxt">
                         <li><b>How fast</b> do they swim?（彼らは<b>どのくらい早く</b>泳ぎますか?）</li>
                         <li><b>How old</b> is this book?（この本は<b>どのくらい古い</b>ですか?）</li>
                     </ul>
+            
+            <p class="menutxt"><b>ものの数を質問する場合</b>は、「How＋many＋名詞」までをひとかたまりにします。</p>
+                <ul class="menutxt">
+                    <li><b>How many apples</b> do you have?（あなたは<b>リンゴを何個</b>持っていますか?）</li>
+                </ul>
 
-            <p class="menutxt">なお、「どう（やって）」を質問する場合も「How」を使いますが、この場合も基本形になります。</p>
+            <p class="menutxt">なお、「どう」「どうやって」を質問する場合も「How」を使いますが、この場合は基本形になります。</p>
                     <ul class="menutxt">
                         <li>How are you?（あなた＜の調子＞はどうですか?）</li>
                         <li>How do you go to school?（あなたはどうやって学校に行きますか?）</li>
                     </ul>
 
-            <p class="menutxt"><b><u>主語（誰が/何が/どちらが）を質問する場合｜"疑問詞（Who/What/Which）"＋"動詞"：</u></b><br>
-                主語（誰が/何が）を質問する場合は、基本形とは形が少し異なります。<br>
-                疑問詞を主語とした、通常の文（肯定文）と同じ語順にします。</p>
+        <h2>【形が少し変わる場合（2）：主語をたずねる場合】</h2>
+
+            <p class="menutxt">主語が「誰か」「何か」を質問する場合は形が少し異なり、疑問詞を主語として、通常の文（肯定文）と同じ語順にします。</p>
                     <ul class="menutxt">
-                        <li>He is my teacher.<br>
-                        ⇒疑問文：Who is your teacher?（誰があなたの先生ですか?）</li>
                         <li>I play the piano.<br>
                         ⇒疑問文：Who plays the piano?（誰がピアノを弾きますか?）<br>
                             （「play」が「plays」に変化していますが、この理由は「三人称単数」という項目で説明します）</li>
-                        <li>This is my book.<br>
-                        ⇒疑問文：Which is your book?（どちらがあなたの本ですか?）</li>
                     </ul>
-
-            <p class="menutxt">なお、「Which」は、「どちらが」と「どちらの～」の2通りのたずね方に使うことができます。</p>
-                <ul class="menutxt">
-                    <li><b>Which</b> is your book?（<b>どちらが</b>あなたの本ですか?）</li>
-                    <li><b>Which book</b> is yours?（<b>どちらの本が</b>あなたのものですか?）</li>
-                </ul>
 
         <h2>英文法まとめ：疑問詞を使った疑問文</h2>
 
             <ul class="menutxt">
                 <li>基本形＝通常の疑問文の先頭に疑問詞を置く（＋通常の疑問文からたずねたいことを消す）</li>
-                <li>「誰の：Whose＋名詞」「どのくらい：How＋形容詞・副詞」「どちらの：Which＋名詞」はひとかたまりとして扱う</li>
-                <li>主語を質問する場合は、形が少し変わる</li>
+                <li>「誰の～」「どのくらい」などは、「疑問詞＋～」をひとかたまりとして考える</li>
+                <li>主語を質問する場合は、基本形とは違う語順になる</li>
             </ul>
 
         <!--ハンバーガーメニュー＆サイドバー↓(1階層下用)-->
@@ -126,6 +164,8 @@
         <script src="../sidebar_en.js"></script>
         <!--ハンバーガーメニュー＆サイドバー↑(1階層下用)-->
 
+        <script src="mondai_g1_4.js"></script>
+        <script src="pgm_grammar.js"></script>
     </main>
 
     <footer class="footer-container">
