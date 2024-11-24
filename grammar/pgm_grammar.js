@@ -151,7 +151,7 @@ function grammarEN () {
             audio2.play();
             $missedList.push($listShuffled[countmondaiNum][0]);
             $missedList.push($listShuffled[countmondaiNum][1]);
-            $missedList.push("回答: " + $inputAnswer.innerText);
+            $missedList.push("あなたの回答: " + $inputAnswer.innerText);
         };
         countmondaiNum++;
         setTimeout(() => {
@@ -268,7 +268,7 @@ function grammarEN () {
         audio2.play();
         $missedList.push($listShuffled[countmondaiNum][0]);
         $missedList.push($listShuffled[countmondaiNum][1]);
-        $missedList.push("回答: (スキップ)");
+        $missedList.push("あなたの回答: (スキップ)");
         countmondaiNum++;
         $progress.value = countmondaiNum / mondaiNumMax;
         $inputAnswer.innerText = "";
