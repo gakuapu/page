@@ -71,3 +71,8 @@
 #missed-list-table tr:nth-child(6n-3) td {
 	background: aliceblue;
 }
+
+h2 {
+    border-left: solid 5px dodgerblue;
+    padding-left: 0.5em;
+}
