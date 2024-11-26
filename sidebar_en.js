@@ -88,24 +88,6 @@ function sidebarEN () {
                 </div>
             </div>
             `
-            ,
-            `
-            <div class="paapi5-pa-ad-unit pull-left">
-                <div class="paapi5-pa-product-container">
-                    <div class="paapi5-pa-product-image">
-                        <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/3O9yKxv" title="N/A" target="_blank">
-                            <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/516tooLniWL._SL500_.jpg" alt="N/A"></a>
-                        </div>
-                    </div>
-                    <div class="paapi5-pa-product-details">
-                        <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://amzn.to/3O9yKxv" title="N/A" target="_blank">【Amazon】角川まんが学習シリーズ 世界の歴史 3大特典つき全20巻+別巻2冊セット</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `
         ];
 
         const isMobile_en = window.matchMedia(`(max-width: 1024px)`).matches;
