@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中1英文法：過去形（一般動詞）｜無料中学英文法ドリルアプリ【学アプ英語】</title>
+    <link rel="icon" href="../favicon.ico">
+    <meta name="description" content="英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_grammar.css">
+
+</head>
+<body>
+
+    <audio id="audio1" src="../seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="../machigaion2.mp3" preload="auto"></audio>
+
+    <header>
+        <h1><a id="page_top">過去形：一般動詞｜無料中学英文法</a></h1>
+        <hr>
+    </header>
+
+    <main>
+
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+            <input type="button" id="start-btn" class="btn" value="練習スタート">
+        </div>
+
+        <div id="mondai"></div>
+        <div>
+            <a id="spacer">|</a>
+            <a id="inputanswer"></a>
+        </div>
+
+        <div id="word-btn-container">
+            <input type="button" id="word1" class="word-btn">
+            <input type="button" id="word2" class="word-btn">
+            <input type="button" id="word3" class="word-btn">
+            <input type="button" id="word4" class="word-btn">
+            <input type="button" id="word5" class="word-btn">
+            <input type="button" id="word6" class="word-btn">
+            <input type="button" id="word7" class="word-btn">
+            <input type="button" id="word8" class="word-btn">
+            <input type="button" id="check-btn">
+        </div>
+
+        <div>
+            <input type="button" id="retry-btn" class="btn" value="やり直す">
+            <input type="button" id="skip-btn" class="btn" value="スキップ">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <p id="resultmsg" class="subtoph2"></p>
+
+        <table id="missed-list-table">
+        </table>
+
+        <p class="subtoph2"> ＞ <a href="g1_7.html">次に進む</a></p>
+        <p class="subtoph2"> ＞ <a href="../en_grammar.html">英文法トップ</a></p>
+        <p class="subtoph2"> ＞ <a href="../top_en.html">トップにもどる</a></p>
+
+        <hr class="dotted">
+
+        <h2>【過去形】とは：</h2>
+
+            <p class="menutxt">過去形は、「昨日」「先週」など、過去に起きたことやしたことを表す表現です。</p>
+
+        <h2>一般動詞の過去形の作り方：</h2>
+
+            <p class="menutxt">一般動詞の過去形は、基本的には動詞に「-ed」を付けて作ります。</p>
+                <ul class="menutxt">
+                    <li>I <b>played</b> soccer yesterday.（私は昨日、サッカーをしました）</li>
+                    <li>He <b>visited</b> his grandparents last week.（彼は先週、彼の祖父母を訪ねました）</li>
+                </ul>
+
+        <h2>「-ed」を付けるルール：</h2>        
+
+            <p class="menutxt">動詞によって過去形にするルールが少し変わります。</p>
+
+                <ul class="menutxt">
+                    <li>基本の形はそのまま「-ed」を付ける：<br>
+                        work ⇒ worked</li>
+                    <li>動詞が「e」で終わる場合は、「-d」を付ける：<br>
+                        like ⇒ liked</li>
+                    <li>動詞が「子音＋y」で終わる場合は、「y」を「i」に変えて「-ed」を付ける：<br>
+                        study ⇒ studied<br>
+                        （「母音＋y」の場合はそのまま「-ed」を付ける：play⇒played）</li>
+                    <li>発音が短い母音＋子音で終わる場合、最後の文字を重ねて「-ed」を付ける：<br>
+                        stop ⇒ stopped</li>
+                </ul>
+
+        <h2>不規則動詞：</h2>
+
+            <p class="menutxt">一部の動詞は、過去形が原形と全く違う形になります。このような動詞を「不規則動詞」と言います。</p>
+                
+                <ul class="menutxt">
+                    <li>go ⇒ went：<br>
+                        I <b>went</b> to the park yesterday.（私は昨日、公園に行きました）</li>
+                    <li>eat ⇒ ate：<br>
+                        She <b>ate</b> breakfast at 8 o'clock.（彼女は、8時に朝食を食べました）</li>
+                </ul>
+
+        <h2>否定文・疑問文の作り方：</h2>
+
+            <p class="menutxt">一般動詞の過去形の否定文・疑問文では、「do」の代わりに「did（doの過去形）」を使い、一方で、一般動詞は原形のままにします。<br>
+                それ以外は、これまで学習してきた通常の一般動詞の否定文・疑問文の作り方と同じです。<br>
+                なお、主語が「三人称単数」であっても、過去形には特別な変化はありません。
+            </p>
+            
+            <p class="menutxt">否定文：</p>
+                <ul class="menutxt">
+                    <li>I <b>did not</b> play soccer yesterday.（私は昨日、サッカーをしませんでした）</li>
+                    <li>He <b>did not</b> visit his grandparents last week.（彼は先週、彼の祖父母を訪ねませんでした）</li>
+                </ul>
+
+            <p class="menutxt">「did not」の短縮形として「didn't」を使うこともできます。</p>
+                <ul class="menutxt">
+                    <li>I <b>didn't</b> play soccer yesterday.</li>
+                </ul>
+    
+            <p class="menutxt">疑問文：</p>
+                <ul class="menutxt">
+                    <li><b>Did</b> you go to the park yesterday?（あなたは昨日、公園に行きましたか?）</li>
+                    <li>When <b>did</b> she eat breakfast?（彼女はいつ、朝食を食べましたか?）</li>
+                </ul>
+
+        <h2>英文法まとめ：過去形（一般動詞）</h2>
+
+            <ul class="menutxt">
+                <li>基本的には、動詞に「-ed」を付けて過去形にする</li>
+                <li>但し、過去形が全く違う形になる「不規則動詞」もあり、これらは覚える必要がある</li>
+                <li>否定文・疑問文は「do」の代わりに「did」を使う。それ以外は、これまでに学習した一般動詞の使い方と同じ</li>
+                <li>過去形の場合は、主語が「三人称単数」でも特別な変化はない</li>
+            </ul>
+
+        <!--ハンバーガーメニュー＆サイドバー↓(1階層下用)-->
+        <div id="en-menu-toggle" class="en-menu-toggle">
+            &#9776;
+        </div>
+        <div id="en-sidebar-container" class="en-sidebar-container"></div>
+        <script src="../sidebar_en2.js"></script>
+        <!--ハンバーガーメニュー＆サイドバー↑(1階層下用)-->
+
+        <script src="mondai_g1_7.js"></script>
+        <script src="pgm_grammar.js"></script>
+    </main>
+
+    <footer class="footer-container">
+        <hr>
+        <p>英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ</p>
+        <p>Copyright(C) 2022- All Rights Reserved</p>
+    </footer>
+    <a href="#page_top" class="page_top_btn">▲</a>
+</body>
+</html>
