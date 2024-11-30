@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中1英文法：現在進行形｜無料中学英文法ドリルアプリ【学アプ英語】</title>
+    <link rel="icon" href="../favicon.ico">
+    <meta name="description" content="英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_grammar.css">
+
+</head>
+<body>
+
+    <audio id="audio1" src="../seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="../machigaion2.mp3" preload="auto"></audio>
+
+    <header>
+        <h1><a id="page_top">現在進行形｜無料中学英文法アプリ</a></h1>
+        <hr>
+    </header>
+
+    <main>
+
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+            <input type="button" id="start-btn" class="btn" value="練習スタート">
+        </div>
+
+        <div id="mondai"></div>
+        <div>
+            <a id="spacer">|</a>
+            <a id="inputanswer"></a>
+        </div>
+
+        <div id="word-btn-container">
+            <input type="button" id="word1" class="word-btn">
+            <input type="button" id="word2" class="word-btn">
+            <input type="button" id="word3" class="word-btn">
+            <input type="button" id="word4" class="word-btn">
+            <input type="button" id="word5" class="word-btn">
+            <input type="button" id="word6" class="word-btn">
+            <input type="button" id="word7" class="word-btn">
+            <input type="button" id="word8" class="word-btn">
+            <input type="button" id="check-btn">
+        </div>
+
+        <div>
+            <input type="button" id="retry-btn" class="btn" value="やり直す">
+            <input type="button" id="skip-btn" class="btn" value="スキップ">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <p id="resultmsg" class="subtoph2"></p>
+
+        <table id="missed-list-table">
+        </table>
+
+        <p class="subtoph2"> ＞ <a href="g1_7.html">次に進む</a></p>
+        <p class="subtoph2"> ＞ <a href="../en_grammar.html">英文法トップ</a></p>
+        <p class="subtoph2"> ＞ <a href="../top_en.html">トップにもどる</a></p>
+
+        <hr class="dotted">
+
+        <h2>【現在進行形】とは：</h2>
+
+            <p class="menutxt">現在進行形は「～している」という意味で、「今まさにしていること」「進行中の動作」を表す時に使います。</p>
+
+        <h2>現在進行形の作り方：</h2>
+
+            <p class="menutxt">現在進行形は、<b>be動詞（am, is, are）＋動詞のing形</b>で作ります。</p>
+            <p class="menutxt">使うbe動詞は主語によって変わりますが、そのルールは、これまで学習してきたbe動詞の使い方と一緒です。</p>
+                <ul class="menutxt">
+                    <li><b>I ⇒ am｜</b>I am studying English.（私は英語を勉強しています）</li>
+                    <li><b>you, we, they ⇒ are｜</b>You are studying English.（あなたは英語を勉強しています）</li>
+                    <li><b>he, she, it ⇒ is｜</b>He is studying English.（彼は英語を勉強しています）</li>
+                </ul>
+
+        <h2>動詞に「ing」を付けるルール：</h2>        
+
+                <ul class="menutxt">
+                    <li>基本の形は、動詞にそのまま「ing」をつける：<br>
+                        play ⇒ playing</li>
+                    <li>動詞が「e」で終わる場合は、「e」を取って「ing」を付ける：<br>
+                        make ⇒ making</li>
+                    <li>＜例外＞子音で終わる場合、最後の文字を重ねて「ing」を付ける場合あり：<br>
+                        run ⇒ running, swim ⇒ swimming</li>    
+                </ul>
+
+        <h2>否定文・疑問文の作り方：</h2>
+
+            <p class="menutxt">現在進行形の否定文・疑問文の作り方は、これまで学習してきた通常のbe動詞の否定文・疑問文の作り方と同じです。</p>
+                
+            <p class="menutxt">否定文：</p>
+                <ul class="menutxt">
+                    <li>I am <b>not</b> studying English now.（私は今、英語を勉強していません）</li>
+                    <li>You are <b>not</b> studying English now.（あなたは今、英語を勉強していません）</li>
+                    <li>He is <b>not</b> studying English now.（彼は今、英語を勉強していません）</li>
+                </ul>
+
+            <p class="menutxt">疑問文：</p>
+                <ul class="menutxt">
+                    <li><b>Are</b> they studying English now?（彼らは今、英語を勉強していますか?）</li>
+                    <li>What <b>is</b> she studying now?（彼女は今、何を勉強していますか?）</li>
+                </ul>
+
+        <h2>英文法まとめ：現在進行形</h2>
+
+            <ul class="menutxt">
+                <li>「be動詞」＋「動詞のing形」で「今していること」を表す</li>
+                <li>現在進行形のbe動詞の使い方、否定文・疑問文の作り方は、これまでに学習したbe動詞の使い方と同じ</li>
+            </ul>
+
+        <!--ハンバーガーメニュー＆サイドバー↓(1階層下用)-->
+        <div id="en-menu-toggle" class="en-menu-toggle">
+            &#9776;
+        </div>
+        <div id="en-sidebar-container" class="en-sidebar-container"></div>
+        <script src="../sidebar_en.js"></script>
+        <!--ハンバーガーメニュー＆サイドバー↑(1階層下用)-->
+
+        <script src="mondai_g1_6.js"></script>
+        <script src="pgm_grammar.js"></script>
+    </main>
+
+    <footer class="footer-container">
+        <hr>
+        <p>英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ</p>
+        <p>Copyright(C) 2022- All Rights Reserved</p>
+    </footer>
+    <a href="#page_top" class="page_top_btn">▲</a>
+</body>
+</html>
