@@ -1,0 +1,109 @@
+#mainbox {
+    width: 340px;
+    height: 100px;
+    font-size: 26px;
+    text-align: center;
+    border: thin solid dimgray;
+    border-radius: 4px;
+    margin-top: 0.1em;
+    display: none;
+    padding-top: 0.5em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#wordtable {
+    width: 340px;
+    font-size: 18px;
+    list-style: none;
+    text-align: center;
+    margin-top: 0.1em;
+    word-break: break-word;
+}
+
+#wordtable th {
+	background: aliceblue;
+}
+
+#wordtable tr:nth-child(odd) td {
+	background: aliceblue;
+}
+
+#progress {
+    width: 340px;
+}
+
+#comp {
+    font-size: 28px;
+}
+
+#stop-btn,
+#sound-btn,
+#comp,
+#progress,
+#appear-btn {
+    display: none;
+}
+
+#turn-btn,
+#again-btn {
+    visibility: hidden;
+}
+
+#grade,
+#step,
+#stop-btn,
+#sound-btn,
+#hanni,
+#mode,
+#start-btn,
+#test-btn,
+#turn-btn,
+#again-btn,
+#hide-btn,
+#appear-btn {
+    width: 150px;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+#start-btn,
+#turn-btn,
+#again-btn {
+    height: 60px;
+    margin-top: 10px;
+}
+
+#start-btn,
+#again-btn {
+    color: white;
+    background-color: dodgerblue;
+    border-color: dodgerblue;
+}
+
+#stop-btn,
+#sound-btn {
+    margin-bottom: 10px;
+}
+
+#sound-btn {
+    color: black;
+    background-color: aliceblue;
+    border-color: dodgerblue;
+}
+
+.katachi {
+    width: 80px;
+    font-size: 18px;
+    color: dodgerblue;
+    background-color: white;
+    border: solid 1px;
+    border-color: dodgerblue;
+    text-align: center;
+    padding: 2px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    display: none;
+}
