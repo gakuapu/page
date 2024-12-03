@@ -239,6 +239,9 @@ function fukisokuEN () {
     $turnBtn.addEventListener("click", () => {
         currentkatachi--;
         katachiDisplay (currentkatachi);
+        if (currentkatachi == 0) {
+            $turnBtn.style.visibility = "hidden";
+        };
         $mainbox.innerText = worddata[cardnum][currentkatachi];
     });
 
@@ -248,27 +251,30 @@ function fukisokuEN () {
         worddata = shuffleArray (worddata);
         worddataENonly = worddata.map(innerArray => innerArray.map(item => item.split(`\n`)[0]));
         tgtnum2 = findRow (worddataENonly, "read");
-        worddataENonly.splice(tgtnum2, 1, ["read", "red", "red"]);
+        if (tgtnum2 != undefined) {
+            worddataENonly.splice(tgtnum2, 1, ["read", "red", "red"]);
+        };
         tgtnum2 = findRow (worddataENonly, "forget");
-        worddataENonly.splice(tgtnum2, 1, ["forget", "forgot", "forgotten"]);
+        if (tgtnum2 != undefined) {
+            worddataENonly.splice(tgtnum2, 1, ["forget", "forgot", "forgotten"]);
+        };
         cardnumMax = worddata.length;
         hanni = $hanni.value;
         mode = $mode.value;
         if (mode == 1) {
-            speed = 1;
+            speed = 1.2;
         } else if (mode == 2) {
-            speed = 1.5;
+            speed = 1.75;
         };
         stopbtnpushed = 0;
         currentkatachi = 0;
         katachiDisplay (currentkatachi);
+        $turnBtn.style.visibility = "hidden";
         $mainbox.style.display = "block";
         $startBtn.style.display = "none";
         $stopBtn.style.display = "inline-block";
         $soundBtn.style.display = "inline-block";
         $comp.style.display = "none";
-        $turnBtn.style.visibility = "hidden";
-        $againBtn.style.visibility = "hidden";
         $progress.style.display = "block";
         $hanni.style.display = "none";
         $mode.style.display = "none";
@@ -343,6 +349,7 @@ function fukisokuEN () {
             worddataENonly.push(worddataENonly[cardnum]);
             currentkatachi = 0;
             katachiDisplay (currentkatachi);
+            $turnBtn.style.visibility = "hidden";
             cardnum++;
             cardnumMax = worddata.length;
             $progress.value = cardnum / cardnumMax;
