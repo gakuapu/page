@@ -118,12 +118,12 @@
 
 #erase-btn,
 #check-btn {
-    height: 60px;
+    height: 40px;
 }
 
-#stop-btn,
-#sound-btn {
-    margin-bottom: 15px;
+#stop-btn {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .char-btn {
@@ -151,7 +151,7 @@
 #same-btn1,
 #same-btn2 {
     height: 40px;
-    width: 120px;
+    width: 130px;
     background-color: #fff4ea;
     border: thin solid darkorange;
     margin: 12px 0px 5px 4px;

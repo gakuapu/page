@@ -178,7 +178,7 @@ function fukisokutest() {
                 currentkatachi = 2;
                 $entxtbox1.style.borderColor = "dimgray";
                 $entxtbox2.style.borderColor = "darkorange";
-                $sameBtn2.style.display = "inline-border";
+                $sameBtn2.style.display = "inline-block";
             } else {
                 if (testdata[count][2] == inputText) {
                     audio1.play();
