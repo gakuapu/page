@@ -178,6 +178,7 @@ function fukisokutest() {
                 currentkatachi = 2;
                 $entxtbox1.style.borderColor = "dimgray";
                 $entxtbox2.style.borderColor = "darkorange";
+                $sameBtn2.style.display = "inline-border";
             } else {
                 if (testdata[count][2] == inputText) {
                     audio1.play();
@@ -212,6 +213,7 @@ function fukisokutest() {
                 currentkatachi = 1;
                 $entxtbox1.style.borderColor = "darkorange";
                 $entxtbox2.style.borderColor = "dimgray";
+                $sameBtn2.style.display = "none";
                 setup();
             };
         };
@@ -339,7 +341,6 @@ function fukisokutest() {
         if ($hanni.value == "1") {
             $katachilabel2.style.display = "inline-block";
             $entxtbox2.style.display = "inline-block";
-            $sameBtn2.style.display = "inline-block";
         };
         $char1.style.display = "inline-block";
         $char2.style.display = "inline-block";
