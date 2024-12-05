@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英単語テスト：不規則動詞｜無料中学英単語ドリルアプリ【学アプ英語】</title>
+    <link rel="icon" href="../favicon.ico">
+    <meta name="description" content="英検の勉強にも役立つ無料の中学英単語ドリルのアプリ。中学で学習する約2000英単語(英検3～5級)を発音付きの英単語帳とスペルテストでマスターできる。ダウンロード不要のおすすめ英語アプリ">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_fukisoku_t.css">
+</head>
+<body>
+
+    <audio id="audio1" src="../seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="../machigaion2.mp3" preload="auto"></audio>
+
+    <header>
+        <h1>不規則動詞｜無料中学英単語テスト</h1>
+        <hr>
+    </header>
+
+    <main>
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+        </div>
+
+        <div>
+            <select id="hanni">
+                <option value="0">過去形のみ</option>
+                <option value="1">過去分詞まで</option>
+            </select>
+            <select id="kaisuu">
+                <option value="1">テスト1</option>
+                <option value="2">テスト2</option>
+                <option value="3">テスト3</option>
+                <option value="4">テスト4</option>
+            </select>
+        </div>
+
+        <div>
+            <input type="button" id="start-btn" class="btn" value="スタート">
+        </div>
+
+        <div class="txtcontainer">
+            <div id="katachilabel0" class="katachilabel">現在形</div>
+            <div id="entxtbox0" class="entxtbox"></div>
+        </div>
+        <div class="txtcontainer">
+            <div id="katachilabel1" class="katachilabel">過去形</div>
+            <div id="entxtbox1" class="entxtbox"></div>
+        </div>
+        <div class="txtcontainer">
+            <div id="katachilabel2" class="katachilabel">過去分詞</div>
+            <div id="entxtbox2" class="entxtbox"></div>
+        </div>
+
+        <div>
+            <input type="button" id="char1" class="char-btn">
+            <input type="button" id="char2" class="char-btn">
+            <input type="button" id="char3" class="char-btn">
+            <input type="button" id="char4" class="char-btn">
+            <input type="button" id="char5" class="char-btn">
+            <input type="button" id="chart" class="char-btn" value="t">
+        </div>
+
+        <div>
+            <input type="button" id="chara" class="char-btn" value="a">
+            <input type="button" id="chare" class="char-btn" value="e">
+            <input type="button" id="chari" class="char-btn" value="i">
+            <input type="button" id="charo" class="char-btn" value="o">
+            <input type="button" id="charu" class="char-btn" value="u">
+            <input type="button" id="chard" class="char-btn" value="d">
+        </div>
+
+        <div>
+            <input type="button" id="same-btn1" class="btn" value="現在形と同じ">
+            <input type="button" id="same-btn2" class="btn" value="過去形と同じ">
+        </div>
+
+        <div>
+            <input type="button" id="erase-btn" class="btn" value="消す">
+            <input type="button" id="check-btn" class="btn" value="チェック">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <p id="resultmsg" class="subtoph2"></p>
+        <table id="wordtable">
+        </table>
+
+        <p id="resultmsg2" class="subtoph2"></p> <!-- --> 
+        <table id="wordtable2">
+        </table> <!-- -->
+
+        <hr class="dotted">
+        <h2 class="subtoph2">不規則動詞確認テスト</h2>
+        <p class="subtoph2"> ＞ <a href="fukisoku.html">英単語帳へ</a></p>
+        <p class="subtoph2"> ＞ <a href="../grammar/g1_7.html">英文法：過去形（一般動詞）</a></p>
+        <p class="subtoph2"> ＞ <a href="../en_grammar.html">英文法トップ</a></p>
+        <p class="subtoph2"> ＞ <a href="top_en.html">トップにもどる</a></p>
+
+        <!--ハンバーガーメニュー＆サイドバー↓(1階層下用)-->
+        <div id="en-menu-toggle" class="en-menu-toggle">
+            &#9776;
+        </div>
+        <div id="en-sidebar-container" class="en-sidebar-container"></div>
+        <script src="../sidebar_en2.js"></script>
+        <!--ハンバーガーメニュー＆サイドバー↑(1階層下用)-->
+
+        <script src="fukisoku_testdata.js"></script>
+        <script src="pgm_fukisoku_t.js"></script>
+    </main>
+
+    <footer class="footer-container">
+        <br>
+        <hr>
+        <p>英検の勉強にも役立つ無料の中学英単語ドリルのアプリ。中学で学習する約2000英単語(英検3～5級)を発音付きの英単語帳とスペルテストでマスターできる。ダウンロード不要のおすすめ英語アプリ</p>
+        <p>Copyright(C) 2022- All Rights Reserved</p>
+    </footer>
+</body>
+</html>
