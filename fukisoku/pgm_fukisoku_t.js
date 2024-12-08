@@ -295,17 +295,17 @@ function fukisokutest() {
             if (seikainum > 0) {
                 $resultmsg2.style.display = "block";
                 $resultmsg2.innerText = "【今回正解した不規則動詞】";
-            };
-            resultdata2.forEach(rowData2 => {
-                const row2 = document.createElement("tr");
-                rowData2.forEach(cellData2 => {
-                    const cell2 = document.createElement("td");
-                    cell2.textContent = cellData2;
-                    row2.appendChild(cell2);
+                resultdata2.forEach(rowData2 => {
+                    const row2 = document.createElement("tr");
+                    rowData2.forEach(cellData2 => {
+                        const cell2 = document.createElement("td");
+                        cell2.textContent = cellData2;
+                        row2.appendChild(cell2);
+                    });
+                    $wordtable2.appendChild(row2);
+                    $wordtable2.style.display = "block";
                 });
-                $wordtable2.appendChild(row2);
-                $wordtable2.style.display = "block";
-            });
+            };
         };
     };
 
