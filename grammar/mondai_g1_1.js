@@ -1,6 +1,5 @@
 const $list = [
 
-    ["私は日本出身です。", "I am from Japan.", "I", "am", "from", "Japan", "is", "are", "my", "me"],
     ["あなたは私の友達です。", "You are my friend.", "you", "are", "my", "friend", "am", "is", "I", "a"],
     ["私の友人は教室にいます。", "My friend is in the classroom.", "my", "friend", "is", "in", "the", "classroom", "am", "are"],
     ["あれは鳥です。", "That is a bird.", "that", "is", "a", "bird", "am", "are", "this", "an"],
