@@ -64,7 +64,7 @@ function sidebarEN () {
                     </div>
                     <div class="paapi5-pa-product-details">
                         <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://amzn.to/48PZCfu" title="N/A" target="_blank">2024年度版 英検4級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/48PZCfu" title="N/A" target="_blank">【Amazon】2024年度版 英検4級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
                         </div>
                     </div>
                 </div>
