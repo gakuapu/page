@@ -1,0 +1,61 @@
+#speed {
+    width: 130px;
+}
+
+#hide-btn,
+.sound-btn {
+    height: 30px;
+    padding: 5px 0 0 0;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: serif;
+    text-align: center;
+    cursor: pointer;
+}
+
+#hide-btn {
+    width: 130px;
+    background-color: aliceblue;
+    border: thin solid dodgerblue;
+    color: black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.sound-btn {
+    width: 50px;
+    background-color: dodgerblue;
+    border: thin solid dodgerblue;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+#speed,
+#hide-btn {
+    display: inline-block;   
+}
+
+.box-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.eng-box-a,
+.eng-box-b,
+.jpn-box-a,
+.jpn-box-b {
+    width: 320px;
+    height: 56px;
+    padding: 5px;
+    margin: 5px 10px 5px 0;
+    font-size: 18px;
+    border: thin solid dimgray;
+}
+
+.eng-box-a,
+.jpn-box-a {
+    display: none;
+    cursor: pointer;
+}
+
