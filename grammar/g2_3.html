@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中2英文法：英語の文型｜無料中学英文法ドリルアプリ【学アプ英語】</title>
+    <link rel="icon" href="../favicon.ico">
+    <meta name="description" content="英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ。中学英語のやり直し・学び直しにもオススメです">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_grammar.css">
+
+</head>
+<body>
+
+    <audio id="audio1" src="../seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="../machigaion2.mp3" preload="auto"></audio>
+
+    <header>
+        <h1><a id="page_top">英語の文型｜無料中学英文法アプリ</a></h1>
+        <hr>
+    </header>
+
+    <main>
+
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+            <input type="button" id="start-btn" class="btn" value="練習スタート">
+        </div>
+
+        <div id="mondai"></div>
+        <div>
+            <a id="spacer">|</a>
+            <a id="inputanswer"></a>
+        </div>
+
+        <div id="word-btn-container">
+            <input type="button" id="word1" class="word-btn">
+            <input type="button" id="word2" class="word-btn">
+            <input type="button" id="word3" class="word-btn">
+            <input type="button" id="word4" class="word-btn">
+            <input type="button" id="word5" class="word-btn">
+            <input type="button" id="word6" class="word-btn">
+            <input type="button" id="word7" class="word-btn">
+            <input type="button" id="word8" class="word-btn">
+            <input type="button" id="check-btn">
+        </div>
+
+        <div>
+            <input type="button" id="retry-btn" class="btn" value="やり直す">
+            <input type="button" id="skip-btn" class="btn" value="スキップ">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <p id="resultmsg" class="subtoph2"></p>
+
+        <table id="missed-list-table">
+        </table>
+
+        <p class="subtoph2"> ＞ <a href="g2_4.html">次に進む</a></p>
+        <p class="subtoph2"> ＞ <a href="b2_3a.html">基本例文の確認（S＋V＋C / S＋V＋O＋O）</a></p>
+        <p class="subtoph2"> ＞ <a href="b2_3b.html">基本例文の確認（S＋V＋O＋C）</a></p>
+        <p class="subtoph2"> ＞ <a href="../en_grammar.html">英文法トップ</a></p>
+        <p class="subtoph2"> ＞ <a href="../top_en.html">トップにもどる</a></p>
+
+        <hr class="dotted">
+
+        <h2>【英語の文型】とは：</h2>
+
+            <p class="menutxt">英語の文型とは、英語の文の基本的な形のことです。英語には、5つの文型があります。</p>
+                <ul class="menutxt">
+                    <li><b>(1) S＋V</b></li>
+                    <li><b>(2) S＋V＋C</b></li>
+                    <li><b>(3) S＋V＋O</b></li>
+                    <li><b>(4) S＋V＋O＋O</b></li>
+                    <li><b>(5) S＋V＋O＋C</b></li>
+                </ul>
+
+            <p class="menutxt">＜記号の意味＞</p>    
+                <ul class="menutxt">
+                    <li><b>S：主語</b>（誰が・何が）</li>
+                    <li><b>V：動詞</b>（～する）</li>
+                    <li><b>O：目的語</b>（何を・誰を）</li>
+                    <li><b>C：補語</b>（主語や目的語の説明）</li>
+                </ul>
+
+        <h2>5つの文型の解説と例文：</h2>
+
+            <p class="menutxt"><b>(1) S＋V（主語＋動詞）</b></p>
+
+                <p class="menutxt">「S（主語）が、V（動詞）する」という形です。<br>
+                    動詞（V）の後に「何を・誰を」がなくても、文としての意味が通じます。 
+                </p>
+                    <ul class="menutxt">
+                        <li>Birds fly.（鳥は飛びます）</li>
+                        <li>He runs.（彼は走ります）</li>
+                    </ul>
+
+            <p class="menutxt"><b>(2) S＋V＋C（主語＋動詞＋補語）</b></p>
+
+                <p class="menutxt">「S（主語）は、C（補語）である」という形です。<br>
+                    補語（C）は主語を説明する言葉で、be動詞（～です）や、感覚を表す動詞（look, feel等）と一緒に使います。
+                </p>
+                    <ul class="menutxt">
+                        <li>She is a student.（彼女は学生です）</li>
+                        <li>You look happy.（あなたは幸せそうに見えます）</li>
+                    </ul>
+
+            <p class="menutxt"><b>(3) S＋V＋O（主語＋動詞＋目的語）</b></p>
+
+                <p class="menutxt">「S（主語）が、O（目的語）をV（動詞）する」という形です。<br>
+                    動詞（V）の後には「何を・誰を」を示す目的語（O）が必要です。 
+                </p>
+                    <ul class="menutxt">
+                        <li>I play soccer.（私はサッカーをします）</li>
+                        <li>He reads a book. （彼は本を読みます）</li>
+                    </ul>        
+
+            <p class="menutxt"><b>(4) S＋V＋O＋O（主語＋動詞＋目的語＋目的語）</b></p>
+
+                <p class="menutxt">O（目的語）が2つ出て来るため、S＋V＋O1（目的語1）＋O2（目的語2）と、目的語を区別して解説します。</p>
+                    
+                <p class="menutxt">「S（主語）が、O1（目的語1）にO2（目的語2）をV（動詞）する」という形です。<br>
+                    O1（目的語1）は「人」、O2（目的語2）は「物」になるケースが多いです。 
+                </p>
+                    <ul class="menutxt">
+                        <li>He gave me a present.（彼は私＜O1＞にプレゼント＜O2＞をくれました）</li>
+                        <li>She taught us Japanese. （彼女は私たち＜O1＞に日本語＜O2＞を教えました）</li>
+                    </ul>
+
+            <p class="menutxt"><b>(5) S＋V＋O＋C（主語＋動詞＋目的語＋補語）</b></p>
+                        
+                    <p class="menutxt">「S（主語）が、O（目的語）をC（補語）にする」という形です。<br>
+                        C（補語）にはO（目的語）を説明する言葉が入ります。 
+                    </p>
+                        <ul class="menutxt">
+                            <li>We call him Ken.（私たちは彼＜O＞をケン＜C＞と呼びます）</li>
+                            <li>The news made me happy. （そのニュースは私＜O＞を幸せに＜C＞しました）</li>
+                            <li>I named the dog Hachi.  （私はその犬＜O＞をハチ＜C＞と名付けました）</li>
+                        </ul>                     
+
+        <h2>文型を考える時に「副詞」や「前置詞＋名詞」は気にしない：</h2>
+
+            <p class="menutxt">文型は、<b>主語（S）・動詞（V）・目的語（O）・補語（C）だけ</b>に注目して考えます。<br>
+                それ以外の要素は、文型を決める時には関係ないと考えて大丈夫です。</p>
+
+            <p class="menutxt">「副詞」や「前置詞＋名詞」は、文の「飾り（補足説明）」の役割を持つだけで、文型そのものには影響しません。</p>
+
+                <p class="menutxt"><b>＜副詞＞</b></p>
+                        
+                    <p class="menutxt">副詞は「いつ」「どこで」「どのように」等を説明する言葉です。<br>
+                        （例：now, quickly, yesterday, there, very）<br>
+                        副詞があってもなくても、文型には影響しません。 
+                    </p>
+                        <ul class="menutxt">
+                            <li>She walks quickly.（彼女は素早く歩きます）<br>
+                            ⇒ 文型は<b>S＋V</b>（She walks）。"quickly"は「どのように」を補足説明
+                            </li>
+                        </ul>
+
+                <p class="menutxt"><b>＜前置詞＋名詞＞</b></p>        
+
+                    <p class="menutxt">前置詞は、名詞の<b>「前」に「置く」</b>ため、「前置詞」と呼びます。</p>
+                    
+                    <p class="menutxt">「前置詞＋名詞」で、「いつ」「どこで」「どのように」等を説明するかたまりになります。<br>
+                        （例：in, on, at, with, by, for）<br>
+                        前置詞の後ろに来る名詞は、文型を考える上での目的語（O）にはなりません。 
+                    </p>
+                        <ul class="menutxt">
+                            <li>I study English in the library.（私は図書館で英語を勉強します）<br>
+                            ⇒ 文型は<b>S＋V＋O</b>（I study English）。"in the library"は「どこで」を補足説明
+                            </li>
+                        </ul>
+
+        <h2>英文法まとめ：「英語の文型」</h2>
+
+            <ul class="menutxt">
+                <li>「文型」＝「英語の文の基本的な形」</li>
+                <li>文型は5種類：S＋V、S＋V＋C、S＋V＋O、S＋V＋O＋O、S＋V＋O＋C</li>
+                <li>文型を考える上では「副詞」や「前置詞＋名詞」は気にしない</li>
+            </ul>
+
+        <!--ハンバーガーメニュー＆サイドバー↓(1階層下用)-->
+        <div id="en-menu-toggle" class="en-menu-toggle">
+            &#9776;
+        </div>
+        <div id="en-sidebar-container" class="en-sidebar-container"></div>
+        <script src="../sidebar_en2.js"></script>
+        <!--ハンバーガーメニュー＆サイドバー↑(1階層下用)-->
+
+        <script src="mondai_g2_3.js"></script>
+        <script src="pgm_grammar.js"></script>
+    </main>
+
+    <footer class="footer-container">
+        <hr>
+        <p>英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ。中学英語のやり直し・学び直しにもオススメです</p>
+        <p>Copyright(C) 2022- All Rights Reserved</p>
+    </footer>
+    <a href="#page_top" class="page_top_btn">▲</a>
+</body>
+</html>
