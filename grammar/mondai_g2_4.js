@@ -1,6 +1,6 @@
 const $list = [
 
-    ["(becauseから始めて)喉が乾いていたので、水が欲しかった。", "Because I was thirsty, I wanted water.", "because", "I", "was", "thirsty", ",", "I", "wanted", "water"],
+    ["(becauseから始めて)私は喉が乾いていたので、水が欲しかった。", "Because I was thirsty, I wanted water.", "because", "I", "was", "thirsty", ",", "I", "wanted", "water"],
     ["(because～を文の後半にして)試合に負けたので、彼女は悲しかった。", "She was sad because she lost the game.", "she", "was", "sad", "because", "she", "lost", "the", "game"],
     ["(ifから始めて)もし時間があれば、私たちは大阪を訪問します。", "If we have time, we'll visit Osaka.", "if", "we", "have", "time", ",", "we'll", "visit", "Osaka"],
     ["(if～を文の後半にして)もし外が雨なら、私はその映画を見ます。", "I'll watch the movie if it's rainy outside.", "I'll", "watch", "the", "movie", "if", "it's", "rainy", "outside"],
