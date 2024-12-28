@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中2英文法：接続詞｜無料中学英文法ドリルアプリ【学アプ英語】</title>
+    <link rel="icon" href="../favicon.ico">
+    <meta name="description" content="英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ。中学英語のやり直し・学び直しにもオススメです">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_grammar.css">
+
+</head>
+<body>
+
+    <audio id="audio1" src="../seikaion.mp3" preload="auto"></audio>
+    <audio id="audio2" src="../machigaion2.mp3" preload="auto"></audio>
+
+    <header>
+        <h1><a id="page_top">接続詞｜無料中学英文法アプリ</a></h1>
+        <hr>
+    </header>
+
+    <main>
+
+        <div>
+            <input type="button" id="stop-btn" class="btn" value="やめる">
+            <input type="button" id="start-btn" class="btn" value="練習スタート">
+        </div>
+
+        <div id="mondai"></div>
+        <div>
+            <a id="spacer">|</a>
+            <a id="inputanswer"></a>
+        </div>
+
+        <div id="word-btn-container">
+            <input type="button" id="word1" class="word-btn">
+            <input type="button" id="word2" class="word-btn">
+            <input type="button" id="word3" class="word-btn">
+            <input type="button" id="word4" class="word-btn">
+            <input type="button" id="word5" class="word-btn">
+            <input type="button" id="word6" class="word-btn">
+            <input type="button" id="word7" class="word-btn">
+            <input type="button" id="word8" class="word-btn">
+            <input type="button" id="check-btn">
+        </div>
+
+        <div>
+            <input type="button" id="retry-btn" class="btn" value="やり直す">
+            <input type="button" id="skip-btn" class="btn" value="スキップ">
+        </div>
+
+        <div>
+            <progress id="progress" value="0"></progress>
+        </div>
+
+        <p id="resultmsg" class="subtoph2"></p>
+
+        <table id="missed-list-table">
+        </table>
+
+        <p class="subtoph2"> ＞ <a href="g2_5.html">次に進む</a></p>
+        <p class="subtoph2"> ＞ <a href="b2_4.html">基本例文のリスニング</a></p>
+        <p class="subtoph2"> ＞ <a href="../en_grammar.html">英文法トップ</a></p>
+        <p class="subtoph2"> ＞ <a href="../top_en.html">トップにもどる</a></p>
+
+        <hr class="dotted">
+
+        <h2>【接続詞】とは：</h2>
+
+            <p class="menutxt">接続詞は、「文と文」「単語と単語」等をつなぐ言葉です。</p>
+
+        <h2>接続詞は2タイプ｜（1）日本語と順番が変わらない接続詞：</h2>
+
+                <p class="menutxt">日本語：「文1＋接続詞＋文2」<br>
+                    ⇒ 英語：「文1＋接続詞＋文2」
+                </p>
+                    <ul class="menutxt">
+                        <li><b>and（～と～、そして）｜</b><br>
+                            I like apples <b>and</b> he likes oranges.（私はリンゴが好きで、彼はオレンジが好きです）
+                        </li>
+                        <li><b>or（または）｜</b><br>
+                            Which do you like, dogs <b>or</b> cats?（犬とネコ、どちらが好きですか?）
+                        </li>
+                        <li><b>so（だから）｜</b><br>
+                            I was hungry, <b>so</b> I had lunch.（私は空腹だったので、昼食を取った）
+                        </li>
+                        <li><b>but（しかし）｜</b><br>
+                            I was hungry, <b>but</b> I didn't have lunch.（私は空腹だったが、昼食を取らなかった）
+                        </li>
+                    </ul> 
+
+                    <p class="menutxt">このタイプの接続詞を「等位」接続詞といいます。<br>
+                        等位接続詞は、接続詞の前後を「等位（＝対等）」につなぐため、つなぐものは文法的に同じ種類である必要があります。<br>
+                        <ul class="menutxt">
+                            <li>〇：「文」と「文」、「単語」と「単語」</li>
+                            <li>×：「文」と「単語」</li>
+                        </ul>
+
+        <h2>（2）日本語とは順番が変わる接続詞：</h2>
+
+                <p class="menutxt">日本語：「文1＋接続詞＋文2」<br>
+                    ⇒ 英語：「接続詞＋文1, 文2」または「文2＋接続詞＋文1」<br>
+                </p>
+                <ul class="menutxt">
+                    <li><b>because（～なので＜理由＞）｜</b><br>
+                        <b>Because</b> it was raining, I stayed home.<br>
+                        I stayed home <b>because</b> it was raining.（雨が降っていたので、私は家にいました）
+                    </li>
+                    <li><b>if（もし～なら）｜</b><br>
+                        <b>If</b> it is not rainy, we can play the game.<br>
+                        We can play the game <b>if</b> it is not rainy.（もし雨でなければ、私たちは試合ができます）
+                    </li>
+                    <li><b>when（～する時）｜</b><br>
+                        <b>When</b> I saw him, he looked busy.<br>
+                        He looked busy <b>when</b> I saw him.（私が彼を見かけた時、彼は忙しそうだった）
+                    </li>
+                    <li><b>that（～ということ）｜</b><br>
+                        I know <b>that</b> he is tired.（彼が疲れていることを私は知っています）<br>
+                        ※1「that」は「接続詞＋文1, 文2」の形はありません<br>
+                        ※2「that」は省略することもできます：I know he is tired.
+                    </li>
+                </ul> 
+
+                <p class="menutxt">このタイプの接続詞を「従属」接続詞といいます。<br>
+                    「文2」がメインの文で、「接続詞＋文1」は「文2」の補足説明になっています。<br>
+                    「接続詞＋文1」を文の先頭に持って来る場合は、カンマ(,)が必要になります。</p>
+
+        <h2>英文法まとめ：「接続詞」</h2>
+
+            <ul class="menutxt">
+                <li>接続詞＝「文と文」「単語と単語」等をつなぐ言葉</li>
+                <li>2タイプの接続詞：<br>
+                    日本語と順番が変わらない接続詞（等位接続詞）、日本語とは順番が変わる接続詞（従属接続詞）</li>
+            </ul>
+
+        <!--ハンバーガーメニュー＆サイドバー↓(1階層下用)-->
+        <div id="en-menu-toggle" class="en-menu-toggle">
+            &#9776;
+        </div>
+        <div id="en-sidebar-container" class="en-sidebar-container"></div>
+        <script src="../sidebar_en2.js"></script>
+        <!--ハンバーガーメニュー＆サイドバー↑(1階層下用)-->
+
+        <script src="mondai_g2_4.js"></script>
+        <script src="pgm_grammar.js"></script>
+    </main>
+
+    <footer class="footer-container">
+        <hr>
+        <p>英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ。中学英語のやり直し・学び直しにもオススメです</p>
+        <p>Copyright(C) 2022- All Rights Reserved</p>
+    </footer>
+    <a href="#page_top" class="page_top_btn">▲</a>
+</body>
+</html>

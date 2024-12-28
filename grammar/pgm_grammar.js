@@ -183,7 +183,11 @@ function grammarEN () {
        if ($inputAnswer.innerText == "") {
         $inputAnswer.innerText = capitalizeFirstLetter($word1Btn.value);
        } else {
-        $inputAnswer.innerText += " " + $word1Btn.value;
+        if ($word1Btn.value == ",") {
+            $inputAnswer.innerText += $word1Btn.value;
+        } else {
+            $inputAnswer.innerText += " " + $word1Btn.value;
+        };
        };
        $word1Btn.style.color = "lightgray";
        $word1Btn.disabled = "disabled";
@@ -193,7 +197,11 @@ function grammarEN () {
         if ($inputAnswer.innerText == "") {
          $inputAnswer.innerText = capitalizeFirstLetter($word2Btn.value);
         } else {
-         $inputAnswer.innerText += " " + $word2Btn.value;
+            if ($word2Btn.value == ",") {
+                $inputAnswer.innerText += $word2Btn.value;
+            } else {
+                $inputAnswer.innerText += " " + $word2Btn.value;
+            };
         };
         $word2Btn.style.color = "lightgray";
         $word2Btn.disabled = "disabled";
@@ -203,7 +211,11 @@ function grammarEN () {
         if ($inputAnswer.innerText == "") {
          $inputAnswer.innerText = capitalizeFirstLetter($word3Btn.value);
         } else {
-         $inputAnswer.innerText += " " + $word3Btn.value;
+            if ($word3Btn.value == ",") {
+                $inputAnswer.innerText += $word3Btn.value;
+            } else {
+                $inputAnswer.innerText += " " + $word3Btn.value;
+            };
         };
         $word3Btn.style.color = "lightgray";
         $word3Btn.disabled = "disabled";
@@ -213,7 +225,11 @@ function grammarEN () {
         if ($inputAnswer.innerText == "") {
          $inputAnswer.innerText = capitalizeFirstLetter($word4Btn.value);
         } else {
-         $inputAnswer.innerText += " " + $word4Btn.value;
+            if ($word4Btn.value == ",") {
+                $inputAnswer.innerText += $word4Btn.value;
+            } else {
+                $inputAnswer.innerText += " " + $word4Btn.value;
+            };
         };
         $word4Btn.style.color = "lightgray";
         $word4Btn.disabled = "disabled";
@@ -223,7 +239,11 @@ function grammarEN () {
         if ($inputAnswer.innerText == "") {
          $inputAnswer.innerText = capitalizeFirstLetter($word5Btn.value);
         } else {
-         $inputAnswer.innerText += " " + $word5Btn.value;
+            if ($word5Btn.value == ",") {
+                $inputAnswer.innerText += $word5Btn.value;
+            } else {
+                $inputAnswer.innerText += " " + $word5Btn.value;
+            };
         };
         $word5Btn.style.color = "lightgray";
         $word5Btn.disabled = "disabled";
@@ -233,7 +253,11 @@ function grammarEN () {
         if ($inputAnswer.innerText == "") {
          $inputAnswer.innerText = capitalizeFirstLetter($word6Btn.value);
         } else {
-         $inputAnswer.innerText += " " + $word6Btn.value;
+            if ($word6Btn.value == ",") {
+                $inputAnswer.innerText += $word6Btn.value;
+            } else {
+                $inputAnswer.innerText += " " + $word6Btn.value;
+            };
         };
         $word6Btn.style.color = "lightgray";
         $word6Btn.disabled = "disabled";
@@ -243,7 +267,11 @@ function grammarEN () {
         if ($inputAnswer.innerText == "") {
          $inputAnswer.innerText = capitalizeFirstLetter($word7Btn.value);
         } else {
-         $inputAnswer.innerText += " " + $word7Btn.value;
+            if ($word7Btn.value == ",") {
+                $inputAnswer.innerText += $word7Btn.value;
+            } else {
+                $inputAnswer.innerText += " " + $word7Btn.value;
+            };
         };
         $word7Btn.style.color = "lightgray";
         $word7Btn.disabled = "disabled";
@@ -253,7 +281,11 @@ function grammarEN () {
         if ($inputAnswer.innerText == "") {
          $inputAnswer.innerText = capitalizeFirstLetter($word8Btn.value);
         } else {
-         $inputAnswer.innerText += " " + $word8Btn.value;
+            if ($word8Btn.value == ",") {
+                $inputAnswer.innerText += $word8Btn.value;
+            } else {
+                $inputAnswer.innerText += " " + $word8Btn.value;
+            };
         };
         $word8Btn.style.color = "lightgray";
         $word8Btn.disabled = "disabled";
