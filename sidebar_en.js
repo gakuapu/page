@@ -8,6 +8,7 @@ function sidebarEN () {
     });
 
     function applyLink_en () {
+        /*
         const mobileonlyLinks_en = [
             `
             <a href="https://px.a8.net/svt/ejp?a8mat=3ZFLL0+37I6GA+46O6+C2GFL" rel="nofollow">
@@ -15,6 +16,7 @@ function sidebarEN () {
             <img border="0" width="1" height="1" src="https://www18.a8.net/0.gif?a8mat=3ZFLL0+37I6GA+46O6+C2GFL" alt="">
             `
         ];
+        */
 
         const alldeviceLinks_en = [
             `
@@ -22,13 +24,31 @@ function sidebarEN () {
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/3Z6krQu" title="N/A" target="_blank">
+                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/42tlkVl" title="N/A" target="_blank">
                             <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51lSQKbWfpL._SL500_.jpg" alt="N/A"></a>
                         </div>
                     </div>
                     <div class="paapi5-pa-product-details">
                         <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://amzn.to/3Z6krQu" title="N/A" target="_blank">【Amazon】ＮＨＫラジオ 中学生の基礎英語　レベル１ 2024年 12月号 ［雑誌］ (NＨＫテキスト)</a>
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/42tlkVl" title="N/A" target="_blank">【Amazon】ＮＨＫラジオ 中学生の基礎英語　レベル１ 2025年 2月号 ［雑誌］ (ＮＨＫテキスト)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+            ,
+            `
+            <div class="paapi5-pa-ad-unit pull-left">
+                <div class="paapi5-pa-product-container">
+                    <div class="paapi5-pa-product-image">
+                        <div class="paapi5-pa-product-image-wrapper">
+                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/3Cq5NeE" title="N/A" target="_blank">
+                            <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51lSQKbWfpL._SL500_.jpg" alt="N/A"></a>
+                        </div>
+                    </div>
+                    <div class="paapi5-pa-product-details">
+                        <div class="paapi5-pa-product-title">
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/3Cq5NeE" title="N/A" target="_blank">【Amazon】ＮＨＫラジオ 中学生の基礎英語　レベル２ 2025年 2月号 ［雑誌］ (ＮＨＫテキスト)</a>
                         </div>
                     </div>
                 </div>
@@ -90,9 +110,10 @@ function sidebarEN () {
             `
         ];
 
-        const isMobile_en = window.matchMedia(`(max-width: 1024px)`).matches;
-
-        const linksToShow_en = isMobile_en ? mobileonlyLinks_en.concat(alldeviceLinks_en) : alldeviceLinks_en;
+        //const isMobile_en = window.matchMedia(`(max-width: 1024px)`).matches;
+        //const linksToShow_en = isMobile_en ? mobileonlyLinks_en.concat(alldeviceLinks_en) : alldeviceLinks_en;
+        
+        const linksToShow_en = alldeviceLinks_en;
 
         const randomIndex_en = Math.floor(Math.random() * linksToShow_en.length);
         const selectedLink_en = linksToShow_en[randomIndex_en];
