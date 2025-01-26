@@ -24,13 +24,13 @@ function sidebarEN () {
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/42tlkVl" title="N/A" target="_blank">
+                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/42tlkVl" target="_blank">
                             <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51lSQKbWfpL._SL500_.jpg" alt="N/A"></a>
                         </div>
                     </div>
                     <div class="paapi5-pa-product-details">
                         <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://amzn.to/42tlkVl" title="N/A" target="_blank">【Amazon】ＮＨＫラジオ 中学生の基礎英語　レベル１ 2025年 2月号 ［雑誌］ (ＮＨＫテキスト)</a>
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/42tlkVl" target="_blank">【Amazon】ＮＨＫラジオ 中学生の基礎英語　レベル１ 2025年 2月号 ［雑誌］ (ＮＨＫテキスト)</a>
                         </div>
                     </div>
                 </div>
@@ -42,13 +42,13 @@ function sidebarEN () {
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/3Cq5NeE" title="N/A" target="_blank">
+                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/3Cq5NeE" target="_blank">
                             <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51lSQKbWfpL._SL500_.jpg" alt="N/A"></a>
                         </div>
                     </div>
                     <div class="paapi5-pa-product-details">
                         <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://amzn.to/3Cq5NeE" title="N/A" target="_blank">【Amazon】ＮＨＫラジオ 中学生の基礎英語　レベル２ 2025年 2月号 ［雑誌］ (ＮＨＫテキスト)</a>
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/3Cq5NeE" target="_blank">【Amazon】ＮＨＫラジオ 中学生の基礎英語　レベル２ 2025年 2月号 ［雑誌］ (ＮＨＫテキスト)</a>
                         </div>
                     </div>
                 </div>
@@ -60,13 +60,13 @@ function sidebarEN () {
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/4fQzEej" title="N/A" target="_blank">
+                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/4fQzEej" target="_blank">
                             <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51UpQ+zPzlL._SL500_.jpg" alt="N/A"></a>
                         </div>
                     </div>
                     <div class="paapi5-pa-product-details">
                         <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://amzn.to/4fQzEej" title="N/A" target="_blank">【Amazon】2024年度版 英検5級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/4fQzEej" target="_blank">【Amazon】2024年度版 英検5級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
                         </div>
                     </div>
                 </div>
@@ -78,13 +78,13 @@ function sidebarEN () {
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/48PZCfu" title="N/A" target="_blank">
+                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/48PZCfu" target="_blank">
                             <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51pHCQggz1L._SL500_.jpg" alt="N/A"></a>
                         </div>
                     </div>
                     <div class="paapi5-pa-product-details">
                         <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://amzn.to/48PZCfu" title="N/A" target="_blank">【Amazon】2024年度版 英検4級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/48PZCfu" target="_blank">【Amazon】2024年度版 英検4級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
                         </div>
                     </div>
                 </div>
@@ -96,13 +96,13 @@ function sidebarEN () {
                 <div class="paapi5-pa-product-container">
                     <div class="paapi5-pa-product-image">
                         <div class="paapi5-pa-product-image-wrapper">
-                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/3Cow8sY" title="N/A" target="_blank">
+                            <a class="paapi5-pa-product-image-link" href="https://amzn.to/3Cow8sY" target="_blank">
                             <img class="paapi5-pa-product-image-source" src="https://m.media-amazon.com/images/I/51Vt8+47DTL._SL500_.jpg" alt="N/A"></a>
                         </div>
                     </div>
                     <div class="paapi5-pa-product-details">
                         <div class="paapi5-pa-product-title">
-                            <a class="paap5-pa-product-title-link" href="https://amzn.to/3Cow8sY" title="N/A" target="_blank">【Amazon】2024年度版 英検3級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
+                            <a class="paap5-pa-product-title-link" href="https://amzn.to/3Cow8sY" target="_blank">【Amazon】2024年度版 英検3級 過去6回全問題集【音声アプリ・ダウンロード付き】 (旺文社英検書)</a>
                         </div>
                     </div>
                 </div>
