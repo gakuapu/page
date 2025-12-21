@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規作成｜Myリスニング</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="英検の勉強にも役立つ無料の中学英語学習アプリ。約2000英単語(英検3～5級)を学習できる発音付きの英単語帳・英単語テスト、中学の英文法を学習できる基本例文・解説・並べ替え練習問題、無料のリスニング練習問題等で中学英語をマスターしよう。">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --bg-body: #F8FAFC;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-sub: #64748B;
+            --border: #E2E8F0;
+            --primary: #8B5CF6; 
+            --primary-dark: #7C3AED;
+            --radius: 16px;
+            --error: #EF4444;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; background-color: var(--bg-body); color: var(--text-main);
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            height: 100vh; display: flex; flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;
+            background: var(--bg-surface); border-bottom: 1px solid var(--border);
+        }
+        .header-btn {
+            background: none; border: none; font-size: 1.5rem;
+            color: var(--text-sub); cursor: pointer; padding: 4px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; transition: background 0.2s;
+        }
+        .header-btn:hover { background: #F1F5F9; color: var(--primary); }
+        
+        /* ヘッダーのバランスを取るためのダミー要素 */
+        .header-spacer { width: 32px; }
+
+        /* Main Content */
+        .main-container {
+            flex: 1; padding: 20px; overflow-y: auto; max-width: 800px; margin: 0 auto; width: 100%;
+        }
+
+        /* --- Editor Styles --- */
+        .editor-group { margin-bottom: 20px; }
+        .label {
+            display: block; font-weight: 700; color: var(--text-sub); font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+        .input-title {
+            width: 100%; padding: 12px; font-size: 1.1rem; font-weight: 700;
+            border: 1px solid var(--border); border-radius: 12px;
+            font-family: inherit;
+        }
+        .input-text {
+            width: 100%; height: 300px; padding: 12px; font-size: 1rem; line-height: 1.6;
+            border: 1px solid var(--border); border-radius: 12px; resize: vertical;
+            font-family: inherit;
+        }
+        
+        .char-count-area {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 4px; font-size: 0.75rem; color: var(--text-sub);
+        }
+        .char-over { color: var(--error); font-weight: bold; }
+
+        /* Editor Actions (New Position: Below inputs) */
+        .editor-actions {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+            margin-top: 30px; margin-bottom: 40px;
+        }
+        .editor-btn {
+            padding: 14px; border-radius: 12px; font-weight: 700; font-size: 1rem;
+            cursor: pointer; border: none; transition: transform 0.2s;
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+        }
+        .editor-btn:active { transform: scale(0.98); }
+        
+        .btn-cancel {
+            background: #E2E8F0; color: var(--text-sub);
+        }
+        .btn-save {
+            background: var(--primary); color: white;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        /* --- Player Styles --- */
+        .player-title-area { text-align: center; margin-bottom: 30px; margin-top: 20px; }
+        .player-title { font-size: 1.4rem; font-weight: 800; margin: 0 0 8px 0; }
+        .player-meta { font-size: 0.8rem; color: var(--text-sub); }
+
+        /* Text Display (Lyrics style) */
+        .text-display-area {
+            background: var(--bg-surface); border-radius: 16px; padding: 20px;
+            height: 300px; overflow-y: auto; border: 1px solid var(--border);
+            font-size: 1.1rem; line-height: 1.8; white-space: pre-wrap;
+            position: relative;
+        }
+        .text-display-area::after { content: ''; display: block; height: 40px; }
+
+        /* Controls */
+        .controls-container {
+            background: var(--bg-surface);
+            padding: 20px;
+            border-top: 1px solid var(--border);
+            border-radius: 24px 24px 0 0;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+        }
+
+        .slider-group {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+        }
+        .speed-label { font-size: 0.8rem; font-weight: 700; color: var(--text-sub); white-space: nowrap; width: 40px; }
+        
+        input[type=range] {
+            flex: 1; -webkit-appearance: none; background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%;
+            background: var(--primary); cursor: pointer; margin-top: -8px;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px; cursor: pointer; background: #E2E8F0; border-radius: 2px;
+        }
+
+        .main-controls {
+            display: flex; justify-content: center; align-items: center; gap: 30px;
+        }
+        .ctrl-btn {
+            background: none; border: none; color: var(--text-main);
+            font-size: 2rem; cursor: pointer; transition: transform 0.1s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .ctrl-btn:active { transform: scale(0.9); }
+        .play-btn {
+            width: 70px; height: 70px; background: var(--primary); color: white;
+            border-radius: 50%; font-size: 2.5rem;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Modes */
+        .hidden { display: none !important; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="header-btn" onclick="goBack()">
+            <i class="ph-bold ph-caret-left"></i>
+        </button>
+        <div style="font-weight:700" id="header-title">Player</div>
+        <!-- バランス調整用のダミー要素 -->
+        <div class="header-spacer"></div>
+    </header>
+
+    <main class="main-container">
+        
+        <!-- Mode: Editor -->
+        <div id="editor-mode" class="hidden">
+            <div class="editor-group">
+                <label class="label">タイトル</label>
+                <input type="text" id="input-title" class="input-title" placeholder="例: Lesson 1 本文" maxlength="50">
+            </div>
+            <div class="editor-group">
+                <label class="label">英文テキスト (貼り付け)</label>
+                <textarea id="input-text" class="input-text" placeholder="ここに英文を貼り付けてください..." maxlength="10000"></textarea>
+                <div class="char-count-area">
+                    <button onclick="clearText()" style="border:none; background:none; color:var(--primary); font-size:1rem; cursor:pointer;">テキストを全てクリア</button>
+                    <div class="char-count"><span id="char-num">0</span> / 10000</div>
+                </div>
+            </div>
+
+            <!-- アクションボタン（下に移動） -->
+            <div class="editor-actions">
+                <button class="editor-btn btn-cancel" onclick="goBack()">
+                    キャンセル
+                </button>
+                <button class="editor-btn btn-save" onclick="saveData()">
+                    <i class="ph-bold ph-floppy-disk"></i> 保存する
+                </button>
+            </div>
+        </div>
+
+        <!-- Mode: Player -->
+        <div id="player-mode" class="hidden">
+            <div class="text-display-area" id="display-text">
+                <!-- Text goes here -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Controls (Player Only) -->
+    <div id="player-controls" class="controls-container hidden">
+        
+        <!-- Speed Control -->
+        <div class="slider-group">
+            <span class="speed-label">Speed</span>
+            <input type="range" id="speed-range" min="0.5" max="2.0" step="0.1" value="1.0">
+            <span class="speed-label" id="speed-display">1.0</span>
+        </div>
+
+        <!-- Main Buttons -->
+        <div class="main-controls">
+            <button class="ctrl-btn" onclick="stopSpeech()">
+                <i class="ph-fill ph-stop"></i>
+            </button>
+            <button class="ctrl-btn play-btn" id="play-pause-btn" onclick="togglePlay()">
+                <i class="ph-fill ph-play"></i>
+            </button>
+            <button class="ctrl-btn" onclick="editCurrent()">
+                <i class="ph-bold ph-pencil-simple"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'gakuapu_my_listening';
+        const MAX_CHARS = 10000;
+        const MAX_TITLE = 50;
+        const MAX_ITEMS = 10;
+        
+        // URL Params
+        const urlParams = new URLSearchParams(window.location.search);
+        const mode = urlParams.get('mode'); // 'edit' or null(play)
+        const id = urlParams.get('id');     // timestamp ID
+
+        // Elements
+        const elEditor = document.getElementById('editor-mode');
+        const elPlayer = document.getElementById('player-mode');
+        const elControls = document.getElementById('player-controls');
+        const elHeaderTitle = document.getElementById('header-title');
+        const elInputText = document.getElementById('input-text');
+        const elCharNum = document.getElementById('char-num');
+        
+        // Speech Synthesis
+        let synth = window.speechSynthesis;
+        let utterance = null;
+        let isPlaying = false;
+        let currentText = "";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+        });
+
+        function init() {
+            // IDがない、または編集モードの場合は「編集画面」を表示
+            if (!id || mode === 'edit') {
+                // Edit Mode
+                elEditor.classList.remove('hidden');
+                elHeaderTitle.innerText = id ? "編集" : "新規作成";
+                
+                if (id) loadDataForEdit(id);
+                
+                // Character Counter
+                elInputText.addEventListener('input', (e) => {
+                    const len = e.target.value.length;
+                    elCharNum.innerText = len;
+                    if(len > MAX_CHARS) {
+                        elCharNum.classList.add('char-over');
+                    } else {
+                        elCharNum.classList.remove('char-over');
+                    }
+                });
+
+            } else {
+                // Player Mode (IDがある場合のみ)
+                elPlayer.classList.remove('hidden');
+                elControls.classList.remove('hidden');
+                //elHeaderTitle.innerText = "Now Playing:";
+                
+                loadDataForPlay(id);
+            }
+        }
+
+        // --- Data Logic ---
+
+        function loadDataForEdit(targetId) {
+            const list = getList();
+            const item = list.find(i => i.id == targetId);
+            if (item) {
+                document.getElementById('input-title').value = item.title;
+                document.getElementById('input-text').value = item.text;
+                elCharNum.innerText = item.text.length;
+            }
+        }
+
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+
+        function loadDataForPlay(targetId) {
+            const list = getList();
+            const item = list.find(i => i.id == targetId);
+            if (item) {
+                const displayArea = document.getElementById('display-text');
+                displayArea.innerText = item.text;
+                currentText = item.text;
+                elHeaderTitle.innerText = `Now Playing｜${item.title}`;
+            } else {
+                alert("データが削除された可能性があります");
+                navigateTo('WIP_mylistening_library.html');
+            }
+        }
+
+        function saveData() {
+            const titleInput = document.getElementById('input-title').value.trim();
+            const textInput = document.getElementById('input-text').value.trim();
+
+            if (!textInput) {
+                alert("英文テキストを入力してください。");
+                return;
+            }
+            
+            if (titleInput.length > MAX_TITLE) {
+                alert(`タイトルが長すぎます（最大${MAX_TITLE}文字）。`);
+                return;
+            }
+
+            if (textInput.length > MAX_CHARS) {
+                alert(`テキストが長すぎます（最大${MAX_CHARS}文字）。`);
+                return;
+            }
+
+            const title = titleInput || "No Title";
+            let list = getList();
+            
+            if (id && mode === 'edit') {
+                // Update existing
+                const index = list.findIndex(i => i.id == id);
+                if (index !== -1) {
+                    list[index].title = title;
+                    list[index].text = textInput;
+                    list[index].updatedAt = new Date().toLocaleDateString();
+                }
+            } else {
+                // Create new
+                // 容量制限（件数）チェック
+                if (list.length >= MAX_ITEMS) {
+                    alert(`保存件数が上限(${MAX_ITEMS}件)に達しています。不要な教材を削除してください。`);
+                    return;
+                }
+                
+                const newItem = {
+                    id: Date.now(),
+                    title: title,
+                    text: textInput,
+                    createdAt: new Date().toLocaleDateString()
+                };
+                list.push(newItem);
+            }
+
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+                alert("保存しました！");
+                navigateTo('WIP_mylistening_library.html');
+            } catch (e) {
+                console.error(e);
+                if (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+                    alert("【保存エラー】\nブラウザの保存容量が一杯です。不要なデータを削除してください。");
+                } else {
+                    alert("保存中にエラーが発生しました。");
+                }
+            }
+        }
+
+        function getList() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            return raw ? JSON.parse(raw) : [];
+        }
+
+        function clearText() {
+            if(confirm("入力内容をすべて消去しますか？")) {
+                document.getElementById('input-text').value = "";
+                elCharNum.innerText = "0";
+            }
+        }
+
+        function goBack() {
+            // もし編集中なら確認
+            if (mode === 'edit' && document.getElementById('input-text').value.length > 0) {
+                if(!confirm("編集内容を破棄して一覧に戻りますか？")) return;
+            }
+            if (synth.speaking) synth.cancel(); // 停止
+            navigateTo('WIP_mylistening_library.html');
+        }
+
+        function editCurrent() {
+            navigateTo(`WIP_mylistening_editor.html?mode=edit&id=${id}`);
+        }
+
+        // --- Player Logic ---
+
+        const speedRange = document.getElementById('speed-range');
+        const speedDisplay = document.getElementById('speed-display');
+        const playBtnIcon = document.querySelector('#play-pause-btn i');
+
+        speedRange.addEventListener('input', (e) => {
+            const val = e.target.value;
+            speedDisplay.innerText = val;
+        });
+
+        function togglePlay() {
+            if (synth.speaking) {
+                if (synth.paused) {
+                    synth.resume();
+                    isPlaying = true;
+                    updatePlayBtn();
+                } else {
+                    synth.pause();
+                    isPlaying = false;
+                    updatePlayBtn();
+                }
+            } else {
+                speak(currentText);
+            }
+        }
+
+        function stopSpeech() {
+            synth.cancel();
+            isPlaying = false;
+            updatePlayBtn();
+        }
+
+        function speak(text) {
+            if (synth.speaking) {
+                return;
+            }
+            if (text !== '') {
+                utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = parseFloat(speedRange.value);
+
+                utterance.onend = function (event) {
+                    isPlaying = false;
+                    updatePlayBtn();
+                }
+                
+                utterance.onerror = function (event) {
+                    console.error('SpeechSynthesisUtterance.onerror');
+                    isPlaying = false;
+                    updatePlayBtn();
+                }
+
+                synth.speak(utterance);
+                isPlaying = true;
+                updatePlayBtn();
+            }
+        }
+
+        function updatePlayBtn() {
+            if (isPlaying) {
+                playBtnIcon.classList.remove('ph-play');
+                playBtnIcon.classList.add('ph-pause');
+            } else {
+                playBtnIcon.classList.remove('ph-pause');
+                playBtnIcon.classList.add('ph-play');
+            }
+        }
+
+        window.onbeforeunload = function() {
+            synth.cancel();
+        };
+
+    </script>
+</body>
+</html>

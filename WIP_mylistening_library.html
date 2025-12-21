@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myリスニング｜学アプ英語</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="英検の勉強にも役立つ無料の中学英語学習アプリ。約2000英単語(英検3～5級)を学習できる発音付きの英単語帳・英単語テスト、中学の英文法を学習できる基本例文・解説・並べ替え練習問題、無料のリスニング練習問題等で中学英語をマスターしよう。">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- ▼▼▼ スタイル定義 ▼▼▼ -->
+    <style>
+        /* --- Design System --- */
+        :root {
+            --bg-body: #F8FAFC;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-sub: #64748B;
+            --border: #E2E8F0;
+            --primary: #8B5CF6;
+            --primary-light: #A78BFA;
+            --danger: #FF006E;
+            --radius: 16px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            padding-bottom: 80px;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-surface);
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .back-btn { 
+            color: var(--text-sub); text-decoration: none; font-size: 1.5rem; 
+            display: flex; align-items: center; transition: color 0.2s;
+            background: none; border: none; cursor: pointer;
+        }
+        .back-btn:hover { color: var(--primary); }
+        h1 { font-size: 1.1rem; font-weight: 800; margin: 0; }
+
+        /* Container */
+        .container {
+            max-width: 800px; margin: 0 auto; padding: 24px;
+        }
+
+        /* Create New Button */
+        .create-btn-area {
+            margin-bottom: 30px;
+        }
+        .create-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+            transition: transform 0.2s;
+        }
+        .create-btn:active { transform: scale(0.98); }
+        .create-btn i { font-size: 1.2rem; }
+
+        /* List Area */
+        .list-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 16px;
+        }
+        .list-title { font-size: 1rem; font-weight: 700; color: var(--text-sub); }
+        .item-count { background: #E0E7FF; color: var(--primary); padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 800; }
+
+        .listening-list {
+            display: flex; flex-direction: column; gap: 12px;
+        }
+
+        .list-item {
+            background: var(--bg-surface);
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            display: flex; align-items: center; justify-content: space-between;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .list-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-color: var(--primary-light);
+        }
+
+        .item-info { flex: 1; }
+        .item-title { font-weight: 700; font-size: 1rem; margin-bottom: 4px; color: var(--text-main); }
+        .item-meta { font-size: 0.75rem; color: var(--text-sub); display: flex; gap: 10px; align-items: center; }
+        .item-icon { 
+            width: 40px; height: 40px; background: #F3E8FF; color: var(--primary);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; flex-shrink: 0; margin-right: 16px;
+        }
+
+        .item-actions { display: flex; gap: 8px; }
+        .action-btn {
+            background: none; border: none; padding: 8px;
+            color: var(--text-sub); cursor: pointer; font-size: 1.2rem;
+            border-radius: 50%; transition: background 0.2s;
+        }
+        .action-btn:hover { background: #F1F5F9; color: var(--text-main); }
+        .delete-btn:hover { background: #FFF1F2; color: var(--danger); }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center; padding: 40px 20px;
+            background: #F8FAFC; border: 2px dashed var(--border);
+            border-radius: var(--radius); color: var(--text-sub);
+        }
+        .empty-icon { font-size: 3rem; margin-bottom: 12px; color: #CBD5E1; }
+
+        /* Usage Guide (Accordion) */
+        .usage-section { margin-top: 40px; }
+        .usage-details {
+            background: var(--bg-surface); border: 1px solid var(--border);
+            border-radius: var(--radius); overflow: hidden; margin-bottom: 16px;
+        }
+        .usage-summary {
+            padding: 16px; font-weight: 700; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            list-style: none;
+        }
+        .usage-summary::-webkit-details-marker { display: none; }
+        .usage-content {
+            padding: 0 16px 16px; font-size: 0.9rem; line-height: 1.6; color: var(--text-main);
+            border-top: 1px solid var(--border);
+        }
+        .step-item { margin-bottom: 12px; }
+        .step-title { font-weight: 700; color: var(--primary); margin-bottom: 4px; display: block; }
+        
+        .caution-box {
+            background: #FFF7ED; border: 1px solid #FFEDD5; border-radius: 8px;
+            padding: 12px; font-size: 0.85rem; color: #9A3412; margin-top: 10px;
+        }
+        .caution-title { font-weight: 800; display: block; margin-bottom: 4px; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <button class="back-btn" onclick="navigateTo('WIP_top_en.html')">
+                <i class="ph-bold ph-caret-left"></i>
+            </button>
+            <h1>Myリスニング</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- Create New -->
+        <div class="create-btn-area">
+            <button class="create-btn" onclick="navigateTo('WIP_mylistening_editor.html?mode=edit')">
+                <i class="ph-bold ph-plus-circle"></i>
+                新しく教材を作る
+            </button>
+        </div>
+
+        <!-- List -->
+        <div class="list-header">
+            <span class="list-title">保存した教材</span>
+            <span class="item-count" id="list-count">0</span>
+        </div>
+
+        <div id="library-list" class="listening-list">
+            <!-- JSでここにリストを追加 -->
+        </div>
+
+        <!-- Usage Guide -->
+        <section class="usage-section">
+            <details class="usage-details">
+                <summary class="usage-summary">
+                    使い方を見る
+                    <i class="ph-bold ph-caret-down"></i>
+                </summary>
+                <div class="usage-content">
+                    <div class="step-item">
+                        <span class="step-title">1. 英文を用意する</span>
+                        教科書の本文や、Web上のニュース記事などをコピーします。
+                    </div>
+                    <div class="step-item">
+                        <span class="step-title">2. 貼り付けて保存</span>
+                        「新しく教材を作る」ボタンを押し、テキストエリアに英文を貼り付け（ペースト）ます。わかりやすいタイトルをつけて保存しましょう。
+                    </div>
+                    <div class="step-item">
+                        <span class="step-title">3. 再生してリスニング</span>
+                        リストから選択して再生ボタンを押すと、AIが英語を読み上げます。速度を変えて、自分に合ったペースで練習しましょう。
+                    </div>
+                </div>
+            </details>
+
+            <!-- Data Storage Note -->
+            <details class="usage-details">
+                <summary class="usage-summary">
+                    データ保存の注意点
+                    <i class="ph-bold ph-caret-down"></i>
+                </summary>
+                <div class="usage-content">
+                    <p>この機能で作成したデータは、今お使いのブラウザ（LocalStorage）に保存されます。サーバーには送信されません。</p>
+                    <div class="caution-box">
+                        <span class="caution-title">⚠️ 以下の場合、データが消えることがあります</span>
+                        <ul>
+                            <li>ブラウザの「閲覧履歴（キャッシュ）」を削除した場合</li>
+                            <li>iPhoneの「プライベートブラウズ」などを使用している場合</li>
+                        </ul>
+                        ※別のスマホやPCにはデータは引き継がれません。
+                    </div>
+                </div>
+            </details>
+        </section>
+
+    </main>
+
+    <script>
+        const STORAGE_KEY = 'gakuapu_my_listening';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initSampleData(); // サンプルデータの確認・投入
+            renderLibrary();
+        });
+
+        // サンプルデータを投入する関数
+        function initSampleData() {
+            try {
+                const rawData = localStorage.getItem(STORAGE_KEY);
+                let dataList = rawData ? JSON.parse(rawData) : [];
+
+                // データが空っぽの場合のみサンプルを追加
+                if (dataList.length === 0) {
+                    const sampleItem = {
+                        id: Date.now(),
+                        title: "Sample: 自己紹介",
+                        text: "Hello! I am a free English learning app for junior high school students. You can add English text here to create your own listening materials. Let's study English together!",
+                        createdAt: new Date().toLocaleDateString(),
+                        updatedAt: new Date().toLocaleDateString()
+                    };
+                    dataList.push(sampleItem);
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(dataList));
+                }
+            } catch(e) {
+                console.warn("Storage access failed:", e);
+            }
+        }
+
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+
+        function renderLibrary() {
+            const container = document.getElementById('library-list');
+            const countEl = document.getElementById('list-count');
+            
+            // データ取得
+            const rawData = localStorage.getItem(STORAGE_KEY);
+            const dataList = rawData ? JSON.parse(rawData) : [];
+            
+            countEl.innerText = dataList.length;
+            container.innerHTML = '';
+
+            if (dataList.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon"><i class="ph-duotone ph-playlist"></i></div>
+                        <p>まだ教材がありません。<br>上のボタンから作成してみましょう！</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // 新しい順に表示
+            dataList.slice().reverse().forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'list-item';
+                // クリックで再生画面へ (安全な遷移)
+                el.onclick = () => {
+                    navigateTo(`WIP_mylistening_editor.html?id=${item.id}`);
+                };
+
+                // 日付フォーマット
+                const dateStr = item.updatedAt || item.createdAt || '---';
+
+                el.innerHTML = `
+                    <div class="item-icon"><i class="ph-fill ph-headphones"></i></div>
+                    <div class="item-info">
+                        <div class="item-title">${escapeHtml(item.title)}</div>
+                        <div class="item-meta">
+                            <span><i class="ph-regular ph-clock"></i> ${dateStr}</span>
+                            <span><i class="ph-regular ph-text-aa"></i> ${item.text.length} chars</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="action-btn" onclick="event.stopPropagation(); navigateTo('WIP_mylistening_editor.html?mode=edit&id=${item.id}')">
+                            <i class="ph-bold ph-pencil-simple"></i>
+                        </button>
+                        <button class="action-btn delete-btn" onclick="deleteItem(event, ${item.id})">
+                            <i class="ph-bold ph-trash"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function deleteItem(e, id) {
+            e.stopPropagation(); // 親のクリックイベントを止める
+            if (!confirm('この教材を削除しますか？')) return;
+
+            const rawData = localStorage.getItem(STORAGE_KEY);
+            let dataList = rawData ? JSON.parse(rawData) : [];
+            
+            dataList = dataList.filter(item => item.id !== id);
+            
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(dataList));
+            renderLibrary();
+        }
+
+        // サニタイズ（表示用）
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>"']/g, function(match) {
+                const escape = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                };
+                return escape[match];
+            });
+        }
+    </script>
+</body>
+</html>
