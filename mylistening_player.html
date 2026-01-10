@@ -217,10 +217,10 @@
             </div>
             <div class="editor-group">
                 <label class="label">英文テキスト (貼り付け)</label>
-                <textarea id="input-text" class="input-text" placeholder="ここに英文を貼り付けてください..." maxlength="10000"></textarea>
+                <textarea id="input-text" class="input-text" placeholder="ここに英文を貼り付けてください..." maxlength="3000"></textarea>
                 <div class="char-count-area">
                     <button onclick="clearText()" style="border:none; background:none; color:var(--primary); font-size:1rem; cursor:pointer;">テキストを全てクリア</button>
-                    <div class="char-count"><span id="char-num">0</span> / 10000</div>
+                    <div class="char-count"><span id="char-num">0</span> / 3000</div>
                 </div>
             </div>
 
@@ -270,7 +270,7 @@
 
     <script>
         const STORAGE_KEY = 'gakuapu_my_listening';
-        const MAX_CHARS = 10000;
+        const MAX_CHARS = 3000;
         const MAX_TITLE = 50;
         const MAX_ITEMS = 10;
         
@@ -321,7 +321,6 @@
                 // Player Mode (IDがある場合のみ)
                 elPlayer.classList.remove('hidden');
                 elControls.classList.remove('hidden');
-                //elHeaderTitle.innerText = "Now Playing:";
                 
                 loadDataForPlay(id);
             }
@@ -353,7 +352,7 @@
                 elHeaderTitle.innerText = `Now Playing｜${item.title}`;
             } else {
                 alert("データが削除された可能性があります");
-                navigateTo('WIP_mylistening_library.html');
+                navigateTo('mylistening_list.html');
             }
         }
 
@@ -407,7 +406,7 @@
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
                 alert("保存しました！");
-                navigateTo('WIP_mylistening_library.html');
+                navigateTo('mylistening_list.html');
             } catch (e) {
                 console.error(e);
                 if (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
@@ -436,11 +435,11 @@
                 if(!confirm("編集内容を破棄して一覧に戻りますか？")) return;
             }
             if (synth.speaking) synth.cancel(); // 停止
-            navigateTo('WIP_mylistening_library.html');
+            navigateTo('mylistening_list.html');
         }
 
         function editCurrent() {
-            navigateTo(`WIP_mylistening_editor.html?mode=edit&id=${id}`);
+            navigateTo(`mylistening_player.html?mode=edit&id=${id}`);
         }
 
         // --- Player Logic ---
@@ -476,12 +475,19 @@
             updatePlayBtn();
         }
 
+        // ★★★ word_playerと同じ挙動に変更: 英字のみを抽出して読む ★★★
         function speak(text) {
             if (synth.speaking) {
                 return;
             }
-            if (text !== '') {
-                utterance = new SpeechSynthesisUtterance(text);
+            
+            // 英字・数字・記号のみを抽出（word_playerと同じ正規表現）
+            const matchResult = text.match(/[a-zA-Z0-9\s.,?!'-]+/g);
+            
+            if (matchResult && matchResult.length > 0) {
+                const textToSpeak = matchResult.join(" ");
+                
+                utterance = new SpeechSynthesisUtterance(textToSpeak);
                 utterance.lang = 'en-US';
                 utterance.rate = parseFloat(speedRange.value);
 
@@ -500,6 +506,7 @@
                 isPlaying = true;
                 updatePlayBtn();
             }
+            // 英字が含まれていない場合は何もしない（音声再生なし）
         }
 
         function updatePlayBtn() {

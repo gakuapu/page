@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-XKL20YHCTB');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>単語登録｜My単語帳</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root { --bg-body: #F8FAFC; --bg-surface: #FFFFFF; --text-main: #0F172A; --text-sub: #64748B; --border: #E2E8F0; --primary: #3B82F6; --danger: #EF4444; --radius: 16px; --status-green: #10B981; --status-yellow: #F59E0B; --status-red: #EF4444; }
+        * { box-sizing: border-box; }
+        body { margin: 0; background: var(--bg-body); color: var(--text-main); font-family: 'M PLUS Rounded 1c', sans-serif; padding-bottom: 100px; }
+        header { background: var(--bg-surface); padding: 16px 20px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; position: sticky; top: 0; z-index: 100; }
+        h1 { font-size: 1.1rem; font-weight: 800; margin: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .back-btn { background: none; border: none; font-size: 1.5rem; color: var(--text-sub); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
+        .back-btn:hover { color: var(--primary); background: #F1F5F9; }
+        .container { max-width: 600px; margin: 0 auto; padding: 24px 20px; }
+        
+        .limit-info { text-align: right; font-size: 0.8rem; color: var(--text-sub); margin-bottom: 8px; }
+
+        .input-area { background: var(--bg-surface); padding: 20px; border-radius: var(--radius); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); margin-bottom: 24px; display: flex; flex-direction: column; gap: 12px; }
+        .input-row { display: flex; gap: 12px; }
+        input { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 12px; font-size: 1rem; transition: border-color 0.2s; appearance: none; }
+        input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .add-btn { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: transform 0.1s, opacity 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .add-btn:active { transform: scale(0.98); }
+        
+        .word-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+        .word-card { background: var(--bg-surface); padding: 16px 20px; border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; transition: transform 0.2s; }
+        .word-info { flex-grow: 1; margin-right: 12px; }
+        .en-text { font-weight: 700; font-size: 1rem; color: var(--text-main); margin-bottom: 2px; font-family: 'Inter', sans-serif; }
+        .jp-text { font-size: 0.9rem; color: var(--text-sub); }
+        .actions { display: flex; align-items: center; gap: 12px; }
+        
+        /* ステータスボタンの色定義（修正箇所） */
+        .status-btn { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; flex-shrink: 0; transition: all 0.2s; }
+        .status-0 { background: var(--status-green); border-color: var(--status-green); }
+        .status-1 { background: var(--status-yellow); border-color: var(--status-yellow); }
+        .status-2 { background: var(--status-red); border-color: var(--status-red); } /* 赤に変更 */
+
+        .del-btn { background: none; border: none; color: #CBD5E1; cursor: pointer; font-size: 1.2rem; padding: 4px; border-radius: 6px; transition: color 0.2s; }
+        .del-btn:hover { color: var(--danger); background: #FEF2F2; }
+        .empty-state { text-align: center; color: var(--text-sub); padding: 40px 0; font-size: 0.9rem; }
+
+        /* 学習スタートボタン（リスト下部用） */
+        .start-learning-area { margin-top: 24px; padding-bottom: 40px; }
+        .start-learning-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .start-learning-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); }
+        .start-learning-btn:active { transform: scale(0.98); }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button class="back-btn" onclick="window.location.href='mywordbook_list.html'"><i class="ph-bold ph-caret-left"></i></button>
+        <h1 id="deck-title">単語登録</h1>
+        <div style="width: 24px;"></div> </header>
+
+    <main class="container">
+        <div class="limit-info">登録単語数: <span id="word-count-disp">0</span> / 100</div>
+
+        <div class="input-area">
+            <div class="input-row">
+                <input type="text" id="input-en" placeholder="English (例: Apple)" autocomplete="off">
+            </div>
+            <div class="input-row">
+                <input type="text" id="input-jp" placeholder="日本語 (例: リンゴ)" autocomplete="off">
+            </div>
+            <button class="add-btn" onclick="addWord()"><i class="ph-bold ph-plus"></i> 追加する</button>
+        </div>
+
+        <div id="word-list" class="word-list"></div>
+
+        <div class="start-learning-area">
+            <button class="start-learning-btn" onclick="startLearning()">
+                <i class="ph-fill ph-play-circle" style="font-size: 1.5rem;"></i>
+                学習を始める
+            </button>
+        </div>
+    </main>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const deckId = urlParams.get('id');
+        const deckKey = `gakuapu_deck_${deckId}`;
+        const META_KEY = 'gakuapu_decks_meta';
+        const MAX_WORDS = 100;
+        const MAX_CHAR = 30;
+
+        if (!deckId) { alert("エラー: 単語帳が指定されていません"); window.location.href = 'mywordbook_list.html'; }
+
+        function sanitizeInput(str) {
+            if (!str) return "";
+            return String(str).replace(/[&<>"']/g, function(m) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+            });
+        }
+        function escapeHtml(str) { return sanitizeInput(str); }
+
+        function getWords() { return JSON.parse(localStorage.getItem(deckKey) || '[]'); }
+        function saveWords(list) {
+            localStorage.setItem(deckKey, JSON.stringify(list));
+            updateMetaCount(list.length);
+        }
+
+        function updateMetaCount(count) {
+            const meta = JSON.parse(localStorage.getItem(META_KEY) || '[]');
+            const target = meta.find(d => d.id == deckId);
+            if (target) { target.count = count; localStorage.setItem(META_KEY, JSON.stringify(meta)); }
+        }
+
+        function loadDeckInfo() {
+            const meta = JSON.parse(localStorage.getItem(META_KEY) || '[]');
+            const target = meta.find(d => d.id == deckId);
+            if (target) document.getElementById('deck-title').innerText = target.title;
+        }
+
+        function renderList() {
+            const list = getWords();
+            const container = document.getElementById('word-list');
+            
+            document.getElementById('word-count-disp').innerText = list.length;
+            container.innerHTML = '';
+
+            if (list.length === 0) {
+                container.innerHTML = '<div class="empty-state">単語がまだありません<br>上のフォームから追加してください</div>';
+                return;
+            }
+
+            list.slice().reverse().forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'word-card';
+                el.innerHTML = `
+                    <div class="word-info">
+                        <div class="en-text">${escapeHtml(item.word)}</div>
+                        <div class="jp-text">${escapeHtml(item.meaning)}</div>
+                    </div>
+                    <div class="actions">
+                        <div class="status-btn status-${item.status !== undefined ? item.status : 2}" onclick="toggleStatus(${item.id})"></div>
+                        <button class="del-btn" onclick="deleteWord(${item.id})"><i class="ph-bold ph-trash"></i></button>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function addWord() {
+            const enIn = document.getElementById('input-en'), jpIn = document.getElementById('input-jp');
+            const en = sanitizeInput(enIn.value.trim()), jp = sanitizeInput(jpIn.value.trim());
+            
+            if (!en) return;
+            if (en.length > MAX_CHAR || jp.length > MAX_CHAR) { alert("30文字以内で入力してください"); return; }
+            
+            const list = getWords();
+            if (list.length >= MAX_WORDS) { alert("上限(100単語)です。これ以上登録できません。"); return; }
+            
+            if (list.some(w => w.word.toLowerCase() === en.toLowerCase())) { alert("その単語は既に登録されています"); return; }
+
+            // 新規は status: 2 (赤)
+            list.push({ id: Date.now(), word: en, meaning: jp, status: 2 });
+            saveWords(list);
+            
+            enIn.value = ''; jpIn.value = ''; enIn.focus();
+            renderList();
+        }
+
+        function deleteWord(id) {
+            if (confirm("この単語を削除しますか？")) {
+                const list = getWords().filter(w => w.id !== id);
+                saveWords(list);
+                renderList();
+            }
+        }
+
+        function toggleStatus(id) {
+            const list = getWords();
+            const idx = list.findIndex(w => w.id === id);
+            if (idx !== -1) {
+                const s = list[idx].status === undefined ? 2 : list[idx].status;
+                list[idx].status = s === 2 ? 1 : s === 1 ? 0 : 2;
+                saveWords(list);
+                renderList();
+            }
+        }
+
+        function startLearning() {
+            const list = getWords();
+            if (list.length === 0) { alert("まずは単語を登録してください"); return; }
+            window.location.href = `mywordbook_player.html?id=${deckId}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDeckInfo();
+            renderList();
+        });
+    </script>
+</body>
+
+</html>

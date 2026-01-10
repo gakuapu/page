@@ -183,7 +183,7 @@
 
     <header>
         <div class="header-left">
-            <button class="back-btn" onclick="navigateTo('WIP_top_en.html')">
+            <button class="back-btn" onclick="navigateTo('index_en.html')">
                 <i class="ph-bold ph-caret-left"></i>
             </button>
             <h1>Myリスニング</h1>
@@ -194,7 +194,7 @@
         
         <!-- Create New -->
         <div class="create-btn-area">
-            <button class="create-btn" onclick="navigateTo('WIP_mylistening_editor.html?mode=edit')">
+            <button class="create-btn" onclick="navigateTo('mylistening_player.html?mode=edit')">
                 <i class="ph-bold ph-plus-circle"></i>
                 新しく教材を作る
             </button>
@@ -315,9 +315,9 @@
             dataList.slice().reverse().forEach(item => {
                 const el = document.createElement('div');
                 el.className = 'list-item';
-                // クリックで再生画面へ (安全な遷移)
+                // クリックで再生画面へ
                 el.onclick = () => {
-                    navigateTo(`WIP_mylistening_editor.html?id=${item.id}`);
+                    navigateTo(`mylistening_player.html?id=${item.id}`);
                 };
 
                 // 日付フォーマット
@@ -333,7 +333,7 @@
                         </div>
                     </div>
                     <div class="item-actions">
-                        <button class="action-btn" onclick="event.stopPropagation(); navigateTo('WIP_mylistening_editor.html?mode=edit&id=${item.id}')">
+                        <button class="action-btn" onclick="event.stopPropagation(); navigateTo('mylistening_player.html?mode=edit&id=${item.id}')">
                             <i class="ph-bold ph-pencil-simple"></i>
                         </button>
                         <button class="action-btn delete-btn" onclick="deleteItem(event, ${item.id})">

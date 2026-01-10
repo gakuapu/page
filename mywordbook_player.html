@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-XKL20YHCTB');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>学習プレーヤー｜My単語帳</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-body: #F8FAFC;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-sub: #64748B;
+            --border: #E2E8F0;
+            --primary: #3B82F6;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --radius: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: scroll;
+        }
+
+        header {
+            background: var(--bg-surface);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 40px 1fr 40px;
+            align-items: center;
+            z-index: 100;
+            position: sticky;
+            top: 0;
+        }
+
+        .header-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-sub);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .header-title {
+            font-size: 1rem;
+            font-weight: 800;
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .container {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+        }
+
+        /* 設定パネル */
+        #settings-panel {
+            width: 100%;
+            background: var(--bg-surface);
+            padding: 24px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            display: flex; /* 初期表示 */
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .setting-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .filter-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .filter-btn.selected {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-btn:not(.selected) {
+            opacity: 0.3;
+            transform: scale(0.9);
+        }
+
+        .filter-btn.selected::after {
+            content: "✔";
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .filter-green {
+            background: var(--success);
+        }
+
+        .filter-yellow {
+            background: var(--warning);
+        }
+
+        .filter-red {
+            background: var(--danger);
+        }
+
+        .capsule-group {
+            display: flex;
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: 4px;
+            width: 100%;
+        }
+
+        .capsule-opt {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            transition: all 0.2s;
+        }
+
+        .capsule-opt.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .start-main-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: transform 0.1s;
+        }
+        .start-main-btn:active { transform: scale(0.98); }
+
+        #learning-view {
+            width: 100%;
+            display: none;
+            animation: fadeIn 0.3s;
+            margin-top: 10px;
+            padding-bottom: 60px;
+        }
+
+        .progress-bar-area {
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-value {
+            height: 100%;
+            background: var(--success);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .progress-text {
+            text-align: right;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            margin-top: 4px;
+        }
+
+        .card-area {
+            width: 100%;
+            height: 260px;
+            perspective: 1000px;
+            cursor: pointer;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            background: var(--bg-surface);
+            border-radius: var(--radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            border: 1px solid var(--border);
+            transition: transform 0.1s;
+        }
+
+        .card.no-anim {
+            transition: none !important;
+        }
+
+        .card:active {
+            transform: scale(0.98);
+        }
+
+        .card-content {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+
+        .card-status-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .badge-green {
+            background: var(--success);
+        }
+
+        .badge-yellow {
+            background: var(--warning);
+        }
+
+        .badge-red {
+            background: var(--danger);
+        }
+
+        /* 一時停止ボタンエリア */
+        .pause-control-area {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 16px;
+            height: 40px;
+        }
+
+        .pause-btn {
+            background: var(--text-main);
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.1s;
+        }
+
+        .pause-btn:active {
+            transform: scale(0.95);
+        }
+
+        .pause-btn.paused {
+            background: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            }
+        }
+
+        .controls {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            width: 100%;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        /* 1ワード戻るボタン */
+        .back-step-btn {
+            background: #F1F5F9;
+            color: var(--text-sub);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.4rem;
+            margin-right: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s;
+        }
+        .back-step-btn:active { transform: scale(0.9); }
+
+        .status-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.1s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-btn:active {
+            transform: scale(0.9);
+        }
+
+        .btn-green {
+            background: var(--success);
+        }
+
+        .btn-yellow {
+            background: var(--warning);
+        }
+
+        .btn-red {
+            background: var(--danger);
+        }
+
+        .play-btn {
+            background: #F1F5F9;
+            color: var(--text-main);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.4rem;
+            margin-left: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 中断ボタン */
+        .quit-btn-area {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .quit-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .quit-btn:hover {
+            background: #F1F5F9;
+            color: var(--text-main);
+        }
+
+        /* === 自動再生コントロールパネル === */
+        .autoplay-panel {
+            background: #F8FAFC;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .ap-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .ap-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* スイッチスタイル */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider-switch {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #CBD5E1;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider-switch:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider-switch {
+            background-color: var(--primary);
+        }
+
+        input:checked+.slider-switch:before {
+            transform: translateX(20px);
+        }
+
+        input:disabled+.slider-switch {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* 速度スライダー */
+        .speed-slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .speed-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .speed-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.1s;
+        }
+
+        .speed-slider:active::-webkit-slider-thumb {
+            transform: scale(1.2);
+        }
+
+        .speed-slider:disabled {
+            opacity: 0.5;
+        }
+
+        .speed-slider:disabled::-webkit-slider-thumb {
+            background: var(--text-sub);
+        }
+
+        .result-area {
+            display: none;
+            text-align: center;
+            width: 100%;
+            margin-top: 40px;
+            animation: fadeIn 0.5s;
+        }
+
+        .result-btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button class="header-btn" onclick="goBack()"><i class="ph-bold ph-caret-left"></i></button>
+        <h1 class="header-title" id="header-title">Loading...</h1>
+        <div style="width:24px;"></div>
+    </header>
+
+    <main class="container">
+        <div id="settings-panel">
+            <div>
+                <span class="setting-label">対象カード</span>
+                <div class="setting-row">
+                    <button class="filter-btn filter-green selected" id="sel-green"
+                        onclick="toggleColor('green')"></button>
+                    <button class="filter-btn filter-yellow selected" id="sel-yellow"
+                        onclick="toggleColor('yellow')"></button>
+                    <button class="filter-btn filter-red selected" id="sel-red" onclick="toggleColor('red')"></button>
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                <div>
+                    <span class="setting-label">順番</span>
+                    <div class="capsule-group">
+                        <div class="capsule-opt active" id="order-seq" onclick="setOrder('seq')">登録順</div>
+                        <div class="capsule-opt" id="order-shuffle" onclick="setOrder('shuffle')">ランダム</div>
+                    </div>
+                </div>
+                <div>
+                    <span class="setting-label">モード</span>
+                    <div class="capsule-group">
+                        <div class="capsule-opt active" id="dir-enjp" onclick="setDirection('en_jp')">英→日</div>
+                        <div class="capsule-opt" id="dir-jpen" onclick="setDirection('jp_en')">日→英</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="start-main-btn" onclick="startLearning()">
+                <i class="ph-fill ph-play-circle"></i> 学習を始める
+            </button>
+        </div>
+
+        <div id="learning-view">
+            <div class="progress-bar-area">
+                <div class="progress-bar">
+                    <div id="progress-val" class="progress-value"></div>
+                </div>
+                <div class="progress-text"><span id="current-idx">1</span> / <span id="total-idx">--</span></div>
+            </div>
+
+            <div class="card-area" onclick="flipCard()">
+                <div class="card">
+                    <div id="status-badge" class="card-status-badge badge-red"></div>
+                    <div class="card-content" id="card-main">Tap to start</div>
+                </div>
+            </div>
+
+            <div class="pause-control-area" id="pause-area" style="display:none;">
+                <button class="pause-btn" id="pause-btn" onclick="togglePause()">
+                    <i class="ph-fill ph-pause"></i> 一時停止
+                </button>
+            </div>
+
+            <div class="controls">
+                <button class="back-step-btn" onclick="goPrev()"><i class="ph-bold ph-caret-left"></i></button>
+
+                <button class="status-btn btn-green" onclick="setStatusAndNext(0)"></button>
+                <button class="status-btn btn-yellow" onclick="setStatusAndNext(1)"></button>
+                <button class="status-btn btn-red" onclick="setStatusAndNext(2)"></button>
+                <button class="play-btn" onclick="playAudio()"><i class="ph-fill ph-speaker-high"></i></button>
+            </div>
+
+            <div class="quit-btn-area">
+                <button class="quit-btn" onclick="goBack()">
+                    <i class="ph-bold ph-sign-out"></i> 中断して戻る
+                </button>
+            </div>
+
+            <div class="autoplay-panel">
+                <div class="ap-row">
+                    <div class="ap-label"><i class="ph-fill ph-play-circle" style="color:var(--primary)"></i> 自動再生</div>
+                    <label class="switch">
+                        <input type="checkbox" id="ap-switch" onchange="toggleAutoPlay()">
+                        <span class="slider-switch"></span>
+                    </label>
+                </div>
+
+                <div class="ap-row">
+                    <div class="ap-label"><i class="ph-bold ph-tortoise"></i></div>
+                    <div class="speed-slider-container">
+                        <input type="range" id="ap-speed-slider" class="speed-slider" min="1" max="3" step="1" value="2"
+                            oninput="updateSpeed()">
+                    </div>
+                    <div class="ap-label"><i class="ph-bold ph-hare"></i></div>
+                </div>
+
+                <div class="ap-row">
+                    <div class="ap-label"><i class="ph-fill ph-speaker-high"></i> 音声も再生</div>
+                    <label class="switch">
+                        <input type="checkbox" id="ap-audio-switch" checked onchange="updateAudioSetting()">
+                        <span class="slider-switch"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-area" class="result-area">
+            <div style="font-size:3rem; color:var(--success); margin-bottom:10px;"><i
+                    class="ph-fill ph-check-circle"></i></div>
+            <h2 style="margin:0 0 30px 0;">Complete!</h2>
+            <div style="display:flex; flex-direction:column; gap:16px; align-items:center;">
+                <button class="result-btn" onclick="retryLearning()"><i class="ph-bold ph-arrows-clockwise"></i>
+                    もう一度</button>
+                <button style="background:none;border:none;color:var(--text-sub);cursor:pointer;"
+                    onclick="goBack()">一覧に戻る</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search), deckId = urlParams.get('id');
+        let deckKey = '', fullList = [], studyList = [], currentIndex = 0, isFlipped = false;
+
+        let settings = {
+            colors: { green: true, yellow: true, red: true },
+            order: 'seq', direction: 'en_jp',
+            isAutoPlay: false,
+            speedLevel: 2,
+            audioOn: true
+        };
+        let isPaused = false;
+        let autoPlayTimer = null;
+        let audioTimer = null;
+
+        function navigateTo(url) { try { window.location.href = url } catch (e) { alert("移動: " + url) } }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!deckId) { alert("IDがありません"); navigateTo('mywordbook_list.html'); return; }
+            deckKey = `gakuapu_deck_${deckId}`;
+
+            const decks = JSON.parse(localStorage.getItem('gakuapu_decks_meta') || '[]');
+            const deck = decks.find(d => d.id == deckId);
+            if (deck) document.getElementById('header-title').innerText = deck.title;
+
+            document.getElementById('settings-panel').style.display = 'flex';
+        });
+
+        function toggleColor(c) {
+            settings.colors[c] = !settings.colors[c];
+            document.getElementById(`sel-${c}`).classList.toggle('selected', settings.colors[c]);
+        }
+        function setOrder(val) {
+            settings.order = val;
+            document.getElementById('order-seq').classList.toggle('active', val === 'seq');
+            document.getElementById('order-shuffle').classList.toggle('active', val === 'shuffle');
+        }
+        function setDirection(val) {
+            settings.direction = val;
+            document.getElementById('dir-enjp').classList.toggle('active', val === 'en_jp');
+            document.getElementById('dir-jpen').classList.toggle('active', val === 'jp_en');
+        }
+
+        function toggleAutoPlay() {
+            const isChecked = document.getElementById('ap-switch').checked;
+            settings.isAutoPlay = isChecked;
+            document.getElementById('pause-area').style.display = isChecked ? 'flex' : 'none';
+
+            if (!isChecked) {
+                isPaused = false;
+                clearTimeout(autoPlayTimer);
+                updatePauseBtnUI();
+            } else {
+                if (!isPaused) {
+                    checkAnimationMode();
+                    updateSpeed();
+                    
+                    const isLearningViewVisible = document.getElementById('learning-view').style.display === 'block';
+                    if(isLearningViewVisible) {
+                        const isEnglishVisible = (settings.direction === 'en_jp' && !isFlipped) || (settings.direction === 'jp_en' && isFlipped);
+                        if (settings.audioOn && isEnglishVisible) {
+                            playAudio();
+                        }
+                    }
+                }
+            }
+        }
+
+        function updateSpeed() {
+            settings.speedLevel = parseInt(document.getElementById('ap-speed-slider').value);
+            checkAnimationMode();
+
+            if (document.getElementById('learning-view').style.display === 'block' && settings.isAutoPlay && !isPaused) {
+                clearTimeout(autoPlayTimer);
+                scheduleNextAutoAction();
+            }
+        }
+
+        function checkAnimationMode() {
+            const card = document.querySelector('.card');
+            if (!card) return;
+            if (settings.speedLevel >= 3) {
+                card.classList.add('no-anim');
+            } else {
+                card.classList.remove('no-anim');
+            }
+        }
+
+        function updateAudioSetting() {
+            settings.audioOn = document.getElementById('ap-audio-switch').checked;
+        }
+
+        function getIntervalMs() {
+            return 4000 - (settings.speedLevel * 1000);
+        }
+
+        function prepareStudySession() {
+            if (!settings.colors.green && !settings.colors.yellow && !settings.colors.red) {
+                alert("色を1つ以上選択してください"); return false;
+            }
+
+            const raw = localStorage.getItem(deckKey);
+            fullList = raw ? JSON.parse(raw) : [];
+            if (fullList.length === 0) { alert("単語がありません"); return false; }
+
+            studyList = fullList.filter(w => {
+                const s = w.status !== undefined ? w.status : 2;
+                if (s === 0 && settings.colors.green) return true;
+                if (s === 1 && settings.colors.yellow) return true;
+                if ((s === 2) && settings.colors.red) return true;
+                return false;
+            });
+
+            if (studyList.length === 0) return 'EMPTY';
+
+            if (settings.order === 'shuffle') {
+                for (let i = studyList.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [studyList[i], studyList[j]] = [studyList[j], studyList[i]];
+                }
+            }
+            return true;
+        }
+
+        function startLearning() {
+            const res = prepareStudySession();
+            if (res === 'EMPTY') { alert("該当する単語がありません"); return; }
+            if (res !== true) return;
+
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+                const dummy = new SpeechSynthesisUtterance('');
+                dummy.volume = 0;
+                speechSynthesis.speak(dummy);
+            }
+
+            document.getElementById('settings-panel').style.display = 'none';
+            document.getElementById('learning-view').style.display = 'block';
+            document.getElementById('result-area').style.display = 'none';
+
+            initSession();
+
+            const isEnglishVisible = (settings.direction === 'en_jp');
+            if (settings.isAutoPlay && settings.audioOn && isEnglishVisible) {
+                playAudio();
+            }
+        }
+
+        function retryLearning() {
+            const res = prepareStudySession();
+            if (res === 'EMPTY') {
+                alert("学習対象のカードがなくなりました。\n設定を変更してください。");
+                document.getElementById('result-area').style.display = 'none';
+                document.getElementById('learning-view').style.display = 'none';
+                document.getElementById('settings-panel').style.display = 'flex';
+                return;
+            }
+            if (res !== true) return;
+
+            document.getElementById('result-area').style.display = 'none';
+            document.getElementById('learning-view').style.display = 'block';
+            
+            initSession();
+
+            const isEnglishVisible = (settings.direction === 'en_jp');
+            if (settings.isAutoPlay && settings.audioOn && isEnglishVisible) {
+                playAudio();
+            }
+        }
+
+        function initSession() {
+            document.getElementById('total-idx').innerText = studyList.length;
+            currentIndex = 0;
+            isFlipped = false;
+            isPaused = false;
+            updatePauseBtnUI();
+
+            toggleAutoPlay();
+            updateAudioSetting();
+            checkAnimationMode();
+
+            renderCard(false);
+        }
+
+        function togglePause() {
+            isPaused = !isPaused;
+            updatePauseBtnUI();
+
+            if (isPaused) {
+                clearTimeout(autoPlayTimer);
+            } else {
+                scheduleNextAutoAction();
+            }
+        }
+        function updatePauseBtnUI() {
+            const btn = document.getElementById('pause-btn');
+            if (isPaused) {
+                btn.innerHTML = '<i class="ph-fill ph-play"></i> 再開する';
+                btn.classList.add('paused');
+            } else {
+                btn.innerHTML = '<i class="ph-fill ph-pause"></i> 一時停止';
+                btn.classList.remove('paused');
+            }
+        }
+
+        // --- 追加: 戻る機能 ---
+        function goPrev() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                isFlipped = false;
+                // 修正点: 戻った時も、自動再生中なら音声を出すために true で呼び出す
+                renderCard(true);
+            }
+        }
+
+        function renderCard(playVoice = true) {
+            clearTimeout(autoPlayTimer);
+            if(audioTimer) clearTimeout(audioTimer);
+
+            if (currentIndex >= studyList.length) { showResult(); return; }
+
+            const item = studyList[currentIndex];
+            const mainEl = document.getElementById('card-main');
+            const badge = document.getElementById('status-badge');
+
+            let showText = "";
+            if (settings.direction === 'en_jp') {
+                showText = isFlipped ? item.meaning : item.word;
+            } else {
+                showText = isFlipped ? item.word : item.meaning;
+            }
+            mainEl.innerText = showText;
+
+            const s = item.status !== undefined ? item.status : 2;
+            badge.className = 'card-status-badge ' + (s === 0 ? 'badge-green' : s === 1 ? 'badge-yellow' : 'badge-red');
+
+            document.getElementById('current-idx').innerText = currentIndex + 1;
+            document.getElementById('progress-val').style.width = ((currentIndex) / studyList.length) * 100 + "%";
+
+            const isEnglishVisible = (settings.direction === 'en_jp' && !isFlipped) || (settings.direction === 'jp_en' && isFlipped);
+            
+            if (playVoice && settings.isAutoPlay && settings.audioOn && isEnglishVisible && !isPaused) {
+                audioTimer = setTimeout(playAudio, 300);
+            }
+
+            if (settings.isAutoPlay && !isPaused) {
+                scheduleNextAutoAction();
+            }
+        }
+
+        function scheduleNextAutoAction() {
+            const ms = getIntervalMs();
+            autoPlayTimer = setTimeout(() => {
+                if (isPaused) return;
+
+                if (!isFlipped) {
+                    flipCard();
+                } else {
+                    nextCardWithoutStatusChange();
+                }
+            }, ms);
+        }
+
+        function flipCard() { isFlipped = !isFlipped; renderCard(); }
+
+        function setStatusAndNext(s) {
+            const cur = studyList[currentIndex], idx = fullList.findIndex(w => w.id === cur.id);
+            if (idx !== -1) {
+                fullList[idx].status = s;
+                localStorage.setItem(deckKey, JSON.stringify(fullList));
+            }
+            isFlipped = false; currentIndex++; renderCard();
+        }
+
+        function nextCardWithoutStatusChange() {
+            isFlipped = false; currentIndex++; renderCard();
+        }
+
+        function playAudio() {
+            if(audioTimer) clearTimeout(audioTimer);
+
+            if (currentIndex < studyList.length) {
+                const rawText = studyList[currentIndex].word;
+                const matchResult = rawText.match(/[a-zA-Z0-9\s.,?!'-]+/g);
+                if (matchResult) {
+                    const textToSpeak = matchResult.join(" ");
+                    speechSynthesis.cancel();
+                    const u = new SpeechSynthesisUtterance(textToSpeak);
+                    u.lang = 'en-US';
+                    speechSynthesis.speak(u);
+                }
+            }
+        }
+
+        function showResult() {
+            document.getElementById('learning-view').style.display = 'none';
+            document.getElementById('result-area').style.display = 'block';
+        }
+        function goBack() { navigateTo('mywordbook_list.html'); }
+    </script>
+</body>
+
+</html>
