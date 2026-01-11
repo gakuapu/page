@@ -14,7 +14,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="style.css">
     <style>
         :root {
             --bg-body: #F8FAFC;
@@ -25,7 +24,7 @@
             --primary: #3B82F6;
             --primary-light: #60A5FA;
             --danger: #EF4444;
-            --radius: 16px;
+            --radius: 18px; /* index.htmlに合わせて調整 */
             --status-green: #10B981;
             --status-yellow: #F59E0B;
             --status-red: #EF4444;
@@ -38,12 +37,12 @@
             background: var(--bg-body);
             color: var(--text-main);
             font-family: 'M PLUS Rounded 1c', sans-serif;
-            padding-bottom: 100px;
+            padding-bottom: 80px;
         }
 
         header {
             background: var(--bg-surface);
-            padding: 16px 20px;
+            padding: 14px 20px; /* 余白を詰める */
             border-bottom: 1px solid var(--border);
             display: grid;
             grid-template-columns: 40px 1fr auto;
@@ -58,7 +57,7 @@
         .back-btn, .icon-btn {
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.4rem; /* アイコンサイズ調整 */
             color: var(--text-sub);
             cursor: pointer;
             display: flex;
@@ -71,16 +70,16 @@
         
         .back-btn:hover, .icon-btn:hover { color: var(--primary); background: #F1F5F9; }
 
-        h1 { font-size: 1.1rem; font-weight: 800; margin: 0; text-align: center; }
+        h1 { font-size: 1rem; font-weight: 800; margin: 0; text-align: center; }
 
-        .container { max-width: 800px; margin: 0 auto; padding: 24px; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
 
-        .limit-info { text-align: right; font-size: 0.8rem; color: var(--text-sub); margin-bottom: 16px; }
+        .limit-info { text-align: right; font-size: 0.75rem; color: var(--text-sub); margin-bottom: 12px; }
 
         .deck-list {
             display: grid;
-            gap: 16px;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 14px; /* ギャップを詰める */
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             padding-bottom: 40px;
         }
 
@@ -88,12 +87,12 @@
             background: var(--bg-surface);
             border-radius: var(--radius);
             border: 1px solid var(--border);
-            padding: 20px;
+            padding: 16px; /* カード内余白を縮小 */
             cursor: pointer;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 160px;
+            min-height: 140px; /* 高さ調整 */
             position: relative;
             transition: transform 0.2s, box-shadow 0.2s;
         }
@@ -101,16 +100,16 @@
         .deck-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .deck-card:active { transform: scale(0.98); }
 
-        .deck-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .deck-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
         .deck-title { font-size: 1rem; font-weight: 800; margin: 0; color: var(--text-main); line-height: 1.4; }
-        .deck-meta { font-size: 0.85rem; color: var(--text-sub); margin-top: 4px; }
+        .deck-meta { font-size: 0.8rem; color: var(--text-sub); margin-top: 4px; }
 
         .deck-menu { display: flex; gap: 4px; }
-        .deck-menu-btn { background: none; border: none; color: #CBD5E1; font-size: 1.3rem; cursor: pointer; padding: 4px; border-radius: 4px; }
+        .deck-menu-btn { background: none; border: none; color: #CBD5E1; font-size: 1.2rem; cursor: pointer; padding: 4px; border-radius: 4px; }
         .deck-menu-btn:hover { color: var(--danger); background: #FEF2F2; }
         
         .status-preview {
-            display: flex; gap: 12px; font-size: 0.75rem; font-weight: 700;
+            display: flex; gap: 10px; font-size: 0.75rem; font-weight: 700;
             color: var(--text-sub); background: #F8FAFC; padding: 6px 10px;
             border-radius: 8px; width: fit-content; margin-top: auto;
         }
@@ -121,11 +120,11 @@
         .dot-green { background: var(--status-green); }
 
         .mini-edit-btn {
-            position: absolute; bottom: 20px; right: 20px;
+            position: absolute; bottom: 16px; right: 16px;
             background: white; border: 1px solid var(--border); color: var(--text-sub);
-            width: 36px; height: 36px; border-radius: 50%;
+            width: 34px; height: 34px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer; font-size: 1.1rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            cursor: pointer; font-size: 1rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             transition: all 0.2s; z-index: 10;
         }
         .mini-edit-btn:hover { color: var(--primary); border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2); }
@@ -134,7 +133,7 @@
         .add-card {
             border: 2px dashed var(--border); background: transparent;
             justify-content: center; align-items: center; color: var(--primary);
-            font-weight: 700; gap: 10px; min-height: 160px;
+            font-weight: 700; gap: 8px; min-height: 140px;
             display: flex; flex-direction: column;
         }
         .add-card:hover { border-color: var(--primary); background: rgba(59, 130, 246, 0.05); }
@@ -143,17 +142,17 @@
         .add-card-disabled {
             border: 2px dashed #CBD5E1; background: #F8FAFC;
             justify-content: center; align-items: center; color: #94A3B8;
-            gap: 10px; min-height: 160px;
+            gap: 8px; min-height: 140px;
             display: flex; flex-direction: column; cursor: pointer;
         }
         .add-card-disabled:hover { background: #F1F5F9; }
         
-        .add-icon { font-size: 2rem; }
-        .add-text-sub { font-size: 0.8rem; font-weight: normal; margin-top: -4px; }
+        .add-icon { font-size: 1.8rem; }
+        .add-text-sub { font-size: 0.75rem; font-weight: normal; margin-top: -4px; }
 
-        /* --- アコーディオン説明文のスタイル --- */
+        /* --- アコーディオン説明文 --- */
         .about-details {
-            margin-top: 40px;
+            margin-top: 32px;
             border: 1px solid var(--border);
             border-radius: var(--radius);
             background: white;
@@ -161,7 +160,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
         .about-summary {
-            padding: 16px 20px;
+            padding: 14px 16px;
             font-weight: 700;
             cursor: pointer;
             background: #F8FAFC;
@@ -171,24 +170,25 @@
             align-items: center;
             justify-content: space-between;
             transition: background 0.2s;
+            font-size: 0.9rem;
         }
         .about-summary:hover { background: #EFF6FF; }
         .about-summary::-webkit-details-marker { display: none; }
-        .about-summary::after { content: '+'; font-size: 1.2rem; color: var(--text-sub); font-weight: 400; }
+        .about-summary::after { content: '+'; font-size: 1.1rem; color: var(--text-sub); font-weight: 400; }
         details[open] .about-summary::after { content: '-'; }
         
         .about-content {
-            padding: 24px;
-            font-size: 0.9rem;
-            line-height: 1.8;
+            padding: 20px;
+            font-size: 0.85rem;
+            line-height: 1.7;
             color: var(--text-main);
             border-top: 1px solid var(--border);
             animation: fadeIn 0.3s;
         }
         .about-h3 {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 800;
-            margin: 24px 0 12px 0;
+            margin: 20px 0 10px 0;
             color: var(--primary);
             display: flex; align-items: center; gap: 8px;
         }
@@ -197,7 +197,7 @@
         .about-li { margin-bottom: 8px; }
         .about-strong { color: var(--danger); font-weight: 700; background: #FEF2F2; padding: 2px 6px; border-radius: 4px; }
         
-        /* モーダル共通スタイル */
+        /* モーダル */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.5); z-index: 200; display: none;
@@ -205,36 +205,36 @@
         }
         .modal-card { background: white; width: 100%; max-width: 500px; border-radius: 20px; padding: 24px; max-height: 80vh; display: flex; flex-direction: column; }
         
-        .modal-title { margin: 0 0 16px 0; font-size: 1.25rem; color: var(--text-main); }
+        .modal-title { margin: 0 0 16px 0; font-size: 1.1rem; color: var(--text-main); }
         .modal-input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 1rem; margin-bottom: 8px; }
         .input-hint { font-size: 0.75rem; color: var(--text-sub); margin-bottom: 20px; text-align: right; }
         
         .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
-        .btn-modal { padding: 10px 20px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; }
+        .btn-modal { padding: 10px 20px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; font-size: 0.9rem; }
         .btn-cancel { background: #F1F5F9; color: var(--text-sub); }
         .btn-confirm { background: var(--primary); color: white; }
         .btn-confirm:disabled { background: #CBD5E1; cursor: not-allowed; }
 
-        /* インポート選択リスト用スタイル */
+        /* インポートリスト */
         .import-list {
             overflow-y: auto; border: 1px solid var(--border); border-radius: 12px;
             padding: 0; margin: 0; list-style: none; flex-grow: 1;
         }
         .import-item {
-            display: flex; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--border);
             transition: background 0.1s; cursor: pointer;
         }
         .import-item:last-child { border-bottom: none; }
         .import-item:hover { background: #F8FAFC; }
         
-        .import-checkbox { width: 20px; height: 20px; margin-right: 12px; cursor: pointer; }
+        .import-checkbox { width: 18px; height: 18px; margin-right: 12px; cursor: pointer; }
         .import-info { flex-grow: 1; }
-        .import-title { font-weight: 700; font-size: 1rem; display: block; }
-        .import-meta { font-size: 0.8rem; color: var(--text-sub); }
+        .import-title { font-weight: 700; font-size: 0.95rem; display: block; }
+        .import-meta { font-size: 0.75rem; color: var(--text-sub); }
         
         .import-status {
             background: #EFF6FF; color: var(--primary); padding: 8px 12px;
-            border-radius: 8px; font-size: 0.9rem; margin-bottom: 12px;
+            border-radius: 8px; font-size: 0.85rem; margin-bottom: 12px;
             display: flex; justify-content: space-between; font-weight: 600;
         }
         .import-warning { color: var(--danger); font-size: 0.8rem; margin-top: 4px; display: none; text-align: right; }
@@ -245,18 +245,12 @@
 
 <body>
     <header>
-        <button class="back-btn" onclick="navigateTo('index_en.html')"><i class="ph-bold ph-caret-left"></i></button>
+        <button class="back-btn" onclick="navigateTo('index.html')"><i class="ph-bold ph-caret-left"></i></button>
         <h1>単語帳一覧</h1>
         <div class="header-actions">
-            <button class="icon-btn" title="バックアップ" onclick="exportBackup()">
-                <i class="ph-bold ph-download-simple"></i>
-            </button>
-            <button class="icon-btn" title="復元(インポート)" onclick="triggerImport()">
-                <i class="ph-bold ph-upload-simple"></i>
-            </button>
-            <button class="icon-btn" title="全データCSV出力" onclick="exportAllCSV()">
-                <i class="ph-bold ph-file-csv"></i>
-            </button>
+            <button class="icon-btn" title="バックアップ" onclick="exportBackup()"><i class="ph-bold ph-download-simple"></i></button>
+            <button class="icon-btn" title="復元(インポート)" onclick="triggerImport()"><i class="ph-bold ph-upload-simple"></i></button>
+            <button class="icon-btn" title="全データCSV出力" onclick="exportAllCSV()"><i class="ph-bold ph-file-csv"></i></button>
         </div>
     </header>
 
@@ -271,7 +265,6 @@
             <div class="about-content">
                 <h3 class="about-h3">どんなアプリ？</h3>
                 <p>My単語帳は、<strong>「会員登録なし・ログインなし」</strong>ですぐに使える、あなただけのシンプルな学習ツールです。「余計な機能を削ぎ落とし、学習に集中できること」を大切にしています。</p>
-                
                 <h3 class="about-h3">✨ 主な特徴</h3>
                 <ul class="about-ul">
                     <li class="about-li"><b>🚀 0秒で開始</b>: 面倒なアカウント作成は一切不要。</li>
@@ -279,14 +272,12 @@
                     <li class="about-li"><b>📊 効率的な復習</b>: 「覚えた」「まだ」を色分けし、苦手な単語だけを重点的に。</li>
                     <li class="about-li"><b>🔒 プライバシー重視</b>: 入力したデータが勝手に外部サーバーに送られることはありません。</li>
                 </ul>
-
                 <h3 class="about-h3">⚠️ データ保存の仕組み（重要）</h3>
                 <p>このアプリは便利さを優先するため、クラウド（サーバー）ではなく、<span class="about-strong">今お使いのブラウザ（SafariやChromeなど）の内部</span>にデータを保存しています。そのため、以下の点にご注意ください。</p>
                 <ol class="about-ul">
                     <li class="about-li">ブラウザの<strong>「閲覧履歴データの削除（キャッシュクリア）」</strong>を行うと、単語データも消えてしまいます。</li>
                     <li class="about-li">このまま別のスマホやPCでページを開いても、データは同期（共有）されません。</li>
                 </ol>
-
                 <h3 class="about-h3">📲 機種変更・データを移したいときは？</h3>
                 <p>データを守るため、定期的なバックアップをおすすめします。</p>
                 <ol class="about-ul">
@@ -301,7 +292,7 @@
     <div id="create-modal" class="modal-overlay">
         <div class="modal-card" style="height: auto;">
             <h2 class="modal-title">単語帳の名前</h2>
-            <input type="text" id="deck-name-input" class="modal-input" placeholder="例: 英検準2級 苦手単語" maxlength="20">
+            <input type="text" id="deck-name-input" class="modal-input" placeholder="例: テスト対策" maxlength="20">
             <div class="input-hint">最大20文字</div>
             <div class="modal-actions">
                 <button class="btn-modal btn-cancel" onclick="closeCreateModal()">キャンセル</button>
@@ -329,11 +320,9 @@
 
     <script>
         const META_KEY = 'gakuapu_decks_meta', OLD_DATA_KEY = 'gakuapu_my_words', MAX_DECKS = 10, MAX_DECK_NAME_LEN = 20;
-        
         let tempImportData = null; 
 
         function navigateTo(url) { try { window.location.href = url } catch (e) { alert("移動: " + url) } }
-        
         function sanitizeInput(str) {
             if (!str) return "";
             return String(str).replace(/[&<>"']/g, function(m) {
@@ -347,7 +336,6 @@
         function getDecksMeta() { return JSON.parse(localStorage.getItem(META_KEY) || '[]') }
         function saveDecksMeta(list) { localStorage.setItem(META_KEY, JSON.stringify(list)) }
 
-        // --- 旧データ移行・サンプルデータ処理 ---
         function migrateOldData() {
             const old = localStorage.getItem(OLD_DATA_KEY);
             if (old) {
@@ -373,13 +361,11 @@
             }
         }
 
-        // --- 一覧描画 ---
         function renderDecks() {
             const container = document.getElementById('deck-list'), countDisp = document.getElementById('deck-count-disp'), decks = getDecksMeta();
             container.innerHTML = '';
             countDisp.innerText = decks.length;
 
-            // 既存デッキの表示
             decks.slice().reverse().forEach(deck => {
                 const list = JSON.parse(localStorage.getItem(`gakuapu_deck_${deck.id}`) || '[]');
                 let r = 0, y = 0, g = 0;
@@ -387,10 +373,8 @@
 
                 const el = document.createElement('div');
                 el.className = 'deck-card';
-                // クリックでプレーヤーへ
                 el.onclick = () => navigateTo(`mywordbook_player.html?id=${deck.id}`);
                 
-                // ★日付削除: ${list.length} 単語 のみ表示
                 el.innerHTML = `
                     <div class="deck-header">
                         <div><h3 class="deck-title">${escapeHtml(deck.title)}</h3><div class="deck-meta">${list.length} 単語</div></div>
@@ -408,7 +392,6 @@
                 container.appendChild(el);
             });
 
-            // 新規作成ボタン
             const addEl = document.createElement('div');
             if (decks.length < MAX_DECKS) {
                 addEl.className = 'deck-card add-card';
@@ -417,16 +400,11 @@
             } else {
                 addEl.className = 'deck-card add-card-disabled';
                 addEl.onclick = () => alert("単語帳は最大10冊までです。\n作成するには不要な単語帳を削除してください。");
-                addEl.innerHTML = `
-                    <i class="ph-bold ph-prohibit add-icon"></i>
-                    <span>上限(10冊)です</span>
-                    <span class="add-text-sub">新規作成できません</span>
-                `;
+                addEl.innerHTML = `<i class="ph-bold ph-prohibit add-icon"></i><span>上限(10冊)です</span><span class="add-text-sub">新規作成できません</span>`;
             }
             container.appendChild(addEl);
         }
 
-        // --- 作成・削除・一括CSV出力 ---
         const createModal = document.getElementById('create-modal'), input = document.getElementById('deck-name-input');
         function openCreateModal() { if (getDecksMeta().length >= MAX_DECKS) { alert("上限です"); return; } createModal.style.display = 'flex'; input.value = ''; input.focus(); }
         function closeCreateModal() { createModal.style.display = 'none'; }
@@ -435,7 +413,6 @@
             const title = sanitizeInput(input.value.trim());
             if (!title) return; if (title.length > MAX_DECK_NAME_LEN) { alert("名前が長すぎます"); return; }
             const decks = getDecksMeta(); const id = Date.now();
-            // データ上は日付を保持
             decks.push({ id: id, title: title, createdAt: new Date().toLocaleDateString(), count: 0 });
             saveDecksMeta(decks); localStorage.setItem(`gakuapu_deck_${id}`, '[]');
             navigateTo(`mywordbook_registration.html?id=${id}`);
@@ -449,7 +426,6 @@
         function exportAllCSV() {
             const decks = getDecksMeta();
             if (decks.length === 0) { alert("データがありません"); return; }
-            
             let csv = '\uFEFFDeck Name,English,Meaning,Status\n';
             let hasData = false;
             decks.forEach(deck => {
@@ -463,13 +439,11 @@
                     csv += `"${deckTitle}","${word}","${meaning}",${status}\n`;
                 });
             });
-
             if (!hasData) { alert("登録された単語が1つもありません"); return; }
             const dateStr = new Date().toISOString().slice(0,10).replace(/-/g,'');
             downloadFile(`all_words_${dateStr}.csv`, csv, 'text/csv;charset=utf-8;');
         }
 
-        // --- バックアップ出力 ---
         function exportBackup() {
             const meta = getDecksMeta(), data = { meta: meta, decks: {} };
             if (meta.length === 0) { alert("データがありません"); return; }
@@ -482,20 +456,12 @@
             a.href = url; a.download = name; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
         }
 
-        // --- バックアップ復元 ---
-        const importModal = document.getElementById('import-modal');
-        const importList = document.getElementById('import-list');
-        const btnExecImport = document.getElementById('btn-exec-import');
-        const selectedCountEl = document.getElementById('selected-count');
-        const freeSlotsEl = document.getElementById('free-slots');
-        const limitWarningEl = document.getElementById('import-limit-warning');
-
+        const importModal = document.getElementById('import-modal'), importList = document.getElementById('import-list'), btnExecImport = document.getElementById('btn-exec-import'), selectedCountEl = document.getElementById('selected-count'), freeSlotsEl = document.getElementById('free-slots'), limitWarningEl = document.getElementById('import-limit-warning');
         function triggerImport() { document.getElementById('import-file').click(); }
 
         function readBackupFile(inputElement) {
             const file = inputElement.files[0];
             if (!file) return;
-
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
@@ -503,11 +469,7 @@
                     if (!data.meta || !data.decks) throw new Error("不正なファイル形式です");
                     tempImportData = data; 
                     openImportModal();
-                } catch (err) {
-                    alert("読み込みに失敗しました。\n" + err.message);
-                } finally {
-                    inputElement.value = ''; 
-                }
+                } catch (err) { alert("読み込みに失敗しました。\n" + err.message); } finally { inputElement.value = ''; }
             };
             reader.readAsText(file);
         }
@@ -516,30 +478,14 @@
             const currentDecks = getDecksMeta();
             const freeSlots = MAX_DECKS - currentDecks.length;
             importList.innerHTML = '';
-            
             tempImportData.meta.forEach((deck, index) => {
                 const li = document.createElement('li');
                 li.className = 'import-item';
-                li.onclick = (e) => {
-                   if(e.target.type !== 'checkbox') {
-                       const cb = li.querySelector('input[type="checkbox"]');
-                       cb.checked = !cb.checked;
-                       updateImportSelection();
-                   }
-                };
+                li.onclick = (e) => { if(e.target.type !== 'checkbox') { const cb = li.querySelector('input[type="checkbox"]'); cb.checked = !cb.checked; updateImportSelection(); } };
                 const words = tempImportData.decks[`gakuapu_deck_${deck.id}`] || [];
-                const count = words.length;
-
-                li.innerHTML = `
-                    <input type="checkbox" class="import-checkbox" data-index="${index}" onchange="updateImportSelection()">
-                    <div class="import-info">
-                        <span class="import-title">${escapeHtml(deck.title)}</span>
-                        <span class="import-meta">登録単語数: ${count} / 作成日: ${deck.createdAt || '-'}</span>
-                    </div>
-                `;
+                li.innerHTML = `<input type="checkbox" class="import-checkbox" data-index="${index}" onchange="updateImportSelection()"><div class="import-info"><span class="import-title">${escapeHtml(deck.title)}</span><span class="import-meta">登録単語数: ${words.length} / 作成日: ${deck.createdAt || '-'}</span></div>`;
                 importList.appendChild(li);
             });
-
             freeSlotsEl.innerText = freeSlots;
             updateImportSelection();
             importModal.style.display = 'flex';
@@ -552,60 +498,34 @@
             selectedCountEl.innerText = selected.length;
             const isValid = selected.length > 0 && selected.length <= freeSlots;
             btnExecImport.disabled = !isValid;
-            if (selected.length > freeSlots) {
-                limitWarningEl.style.display = 'block';
-                limitWarningEl.innerText = `空き枠(${freeSlots})を超えています`;
-            } else {
-                limitWarningEl.style.display = 'none';
-            }
+            limitWarningEl.style.display = selected.length > freeSlots ? 'block' : 'none';
         }
 
-        function closeImportModal() {
-            importModal.style.display = 'none';
-            tempImportData = null;
-        }
+        function closeImportModal() { importModal.style.display = 'none'; tempImportData = null; }
 
         function executeImport() {
             if (!tempImportData) return;
             const checkboxes = document.querySelectorAll('.import-checkbox:checked');
             if (checkboxes.length === 0) return;
-
             const currentMeta = getDecksMeta();
             let importedCount = 0;
             const baseTime = Date.now();
-
             checkboxes.forEach((cb, loopIdx) => {
                 const index = parseInt(cb.dataset.index);
                 const deckMeta = tempImportData.meta[index];
                 const oldKey = `gakuapu_deck_${deckMeta.id}`;
                 const words = tempImportData.decks[oldKey];
-
                 if (words) {
                     const newId = baseTime + importedCount; 
-                    
                     const safeTitle = sanitizeInput(deckMeta.title || "No Title");
-                    const safeWords = words.map((w, wIdx) => ({
-                        id: w.id || (baseTime + (importedCount * 10000) + wIdx),
-                        word: sanitizeInput(w.word),
-                        meaning: sanitizeInput(w.meaning),
-                        status: (typeof w.status === 'number') ? w.status : 2
-                    }));
-
-                    currentMeta.push({
-                        id: newId,
-                        title: safeTitle,
-                        createdAt: new Date().toLocaleDateString(),
-                        count: safeWords.length
-                    });
-
+                    const safeWords = words.map((w, wIdx) => ({ id: w.id || (baseTime + (importedCount * 10000) + wIdx), word: sanitizeInput(w.word), meaning: sanitizeInput(w.meaning), status: (typeof w.status === 'number') ? w.status : 2 }));
+                    currentMeta.push({ id: newId, title: safeTitle, createdAt: new Date().toLocaleDateString(), count: safeWords.length });
                     localStorage.setItem(`gakuapu_deck_${newId}`, JSON.stringify(safeWords));
                     importedCount++;
                 }
             });
-
             saveDecksMeta(currentMeta);
             alert(`${importedCount} 件の単語帳を復元しました！`);
-            
             closeImportModal();
             renderDecks();
         }
