@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-XKL20YHCTB');
     </script>
@@ -13,10 +14,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>学習中|学アプ英語</title>
-    
+
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
@@ -33,7 +36,9 @@
             --radius: 18px;
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             margin: 0;
@@ -157,7 +162,10 @@
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
             transition: transform 0.1s;
         }
-        .start-main-btn:active { transform: scale(0.98); }
+
+        .start-main-btn:active {
+            transform: scale(0.98);
+        }
 
         #learning-view {
             width: 100%;
@@ -268,9 +276,17 @@
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            }
         }
 
         .controls {
@@ -298,7 +314,10 @@
             justify-content: center;
             transition: transform 0.1s;
         }
-        .back-step-btn:active { transform: scale(0.9); }
+
+        .back-step-btn:active {
+            transform: scale(0.9);
+        }
 
         .next-btn {
             background: var(--primary);
@@ -510,13 +529,57 @@
                 opacity: 0;
                 transform: translateY(5px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.9);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            width: 90%;
+            max-width: 420px;
+        }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -575,6 +638,8 @@
                 <button class="back-step-btn" onclick="goPrev()"><i class="ph-bold ph-caret-left"></i></button>
                 <button class="next-btn" onclick="nextCard()"><i class="ph-bold ph-caret-right"></i></button>
                 <button class="play-btn" onclick="playAudio()"><i class="ph-fill ph-speaker-high"></i></button>
+                <button class="play-btn" onclick="quickAddCurrent()"><i class="ph-bold ph-plus"></i></button>
+                <button class="play-btn" onclick="openDeckModal()"><i class="ph-bold ph-folder-open"></i></button>
             </div>
 
             <div class="quit-btn-area">
@@ -633,7 +698,7 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const unitId = urlParams.get('id');
-        
+
         let fullList = [], studyList = [], currentIndex = 0, isFlipped = false;
 
         let settings = {
@@ -643,20 +708,20 @@
             speedLevel: 2,
             audioOn: true
         };
-        
+
         let isPaused = false;
         let autoPlayTimer = null;
         let audioTimer = null;
 
-        function navigateTo(url) { 
-            try { window.location.href = url; } 
-            catch (e) { alert("移動: " + url); } 
+        function navigateTo(url) {
+            try { window.location.href = url; }
+            catch (e) { alert("移動: " + url); }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const DATA = (typeof BASICWORD_DATA !== 'undefined') ? BASICWORD_DATA : 
-                        (typeof WORDBOOK_DATA !== 'undefined' ? WORDBOOK_DATA : undefined);
-            
+            const DATA = (typeof BASICWORD_DATA !== 'undefined') ? BASICWORD_DATA :
+                (typeof WORDBOOK_DATA !== 'undefined' ? WORDBOOK_DATA : undefined);
+
             if (unitId && DATA && DATA[unitId]) {
                 const data = DATA[unitId];
                 document.getElementById('header-title').innerText = data.title;
@@ -697,11 +762,11 @@
                 if (!isPaused) {
                     checkAnimationMode();
                     updateSpeed();
-                    
+
                     const isLearningViewVisible = document.getElementById('learning-view').style.display === 'block';
-                    if(isLearningViewVisible) {
-                        const isEnglishVisible = (settings.direction === 'en_jp' && !isFlipped) || 
-                                               (settings.direction === 'jp_en' && isFlipped);
+                    if (isLearningViewVisible) {
+                        const isEnglishVisible = (settings.direction === 'en_jp' && !isFlipped) ||
+                            (settings.direction === 'jp_en' && isFlipped);
                         if (settings.audioOn && isEnglishVisible) {
                             playAudio();
                         }
@@ -714,7 +779,7 @@
             settings.speedLevel = parseInt(document.getElementById('ap-speed-slider').value);
             checkAnimationMode();
 
-            if (document.getElementById('learning-view').style.display === 'block' && 
+            if (document.getElementById('learning-view').style.display === 'block' &&
                 settings.isAutoPlay && !isPaused) {
                 clearTimeout(autoPlayTimer);
                 scheduleNextAutoAction();
@@ -775,10 +840,10 @@
 
         function retryLearning() {
             prepareStudySession();
-            
+
             document.getElementById('result-area').style.display = 'none';
             document.getElementById('learning-view').style.display = 'block';
-            
+
             initSession();
 
             const isEnglishVisible = (settings.direction === 'en_jp');
@@ -823,6 +888,94 @@
             }
         }
 
+        function getDeckMeta() {
+            return JSON.parse(localStorage.getItem('gakuapu_decks_meta') || '[]');
+        }
+
+        function getValidCurrentDeckId() {
+            const id = localStorage.getItem('gakuapu_last_deck');
+            if (!id) return null;
+
+            const meta = getDeckMeta();
+            if (!meta.some(d => d.id == id)) {
+                localStorage.removeItem('gakuapu_last_deck');
+                return null;
+            }
+            return id;
+        }
+
+        function quickAddCurrent() {
+            const deckId = getValidCurrentDeckId();
+            if (!deckId) {
+                openDeckModal();
+                return;
+            }
+
+            const item = studyList[currentIndex];
+            addWordToDeck(deckId, item.word, item.meaning);
+            showToast('登録しました');
+        }
+
+        function addWordToDeck(deckId, word, meaning) {
+            const key = `gakuapu_deck_${deckId}`;
+            const list = JSON.parse(localStorage.getItem(key) || '[]');
+
+            list.push({
+                id: Date.now(),
+                word,
+                meaning,
+                status: 2
+            });
+
+            localStorage.setItem(key, JSON.stringify(list));
+
+            const meta = getDeckMeta();
+            const idx = meta.findIndex(d => d.id == deckId);
+            if (idx !== -1) {
+                meta[idx].count = list.length;
+                localStorage.setItem('gakuapu_decks_meta', JSON.stringify(meta));
+            }
+        }
+
+        function showToast(text) {
+            const t = document.getElementById('toast');
+            t.innerText = text;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 1200);
+        }
+
+        function openDeckModal() {
+            renderDeckList();
+            document.getElementById('deck-modal').classList.remove('hidden');
+        }
+
+        function closeDeckModal() {
+            document.getElementById('deck-modal').classList.add('hidden');
+        }
+
+        function renderDeckList() {
+            const el = document.getElementById('deck-list');
+            const meta = getDeckMeta();
+            const current = getValidCurrentDeckId();
+
+            if (meta.length === 0) {
+                el.innerHTML = `<p>My単語帳から単語帳を作成して下さい</p>`;
+                return;
+            }
+
+            el.innerHTML = meta.map(d => `
+                <label style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <input type="radio" name="deck" value="${d.id}" ${d.id == current ? 'checked' : ''}
+        onchange="selectDeck('${d.id}')">
+                    ${d.title}
+                </label>
+            `).join('');
+        }
+
+        function selectDeck(id) {
+            localStorage.setItem('gakuapu_last_deck', id);
+        }
+
         function goPrev() {
             if (currentIndex > 0) {
                 currentIndex--;
@@ -833,11 +986,11 @@
 
         function renderCard(playVoice = true) {
             clearTimeout(autoPlayTimer);
-            if(audioTimer) clearTimeout(audioTimer);
+            if (audioTimer) clearTimeout(audioTimer);
 
-            if (currentIndex >= studyList.length) { 
-                showResult(); 
-                return; 
+            if (currentIndex >= studyList.length) {
+                showResult();
+                return;
             }
 
             const item = studyList[currentIndex];
@@ -852,12 +1005,12 @@
             mainEl.innerText = showText;
 
             document.getElementById('current-idx').innerText = currentIndex + 1;
-            document.getElementById('progress-val').style.width = 
+            document.getElementById('progress-val').style.width =
                 ((currentIndex) / studyList.length) * 100 + "%";
 
-            const isEnglishVisible = (settings.direction === 'en_jp' && !isFlipped) || 
-                                    (settings.direction === 'jp_en' && isFlipped);
-            
+            const isEnglishVisible = (settings.direction === 'en_jp' && !isFlipped) ||
+                (settings.direction === 'jp_en' && isFlipped);
+
             if (playVoice && settings.isAutoPlay && settings.audioOn && isEnglishVisible && !isPaused) {
                 audioTimer = setTimeout(playAudio, 300);
             }
@@ -880,19 +1033,19 @@
             }, ms);
         }
 
-        function flipCard() { 
-            isFlipped = !isFlipped; 
-            renderCard(); 
+        function flipCard() {
+            isFlipped = !isFlipped;
+            renderCard();
         }
 
         function nextCard() {
-            isFlipped = false; 
-            currentIndex++; 
+            isFlipped = false;
+            currentIndex++;
             renderCard();
         }
 
         function playAudio() {
-            if(audioTimer) clearTimeout(audioTimer);
+            if (audioTimer) clearTimeout(audioTimer);
 
             if (currentIndex < studyList.length) {
                 const rawText = studyList[currentIndex].word;
@@ -913,9 +1066,27 @@
             document.getElementById('progress-val').style.width = "100%";
         }
 
-        function goBack() { 
-            navigateTo('basicword_setting.html'); 
+        function goBack() {
+            navigateTo('basicword_setting.html?restore=1');
         }
     </script>
+
+    <div id="toast" class="toast">登録しました</div>
+
+    <div id="deck-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 style="margin-top:0;">登録先の単語帳</h3>
+
+            <div id="deck-list"></div>
+
+            <p style="font-size:0.8rem;color:#64748B;">
+                単語帳の作成はMy単語帳から行って下さい
+            </p>
+
+            <button class="start-main-btn" onclick="closeDeckModal()">閉じる</button>
+        </div>
+    </div>
+
 </body>
+
 </html>

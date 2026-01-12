@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-XKL20YHCTB');
     </script>
@@ -15,10 +16,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>学アプ英語|無料中学英単語</title>
     <link rel="icon" href="favicon.ico">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
@@ -30,31 +33,41 @@
             --text-main: #0F172A;
             --text-sub: #64748B;
             --border: #E2E8F0;
-            --primary: #3B82F6; /* Blue */
+            --primary: #3B82F6;
+            /* Blue */
             --primary-dark: #2563EB;
             --accent: #F59E0B;
             --radius: 16px;
-            
+
             --g1-color: #3B82F6;
             --g2-color: #10B981;
             --g3-color: #8B5CF6;
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
-            margin: 0; background-color: var(--bg-body); color: var(--text-main);
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             font-family: 'M PLUS Rounded 1c', sans-serif;
             padding-bottom: 24px;
-            touch-action: manipulation; 
+            touch-action: manipulation;
         }
 
         /* Header */
         .app-header {
-            background: var(--bg-surface); padding: 16px 24px;
+            background: var(--bg-surface);
+            padding: 16px 24px;
             border-bottom: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .brand {
@@ -79,50 +92,120 @@
             opacity: 0.7;
         }
 
-        .brand i { color: var(--primary); }
+        .brand i {
+            color: var(--primary);
+        }
 
         /* Container */
-        .container { max-width: 800px; margin: 0 auto; padding: 24px; }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px;
+        }
 
         /* Tabs (Grade Selection) */
         .tabs {
-            display: flex; gap: 8px; margin-bottom: 24px;
-            overflow-x: auto; padding-bottom: 4px;
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 4px;
             justify-content: center;
         }
+
         .tab-btn {
-            background: var(--bg-surface); border: 1px solid var(--border);
-            color: var(--text-sub); padding: 10px 24px; border-radius: 50px;
-            font-weight: 700; font-size: 0.95rem; cursor: pointer;
-            white-space: nowrap; transition: all 0.2s;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
         }
-        .tab-btn:hover { background: #F1F5F9; }
-        
+
+        .tab-btn:hover {
+            background: #F1F5F9;
+        }
+
         /* 学年ごとのアクティブ色 */
-        .tab-btn.active[data-grade="1"] { background: var(--g1-color); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
-        .tab-btn.active[data-grade="2"] { background: var(--g2-color); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
-        .tab-btn.active[data-grade="3"] { background: var(--g3-color); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); }
-        
+        .tab-btn.active[data-grade="1"] {
+            background: var(--g1-color);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .tab-btn.active[data-grade="2"] {
+            background: var(--g2-color);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .tab-btn.active[data-grade="3"] {
+            background: var(--g3-color);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
         /* チャプター選択ボタンのアクティブ色（学年に応じて変化） */
-        .chapter-selector[data-current-grade="1"] .tab-btn.active { background: var(--g1-color); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
-        .chapter-selector[data-current-grade="2"] .tab-btn.active { background: var(--g2-color); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
-        .chapter-selector[data-current-grade="3"] .tab-btn.active { background: var(--g3-color); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); }
+        .chapter-selector[data-current-grade="1"] .tab-btn.active {
+            background: var(--g1-color);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .chapter-selector[data-current-grade="2"] .tab-btn.active {
+            background: var(--g2-color);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .chapter-selector[data-current-grade="3"] .tab-btn.active {
+            background: var(--g3-color);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
 
         /* Section Header */
         .section-header {
-            display: flex; align-items: center; gap: 12px;
-            margin-bottom: 24px; margin-top: 10px;
-            padding-bottom: 12px; border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            margin-top: 10px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
         }
-        .grade-title { font-size: 1.5rem; font-weight: 800; margin: 0; color: var(--text-main); }
+
+        .grade-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0;
+            color: var(--text-main);
+        }
+
         .grade-badge {
-            font-size: 0.75rem; font-weight: 700; padding: 4px 10px;
-            border-radius: 6px; background: #E2E8F0; color: var(--text-sub);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: #E2E8F0;
+            color: var(--text-sub);
         }
 
         /* Chapter Accordion */
-        .chapter-section { margin-bottom: 20px; }
-        
+        .chapter-section {
+            margin-bottom: 20px;
+        }
+
         details {
             background: var(--bg-surface);
             border: 1px solid var(--border);
@@ -130,21 +213,45 @@
             overflow: hidden;
             transition: all 0.3s ease;
         }
-        details[open] { border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+
+        details[open] {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
 
         details summary.chapter-title {
-            font-size: 1rem; font-weight: 700; color: var(--text-main);
-            cursor: pointer; list-style: none;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 16px 20px; margin: 0;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            margin: 0;
             background: var(--bg-surface);
             transition: background 0.2s;
         }
-        details summary:hover { background: #F8FAFC; }
-        details summary::-webkit-details-marker { display: none; }
-        
-        .toggle-icon { font-size: 1.2rem; color: var(--text-sub); transition: transform 0.2s; }
-        details[open] summary .toggle-icon { transform: rotate(180deg); color: var(--primary); }
+
+        details summary:hover {
+            background: #F8FAFC;
+        }
+
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .toggle-icon {
+            font-size: 1.2rem;
+            color: var(--text-sub);
+            transition: transform 0.2s;
+        }
+
+        details[open] summary .toggle-icon {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
 
         /* Grid Layout */
         .grid-wrapper {
@@ -154,54 +261,126 @@
             padding: 0 20px 20px;
             animation: fadeIn 0.3s ease-out;
         }
+
         @media (min-width: 600px) {
-            .grid-wrapper { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+            .grid-wrapper {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         /* Unit Card */
         .unit-card {
-            background: white; border-radius: 12px; padding: 16px;
-            position: relative; cursor: pointer; transition: all 0.2s;
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
             border: 2px solid var(--border);
-            display: flex; flex-direction: column; gap: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
+
         .unit-card:hover {
             border-color: var(--primary);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        
+
         .unit-card-header {
-            display: flex; align-items: center; justify-content: space-between;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        
-        .unit-info { display: flex; align-items: center; gap: 12px; flex: 1; }
+
+        .unit-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
         .unit-number {
-            font-family: 'Inter', sans-serif; font-size: 1.2rem; font-weight: 800;
-            color: #CBD5E1; width: 30px; text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #CBD5E1;
+            width: 30px;
+            text-align: center;
         }
-        .unit-text div:first-child { font-weight: 700; font-size: 1rem; color: var(--text-main); margin-bottom: 2px; }
-        .unit-text div:last-child { font-size: 0.8rem; color: var(--text-sub); }
-        
+
+        .unit-text div:first-child {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .unit-text div:last-child {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
+
         .unit-preview {
-            font-size: 0.85rem; color: var(--text-sub);
-            padding: 8px 12px; background: #F8FAFC;
-            border-radius: 8px; font-family: 'Inter', sans-serif;
-            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            padding: 8px 12px;
+            background: #F8FAFC;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
-        
-        .unit-arrow { color: var(--primary); font-size: 1.2rem; opacity: 0; transform: translateX(-10px); transition: all 0.2s; }
-        .unit-card:hover .unit-arrow { opacity: 1; transform: translateX(0); }
-        .empty-state { text-align: center; padding: 40px; color: var(--text-sub); background: #f8fafc; border-radius: 12px; border: 2px dashed #e2e8f0; }
+
+        .unit-arrow {
+            color: var(--primary);
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.2s;
+        }
+
+        .unit-card:hover .unit-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-sub);
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 2px dashed #e2e8f0;
+        }
 
         @media (max-width: 600px) {
-            .app-header { padding: 12px 16px; }
-            .container { padding: 0 16px 24px; }
+            .app-header {
+                padding: 12px 16px;
+            }
+
+            .container {
+                padding: 0 16px 24px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- ヘッダー -->
@@ -214,7 +393,7 @@
 
     <!-- Main -->
     <main class="container">
-        
+
         <!-- Grade Tabs -->
         <div class="tabs">
             <button class="tab-btn active" data-grade="1" onclick="setGrade(1)">中1 (英検5級)</button>
@@ -227,12 +406,12 @@
             <div class="section-header">
                 <h2 class="grade-title" id="current-title">中学1年生</h2>
             </div>
-            
+
             <!-- 単語帳リスト -->
             <div id="chapter-container"></div>
         </div>
     </main>
-    
+
     <!-- データを外部ファイルから読み込み -->
     <script src="basicword_data.js"></script>
 
@@ -241,31 +420,43 @@
 
         // 安全な遷移
         function navigateTo(url) {
-            try { window.location.href = url; } catch(e) { alert("移動: " + url); }
+            try { window.location.href = url; } catch (e) { alert("移動: " + url); }
+        }
+
+        function saveListStateAndGo(grade, chapter, url) {
+            localStorage.setItem('basicword_list_state', JSON.stringify({
+                grade,
+                chapter
+            }));
+            navigateTo(url);
+        }
+
+        function buildPlayerLink(unitId) {
+            return `basicword_player.html?id=${unitId}`;
         }
 
         // === 描画ロジック ===
-        function setGrade(grade) {
+        function setGrade(grade, restoreChapter = null) {
             currentGrade = grade;
-            
+
             // タブの見た目更新
             document.querySelectorAll('.tab-btn').forEach((btn) => {
-                if(parseInt(btn.dataset.grade) === grade) btn.classList.add('active');
+                if (parseInt(btn.dataset.grade) === grade) btn.classList.add('active');
                 else btn.classList.remove('active');
             });
 
             // タイトル更新
             const titleEl = document.getElementById('current-title');
-            if(grade === 1) titleEl.innerText = "中学1年生";
-            else if(grade === 2) titleEl.innerText = "中学2年生";
+            if (grade === 1) titleEl.innerText = "中学1年生";
+            else if (grade === 2) titleEl.innerText = "中学2年生";
             else titleEl.innerText = "中学3年生";
 
-            renderContent();
+            renderContent(restoreChapter);
         }
 
-        function renderContent() {
+        function renderContent(restoreChapter = null) {
             const container = document.getElementById('chapter-container');
-            container.innerHTML = ''; 
+            container.innerHTML = '';
 
             // データオブジェクトを選択
             const DATA = (typeof WORDBOOK_DATA !== 'undefined') ? WORDBOOK_DATA : (typeof BASICWORD_DATA !== 'undefined' ? BASICWORD_DATA : undefined);
@@ -273,7 +464,7 @@
                 container.innerHTML = `<div class="empty-state"><p>データ読み込みエラー</p></div>`;
                 return;
             }
-            
+
             // Parse key and extract grade (first digit), chapter (second digit), and unit number
             const parseKey = (k) => {
                 if (!k.startsWith('en')) return null;
@@ -315,7 +506,7 @@
 
             // expose chapters and render function
             container._chapters = chapters;
-            window.renderChapter = function(ci) {
+            window.renderChapter = function (ci) {
                 const cardsEl = document.getElementById('chapter-cards');
                 const list = (container._chapters && container._chapters[ci]) ? container._chapters[ci] : [];
                 if (list.length === 0) {
@@ -328,16 +519,16 @@
                 list.forEach((e, index) => {
                     const item = DATA[e.key];
                     const unitId = e.key;
-                    const learnLink = `basicword_player.html?id=${unitId}`;
+                    const learnLink = buildPlayerLink(unitId);
                     const displayTitle = item.title;
                     const wordCount = (item.words && item.words.length) ? item.words.length : 0;
-                    
+
                     // 最初の3単語を取得（データ側の...を削除）
                     const previewWords = item.words.slice(0, 3).map(w => w.w.replace(/\.{3,}$/, '')).join(', ');
                     const preview = wordCount > 3 ? previewWords + '...' : previewWords;
-                    
+
                     gridHtml += `
-                    <div class="unit-card" onclick="navigateTo('${learnLink}')">
+                    <div class="unit-card" onclick="saveListStateAndGo(${currentGrade}, ${e.p.chapter}, '${learnLink}')">
                         <div class="unit-card-header">
                             <div class="unit-info">
                                 <div class="unit-number">${index + 1}</div>
@@ -356,25 +547,43 @@
                 cardsEl.innerHTML = `<div class="grid-wrapper">${gridHtml}</div>`;
             };
             // highlight selected chapter button and render
-            window.selectChapter = function(ci, btn) {
+            window.selectChapter = function (ci, btn) {
                 document.querySelectorAll('.chapter-selector .tab-btn').forEach(b => b.classList.remove('active'));
                 if (btn) btn.classList.add('active');
                 window.renderChapter(ci);
             };
             
-            // 初期表示: 最初のチャプターを自動選択
-            const firstChapter = chapterIndices[0];
-            const firstBtn = document.querySelector(`.chapter-selector .tab-btn[data-chapter="${firstChapter}"]`);
-            if (firstBtn) {
-                firstBtn.classList.add('active');
-                window.renderChapter(firstChapter);
+            const chapterToShow = restoreChapter ?? chapterIndices[0];
+
+            const btn = document.querySelector(
+                `.chapter-selector .tab-btn[data-chapter="${chapterToShow}"]`
+            );
+
+            if (btn) {
+                btn.classList.add('active');
+                window.renderChapter(chapterToShow);
             }
+
         }
 
-        // Render cards on initial load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(location.search);
+            const restore = params.get('restore');
+
+            if (restore) {
+                const state = JSON.parse(
+                    localStorage.getItem('basicword_list_state') || 'null'
+                );
+                if (state) {
+                    setGrade(state.grade, state.chapter);
+                    return;
+                }
+            }
+
             setGrade(currentGrade);
         });
+
     </script>
 </body>
+
 </html>
