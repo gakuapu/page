@@ -201,7 +201,18 @@
             renderList();
         });
 
-        function getWords() { return JSON.parse(localStorage.getItem(deckKey) || '[]'); }
+        function getWords() {
+            const data = localStorage.getItem(deckKey);
+            if (!data) return [];
+            const parsed = JSON.parse(data);
+            // 古いフォーマット対応: id がない場合は生成
+            return parsed.map((item, idx) => ({
+                id: item.id || Date.now() + idx,
+                word: item.word,
+                meaning: item.meaning,
+                status: item.status !== undefined ? item.status : 2
+            }));
+        }
         function saveWords(list) { localStorage.setItem(deckKey, JSON.stringify(list)); updateMetaCount(list.length); }
         
         function updateMetaCount(count) {
@@ -345,7 +356,6 @@
             speechSynthesis.cancel();
             const u = new SpeechSynthesisUtterance(text);
             u.lang = 'en-US';
-            u.rate = 0.9;
             speechSynthesis.speak(u);
         }
 
@@ -354,11 +364,13 @@
             const currentTitle = document.getElementById('deck-title-disp').innerText;
             document.getElementById('modal-title-input').value = currentTitle;
             document.getElementById('title-edit-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
             setTimeout(() => document.getElementById('modal-title-input').focus(), 0);
         }
 
         function closeTitleEditModal() {
             document.getElementById('title-edit-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
         function saveTitleEdit() {
