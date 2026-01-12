@@ -100,16 +100,14 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 24px;
+            padding: 32px 24px 24px;
         }
 
         /* Tabs (Grade Selection) */
         .tabs {
             display: flex;
+            flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 24px;
-            overflow-x: auto;
-            padding-bottom: 4px;
             justify-content: center;
         }
 
@@ -265,6 +263,9 @@
         @media (min-width: 600px) {
             .grid-wrapper {
                 grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            .container {
+                padding-top: 40px;
             }
         }
 
@@ -552,7 +553,7 @@
                 if (btn) btn.classList.add('active');
                 window.renderChapter(ci);
             };
-            
+
             const chapterToShow = restoreChapter ?? chapterIndices[0];
 
             const btn = document.querySelector(

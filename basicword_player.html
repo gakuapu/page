@@ -1055,6 +1055,7 @@
                     speechSynthesis.cancel();
                     const u = new SpeechSynthesisUtterance(textToSpeak);
                     u.lang = 'en-US';
+                    u.rate = 0.9;
                     speechSynthesis.speak(u);
                 }
             }
