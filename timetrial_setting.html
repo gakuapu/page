@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タイムトライアル - 単語種別選択｜学アプ英語</title>
+    <link rel="icon" href="favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --bg-body: #F8FAFC;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-sub: #64748B;
+            --border: #E2E8F0;
+            --primary: #3B82F6;
+            --primary-dark: #2563EB;
+            --accent: #F59E0B;
+            --radius: 16px;
+            --g1-color: #3B82F6;
+            --g2-color: #10B981;
+            --g3-color: #8B5CF6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            padding-bottom: 24px;
+            touch-action: manipulation;
+        }
+
+        .app-header {
+            background: var(--bg-surface);
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .brand:hover {
+            opacity: 0.7;
+        }
+
+        .brand i {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 24px 16px 24px;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: flex-start;
+            margin-bottom: 32px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+
+        .tab-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .tab-btn:hover {
+            background: #F1F5F9;
+        }
+
+        .tab-btn.active[data-grade="1"] {
+            background: var(--g1-color);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .tab-btn.active[data-grade="2"] {
+            background: var(--g2-color);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .tab-btn.active[data-grade="3"] {
+            background: var(--g3-color);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .section-header {
+            font-size: 1rem;
+            font-weight: 800;
+            margin: 0 0 16px 0;
+            color: var(--text-main);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .category-btn {
+            background: var(--bg-surface);
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 16px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .category-btn:hover {
+            border-color: var(--primary);
+            background: #F8FAFC;
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .category-btn i {
+            font-size: 1.6rem;
+        }
+
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+
+        .level-btn {
+            background: var(--bg-surface);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-sub);
+        }
+
+        .level-btn:hover {
+            border-color: var(--primary);
+            background: #F8FAFC;
+        }
+
+        .level-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .mode-section {
+            background: var(--bg-surface);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .mode-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .capsule-group {
+            display: flex;
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: 4px;
+            width: 100%;
+        }
+
+        .capsule-opt {
+            flex: 1;
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            transition: all 0.2s;
+        }
+
+        .capsule-opt.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .start-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: transform 0.1s;
+        }
+
+        .start-btn:active {
+            transform: scale(0.98);
+        }
+
+        .start-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 600px) {
+            .app-header {
+                padding: 12px 16px;
+            }
+            .container {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="app-header">
+        <a href="index_en.html" class="brand">
+            <i class="ph-fill ph-book-bookmark"></i>
+            GakuApu
+        </a>
+    </header>
+
+    <main class="container">
+        <div class="tabs">
+            <button class="tab-btn active" data-grade="1" onclick="setGrade(1)">中1 (英検5級)</button>
+            <button class="tab-btn" data-grade="2" onclick="setGrade(2)">中2 (英検4級)</button>
+            <button class="tab-btn" data-grade="3" onclick="setGrade(3)">中3 (英検3級)</button>
+        </div>
+
+        <h2 class="section-header">単語種別を選択</h2>
+        <div class="category-grid" id="category-grid">
+            <button class="category-btn active" data-category="n" onclick="setCategory('n')">
+                <i class="ph-bold ph-book"></i>
+                名詞
+            </button>
+            <button class="category-btn" data-category="v" onclick="setCategory('v')">
+                <i class="ph-bold ph-arrow-right"></i>
+                動詞
+            </button>
+            <button class="category-btn" data-category="a" onclick="setCategory('a')">
+                <i class="ph-bold ph-star"></i>
+                形容詞
+            </button>
+        </div>
+
+        <h2 class="section-header">レベルを選択</h2>
+        <div class="level-grid" id="level-grid"></div>
+
+        <h2 class="section-header">出題方向を選択</h2>
+        <div class="mode-section">
+            <span class="mode-label">出題方向</span>
+            <div class="capsule-group">
+                <div class="capsule-opt active" id="dir-jp-en" onclick="setDirection('jp_en')">日本語→英語</div>
+                <div class="capsule-opt" id="dir-en-jp" onclick="setDirection('en_jp')">英語→日本語</div>
+            </div>
+        </div>
+
+        <button class="start-btn" onclick="startTimeTrial()">
+            <i class="ph-fill ph-play-circle"></i> タイムトライアル開始
+        </button>
+    </main>
+
+    <script>
+        let currentGrade = 1;
+        let currentCategory = 'n';
+        let currentLevel = 1;
+        let currentDirection = 'jp_en';
+
+        // レベルマッピング
+        const levelMap = {
+            1: { n: 5, v: 2, a: 1 },
+            2: { n: 7, v: 3, a: 2 },
+            3: { n: 11, v: 3, a: 2 }
+        };
+
+        function setGrade(grade) {
+            currentGrade = grade;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.grade) === grade);
+            });
+            currentLevel = 1;
+            renderLevelGrid();
+        }
+
+        function setCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.category === category);
+            });
+            currentLevel = 1;
+            renderLevelGrid();
+        }
+
+        function setDirection(direction) {
+            currentDirection = direction;
+            document.getElementById('dir-jp-en').classList.toggle('active', direction === 'jp_en');
+            document.getElementById('dir-en-jp').classList.toggle('active', direction === 'en_jp');
+        }
+
+        function setLevel(level) {
+            currentLevel = level;
+            document.querySelectorAll('.level-btn').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.level) === level);
+            });
+        }
+
+        function renderLevelGrid() {
+            const grid = document.getElementById('level-grid');
+            const maxLevel = levelMap[currentGrade][currentCategory];
+            let html = '';
+
+            for (let i = 1; i <= maxLevel; i++) {
+                html += `<button class="level-btn ${i === currentLevel ? 'active' : ''}" data-level="${i}" onclick="setLevel(${i})">${i}</button>`;
+            }
+
+            grid.innerHTML = html;
+        }
+
+        function startTimeTrial() {
+            const filename = `ta_${currentCategory}${currentGrade}${currentLevel}`;
+            const url = `timetrial_player.html?filename=${filename}&direction=${currentDirection}`;
+            window.location.href = url;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderLevelGrid();
+        });
+    </script>
+</body>
+
+</html>

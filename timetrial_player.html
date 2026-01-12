@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タイムトライアル｜学アプ英語</title>
+    <link rel="icon" href="favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --bg-body: #F8FAFC;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-sub: #64748B;
+            --border: #E2E8F0;
+            --primary: #3B82F6;
+            --success: #10B981;
+            --danger: #EF4444;
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: scroll;
+        }
+
+        header {
+            background: var(--bg-surface);
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 40px 1fr 40px;
+            align-items: center;
+            z-index: 100;
+            position: sticky;
+            top: 0;
+        }
+
+        .header-btn {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: var(--text-sub);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .header-btn:hover {
+            color: var(--primary);
+        }
+
+        .header-title {
+            font-size: 1rem;
+            font-weight: 800;
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .container {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+        }
+
+        #game-screen {
+            width: 100%;
+            max-width: 540px;
+        }
+
+        #answers-container {
+            width: 100%;
+            max-width: 540px;
+        }
+
+        .progress-bar-area {
+            width: 100%;
+            margin-bottom: 16px;
+            margin-top: 12px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-value {
+            height: 100%;
+            background: var(--success);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .timer-bar-area {
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .timer-bar {
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .timer-value {
+            height: 100%;
+            background: #F59E0B;
+            width: 0%;
+            transition: width 0.5s linear;
+        }
+
+        .question-count {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .question-card {
+            width: 100%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            background: #F0F9FF;
+            border-color: #BFDBFE;
+        }
+
+        .question-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .answer-choice {
+            width: 100%;
+            height: 48px;
+            background: #FAFAFA;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 0 14px;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            text-align: center;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 700;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .answer-choice:hover {
+            border-color: var(--primary);
+            background: #F8FAFC;
+        }
+
+        .answer-choice:active {
+            transform: scale(0.98);
+        }
+
+        .answer-choice.correct {
+            background: #DCFCE7;
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .answer-choice.incorrect {
+            background: #FEE2E2;
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .answer-choice.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .result-screen {
+            display: none;
+            text-align: center;
+            width: 100%;
+            animation: fadeIn 0.5s;
+        }
+
+        .result-icon {
+            font-size: 3rem;
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+
+        .result-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 0 0 16px 0;
+        }
+
+        .result-count {
+            font-size: 1rem;
+            color: var(--text-sub);
+            margin-bottom: 24px;
+        }
+
+        .result-btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            transition: transform 0.1s;
+        }
+
+        .result-btn:active {
+            transform: scale(0.95);
+        }
+
+        .back-link {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            color: var(--text-main);
+        }
+
+        .wrong-word-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            display: none;
+            font-size: 0.9rem;
+        }
+
+        .wrong-word-table tr:nth-child(odd) {
+            background: #F8FAFC;
+        }
+
+        .wrong-word-table td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .wrong-word-header {
+            font-weight: 700;
+            background: #F1F5F9;
+            color: var(--text-main);
+        }
+
+        .wrong-word-list {
+            width: 100%;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .wrong-word-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .wrong-word-item:nth-child(even) {
+            background: white;
+        }
+
+        .wrong-word-en {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            color: var(--text-main);
+            flex: 0 0 auto;
+            min-width: 100px;
+        }
+
+        .wrong-word-jp {
+            color: var(--text-sub);
+            text-align: right;
+            flex: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button class="header-btn" onclick="goBack()">
+            <i class="ph-bold ph-caret-left"></i>
+        </button>
+        <h1 class="header-title">タイムトライアル</h1>
+        <div style="width:24px;"></div>
+    </header>
+
+    <main class="container">
+        <div id="game-screen">
+            <div class="progress-bar-area">
+                <div class="progress-bar">
+                    <div id="progress-val" class="progress-value"></div>
+                </div>
+            </div>
+
+            <div class="timer-bar-area">
+                <div class="timer-bar">
+                    <div id="timer-val" class="timer-value"></div>
+                </div>
+            </div>
+
+            <div class="question-count">
+                正解数: <span id="correct-count">0</span>問
+            </div>
+
+            <div class="question-card">
+                <div class="question-text" id="question-text">問題を読み込み中...</div>
+            </div>
+
+            <div id="answers-container">
+                <div class="answer-choice" id="answer-0" onclick="checkAnswer(0)"></div>
+                <div class="answer-choice" id="answer-1" onclick="checkAnswer(1)"></div>
+                <div class="answer-choice" id="answer-2" onclick="checkAnswer(2)"></div>
+            </div>
+        </div>
+
+        <div id="result-screen" class="result-screen">
+            <div class="result-icon">
+                <i class="ph-fill ph-check-circle"></i>
+            </div>
+            <h2 class="result-title">完了！</h2>
+            <div class="result-count" id="result-count">正解数: 0問</div>
+            
+            <div id="wrong-word-list" class="wrong-word-list"></div>
+
+            <button class="result-btn" onclick="retryGame()">
+                <i class="ph-bold ph-arrows-clockwise"></i> もう一度
+            </button>
+            <div>
+                <span class="back-link" onclick="goBack()">選択に戻る</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ゲーム状態
+        let gameState = {
+            wordList: [],
+            currentIndex: 0,
+            correctCount: 0,
+            timeLeft: 60,
+            isAnswering: false,
+            wrongWords: [],
+            direction: 'jp_en',
+            dataLoaded: false,
+            timerInterval: null,
+            canAnswer: true
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const filename = urlParams.get('filename');
+        const direction = urlParams.get('direction');
+
+        if (direction) {
+            gameState.direction = direction;
+        }
+
+        // ファイル名からパラメータを抽出
+        function parseFilename(fn) {
+            // ta_n11 -> grade=1, category=n, level=1
+            const match = fn.match(/ta_([nva])(\d)(\d+)/);
+            if (!match) return null;
+            
+            const categoryMap = { n: '名詞', v: '動詞', a: '形容詞' };
+            const gradeMap = { 1: '中学1年', 2: '中学2年', 3: '中学3年' };
+            
+            return {
+                grade: gradeMap[match[2]],
+                category: categoryMap[match[1]],
+                level: match[3]
+            };
+        }
+
+        // ヘッダータイトルを設定
+        function setHeaderTitle() {
+            const params = parseFilename(filename);
+            if (params) {
+                const titleEl = document.querySelector('.header-title');
+                if (titleEl) {
+                    titleEl.innerText = `${params.grade} ${params.category} レベル${params.level}`;
+                }
+            }
+        }
+
+        // データ読み込み
+        function loadData() {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = `timetrial_data/wordlist_${filename}.js`;
+                script.onload = () => {
+                    if (typeof $list !== 'undefined') {
+                        gameState.wordList = $list.slice();
+                        gameState.dataLoaded = true;
+                        resolve();
+                    } else {
+                        reject('データが読み込めません');
+                    }
+                };
+                script.onerror = () => {
+                    reject('ファイルが見つかりません');
+                };
+                document.head.appendChild(script);
+            });
+        }
+
+        // シャッフル
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // ゲーム初期化
+        function initGame() {
+            gameState.currentIndex = 0;
+            gameState.correctCount = 0;
+            gameState.timeLeft = 120;
+            gameState.isAnswering = false;
+            gameState.wrongWords = [];
+            gameState.canAnswer = true;
+
+            document.getElementById('game-screen').style.display = 'block';
+            document.getElementById('result-screen').style.display = 'none';
+
+            shuffleArray(gameState.wordList);
+            startTimer();
+            showQuestion();
+        }
+
+        // タイマー開始
+        function startTimer() {
+            if (gameState.timerInterval) clearInterval(gameState.timerInterval);
+            
+            gameState.timerInterval = setInterval(() => {
+                gameState.timeLeft -= 0.5;
+                updateTimerDisplay();
+
+                if (gameState.timeLeft <= 0) {
+                    gameState.timeLeft = 0;
+                    clearInterval(gameState.timerInterval);
+                    endGame();
+                }
+            }, 500);
+        }
+
+        // タイマー表示更新
+        function updateTimerDisplay() {
+            // 経過時間をオレンジで表示（左から右に増える）
+            const elapsedTime = 120 - gameState.timeLeft;
+            const percentage = (elapsedTime / 120) * 100;
+            document.getElementById('timer-val').style.width = percentage + '%';
+        }
+
+        // 問題表示
+        function showQuestion() {
+            if (gameState.currentIndex >= gameState.wordList.length) {
+                endGame();
+                return;
+            }
+
+            gameState.isAnswering = false;
+            gameState.canAnswer = true;
+
+            const current = gameState.wordList[gameState.currentIndex];
+            
+            // 異なる選択肢を確保
+            let n1, n2;
+            do {
+                n1 = Math.floor(Math.random() * gameState.wordList.length);
+            } while (n1 === gameState.currentIndex);
+            
+            do {
+                n2 = Math.floor(Math.random() * gameState.wordList.length);
+            } while (n2 === gameState.currentIndex || n2 === n1);
+
+            // 問題文の表示
+            let questionText = '';
+            if (gameState.direction === 'jp_en') {
+                questionText = current[1];
+            } else {
+                questionText = current[0];
+            }
+            document.getElementById('question-text').innerText = questionText;
+
+            // 選択肢の準備
+            let choices = [];
+            if (gameState.direction === 'jp_en') {
+                choices = [
+                    gameState.wordList[n1][0],
+                    gameState.wordList[n2][0],
+                    current[0]
+                ];
+            } else {
+                choices = [
+                    gameState.wordList[n1][1],
+                    gameState.wordList[n2][1],
+                    current[1]
+                ];
+            }
+
+            const shuffledChoices = choices.slice();
+            shuffleArray(shuffledChoices);
+            gameState.correctIndex = shuffledChoices.indexOf(gameState.direction === 'jp_en' ? current[0] : current[1]);
+
+            document.getElementById('answer-0').innerText = shuffledChoices[0];
+            document.getElementById('answer-1').innerText = shuffledChoices[1];
+            document.getElementById('answer-2').innerText = shuffledChoices[2];
+
+            for (let i = 0; i < 3; i++) {
+                document.getElementById(`answer-${i}`).className = 'answer-choice';
+            }
+
+            document.getElementById('progress-val').style.width = ((gameState.currentIndex) / gameState.wordList.length) * 100 + '%';
+        }
+
+        // 回答チェック
+        function checkAnswer(index) {
+            if (!gameState.canAnswer) return;
+            gameState.canAnswer = false;
+
+            const current = gameState.wordList[gameState.currentIndex];
+            const isCorrect = index === gameState.correctIndex;
+
+            const answerEl = document.getElementById(`answer-${index}`);
+            let nextDelay = 400; // デフォルト（正解時は短い）
+
+            if (isCorrect) {
+                gameState.correctCount++;
+                answerEl.classList.add('correct');
+                document.getElementById('correct-count').innerText = gameState.correctCount;
+            } else {
+                nextDelay = 1000; // 不正解時は1秒
+                answerEl.classList.add('incorrect');
+                document.getElementById(`answer-${gameState.correctIndex}`).classList.add('correct');
+                gameState.wrongWords.push(current);
+            }
+
+            // 全選択肢を無効化
+            for (let i = 0; i < 3; i++) {
+                document.getElementById(`answer-${i}`).classList.add('disabled');
+            }
+
+            // 次問に進む
+            setTimeout(() => {
+                gameState.currentIndex++;
+                showQuestion();
+            }, nextDelay);
+        }
+
+        // ゲーム終了
+        function endGame() {
+            clearInterval(gameState.timerInterval);
+            document.getElementById('game-screen').style.display = 'none';
+            document.getElementById('result-screen').style.display = 'block';
+
+            const total = gameState.wordList.length;
+            const rate = Math.round((gameState.correctCount / total) * 100);
+
+            document.getElementById('result-count').innerText = `正解数: ${gameState.correctCount}問 / ${total}問 (${rate}%)`;
+
+            // 不正解一覧を表示
+            if (gameState.wrongWords.length > 0) {
+                const listEl = document.getElementById('wrong-word-list');
+                let html = '';
+                gameState.wrongWords.forEach(word => {
+                    html += `
+                        <div class="wrong-word-item">
+                            <div class="wrong-word-en">${word[0]}</div>
+                            <div class="wrong-word-jp">${word[1]}</div>
+                        </div>
+                    `;
+                });
+                listEl.innerHTML = html;
+                listEl.style.display = 'block';
+            }
+        }
+
+        // リトライ
+        function retryGame() {
+            gameState.currentIndex = 0;
+            gameState.correctCount = 0;
+            gameState.timeLeft = 120;
+            gameState.wrongWords = [];
+            initGame();
+        }
+
+        // 戻る
+        function goBack() {
+            if (gameState.timerInterval) clearInterval(gameState.timerInterval);
+            window.location.href = 'timetrial_setting.html';
+        }
+
+        // ページ読み込み時
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                console.log('ファイル名:', filename);
+                console.log('方向:', direction);
+                setHeaderTitle();
+                await loadData();
+                initGame();
+            } catch (error) {
+                console.error('エラー詳細:', error);
+                console.error('エラー発生場所:', error.stack);
+                alert('エラー: ' + error);
+                goBack();
+            }
+        });
+    </script>
+</body>
+
+</html>
