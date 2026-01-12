@@ -20,7 +20,8 @@
             background: var(--bg-surface); padding: 14px 20px; border-bottom: 1px solid var(--border); 
             display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; z-index: 100;
         }
-        h1 { font-size: 1rem; font-weight: 800; margin: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        h1 { font-size: 1rem; font-weight: 800; margin: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; transition: color 0.2s; }
+        h1:hover { color: var(--primary); }
         
         .header-btn { background: none; border: none; font-size: 1.4rem; color: var(--text-sub); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px; border-radius: 8px; }
         .header-btn:hover { color: var(--primary); background: #F1F5F9; }
@@ -61,6 +62,7 @@
         
         .word-actions { display: flex; align-items: center; gap: 10px; margin-left: 12px; }
         .action-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #CBD5E1; padding: 4px; }
+        .btn-edit:hover { color: var(--primary); }
         .btn-delete:hover { color: var(--danger); }
         .btn-sound:hover { color: var(--primary); }
 
@@ -72,6 +74,33 @@
         .st-0 { background: #10B981; } /* 覚えた */
         .st-1 { background: #F59E0B; } /* 不安 */
         .st-2 { background: #EF4444; } /* 未学習 */
+
+        /* 編集モード */
+        .edit-mode {
+            padding: 12px 14px;
+            display: grid; grid-template-columns: 1fr auto; align-items: flex-start; gap: 12px;
+        }
+        .edit-form { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+        .edit-form input { 
+            padding: 8px 10px; font-size: 0.95rem; border: 1px solid var(--primary);
+            border-radius: 8px; background: #F0F9FF;
+        }
+        .edit-form input:focus { outline: none; border-color: var(--primary); background: white; }
+        
+        .edit-actions { display: flex; gap: 8px; flex-direction: column; }
+        .edit-btn {
+            background: var(--primary); color: white; border: none; padding: 8px 12px;
+            border-radius: 8px; font-size: 0.9rem; cursor: pointer; font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        .edit-btn:active { opacity: 0.8; }
+        
+        .cancel-btn {
+            background: #E2E8F0; color: var(--text-main); border: none; padding: 8px 12px;
+            border-radius: 8px; font-size: 0.9rem; cursor: pointer; font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        .cancel-btn:active { opacity: 0.8; }
 
         .empty-state { text-align: center; color: var(--text-sub); margin-top: 40px; font-size: 0.9rem; }
 
@@ -87,13 +116,35 @@
             border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem;
             display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
+
+        /* タイトル編集用モーダル背景 */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3); z-index: 200; align-items: center; justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        
+        .modal-dialog {
+            background: white; border-radius: 16px; padding: 24px; max-width: 300px;
+            width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .modal-dialog h2 { margin-top: 0; font-size: 1.1rem; }
+        .modal-dialog input { 
+            width: 100%; margin-bottom: 16px; padding: 10px;
+            border: 1px solid var(--border); border-radius: 8px; font-size: 1rem;
+            font-family: inherit;
+        }
+        .modal-actions { display: flex; gap: 12px; }
+        .modal-actions button { flex: 1; padding: 10px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .modal-save { background: var(--primary); color: white; }
+        .modal-cancel { background: #E2E8F0; color: var(--text-main); }
     </style>
 </head>
 
 <body>
     <header>
         <button class="header-btn" onclick="navigateTo('mywordbook_list.html')"><i class="ph-bold ph-caret-left"></i></button>
-        <h1 id="deck-title-disp">単語登録</h1>
+        <h1 id="deck-title-disp" onclick="openTitleEditModal()" title="クリックで編集">単語登録</h1>
         <div style="width:32px;"></div>
     </header>
 
@@ -118,11 +169,24 @@
         </div>
     </div>
 
+    <!-- タイトル編集用モーダル -->
+    <div class="modal-overlay" id="title-edit-modal">
+        <div class="modal-dialog">
+            <h2>単語帳名を編集</h2>
+            <input type="text" id="modal-title-input" placeholder="新しい名前">
+            <div class="modal-actions">
+                <button class="modal-save" onclick="saveTitleEdit()">保存</button>
+                <button class="modal-cancel" onclick="closeTitleEditModal()">キャンセル</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const deckId = urlParams.get('id');
         const deckKey = `gakuapu_deck_${deckId}`;
         const MAX_WORDS = 100;
+        let editingId = null; // 編集中の単語ID
 
         function navigateTo(url) { window.location.href = url; }
 
@@ -162,22 +226,43 @@
 
             list.slice().reverse().forEach(item => {
                 const el = document.createElement('div');
-                el.className = 'word-item';
-                const s = item.status !== undefined ? item.status : 2;
-                const sClass = s === 0 ? 'st-0' : s === 1 ? 'st-1' : 'st-2';
                 
-                el.innerHTML = `
-                    <div class="word-info">
-                        <div class="word-en">${sanitize(item.word)}</div>
-                        <div class="word-jp">${sanitize(item.meaning)}</div>
-                    </div>
-                    <div class="word-actions">
-                        <div class="status-marker ${sClass}" onclick="toggleStatus(${item.id})" title="状態切替"></div>
-                        <button class="action-btn btn-sound" onclick="playOne('${sanitize(item.word)}')" title="発音"><i class="ph-bold ph-speaker-high"></i></button>
-                        <button class="action-btn btn-delete" onclick="deleteWord(${item.id})" title="削除"><i class="ph-bold ph-trash"></i></button>
-                    </div>
-                `;
-                container.appendChild(el);
+                // 編集中の場合は編集フォームを表示
+                if (editingId === item.id) {
+                    el.className = 'word-item edit-mode';
+                    el.innerHTML = `
+                        <div class="edit-form">
+                            <input type="text" id="edit-word-${item.id}" value="${sanitize(item.word)}" placeholder="英単語">
+                            <input type="text" id="edit-meaning-${item.id}" value="${sanitize(item.meaning)}" placeholder="意味">
+                        </div>
+                        <div class="edit-actions">
+                            <button class="edit-btn" onclick="saveEdit(${item.id})">保存</button>
+                            <button class="cancel-btn" onclick="cancelEdit()">キャンセル</button>
+                        </div>
+                    `;
+                    // フォーカス設定
+                    container.appendChild(el);
+                    setTimeout(() => document.getElementById(`edit-word-${item.id}`).focus(), 0);
+                } else {
+                    // 通常表示
+                    el.className = 'word-item';
+                    const s = item.status !== undefined ? item.status : 2;
+                    const sClass = s === 0 ? 'st-0' : s === 1 ? 'st-1' : 'st-2';
+                    
+                    el.innerHTML = `
+                        <div class="word-info">
+                            <div class="word-en">${sanitize(item.word)}</div>
+                            <div class="word-jp">${sanitize(item.meaning)}</div>
+                        </div>
+                        <div class="word-actions">
+                            <div class="status-marker ${sClass}" onclick="toggleStatus(${item.id})" title="状態切替"></div>
+                            <button class="action-btn btn-edit" onclick="startEdit(${item.id})" title="編集"><i class="ph-bold ph-pencil"></i></button>
+                            <button class="action-btn btn-sound" onclick="playOne('${sanitize(item.word)}')" title="発音"><i class="ph-bold ph-speaker-high"></i></button>
+                            <button class="action-btn btn-delete" onclick="deleteWord(${item.id})" title="削除"><i class="ph-bold ph-trash"></i></button>
+                        </div>
+                    `;
+                    container.appendChild(el);
+                }
             });
         }
 
@@ -204,6 +289,7 @@
             if (confirm("この単語を削除しますか？")) {
                 const list = getWords().filter(w => w.id !== id);
                 saveWords(list);
+                editingId = null;
                 renderList();
             }
         }
@@ -219,12 +305,82 @@
             }
         }
 
+        // 編集モード開始
+        function startEdit(id) {
+            editingId = id;
+            renderList();
+        }
+
+        // 編集モード キャンセル
+        function cancelEdit() {
+            editingId = null;
+            renderList();
+        }
+
+        // 編集内容保存
+        function saveEdit(id) {
+            const list = getWords();
+            const idx = list.findIndex(w => w.id === id);
+            if (idx === -1) return;
+
+            const newWord = document.getElementById(`edit-word-${id}`).value.trim();
+            const newMeaning = document.getElementById(`edit-meaning-${id}`).value.trim();
+
+            if (!newWord || !newMeaning) { alert("単語と意味の両方を入力してください"); return; }
+
+            // 重複チェック（自分自身以外で）
+            if (list.some(w => w.id !== id && w.word.toLowerCase() === newWord.toLowerCase())) {
+                alert("その単語は既に登録されています");
+                return;
+            }
+
+            list[idx].word = newWord;
+            list[idx].meaning = newMeaning;
+            saveWords(list);
+            editingId = null;
+            renderList();
+        }
+
         function playOne(text) {
             speechSynthesis.cancel();
             const u = new SpeechSynthesisUtterance(text);
             u.lang = 'en-US';
+            u.rate = 0.9;
             speechSynthesis.speak(u);
         }
+
+        // タイトル編集モーダル
+        function openTitleEditModal() {
+            const currentTitle = document.getElementById('deck-title-disp').innerText;
+            document.getElementById('modal-title-input').value = currentTitle;
+            document.getElementById('title-edit-modal').classList.add('active');
+            setTimeout(() => document.getElementById('modal-title-input').focus(), 0);
+        }
+
+        function closeTitleEditModal() {
+            document.getElementById('title-edit-modal').classList.remove('active');
+        }
+
+        function saveTitleEdit() {
+            const newTitle = document.getElementById('modal-title-input').value.trim();
+            if (!newTitle) { alert("名前を入力してください"); return; }
+
+            const meta = JSON.parse(localStorage.getItem('gakuapu_decks_meta') || '[]');
+            const idx = meta.findIndex(d => d.id == deckId);
+            if (idx !== -1) {
+                meta[idx].title = newTitle;
+                localStorage.setItem('gakuapu_decks_meta', JSON.stringify(meta));
+                document.getElementById('deck-title-disp').innerText = newTitle;
+                closeTitleEditModal();
+            }
+        }
+
+        // モーダル背景クリックで閉じる
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('title-edit-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'title-edit-modal') closeTitleEditModal();
+            });
+        });
     </script>
 </body>
 </html>
