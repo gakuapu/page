@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>タイムトライアル｜学アプ英語</title>
+    <title>タイムトライアル～学ぶ英語</title>
     <link rel="icon" href="favicon.ico">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -339,13 +339,17 @@
             font-weight: 700;
             color: var(--text-main);
             flex: 0 0 auto;
-            min-width: 100px;
+            min-width: 90px;
+            text-align: left;
         }
 
         .wrong-word-jp {
             color: var(--text-sub);
-            text-align: right;
+            text-align: left;
             flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .wrong-word-text {
@@ -353,6 +357,7 @@
         }
 
         .wrong-word-add-btn {
+            flex-shrink: 0;
             background: #F1F5F9;
             border: none;
             border-radius: 50%;
@@ -376,6 +381,70 @@
             font-size: 1.4rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             cursor: pointer;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.9);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            width: 90%;
+            max-width: 420px;
+        }
+
+        .start-main-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: transform 0.1s;
+        }
+
+        .start-main-btn:active {
+            transform: scale(0.98);
         }
 
         @keyframes fadeIn {
@@ -457,6 +526,22 @@
         </div>
     </main>
 
+    <div id="toast" class="toast">登録しました</div>
+
+    <div id="deck-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 style="margin-top:0;">登録先の単語帳</h3>
+
+            <div id="deck-list"></div>
+
+            <p style="font-size:0.8rem;color:#64748B;">
+                単語帳の作成はMy単語帳から行ってください
+            </p>
+
+            <button class="start-main-btn" onclick="closeDeckModal()">閉じる</button>
+        </div>
+    </div>
+
     <script>
         // ゲーム状態
         let gameState = {
@@ -470,6 +555,8 @@
             timerInterval: null,
             canAnswer: true
         };
+
+        let pendingWord = null;  // モーダル選択前の保留中の単語
 
         const urlParams = new URLSearchParams(window.location.search);
         const filename = urlParams.get('filename');
@@ -688,6 +775,114 @@
             }, nextDelay);
         }
 
+        function getDeckMeta() {
+            return JSON.parse(localStorage.getItem('gakuapu_decks_meta') || '[]');
+        }
+
+        function getValidCurrentDeckId() {
+            const id = localStorage.getItem('gakuapu_last_deck');
+            if (!id) return null;
+
+            const meta = getDeckMeta();
+            if (!meta.some(d => d.id == id)) {
+                localStorage.removeItem('gakuapu_last_deck');
+                return null;
+            }
+            return id;
+        }
+
+        function addWordToDeck(deckId, word, meaning) {
+            const key = `gakuapu_deck_${deckId}`;
+            const list = JSON.parse(localStorage.getItem(key) || '[]');
+
+            list.push({
+                id: Date.now(),
+                word,
+                meaning,
+                status: 2
+            });
+
+            localStorage.setItem(key, JSON.stringify(list));
+
+            const meta = getDeckMeta();
+            const idx = meta.findIndex(d => d.id == deckId);
+            if (idx !== -1) {
+                meta[idx].count = list.length;
+                localStorage.setItem('gakuapu_decks_meta', JSON.stringify(meta));
+            }
+        }
+
+        function quickAddWrongWord(word, meaning, btn) {
+            const deckId = getValidCurrentDeckId();
+
+            if (!deckId) {
+                pendingWord = { word, meaning, btn };
+                openDeckModal();
+                return;
+            }
+
+            addWordToDeck(deckId, word, meaning);
+
+            btn.innerHTML = '<i class="ph-bold ph-check"></i>';
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+
+            showToast('登録しました');
+        }
+
+        function showToast(text) {
+            const t = document.getElementById('toast');
+            t.innerText = text;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 1200);
+        }
+
+        function openDeckModal() {
+            renderDeckList();
+            document.getElementById('deck-modal').classList.remove('hidden');
+        }
+
+        function closeDeckModal() {
+            document.getElementById('deck-modal').classList.add('hidden');
+        }
+
+        function renderDeckList() {
+            const el = document.getElementById('deck-list');
+            const meta = getDeckMeta();
+            const current = getValidCurrentDeckId();
+
+            if (meta.length === 0) {
+                el.innerHTML = `<p>My単語帳から単語帳を作成してください</p>`;
+                return;
+            }
+
+            el.innerHTML = meta.map(d => `
+                <label style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <input type="radio" name="deck" value="${d.id}" ${d.id == current ? 'checked' : ''}
+                        onchange="selectDeck('${d.id}')">
+                    ${d.title}
+                </label>
+            `).join('');
+        }
+
+        function selectDeck(id) {
+            localStorage.setItem('gakuapu_last_deck', id);
+            
+            // 保留中の単語があれば登録
+            if (pendingWord) {
+                addWordToDeck(id, pendingWord.word, pendingWord.meaning);
+                
+                pendingWord.btn.innerHTML = '<i class="ph-bold ph-check"></i>';
+                pendingWord.btn.disabled = true;
+                pendingWord.btn.style.opacity = '0.5';
+                
+                showToast('登録しました');
+                pendingWord = null;
+            }
+            
+            closeDeckModal();
+        }
+
         // ゲーム終了
         function endGame() {
             clearInterval(gameState.timerInterval);
@@ -762,60 +957,6 @@
             window.location.href = `timetrial_setting.html?${params.toString()}`;
         }
 
-        function getDeckMeta() {
-            return JSON.parse(localStorage.getItem('gakuapu_decks_meta') || '[]');
-        }
-
-        function getValidCurrentDeckId() {
-            const id = localStorage.getItem('gakuapu_last_deck');
-            if (!id) return null;
-
-            const meta = getDeckMeta();
-            if (!meta.some(d => d.id == id)) {
-                localStorage.removeItem('gakuapu_last_deck');
-                return null;
-            }
-            return id;
-        }
-
-        function addWordToDeck(deckId, word, meaning) {
-            const key = `gakuapu_deck_${deckId}`;
-            const list = JSON.parse(localStorage.getItem(key) || '[]');
-
-            list.push({
-                id: Date.now(),
-                word,
-                meaning,
-                status: 2
-            });
-
-            localStorage.setItem(key, JSON.stringify(list));
-
-            const meta = getDeckMeta();
-            const idx = meta.findIndex(d => d.id == deckId);
-            if (idx !== -1) {
-                meta[idx].count = list.length;
-                localStorage.setItem('gakuapu_decks_meta', JSON.stringify(meta));
-            }
-        }
-
-        function quickAddWrongWord(word, meaning, btn) {
-            const deckId = getValidCurrentDeckId();
-
-            if (!deckId) {
-                openDeckModal();
-                return;
-            }
-
-            addWordToDeck(deckId, word, meaning);
-
-            btn.innerHTML = '<i class="ph-bold ph-check"></i>';
-            btn.disabled = true;
-            btn.style.opacity = '0.5';
-
-            showToast('登録しました');
-        }
-
         // ページ読み込み時
         document.addEventListener('DOMContentLoaded', async () => {
             try {
@@ -832,6 +973,7 @@
             }
         });
     </script>
+
 </body>
 
 </html>
