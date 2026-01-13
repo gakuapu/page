@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>タイムトライアル - 単語種別選択｜学アプ英語</title>
+    <title>英単語タイムトライアル - 学アプ英語</title>
     <link rel="icon" href="favicon.ico">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
@@ -106,25 +108,11 @@
             background: #F1F5F9;
         }
 
-        .tab-btn.active[data-grade="1"] {
-            background: var(--g1-color);
+        .tab-btn.active {
+            background: var(--primary);
             color: white;
             border-color: transparent;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        .tab-btn.active[data-grade="2"] {
-            background: var(--g2-color);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-        }
-
-        .tab-btn.active[data-grade="3"] {
-            background: var(--g3-color);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, .3);
         }
 
         .section-header {
@@ -156,6 +144,7 @@
             font-weight: 700;
             font-size: 0.9rem;
             color: var(--text-main);
+            opacity: 0.7;
         }
 
         .category-btn:hover {
@@ -168,17 +157,19 @@
             color: white;
             border-color: var(--primary);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            opacity: 1;
+            transform: translateY(-2px);
         }
 
         .category-btn i {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
         }
 
         .level-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
             gap: 8px;
-            margin-bottom: 32px;
+            margin-bottom: 0;
         }
 
         .level-btn {
@@ -206,12 +197,20 @@
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
+        .level-section {
+            background: var(--bg-surface);
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            margin-bottom: 32px;
+        }
+
         .mode-section {
             background: var(--bg-surface);
             padding: 16px;
             border-radius: 12px;
             border: 1px solid var(--border);
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
 
         .mode-label {
@@ -228,6 +227,8 @@
             border-radius: 12px;
             padding: 4px;
             width: 100%;
+            max-width: 360px;
+            margin: 0 auto;
         }
 
         .capsule-opt {
@@ -253,9 +254,10 @@
             background: var(--primary);
             color: white;
             border: none;
-            padding: 14px;
+            padding: 16px;
             border-radius: 12px;
-            font-size: 1rem;
+            margin-top: 24px;
+            font-size: 1.05rem;
             font-weight: 800;
             cursor: pointer;
             display: flex;
@@ -279,6 +281,7 @@
             .app-header {
                 padding: 12px 16px;
             }
+
             .container {
                 padding: 16px;
             }
@@ -289,6 +292,7 @@
 <body>
     <header class="app-header">
         <a href="index_en.html" class="brand">
+            <i class="ph-fill ph-caret-left"></i>
             <i class="ph-fill ph-book-bookmark"></i>
             GakuApu
         </a>
@@ -301,10 +305,10 @@
             <button class="tab-btn" data-grade="3" onclick="setGrade(3)">中3 (英検3級)</button>
         </div>
 
-        <h2 class="section-header">単語種別を選択</h2>
+        <h2 class="section-header">品詞</h2>
         <div class="category-grid" id="category-grid">
             <button class="category-btn active" data-category="n" onclick="setCategory('n')">
-                <i class="ph-bold ph-book"></i>
+                <i class="ph-bold ph-cube"></i>
                 名詞
             </button>
             <button class="category-btn" data-category="v" onclick="setCategory('v')">
@@ -312,26 +316,40 @@
                 動詞
             </button>
             <button class="category-btn" data-category="a" onclick="setCategory('a')">
-                <i class="ph-bold ph-star"></i>
+                <i class="ph-bold ph-palette"></i>
                 形容詞
             </button>
         </div>
 
-        <h2 class="section-header">レベルを選択</h2>
-        <div class="level-grid" id="level-grid"></div>
+        <h2 class="section-header">チャプター</h2>
+        <div class="level-section">
+            <div class="level-grid" id="level-grid"></div>
+        </div>
 
-        <h2 class="section-header">出題方向を選択</h2>
+        <h2 class="section-header">タイプ</h2>
         <div class="mode-section">
-            <span class="mode-label">出題方向</span>
             <div class="capsule-group">
                 <div class="capsule-opt active" id="dir-jp-en" onclick="setDirection('jp_en')">日本語→英語</div>
                 <div class="capsule-opt" id="dir-en-jp" onclick="setDirection('en_jp')">英語→日本語</div>
             </div>
         </div>
 
-        <button class="start-btn" onclick="startTimeTrial()">
-            <i class="ph-fill ph-play-circle"></i> タイムトライアル開始
+        <button class="start-btn" id="start-btn" onclick="startTimeTrial()">
+            <i class="ph-fill ph-play-circle"></i> START
         </button>
+
+        <div style="margin-top:32px; border-top:1px solid var(--border); padding-top:24px;">
+            <label style="display:flex; align-items:center; gap:8px; font-weight:700;">
+                <input type="checkbox" id="toggle-hide-cleared" checked>
+                クリア済みのものは表示しない
+            </label>
+
+            <button
+                style="margin-top:16px; background:#F1F5F9; border:none; padding:12px; border-radius:10px; font-weight:700; cursor:pointer;"
+                onclick="resetClearStatus()">
+                クリアステータスを削除する
+            </button>
+        </div>
     </main>
 
     <script>
@@ -369,6 +387,7 @@
             currentDirection = direction;
             document.getElementById('dir-jp-en').classList.toggle('active', direction === 'jp_en');
             document.getElementById('dir-en-jp').classList.toggle('active', direction === 'en_jp');
+            renderLevelGrid();
         }
 
         function setLevel(level) {
@@ -378,17 +397,72 @@
             });
         }
 
+        function getClearStatus() {
+            return JSON.parse(localStorage.getItem('timetrial_clear_status') || '{}');
+        }
+
+        function isCleared(filename, direction) {
+            const data = getClearStatus();
+            return !!(data[filename] && data[filename][direction]);
+        }
+
+        function resetClearStatus() {
+            if (!confirm('クリアステータスを削除します。よろしいですか？')) return;
+            localStorage.removeItem('timetrial_clear_status');
+            location.reload();
+        }
+
         function renderLevelGrid() {
             const grid = document.getElementById('level-grid');
             const maxLevel = levelMap[currentGrade][currentCategory];
+            const hideCleared = document.getElementById('toggle-hide-cleared').checked;
+
             let html = '';
+            let renderedCount = 0;
+            const visibleLevels = [];
 
             for (let i = 1; i <= maxLevel; i++) {
-                html += `<button class="level-btn ${i === currentLevel ? 'active' : ''}" data-level="${i}" onclick="setLevel(${i})">${i}</button>`;
+                const filename = `ta_${currentCategory}${currentGrade}${i}`;
+                const cleared = isCleared(filename, currentDirection);
+
+                if (hideCleared && cleared) continue;
+
+                renderedCount++;
+                visibleLevels.push(i);
+
+                html += `
+          <button class="level-btn ${i === currentLevel ? 'active' : ''}"
+            data-level="${i}"
+            onclick="setLevel(${i})">
+            ${i}
+          </button>`;
             }
 
-            grid.innerHTML = html;
+            // currentLevel補正
+            if (renderedCount > 0 && !visibleLevels.includes(currentLevel)) {
+                currentLevel = visibleLevels[0];
+            }
+
+            // 表示
+            if (renderedCount === 0) {
+                grid.innerHTML = `
+          <div class="empty-state">
+            おめでとうございます！<br>
+            全てクリア済みです！
+          </div>`;
+            } else {
+                grid.innerHTML = html;
+            }
+
+            // STARTボタン制御（ここ1か所）
+            const startBtn = document.getElementById('start-btn');
+            startBtn.disabled = (renderedCount === 0);
         }
+
+
+        document.getElementById('toggle-hide-cleared').addEventListener('change', () => {
+            renderLevelGrid();
+        });
 
         function startTimeTrial() {
             const filename = `ta_${currentCategory}${currentGrade}${currentLevel}`;
@@ -396,7 +470,40 @@
             window.location.href = url;
         }
 
+        const params = new URLSearchParams(window.location.search);
+
+        const savedGrade = parseInt(params.get('grade')) || 1;
+        const savedCategory = params.get('category') || 'n';
+        const savedLevel = parseInt(params.get('level')) || 1;
+        const savedDirection = params.get('direction') || 'jp_en';
+
         document.addEventListener('DOMContentLoaded', () => {
+            currentGrade = savedGrade;
+            currentCategory = savedCategory;
+            currentLevel = savedLevel;
+            currentDirection = savedDirection;
+
+            // 学年UI
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle(
+                    'active',
+                    parseInt(btn.dataset.grade) === currentGrade
+                );
+            });
+
+            // 品詞UI
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.toggle(
+                    'active',
+                    btn.dataset.category === currentCategory
+                );
+            });
+
+            // タイプUI（※描画はまだしない）
+            document.getElementById('dir-jp-en').classList.toggle('active', currentDirection === 'jp_en');
+            document.getElementById('dir-en-jp').classList.toggle('active', currentDirection === 'en_jp');
+
+            // ★ 最後に1回だけ
             renderLevelGrid();
         });
     </script>

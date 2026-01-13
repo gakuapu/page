@@ -288,7 +288,6 @@
             if (!en || !jp) return;
             const list = getWords();
             if (list.length >= MAX_WORDS) { alert("上限(100単語)です。これ以上登録できません。"); return; }
-            if (list.some(w => w.word.toLowerCase() === en.toLowerCase())) { alert("その単語は既に登録されています"); return; }
 
             list.push({ id: Date.now(), word: en, meaning: jp, status: 2 });
             saveWords(list);
@@ -338,12 +337,6 @@
             const newMeaning = document.getElementById(`edit-meaning-${id}`).value.trim();
 
             if (!newWord || !newMeaning) { alert("単語と意味の両方を入力してください"); return; }
-
-            // 重複チェック（自分自身以外で）
-            if (list.some(w => w.id !== id && w.word.toLowerCase() === newWord.toLowerCase())) {
-                alert("その単語は既に登録されています");
-                return;
-            }
 
             list[idx].word = newWord;
             list[idx].meaning = newMeaning;

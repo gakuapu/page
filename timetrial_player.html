@@ -9,7 +9,9 @@
     <link rel="icon" href="favicon.ico">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
@@ -106,7 +108,7 @@
         }
 
         .progress-bar {
-            height: 6px;
+            height: 8px;
             background: #E2E8F0;
             border-radius: 3px;
             overflow: hidden;
@@ -115,7 +117,7 @@
 
         .progress-value {
             height: 100%;
-            background: var(--success);
+            background: var(--primary);
             width: 0%;
             transition: width 0.3s;
         }
@@ -126,7 +128,7 @@
         }
 
         .timer-bar {
-            height: 6px;
+            height: 4px;
             background: #E2E8F0;
             border-radius: 3px;
             overflow: hidden;
@@ -141,17 +143,23 @@
 
         .question-count {
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-sub);
             margin-bottom: 16px;
             font-weight: 700;
+        }
+
+        .question-count span {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 1.2rem;
         }
 
         .question-card {
             width: 100%;
             background: var(--bg-surface);
             border: 1px solid var(--border);
-            border-radius: 14px;
+            border-radius: 18px;
             padding: 20px 16px;
             text-align: center;
             margin-bottom: 20px;
@@ -159,25 +167,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
             background: #F0F9FF;
             border-color: #BFDBFE;
         }
 
         .question-text {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 800;
             color: var(--text-main);
             line-height: 1.4;
             word-break: break-word;
+            letter-spacing: 0.02em;
         }
 
         .answer-choice {
             width: 100%;
-            height: 48px;
+            height: 56px;
             background: #FAFAFA;
             border: 2px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
             padding: 0 14px;
             margin-bottom: 12px;
             font-size: 1.05rem;
@@ -200,24 +210,25 @@
         }
 
         .answer-choice:active {
-            transform: scale(0.98);
+            transform: scale(0.96);
         }
 
         .answer-choice.correct {
-            background: #DCFCE7;
+            background: #ECFDF5;
             border-color: var(--success);
-            color: var(--success);
+            color: #047857;
         }
 
         .answer-choice.incorrect {
-            background: #FEE2E2;
+            background: #FEF2F2;
             border-color: var(--danger);
-            color: var(--danger);
+            color: #B91C1C;
         }
 
         .answer-choice.disabled {
             opacity: 0.5;
-            cursor: not-allowed;
+            cursor: default;
+            pointer-events: none;
         }
 
         .result-screen {
@@ -311,12 +322,12 @@
             background: white;
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 14px 16px;
+            padding: 10px 12px;
             margin-bottom: 8px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            gap: 16px;
+            justify-content: space-between;
+            gap: 12px;
         }
 
         .wrong-word-item:nth-child(even) {
@@ -337,11 +348,42 @@
             flex: 1;
         }
 
+        .wrong-word-text {
+            flex: 1;
+        }
+
+        .wrong-word-add-btn {
+            background: #F1F5F9;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .wrong-word-deck-btn {
+            position: fixed;
+            right: 16px;
+            bottom: 80px;
+            background: #F1F5F9;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(5px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -400,8 +442,11 @@
             </div>
             <h2 class="result-title">完了！</h2>
             <div class="result-count" id="result-count">正解数: 0問</div>
-            
+
             <div id="wrong-word-list" class="wrong-word-list"></div>
+            <div class="wrong-word-deck-btn" onclick="openDeckModal()">
+                <i class="ph-bold ph-folder-open"></i>
+            </div>
 
             <button class="result-btn" onclick="retryGame()">
                 <i class="ph-bold ph-arrows-clockwise"></i> もう一度
@@ -419,7 +464,6 @@
             currentIndex: 0,
             correctCount: 0,
             timeLeft: 60,
-            isAnswering: false,
             wrongWords: [],
             direction: 'jp_en',
             dataLoaded: false,
@@ -440,13 +484,15 @@
             // ta_n11 -> grade=1, category=n, level=1
             const match = fn.match(/ta_([nva])(\d)(\d+)/);
             if (!match) return null;
-            
+
             const categoryMap = { n: '名詞', v: '動詞', a: '形容詞' };
             const gradeMap = { 1: '中学1年', 2: '中学2年', 3: '中学3年' };
-            
+
             return {
                 grade: gradeMap[match[2]],
+                gradeNum: match[2],
                 category: categoryMap[match[1]],
+                categoryKey: match[1],
                 level: match[3]
             };
         }
@@ -497,7 +543,6 @@
             gameState.currentIndex = 0;
             gameState.correctCount = 0;
             gameState.timeLeft = 120;
-            gameState.isAnswering = false;
             gameState.wrongWords = [];
             gameState.canAnswer = true;
 
@@ -509,10 +554,25 @@
             showQuestion();
         }
 
+        function saveClearStatus(filename, direction) {
+            const key = 'timetrial_clear_status';
+            const data = JSON.parse(localStorage.getItem(key) || '{}');
+
+            if (!data[filename]) {
+                data[filename] = {};
+            }
+
+            // 初回クリアのみ保存（上書きしない）
+            if (!data[filename][direction]) {
+                data[filename][direction] = true;
+                localStorage.setItem(key, JSON.stringify(data));
+            }
+        }
+
         // タイマー開始
         function startTimer() {
             if (gameState.timerInterval) clearInterval(gameState.timerInterval);
-            
+
             gameState.timerInterval = setInterval(() => {
                 gameState.timeLeft -= 0.5;
                 updateTimerDisplay();
@@ -540,17 +600,16 @@
                 return;
             }
 
-            gameState.isAnswering = false;
             gameState.canAnswer = true;
 
             const current = gameState.wordList[gameState.currentIndex];
-            
+
             // 異なる選択肢を確保
             let n1, n2;
             do {
                 n1 = Math.floor(Math.random() * gameState.wordList.length);
             } while (n1 === gameState.currentIndex);
-            
+
             do {
                 n2 = Math.floor(Math.random() * gameState.wordList.length);
             } while (n2 === gameState.currentIndex || n2 === n1);
@@ -638,22 +697,47 @@
             const total = gameState.wordList.length;
             const rate = Math.round((gameState.correctCount / total) * 100);
 
-            document.getElementById('result-count').innerText = `正解数: ${gameState.correctCount}問 / ${total}問 (${rate}%)`;
+            document.getElementById('result-count').innerText =
+                `正解数: ${gameState.correctCount}問 / ${total}問 (${rate}%)`;
 
             // 不正解一覧を表示
+            const listEl = document.getElementById('wrong-word-list');
+
             if (gameState.wrongWords.length > 0) {
-                const listEl = document.getElementById('wrong-word-list');
                 let html = '';
                 gameState.wrongWords.forEach(word => {
                     html += `
-                        <div class="wrong-word-item">
-                            <div class="wrong-word-en">${word[0]}</div>
-                            <div class="wrong-word-jp">${word[1]}</div>
-                        </div>
-                    `;
+                <div class="wrong-word-item">
+                    <div class="wrong-word-text">
+                        <div class="wrong-word-en">${word[0]}</div>
+                        <div class="wrong-word-jp">${word[1]}</div>
+                    </div>
+                    <button class="wrong-word-add-btn"
+                        onclick="quickAddWrongWord('${word[0]}','${word[1]}', this)">
+                        <i class="ph-bold ph-plus"></i>
+                    </button>
+                </div>
+            `;
                 });
                 listEl.innerHTML = html;
                 listEl.style.display = 'block';
+            } else {
+                listEl.style.display = 'none';
+            }
+
+            const deckBtn = document.querySelector('.wrong-word-deck-btn');
+            if (gameState.wrongWords.length > 0) {
+                deckBtn.style.display = 'flex';
+            } else {
+                deckBtn.style.display = 'none';
+            }
+
+            // 全問正解 & 時間切れでない場合のみ
+            if (
+                gameState.correctCount === gameState.wordList.length &&
+                gameState.timeLeft > 0
+            ) {
+                saveClearStatus(filename, gameState.direction);
             }
         }
 
@@ -669,7 +753,67 @@
         // 戻る
         function goBack() {
             if (gameState.timerInterval) clearInterval(gameState.timerInterval);
-            window.location.href = 'timetrial_setting.html';
+            const params = new URLSearchParams({
+                grade: parseFilename(filename)?.gradeNum,
+                category: parseFilename(filename)?.categoryKey,
+                level: parseFilename(filename)?.level,
+                direction: gameState.direction
+            });
+            window.location.href = `timetrial_setting.html?${params.toString()}`;
+        }
+
+        function getDeckMeta() {
+            return JSON.parse(localStorage.getItem('gakuapu_decks_meta') || '[]');
+        }
+
+        function getValidCurrentDeckId() {
+            const id = localStorage.getItem('gakuapu_last_deck');
+            if (!id) return null;
+
+            const meta = getDeckMeta();
+            if (!meta.some(d => d.id == id)) {
+                localStorage.removeItem('gakuapu_last_deck');
+                return null;
+            }
+            return id;
+        }
+
+        function addWordToDeck(deckId, word, meaning) {
+            const key = `gakuapu_deck_${deckId}`;
+            const list = JSON.parse(localStorage.getItem(key) || '[]');
+
+            list.push({
+                id: Date.now(),
+                word,
+                meaning,
+                status: 2
+            });
+
+            localStorage.setItem(key, JSON.stringify(list));
+
+            const meta = getDeckMeta();
+            const idx = meta.findIndex(d => d.id == deckId);
+            if (idx !== -1) {
+                meta[idx].count = list.length;
+                localStorage.setItem('gakuapu_decks_meta', JSON.stringify(meta));
+            }
+        }
+
+        function quickAddWrongWord(word, meaning, btn) {
+            const deckId = getValidCurrentDeckId();
+
+            if (!deckId) {
+                openDeckModal();
+                return;
+            }
+
+            addWordToDeck(deckId, word, meaning);
+
+            btn.innerHTML = '<i class="ph-bold ph-check"></i>';
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+
+            showToast('登録しました');
         }
 
         // ページ読み込み時
