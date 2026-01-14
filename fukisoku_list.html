@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>不規則動詞一覧</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            --bg-body: #F8FAFC;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-sub: #64748B;
+            --border: #E2E8F0;
+            --primary: #3B82F6;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --radius: 18px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-main);
+            padding-bottom: 80px;
+        }
+
+        header {
+            background: var(--bg-surface);
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 40px 1fr auto;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-btn {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: var(--text-sub);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .header-btn:hover {
+            color: var(--primary);
+            background: #F1F5F9;
+        }
+
+        header h1 {
+            font-size: 1rem;
+            font-weight: 800;
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .reset-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 20px;
+        }
+
+        .reset-btn:hover {
+            background: #2563EB;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .list-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-surface);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+        }
+
+        .list-table th {
+            padding: 12px;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            background: #F1F5F9;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .list-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .list-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .list-table tbody tr:hover {
+            background: #F8FAFC;
+        }
+
+        .status-badge {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+
+        .status-badge.green {
+            background: var(--success);
+        }
+
+        .status-badge.yellow {
+            background: var(--warning);
+        }
+
+        .status-badge.red {
+            background: var(--danger);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="fukisoku_player.html" class="header-btn" style="text-decoration: none;">
+            <i class="ph-bold ph-caret-left"></i>
+        </a>
+        <h1>単語一覧</h1>
+        <div style="width: 40px;"></div>
+    </header>
+
+    <main class="container">
+        <table class="list-table">
+            <thead>
+                <tr>
+                    <th style="width: 30px;"></th>
+                    <th>原形</th>
+                    <th>過去形</th>
+                    <th>過去分詞</th>
+                </tr>
+            </thead>
+            <tbody id="list-tbody">
+            </tbody>
+        </table>
+
+        <button class="reset-btn" onclick="listApp.resetAllStatus()">ステータスを戻す</button>
+    </main>
+
+    <script src="fukisoku_data.js"></script>
+    <script>
+        const listApp = {
+            vocabData: [],
+
+            init() {
+                this.loadData();
+                this.loadFromStorage();
+                this.renderList();
+            },
+
+            loadData() {
+                this.vocabData = [
+                    ...JSON.parse(JSON.stringify(VOCAB_SET_1)),
+                    ...JSON.parse(JSON.stringify(VOCAB_SET_2))
+                ];
+            },
+
+            loadFromStorage() {
+                const stored = localStorage.getItem('fukisoku_data');
+                if (stored) {
+                    const data = JSON.parse(stored);
+                    const allVocab = [...data.vocab1, ...data.vocab2];
+                    this.vocabData = allVocab;
+                }
+            },
+
+            saveToStorage() {
+                const vocab1 = this.vocabData.slice(0, VOCAB_SET_1.length);
+                const vocab2 = this.vocabData.slice(VOCAB_SET_1.length);
+                const data = {
+                    vocab1: vocab1,
+                    vocab2: vocab2
+                };
+                localStorage.setItem('fukisoku_data', JSON.stringify(data));
+            },
+
+            renderList() {
+                const tbody = document.getElementById('list-tbody');
+                tbody.innerHTML = '';
+                
+                this.vocabData.forEach(card => {
+                    const tr = document.createElement('tr');
+                    const status = card.status !== undefined ? card.status : 2;
+                    const statusClass = status === 0 ? 'green' : status === 1 ? 'yellow' : 'red';
+                    
+                    tr.innerHTML = `
+                        <td>
+                            <div class="status-badge ${statusClass}"></div>
+                        </td>
+                        <td>${card[0]}</td>
+                        <td>${card[1]}</td>
+                        <td>${card[2]}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            },
+
+            resetAllStatus() {
+                if (confirm('すべてのステータスを赤に戻しますか？')) {
+                    this.vocabData.forEach(card => {
+                        card.status = 2;
+                    });
+                    this.saveToStorage();
+                    this.renderList();
+                }
+            }
+        };
+
+        listApp.init();
+    </script>
+</body>
+</html>

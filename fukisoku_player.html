@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>不規則動詞学習アプリ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            --bg-body: #F8FAFC;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-sub: #64748B;
+            --border: #E2E8F0;
+            --primary: #3B82F6;
+            --primary-light: #EFF6FF;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --radius: 18px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-main);
+            padding-bottom: 80px;
+        }
+
+        header {
+            background: var(--bg-surface);
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 40px 1fr auto;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-btn {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: var(--text-sub);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .header-btn:hover {
+            color: var(--primary);
+            background: #F1F5F9;
+        }
+
+        header h1 {
+            font-size: 1rem;
+            font-weight: 800;
+            margin: 0;
+            text-align: center;
+        }
+
+        body.learning header .header-btn {
+            display: none;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 20px;
+            background: #F1F5F9;
+            border-radius: var(--radius);
+            padding: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            border: none;
+            height: 48px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-btn:hover {
+            color: var(--primary);
+        }
+
+        .nav-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            align-items: stretch;
+        }
+
+        .nav-tabs-wrapper {
+            flex: 1;
+        }
+
+        .test-link-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+            transition: all 0.2s ease;
+            height: 48px;
+            white-space: nowrap;
+        }
+
+        .test-link-btn:hover {
+            background: #2563EB;
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #settings-panel {
+            background: var(--bg-surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 20px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+        }
+
+        .setting-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .filter-btn.selected {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .filter-btn:not(.selected) {
+            opacity: 0.3;
+            transform: scale(0.9);
+        }
+
+        .filter-btn.selected::after {
+            content: "✓";
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .filter-green {
+            background: var(--success);
+        }
+
+        .filter-yellow {
+            background: var(--warning);
+        }
+
+        .filter-red {
+            background: var(--danger);
+        }
+
+        .capsule-group {
+            display: flex;
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: 4px;
+            width: 100%;
+        }
+
+        .capsule-opt {
+            flex: 1;
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            transition: all 0.2s;
+            border: none;
+            background: transparent;
+        }
+
+        .capsule-opt.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #2563EB;
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: #F1F5F9;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            width: auto;
+            padding: 8px 16px;
+        }
+
+        .btn-secondary:hover {
+            background: #E2E8F0;
+        }
+
+        #learning-view {
+            display: none;
+        }
+
+        #learning-view.active {
+            display: block;
+        }
+
+        .progress-area {
+            margin-bottom: 16px;
+        }
+
+        progress {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            appearance: none;
+            background: var(--border);
+        }
+
+        progress::-webkit-progress-bar {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        progress::-webkit-progress-value {
+            background: var(--success);
+            border-radius: 3px;
+        }
+
+        progress::-moz-progress-bar {
+            background: var(--success);
+            border-radius: 3px;
+        }
+
+        .progress-text {
+            text-align: right;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            margin-top: 6px;
+        }
+
+        .card-area {
+            cursor: pointer;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .card {
+            background: var(--bg-surface);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px 20px;
+            text-align: center;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .card-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-row:last-child {
+            border-bottom: none;
+        }
+
+        .card-row-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            min-width: 60px;
+            text-transform: uppercase;
+        }
+
+        .card-row-value {
+            flex: 1;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            margin: 0 16px;
+        }
+
+        .card-row-value.hidden {
+            color: #CBD5E1;
+        }
+
+        .card-row-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .badge-red {
+            background: var(--danger);
+        }
+
+        .badge-yellow {
+            background: var(--warning);
+        }
+
+        .badge-green {
+            background: var(--success);
+        }
+
+        .speak-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .speak-btn:hover {
+            color: #2563EB;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .status-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            color: white;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-btn:active {
+            transform: scale(0.9);
+        }
+
+        .btn-green {
+            background: var(--success);
+        }
+
+        .btn-yellow {
+            background: var(--warning);
+        }
+
+        .btn-red {
+            background: var(--danger);
+        }
+
+        .autoplay-panel {
+            background: #F8FAFC;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .ap-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .ap-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .ap-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider-switch {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #CBD5E1;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider-switch:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider-switch {
+            background-color: var(--primary);
+        }
+
+        input:checked+.slider-switch:before {
+            transform: translateX(20px);
+        }
+
+        .speed-slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .speed-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .speed-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .speed-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border: none;
+        }
+
+        .completion-message {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--success);
+            margin: 80px 0;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #list-view {
+            display: none;
+        }
+
+        #list-view.active {
+            display: block;
+        }
+
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .list-back-btn {
+            background: #F1F5F9;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .list-back-btn:hover {
+            background: #E2E8F0;
+        }
+
+        .list-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-surface);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+        }
+
+        .list-table thead {
+            background: #F1F5F9;
+        }
+
+        .list-table th {
+            padding: 12px;
+            text-align: left;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .list-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .list-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .list-table tbody tr:hover {
+            background: #F8FAFC;
+        }
+
+        .status-badge {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 0;
+        }
+
+        .status-badge.green {
+            background: var(--success);
+        }
+
+        .status-badge.yellow {
+            background: var(--warning);
+        }
+
+        .list-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .list-controls select {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .back-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: #F1F5F9;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.2rem;
+        }
+
+        .back-btn:hover {
+            background: #E2E8F0;
+        }
+
+        .back-btn:active {
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button class="header-btn" onclick="location.href='index_en.html'"><i
+                class="ph-bold ph-caret-left"></i></button>
+        <h1>不規則動詞</h1>
+        <div style="width: 40px;"></div>
+    </header>
+
+    <main class="container">
+        <!-- 設定パネル -->
+        <div id="settings-panel" class="section active">
+            <div class="nav-container">
+                <div class="nav-tabs-wrapper">
+                    <div class="nav-tabs">
+                        <button class="nav-btn active" data-mode="vocab1">単語帳1</button>
+                        <button class="nav-btn" data-mode="vocab2">単語帳2</button>
+                    </div>
+                </div>
+                <button class="test-link-btn" onclick="app.showList()">一覧</button>
+            </div>
+
+            <!-- 単語帳1設定 -->
+            <div id="vocab1-settings" class="section active">
+                <div style="margin-bottom: 20px;">
+                    <span class="setting-label">対象カード</span>
+                    <div class="setting-row">
+                        <button class="filter-btn filter-green selected" id="vocab1-green"
+                            onclick="app.toggleColor('green', 1)"></button>
+                        <button class="filter-btn filter-yellow selected" id="vocab1-yellow"
+                            onclick="app.toggleColor('yellow', 1)"></button>
+                        <button class="filter-btn filter-red selected" id="vocab1-red"
+                            onclick="app.toggleColor('red', 1)"></button>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom: 20px;">
+                    <div>
+                        <span class="setting-label">順番</span>
+                        <div class="capsule-group">
+                            <button class="capsule-opt active" id="vocab1-order-seq"
+                                onclick="app.setOrder(1, 'seq')">登録順</button>
+                            <button class="capsule-opt" id="vocab1-order-shuffle"
+                                onclick="app.setOrder(1, 'shuffle')">ランダム</button>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="setting-label">モード</span>
+                        <div class="capsule-group">
+                            <button class="capsule-opt active" id="vocab1-mode-past"
+                                onclick="app.setMode(1, 'past')">過去形</button>
+                            <button class="capsule-opt" id="vocab1-mode-full"
+                                onclick="app.setMode(1, 'full')">過去形＋過去分詞</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" onclick="app.startVocab(1)">スタート</button>
+            </div>
+
+            <!-- 単語帳2設定 -->
+            <div id="vocab2-settings" class="section">
+                <div style="margin-bottom: 20px;">
+                    <span class="setting-label">対象カード</span>
+                    <div class="setting-row">
+                        <button class="filter-btn filter-green selected" id="vocab2-green"
+                            onclick="app.toggleColor('green', 2)"></button>
+                        <button class="filter-btn filter-yellow selected" id="vocab2-yellow"
+                            onclick="app.toggleColor('yellow', 2)"></button>
+                        <button class="filter-btn filter-red selected" id="vocab2-red"
+                            onclick="app.toggleColor('red', 2)"></button>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom: 20px;">
+                    <div>
+                        <span class="setting-label">順番</span>
+                        <div class="capsule-group">
+                            <button class="capsule-opt active" id="vocab2-order-seq"
+                                onclick="app.setOrder(2, 'seq')">登録順</button>
+                            <button class="capsule-opt" id="vocab2-order-shuffle"
+                                onclick="app.setOrder(2, 'shuffle')">ランダム</button>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="setting-label">モード</span>
+                        <div class="capsule-group">
+                            <button class="capsule-opt active" id="vocab2-mode-past"
+                                onclick="app.setMode(2, 'past')">過去形</button>
+                            <button class="capsule-opt" id="vocab2-mode-full"
+                                onclick="app.setMode(2, 'full')">過去形/過去分詞</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" onclick="app.startVocab(2)">スタート</button>
+            </div>
+        </div>
+
+        <!-- 学習ビュー -->
+        <div id="learning-view" class="section">
+            <div class="progress-area">
+                <progress id="progress-bar" value="0"></progress>
+                <div class="progress-text"><span id="current-idx">1</span> / <span id="total-idx">30</span></div>
+            </div>
+
+            <div class="card-area" onclick="app.nextForm()">
+                <div class="card">
+                    <div id="card-badge" class="card-badge badge-red"></div>
+                    <div id="card-content" class="card-content">
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group" style="justify-content: center;">
+                <button class="back-btn" onclick="app.prevCard()"><i class="ph-bold ph-caret-left"></i></button>
+                <button class="status-btn btn-green" onclick="app.changeStatus(0)"></button>
+                <button class="status-btn btn-yellow" onclick="app.changeStatus(1)"></button>
+                <button class="status-btn btn-red" onclick="app.changeStatus(2)"></button>
+                <button class="back-btn" onclick="app.skipToNext()"><i class="ph-bold ph-caret-right"></i></button>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn btn-secondary" onclick="app.quit()">
+                    <i class="ph-bold ph-sign-out"></i> 設定に戻る
+                </button>
+            </div>
+
+            <div class="autoplay-panel">
+                <div class="ap-row">
+                    <div class="ap-label"><i class="ph-fill ph-play-circle" style="color:var(--primary)"></i> 自動再生</div>
+                    <label class="switch">
+                        <input type="checkbox" id="ap-switch" onchange="app.toggleAutoPlay()">
+                        <span class="slider-switch"></span>
+                    </label>
+                </div>
+                <div class="ap-row">
+                    <div class="ap-label"><i class="ph-bold ph-tortoise"></i></div>
+                    <div class="speed-slider-container">
+                        <input type="range" id="ap-speed-slider" class="speed-slider" min="1" max="3" step="1" value="2"
+                            oninput="app.updateSpeed()">
+                    </div>
+                    <div class="ap-label"><i class="ph-bold ph-hare"></i></div>
+                </div>
+                <div class="ap-row">
+                    <div class="ap-label"><i class="ph-fill ph-speaker-high"></i> 音声を再生</div>
+                    <label class="switch">
+                        <input type="checkbox" id="ap-audio-switch" checked onchange="app.updateAudioSetting()">
+                        <span class="slider-switch"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 一覧ビュー -->
+        <div id="list-view" class="section">
+            <div class="list-header">
+                <h2 style="font-size: 1.2rem; margin: 0;">単語一覧</h2>
+                <button class="list-back-btn" onclick="app.backToSettings()">戻る</button>
+            </div>
+
+            <h3 style="font-size: 1rem; margin-top: 20px; margin-bottom: 12px;">単語帳1</h3>
+            <table class="list-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">ステータス</th>
+                        <th>原形</th>
+                        <th>過去形</th>
+                        <th>過去分詞</th>
+                    </tr>
+                </thead>
+                <tbody id="list-tbody-1">
+                </tbody>
+            </table>
+
+            <h3 style="font-size: 1rem; margin-top: 24px; margin-bottom: 12px;">単語帳2</h3>
+            <table class="list-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">ステータス</th>
+                        <th>原形</th>
+                        <th>過去形</th>
+                        <th>過去分詞</th>
+                    </tr>
+                </thead>
+                <tbody id="list-tbody-2">
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="fukisoku_data.js"></script>
+    <script>
+        const app = {
+            vocabData: { 1: [], 2: [] },
+            currentIndex: 0,
+            currentForm: 0,
+            currentSetNum: null,
+            colorFilters: {
+                1: { green: true, yellow: true, red: true },
+                2: { green: true, yellow: true, red: true }
+            },
+            orderSettings: {
+                1: 'seq',
+                2: 'seq'
+            },
+            modeSettings: {
+                1: 'past',
+                2: 'past'
+            },
+            autoPlaySettings: {
+                isAutoPlay: false,
+                speed: 2,
+                audioOn: true
+            },
+            autoPlayTimer: null,
+
+            init() {
+                this.loadData();
+                this.loadFromStorage();
+                this.setupNavigation();
+            },
+
+            loadData() {
+                this.vocabData[1] = JSON.parse(JSON.stringify(VOCAB_SET_1));
+                this.vocabData[2] = JSON.parse(JSON.stringify(VOCAB_SET_2));
+
+                if (!localStorage.getItem('fukisoku_initialized')) {
+                    this.vocabData[1].forEach(card => { if (card.status === undefined) card.status = 2; });
+                    this.vocabData[2].forEach(card => { if (card.status === undefined) card.status = 2; });
+                    localStorage.setItem('fukisoku_initialized', 'true');
+                    this.saveToStorage();
+                }
+            },
+
+            loadFromStorage() {
+                const stored = localStorage.getItem('fukisoku_data');
+                if (stored) {
+                    const data = JSON.parse(stored);
+                    this.vocabData[1] = data.vocab1;
+                    this.vocabData[2] = data.vocab2;
+                }
+            },
+
+            saveToStorage() {
+                const data = {
+                    vocab1: this.vocabData[1],
+                    vocab2: this.vocabData[2]
+                };
+                localStorage.setItem('fukisoku_data', JSON.stringify(data));
+            },
+
+            setupNavigation() {
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const mode = e.target.dataset.mode;
+                        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                        document.querySelectorAll('[id$="-settings"]').forEach(s => s.classList.remove('active'));
+                        e.target.classList.add('active');
+                        document.getElementById(mode + '-settings').classList.add('active');
+                    });
+                });
+            },
+
+            toggleColor(color, setNum) {
+                this.colorFilters[setNum][color] = !this.colorFilters[setNum][color];
+                const btn = document.getElementById(`vocab${setNum}-${color}`);
+                if (this.colorFilters[setNum][color]) {
+                    btn.classList.add('selected');
+                } else {
+                    btn.classList.remove('selected');
+                }
+            },
+
+            setOrder(setNum, order) {
+                this.orderSettings[setNum] = order;
+                document.getElementById(`vocab${setNum}-order-seq`).classList.toggle('active', order === 'seq');
+                document.getElementById(`vocab${setNum}-order-shuffle`).classList.toggle('active', order === 'shuffle');
+            },
+
+            setMode(setNum, mode) {
+                this.modeSettings[setNum] = mode;
+                document.getElementById(`vocab${setNum}-mode-past`).classList.toggle('active', mode === 'past');
+                document.getElementById(`vocab${setNum}-mode-full`).classList.toggle('active', mode === 'full');
+            },
+
+            startVocab(setNum) {
+                document.body.classList.add('learning');
+                this.currentSetNum = setNum;
+                const order = this.orderSettings[setNum];
+                const mode = this.modeSettings[setNum];
+
+                let data = this.vocabData[setNum].slice();
+
+                data = data.filter(card => {
+                    const status = card.status !== undefined ? card.status : 2;
+                    if (status === 0 && this.colorFilters[setNum].green) return true;
+                    if (status === 1 && this.colorFilters[setNum].yellow) return true;
+                    if (status === 2 && this.colorFilters[setNum].red) return true;
+                    return false;
+                });
+
+                if (data.length === 0) {
+                    alert('学習対象のカードがありません');
+                    return;
+                }
+
+                if (order === 'shuffle') {
+                    data = this.shuffle(data);
+                }
+
+                this.currentMode = {
+                    type: 'vocab',
+                    setNum,
+                    data,
+                    mode: mode === 'past' ? 'past' : 'full'
+                };
+                this.currentIndex = 0;
+                this.currentForm = 0;
+
+                document.getElementById('settings-panel').classList.remove('active');
+                document.getElementById('learning-view').classList.add('active');
+
+                document.getElementById('total-idx').innerText = data.length;
+                this.displayCard();
+            },
+
+            displayCard() {
+                if (!this.currentMode || this.currentIndex >= this.currentMode.data.length) {
+                    this.showCompletion();
+                    return;
+                }
+
+                const card = this.currentMode.data[this.currentIndex];
+                const maxCol = this.currentMode.mode === 'past' ? 1 : 2;
+
+                const cardContent = document.getElementById('card-content');
+                cardContent.innerHTML = '';
+
+                // 原形行
+                const row0 = document.createElement('div');
+                row0.className = 'card-row';
+                const label0 = document.createElement('div');
+                label0.className = 'card-row-label';
+                label0.textContent = '原形';
+                const value0 = document.createElement('div');
+                value0.className = 'card-row-value';
+                value0.textContent = card[0];
+                const btnDiv0 = document.createElement('div');
+                btnDiv0.className = 'card-row-btn';
+                const btn0 = document.createElement('button');
+                btn0.className = 'speak-btn';
+                btn0.innerHTML = '<i class="ph-fill ph-speaker-high"></i>';
+                btn0.onclick = (e) => { e.stopPropagation(); app.speak(card[0]); };
+                btnDiv0.appendChild(btn0);
+                row0.appendChild(label0);
+                row0.appendChild(value0);
+                row0.appendChild(btnDiv0);
+                cardContent.appendChild(row0);
+
+                // 過去形行
+                const row1 = document.createElement('div');
+                row1.className = 'card-row';
+                const label1 = document.createElement('div');
+                label1.className = 'card-row-label';
+                label1.textContent = '過去形';
+                const value1 = document.createElement('div');
+                value1.className = 'card-row-value' + (this.currentForm >= 1 ? '' : ' hidden');
+                value1.textContent = this.currentForm >= 1 ? card[1] : '?';
+                const btnDiv1 = document.createElement('div');
+                btnDiv1.className = 'card-row-btn';
+                const btn1 = document.createElement('button');
+                btn1.className = 'speak-btn';
+                btn1.innerHTML = '<i class="ph-fill ph-speaker-high"></i>';
+                btn1.style.display = this.currentForm >= 1 ? 'flex' : 'none';
+                btn1.onclick = (e) => { e.stopPropagation(); app.speak(card[1]); };
+                btnDiv1.appendChild(btn1);
+                row1.appendChild(label1);
+                row1.appendChild(value1);
+                row1.appendChild(btnDiv1);
+                cardContent.appendChild(row1);
+
+                // 過去分詞行（モードが過去形+過去分詞の場合のみ表示）
+                if (maxCol > 1) {
+                    const row2 = document.createElement('div');
+                    row2.className = 'card-row';
+                    const label2 = document.createElement('div');
+                    label2.className = 'card-row-label';
+                    label2.textContent = '過去分詞';
+                    const value2 = document.createElement('div');
+                    value2.className = 'card-row-value' + (this.currentForm >= 2 ? '' : ' hidden');
+                    value2.textContent = this.currentForm >= 2 ? card[2] : '?';
+                    const btnDiv2 = document.createElement('div');
+                    btnDiv2.className = 'card-row-btn';
+                    const btn2 = document.createElement('button');
+                    btn2.className = 'speak-btn';
+                    btn2.innerHTML = '<i class="ph-fill ph-speaker-high"></i>';
+                    btn2.style.display = this.currentForm >= 2 ? 'flex' : 'none';
+                    btn2.onclick = (e) => { e.stopPropagation(); app.speak(card[2]); };
+                    btnDiv2.appendChild(btn2);
+                    row2.appendChild(label2);
+                    row2.appendChild(value2);
+                    row2.appendChild(btnDiv2);
+                    cardContent.appendChild(row2);
+                }
+
+                const s = card.status !== undefined ? card.status : 2;
+                const badge = document.getElementById('card-badge');
+                badge.className = 'card-badge ' + (s === 0 ? 'badge-green' : s === 1 ? 'badge-yellow' : 'badge-red');
+
+                document.getElementById('current-idx').textContent = this.currentIndex + 1;
+                document.getElementById('progress-bar').value = this.currentIndex / this.currentMode.data.length;
+
+                if (this.autoPlaySettings.isAutoPlay) {
+                    this.scheduleAutoPlay();
+                }
+            },
+
+            nextForm() {
+                const maxForm = this.currentMode.mode === 'past' ? 1 : 2;
+
+                if (this.currentForm < maxForm) {
+                    this.currentForm++;
+                    this.displayCard();
+                } else {
+                    this.currentForm = 0;
+                    this.currentIndex++;
+                    if (this.currentIndex >= this.currentMode.data.length) {
+                        this.showCompletion();
+                    } else {
+                        this.displayCard();
+                    }
+                }
+            },
+
+            skipToNext() {
+                this.currentForm = 0;
+                this.currentIndex++;
+                if (this.currentIndex >= this.currentMode.data.length) {
+                    this.showCompletion();
+                } else {
+                    this.displayCard();
+                }
+            },
+
+            prevCard() {
+                if (this.currentIndex > 0) {
+                    this.currentIndex--;
+                    this.currentForm = 0;
+                    this.displayCard();
+                }
+            },
+
+            changeStatus(status) {
+                const card = this.currentMode.data[this.currentIndex];
+                card.status = status;
+                this.saveToStorage();
+                const badge = document.getElementById('card-badge');
+                badge.className = 'card-badge ' + (status === 0 ? 'badge-green' : status === 1 ? 'badge-yellow' : 'badge-red');
+            },
+
+            speak(text) {
+                speechSynthesis.cancel();
+
+                // 発音の例外処理
+                let textToSpeak = text;
+                if (text === 'read' && this.currentForm >= 1) {
+                    // readの過去形・過去分詞は「red」として発音
+                    textToSpeak = 'red';
+                } else if (text === 'forgot(forgotten)') {
+                    // forgettenは「forgot」として発音
+                    textToSpeak = 'forgot';
+                }
+
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                speechSynthesis.speak(utterance);
+            },
+
+            toggleAutoPlay() {
+                const isChecked = document.getElementById('ap-switch').checked;
+                this.autoPlaySettings.isAutoPlay = isChecked;
+
+                if (isChecked) {
+                    this.scheduleAutoPlay();
+                } else {
+                    clearTimeout(this.autoPlayTimer);
+                }
+            },
+
+            updateSpeed() {
+                const slider = document.getElementById('ap-speed-slider');
+                this.autoPlaySettings.speed = Number(slider.value);
+            },
+
+            updateAudioSetting() {
+                const audioSwitch = document.getElementById('ap-audio-switch');
+                this.autoPlaySettings.audioOn = audioSwitch.checked;
+            },
+
+            getAutoPlayInterval() {
+                const intervals = { 1: 2500, 2: 2000, 3: 1500 };
+                return intervals[this.autoPlaySettings.speed];
+            },
+
+            scheduleAutoPlay() {
+                clearTimeout(this.autoPlayTimer);
+                if (!this.autoPlaySettings.isAutoPlay) return;
+                this.autoPlayTimer = setTimeout(() => {
+                    if (!this.autoPlaySettings.isAutoPlay) return;
+                    this.nextForm();
+                    this.scheduleAutoPlay();
+                }, this.getAutoPlayInterval());
+            },
+
+            showCompletion() {
+                document.getElementById('learning-view').innerHTML = `
+                    <div class="completion-message">Complete!</div>
+                    <div style="text-align: center;">
+                        <button class="btn btn-primary" style="max-width: 200px;" onclick="app.retry()">もう一度</button>
+                        <button class="btn btn-secondary" style="max-width: 200px; margin-top: 10px;" onclick="app.quit()">設定に戻る</button>
+                    </div>
+                `;
+            },
+
+            retry() {
+                this.startVocab(this.currentSetNum);
+            },
+
+            quit() {
+                document.body.classList.remove('learning');
+
+                clearTimeout(this.autoPlayTimer);
+                this.autoPlaySettings.isAutoPlay = false;
+
+                document.getElementById('learning-view').classList.remove('active');
+                document.getElementById('settings-panel').classList.add('active');
+
+                const { speed, audioOn, isAutoPlay } = this.autoPlaySettings;
+
+                document.getElementById('learning-view').innerHTML = `
+                <div class="progress-area">
+                    <progress id="progress-bar" value="0"></progress>
+                    <div class="progress-text">
+                        <span id="current-idx">1</span> / <span id="total-idx">30</span>
+                    </div>
+                </div>
+
+                <div class="card-area" onclick="app.nextForm()">
+                    <div class="card">
+                        <div id="card-badge" class="card-badge badge-red"></div>
+                        <div id="card-content" class="card-content"></div>
+                    </div>
+                </div>
+
+                <div class="btn-group" style="justify-content: center;">
+                    <button class="back-btn" onclick="app.prevCard()">
+                        <i class="ph-bold ph-caret-left"></i>
+                    </button>
+                    <button class="status-btn btn-green" onclick="app.changeStatus(0)"></button>
+                    <button class="status-btn btn-yellow" onclick="app.changeStatus(1)"></button>
+                    <button class="status-btn btn-red" onclick="app.changeStatus(2)"></button>
+                    <button class="back-btn" style="background:#F1F5F9;" onclick="app.skipToNext()">
+                        <i class="ph-bold ph-caret-right"></i>
+                    </button>
+                </div>
+
+                <div style="text-align:center;">
+                    <button class="btn btn-secondary" onclick="app.quit()">
+                        <i class="ph-bold ph-sign-out"></i> 設定に戻る
+                    </button>
+                </div>
+
+                <div class="autoplay-panel">
+                    <div class="ap-row">
+                        <div class="ap-label">
+                            <i class="ph-fill ph-play-circle" style="color:var(--primary)"></i> 自動再生
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox"
+                                id="ap-switch"
+                                ${isAutoPlay ? 'checked' : ''}
+                                onchange="app.toggleAutoPlay()">
+                            <span class="slider-switch"></span>
+                        </label>
+                    </div>
+
+                    <div class="ap-row">
+                        <div class="ap-label"><i class="ph-bold ph-tortoise"></i></div>
+                        <div class="speed-slider-container">
+                            <input type="range"
+                                id="ap-speed-slider"
+                                class="speed-slider"
+                                min="1" max="3" step="1"
+                                value="${speed}"
+                                oninput="app.updateSpeed()">
+                        </div>
+                        <div class="ap-label"><i class="ph-bold ph-hare"></i></div>
+                    </div>
+
+                    <div class="ap-row">
+                        <div class="ap-label">
+                            <i class="ph-fill ph-speaker-high"></i> 音声を再生
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox"
+                                id="ap-audio-switch"
+                                ${audioOn ? 'checked' : ''}
+                                onchange="app.updateAudioSetting()">
+                            <span class="slider-switch"></span>
+                        </label>
+                    </div>
+                </div>
+            `;
+            },
+
+            shuffle(array) {
+                const arr = [...array];
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr;
+            }
+        };
+
+        app.init();
+    </script>
+</body>
+
+</html>
