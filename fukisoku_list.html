@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>不規則動詞一覧</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         :root {
@@ -88,7 +91,7 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
-            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         .reset-btn:hover {
@@ -147,18 +150,37 @@
         .status-badge.red {
             background: var(--danger);
         }
+
+        .status-badge {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            cursor: pointer;
+            /* ★追加 */
+            transition: transform 0.2s ease;
+            /* ★追加：ホバー時のアニメーション */
+        }
+
+        .status-badge:hover {
+            transform: scale(1.2);
+            /* ★追加：ホバー時に少し大きくなる */
+        }
     </style>
 </head>
+
 <body>
     <header>
         <a href="fukisoku_player.html" class="header-btn" style="text-decoration: none;">
             <i class="ph-bold ph-caret-left"></i>
         </a>
-        <h1>単語一覧</h1>
+        <h1>不規則動詞一覧</h1>
         <div style="width: 40px;"></div>
     </header>
 
     <main class="container">
+        <button class="reset-btn" onclick="listApp.resetAllStatus()">ステータスを戻す</button>
+
         <table class="list-table">
             <thead>
                 <tr>
@@ -171,8 +193,6 @@
             <tbody id="list-tbody">
             </tbody>
         </table>
-
-        <button class="reset-btn" onclick="listApp.resetAllStatus()">ステータスを戻す</button>
     </main>
 
     <script src="fukisoku_data.js"></script>
@@ -182,29 +202,47 @@
 
             init() {
                 this.loadData();
-                this.loadFromStorage();
                 this.renderList();
             },
 
             loadData() {
+                const stored = localStorage.getItem('fukisoku_data');
+
+                if (!stored) {
+                    console.warn('学習データが見つかりません');
+                    this.vocabData = [];
+                    return;
+                }
+
+                const data = JSON.parse(stored);
+
                 this.vocabData = [
-                    ...JSON.parse(JSON.stringify(VOCAB_SET_1)),
-                    ...JSON.parse(JSON.stringify(VOCAB_SET_2))
+                    ...data.vocab1.map(cardData => ({
+                        forms: cardData.forms,
+                        status: cardData.status ?? 2,
+                        set: 1
+                    })),
+                    ...data.vocab2.map(cardData => ({
+                        forms: cardData.forms,
+                        status: cardData.status ?? 2,
+                        set: 2
+                    }))
                 ];
             },
 
-            loadFromStorage() {
-                const stored = localStorage.getItem('fukisoku_data');
-                if (stored) {
-                    const data = JSON.parse(stored);
-                    const allVocab = [...data.vocab1, ...data.vocab2];
-                    this.vocabData = allVocab;
-                }
-            },
-
             saveToStorage() {
-                const vocab1 = this.vocabData.slice(0, VOCAB_SET_1.length);
-                const vocab2 = this.vocabData.slice(VOCAB_SET_1.length);
+                const vocab1Count = VOCAB_SET_1.length;
+
+                const vocab1 = this.vocabData.slice(0, vocab1Count).map(card => ({
+                    forms: card.forms,
+                    status: card.status
+                }));
+
+                const vocab2 = this.vocabData.slice(vocab1Count).map(card => ({
+                    forms: card.forms,
+                    status: card.status
+                }));
+
                 const data = {
                     vocab1: vocab1,
                     vocab2: vocab2
@@ -215,22 +253,38 @@
             renderList() {
                 const tbody = document.getElementById('list-tbody');
                 tbody.innerHTML = '';
-                
-                this.vocabData.forEach(card => {
+
+                this.vocabData.forEach((card, index) => {
                     const tr = document.createElement('tr');
-                    const status = card.status !== undefined ? card.status : 2;
+                    const status = card.status ?? 2;
                     const statusClass = status === 0 ? 'green' : status === 1 ? 'yellow' : 'red';
-                    
+
                     tr.innerHTML = `
-                        <td>
-                            <div class="status-badge ${statusClass}"></div>
-                        </td>
-                        <td>${card[0]}</td>
-                        <td>${card[1]}</td>
-                        <td>${card[2]}</td>
-                    `;
+                    <td>
+                        <div class="status-badge ${statusClass}" data-index="${index}"></div>
+                    </td>
+                    <td>${card.forms[0]}</td>
+                    <td>${card.forms[1]}</td>
+                    <td>${card.forms[2]}</td>
+                `;
                     tbody.appendChild(tr);
                 });
+
+                // ★イベントリスナーを追加
+                document.querySelectorAll('.status-badge').forEach(badge => {
+                    badge.addEventListener('click', (e) => {
+                        const index = parseInt(e.target.dataset.index);
+                        this.cycleStatus(index);
+                    });
+                });
+            },
+
+            cycleStatus(index) {
+                const card = this.vocabData[index];
+                // 赤(2) → 黄色(1) → 緑(0) → 赤(2)
+                card.status = (card.status + 2) % 3;
+                this.saveToStorage();
+                this.renderList();
             },
 
             resetAllStatus() {
@@ -247,4 +301,5 @@
         listApp.init();
     </script>
 </body>
+
 </html>

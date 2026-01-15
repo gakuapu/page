@@ -763,6 +763,25 @@
         .back-btn:active {
             transform: scale(0.9);
         }
+
+        .completion-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            max-width: 320px;
+            margin: 0 auto 40px;
+        }
+
+        .completion-main-btn {
+            font-size: 1.05rem;
+            padding: 16px;
+            border-radius: 16px;
+        }
+
+        .completion-sub-btn {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
     </style>
 </head>
 
@@ -784,7 +803,7 @@
                         <button class="nav-btn" data-mode="vocab2">単語帳2</button>
                     </div>
                 </div>
-                <button class="test-link-btn" onclick="app.showList()">一覧</button>
+                <button class="test-link-btn" onclick="location.href='fukisoku_list.html'">一覧</button>
             </div>
 
             <!-- 単語帳1設定 -->
@@ -881,9 +900,9 @@
 
             <div class="btn-group" style="justify-content: center;">
                 <button class="back-btn" onclick="app.prevCard()"><i class="ph-bold ph-caret-left"></i></button>
-                <button class="status-btn btn-green" onclick="app.changeStatus(0)"></button>
-                <button class="status-btn btn-yellow" onclick="app.changeStatus(1)"></button>
-                <button class="status-btn btn-red" onclick="app.changeStatus(2)"></button>
+                <button class="status-btn btn-green" onclick="event.stopPropagation(); app.changeStatus(0)"></button>
+                <button class="status-btn btn-yellow" onclick="event.stopPropagation(); app.changeStatus(1)"></button>
+                <button class="status-btn btn-red" onclick="event.stopPropagation(); app.changeStatus(2)"></button>
                 <button class="back-btn" onclick="app.skipToNext()"><i class="ph-bold ph-caret-right"></i></button>
             </div>
 
@@ -919,41 +938,21 @@
             </div>
         </div>
 
-        <!-- 一覧ビュー -->
-        <div id="list-view" class="section">
-            <div class="list-header">
-                <h2 style="font-size: 1.2rem; margin: 0;">単語一覧</h2>
-                <button class="list-back-btn" onclick="app.backToSettings()">戻る</button>
+        <!-- 完了ビュー -->
+        <div id="completion-view" class="section">
+            <div class="completion-message">Complete!</div>
+
+            <div class="completion-actions">
+                <button class="btn btn-primary completion-main-btn" onclick="app.retry()">
+                    もう一度チャレンジ
+                </button>
+
+                <button class="btn btn-secondary completion-sub-btn" onclick="app.quit()">
+                    設定に戻る
+                </button>
             </div>
-
-            <h3 style="font-size: 1rem; margin-top: 20px; margin-bottom: 12px;">単語帳1</h3>
-            <table class="list-table">
-                <thead>
-                    <tr>
-                        <th style="width: 50px;">ステータス</th>
-                        <th>原形</th>
-                        <th>過去形</th>
-                        <th>過去分詞</th>
-                    </tr>
-                </thead>
-                <tbody id="list-tbody-1">
-                </tbody>
-            </table>
-
-            <h3 style="font-size: 1rem; margin-top: 24px; margin-bottom: 12px;">単語帳2</h3>
-            <table class="list-table">
-                <thead>
-                    <tr>
-                        <th style="width: 50px;">ステータス</th>
-                        <th>原形</th>
-                        <th>過去形</th>
-                        <th>過去分詞</th>
-                    </tr>
-                </thead>
-                <tbody id="list-tbody-2">
-                </tbody>
-            </table>
         </div>
+
     </main>
 
     <script src="fukisoku_data.js"></script>
@@ -984,29 +983,45 @@
 
             init() {
                 this.loadData();
-                this.loadFromStorage();
                 this.setupNavigation();
             },
 
             loadData() {
-                this.vocabData[1] = JSON.parse(JSON.stringify(VOCAB_SET_1));
-                this.vocabData[2] = JSON.parse(JSON.stringify(VOCAB_SET_2));
-
-                if (!localStorage.getItem('fukisoku_initialized')) {
-                    this.vocabData[1].forEach(card => { if (card.status === undefined) card.status = 2; });
-                    this.vocabData[2].forEach(card => { if (card.status === undefined) card.status = 2; });
-                    localStorage.setItem('fukisoku_initialized', 'true');
-                    this.saveToStorage();
-                }
-            },
-
-            loadFromStorage() {
                 const stored = localStorage.getItem('fukisoku_data');
                 if (stored) {
                     const data = JSON.parse(stored);
+                    const isValidSet = (set) =>
+                        Array.isArray(set) &&
+                        set.length > 0 &&
+                        set[0].forms &&
+                        Array.isArray(set[0].forms);
+                    if (!isValidSet(data.vocab1) || !isValidSet(data.vocab2)) {
+                        console.log('データ形式が異なるため、リセットします');
+                        this.vocabData[1] = VOCAB_SET_1.map(forms => ({
+                            forms,
+                            status: 2
+                        }));
+                        this.vocabData[2] = VOCAB_SET_2.map(forms => ({
+                            forms,
+                            status: 2
+                        }));
+                        this.saveToStorage();
+                        return;
+                    }
                     this.vocabData[1] = data.vocab1;
                     this.vocabData[2] = data.vocab2;
+                    return;
                 }
+                // 初回
+                this.vocabData[1] = VOCAB_SET_1.map(forms => ({
+                    forms,
+                    status: 2
+                }));
+                this.vocabData[2] = VOCAB_SET_2.map(forms => ({
+                    forms,
+                    status: 2
+                }));
+                this.saveToStorage();
             },
 
             saveToStorage() {
@@ -1057,29 +1072,24 @@
                 const order = this.orderSettings[setNum];
                 const mode = this.modeSettings[setNum];
 
-                let data = this.vocabData[setNum].slice();
-
-                data = data.filter(card => {
-                    const status = card.status !== undefined ? card.status : 2;
+                let data = this.vocabData[setNum].filter(cardData => {  // ★変更
+                    const status = cardData.status ?? 2;  // ★変更
                     if (status === 0 && this.colorFilters[setNum].green) return true;
                     if (status === 1 && this.colorFilters[setNum].yellow) return true;
                     if (status === 2 && this.colorFilters[setNum].red) return true;
                     return false;
                 });
 
-                if (data.length === 0) {
-                    alert('学習対象のカードがありません');
-                    return;
-                }
-
                 if (order === 'shuffle') {
-                    data = this.shuffle(data);
+                    data = [...data];
+                    this.shuffle(data);
                 }
 
                 this.currentMode = {
-                    type: 'vocab',
                     setNum,
-                    data,
+                    indices: data.map(cardData =>  // ★変更
+                        this.vocabData[setNum].indexOf(cardData)
+                    ),
                     mode: mode === 'past' ? 'past' : 'full'
                 };
                 this.currentIndex = 0;
@@ -1093,77 +1103,106 @@
             },
 
             displayCard() {
-                if (!this.currentMode || this.currentIndex >= this.currentMode.data.length) {
+                if (!this.currentMode || this.currentIndex >= this.currentMode.indices.length) {
                     this.showCompletion();
                     return;
                 }
 
-                const card = this.currentMode.data[this.currentIndex];
+                const vocabIndex = this.currentMode.indices[this.currentIndex];
+                const cardData = this.vocabData[this.currentSetNum][vocabIndex];
+                const card = cardData.forms;  // ★変更：配列を取得
+
                 const maxCol = this.currentMode.mode === 'past' ? 1 : 2;
 
                 const cardContent = document.getElementById('card-content');
                 cardContent.innerHTML = '';
 
-                // 原形行
+                /* ========= 原形 ========= */
                 const row0 = document.createElement('div');
                 row0.className = 'card-row';
+
                 const label0 = document.createElement('div');
                 label0.className = 'card-row-label';
                 label0.textContent = '原形';
+
                 const value0 = document.createElement('div');
                 value0.className = 'card-row-value';
                 value0.textContent = card[0];
+
                 const btnDiv0 = document.createElement('div');
                 btnDiv0.className = 'card-row-btn';
+
                 const btn0 = document.createElement('button');
                 btn0.className = 'speak-btn';
                 btn0.innerHTML = '<i class="ph-fill ph-speaker-high"></i>';
-                btn0.onclick = (e) => { e.stopPropagation(); app.speak(card[0]); };
+                btn0.onclick = (e) => {
+                    e.stopPropagation();
+                    this.speak(card[0]);
+                };
+
                 btnDiv0.appendChild(btn0);
                 row0.appendChild(label0);
                 row0.appendChild(value0);
                 row0.appendChild(btnDiv0);
                 cardContent.appendChild(row0);
 
-                // 過去形行
+                /* ========= 過去形 ========= */
                 const row1 = document.createElement('div');
                 row1.className = 'card-row';
+
                 const label1 = document.createElement('div');
                 label1.className = 'card-row-label';
                 label1.textContent = '過去形';
+
                 const value1 = document.createElement('div');
-                value1.className = 'card-row-value' + (this.currentForm >= 1 ? '' : ' hidden');
+                value1.className =
+                    'card-row-value' + (this.currentForm >= 1 ? '' : ' hidden');
                 value1.textContent = this.currentForm >= 1 ? card[1] : '?';
+
                 const btnDiv1 = document.createElement('div');
                 btnDiv1.className = 'card-row-btn';
+
                 const btn1 = document.createElement('button');
                 btn1.className = 'speak-btn';
                 btn1.innerHTML = '<i class="ph-fill ph-speaker-high"></i>';
                 btn1.style.display = this.currentForm >= 1 ? 'flex' : 'none';
-                btn1.onclick = (e) => { e.stopPropagation(); app.speak(card[1]); };
+                btn1.onclick = (e) => {
+                    e.stopPropagation();
+                    this.speak(card[1]);
+                };
+
                 btnDiv1.appendChild(btn1);
                 row1.appendChild(label1);
                 row1.appendChild(value1);
                 row1.appendChild(btnDiv1);
                 cardContent.appendChild(row1);
 
-                // 過去分詞行（モードが過去形+過去分詞の場合のみ表示）
+                /* ========= 過去分詞（full モードのみ） ========= */
                 if (maxCol > 1) {
                     const row2 = document.createElement('div');
                     row2.className = 'card-row';
+
                     const label2 = document.createElement('div');
                     label2.className = 'card-row-label';
                     label2.textContent = '過去分詞';
+
                     const value2 = document.createElement('div');
-                    value2.className = 'card-row-value' + (this.currentForm >= 2 ? '' : ' hidden');
+                    value2.className =
+                        'card-row-value' + (this.currentForm >= 2 ? '' : ' hidden');
                     value2.textContent = this.currentForm >= 2 ? card[2] : '?';
+
                     const btnDiv2 = document.createElement('div');
                     btnDiv2.className = 'card-row-btn';
+
                     const btn2 = document.createElement('button');
                     btn2.className = 'speak-btn';
                     btn2.innerHTML = '<i class="ph-fill ph-speaker-high"></i>';
                     btn2.style.display = this.currentForm >= 2 ? 'flex' : 'none';
-                    btn2.onclick = (e) => { e.stopPropagation(); app.speak(card[2]); };
+                    btn2.onclick = (e) => {
+                        e.stopPropagation();
+                        this.speak(card[2]);
+                    };
+
                     btnDiv2.appendChild(btn2);
                     row2.appendChild(label2);
                     row2.appendChild(value2);
@@ -1171,15 +1210,28 @@
                     cardContent.appendChild(row2);
                 }
 
-                const s = card.status !== undefined ? card.status : 2;
+                /* ========= ステータスバッジ ========= */
+                const status = cardData.status ?? 2;  // ★変更：cardData.status
                 const badge = document.getElementById('card-badge');
-                badge.className = 'card-badge ' + (s === 0 ? 'badge-green' : s === 1 ? 'badge-yellow' : 'badge-red');
+                badge.className =
+                    'card-badge ' +
+                    (status === 0 ? 'badge-green' :
+                        status === 1 ? 'badge-yellow' : 'badge-red');
 
+                /* ========= 進捗 ========= */
                 document.getElementById('current-idx').textContent = this.currentIndex + 1;
-                document.getElementById('progress-bar').value = this.currentIndex / this.currentMode.data.length;
+                document.getElementById('progress-bar').value =
+                    this.currentIndex / this.currentMode.indices.length;
 
+                /* ========= 自動再生 ========= */
                 if (this.autoPlaySettings.isAutoPlay) {
                     this.scheduleAutoPlay();
+
+                    if (this.autoPlaySettings.audioOn) {
+                        const textMap = [card[0], card[1], card[2]];
+                        const text = textMap[this.currentForm];
+                        if (text) this.speak(text);
+                    }
                 }
             },
 
@@ -1192,7 +1244,8 @@
                 } else {
                     this.currentForm = 0;
                     this.currentIndex++;
-                    if (this.currentIndex >= this.currentMode.data.length) {
+
+                    if (this.currentIndex >= this.currentMode.indices.length) {
                         this.showCompletion();
                     } else {
                         this.displayCard();
@@ -1203,7 +1256,8 @@
             skipToNext() {
                 this.currentForm = 0;
                 this.currentIndex++;
-                if (this.currentIndex >= this.currentMode.data.length) {
+
+                if (this.currentIndex >= this.currentMode.indices.length) {
                     this.showCompletion();
                 } else {
                     this.displayCard();
@@ -1219,11 +1273,17 @@
             },
 
             changeStatus(status) {
-                const card = this.currentMode.data[this.currentIndex];
-                card.status = status;
+                const index = this.currentMode.indices[this.currentIndex];
+                const cardData = this.vocabData[this.currentSetNum][index];  // ★変更
+
+                cardData.status = status;  // ★変更
                 this.saveToStorage();
+
                 const badge = document.getElementById('card-badge');
-                badge.className = 'card-badge ' + (status === 0 ? 'badge-green' : status === 1 ? 'badge-yellow' : 'badge-red');
+                badge.className =
+                    'card-badge ' +
+                    (status === 0 ? 'badge-green' :
+                        status === 1 ? 'badge-yellow' : 'badge-red');
             },
 
             speak(text) {
@@ -1282,16 +1342,20 @@
             },
 
             showCompletion() {
-                document.getElementById('learning-view').innerHTML = `
-                    <div class="completion-message">Complete!</div>
-                    <div style="text-align: center;">
-                        <button class="btn btn-primary" style="max-width: 200px;" onclick="app.retry()">もう一度</button>
-                        <button class="btn btn-secondary" style="max-width: 200px; margin-top: 10px;" onclick="app.quit()">設定に戻る</button>
-                    </div>
-                `;
+                document.getElementById('learning-view').classList.remove('active');
+                document.getElementById('completion-view').classList.add('active');
             },
 
             retry() {
+                document.getElementById('completion-view').classList.remove('active');
+                document.getElementById('learning-view').classList.remove('active');
+
+                // 一度完全に抜ける
+                this.currentIndex = 0;
+                this.currentForm = 0;
+                this.currentMode = null;
+
+                // 改めて開始
                 this.startVocab(this.currentSetNum);
             },
 
@@ -1302,93 +1366,18 @@
                 this.autoPlaySettings.isAutoPlay = false;
 
                 document.getElementById('learning-view').classList.remove('active');
+                document.getElementById('completion-view').classList.remove('active');
                 document.getElementById('settings-panel').classList.add('active');
 
-                const { speed, audioOn, isAutoPlay } = this.autoPlaySettings;
-
-                document.getElementById('learning-view').innerHTML = `
-                <div class="progress-area">
-                    <progress id="progress-bar" value="0"></progress>
-                    <div class="progress-text">
-                        <span id="current-idx">1</span> / <span id="total-idx">30</span>
-                    </div>
-                </div>
-
-                <div class="card-area" onclick="app.nextForm()">
-                    <div class="card">
-                        <div id="card-badge" class="card-badge badge-red"></div>
-                        <div id="card-content" class="card-content"></div>
-                    </div>
-                </div>
-
-                <div class="btn-group" style="justify-content: center;">
-                    <button class="back-btn" onclick="app.prevCard()">
-                        <i class="ph-bold ph-caret-left"></i>
-                    </button>
-                    <button class="status-btn btn-green" onclick="app.changeStatus(0)"></button>
-                    <button class="status-btn btn-yellow" onclick="app.changeStatus(1)"></button>
-                    <button class="status-btn btn-red" onclick="app.changeStatus(2)"></button>
-                    <button class="back-btn" style="background:#F1F5F9;" onclick="app.skipToNext()">
-                        <i class="ph-bold ph-caret-right"></i>
-                    </button>
-                </div>
-
-                <div style="text-align:center;">
-                    <button class="btn btn-secondary" onclick="app.quit()">
-                        <i class="ph-bold ph-sign-out"></i> 設定に戻る
-                    </button>
-                </div>
-
-                <div class="autoplay-panel">
-                    <div class="ap-row">
-                        <div class="ap-label">
-                            <i class="ph-fill ph-play-circle" style="color:var(--primary)"></i> 自動再生
-                        </div>
-                        <label class="switch">
-                            <input type="checkbox"
-                                id="ap-switch"
-                                ${isAutoPlay ? 'checked' : ''}
-                                onchange="app.toggleAutoPlay()">
-                            <span class="slider-switch"></span>
-                        </label>
-                    </div>
-
-                    <div class="ap-row">
-                        <div class="ap-label"><i class="ph-bold ph-tortoise"></i></div>
-                        <div class="speed-slider-container">
-                            <input type="range"
-                                id="ap-speed-slider"
-                                class="speed-slider"
-                                min="1" max="3" step="1"
-                                value="${speed}"
-                                oninput="app.updateSpeed()">
-                        </div>
-                        <div class="ap-label"><i class="ph-bold ph-hare"></i></div>
-                    </div>
-
-                    <div class="ap-row">
-                        <div class="ap-label">
-                            <i class="ph-fill ph-speaker-high"></i> 音声を再生
-                        </div>
-                        <label class="switch">
-                            <input type="checkbox"
-                                id="ap-audio-switch"
-                                ${audioOn ? 'checked' : ''}
-                                onchange="app.updateAudioSetting()">
-                            <span class="slider-switch"></span>
-                        </label>
-                    </div>
-                </div>
-            `;
+                // UI状態だけリセット
+                document.getElementById('ap-switch').checked = false;
             },
 
             shuffle(array) {
-                const arr = [...array];
-                for (let i = arr.length - 1; i > 0; i--) {
+                for (let i = array.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
-                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                    [array[i], array[j]] = [array[j], array[i]];
                 }
-                return arr;
             }
         };
 
