@@ -3,10 +3,18 @@
 
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
-    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-XKL20YHCTB');</script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>学習プレーヤー｜My単語帳</title>
+    <title>自作の英単語帳を作成・管理｜My単語帳</title>
+    <meta name="description" content="
+    自分だけの音声付き英単語帳「My単語帳」の学習用ページ。音声読み上げ付きで英単語の暗記に最適。無料・登録不要で、ブラウザですぐに使えます。
+    ">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
@@ -23,7 +31,7 @@
             --success: #10B981;
             --warning: #F59E0B;
             --danger: #EF4444;
-            --radius: 18px; /* index.htmlに合わせる */
+            --radius: 18px;
         }
 
         * {
@@ -43,7 +51,7 @@
 
         header {
             background: var(--bg-surface);
-            padding: 14px 20px; /* サイズ調整 */
+            padding: 14px 20px;
             border-bottom: 1px solid var(--border);
             display: grid;
             grid-template-columns: 40px 1fr 40px;
@@ -91,10 +99,10 @@
         #settings-panel {
             width: 100%;
             background: var(--bg-surface);
-            padding: 20px 16px; /* 余白調整 */
+            padding: 20px 16px;
             border-radius: 20px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            display: flex; 
+            display: flex;
             flex-direction: column;
             gap: 20px;
             margin-top: 20px;
@@ -115,7 +123,7 @@
         }
 
         .filter-btn {
-            width: 46px; /* 少し小さく */
+            width: 46px;
             height: 46px;
             border-radius: 50%;
             border: 3px solid transparent;
@@ -201,7 +209,10 @@
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
             transition: transform 0.1s;
         }
-        .start-main-btn:active { transform: scale(0.98); }
+
+        .start-main-btn:active {
+            transform: scale(0.98);
+        }
 
         #learning-view {
             width: 100%;
@@ -239,7 +250,7 @@
 
         .card-area {
             width: 100%;
-            height: 240px; /* 高さを調整 */
+            height: 240px;
             perspective: 1000px;
             cursor: pointer;
             position: relative;
@@ -271,7 +282,7 @@
         }
 
         .card-content {
-            font-size: 1.8rem; /* フォントサイズ調整 */
+            font-size: 1.8rem;
             font-weight: 800;
             color: var(--text-main);
             line-height: 1.3;
@@ -359,7 +370,7 @@
         .back-step-btn {
             background: #F1F5F9;
             color: var(--text-sub);
-            width: 44px; /* サイズ調整 */
+            width: 44px;
             height: 44px;
             border-radius: 50%;
             border: none;
@@ -371,10 +382,13 @@
             justify-content: center;
             transition: transform 0.1s;
         }
-        .back-step-btn:active { transform: scale(0.9); }
+
+        .back-step-btn:active {
+            transform: scale(0.9);
+        }
 
         .status-btn {
-            width: 50px; /* サイズ調整 */
+            width: 50px;
             height: 50px;
             border-radius: 50%;
             border: none;
@@ -402,7 +416,7 @@
         .play-btn {
             background: #F1F5F9;
             color: var(--text-main);
-            width: 44px; /* サイズ調整 */
+            width: 44px;
             height: 44px;
             border-radius: 50%;
             border: none;
@@ -772,9 +786,9 @@
                 if (!isPaused) {
                     checkAnimationMode();
                     updateSpeed();
-                    
+
                     const isLearningViewVisible = document.getElementById('learning-view').style.display === 'block';
-                    if(isLearningViewVisible) {
+                    if (isLearningViewVisible) {
                         const isEnglishVisible = (settings.direction === 'en_jp' && !isFlipped) || (settings.direction === 'jp_en' && isFlipped);
                         if (settings.audioOn && isEnglishVisible) {
                             playAudio();
@@ -877,7 +891,7 @@
 
             document.getElementById('result-area').style.display = 'none';
             document.getElementById('learning-view').style.display = 'block';
-            
+
             initSession();
 
             const isEnglishVisible = (settings.direction === 'en_jp');
@@ -926,14 +940,13 @@
             if (currentIndex > 0) {
                 currentIndex--;
                 isFlipped = false;
-                // 戻った時も、自動再生中なら音声を出す (true)
                 renderCard(true);
             }
         }
 
         function renderCard(playVoice = true) {
             clearTimeout(autoPlayTimer);
-            if(audioTimer) clearTimeout(audioTimer);
+            if (audioTimer) clearTimeout(audioTimer);
 
             if (currentIndex >= studyList.length) { showResult(); return; }
 
@@ -956,7 +969,7 @@
             document.getElementById('progress-val').style.width = ((currentIndex) / studyList.length) * 100 + "%";
 
             const isEnglishVisible = (settings.direction === 'en_jp' && !isFlipped) || (settings.direction === 'jp_en' && isFlipped);
-            
+
             if (playVoice && settings.isAutoPlay && settings.audioOn && isEnglishVisible && !isPaused) {
                 audioTimer = setTimeout(playAudio, 300);
             }
@@ -995,7 +1008,7 @@
         }
 
         function playAudio() {
-            if(audioTimer) clearTimeout(audioTimer);
+            if (audioTimer) clearTimeout(audioTimer);
 
             if (currentIndex < studyList.length) {
                 const rawText = studyList[currentIndex].word;
