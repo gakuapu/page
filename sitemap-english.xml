@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://gakuapu.github.io/page/index_en.html</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://gakuapu.github.io/page/mywordbook_list.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gakuapu.github.io/page/mywordbook_registration.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+    <url>
+    <loc>https://gakuapu.github.io/page/mywordbook_player.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://gakuapu.github.io/page/mylistening_list.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gakuapu.github.io/page/mylistening_player.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://gakuapu.github.io/page/basicword_setting.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gakuapu.github.io/page/basicword_player.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://gakuapu.github.io/page/timetrial_setting.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gakuapu.github.io/page/timetrial_player.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://gakuapu.github.io/page/fukisoku_player.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gakuapu.github.io/page/fukisoku_list.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://gakuapu.github.io/page/en_grammar.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gakuapu.github.io/page/en_basicsentence.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

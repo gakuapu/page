@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- 英語コンテンツ -->
+  <sitemap>
+    <loc>https://gakuapu.github.io/page/sitemap-english.xml</loc>
+    <lastmod>2026-01-22</lastmod>
+  </sitemap>
+
+  <!-- 算数コンテンツ -->
+  <sitemap>
+    <loc>https://gakuapu.github.io/page/sitemap-math.xml</loc>
+    <lastmod>2026-01-22</lastmod>
+  </sitemap>
+
+</sitemapindex>
