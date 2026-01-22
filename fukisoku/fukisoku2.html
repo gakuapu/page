@@ -1,255 +1,53 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-XKL20YHCTB');
-    </script>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>英単語帳：不規則動詞2｜無料中学英単語ドリルアプリ【学アプ英語】</title>
-    <link rel="icon" href="favicon.ico">
-    <meta name="description" content="英検の勉強にも役立つ無料の中学英単語ドリルのアプリ。中学で学習する約2000英単語(英検3～5級)を発音付きの英単語帳とスペルテストでマスターできる。ダウンロード不要のおすすめ英語アプリ">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="style_fukisoku.css">
+    <title>ページ移転のお知らせ</title>
+    <meta http-equiv="refresh" content="0; url=https://gakuapu.github.io/page/fukisoku_player.html">
+    <link rel="canonical" href="https://gakuapu.github.io/page/fukisoku_player.html">
 </head>
+
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+            Roboto, "Helvetica Neue", Arial, sans-serif;
+        margin: 0;
+        padding: 40px 16px;
+        background: #f9fafb;
+        color: #222;
+    }
+    .container {
+        max-width: 640px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 24px 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    h1 {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+    p {
+        line-height: 1.7;
+        margin: 0 0 12px;
+    }
+    a {
+        color: #2563eb;
+        font-weight: 600;
+    }
+</style>
+
 <body>
-    <header>
-        <h1><a id="page_top">不規則動詞2｜無料中学英単語アプリ</a></h1>
-        <hr>
-    </header>
-
-    <main>
-        <div>
-            <input type="button" id="stop-btn" class="btn" value="やめる">
-            <input type="button" id="sound-btn" class="btn" value="発音(β版)"> <!-- -->
-        </div>
-
-        <div>
-            <select id="hanni">
-                <option value="0">過去形のみ</option>
-                <option value="1">過去分詞まで</option>
-            </select>
-            <select id="mode">
-                <option value="0">自分でめくる</option>
-                <option value="1">自動：おそめ</option>
-                <option value="2">自動：はやめ</option>
-            </select>
-        </div>
-
-        <input type="button" id="start-btn" class="btn" value="スタート">
-
-        <p id="comp">COMPLETED!</p>
-
-        <div>
-            <div class="katachi" id="katachi1">原形</div>
-            <div class="katachi" id="katachi2">過去形</div>
-            <div class="katachi" id="katachi3">過去分詞</div>
-        </div>
-
-        <div id="mainbox"></div>
-
-        <div>
-            <input type="button" id="turn-btn" class="btn" value="戻る">
-            <input type="button" id="again-btn" class="btn" value="？">
-        </div>
-
-        <div>
-            <progress id="progress" value="0"></progress>
-        </div>
-
-        <hr class="dotted">
-
-        <p class="subtoph2"> ＞ <a href="fukisoku3.html">確認テストへ</a></p>
-        <p class="subtoph2"> ＞ <a href="fukisoku.html">英単語帳：不規則動詞（1）へ</a></p>
-        <p class="subtoph2"> ＞ <a href="../grammar/g1_7.html">英文法：過去形（一般動詞）</a></p>
-        <p class="subtoph2"> ＞ <a href="../en_grammar.html">英文法トップ</a></p>
-        <p class="subtoph2"> ＞ <a href="../top_en.html">トップにもどる</a></p>
-
-        <hr class="dotted">
-
-        <h2 class="subtoph2">不規則動詞（2）：</h2> 
-        <div>
-            <input type="button" id="hide-btn" class="btn" value="かくす">
-            <input type="button" id="appear-btn" class="btn" value="表示">
-        </div>
-
-        <table id="wordtable">
-            <tr>
-                <th>原形</th>
-                <th>過去形</th>
-                <th>過去分詞</th>
-            </tr>
-            <tr>
-                <td>sell<br>売る</td>
-                <td>sold</td>
-                <td>sold</td>
-            </tr>
-            <tr>
-                <td>tell<br>話す</td>
-                <td>told</td>
-                <td>told</td>
-            </tr>
-            <tr>
-                <td>buy<br>買う</td>
-                <td>bought</td>
-                <td>bought</td>
-            </tr>
-            <tr>
-                <td>bring<br>持って来る</td>
-                <td>brought</td>
-                <td>brought</td>
-            </tr>
-            <tr>
-                <td>think<br>思う</td>
-                <td>thought</td>
-                <td>thought</td>
-            </tr>
-            <tr>
-                <td>catch<br>捕まえる</td>
-                <td>caught</td>
-                <td>caught</td>
-            </tr>
-            <tr>
-                <td>teach<br>教える</td>
-                <td>taught</td>
-                <td>taught</td>
-            </tr>
-            <tr>
-                <td>stand<br>立つ</td>
-                <td>stood</td>
-                <td>stood</td>
-            </tr>
-            <tr>
-                <td>understand<br>理解する</td>
-                <td>understood</td>
-                <td>understood</td>
-            </tr>
-            <tr>
-                <td>do<br>する</td>
-                <td>did</td>
-                <td>done</td>
-            </tr>
-            <tr>
-                <td>go<br>行く</td>
-                <td>went</td>
-                <td>gone</td>
-            </tr>
-            <tr>
-                <td>draw<br>描く</td>
-                <td>drew</td>
-                <td>drawn</td>
-            </tr>
-            <tr>
-                <td>fly<br>飛ぶ</td>
-                <td>flew</td>
-                <td>flown</td>
-            </tr>
-            <tr>
-                <td>grow<br>成長する</td>
-                <td>grew</td>
-                <td>grown</td>
-            </tr>
-            <tr>
-                <td>know<br>知っている</td>
-                <td>knew</td>
-                <td>known</td>
-            </tr>
-            <tr>
-                <td>throw<br>投げる</td>
-                <td>threw</td>
-                <td>thrown</td>
-            </tr>
-            <tr>
-                <td>drive<br>運転する</td>
-                <td>drove</td>
-                <td>driven</td>
-            </tr>
-            <tr>
-                <td>fall<br>落ちる</td>
-                <td>fell</td>
-                <td>fallen</td>
-            </tr>
-            <tr>
-                <td>give<br>与える</td>
-                <td>gave</td>
-                <td>given</td>
-            </tr>
-            <tr>
-                <td>write<br>書く</td>
-                <td>wrote</td>
-                <td>written</td>
-            </tr>
-            <tr>
-                <td>eat<br>食べる</td>
-                <td>ate</td>
-                <td>eaten</td>
-            </tr>
-            <tr>
-                <td>see<br>見る</td>
-                <td>saw</td>
-                <td>seen</td>
-            </tr>
-            <tr>
-                <td>take<br>取る</td>
-                <td>took</td>
-                <td>taken</td>
-            </tr>
-            <tr>
-                <td>break<br>壊す</td>
-                <td>broke</td>
-                <td>broken</td>
-            </tr>
-            <tr>
-                <td>speak<br>話す</td>
-                <td>spoke</td>
-                <td>spoken</td>
-            </tr>
-            <tr>
-                <td>begin<br>始まる</td>
-                <td>began</td>
-                <td>begun</td>
-            </tr>
-            <tr>
-                <td>drink<br>飲む</td>
-                <td>drank</td>
-                <td>drunk</td>
-            </tr>
-            <tr>
-                <td>sing<br>歌う</td>
-                <td>sang</td>
-                <td>sung</td>
-            </tr>
-            <tr>
-                <td>swim<br>泳ぐ</td>
-                <td>swam</td>
-                <td>swum</td>
-            </tr>
-        </table>
-
-        <!--ハンバーガーメニュー＆サイドバー↓(1階層下用)-->
-        <div id="en-menu-toggle" class="en-menu-toggle">
-            &#9776;
-        </div>
-        <div id="en-sidebar-container" class="en-sidebar-container"></div>
-        <script src="../sidebar_en2.js"></script>
-        <!--ハンバーガーメニュー＆サイドバー↑(1階層下用)-->
-
-        <script src="pgm_fukisoku.js"></script>
-    </main>
-
-    <footer class="footer-container">
-        <br>
-        <hr>
-        <p>英検の勉強にも役立つ無料の中学英単語ドリルのアプリ。中学で学習する約2000英単語(英検3～5級)を発音付きの英単語帳とスペルテストでマスターできる。ダウンロード不要のおすすめ英語アプリ</p>
-        <p>Copyright(C) 2022- All Rights Reserved</p>
-    </footer>
-    <a href="#page_top" class="page_top_btn">▲</a>
+    <div class="container">
+        <h1>ページ移転のお知らせ</h1>
+        <p>サイトリニューアルに伴い、ページを移転しました。</p>
+        <p>自動的に新しいページに移動しない場合は
+            <a href="https://gakuapu.github.io/page/fukisoku_player.html">こちら</a>
+            をクリックして下さい。
+        </p>
+    </div>
 </body>
+
 </html>
