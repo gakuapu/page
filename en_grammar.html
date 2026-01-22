@@ -251,12 +251,6 @@
             line-height: 1.4;
         }
 
-        .unit-subtitle {
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            font-family: 'Inter', sans-serif;
-        }
-
         .unit-arrow {
             color: var(--border);
             font-size: 1.25rem;
@@ -395,36 +389,36 @@
         // ここでリストを管理します。項目の追加・削除はここを編集
         const grammarData = {
             1: [
-                { title: "冠詞(a/an/the)・所有格", link: "grammar/g1_0.html", sub: "Unit 1" },
-                { title: "be動詞", link: "grammar/g1_1.html", sub: "Unit 2" },
-                { title: "一般動詞", link: "grammar/g1_2.html", sub: "Unit 3" },
-                { title: "can", link: "grammar/g1_3.html", sub: "Unit 4" },
-                { title: "疑問詞を使った疑問文", link: "grammar/g1_4.html", sub: "Unit 5" },
-                { title: "三人称単数現在", link: "grammar/g1_5.html", sub: "Unit 6" },
-                { title: "現在進行形", link: "grammar/g1_6.html", sub: "Unit 7" },
-                { title: "過去形：一般動詞", link: "grammar/g1_7.html", sub: "Unit 8" },
-                { title: "過去形：be動詞", link: "grammar/g1_8.html", sub: "Unit 9" },
-                { title: "There is/are", link: "grammar/g1_9.html", sub: "Unit 10" },
-                { title: "過去進行形", link: "grammar/g1_10.html", sub: "Unit 11" }
+                { title: "冠詞(a/an/the)・所有格", link: "grammar/g1_0.html" },
+                { title: "be動詞", link: "grammar/g1_1.html" },
+                { title: "一般動詞", link: "grammar/g1_2.html" },
+                { title: "can", link: "grammar/g1_3.html" },
+                { title: "疑問詞を使った疑問文", link: "grammar/g1_4.html" },
+                { title: "三人称単数現在", link: "grammar/g1_5.html" },
+                { title: "現在進行形", link: "grammar/g1_6.html" },
+                { title: "過去形：一般動詞", link: "grammar/g1_7.html" },
+                { title: "過去形：be動詞", link: "grammar/g1_8.html" },
+                { title: "There is/are", link: "grammar/g1_9.html" },
+                { title: "過去進行形", link: "grammar/g1_10.html" }
             ],
             2: [
-                { title: "will", link: "grammar/g2_1.html", sub: "Unit 1" },
-                { title: "be going to", link: "grammar/g2_2.html", sub: "Unit 2" },
-                { title: "英語の文型", link: "grammar/g2_3.html", sub: "Unit 3" },
-                { title: "接続詞", link: "grammar/g2_4.html", sub: "Unit 4" },
-                { title: "不定詞(1)", link: "grammar/g2_5.html", sub: "Unit 5" },
-                { title: "不定詞(2)", link: "grammar/g2_6.html", sub: "Unit 6" },
-                { title: "must", link: "grammar/g2_7.html", sub: "Unit 7" },
-                { title: "have to", link: "grammar/g2_8.html", sub: "Unit 8" },
-                { title: "動名詞", link: "grammar/g2_9.html", sub: "Unit 9" },
-                { title: "疑問詞＋不定詞", link: "grammar/g2_10.html", sub: "Unit 10" },
-                { title: "比較：比較級", link: "grammar/g2_11.html", sub: "Unit 11" },
-                { title: "比較：最上級", link: "grammar/g2_12.html", sub: "Unit 12" },
-                { title: "比較：as ... as", link: "grammar/g2_13.html", sub: "Unit 13" },
-                { title: "受動態（受け身）", link: "grammar/g2_14.html", sub: "Unit 14" }
+                { title: "will", link: "grammar/g2_1.html" },
+                { title: "be going to", link: "grammar/g2_2.html" },
+                { title: "英語の文型", link: "grammar/g2_3.html" },
+                { title: "接続詞", link: "grammar/g2_4.html" },
+                { title: "不定詞(1)", link: "grammar/g2_5.html" },
+                { title: "不定詞(2)", link: "grammar/g2_6.html" },
+                { title: "must", link: "grammar/g2_7.html" },
+                { title: "have to", link: "grammar/g2_8.html" },
+                { title: "動名詞", link: "grammar/g2_9.html" },
+                { title: "疑問詞＋不定詞", link: "grammar/g2_10.html" },
+                { title: "比較：比較級", link: "grammar/g2_11.html" },
+                { title: "比較：最上級", link: "grammar/g2_12.html" },
+                { title: "比較：as ... as", link: "grammar/g2_13.html" },
+                { title: "受動態（受け身）", link: "grammar/g2_14.html" }
             ],
             3: [
-                { title: "現在完了形：経験", link: "grammar/g3_1.html", sub: "Unit 1" }
+                { title: "現在完了形：経験", link: "grammar/g3_1.html" }
             ]
         };
 
@@ -469,7 +463,6 @@
                         <div class="unit-number">${String(index + 1).padStart(2, '0')}</div>
                         <div class="unit-content">
                             <div class="unit-title">${item.title}</div>
-                            <div class="unit-subtitle">${item.sub}</div>
                         </div>
                     </div>
                     <div class="unit-arrow">
