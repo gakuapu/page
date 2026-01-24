@@ -1,148 +1,725 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-    <!-- Google tag (gtag.js) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-XKL20YHCTB');
     </script>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中1英文法：冠詞・所有格｜無料中学英文法ドリルアプリ【学アプ英語】</title>
-    <link rel="icon" href="../favicon.ico">
-    <meta name="description" content="英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ。中学英語のやり直し・学び直しにもオススメです">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="style_grammar.css">
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1 冠詞・所有格 | 学アプ英語</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            /* Design System */
+            --bg-body: #F8FAFC;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-sub: #64748B;
+            --border: #E2E8F0;
+
+            /* Theme Color (中1: Blue) */
+            --theme-color: #3B82F6;
+            --theme-light: #EFF6FF;
+            --theme-dark: #2563EB;
+            --radius: 16px;
+
+            /* Feedback Colors */
+            --success-bg: #ECFDF5;
+            --success-border: #10B981;
+            --success-text: #047857;
+            --error-bg: #FEF2F2;
+            --error-border: #EF4444;
+            --error-text: #B91C1C;
+        }
+
+        * {
+            box-sizing: border-box;
+            touch-action: manipulation;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            padding-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        .app-header {
+            background: var(--bg-surface);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .back-link {
+            color: var(--text-sub);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        /* --- Tab Navigation --- */
+        .tab-nav {
+            display: flex;
+            background: var(--bg-surface);
+            padding: 8px 16px 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 50px;
+            z-index: 90;
+        }
+
+        .tab-btn {
+            font-size: 1rem;
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            font-weight: 700;
+            color: var(--text-sub);
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+
+        .tab-btn.active {
+            color: var(--theme-color);
+            border-bottom-color: var(--theme-color);
+        }
+
+        /* --- Content Area --- */
+        .content-area {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px 16px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .content-area.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Typography --- */
+        h1 {
+            font-size: 1.4rem;
+            margin: 0 0 16px;
+            line-height: 1.4;
+            color: var(--text-main);
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            border-left: 6px solid var(--theme-color);
+            padding-left: 12px;
+            margin: 40px 0 20px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin: 24px 0 12px;
+            color: var(--text-main);
+        }
+
+        p {
+            line-height: 1.8;
+            color: #334155;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        ul {
+            margin-bottom: 16px;
+            color: #334155;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* --- Highlight Box --- */
+        .highlight-box {
+            background: var(--theme-light);
+            border: 2px solid var(--theme-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+            position: relative;
+        }
+
+        .highlight-label {
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            background: var(--theme-color);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+
+        /* --- Example Box --- */
+        .example-box {
+            background: #F1F5F9;
+            border-left: 4px solid #94A3B8;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .ex-text-en {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1E293B;
+            margin-bottom: 4px;
+        }
+
+        .ex-text-jp {
+            font-size: 0.9rem;
+            color: #64748B;
+        }
+
+        .note-text {
+            font-size: 0.9rem;
+            color: #64748B;
+            margin-top: 4px;
+        }
+
+        /* --- Listening Section --- */
+        .listening-section {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 2px dashed var(--border);
+        }
+
+        .example-item {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .play-btn-sm {
+            background: var(--theme-light);
+            color: var(--theme-color);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: transform 0.1s;
+        }
+
+        .play-btn-sm:active {
+            transform: scale(0.95);
+            background: #DBEAFE;
+        }
+
+        /* --- Practice Quiz Styles --- */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-header {
+            padding: 0 0 8px 0;
+            margin-bottom: 8px;
+        }
+
+        .progress-container {
+            margin: 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            color: var(--text-sub);
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--theme-color);
+            width: 0%;
+            transition: width 0.4s ease;
+            border-radius: 2px;
+        }
+
+        /* --- Quiz Card --- */
+        .quiz-card {
+            background: var(--bg-surface);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 8px 24px;
+        }
+
+        .question-jp {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 12px;
+            margin-bottom: 12px;
+            padding-left: 16px;
+            text-align: left;
+            color: var(--text-main);
+            min-height: 2em;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .answer-display {
+            margin-bottom: 24px;
+        }
+
+        .answer-box {
+            background: #F8FAFC;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            min-height: 70px;
+            padding: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .answer-box-feedback {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .answer-box-feedback.show {
+            opacity: 1;
+        }
+
+        .answer-box-feedback i {
+            font-size: 1.3rem;
+        }
+
+        .answer-box.correct {
+            background: var(--success-bg);
+            border-color: var(--success-border);
+            color: var(--success-text);
+        }
+
+        .answer-box.incorrect {
+            background: var(--error-bg);
+            border-color: var(--error-border);
+            color: var(--error-text);
+        }
+
+        .answer-box:empty::before {
+            color: #94A3B8;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        /* --- Word Chips --- */
+        .word-pool {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .word-chip {
+            background: white;
+            border: 2px solid #CBD5E1;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.15s;
+            color: var(--text-main);
+        }
+
+        .word-chip:hover:not(:disabled) {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .word-chip:active:not(:disabled) {
+            transform: translateY(1px);
+            border-bottom-width: 2px;
+        }
+
+        .word-chip:disabled {
+            color: #CBD5E1;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        /* --- Action Buttons --- */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--theme-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--theme-dark);
+        }
+
+        .btn-secondary {
+            background: #E5E7EB;
+            color: #64748B;
+        }
+
+        .btn-secondary:hover {
+            background: #D1D5DB;
+        }
+
+        .btn-warning {
+            background: #E5E7EB;
+            color: #64748B;
+        }
+
+        .btn-warning:hover {
+            background: #D1D5DB;
+        }
+
+        .btn-danger {
+            background: #EF4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #DC2626;
+        }
+
+        .check-btn {
+            width: 200px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feedback-message.correct {
+            background: var(--success-bg);
+            color: var(--success-text);
+            border: 2px solid var(--success-border);
+        }
+
+        .feedback-message.incorrect {
+            background: var(--error-bg);
+            color: var(--error-text);
+            border: 2px solid var(--error-border);
+        }
+
+        /* --- Results Section --- */
+        .results-container {
+            background: var(--bg-surface);
+            border-radius: 20px;
+            padding: 32px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .results-score {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--theme-color);
+            margin-bottom: 8px;
+        }
+
+        .results-label {
+            font-size: 1rem;
+            color: var(--text-sub);
+            margin-bottom: 32px;
+        }
+
+        .missed-list {
+            text-align: left;
+            margin-top: 32px;
+        }
+
+        .missed-list-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .missed-item {
+            background: #F8FAFC;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .missed-question {
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .missed-answer {
+            font-family: 'Inter', sans-serif;
+            color: var(--success-text);
+            margin-bottom: 4px;
+        }
+
+        .missed-your-answer {
+            font-family: 'Inter', sans-serif;
+            color: var(--error-text);
+        }
+
+        .answer-comparison {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .answer-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .answer-row i {
+            font-size: 1.2rem;
+        }
+
+        /* --- Hidden State --- */
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
+
 <body>
 
-    <audio id="audio1" src="../seikaion.mp3" preload="auto"></audio>
-    <audio id="audio2" src="../machigaion2.mp3" preload="auto"></audio>
-
-    <header>
-        <h1><a id="page_top">冠詞・所有格｜無料中学英文法アプリ</a></h1>
-        <hr>
+    <!-- Header -->
+    <header class="app-header">
+        <a href="../en_grammar.html" class="back-link">
+            <i class="ph-bold ph-caret-left"></i>
+        </a>
+        <div style="font-weight:700; font-size:1rem;">Unit 1: 冠詞・所有格</div>
+        <div style="width:40px"></div>
     </header>
 
-    <main>
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="learn">
+            <i class="ph-fill ph-book-open"></i> 解説・例文リスニング
+        </button>
+        <button class="tab-btn" data-tab="practice">
+            <i class="ph-fill ph-pencil-simple"></i> 練習問題
+        </button>
+    </nav>
 
-        <div>
-            <input type="button" id="stop-btn" class="btn" value="やめる">
-            <input type="button" id="start-btn" class="btn" value="練習スタート">
-        </div>
+    <!-- TAB 1: 解説 & 例文リスニング -->
+    <section id="tab-learn" class="content-area active">
 
-        <div id="mondai"></div>
-        <div>
-            <a id="spacer">|</a>
-            <a id="inputanswer"></a>
-        </div>
+        <h1>冠詞（a/an/the）・所有格</h1>
 
-        <div id="word-btn-container">
-            <input type="button" id="word1" class="word-btn">
-            <input type="button" id="word2" class="word-btn">
-            <input type="button" id="word3" class="word-btn">
-            <input type="button" id="word4" class="word-btn">
-            <input type="button" id="word5" class="word-btn">
-            <input type="button" id="word6" class="word-btn">
-            <input type="button" id="word7" class="word-btn">
-            <input type="button" id="word8" class="word-btn">
-            <input type="button" id="check-btn">
-        </div>
-
-        <div>
-            <input type="button" id="retry-btn" class="btn" value="やり直す">
-            <input type="button" id="skip-btn" class="btn" value="スキップ">
-        </div>
-
-        <div>
-            <progress id="progress" value="0"></progress>
-        </div>
-
-        <p id="resultmsg" class="subtoph2"></p>
-
-        <table id="missed-list-table">
-        </table>
-
-        <p class="subtoph2"> ＞ <a href="g1_1.html">次に進む</a></p>
-        <p class="subtoph2"> ＞ <a href="b1_0.html">基本例文のリスニング</a></p>
-        <p class="subtoph2"> ＞ <a href="../en_grammar.html">英文法トップ</a></p>
-        <p class="subtoph2"> ＞ <a href="../index_en.html">トップにもどる</a></p>
-
-        <hr class="dotted">
-
-        <h2>【冠詞】とは：</h2>
-
-            <p class="menutxt">冠詞（かんし）とは、名詞の前に付ける短い言葉で、「a/an」と「the」の2種類があります。<br>
+        <h2>【冠詞】とは</h2>
+        <p>冠詞（かんし）とは、名詞の前に付ける短い言葉で、「a/an」と「the」の2種類があります。<br>
             名詞が何を指しているのかをくわしく説明する役割があります。</p>
 
-        <h2>「a/an」の使い方：</h2>
+        <h2>「a/an」の使い方</h2>
+        <p>「a/an」は、「1つの～」「とある～」という意味で、「数えられる名詞」が「単数（1つ）」の場合に使います。</p>
+        <ul>
+            <li><b>a</b>｜子音で始まる単語の時に使う</li>
+            <li><b>an</b>｜母音（a, e, i, o, u）で始まる単語の時に使う</li>
+        </ul>
 
-            <p class="menutxt">「a/an」は、「1つの～」「とある～」という意味で、「数えられる名詞」が「単数（1つ）」の場合に使います。</p>
-                <ul class="menutxt">
-                    <li><b>a｜</b>子音で始まる単語の時に使う</li>
-                    <li><b>an｜</b>母音（a, e, i, o, u）で始まる単語の時に使う</li>
-                </ul>
+        <p>※注意点：「母音で始まる」は、発音で判断します。</p>
+        <ul>
+            <li>例：hour ⇒ an hour（発音は母音からのため）</li>
+            <li>例：university ⇒ a university（発音は母音からではないため）</li>
+        </ul>
 
-            <p class="menutxt">※注意点：「母音で始まる」は、発音で判断します。</p>
-                <ul class="menutxt">
-                    <li>hour ⇒ an hour（"h"は発音しないため）</li>
-                </ul>
-                
-        <h2>「a/an」の例文：</h2>
+        <h3>「a/an」の例文</h3>
 
-            <ul class="menutxt">
-                <li>I have a pen.（私は1本のペンを持っています）</li>
-                <li>She is an artist.（彼女はアーティストです）</li>
-            </ul>
+        <div class="example-box">
+            <div class="ex-text-en">I have a pen.</div>
+            <div class="ex-text-jp">私は1本のペンを持っています。</div>
+        </div>
 
-        <h2>「the」の使い方：</h2>
+        <div class="example-box">
+            <div class="ex-text-en">She is an artist.</div>
+            <div class="ex-text-jp">彼女はアーティストです。</div>
+        </div>
 
-            <p class="menutxt">「the」は、「その～」「例の～」という意味で、特定のもの・相手が知っているものを指すときに使います。<br>
+        <h2>「the」の使い方</h2>
+        <p>「the」は、「その～」「例の～」という意味で、特定のもの・相手が知っているものを指すときに使います。<br>
             「the」は「a/an」とは異なり、人・ものが複数の場合でも使えます。</p>
 
-        <h2>「the」の例文と「a/an」との違い：</h2>
+        <h3>「the」の例文と「a/an」との違い</h3>
 
-            <ul class="menutxt">
-                <li>I want the dog. （私は「その」犬が欲しい）<br>
-                    / I want a dog. （私は犬が欲しい：「どの犬か」までは表していない）</li>
-                <li>Please open the window.（「その」窓を開けて下さい）<br>
-                    / Please open a window.（窓を開けて下さい：「どの窓か」までは表していない））</li>
+        <div class="example-box">
+            <div class="ex-text-en">I want the dog.</div>
+            <div class="ex-text-jp">私は「その」犬が欲しい。</div>
+            <br>
+            <div class="ex-text-en">I want a dog.</div>
+            <div class="ex-text-jp">私は犬が欲しい。（「どの犬か」までは表していない）</div>
+        </div>
+
+        <div class="example-box">
+            <div class="ex-text-en">Please open the window.</div>
+            <div class="ex-text-jp">「その」窓を開けて下さい。</div>
+            <br>
+            <div class="ex-text-en">Please open a window.</div>
+            <div class="ex-text-jp">窓を開けて下さい。（「どの窓か」までは表していない）</div>
+        </div>
+
+        <h2>【所有格】とは</h2>
+        <p>所有格（しょゆうかく）とは、名詞の前に付けて、それが「誰のものか」を表す言葉です。</p>
+
+        <h3>所有格の種類と例文</h3>
+
+        <div class="example-box">
+            <ul>
+                <li><b>I ⇒ my</b>｜This is my ball.（これは私のボールです）</li>
+                <li><b>you ⇒ your</b>｜This is your ball.（あなたの/あなたたちの...）</li>
+                <li><b>he ⇒ his</b>｜This is his ball.（彼の...）</li>
+                <li><b>she ⇒ her</b>｜This is her ball.（彼女の...）</li>
+                <li><b>it ⇒ its</b>｜This is its ball.（それの...）</li>
+                <li><b>we ⇒ our</b>｜This is our ball.（私たちの...）</li>
+                <li><b>they ⇒ their</b>｜This is their ball.（彼らの/彼女らの/それらの...）</li>
+                <li><b>〇〇（名詞） ⇒ 〇〇's</b>｜This is Tom's ball.（トムの...）</li>
             </ul>
+        </div>
 
-        <h2>【所有格】とは：</h2>
-
-            <p class="menutxt">所有格（しょゆうかく）とは、名詞の前に付けて、それが「誰のものか」を表す言葉です。</p>
-
-        <h2>所有格の種類と例文：</h2>
-
-            <ul class="menutxt">
-                <li><b>I ⇒ my｜</b>This is my ball.（これは私のボールです）</li>
-                <li><b>you ⇒ your｜</b>This is your ball.（あなたの/あなたたちの...）</li>
-                <li><b>he ⇒ his｜</b>This is his ball.（彼の...）</li>
-                <li><b>she ⇒ her｜</b>This is her ball.（彼女の...）</li>
-                <li><b>it ⇒ its｜</b>This is its ball.（それの...）</li> 
-                <li><b>we ⇒ our｜</b>This is our ball.（私たちの...）</li> 
-                <li><b>they ⇒ their｜</b>This is their ball.（彼らの/彼女らの/それらの...）</li>
-                <li><b>〇〇（名詞） ⇒ 〇〇's｜</b>This is Tom's ball.（トムの...）</li>
-            </ul>
-
-            <p class="menutxt">※注意点：冠詞と所有格は、一緒には使えません。（どちらか一方のみ）</p>
-                <ul class="menutxt">
-                    <li><b>〇： </b>This is a car.（これは、1台の車です）</li>
-                    <li><b>〇： </b>This is the car.（これは、その車です）</li>
-                    <li><b>〇： </b>This is my car.（これは、私の車です）</li>
-                    <li><b>×： </b>This is a my car. / This is my a car. / This is the my car.</li>
+        <div class="highlight-box" style="border-color:#F59E0B; background:#FFFBEB;">
+            <span class="highlight-label" style="background:#F59E0B;">注意</span>
+            <p style="margin:0; font-weight:bold; color:#B45309;">
+                冠詞と所有格は、一緒には使えません。（どちらか一方のみ）
+            </p>
+            <p style="margin:8px 0 0 0; font-size:0.9rem;">
+                <ul>
+                    <li>〇：This is a car.（これは、1台の車です）</li>
+                    <li>〇：This is the car.（これは、その車です）</li>
+                    <li>〇：This is my car.（これは、私の車です）</li>
+                    <li>×：This is a my car. / This is my a car. / This is the my car.</li>
                 </ul>
+            </p>
+        </div>
 
-        <h2>英文法まとめ：冠詞・所有格</h2>
-
-            <ul class="menutxt">
+        <div class="highlight-box">
+            <span class="highlight-label">💡英文法まとめ：冠詞・所有格</span>
+            <ul style="margin:0; padding-left:20px; font-weight:700;">
                 <li>冠詞：<br>
                     「a/an」⇒不特定のもの（1つの～）<br>
                     「the」⇒特定のもの（その～）</li>
@@ -150,16 +727,119 @@
                 <li>冠詞や所有格は、必ず「名詞とセット」で、「名詞の前」に置く</li>
                 <li>冠詞と所有格は同時には使えない（×：a my book）</li>
             </ul>
+        </div>
 
-        <script src="mondai_g1_0.js"></script>
-        <script src="pgm_grammar.js"></script>
-    </main>
+        <div class="listening-section">
+            <h2>🎧 基本例文リスニング</h2>
+            <div id="example-list-container"></div>
+        </div>
 
-    <footer class="footer-container">
-        <hr>
-        <p>英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ。中学英語のやり直し・学び直しにもオススメです</p>
-        <p>Copyright(C) 2022- All Rights Reserved</p>
-    </footer>
-    <a href="#page_top" class="page_top_btn">▲</a>
+    </section>
+
+    <!-- TAB 2: 練習問題 -->
+    <section id="tab-practice" class="content-area">
+        <div class="quiz-container">
+
+            <!-- Quiz Header with Progress -->
+            <div class="quiz-header hidden" id="quiz-header">
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span id="progress-text">問題 1 / 10</span>
+                        <span id="progress-percentage">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Start Screen -->
+            <div class="results-container" id="start-screen">
+                <p style="color: var(--text-sub); margin-bottom: 32px;">
+                    日本語に合う英文になるように、単語を並べ替えましょう!(全10問)
+                </p>
+                <button class="btn btn-primary check-btn" id="start-btn">
+                    <i class="ph-fill ph-play"></i>
+                    スタート
+                </button>
+            </div>
+
+            <!-- Quiz Card -->
+            <div class="quiz-card hidden" id="quiz-card">
+                <div id="feedback-container"></div>
+
+                <div class="question-jp" id="question-jp"></div>
+
+                <div class="answer-display">
+                    <div class="answer-box" id="answer-box"></div>
+                </div>
+
+                <div class="word-pool" id="word-pool"></div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="retry-btn">
+                        <i class="ph-fill ph-eraser"></i>
+                        消す
+                    </button>
+                    <button class="btn btn-secondary" id="skip-btn">
+                        <i class="ph-fill ph-skip-forward"></i>
+                        スキップ
+                    </button>
+                    <button class="btn btn-primary" id="check-btn">
+                        <span id="check-btn-text">. </span>
+                        <i class="ph-fill ph-check-circle"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div class="results-container hidden" id="results-screen">
+                <div class="results-title">Completed!</div>
+                <div class="results-score" id="results-score">10/10</div>
+                <div class="results-label">正解数</div>
+
+                <button class="btn btn-primary check-btn" id="restart-btn">
+                    <i class="ph-fill ph-arrow-clockwise"></i>
+                    もう一度
+                </button>
+
+                <div class="missed-list hidden" id="missed-list">
+                    <div class="missed-list-title">間違えた問題</div>
+                    <div id="missed-items-container"></div>
+                </div>
+            </div>
+
+            <!-- Stop Button (shown during quiz) -->
+            <button class="btn btn-warning hidden" id="stop-btn" style="margin-top: 16px;">
+                <i class="ph-fill ph-x-circle"></i>
+                止める
+            </button>
+
+        </div>
+    </section>
+
+    <!-- External Scripts -->
+    <script src="mondai_g1_0.js"></script>
+    <script src="pgm_grammarpractice.js"></script>
+    <script src="pgm_basicsentencelistening.js"></script>
+
+    <script>
+        // === タブ切り替え ===
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tab = btn.dataset.tab;
+
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                document.querySelectorAll('.content-area').forEach(area => area.classList.remove('active'));
+                document.getElementById(`tab-${tab}`).classList.add('active');
+
+                window.scrollTo(0, 0);
+            });
+        });
+    </script>
+
 </body>
+
 </html>

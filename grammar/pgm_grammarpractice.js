@@ -91,8 +91,8 @@ class GrammarQuiz {
         // 問題文を表示
         this.elements.questionJp.textContent = question.ja;
 
-        // 単語プールを準備
-        this.availableWords = this.shuffleArray(question.words);
+        // 単語プールを準備（words配列の全要素をシャッフル）
+        this.availableWords = this.shuffleArray([...question.words]);
         this.userAnswer = [];
 
         // 確定ボタンのテキストを設定
@@ -108,9 +108,15 @@ class GrammarQuiz {
 
     checkAnswer() {
         const question = this.questions[this.currentIndex];
-        const userAnswerStr = this.userAnswer.join(' ') + question.endMark;
+
+        // ユーザーの回答（先頭を大文字化してから終了記号を追加）
+        const userAnswerBase = this.userAnswer.join(' ');
+        const userAnswerStr = this.capitalizeFirst(userAnswerBase) + question.endMark;
+
+        // 正解（データから取得、既に先頭が大文字）
         const correctAnswer = question.en;
 
+        // 正誤判定（両方とも先頭が大文字の状態で比較）
         const isCorrect = userAnswerStr === correctAnswer;
 
         if (isCorrect) {
@@ -129,16 +135,20 @@ class GrammarQuiz {
             });
         }
 
+        // 終了記号を含めて表示を更新
+        this.renderAnswer();
+
         // 次の問題へ
         setTimeout(() => {
             this.currentIndex++;
             this.loadQuestion();
-        }, 1500);
+        }, 800);
     }
 
     retryQuestion() {
         this.userAnswer = [];
-        this.availableWords = this.shuffleArray(this.questions[this.currentIndex].words);
+        // words配列の全要素をシャッフル
+        this.availableWords = this.shuffleArray([...this.questions[this.currentIndex].words]);
         this.renderWordPool();
         this.renderAnswer();
         this.clearFeedback();
@@ -150,20 +160,16 @@ class GrammarQuiz {
 
         this.missedQuestions.push({
             question: question.ja,
-            correct: question.en,
+            correct: this.capitalizeFirst(question.en),
             userAnswer: '(スキップ)'
         });
 
-        this.showFeedback(false);
-
-        setTimeout(() => {
-            this.currentIndex++;
-            this.loadQuestion();
-        }, 1000);
+        this.currentIndex++;
+        this.loadQuestion();
     }
 
     stopQuiz() {
-        if (confirm('練習を止めますか？')) {
+        if (confirm('練習を止めますか?')) {
             this.showScreen('start');
         }
     }
@@ -206,10 +212,14 @@ class GrammarQuiz {
     }
 
     renderAnswer() {
+        // 既存のフィードバックを一時保存
+        const existingFeedback = this.elements.answerBox.querySelector('.answer-box-feedback');
+        const feedbackHtml = existingFeedback ? existingFeedback.outerHTML : null;
+
         if (this.userAnswer.length === 0) {
             this.elements.answerBox.innerHTML = '';
         } else {
-            // 最初の単語は大文字にする
+            // 最初の単語は大文字にする（表示用）
             const displayAnswer = this.userAnswer.map((word, index) => {
                 if (index === 0) {
                     return this.capitalizeFirst(word);
@@ -217,7 +227,21 @@ class GrammarQuiz {
                 return word;
             });
 
-            this.elements.answerBox.textContent = displayAnswer.join(' ');
+            // 回答をチェックした後は終了記号も表示
+            const question = this.questions[this.currentIndex];
+            const hasBeenChecked = this.elements.answerBox.classList.contains('correct') ||
+                this.elements.answerBox.classList.contains('incorrect');
+
+            if (hasBeenChecked) {
+                this.elements.answerBox.textContent = displayAnswer.join(' ') + question.endMark;
+            } else {
+                this.elements.answerBox.textContent = displayAnswer.join(' ');
+            }
+        }
+
+        // フィードバックを復元
+        if (feedbackHtml) {
+            this.elements.answerBox.insertAdjacentHTML('beforeend', feedbackHtml);
         }
     }
 
@@ -228,12 +252,12 @@ class GrammarQuiz {
                     <div class="missed-question">${item.question}</div>
                     <div class="answer-comparison">
                         <div class="answer-row">
-                            <i class="ph-fill ph-check-circle" style="color: var(--success-text);"></i>
-                            <span><strong>正解：</strong>${item.correct}</span>
+                            <i class="ph-fill ph-check-circle" style="color: var(--success-border);"></i>
+                            <span><strong>正解:</strong>${item.correct}</span>
                         </div>
                         <div class="answer-row">
-                            <i class="ph-fill ph-x-circle" style="color: var(--error-text);"></i>
-                            <span><strong>あなたの回答：</strong>${item.userAnswer}</span>
+                            <i class="ph-fill ph-x-circle" style="color: var(--error-border);"></i>
+                            <span><strong>あなたの回答:</strong>${item.userAnswer}</span>
                         </div>
                     </div>
                 </div>
@@ -252,19 +276,32 @@ class GrammarQuiz {
         const icon = isCorrect
             ? '<i class="ph-fill ph-check-circle"></i>'
             : '<i class="ph-fill ph-x-circle"></i>';
-        const text = isCorrect ? '正解！' : '不正解';
+        const text = isCorrect ? '正解' : '不正解';
         const className = isCorrect ? 'correct' : 'incorrect';
 
-        this.elements.feedbackContainer.innerHTML = `
-            <div class="feedback-message ${className}">
-                ${icon}
-                <span>${text}</span>
-            </div>
-        `;
+        // 回答ボックス内にフィードバックを表示
+        const feedbackHtml = `
+        <div class="answer-box-feedback show ${className}">
+            ${icon}
+            <span>${text}</span>
+        </div>
+    `;
+
+        // 既存のフィードバックがあれば削除
+        const existingFeedback = this.elements.answerBox.querySelector('.answer-box-feedback');
+        if (existingFeedback) {
+            existingFeedback.remove();
+        }
+
+        // 新しいフィードバックを追加
+        this.elements.answerBox.insertAdjacentHTML('beforeend', feedbackHtml);
     }
 
     clearFeedback() {
-        this.elements.feedbackContainer.innerHTML = '';
+        const feedback = this.elements.answerBox.querySelector('.answer-box-feedback');
+        if (feedback) {
+            feedback.remove();
+        }
     }
 
     resetAnswerBoxState() {
@@ -344,7 +381,7 @@ function convertQuestionData(rawData) {
     return rawData.map(item => ({
         ja: item[0],
         en: item[1],
-        endMark: item[1].slice(-1), // 最後の文字（. ? !）
+        endMark: item[1].slice(-1), // 最後の文字(. ? !)
         words: item.slice(2) // 残りの要素が単語リスト
     }));
 }

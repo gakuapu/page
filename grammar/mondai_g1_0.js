@@ -1,4 +1,4 @@
-const $list = [
+const $practiceSentence = [
 
     ["彼は私の友達です。", "He is my friend.", "he", "is", "my", "friend", "the", "an", "I", "a"],
     ["あれは私のネコです。", "That is my cat.", "that", "is", "my", "cat", "a", "an", "the", "I"],
@@ -10,5 +10,20 @@ const $list = [
     ["これは私の鉛筆ですか?", "Is this my pencil?", "is", "this", "my", "pencil", "a", "an", "the", "I"],
     ["私は毎日、リンゴを1つ食べます。", "I have an apple every day.", "I", "have", "an", "apple", "every", "day", "a", "the"],
     ["私は毎日、その本を読んでいます。", "I read the book every day.", "I", "read", "the", "book", "every", "day", "a", "an"]
-    
+
+]
+
+const $basicSentence = [
+
+    ["彼は私の友達です。", "He is my friend."],
+    ["あれは私のネコです。", "That is my cat."],
+    ["あれは象です。", "That is an elephant."],
+    ["私は彼の弟ではありません。", "I am not his brother."],
+    ["私たちは先生ではありません。", "We are not teachers."],
+    ["これは私の絵ではありません。", "This is not my picture."],
+    ["彼はあなたのお兄さんですか?", "Is he your brother?"],
+    ["これは私の鉛筆ですか?", "Is this my pencil?"],
+    ["私は毎日、リンゴを1つ食べます。", "I have an apple every day."],
+    ["私は毎日、その本を読んでいます。", "I read the book every day."]
+
 ]
