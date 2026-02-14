@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ja">
 
 <head>
@@ -299,30 +298,6 @@
             color: var(--text-main);
         }
 
-        .wrong-word-table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-            display: none;
-            font-size: 0.9rem;
-        }
-
-        .wrong-word-table tr:nth-child(odd) {
-            background: #F8FAFC;
-        }
-
-        .wrong-word-table td {
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .wrong-word-header {
-            font-weight: 700;
-            background: #F1F5F9;
-            color: var(--text-main);
-        }
-
         .wrong-word-list {
             width: 100%;
             margin-top: 20px;
@@ -541,15 +516,19 @@
 
     <div id="deck-modal" class="modal hidden">
         <div class="modal-content">
-            <h3 style="margin-top:0;">登録先の単語帳</h3>
-
-            <div id="deck-list"></div>
-
-            <p style="font-size:0.8rem;color:#64748B;">
-                単語帳の作成はMy単語帳から行ってください
-            </p>
-
-            <button class="start-main-btn" onclick="closeDeckModal()">閉じる</button>
+            <!-- 通常：単語帳選択 -->
+            <div id="deck-modal-select">
+                <h3 style="margin-top:0;">登録先の単語帳</h3>
+                <div id="deck-list"></div>
+                <button class="start-main-btn" onclick="closeDeckModal()">閉じる</button>
+            </div>
+            <!-- 自動生成通知 -->
+            <div id="deck-modal-created" style="display:none;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:12px;">📖</div>
+                <h3 style="margin-top:0;">単語帳を作成しました</h3>
+                <p style="color:var(--text-sub);font-size:0.9rem;margin-bottom:20px;">「タイムトライアル」という名前の単語帳を自動作成しました。My単語帳から確認・編集できます。</p>
+                <button class="start-main-btn" onclick="closeDeckModal()">閉じる</button>
+            </div>
         </div>
     </div>
 
@@ -802,6 +781,17 @@
             return id;
         }
 
+        // 単語帳がない場合に「タイムトライアル」デッキを自動生成する
+        function createDefaultDeck() {
+            const id = Date.now();
+            const meta = getDeckMeta();
+            meta.push({ id: id, title: 'タイムトライアル', createdAt: new Date().toLocaleDateString(), count: 0 });
+            localStorage.setItem('gakuapu_decks_meta', JSON.stringify(meta));
+            localStorage.setItem(`gakuapu_deck_${id}`, '[]');
+            localStorage.setItem('gakuapu_last_deck', id);
+            return id;
+        }
+
         function addWordToDeck(deckId, word, meaning) {
             const key = `gakuapu_deck_${deckId}`;
             const list = JSON.parse(localStorage.getItem(key) || '[]');
@@ -824,12 +814,25 @@
         }
 
         function quickAddWrongWord(word, meaning, btn) {
-            const deckId = getValidCurrentDeckId();
+            let deckId = getValidCurrentDeckId();
 
+            // 単語帳がない場合は「タイムトライアル」デッキを自動生成
             if (!deckId) {
-                pendingWord = { word, meaning, btn };
-                openDeckModal();
-                return;
+                const meta = getDeckMeta();
+                if (meta.length === 0) {
+                    deckId = createDefaultDeck();
+                    addWordToDeck(deckId, word, meaning);
+                    btn.innerHTML = '<i class="ph-bold ph-check"></i>';
+                    btn.disabled = true;
+                    btn.style.opacity = '0.5';
+                    showToast('「タイムトライアル」単語帳を作成して登録しました');
+                    return;
+                } else {
+                    // 単語帳はあるが選択されていない場合はモーダルを開く
+                    pendingWord = { word, meaning, btn };
+                    openDeckModal();
+                    return;
+                }
             }
 
             addWordToDeck(deckId, word, meaning);
@@ -849,7 +852,16 @@
         }
 
         function openDeckModal() {
-            renderDeckList();
+            const meta = getDeckMeta();
+            if (meta.length === 0) {
+                createDefaultDeck();
+                document.getElementById('deck-modal-select').style.display = 'none';
+                document.getElementById('deck-modal-created').style.display = 'block';
+            } else {
+                document.getElementById('deck-modal-select').style.display = 'block';
+                document.getElementById('deck-modal-created').style.display = 'none';
+                renderDeckList();
+            }
             document.getElementById('deck-modal').classList.remove('hidden');
         }
 
@@ -861,11 +873,6 @@
             const el = document.getElementById('deck-list');
             const meta = getDeckMeta();
             const current = getValidCurrentDeckId();
-
-            if (meta.length === 0) {
-                el.innerHTML = `<p>My単語帳から単語帳を作成してください</p>`;
-                return;
-            }
 
             el.innerHTML = meta.map(d => `
                 <label style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
