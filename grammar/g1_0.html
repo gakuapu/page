@@ -97,7 +97,7 @@
         }
 
         .tab-btn {
-            font-size: 1rem;
+            font-size: 0.85rem;
             flex: 1;
             text-align: center;
             padding: 12px;
@@ -233,12 +233,6 @@
         }
 
         /* --- Listening Section --- */
-        .listening-section {
-            margin-top: 48px;
-            padding-top: 24px;
-            border-top: 2px dashed var(--border);
-        }
-
         .example-item {
             background: var(--bg-surface);
             border: 1px solid var(--border);
@@ -624,14 +618,17 @@
     <!-- Tab Navigation -->
     <nav class="tab-nav">
         <button class="tab-btn active" data-tab="learn">
-            <i class="ph-fill ph-book-open"></i> 解説・例文リスニング
+            <i class="ph-fill ph-book-open"></i> 解説
+        </button>
+        <button class="tab-btn" data-tab="listen">
+            <i class="ph-fill ph-headphones"></i> 例文リスニング
         </button>
         <button class="tab-btn" data-tab="practice">
             <i class="ph-fill ph-pencil-simple"></i> 練習問題
         </button>
     </nav>
 
-    <!-- TAB 1: 解説 & 例文リスニング -->
+    <!-- TAB 1: 解説 -->
     <section id="tab-learn" class="content-area active">
 
         <h1>冠詞（a/an/the）・所有格</h1>
@@ -732,14 +729,15 @@
             </ul>
         </div>
 
-        <div class="listening-section">
-            <h2>🎧 基本例文リスニング</h2>
-            <div id="example-list-container"></div>
-        </div>
-
     </section>
 
-    <!-- TAB 2: 練習問題 -->
+    <!-- TAB 2: 例文リスニング -->
+    <section id="tab-listen" class="content-area">
+        <h2>🎧 基本例文リスニング</h2>
+        <div id="example-list-container"></div>
+    </section>
+
+    <!-- TAB 3: 練習問題 -->
     <section id="tab-practice" class="content-area">
         <div class="quiz-container">
 
