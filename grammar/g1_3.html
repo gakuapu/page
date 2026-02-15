@@ -1,136 +1,234 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-    <!-- Google tag (gtag.js) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-XKL20YHCTB');
     </script>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中1英文法：can｜無料中学英文法ドリルアプリ【学アプ英語】</title>
-    <link rel="icon" href="../favicon.ico">
-    <meta name="description" content="英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ。中学英語のやり直し・学び直しにもオススメです">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="style_grammar.css">
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中学英文法｜can</title>
+    <meta name="description" content="
+    canの基本ルールを分かりやすく解説。リスニング音声付き例文や練習問題も。中学英語・英検対策に使える無料の基本英文法学習アプリです。
+    ">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style_grammar2.css">
 </head>
+
 <body>
 
-    <audio id="audio1" src="../seikaion.mp3" preload="auto"></audio>
-    <audio id="audio2" src="../machigaion2.mp3" preload="auto"></audio>
-
-    <header>
-        <h1><a id="page_top">can｜無料中学英文法アプリ</a></h1>
-        <hr>
+    <!-- Header -->
+    <header class="app-header">
+        <a href="../en_grammar.html" class="back-link">
+            <i class="ph-bold ph-caret-left"></i>
+        </a>
+        <div style="font-weight:700; font-size:1rem;">can</div>
+        <div style="width:40px"></div>
     </header>
 
-    <main>
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="learn">
+            <i class="ph-fill ph-book-open"></i> 解説
+        </button>
+        <button class="tab-btn" data-tab="listen">
+            <i class="ph-fill ph-headphones"></i> 例文リスニング
+        </button>
+        <button class="tab-btn" data-tab="practice">
+            <i class="ph-fill ph-pencil-simple"></i> 練習問題
+        </button>
+    </nav>
 
-        <div>
-            <input type="button" id="stop-btn" class="btn" value="やめる">
-            <input type="button" id="start-btn" class="btn" value="練習スタート">
+    <!-- TAB 1: 解説 -->
+    <section id="tab-learn" class="content-area active">
+
+        <h1>can</h1>
+
+        <h2>【can】とは</h2>
+        <p>「can」は、「～できる」という意味を表す言葉です。</p>
+
+        <h2>「can」の使い方と例文</h2>
+        <p>「主語＋can＋動詞」と、動詞の前に「can」を置くのが基本の形です。</p>
+        <div class="example-box">
+            <div class="ex-text-en">I <b>can</b> swim.</div>
+            <div class="ex-text-jp">私は泳ぐことができます。</div>
         </div>
-
-        <div id="mondai"></div>
-        <div>
-            <a id="spacer">|</a>
-            <a id="inputanswer"></a>
+        <div class="example-box">
+            <div class="ex-text-en">We <b>can</b> play the piano.</div>
+            <div class="ex-text-jp">私たちはピアノを弾くことができます。</div>
         </div>
-
-        <div id="word-btn-container">
-            <input type="button" id="word1" class="word-btn">
-            <input type="button" id="word2" class="word-btn">
-            <input type="button" id="word3" class="word-btn">
-            <input type="button" id="word4" class="word-btn">
-            <input type="button" id="word5" class="word-btn">
-            <input type="button" id="word6" class="word-btn">
-            <input type="button" id="word7" class="word-btn">
-            <input type="button" id="word8" class="word-btn">
-            <input type="button" id="check-btn">
-        </div>
-
-        <div>
-            <input type="button" id="retry-btn" class="btn" value="やり直す">
-            <input type="button" id="skip-btn" class="btn" value="スキップ">
-        </div>
-
-        <div>
-            <progress id="progress" value="0"></progress>
-        </div>
-
-        <p id="resultmsg" class="subtoph2"></p>
-
-        <table id="missed-list-table">
-        </table>
-
-        <p class="subtoph2"> ＞ <a href="g1_4.html">次に進む</a></p>
-        <p class="subtoph2"> ＞ <a href="b1_3.html">基本例文のリスニング</a></p>
-        <p class="subtoph2"> ＞ <a href="../en_grammar.html">英文法トップ</a></p>
-        <p class="subtoph2"> ＞ <a href="../index_en.html">トップにもどる</a></p>
-
-        <hr class="dotted">
-
-        <h2>【can】とは：</h2>
-
-            <p class="menutxt">「can」は、「～できる」という意味を表す言葉です。</p>
-
-        <h2>「can」の使い方と例文：</h2>
-
-            <p class="menutxt">「主語＋can＋動詞」と、動詞の前に「can」を置くのが基本の形です。</p>
-                <ul class="menutxt">
-                    <li>I <b>can</b> swim.（私は泳ぐことができます）</li>
-                    <li>We <b>can</b> play the piano.（私たちはピアノを弾くことができます）</li>
-                </ul>
 
         <h2>否定文と疑問文の作り方：</h2>
-
-            <p class="menutxt"><b>否定文｜</b>「can not（短縮形：can't）」を使います。<br>
+        <p><b>否定文｜</b>「can not（短縮形：can't）」を使います。<br>
             「can」の後ろに「not」つけることで、「～できない」という意味になります。</p>
-                <ul class="menutxt">
-                    <li>I <b>can not</b> swim.（私は泳ぐことができません）</li>
-                    <li>They <b>can't</b> play the piano.（彼らはピアノを弾くことができません）</li>
-                </ul>
+        <div class="example-box">
+            <div class="ex-text-en">I <b>can not</b> swim.</div>
+            <div class="ex-text-jp">私は泳ぐことができません。</div>
+        </div>
+        <div class="example-box">
+            <div class="ex-text-en">They <b>can't</b> play the piano.</div>
+            <div class="ex-text-jp">彼らはピアノを弾くことができません。</div>
+        </div>
 
-            <p class="menutxt"><b>疑問文｜</b>文の先頭に「Can」を置くことで、「～できますか?」と質問する文になります。</p>
-                <ul class="menutxt">
-                    <li><b>Can</b> you swim?（あなたは泳ぐことができますか?）</li>
-                    <li><b>Can</b> they play the piano?（彼らはピアノを弾くことができますか?）</li>
-                </ul>
+        <p><b>疑問文｜</b>文の先頭に「Can」を置くことで、「～できますか?」と質問する文になります。</p>
+        <div class="example-box">
+            <div class="ex-text-en"><b>Can</b> you swim?</div>
+            <div class="ex-text-jp">あなたは泳ぐことができますか?</div>
+        </div>
+        <div class="example-box">
+            <div class="ex-text-en"><b>Can</b> they play the piano?</div>
+            <div class="ex-text-jp">彼らはピアノを弾くことができますか?</div>
+        </div>
 
-        <h2>英文法まとめ：「can」</h2>
-
-            <ul class="menutxt">
+        <div class="highlight-box">
+            <span class="highlight-label">英文法まとめ：can</span>
+            <ul style="margin:0; padding-left:20px; font-weight:700;">
                 <li>"主語" "can" "動詞" ...が基本の形</li>
                 <li>否定文では、「can not（can't）」を使う</li>
                 <li>疑問文では、「Can」を文の先頭に置く</li>
             </ul>
+        </div>
 
-        <h2>参考：「助動詞」について</h2>
+        <div class="highlight-box" style="border-color:#F59E0B; background:#FFFBEB;">
+            <span class="highlight-label" style="background:#F59E0B;">参考：助動詞とは?</span>
+            <p style="margin:0; font-weight:bold; color:#B45309;">
+                「can」のような、動詞に意味を付け足すことができる特別な言葉を「助動詞」と言います。
+            </p>
+            <br>
+            <p style="margin:0; font-weight:bold; color:#B45309;">
+                <b>【助動詞のルール】</b>
+            </p>
+            <p style="margin:8px 0 0 0; font-size:0.9rem;">
+            <ul>
+                <li>必ず動詞より前に置きます</li>
+                <li>助動詞を使う時、動詞は「原形（元の形）」になります</li>
+                <li>否定文は「助動詞＋not」、疑問文は「助動詞＋主語＋動詞（原形）...?」という形になります</li>
+            </ul>
+            </p>
+        </div>
 
-            <p class="menutxt">「can」のような、動詞に意味を付け足すことができる特別な言葉を「助動詞」と言います。</p>
+    </section>
 
-            <p class="menutxt"><b>【助動詞のルール】</b></p>
-                <ul class="menutxt">
-                    <li>必ず動詞より前に置きます</li>
-                    <li>助動詞を使う時、動詞は「原形（元の形）」になります</li>
-                    <li>否定文は「助動詞＋not」、疑問文は「助動詞＋主語＋動詞（原形）...?」という形になります</li>
-                </ul>
+    <!-- TAB 2: 例文リスニング -->
+    <section id="tab-listen" class="content-area">
+        <h2>🎧 基本例文リスニング</h2>
+        <div id="example-list-container"></div>
+    </section>
 
-        <script src="mondai_g1_3.js"></script>
-        <script src="pgm_grammar.js"></script>
-    </main>
+    <!-- TAB 3: 練習問題 -->
+    <section id="tab-practice" class="content-area">
+        <div class="quiz-container">
 
-    <footer class="footer-container">
-        <hr>
-        <p>英検の勉強にも役立つ無料の中学英語ドリルのアプリ。中学英語(英検3～5級)で学習する英文法を基本例文・解説と並べ替え練習問題でマスターしよう。ダウンロード不要のおすすめ英語アプリ。中学英語のやり直し・学び直しにもオススメです</p>
-        <p>Copyright(C) 2022- All Rights Reserved</p>
-    </footer>
-    <a href="#page_top" class="page_top_btn">▲</a>
+            <!-- Quiz Header with Progress -->
+            <div class="quiz-header hidden" id="quiz-header">
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span id="progress-text">問題 1 / 10</span>
+                        <span id="progress-percentage">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Start Screen -->
+            <div class="results-container" id="start-screen">
+                <p style="color: var(--text-sub); margin-bottom: 32px;">
+                    日本語に合う英文になるように、単語を並べ替えましょう(全10問)
+                </p>
+                <button class="btn btn-primary check-btn" id="start-btn">
+                    <i class="ph-fill ph-play"></i>
+                    スタート
+                </button>
+            </div>
+
+            <!-- Quiz Card -->
+            <div class="quiz-card hidden" id="quiz-card">
+                <div id="feedback-container"></div>
+
+                <div class="question-jp" id="question-jp"></div>
+
+                <div class="answer-display">
+                    <div class="answer-box" id="answer-box"></div>
+                </div>
+
+                <div class="word-pool" id="word-pool"></div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="retry-btn">
+                        <i class="ph-fill ph-eraser"></i>
+                    </button>
+                    <button class="btn btn-secondary" id="skip-btn">
+                        <i class="ph-fill ph-skip-forward"></i>
+                    </button>
+                    <button class="btn btn-primary" id="check-btn">
+                        <span id="check-btn-text">. </span>
+                        <i class="ph-fill ph-check-circle"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div class="results-container hidden" id="results-screen">
+                <div class="results-title">Completed!</div>
+                <div class="results-score" id="results-score">10/10</div>
+                <div class="results-label">正解数</div>
+
+                <button class="btn btn-primary check-btn" id="restart-btn">
+                    <i class="ph-fill ph-arrow-clockwise"></i>
+                    もう一度
+                </button>
+
+                <div class="missed-list hidden" id="missed-list">
+                    <div class="missed-list-title">間違えた問題</div>
+                    <div id="missed-items-container"></div>
+                </div>
+            </div>
+
+            <!-- Stop Button (shown during quiz) -->
+            <button class="btn btn-warning hidden" id="stop-btn" style="margin-top: 16px;">
+                <i class="ph-fill ph-x-circle"></i>
+                止める
+            </button>
+
+        </div>
+    </section>
+
+    <!-- External Scripts -->
+    <script src="mondai_g1_3.js"></script>
+    <script src="pgm_grammarpractice.js"></script>
+    <script src="pgm_basicsentencelistening.js"></script>
+
+    <script>
+        // === タブ切り替え ===
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tab = btn.dataset.tab;
+
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                document.querySelectorAll('.content-area').forEach(area => area.classList.remove('active'));
+                document.getElementById(`tab-${tab}`).classList.add('active');
+
+                window.scrollTo(0, 0);
+            });
+        });
+    </script>
+
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-const $list = [
+const $practiceSentence = [
 
     ["私はピアノを弾くことができます。", "I can play the piano.", "I", "can", "play", "the", "piano", "am", "do", "I'm"],
     ["あなたはとても速く泳げます。", "You can swim very fast.", "you", "can", "swim", "very", "fast", "are", "do", "a"],
@@ -10,5 +10,20 @@ const $list = [
     ["彼らは英語を話せますか?", "Can they speak English?", "can", "they", "speak", "English", "are", "do", "the", "an"],
     ["あなたは車を運転できますか?", "Can you drive a car?", "can", "you", "drive", "a", "car", "are", "do", "is"],
     ["あなたは私の家に来ることができますか?", "Can you come to my house?", "can", "you", "come", "to", "my", "house", "do", "are"]
+
+]
+
+const $basicSentence = [
+
+    ["私はピアノを弾くことができます。", "I can play the piano."],
+    ["あなたはとても速く泳げます。", "You can swim very fast."],
+    ["彼らはとても上手に英語を話すことができます。", "They can speak English very well."],
+    ["私の猫は泳げません。", "My cat can not swim."],
+    ["私たちは公園で野球をすることができません。", "We can't play baseball in the park."],
+    ["私たちはサッカーができません。", "We can not play soccer."],
+    ["私は上手に歌えません。", "I can't sing a song well"],
+    ["彼らは英語を話せますか?", "Can they speak English?"],
+    ["あなたは車を運転できますか?", "Can you drive a car?"],
+    ["あなたは私の家に来ることができますか?", "Can you come to my house?"]
 
 ]
