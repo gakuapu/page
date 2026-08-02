@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本の歴史 暗記カード｜時代を選ぶ</title>
+    <script src="history_data.js"></script>
+</head>
+
+<style>
+    :root {
+        --bg: #f9fafb;
+        --surface: #fff;
+        --text: #222;
+        --text-soft: #6b7280;
+        --accent: #2563eb;
+        --accent-soft: #eef2ff;
+        --border: rgba(0, 0, 0, 0.06);
+        --radius: 8px;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+            Roboto, "Helvetica Neue", Arial, sans-serif;
+        margin: 0;
+        padding: 40px 16px 64px;
+        background: var(--bg);
+        color: var(--text);
+    }
+
+    .wrap {
+        max-width: 640px;
+        margin: 0 auto;
+    }
+
+    .container {
+        background: var(--surface);
+        padding: 24px 20px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+    }
+
+    h1 {
+        font-size: 1.35rem;
+        margin: 0 0 10px;
+        font-weight: 700;
+    }
+
+    p {
+        line-height: 1.7;
+        margin: 0;
+        color: var(--text-soft);
+        font-size: 0.92rem;
+    }
+
+    .list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        text-decoration: none;
+        color: inherit;
+        background: var(--surface);
+        padding: 18px 20px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border: 1px solid transparent;
+        transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+        cursor: pointer;
+    }
+    .card:hover, .card:focus-visible {
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-2px);
+        border-color: var(--accent-soft);
+        outline: none;
+    }
+    .card:active { transform: translateY(0); }
+
+    .badge {
+        flex: 0 0 auto;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.85rem;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .card-title {
+        font-weight: 700;
+        font-size: 1rem;
+        margin: 0 0 4px;
+        color: var(--text);
+    }
+
+    .card-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.78rem;
+        color: var(--text-soft);
+    }
+
+    .range {
+        color: var(--accent);
+        font-weight: 600;
+    }
+
+    .dot {
+        width: 3px; height: 3px; border-radius: 50%;
+        background: var(--border);
+        flex: 0 0 auto;
+    }
+
+    .era-chip {
+        border: 1px solid var(--border);
+        padding: 1px 7px;
+        border-radius: 20px;
+        font-size: 0.72rem;
+    }
+
+    .card-right {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .count {
+        font-size: 0.75rem;
+        color: var(--text-soft);
+        white-space: nowrap;
+        text-align: right;
+    }
+    .count b { color: var(--text); font-size: 0.95rem; }
+
+    .arrow {
+        color: var(--accent);
+        font-size: 1.1rem;
+        font-weight: 700;
+        transition: transform .18s ease;
+    }
+    .card:hover .arrow { transform: translateX(3px); }
+
+    .foot-note {
+        text-align: center;
+        font-size: 0.78rem;
+        color: var(--text-soft);
+        margin-top: 28px;
+    }
+
+    #state {
+        display: none;
+        text-align: center;
+        padding: 20px 4px;
+        line-height: 1.9;
+        color: var(--text-soft);
+        font-size: 0.9rem;
+    }
+    #state.show { display: block; }
+    #state code {
+        background: var(--accent-soft);
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+        .era-chip { display: none; }
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <div class="container">
+            <h1>日本の歴史 暗記カード</h1>
+            <p>学びたい時代を選んでください。年号と出来事を、起きた順にカードでたどれます。</p>
+        </div>
+
+        <ul class="list" id="list"></ul>
+
+        <div id="state"></div>
+
+        <p class="foot-note">全 <span id="total-count">-</span> 件の出来事 ／ <span id="cat-count">-</span> 時代区分</p>
+    </div>
+
+<script>
+function init(){
+  const stateEl = document.getElementById('state');
+  try{
+    if(typeof HISTORY_DATA === 'undefined') throw new Error('no-data');
+    render(HISTORY_DATA);
+  }catch(err){
+    stateEl.classList.add('show');
+    stateEl.innerHTML =
+      '読み込みに失敗しました。<br>' +
+      'このページは <code>history_data.js</code> を同じフォルダに置き、' +
+      '<code>&lt;script src="history_data.js"&gt;&lt;/script&gt;</code> で読み込む必要があります。<br>' +
+      'ファイルが同じフォルダにあるかご確認ください。';
+    console.error(err);
+  }
+}
+
+function render(data){
+  const listEl = document.getElementById('list');
+
+  const order = [];
+  const groups = {};
+  data.forEach(item=>{
+    if(!groups[item.category]){
+      groups[item.category] = { events: [], eras: [] };
+      order.push(item.category);
+    }
+    groups[item.category].events.push(item);
+    if(!groups[item.category].eras.includes(item.era)){
+      groups[item.category].eras.push(item.era);
+    }
+  });
+
+  document.getElementById('total-count').textContent = data.length;
+  document.getElementById('cat-count').textContent = order.length;
+
+  order.forEach((cat, idx)=>{
+    const g = groups[cat];
+    const years = g.events.map(e=>e.year);
+    const min = Math.min(...years);
+    const max = Math.max(...years);
+    const rangeLabel = (min === max) ? `${min}年` : `${min}〜${max}年`;
+
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.className = 'card';
+    a.href = 'history_card.html?cat=' + encodeURIComponent(cat);
+
+    a.innerHTML = `
+      <span class="badge">${idx+1}</span>
+      <span class="card-body">
+        <span class="card-title">${escapeHtml(cat)}</span>
+        <span class="card-meta">
+          <span class="range">${rangeLabel}</span>
+          <span class="dot"></span>
+          ${g.eras.slice(0,3).map(e=>`<span class="era-chip">${escapeHtml(e)}</span>`).join('')}
+        </span>
+      </span>
+      <span class="card-right">
+        <span class="count"><b>${g.events.length}</b>件</span>
+        <span class="arrow">→</span>
+      </span>
+    `;
+    li.appendChild(a);
+    listEl.appendChild(li);
+  });
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, s => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[s]));
+}
+
+init();
+</script>
+</body>
+
+</html>

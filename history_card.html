@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本の歴史 暗記カード</title>
+    <script src="history_data.js"></script>
+</head>
+
+<style>
+    :root {
+        --bg: #f9fafb;
+        --surface: #fff;
+        --text: #222;
+        --text-soft: #6b7280;
+        --accent: #2563eb;
+        --accent-soft: #eef2ff;
+        --border: rgba(0, 0, 0, 0.06);
+        --radius: 8px;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+            Roboto, "Helvetica Neue", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        overflow: hidden;
+    }
+
+    /* ---------- Header ---------- */
+    header {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 20;
+        background: rgba(249, 250, 251, 0.94);
+        backdrop-filter: blur(4px);
+        border-bottom: 1px solid var(--border);
+    }
+    .head-row {
+        max-width: 640px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px;
+        gap: 12px;
+    }
+    .back-link {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        text-decoration: none;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 600;
+        white-space: nowrap;
+        flex: 0 0 auto;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    .head-title {
+        font-weight: 700;
+        font-size: 0.92rem;
+        color: var(--text);
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1 1 auto;
+    }
+
+    .head-count {
+        font-size: 0.78rem;
+        color: var(--text-soft);
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+    .head-count b { color: var(--text); font-weight: 700; }
+
+    .progress-track {
+        height: 3px;
+        background: var(--border);
+        position: relative;
+    }
+    .progress-fill {
+        position: absolute;
+        left: 0; top: 0; bottom: 0;
+        width: 0%;
+        background: var(--accent);
+        transition: width .15s ease-out;
+    }
+
+    /* ---------- Scroll container ---------- */
+    #scroller {
+        height: 100vh;
+        height: 100dvh;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .card {
+        height: 100vh;
+        height: 100dvh;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 84px 20px 40px;
+        position: relative;
+    }
+
+    .card-inner {
+        width: 100%;
+        max-width: 460px;
+        margin: 0 auto;
+        text-align: center;
+        background: var(--surface);
+        border-radius: 12px;
+        box-shadow: var(--shadow-lg);
+        padding: 40px 28px;
+    }
+
+    .era-pill {
+        display: inline-block;
+        font-size: 0.75rem;
+        color: var(--accent);
+        border: 1px solid var(--accent-soft);
+        background: var(--accent-soft);
+        padding: 4px 14px;
+        border-radius: 20px;
+        margin-bottom: 24px;
+        font-weight: 700;
+    }
+
+    .year-wrap {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 6px;
+        margin-bottom: 18px;
+    }
+    .year {
+        font-weight: 700;
+        font-size: clamp(18px, 4.6vw, 22px);
+        color: var(--text);
+        line-height: 1;
+    }
+    .year-suffix {
+        font-size: 0.85rem;
+        color: var(--text-soft);
+        font-weight: 600;
+    }
+
+    .event {
+        font-weight: 700;
+        font-size: clamp(18px, 4.6vw, 22px);
+        color: var(--text);
+        line-height: 1.55;
+        margin: 0 0 20px;
+    }
+
+    .divider {
+        width: 40px;
+        height: 2px;
+        background: var(--accent-soft);
+        margin: 0 auto 20px;
+        border-radius: 2px;
+    }
+
+    .desc-panel p {
+        margin: 0;
+        font-size: 0.92rem;
+        line-height: 1.9;
+        color: var(--text-soft);
+        text-align: left;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px 18px;
+    }
+
+    /* badge - card index */
+    .badge {
+        position: absolute;
+        top: 76px;
+        right: 22px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.72rem;
+    }
+
+    /* end card */
+    .end-card .card-inner { cursor: default; }
+    .end-mark {
+        width: 56px; height: 56px; border-radius: 50%;
+        background: var(--accent-soft);
+        color: var(--accent);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.4rem; font-weight: 800;
+        margin: 0 auto 20px;
+    }
+    .end-title {
+        font-size: 1.25rem; font-weight: 700;
+        margin: 0 0 8px;
+    }
+    .end-sub {
+        font-size: 0.85rem; color: var(--text-soft); margin: 0 0 26px; line-height: 1.8;
+    }
+    .end-btn-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .end-btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+        text-decoration: none;
+        padding: 11px 24px; border-radius: 30px;
+        font-size: 0.85rem; font-weight: 700;
+        transition: background .18s ease, color .18s ease, border-color .18s ease;
+        white-space: nowrap;
+    }
+    .end-btn-primary {
+        background: var(--accent); color: #fff;
+    }
+    .end-btn-primary:hover { background: #1d4fd1; }
+    .end-btn-secondary {
+        background: transparent; color: var(--text-soft);
+        border: 1px solid var(--border);
+    }
+    .end-btn-secondary:hover { color: var(--accent); border-color: var(--accent-soft); }
+
+    #state {
+        height: 100vh;
+        height: 100dvh;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 30px;
+        color: var(--text-soft);
+        font-size: 0.9rem;
+        line-height: 1.9;
+    }
+    #state.show { display: flex; }
+    #state code {
+        background: var(--accent-soft);
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+    }
+</style>
+
+<body>
+
+<header>
+  <div class="head-row">
+    <a class="back-link" href="history_card_menu.html">← 時代を選ぶ</a>
+    <span class="head-title" id="head-title">読み込み中…</span>
+    <span class="head-count"><b id="cur">0</b>/<span id="tot">0</span></span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+</header>
+
+<div id="scroller"><div id="state"></div></div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const catName = params.get('cat') || '';
+
+function init(){
+  const stateEl = document.getElementById('state');
+  try{
+    if(typeof HISTORY_DATA === 'undefined') throw new Error('no-data');
+    const items = HISTORY_DATA
+      .filter(d => d.category === catName)
+      .sort((a,b) => a.year - b.year);
+
+    if(items.length === 0){
+      throw new Error('no-items');
+    }
+    document.getElementById('head-title').textContent = catName;
+    document.getElementById('tot').textContent = items.length;
+
+    const catOrder = [];
+    HISTORY_DATA.forEach(d => { if(!catOrder.includes(d.category)) catOrder.push(d.category); });
+    const catIdx = catOrder.indexOf(catName);
+    const nextCat = (catIdx !== -1 && catIdx < catOrder.length - 1) ? catOrder[catIdx + 1] : null;
+
+    render(items, nextCat);
+  }catch(err){
+    stateEl.classList.add('show');
+    if(err.message === 'no-items'){
+      stateEl.innerHTML = `「${escapeHtml(catName)}」に該当するデータが見つかりませんでした。<br><a href="history_card_menu.html" style="color:var(--accent)">← 時代を選ぶ画面に戻る</a>`;
+    }else{
+      stateEl.innerHTML =
+        '読み込みに失敗しました。<br>' +
+        'このページは <code>history_data.js</code> を同じフォルダに置き、' +
+        '<code>&lt;script src="history_data.js"&gt;&lt;/script&gt;</code> で読み込む必要があります。<br>' +
+        'ファイルが同じフォルダにあるかご確認ください。';
+    }
+    console.error(err);
+  }
+}
+
+function render(items, nextCat){
+  const scroller = document.getElementById('scroller');
+  scroller.innerHTML = '';
+
+  items.forEach((item, idx) => {
+    const section = document.createElement('section');
+    section.className = 'card';
+    section.dataset.index = idx;
+
+    section.innerHTML = `
+      <span class="badge">${idx+1}</span>
+      <div class="card-inner">
+        <span class="era-pill">${escapeHtml(item.era)}</span>
+        <div class="year-wrap">
+          <span class="year">${item.year}</span>
+          <span class="year-suffix">年</span>
+        </div>
+        <p class="event">${escapeHtml(item.event)}</p>
+        <div class="divider"></div>
+        <div class="desc-panel"><p>${escapeHtml(item.description || '')}</p></div>
+      </div>
+    `;
+
+    scroller.appendChild(section);
+  });
+
+  // end card
+  const end = document.createElement('section');
+  end.className = 'card end-card';
+  const nextBtn = nextCat
+    ? `<a class="end-btn end-btn-primary" href="history_card.html?cat=${encodeURIComponent(nextCat)}">次の時代へ：${escapeHtml(nextCat)} →</a>`
+    : '';
+  end.innerHTML = `
+    <div class="card-inner">
+      <div class="end-mark">✓</div>
+      <p class="end-title">お疲れさまでした</p>
+      <p class="end-sub">「${escapeHtml(catName)}」の出来事 ${items.length}件を<br>すべて確認しました。</p>
+      <div class="end-btn-group">
+        ${nextBtn}
+        <a class="end-btn end-btn-secondary" href="history_card_menu.html">時代を選ぶ画面に戻る</a>
+      </div>
+    </div>
+  `;
+  scroller.appendChild(end);
+
+  setupProgress(items.length);
+}
+
+function setupProgress(count){
+  const scroller = document.getElementById('scroller');
+  const cur = document.getElementById('cur');
+  const progress = document.getElementById('progress');
+  const cards = Array.from(scroller.querySelectorAll('.card'));
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const idx = cards.indexOf(entry.target);
+        const shown = Math.min(idx+1, count);
+        cur.textContent = shown;
+        progress.style.width = (Math.min(idx+1, count) / count * 100) + '%';
+      }
+    });
+  }, { root: scroller, threshold: 0.6 });
+
+  cards.forEach(c => io.observe(c));
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, s => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[s]));
+}
+
+init();
+</script>
+</body>
+
+</html>
