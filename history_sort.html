@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>日本の歴史 並べ替えクイズ｜学アプ【無料・登録不要】</title>
+    <meta name="description" content="
+    無料・登録不要で使える、中学受験準備用の日本の歴史の暗記アプリ。歴史上の重要な出来事を年号順に並べ替える練習問題です。
+    ">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="history_data.js"></script>
+</head>
+
+<style>
+    :root {
+        --bg: #f9fafb;
+        --surface: #fff;
+        --text: #222;
+        --text-soft: #6b7280;
+        --accent: #2563eb;
+        --accent-soft: #eef2ff;
+        --border: rgba(0, 0, 0, 0.06);
+        --radius: 8px;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+        --correct: #16a34a;
+        --correct-soft: #dcfce7;
+        --wrong: #dc2626;
+        --wrong-soft: #fee2e2;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'M PLUS Rounded 1c', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+    }
+
+    /* ---------- Header ---------- */
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(249, 250, 251, 0.94);
+        backdrop-filter: blur(4px);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .head-row {
+        max-width: 640px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+    }
+
+    .back-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-decoration: none;
+        color: var(--accent);
+        font-size: 1.8rem;
+        font-weight: 700;
+        line-height: 1;
+        flex: 0 0 auto;
+        transition: background .15s ease;
+    }
+
+    .back-link:hover {
+        background: var(--accent-soft);
+    }
+
+    .head-title {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: var(--text);
+        flex: 1 1 auto;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* ---------- Layout ---------- */
+    main {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 24px 16px 64px;
+    }
+
+    /* ---------- Category select ---------- */
+    .intro {
+        background: var(--surface);
+        padding: 24px 20px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+    }
+
+    .intro h1 {
+        font-size: 1.2rem;
+        margin: 0 0 10px;
+        font-weight: 700;
+    }
+
+    .intro p {
+        line-height: 1.7;
+        margin: 0;
+        color: var(--text-soft);
+        font-size: 0.92rem;
+    }
+
+    .list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .cat-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        text-decoration: none;
+        color: inherit;
+        background: var(--surface);
+        padding: 18px 20px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border: 1px solid transparent;
+        transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+        cursor: pointer;
+    }
+
+    .cat-card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-2px);
+        border-color: var(--accent-soft);
+    }
+
+    .cat-badge {
+        flex: 0 0 auto;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.85rem;
+    }
+
+    .cat-body {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .cat-title {
+        font-weight: 700;
+        font-size: 1rem;
+        margin: 0 0 4px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .cat-star {
+        color: #f59e0b;
+        font-size: 0.95rem;
+        flex: 0 0 auto;
+    }
+
+    .cat-meta {
+        font-size: 0.78rem;
+        color: var(--text-soft);
+    }
+
+    .cat-arrow {
+        color: var(--accent);
+        font-size: 1.1rem;
+        font-weight: 700;
+        flex: 0 0 auto;
+    }
+
+    .clear-stars-row {
+        text-align: center;
+        margin-top: 24px;
+    }
+
+    .clear-stars-btn {
+        background: transparent;
+        border: none;
+        color: var(--text-soft);
+        font-family: inherit;
+        font-size: 0.78rem;
+        text-decoration: underline;
+        cursor: pointer;
+        padding: 6px 4px;
+    }
+
+    .clear-stars-btn:hover {
+        color: var(--wrong);
+    }
+
+    /* ---------- Sort round ---------- */
+    .round-intro {
+        background: var(--surface);
+        padding: 18px 20px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin-bottom: 18px;
+        font-size: 0.85rem;
+        color: var(--text-soft);
+        line-height: 1.7;
+    }
+
+    .round-intro b {
+        color: var(--text);
+    }
+
+    .sort-list {
+        list-style: none;
+        margin: 0 0 18px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .sort-row {
+        display: flex;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .year-box {
+        flex: 0 0 auto;
+        width: 64px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-weight: 800;
+        font-size: 1.05rem;
+        background: var(--accent-soft);
+        color: var(--accent);
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        padding: 8px 4px;
+    }
+
+    .year-box span {
+        display: block;
+        font-size: 0.62rem;
+        font-weight: 600;
+        margin-top: 1px;
+    }
+
+    .event-box {
+        flex: 1 1 auto;
+        min-width: 0;
+        text-align: left;
+        background: var(--surface);
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        padding: 12px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        font-family: inherit;
+        transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    .event-box.is-selected {
+        border-color: var(--accent);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .event-box.row-correct {
+        border-color: var(--correct);
+        background: var(--correct-soft);
+        cursor: default;
+    }
+
+    .event-box.row-wrong {
+        border-color: var(--wrong);
+        background: var(--wrong-soft);
+    }
+
+    .sort-card-main {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .sort-event {
+        font-weight: 700;
+        font-size: 0.92rem;
+        line-height: 1.45;
+    }
+
+    .hint-btn-sm {
+        flex: 0 0 auto;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        border: 1px solid var(--accent);
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-family: inherit;
+        font-weight: 700;
+        font-size: 0.78rem;
+        line-height: 1;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        text-align: center;
+    }
+
+    .hint-btn-sm.is-active {
+        background: var(--accent);
+        color: #fff;
+    }
+
+    .hint-btn-sm:disabled {
+        opacity: 0.5;
+        cursor: default;
+    }
+
+    .sort-desc {
+        margin-top: 8px;
+        font-size: 0.8rem;
+        line-height: 1.7;
+        color: var(--text-soft);
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 12px;
+    }
+
+    .sort-desc[hidden] {
+        display: none;
+    }
+
+    .row-note {
+        margin-top: 6px;
+        font-size: 0.74rem;
+        font-weight: 700;
+    }
+
+    .row-note.is-correct {
+        color: var(--correct);
+    }
+
+    .row-note.is-wrong {
+        color: var(--wrong);
+    }
+
+    .judge-btn {
+        display: block;
+        width: 100%;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        padding: 14px;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background .18s ease;
+    }
+
+    .judge-btn:hover {
+        background: #1d4fd1;
+    }
+
+    .judge-btn:disabled {
+        opacity: 0.4;
+        cursor: default;
+    }
+
+    .score-banner {
+        text-align: center;
+        padding: 16px;
+        border-radius: 10px;
+        margin-bottom: 18px;
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+
+    .score-banner.is-perfect {
+        background: var(--correct-soft);
+        color: var(--correct);
+    }
+
+    .score-banner.is-partial {
+        background: var(--accent-soft);
+        color: var(--accent);
+    }
+
+    .result-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        margin-top: 18px;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        text-decoration: none;
+        padding: 11px 24px;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        transition: background .18s ease, color .18s ease, border-color .18s ease;
+        white-space: nowrap;
+    }
+
+    .btn-primary {
+        background: var(--accent);
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background: #1d4fd1;
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: var(--text-soft);
+        border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+        color: var(--accent);
+        border-color: var(--accent-soft);
+    }
+
+    #state {
+        display: none;
+        text-align: center;
+        padding: 40px 4px;
+        line-height: 1.9;
+        color: var(--text-soft);
+        font-size: 0.9rem;
+    }
+
+    #state.show {
+        display: block;
+    }
+
+    #state code {
+        background: var(--accent-soft);
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+    }
+</style>
+
+<body>
+
+    <header>
+        <div class="head-row">
+            <a class="back-link" id="back-link" href="index_history.html" aria-label="戻る">＜</a>
+            <span class="head-title" id="head-title">並べ替えクイズ</span>
+        </div>
+    </header>
+
+    <main id="app"></main>
+
+    <script>
+        const params = new URLSearchParams(location.search);
+        const catName = params.get('cat') || '';
+
+        const app = document.getElementById('app');
+        const headTitle = document.getElementById('head-title');
+        const backLink = document.getElementById('back-link');
+
+        let roundItems = [];   // 正解順（年号の昇順）に並んだ、この回で出題するN件
+        let leftYears = [];    // 左側に固定表示する年号（roundItemsのyearをそのまま）
+        let rightOrder = [];   // 各行(右側)に現在表示されているroundItemsのインデックス
+        let judged = false;
+        let selectedRow = null;      // タップ入れ替え：最初にタップされた行番号
+        let itemJudgment = {};       // itemIdx -> {correct, noteHtml}（判定時点の記録。以後の入れ替えで変化しない）
+
+        /* ---------- localStorage: perfect-score stars ---------- */
+        const STAR_STORAGE_KEY = 'gakuapu_sort_perfect_categories';
+
+        function getPerfectCategories() {
+            try {
+                const raw = localStorage.getItem(STAR_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                console.error('localStorage read failed', e);
+                return [];
+            }
+        }
+        function savePerfectCategory(cat) {
+            try {
+                const list = getPerfectCategories();
+                if (!list.includes(cat)) {
+                    list.push(cat);
+                    localStorage.setItem(STAR_STORAGE_KEY, JSON.stringify(list));
+                }
+            } catch (e) { console.error('localStorage write failed', e); }
+        }
+        function clearPerfectCategories() {
+            try { localStorage.removeItem(STAR_STORAGE_KEY); }
+            catch (e) { console.error('localStorage clear failed', e); }
+        }
+
+        function init() {
+            try {
+                if (typeof HISTORY_DATA === 'undefined') throw new Error('no-data');
+                if (catName) {
+                    startRound(catName);
+                } else {
+                    showCategorySelect();
+                }
+            } catch (err) {
+                app.innerHTML = `<div id="state" class="show">
+      読み込みに失敗しました。<br>
+      このページは <code>history_data.js</code> を同じフォルダに置き、
+      <code>&lt;script src="history_data.js"&gt;&lt;/script&gt;</code> で読み込む必要があります。<br>
+      ファイルが同じフォルダにあるかご確認ください。
+    </div>`;
+                console.error(err);
+            }
+        }
+
+        /* ---------- Category select screen ---------- */
+        function showCategorySelect() {
+            headTitle.textContent = '並べ替えクイズ';
+            backLink.href = 'index_history.html';
+
+            const order = [];
+            const groups = {};
+            HISTORY_DATA.forEach(item => {
+                if (!groups[item.category]) {
+                    groups[item.category] = [];
+                    order.push(item.category);
+                }
+                groups[item.category].push(item);
+            });
+
+            const perfectCats = getPerfectCategories();
+
+            const listHtml = order.map((cat, idx) => `
+    <li>
+      <a class="cat-card" href="history_sort.html?cat=${encodeURIComponent(cat)}">
+        <span class="cat-badge">${idx + 1}</span>
+        <span class="cat-body">
+          <span class="cat-title">${escapeHtml(cat)}${perfectCats.includes(cat) ? ' <span class="cat-star">★</span>' : ''}</span>
+          <span class="cat-meta">${groups[cat].length}件の出来事</span>
+        </span>
+        <span class="cat-arrow">→</span>
+      </a>
+    </li>
+  `).join('');
+
+            app.innerHTML = `
+    <div class="intro">
+      <h1>並べ替えクイズ</h1>
+      <p>時代を選ぶと、その時代の出来事が全件出てきます。左に並ぶ正しい年号に合うように、右側の出来事を入れ替えましょう。全問正解した時代には★が付きます。</p>
+    </div>
+    <ul class="list">${listHtml}</ul>
+    <div class="clear-stars-row">
+      <button type="button" class="clear-stars-btn" id="clear-stars-btn">★の記録をすべてクリアする</button>
+    </div>
+  `;
+
+            document.getElementById('clear-stars-btn').addEventListener('click', () => {
+                if (confirm('すべての★の記録を消去します。よろしいですか？')) {
+                    clearPerfectCategories();
+                    showCategorySelect();
+                }
+            });
+        }
+
+        /* ---------- Round setup ---------- */
+        function startRound(cat) {
+            const pool = HISTORY_DATA.filter(d => d.category === cat);
+
+            if (pool.length < 2) {
+                app.innerHTML = `<div id="state" class="show">
+      「${escapeHtml(cat)}」は出題できる件数が足りません。<br>
+      <a href="history_sort.html" style="color:var(--accent)">← 時代を選ぶ画面に戻る</a>
+    </div>`;
+                return;
+            }
+
+            const n = pool.length;
+            roundItems = shuffle(pool).slice(0, n).sort((a, b) => a.year - b.year);
+            leftYears = roundItems.map(it => it.year);
+
+            let order = shuffle(roundItems.map((_, i) => i));
+            let tries = 0;
+            while (order.every((v, i) => v === i) && tries < 5) {
+                order = shuffle(order);
+                tries++;
+            }
+            rightOrder = order;
+            judged = false;
+            selectedRow = null;
+            itemJudgment = {};
+
+            headTitle.textContent = cat;
+            backLink.href = 'history_sort.html';
+
+            renderRound();
+        }
+
+        function renderRound() {
+            app.innerHTML = `
+    <div class="round-intro">左の<b>年号</b>に合うように、右側の<b>出来事</b>を入れ替えてください。</div>
+    <ul class="sort-list" id="sort-list"></ul>
+    <button type="button" class="judge-btn" id="judge-btn">判定する</button>
+  `;
+            document.getElementById('judge-btn').addEventListener('click', judgeRound);
+            renderRows();
+        }
+
+        function renderRows() {
+            const rowsHtml = rightOrder.map((itemIdx, rowIdx) => {
+                const item = roundItems[itemIdx];
+                const j = itemJudgment[itemIdx];
+                const stateClass = j ? (j.correct ? 'row-correct' : 'row-wrong') : '';
+                const selectedClass = (selectedRow === rowIdx) ? 'is-selected' : '';
+                const noteHtml = j ? j.noteHtml : '';
+
+                return `
+      <li class="sort-row" data-row="${rowIdx}">
+        <div class="year-box">${leftYears[rowIdx]}<span>年</span></div>
+        <button type="button" class="event-box ${stateClass} ${selectedClass}" data-row="${rowIdx}">
+          <div class="sort-card-main">
+            <span class="sort-event">${escapeHtml(item.event)}</span>
+            <span class="hint-btn-sm" data-row="${rowIdx}" role="button" aria-label="説明を見る">？</span>
+          </div>
+          <div class="sort-desc" id="desc-${rowIdx}" hidden>${escapeHtml(item.description || '')}</div>
+          <div class="row-note-slot">${noteHtml}</div>
+        </button>
+      </li>
+    `;
+            }).join('');
+
+            document.getElementById('sort-list').innerHTML = rowsHtml;
+
+            document.querySelectorAll('.hint-btn-sm').forEach(hintBtn => {
+                hintBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const row = hintBtn.dataset.row;
+                    const desc = document.getElementById('desc-' + row);
+                    const show = desc.hidden;
+                    desc.hidden = !show;
+                    hintBtn.classList.toggle('is-active', show);
+                });
+            });
+
+            document.querySelectorAll('.event-box').forEach(box => {
+                box.addEventListener('click', () => {
+                    const row = Number(box.dataset.row);
+                    const itemIdx = rightOrder[row];
+                    const isLocked = itemJudgment[itemIdx] && itemJudgment[itemIdx].correct;
+                    if (isLocked) return;
+
+                    if (selectedRow === null) {
+                        selectedRow = row;
+                    } else if (selectedRow === row) {
+                        selectedRow = null;
+                    } else {
+                        [rightOrder[selectedRow], rightOrder[row]] = [rightOrder[row], rightOrder[selectedRow]];
+                        selectedRow = null;
+                    }
+                    renderRows();
+                });
+            });
+        }
+
+        function judgeRound() {
+            if (judged) return;
+            judged = true;
+            selectedRow = null;
+
+            let correctCount = 0;
+            rightOrder.forEach((itemIdx, rowIdx) => {
+                const isCorrect = itemIdx === rowIdx;
+                if (isCorrect) {
+                    correctCount++;
+                    itemJudgment[itemIdx] = {
+                        correct: true,
+                        noteHtml: `<div class="row-note is-correct">○ 正解</div>`
+                    };
+                } else {
+                    const actualYear = roundItems[itemIdx].year;
+                    itemJudgment[itemIdx] = {
+                        correct: false,
+                        noteHtml: `<div class="row-note is-wrong">× 正しくは${actualYear}年です</div>`
+                    };
+                }
+            });
+
+            renderRows();
+
+            document.getElementById('judge-btn').remove();
+
+            const total = rightOrder.length;
+            const isPerfect = correctCount === total;
+            if (isPerfect) {
+                savePerfectCategory(catName);
+            }
+
+            const banner = document.createElement('div');
+            banner.className = 'score-banner ' + (isPerfect ? 'is-perfect' : 'is-partial');
+            banner.textContent = isPerfect
+                ? `全問正解！(${correctCount}/${total}) 時代選択画面に★が付きました。`
+                : `${correctCount} / ${total} 問正解でした。`;
+            document.getElementById('sort-list').before(banner);
+
+            const actions = document.createElement('div');
+            actions.className = 'result-actions';
+            actions.innerHTML = `
+    <a class="btn btn-primary" href="history_sort.html?cat=${encodeURIComponent(catName)}">もう一度挑戦する →</a>
+    <a class="btn btn-secondary" href="history_sort.html">他の時代を選ぶ</a>
+  `;
+            app.appendChild(actions);
+        }
+
+        /* ---------- Utils ---------- */
+        function shuffle(arr) {
+            const a = arr.slice();
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, s => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[s]));
+        }
+
+        init();
+    </script>
+</body>
+
+</html>
