@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>日本の歴史 年号4択クイズ｜学アプ【無料・登録不要】</title>
+    <meta name="description" content="
+    無料・登録不要で使える、中学受験準備用の日本の歴史の暗記アプリ。歴史上の重要な出来事の年号を4択クイズ形式で確認。
+    ">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="history_data.js"></script>
+</head>
+
+<style>
+    :root {
+        --bg: #f9fafb;
+        --surface: #fff;
+        --text: #222;
+        --text-soft: #6b7280;
+        --accent: #2563eb;
+        --accent-soft: #eef2ff;
+        --border: rgba(0, 0, 0, 0.06);
+        --radius: 8px;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+        --correct: #16a34a;
+        --correct-soft: #dcfce7;
+        --wrong: #dc2626;
+        --wrong-soft: #fee2e2;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'M PLUS Rounded 1c', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+    }
+
+    /* ---------- Header ---------- */
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(249, 250, 251, 0.94);
+        backdrop-filter: blur(4px);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .head-row {
+        max-width: 640px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+    }
+
+    .back-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-decoration: none;
+        color: var(--accent);
+        font-size: 1.8rem;
+        font-weight: 700;
+        line-height: 1;
+        flex: 0 0 auto;
+        transition: background .15s ease;
+    }
+
+    .back-link:hover {
+        background: var(--accent-soft);
+    }
+
+    .head-title {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: var(--text);
+        flex: 1 1 auto;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .head-count {
+        font-size: 0.78rem;
+        color: var(--text-soft);
+        flex: 0 0 auto;
+        white-space: nowrap;
+        min-width: 40px;
+        text-align: right;
+    }
+
+    .head-count b {
+        color: var(--text);
+        font-weight: 700;
+    }
+
+    .progress-track {
+        height: 3px;
+        background: var(--border);
+        position: relative;
+    }
+
+    .progress-fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 0%;
+        background: var(--accent);
+        transition: width .2s ease-out;
+    }
+
+    /* ---------- Layout ---------- */
+    main {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 24px 16px 64px;
+    }
+
+    /* ---------- Category select (reused list style) ---------- */
+    .intro {
+        background: var(--surface);
+        padding: 24px 20px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+    }
+
+    .intro h1 {
+        font-size: 1.2rem;
+        margin: 0 0 10px;
+        font-weight: 700;
+    }
+
+    .intro p {
+        line-height: 1.7;
+        margin: 0;
+        color: var(--text-soft);
+        font-size: 0.92rem;
+    }
+
+    .list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .cat-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        text-decoration: none;
+        color: inherit;
+        background: var(--surface);
+        padding: 18px 20px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border: 1px solid transparent;
+        transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+        cursor: pointer;
+    }
+
+    .cat-card:hover {
+        box-shadow: var(--shadow-hover, 0 6px 16px rgba(0, 0, 0, .08));
+        transform: translateY(-2px);
+        border-color: var(--accent-soft);
+    }
+
+    .cat-badge {
+        flex: 0 0 auto;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.85rem;
+    }
+
+    .cat-body {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .cat-title {
+        font-weight: 700;
+        font-size: 1rem;
+        margin: 0 0 4px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .cat-star {
+        color: #f59e0b;
+        font-size: 0.95rem;
+        flex: 0 0 auto;
+    }
+
+    .cat-meta {
+        font-size: 0.78rem;
+        color: var(--text-soft);
+    }
+
+    .cat-arrow {
+        color: var(--accent);
+        font-size: 1.1rem;
+        font-weight: 700;
+        flex: 0 0 auto;
+    }
+
+    .clear-stars-row {
+        text-align: center;
+        margin-top: 24px;
+    }
+
+    .clear-stars-btn {
+        background: transparent;
+        border: none;
+        color: var(--text-soft);
+        font-family: inherit;
+        font-size: 0.78rem;
+        text-decoration: underline;
+        cursor: pointer;
+        padding: 6px 4px;
+    }
+
+    .clear-stars-btn:hover {
+        color: var(--wrong);
+    }
+
+    /* ---------- Question card ---------- */
+    .q-card {
+        background: var(--surface);
+        border-radius: 12px;
+        box-shadow: var(--shadow-lg);
+        padding: 32px 24px;
+        text-align: center;
+    }
+
+    .era-pill {
+        display: inline-block;
+        font-size: 0.75rem;
+        color: var(--accent);
+        border: 1px solid var(--accent-soft);
+        background: var(--accent-soft);
+        padding: 4px 14px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .q-event-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 22px;
+    }
+
+    .q-event {
+        font-weight: 700;
+        font-size: clamp(19px, 5vw, 23px);
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .hint-btn {
+        flex: 0 0 auto;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid var(--accent);
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-family: inherit;
+        font-weight: 700;
+        font-size: 0.9rem;
+        line-height: 1;
+        cursor: pointer;
+        transition: background .15s ease;
+    }
+
+    .hint-btn:hover {
+        background: #e0e7ff;
+    }
+
+    .hint-btn.is-active {
+        background: var(--accent);
+        color: #fff;
+    }
+
+    .q-desc {
+        font-size: 0.9rem;
+        line-height: 1.85;
+        color: var(--text-soft);
+        text-align: left;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px 18px;
+        margin-bottom: 22px;
+    }
+
+    .q-desc[hidden] {
+        display: none;
+    }
+
+    .choices {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .choice-btn {
+        font-family: inherit;
+        cursor: pointer;
+        background: var(--surface);
+        border: 2px solid var(--border);
+        border-radius: 10px;
+        padding: 16px 10px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text);
+        transition: border-color .15s ease, background .15s ease, transform .1s ease;
+    }
+
+    .choice-btn:hover:not(:disabled) {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+    }
+
+    .choice-btn:active:not(:disabled) {
+        transform: scale(0.97);
+    }
+
+    .choice-btn:disabled {
+        cursor: default;
+    }
+
+    .choice-correct {
+        border-color: var(--correct) !important;
+        background: var(--correct-soft) !important;
+        color: #14532d;
+    }
+
+    .choice-wrong {
+        border-color: var(--wrong) !important;
+        background: var(--wrong-soft) !important;
+        color: #7f1d1d;
+    }
+
+    .choice-muted {
+        opacity: 0.45;
+    }
+
+    .feedback {
+        margin-top: 18px;
+        font-weight: 700;
+        font-size: 0.98rem;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .feedback.is-correct {
+        color: var(--correct);
+        background: var(--correct-soft);
+    }
+
+    .feedback.is-wrong {
+        color: var(--wrong);
+        background: var(--wrong-soft);
+    }
+
+    .next-btn {
+        margin-top: 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        text-decoration: none;
+        padding: 12px 28px;
+        border-radius: 30px;
+        font-family: inherit;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background .18s ease;
+    }
+
+    .next-btn:hover {
+        background: #1d4fd1;
+    }
+
+    .next-btn[hidden],
+    .feedback[hidden] {
+        display: none;
+    }
+
+    /* ---------- Result screen ---------- */
+    .result-card {
+        background: var(--surface);
+        border-radius: 12px;
+        box-shadow: var(--shadow-lg);
+        padding: 36px 24px;
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .result-score {
+        font-size: 2.4rem;
+        font-weight: 800;
+        color: var(--accent);
+        margin: 8px 0 4px;
+    }
+
+    .result-score span {
+        font-size: 1.2rem;
+        color: var(--text-soft);
+        font-weight: 700;
+    }
+
+    .result-label {
+        font-size: 0.85rem;
+        color: var(--text-soft);
+        margin-bottom: 24px;
+    }
+
+    .result-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        text-decoration: none;
+        padding: 11px 24px;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        transition: background .18s ease, color .18s ease, border-color .18s ease;
+        white-space: nowrap;
+    }
+
+    .btn-primary {
+        background: var(--accent);
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background: #1d4fd1;
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: var(--text-soft);
+        border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+        color: var(--accent);
+        border-color: var(--accent-soft);
+    }
+
+    /* ---------- Review flashcards (wrong answers) ---------- */
+    .review-heading {
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 32px 0 14px;
+    }
+
+    .review-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .review-card {
+        background: var(--surface);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 22px 20px;
+        text-align: center;
+    }
+
+    .review-year {
+        font-weight: 800;
+        font-size: 1.6rem;
+        color: var(--text);
+    }
+
+    .review-year span {
+        font-size: 0.85rem;
+        color: var(--text-soft);
+        font-weight: 600;
+        margin-left: 2px;
+    }
+
+    .review-event {
+        font-weight: 700;
+        font-size: 1rem;
+        margin: 8px 0 14px;
+    }
+
+    .review-desc {
+        font-size: 0.85rem;
+        line-height: 1.8;
+        color: var(--text-soft);
+        text-align: left;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 14px 16px;
+    }
+
+    #state {
+        display: none;
+        text-align: center;
+        padding: 40px 4px;
+        line-height: 1.9;
+        color: var(--text-soft);
+        font-size: 0.9rem;
+    }
+
+    #state.show {
+        display: block;
+    }
+
+    #state code {
+        background: var(--accent-soft);
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+    }
+</style>
+
+<body>
+
+    <header>
+        <div class="head-row">
+            <a class="back-link" id="back-link" href="index_history.html" aria-label="戻る">＜</a>
+            <span class="head-title" id="head-title">年号4択クイズ</span>
+            <span class="head-count" id="head-count"></span>
+        </div>
+        <div class="progress-track">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+    </header>
+
+    <main id="app"></main>
+
+    <script>
+        const params = new URLSearchParams(location.search);
+        const catName = params.get('cat') || '';
+
+        const app = document.getElementById('app');
+        const headTitle = document.getElementById('head-title');
+        const headCount = document.getElementById('head-count');
+        const backLink = document.getElementById('back-link');
+        const progressFill = document.getElementById('progress');
+
+        let quizItems = [];
+        let currentIndex = 0;
+        let score = 0;
+        let wrongItems = [];
+        let answered = false;
+
+        /* ---------- localStorage: perfect-score stars ---------- */
+        const STAR_STORAGE_KEY = 'gakuapu_quiz_perfect_categories';
+
+        function getPerfectCategories() {
+            try {
+                const raw = localStorage.getItem(STAR_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                console.error('localStorage read failed', e);
+                return [];
+            }
+        }
+
+        function savePerfectCategory(cat) {
+            try {
+                const list = getPerfectCategories();
+                if (!list.includes(cat)) {
+                    list.push(cat);
+                    localStorage.setItem(STAR_STORAGE_KEY, JSON.stringify(list));
+                }
+            } catch (e) {
+                console.error('localStorage write failed', e);
+            }
+        }
+
+        function clearPerfectCategories() {
+            try {
+                localStorage.removeItem(STAR_STORAGE_KEY);
+            } catch (e) {
+                console.error('localStorage clear failed', e);
+            }
+        }
+
+        function init() {
+            try {
+                if (typeof HISTORY_DATA === 'undefined') throw new Error('no-data');
+                if (catName) {
+                    startQuiz(catName);
+                } else {
+                    showCategorySelect();
+                }
+            } catch (err) {
+                app.innerHTML = `<div id="state" class="show">
+      読み込みに失敗しました。<br>
+      このページは <code>history_data.js</code> を同じフォルダに置き、
+      <code>&lt;script src="history_data.js"&gt;&lt;/script&gt;</code> で読み込む必要があります。<br>
+      ファイルが同じフォルダにあるかご確認ください。
+    </div>`;
+                console.error(err);
+            }
+        }
+
+        /* ---------- Category select screen ---------- */
+        function showCategorySelect() {
+            headTitle.textContent = '年号4択クイズ';
+            headCount.textContent = '';
+            backLink.href = 'index_history.html';
+            progressFill.style.width = '0%';
+
+            const order = [];
+            const groups = {};
+            HISTORY_DATA.forEach(item => {
+                if (!groups[item.category]) {
+                    groups[item.category] = [];
+                    order.push(item.category);
+                }
+                groups[item.category].push(item);
+            });
+
+            const perfectCats = getPerfectCategories();
+
+            const listHtml = order.map((cat, idx) => `
+    <li>
+      <a class="cat-card" href="history_quiz.html?cat=${encodeURIComponent(cat)}">
+        <span class="cat-badge">${idx + 1}</span>
+        <span class="cat-body">
+          <span class="cat-title">${escapeHtml(cat)}${perfectCats.includes(cat) ? ' <span class="cat-star">★</span>' : ''}</span>
+          <span class="cat-meta">${groups[cat].length}件の出来事</span>
+        </span>
+        <span class="cat-arrow">→</span>
+      </a>
+    </li>
+  `).join('');
+
+            app.innerHTML = `
+    <div class="intro">
+      <h1>年号4択クイズ</h1>
+      <p>時代を選んで、出来事から正しい年号を4択で当てましょう。間違えた問題は最後にまとめて復習できます。全問正解した時代には★が付きます。</p>
+    </div>
+    <ul class="list">${listHtml}</ul>
+    <div class="clear-stars-row">
+      <button type="button" class="clear-stars-btn" id="clear-stars-btn">★の記録をすべてクリアする</button>
+    </div>
+  `;
+
+            document.getElementById('clear-stars-btn').addEventListener('click', () => {
+                if (confirm('すべての★の記録を消去します。よろしいですか？')) {
+                    clearPerfectCategories();
+                    showCategorySelect();
+                }
+            });
+        }
+
+        /* ---------- Quiz session ---------- */
+        function startQuiz(cat) {
+            quizItems = shuffle(
+                HISTORY_DATA.filter(d => d.category === cat)
+            );
+
+            if (quizItems.length === 0) {
+                app.innerHTML = `<div id="state" class="show">
+      「${escapeHtml(cat)}」に該当するデータが見つかりませんでした。<br>
+      <a href="history_quiz.html" style="color:var(--accent)">← 時代を選ぶ画面に戻る</a>
+    </div>`;
+                return;
+            }
+
+            currentIndex = 0;
+            score = 0;
+            wrongItems = [];
+
+            backLink.href = 'history_quiz.html';
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const item = quizItems[currentIndex];
+            answered = false;
+
+            headTitle.textContent = catName;
+            headCount.innerHTML = `<b>${currentIndex + 1}</b>/${quizItems.length}`;
+            progressFill.style.width = (currentIndex / quizItems.length * 100) + '%';
+
+            const choices = buildChoices(item);
+
+            app.innerHTML = `
+    <div class="q-card">
+      <span class="era-pill">${escapeHtml(item.era)}</span>
+      <div class="q-event-row">
+        <p class="q-event">${escapeHtml(item.event)}</p>
+        <button type="button" class="hint-btn" id="hint-btn" aria-label="説明を見る">？</button>
+      </div>
+      <div class="q-desc" id="q-desc" hidden>${escapeHtml(item.description || '')}</div>
+      <div class="choices" id="choices">
+        ${choices.map(c => `<button type="button" class="choice-btn" data-year="${c.year}">${c.year}年</button>`).join('')}
+      </div>
+      <div class="feedback" id="feedback" hidden></div>
+      <button type="button" class="next-btn" id="next-btn" hidden></button>
+    </div>
+  `;
+
+            const hintBtn = document.getElementById('hint-btn');
+            const descEl = document.getElementById('q-desc');
+            hintBtn.addEventListener('click', () => {
+                const show = descEl.hidden;
+                descEl.hidden = !show;
+                hintBtn.classList.toggle('is-active', show);
+            });
+
+            const btns = Array.from(document.querySelectorAll('.choice-btn'));
+            btns.forEach(btn => {
+                btn.addEventListener('click', () => handleAnswer(item, Number(btn.dataset.year), btns));
+            });
+        }
+
+        function buildChoices(item) {
+            const globalIdx = HISTORY_DATA.indexOf(item);
+            let radius = 3;
+            let decoys = [];
+
+            while (decoys.length < 3 && radius <= HISTORY_DATA.length) {
+                const pool = [];
+                for (let i = globalIdx - 1; i >= 0 && i >= globalIdx - radius; i--) pool.push(HISTORY_DATA[i]);
+                for (let i = globalIdx + 1; i < HISTORY_DATA.length && i <= globalIdx + radius; i++) pool.push(HISTORY_DATA[i]);
+
+                const seenYears = new Set([item.year]);
+                decoys = [];
+                for (const cand of shuffle(pool.slice())) {
+                    if (seenYears.has(cand.year)) continue;
+                    seenYears.add(cand.year);
+                    decoys.push(cand);
+                    if (decoys.length === 3) break;
+                }
+                radius++;
+            }
+
+            const all = [item, ...decoys];
+            return shuffle(all);
+        }
+
+        function handleAnswer(item, selectedYear, btns) {
+            if (answered) return;
+            answered = true;
+
+            const isCorrect = selectedYear === item.year;
+            if (isCorrect) {
+                score++;
+            } else {
+                wrongItems.push(item);
+            }
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                const y = Number(btn.dataset.year);
+                if (y === item.year) btn.classList.add('choice-correct');
+                else if (y === selectedYear) btn.classList.add('choice-wrong');
+                else btn.classList.add('choice-muted');
+            });
+
+            const feedback = document.getElementById('feedback');
+            feedback.hidden = false;
+            feedback.textContent = isCorrect ? '正解！' : `不正解… 正解は ${item.year}年`;
+            feedback.className = 'feedback ' + (isCorrect ? 'is-correct' : 'is-wrong');
+
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.hidden = false;
+            nextBtn.textContent = (currentIndex < quizItems.length - 1) ? '次の問題へ →' : '結果を見る →';
+            nextBtn.addEventListener('click', () => {
+                currentIndex++;
+                if (currentIndex < quizItems.length) {
+                    renderQuestion();
+                } else {
+                    renderResult();
+                }
+            }, { once: true });
+        }
+
+        function renderResult() {
+            headTitle.textContent = catName;
+            headCount.innerHTML = `<b>${quizItems.length}</b>/${quizItems.length}`;
+            progressFill.style.width = '100%';
+
+            const total = quizItems.length;
+            const wrongCount = wrongItems.length;
+
+            if (wrongCount === 0) {
+                savePerfectCategory(catName);
+            }
+
+            const reviewHtml = wrongCount === 0 ? '' : `
+    <p class="review-heading">間違えた問題（${wrongCount}件）を暗記カードでおさらい</p>
+    <div class="review-list">
+      ${wrongItems.map(item => `
+        <div class="review-card">
+          <span class="era-pill">${escapeHtml(item.era)}</span>
+          <div class="review-year">${item.year}<span>年</span></div>
+          <p class="review-event">${escapeHtml(item.event)}</p>
+          <div class="review-desc">${escapeHtml(item.description || '')}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+            app.innerHTML = `
+    <div class="result-card">
+      <div class="result-label">「${escapeHtml(catName)}」の結果</div>
+      <div class="result-score">${score}<span> / ${total} 問正解</span></div>
+      <div class="result-label">${wrongCount === 0 ? '全問正解です！時代選択画面に★が付きました。' : `${wrongCount}問、間違えました。下で復習できます。`}</div>
+      <div class="result-actions">
+        <a class="btn btn-primary" href="history_quiz.html?cat=${encodeURIComponent(catName)}">もう一度この時代に挑戦 →</a>
+        <a class="btn btn-secondary" href="history_quiz.html">他の時代を選ぶ</a>
+      </div>
+    </div>
+    ${reviewHtml}
+  `;
+        }
+
+        /* ---------- Utils ---------- */
+        function shuffle(arr) {
+            const a = arr.slice();
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, s => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[s]));
+        }
+
+        init();
+    </script>
+</body>
+
+</html>
