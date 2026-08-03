@@ -2,9 +2,26 @@
 <html lang="ja">
 
 <head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>日本の歴史 暗記カード｜時代を選ぶ</title>
+    <meta name="description" content="
+    無料・登録不要で使える、中学受験準備用の日本の歴史の暗記アプリ。カード型教材で歴史上の重要な出来事を効率的に学習できます。
+    ">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <script src="history_data.js"></script>
 </head>
 
@@ -22,13 +39,14 @@
         --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.08);
     }
 
-    * { box-sizing: border-box; }
+    * {
+        box-sizing: border-box;
+    }
 
     body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-            Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-family: 'M PLUS Rounded 1c', sans-serif;
         margin: 0;
-        padding: 40px 16px 64px;
+        padding: 0 0 64px;
         background: var(--bg);
         color: var(--text);
     }
@@ -36,6 +54,7 @@
     .wrap {
         max-width: 640px;
         margin: 0 auto;
+        padding: 24px 16px 0;
     }
 
     .container {
@@ -47,7 +66,7 @@
     }
 
     h1 {
-        font-size: 1.35rem;
+        font-size: 1.2rem;
         margin: 0 0 10px;
         font-weight: 700;
     }
@@ -82,13 +101,18 @@
         transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
         cursor: pointer;
     }
-    .card:hover, .card:focus-visible {
+
+    .card:hover,
+    .card:focus-visible {
         box-shadow: var(--shadow-hover);
         transform: translateY(-2px);
         border-color: var(--accent-soft);
         outline: none;
     }
-    .card:active { transform: translateY(0); }
+
+    .card:active {
+        transform: translateY(0);
+    }
 
     .badge {
         flex: 0 0 auto;
@@ -125,17 +149,6 @@
         color: var(--text-soft);
     }
 
-    .range {
-        color: var(--accent);
-        font-weight: 600;
-    }
-
-    .dot {
-        width: 3px; height: 3px; border-radius: 50%;
-        background: var(--border);
-        flex: 0 0 auto;
-    }
-
     .era-chip {
         border: 1px solid var(--border);
         padding: 1px 7px;
@@ -156,7 +169,11 @@
         white-space: nowrap;
         text-align: right;
     }
-    .count b { color: var(--text); font-size: 0.95rem; }
+
+    .count b {
+        color: var(--text);
+        font-size: 0.95rem;
+    }
 
     .arrow {
         color: var(--accent);
@@ -164,7 +181,10 @@
         font-weight: 700;
         transition: transform .18s ease;
     }
-    .card:hover .arrow { transform: translateX(3px); }
+
+    .card:hover .arrow {
+        transform: translateX(3px);
+    }
 
     .foot-note {
         text-align: center;
@@ -181,7 +201,11 @@
         color: var(--text-soft);
         font-size: 0.9rem;
     }
-    #state.show { display: block; }
+
+    #state.show {
+        display: block;
+    }
+
     #state code {
         background: var(--accent-soft);
         padding: 2px 6px;
@@ -190,14 +214,71 @@
     }
 
     @media (max-width: 480px) {
-        .era-chip { display: none; }
+        .era-chip {
+            display: none;
+        }
+    }
+
+    /* ---------- Header ---------- */
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(249, 250, 251, 0.94);
+        backdrop-filter: blur(4px);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .head-row {
+        max-width: 640px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+    }
+
+    .back-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-decoration: none;
+        color: var(--accent);
+        font-size: 1.8rem;
+        font-weight: 700;
+        line-height: 1;
+        flex: 0 0 auto;
+        transition: background .15s ease;
+    }
+
+    .back-link:hover {
+        background: var(--accent-soft);
+    }
+
+    .head-title {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: var(--text);
+        flex: 1 1 auto;
+        text-align: center;
+        padding-right: 40px;
     }
 </style>
 
 <body>
+    <header>
+        <div class="head-row">
+            <a class="back-link" href="index_history.html" aria-label="トップへ戻る">＜</a>
+            <span class="head-title">日本の歴史 暗記カード</span>
+        </div>
+    </header>
+
     <div class="wrap">
         <div class="container">
-            <h1>日本の歴史 暗記カード</h1>
+            <h1>時代を選ぶ</h1>
             <p>学びたい時代を選んでください。年号と出来事を、起きた順にカードでたどれます。</p>
         </div>
 
@@ -208,62 +289,56 @@
         <p class="foot-note">全 <span id="total-count">-</span> 件の出来事 ／ <span id="cat-count">-</span> 時代区分</p>
     </div>
 
-<script>
-function init(){
-  const stateEl = document.getElementById('state');
-  try{
-    if(typeof HISTORY_DATA === 'undefined') throw new Error('no-data');
-    render(HISTORY_DATA);
-  }catch(err){
-    stateEl.classList.add('show');
-    stateEl.innerHTML =
-      '読み込みに失敗しました。<br>' +
-      'このページは <code>history_data.js</code> を同じフォルダに置き、' +
-      '<code>&lt;script src="history_data.js"&gt;&lt;/script&gt;</code> で読み込む必要があります。<br>' +
-      'ファイルが同じフォルダにあるかご確認ください。';
-    console.error(err);
-  }
-}
+    <script>
+        function init() {
+            const stateEl = document.getElementById('state');
+            try {
+                if (typeof HISTORY_DATA === 'undefined') throw new Error('no-data');
+                render(HISTORY_DATA);
+            } catch (err) {
+                stateEl.classList.add('show');
+                stateEl.innerHTML =
+                    '読み込みに失敗しました。<br>' +
+                    'このページは <code>history_data.js</code> を同じフォルダに置き、' +
+                    '<code>&lt;script src="history_data.js"&gt;&lt;/script&gt;</code> で読み込む必要があります。<br>' +
+                    'ファイルが同じフォルダにあるかご確認ください。';
+                console.error(err);
+            }
+        }
 
-function render(data){
-  const listEl = document.getElementById('list');
+        function render(data) {
+            const listEl = document.getElementById('list');
 
-  const order = [];
-  const groups = {};
-  data.forEach(item=>{
-    if(!groups[item.category]){
-      groups[item.category] = { events: [], eras: [] };
-      order.push(item.category);
-    }
-    groups[item.category].events.push(item);
-    if(!groups[item.category].eras.includes(item.era)){
-      groups[item.category].eras.push(item.era);
-    }
-  });
+            const order = [];
+            const groups = {};
+            data.forEach(item => {
+                if (!groups[item.category]) {
+                    groups[item.category] = { events: [], eras: [] };
+                    order.push(item.category);
+                }
+                groups[item.category].events.push(item);
+                if (!groups[item.category].eras.includes(item.era)) {
+                    groups[item.category].eras.push(item.era);
+                }
+            });
 
-  document.getElementById('total-count').textContent = data.length;
-  document.getElementById('cat-count').textContent = order.length;
+            document.getElementById('total-count').textContent = data.length;
+            document.getElementById('cat-count').textContent = order.length;
 
-  order.forEach((cat, idx)=>{
-    const g = groups[cat];
-    const years = g.events.map(e=>e.year);
-    const min = Math.min(...years);
-    const max = Math.max(...years);
-    const rangeLabel = (min === max) ? `${min}年` : `${min}〜${max}年`;
+            order.forEach((cat, idx) => {
+                const g = groups[cat];
 
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.className = 'card';
-    a.href = 'history_card.html?cat=' + encodeURIComponent(cat);
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.className = 'card';
+                a.href = 'history_card.html?cat=' + encodeURIComponent(cat);
 
-    a.innerHTML = `
-      <span class="badge">${idx+1}</span>
+                a.innerHTML = `
+      <span class="badge">${idx + 1}</span>
       <span class="card-body">
         <span class="card-title">${escapeHtml(cat)}</span>
         <span class="card-meta">
-          <span class="range">${rangeLabel}</span>
-          <span class="dot"></span>
-          ${g.eras.slice(0,3).map(e=>`<span class="era-chip">${escapeHtml(e)}</span>`).join('')}
+          ${g.eras.slice(0, 3).map(e => `<span class="era-chip">${escapeHtml(e)}</span>`).join('')}
         </span>
       </span>
       <span class="card-right">
@@ -271,19 +346,19 @@ function render(data){
         <span class="arrow">→</span>
       </span>
     `;
-    li.appendChild(a);
-    listEl.appendChild(li);
-  });
-}
+                li.appendChild(a);
+                listEl.appendChild(li);
+            });
+        }
 
-function escapeHtml(str){
-  return String(str).replace(/[&<>"']/g, s => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  }[s]));
-}
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, s => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[s]));
+        }
 
-init();
-</script>
+        init();
+    </script>
 </body>
 
 </html>
