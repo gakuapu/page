@@ -285,6 +285,9 @@
     const R = { '0,1': 3, '0,2': 4, '1,2': 5, '0,6': 8, '1,6': 9, '2,3': [6, 7], '1,4': [6, 7], '0,5': [6, 7] }; // 混色レシピ
     const ALLC = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     const STG = [[0, 1, 2, 3, 4, 5], [6, 7], [8, 9], ALLC, ALLC], STN = ['3原色＋混色3色', '白・黒', 'ピンク・水色', 'ALL', 'ALL（5秒キープ）'];
+    const S5 = 4;                                    // ステージ5のインデックス(0始まり)
+    const srcT = () => G.stage === S5 ? T_SRC / 1.2 : T_SRC;    // ステージ5は拠点の生産が2割速い
+    const cpMax = () => G.stage === S5 ? 3 : 1;               // 複製機の設置上限(ステージ5は3台)
     const HOLD = [0, 0, 0, 0, 5];                       // 全色がそろった状態を保つ秒数(0=そろった瞬間にクリア)
     const DIRS8 = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]];
     const PAUSE = '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><rect x="2.5" y="1.5" width="3.2" height="11" rx="1"/><rect x="8.3" y="1.5" width="3.2" height="11" rx="1"/></svg>';
@@ -300,7 +303,8 @@
 <b>混色</b>：${dot(0)}+${dot(1)}=${dot(3)}　${dot(0)}+${dot(2)}=${dot(4)}　${dot(1)}+${dot(2)}=${dot(5)}　${dot(6)}+${dot(0)}=${dot(8)}　${dot(6)}+${dot(1)}=${dot(9)}<br>
 ${dot(3)}+${dot(2)}、${dot(4)}+${dot(1)}、${dot(5)}+${dot(0)}は${dot(6)}か${dot(7)}（ランダム）。他の組み合わせは受け付けず、玉が手前で止まります。<br>
 <b>仕分け</b>（ステージ1クリア後）：${dot(6)}と${dot(7)}を振り分けます。1本目の出口が${dot(6)}、2本目が${dot(7)}。<br>
-<b>複製</b>（ステージ3クリア後）：出口の線1本につき1個ずつ複製します（最大3本）。1つだけ置けます。<br>
+<b>複製</b>（ステージ3クリア後）：出口の線1本につき1個ずつ複製します（最大3本）。1つだけ置けます（ステージ5は3つ）。<br>
+<b>ステージ5</b>：拠点の生産が2割速くなります。<br>
 <b>消す</b>：線や装置を消します。<br>
 装置は、斜めを含め他の建物と隣り合わせに置けません（橋・地下は例外）。`;
 
@@ -422,7 +426,7 @@ ${dot(3)}+${dot(2)}、${dot(4)}+${dot(1)}、${dot(5)}+${dot(0)}は${dot(6)}か${
       for (const b of G.bs) {
         b.pulse = Math.max(0, b.pulse - dt * 3);
         switch (b.k) {
-          case 'src': b.t += dt; if (b.t >= T_SRC && emit(b, b.c)) b.t = 0; break;
+          case 'src': b.t += dt; if (b.t >= srcT() && emit(b, b.c)) b.t = 0; break;
           case 'mx':
             if (b.busy > 0) { b.busy -= dt; if (b.busy <= 0) { b.out.push(mix(b.buf)); b.buf = [] } }
             if (b.out.length && emit(b, b.out[0])) b.out.shift(); break;
@@ -478,7 +482,7 @@ ${dot(3)}+${dot(2)}、${dot(4)}+${dot(1)}、${dot(5)}+${dot(0)}は${dot(6)}か${
       if (spanOK(a, t, tn)) G.bp = { a, h: t, d, tn };
     }
     function build(i) {
-      if (tool === 'cp' && G.bs.some(b => b.k === 'cp')) { done(); return } // 複製機は1つだけ
+      if (tool === 'cp' && G.bs.filter(b => b.k === 'cp').length >= cpMax()) { done(); return } // 複製機の上限(通常1台・ステージ5は3台)
       if (G.bl[i] || onSpan(i) || adjB(i) || (UNLOCK[tool] || 0) > G.stage) return;
       addB(i, tool); done();
     }
@@ -593,7 +597,7 @@ ${dot(3)}+${dot(2)}、${dot(4)}+${dot(1)}、${dot(5)}+${dot(0)}は${dot(6)}か${
     /* ---------- HUD・ループ ---------- */
     let hk = '', stg = -1;
     function hud() {
-      const hasCp = G.bs.some(b => b.k === 'cp'); if (cpBtn.disabled !== hasCp) { cpBtn.disabled = hasCp; cpBtn.style.opacity = hasCp ? .4 : '' } // 設置済みなら複製ボタンを無効化
+      const hasCp = G.bs.filter(b => b.k === 'cp').length >= cpMax(); if (cpBtn.disabled !== hasCp) { cpBtn.disabled = hasCp; cpBtn.style.opacity = hasCp ? .4 : '' } // 上限まで置いたら複製ボタンを無効化
       if (G.stage !== stg) { stg = G.stage; BT.forEach(b => { b.style.display = (UNLOCK[b.dataset.t] || 0) > stg ? 'none' : '' }) } // 開放済みのボタンだけ表示
       const h = G.hold ? '1' : '0'; if (ps.dataset.s !== h) { ps.dataset.s = h; ps.innerHTML = h === '1' ? PLAY : PAUSE; ps.classList.toggle('on', h === '1') }
       const html = STG[G.stage].map(i => {
