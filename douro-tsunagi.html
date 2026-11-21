@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-XKL20YHCTB');
+    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>道路つなぎ｜無料で遊べる交通整理パズルゲーム</title>
+    <meta name="description" content="
+    家とオフィスを道路でつなぐ交通系パズルゲーム。渋滞対策をしながら、街の発展に合わせて道路網を発展させます。無料・インストール不要ですぐに遊べるブラウザゲームです。モバイルにも対応
+    ">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            --ground: #dfe8e2;
+            --grid: rgba(0, 0, 0, .05);
+            --water: #9ccbe0;
+            --road: #505860;
+            --bridge: #b4824f;
+            --ink: #1f2a30;
+            --panel: rgba(255, 255, 255, .9);
+            --accent: #2f6fd0
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) {
+                --ground: #1c2528;
+                --grid: rgba(255, 255, 255, .05);
+                --water: #2a5a69;
+                --road: #aab3ba;
+                --bridge: #c99a68;
+                --ink: #e6eef0;
+                --panel: rgba(30, 40, 44, .92);
+                --accent: #6aa3f0
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --ground: #1c2528;
+            --grid: rgba(255, 255, 255, .05);
+            --water: #2a5a69;
+            --road: #aab3ba;
+            --bridge: #c99a68;
+            --ink: #e6eef0;
+            --panel: rgba(30, 40, 44, .92);
+            --accent: #6aa3f0
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden
+        }
+
+        html {
+            scroll-padding-top: env(safe-area-inset-top, 0px)
+        }
+
+        body {
+            background: var(--ground);
+            color: var(--ink);
+            font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Yu Gothic', sans-serif;
+            -webkit-user-select: none;
+            user-select: none
+        }
+
+        canvas {
+            position: fixed;
+            inset: 0;
+            touch-action: none;
+            cursor: crosshair
+        }
+
+        #hud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            justify-content: space-between;
+            padding: calc(env(safe-area-inset-top, 0px) + 8px) 10px 4px;
+            pointer-events: none
+        }
+
+        #hud>* {
+            pointer-events: auto
+        }
+
+        .sts,
+        .bts {
+            display: flex;
+            gap: 6px
+        }
+
+        #hud>#pbs {
+            order: 2;
+            display: flex;
+            gap: 6px
+        }
+
+        .bts {
+            order: 3;
+            flex: 1 1 100%;
+            flex-wrap: wrap;
+            justify-content: flex-end
+        }
+
+        .bts button {
+            white-space: nowrap
+        }
+
+        @media(max-width:420px) {
+            .bts {
+                gap: 5px
+            }
+
+            .bts button {
+                font-size: 12px;
+                padding: 8px 8px
+            }
+
+            #of {
+                font-size: 9px
+            }
+        }
+
+        @media(max-width:370px) {
+            .bts {
+                gap: 4px
+            }
+
+            .bts button {
+                font-size: 11px;
+                padding: 8px 6px
+            }
+
+            #of button {
+                width: 25px;
+                height: 25px
+            }
+        }
+
+        .st.hide {
+            display: none
+        }
+
+        .st {
+            background: var(--panel);
+            border-radius: 12px;
+            padding: 5px 10px;
+            display: flex;
+            gap: 5px;
+            align-items: baseline;
+            font-size: 12px;
+            position: relative;
+            overflow: hidden
+        }
+
+        #wb {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 4px;
+            width: 0;
+            background: var(--accent)
+        }
+
+        .st b {
+            font-size: 20px;
+            font-weight: 700;
+            min-width: 1.2em;
+            text-align: right
+        }
+
+        button {
+            font: inherit;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--ink);
+            background: var(--panel);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 8px 12px;
+            cursor: pointer
+        }
+
+        button.on {
+            border-color: var(--accent);
+            color: var(--accent)
+        }
+
+        button:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px
+        }
+
+        #ov,
+        #cf,
+        #rl {
+            position: fixed;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: rgba(0, 0, 0, .35);
+            padding: 16px
+        }
+
+        #ov.hide,
+        #cf.hide,
+        #rl.hide,
+        #rs.hide,
+        #vw.hide,
+        #of.hide,
+        #by.hide,
+        #wd.hide,
+        #tn.hide,
+        #op:empty {
+            display: none
+        }
+
+        #of {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
+            font-size: 10px;
+            line-height: 1;
+            font-weight: 700
+        }
+
+        #of div {
+            display: flex;
+            gap: 4px
+        }
+
+        #of button {
+            width: 28px;
+            height: 28px;
+            padding: 2px;
+            border-radius: 9px;
+            border: 0;
+            line-height: 0
+        }
+
+        #of button.on {
+            box-shadow: inset 0 0 0 2px var(--accent)
+        }
+
+        #of button:disabled {
+            opacity: .3;
+            cursor: default
+        }
+
+        #of svg {
+            width: 100%;
+            height: 100%
+        }
+
+        #tn:disabled {
+            opacity: .4;
+            cursor: default
+        }
+
+        #cz {
+            font-size: 15px;
+            min-width: 63px;
+            text-align: center
+        }
+
+        #cz.num {
+            font-size: 20px
+        }
+
+        #stC {
+            align-items: center;
+            justify-content: center
+        }
+
+        #pa,
+        #hm {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        #pa svg,
+        #hm svg {
+            display: block
+        }
+
+        #pa.on {
+            background: color-mix(in srgb, var(--accent) 22%, var(--panel))
+        }
+
+        /* 一時停止中はハイライト */
+        .row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .card button#vw {
+            background: var(--panel);
+            color: var(--ink);
+            border: 2px solid var(--ink)
+        }
+
+        .dim {
+            opacity: .55
+        }
+
+        .card {
+            background: var(--panel);
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 360px;
+            text-align: left;
+            line-height: 1.7
+        }
+
+        .card h2 {
+            margin: 0 0 8px;
+            font-size: 24px
+        }
+
+        .card p {
+            margin: 0 0 16px;
+            font-size: 14px
+        }
+
+        .card button {
+            background: var(--accent);
+            color: #fff;
+            font-size: 16px;
+            padding: 10px 24px
+        }
+
+        .mb {
+            display: inline-flex;
+            gap: 6px;
+            align-items: center
+        }
+
+        .card button.q {
+            background: var(--panel);
+            color: var(--ink);
+            border: 2px solid var(--ink);
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            font-size: 16px;
+            border-radius: 50%
+        }
+
+        #rl .card {
+            max-height: 82vh;
+            overflow: auto
+        }
+
+        #rl ul {
+            margin: 0 0 16px;
+            padding-left: 1.2em;
+            font-size: 14px
+        }
+
+        .card a.pl {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 0;
+            font-size: 13px;
+            color: var(--ink);
+            opacity: .75
+        }
+
+        .card button#cfn {
+            background: var(--panel);
+            color: var(--ink);
+            border: 2px solid var(--ink)
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="c"></canvas>
+    <header id="hud">
+        <div class="sts">
+            <div class="st" id="stS"><b id="s">0</b><span>通勤</span></div>
+            <div class="st hide" id="stC"><b id="cz">建設中</b></div>
+            <div class="st"><b id="r">24</b><span>道路</span><i id="wb"></i></div>
+            <div class="st" id="stP"><b id="pt">0</b><span>pt</span></div>
+        </div>
+        <div id="pbs"><button id="hm" aria-label="トップへ" title="トップへ"><svg viewBox="0 0 24 24" width="18" height="18"
+                    fill="currentColor" aria-hidden="true">
+                    <path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z" />
+                </svg></button><button id="pa" aria-label="一時停止" title="一時停止"><svg viewBox="0 0 24 24" width="18"
+                    height="18" fill="currentColor" aria-hidden="true">
+                    <rect x="6" y="5" width="4" height="14" rx="1" />
+                    <rect x="14" y="5" width="4" height="14" rx="1" />
+                </svg></button></div>
+        <div class="bts"><button id="by">道路+5</button>
+            <div id="of" class="hide"></div><button id="br">橋</button><button id="tn" class="hide">トンネル</button><button
+                id="wd">拡幅（6pt）</button><button id="er">消す（1pt）</button><button id="rs" class="hide">もう一度</button>
+        </div>
+    </header>
+    <div id="ov">
+        <div class="card">
+            <h2 id="ot">道路つなぎ</h2>
+            <p id="op"></p>
+            <div class="row"><button id="vw" class="hide">盤面を見る</button><span class="mb"><button
+                        id="dn">ノーマル</button><button class="q" data-m="normal"
+                        aria-label="ノーマルのルール">？</button></span><span class="mb"><button id="dv">パズル</button><button
+                        class="q" data-m="puzzle" aria-label="パズルのルール">？</button></span></div><a class="pl"
+                href="index_game.html">ゲーム一覧へ</a>
+        </div>
+    </div>
+    <div id="rl" class="hide" role="dialog" aria-modal="true">
+        <div class="card">
+            <h2 id="rlt"></h2>
+            <ul id="rlb"></ul>
+            <div class="row"><button id="rlc">閉じる</button></div>
+        </div>
+    </div>
+    <div id="cf" class="hide" role="dialog" aria-modal="true">
+        <div class="card">
+            <h2>終了しますか？</h2>
+            <p>進行状況は失われ、トップに戻ります。</p>
+            <div class="row"><button id="cfn">続ける</button><button id="cfy">終了する</button></div>
+        </div>
+    </div>
+    <script>
+        const $ = id => document.getElementById(id);
+        const cv = $('c'), ctx = cv.getContext('2d');
+        if (!ctx.roundRect) CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) { r = Math.min(r, w / 2, h / 2); this.moveTo(x + r, y); this.arcTo(x + w, y, x + w, y + h, r); this.arcTo(x + w, y + h, x, y + h, r); this.arcTo(x, y + h, x, y, r); this.arcTo(x, y, x + w, y, r); this.closePath() }; // 古いSafari(16未満)対応
+        const COLORS = ['#e4574d', '#3f7fd6', '#f2b632', '#3fa774'];
+        const ROAD_PACK = 5, ROAD_PACK_COST = 20, MAX_BUYS = 2;
+        const roadCost = () => ROAD_PACK_COST * (1 + S.buys); // 2回目は2倍
+        const WIDE_COST = 6; // 道路1マスの拡幅コスト
+        const HOUSES_PER_OFFICE = 5; // 1オフィスあたりの家の数
+        const UPC = [8, 16, 28]; // オフィス強化に必要なポイント(Lv1→2, 2→3, 3→4)
+        const tu = d => 1 / (1 + .6 * (d.lv - 1)); // オフィスでの降車時間
+        const MAXP = 7, NORMAL_GOAL = 3000, DEV_STOCK = 150, MAX_STOCK = 150, CLEAR_HOLD = 20, DEV_HOUSES = 40, DEV_WARM = 30; // パズルモード：道路の数(補充なし) / 開始時の家の数(増えない。オフィスは家5軒に1軒の比率で建つ) / 渋滞ゼロのカウント(秒) / カウントを始められるまでの待ち時間(秒)
+        const capStock = n => diff === 'dev' ? Math.min(n, MAX_STOCK) : n;
+        // パズルモードはポイントなし（拡幅・消す・オフィス強化・オフィス建設はすべて無料）
+        const canPay = c => diff === 'dev' || S.pts >= c;
+        const pay = c => { if (!canPay(c)) return false; if (diff !== 'dev') S.pts -= c; return true };
+        let office = -1, lastOf = '', tunnel = false, tun1 = -1, W, H, dpr, cell, ox, oy, cols = 0, rows = 0, bc = 0, br = 0, T = {}, S = null, running = false, started = false, eraser = false, wide = false, bridge = false, hover = -1, diff = 'normal';
+        const pinBase = () => diff === 'dev' ? 3 : Math.max(3, 9 - S.t / 50); // 点が増える間隔(秒)。パズルモードは最初から3秒
+
+        function readTheme() { const s = getComputedStyle(document.documentElement); for (const k of ['ground', 'grid', 'water', 'road', 'bridge']) T[k] = s.getPropertyValue('--' + k).trim() }
+        function resize() {
+            dpr = devicePixelRatio || 1; W = innerWidth; H = innerHeight;
+            cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
+            const top = $('hud').getBoundingClientRect().height + 4, bot = (parseFloat(getComputedStyle(document.documentElement).paddingBottom) || 0) + 8;
+            const aw = W - 8, ah = H - top - bot;
+            if (!bc) { const c0 = Math.max(30, Math.min(52, Math.min(W, H) / 14)); bc = Math.max(8, Math.floor(aw / c0)); br = Math.max(8, Math.floor(ah / c0)) }
+            cols = bc + (diff === 'dev' ? 1 : 0); rows = br + (diff === 'dev' ? 1 : 0); // パズルモードは縦横+1マス
+            cell = Math.min(aw / cols, ah / rows); ox = (W - cell * cols) / 2; oy = top + (ah - cell * rows) / 2; readTheme();
+        }
+        function nb(i) { const x = i % cols, y = (i / cols) | 0, r = []; if (x > 0) r.push(i - 1); if (x < cols - 1) r.push(i + 1); if (y > 0) r.push(i - cols); if (y < rows - 1) r.push(i + cols); return r }
+        const ek = (a, b) => a < b ? a + '_' + b : b + '_' + a;
+        const P = i => [ox + ((i % cols) + .5) * cell, oy + (((i / cols) | 0) + .5) * cell];
+
+        function newGame() {
+            S = { pts: 0, buys: 0, wide: new Set(), adj: new Map(), span: new Map(), blocked: new Set(), b: [], bAt: new Map(), cars: [], stock: diff === 'dev' ? DEV_STOCK : 24, hold: 0, alert: false, uo: new Set(), tun: null, score: 0, week: 1, t: 0, wt: 0, sp: 5, colors: 0, over: false, paused: true }; // 開始時は一時停止（道路を引いたりして準備できる）
+            for (let k = 0; k < 2; k++) {
+                const cx = cols * (.2 + Math.random() * .6), cy = rows * (.2 + Math.random() * .6), rx = 1.3 + Math.random() * 1.8, ry = 1 + Math.random() * 1.6;
+                for (let y = 0; y < rows; y++)for (let x = 0; x < cols; x++)if (((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 < 1) S.blocked.add(y * cols + x);
+            }
+            fillPockets();
+            addPair();
+            if (diff === 'dev') { for (let c = 1; c < COLORS.length; c++)addPair(); for (let g = 0; S.b.filter(b => b.type === 'h').length < DEV_HOUSES && g < 500; g++)if (!addMore()) break } // パズルモードは全4色と建物がある程度建った状態から始める
+            setPauseIcon(); office = -1; lastOf = ''; tun1 = -1; tunnel = false; $('tn').classList.remove('on');
+        }
+        // 水と盤面の端だけで囲まれた、何もできない小さな陸地を水にして埋める
+        function fillPockets() {
+            const seen = new Set();
+            for (let i = 0; i < cols * rows; i++) {
+                if (S.blocked.has(i) || seen.has(i)) continue;
+                const comp = [i], q = [i]; seen.add(i);
+                for (let h = 0; h < q.length; h++)for (const m of nb(q[h])) if (!S.blocked.has(m) && !seen.has(m)) { seen.add(m); q.push(m); comp.push(m) }
+                if (comp.length < 4) for (const c of comp) S.blocked.add(c);
+            }
+        }
+        // 建物のまわりに道路をつなげる空きマスが残るか（囲まれて詰むのを防ぐ）
+        const nbFree = i => nb(i).filter(m => !S.blocked.has(m) && !S.bAt.has(m)).length;
+        function accessOK(i) {
+            if (nbFree(i) < 2) return false;
+            for (const m of nb(i)) if (S.bAt.has(m) && nbFree(m) - 1 < 2) return false;
+            return true;
+        }
+        function pick(ok, lv) {
+            const { deck } = bridgeSets(); // 橋の下のマスには建てない
+            for (let L = lv || 0; L < 3; L++) {
+                const c = [];
+                for (let y = 1; y < rows - 1; y++)for (let x = 1; x < cols - 1; x++) {
+                    const i = y * cols + x;
+                    if (S.blocked.has(i) || S.adj.has(i) || deck.has(i) || S.bAt.has(i) || !ok(x, y) || !accessOK(i)) continue;
+                    if (L < 2 && S.b.some(b => L === 0 ? (Math.abs(b.x - x) <= 1 && Math.abs(b.y - y) <= 1) : (Math.abs(b.x - x) + Math.abs(b.y - y) <= 1))) continue;
+                    c.push(i);
+                }
+                if (c.length) return c[(Math.random() * c.length) | 0];
+            } return -1;
+        }
+        // 反対側(家↔オフィス)の同色の建物と道でつながっているか
+        function isConn(b) {
+            const seen = new Set([b.id]), q = [b.id];
+            for (let h = 0; h < q.length; h++) {
+                for (const m of S.adj.get(q[h]) || []) {
+                    const t = S.bAt.get(m);
+                    if (t) { if (t.c === b.c && t.type !== b.type) return true; continue }
+                    if (!seen.has(m)) { seen.add(m); q.push(m) }
+                }
+            } return false;
+        }
+        function add(type, c, i) { const b = { id: i, x: i % cols, y: (i / cols) | 0, type, c, pins: 0, out: 0, pt: 4 + Math.random() * 3, cd: 0, pulse: 0, lv: type === 'd' && diff === 'dev' ? 4 : 1, conn: false }; S.b.push(b); S.bAt.set(i, b); return b }
+        function addPair() {
+            const first = S.colors === 0, c = S.colors;
+            const mid = (x, y) => !first || (x > cols * .25 && x < cols * .75 && y > rows * .25 && y < rows * .75);
+            const hi = pick(mid); if (hi < 0) return false;
+            add('h', c, hi); const hx = hi % cols, hy = (hi / cols) | 0;
+            let di = pick((x, y) => mid(x, y) && Math.abs(x - hx) + Math.abs(y - hy) >= (first ? 4 : 7));
+            if (di < 0) di = pick(() => true);
+            if (di < 0) { S.b.pop(); S.bAt.delete(hi); return false }
+            add('d', c, di); S.colors++; return true;
+        }
+        function tryPend() { if (S.pend && addPair()) { S.pend = false; toast('新しい色が登場') } }
+        function addMore() {
+            let c = (Math.random() * S.colors) | 0;
+            for (let k = 0; k < S.colors; k++)if (!S.b.some(b => b.c === k && b.type === 'd')) { c = k; break }
+            const h = S.b.filter(b => b.c === c && b.type === 'h').length, d = S.b.filter(b => b.c === c && b.type === 'd').length;
+            const i = pick(() => true); if (i < 0) return false; add(h >= d * HOUSES_PER_OFFICE ? 'd' : 'h', c, i); return true;
+        }
+        // 引いた線(辺)だけをたどる。goal は建物。最初の一歩のセルを返す
+        function nextStep(start, goal, av) {
+            const prev = new Map([[start, -1]]), q = [start];
+            for (let h = 0; h < q.length; h++) {
+                const n = q[h];
+                for (const m of S.adj.get(n) || []) {
+                    if (m === goal.id) {
+                        if (n === start) return m;
+                        let cur = n; while (prev.get(cur) !== start) cur = prev.get(cur); return cur;
+                    }
+                    if (!prev.has(m) && !S.bAt.has(m) && !(av && av(m))) { prev.set(m, n); q.push(m) }
+                }
+            } return -1;
+        }
+        // 同じ色の目的地から、距離と混雑を見て行き先を選ぶ
+        function pickDest(start, c) {
+            const dist = new Map([[start, 0]]), q = [start]; let best = null, bs = 1e9;
+            for (let h = 0; h < q.length; h++) {
+                const n = q[h];
+                for (const m of S.adj.get(n) || []) {
+                    const bb = S.bAt.get(m);
+                    if (bb) {
+                        if (bb.type === 'd' && bb.c === c) {
+                            const load = S.cars.filter(o => o.d === bb && !o.ret).length, s = dist.get(n) + 1 + 3 * load + (bb.busy > 0 ? 1 : 0);
+                            if (s < bs) { bs = s; best = bb }
+                        }
+                        continue;
+                    }
+                    if (!dist.has(m)) { dist.set(m, dist.get(n) + 1); q.push(m) }
+                }
+            } return best;
+        }
+        function update(dt) {
+            S.t += dt; S.wt += dt;
+            if (diff !== 'dev' && S.wt >= 24) {
+                S.wt = 0; S.week++; S.stock = capStock(S.stock + 8); toast('第' + S.week + '週：道路 +8');
+                if (S.week % 2 === 0 && S.colors < COLORS.length) { S.pend = true; tryPend() }
+            }
+            if (diff !== 'dev') { S.sp -= dt; if (S.sp <= 0) { addMore(); tryPend(); S.sp = Math.max(3.5, 8 - S.t / 70) } } // パズルモードは建物が増えない
+            if (diff === 'dev') {
+                S.alert = S.b.some(b => b.type === 'h' && b.pins >= MAXP);
+                S.hold = !S.alert && S.t >= DEV_WARM ? S.hold + dt : 0; if (S.hold >= CLEAR_HOLD) return devClear()
+            }
+            for (const b of S.b) {
+                b.pulse = Math.max(0, b.pulse - dt * 2); b.busy = Math.max(0, (b.busy || 0) - dt);
+                if (b.type !== 'h') continue;
+                b.pt -= dt;
+                if (b.pt <= 0) { b.pins++; b.pt = pinBase() * (.8 + Math.random() * .4); if (b.pins >= MAXP) { if (diff !== 'dev') return gameOver(); b.pins = MAXP } } // パズルモードはゲームオーバーなし（7個で止まる）
+                b.cd -= dt;
+                if (b.pins > b.out && b.out < 3 && b.cd <= 0) {
+                    const d = pickDest(b.id, b.c);
+                    if (d) { S.cars.push({ i: b.id, n: -1, t: 0, c: b.c, h: b, d, w: 0, unl: 0, ok: false, st: 0, ret: false }); b.out++; b.cd = .7 } else b.cd = .5;
+                }
+            }
+            const cap = m => diff === 'dev' || S.wide.has(m) ? 4 : 2; // パズルモードは見た目は通常、容量は拡幅後（4台）
+            const jam = m => (S.occ.get(m) || 0) >= cap(m);
+            const route = car => {
+                const g = car.ret ? car.h : car.d;
+                let n = g ? nextStep(car.i, g, jam) : -1;
+                if (!(n >= 0) && g) n = nextStep(car.i, g);
+                if (!(n >= 0) && !car.ret) { car.d = pickDest(car.i, car.c); n = car.d ? nextStep(car.i, car.d) : -1 }
+                return n;
+            };
+            // 1マスに入れる車は2台まで。オフィスは降車中は受け付けない。帰りも走る。
+            S.occ = new Map();
+            for (const o of S.cars) { if (o.unl === 0) S.occ.set(o.i, (S.occ.get(o.i) || 0) + 1); if (o.ok) S.occ.set(o.n, (S.occ.get(o.n) || 0) + 1) }
+            const occ = n => S.occ.get(n) || 0;
+            for (let k = S.cars.length - 1; k >= 0; k--) {
+                const car = S.cars[k];
+                if (car.unl > 0) {
+                    car.unl -= dt;
+                    if (car.unl <= 0) { const d = S.bAt.get(car.i); d.pulse = 1; car.h.pins--; S.score++; S.pts++; car.ret = true; car.n = -1; car.unl = 0; if (diff === 'normal' && S.score >= NORMAL_GOAL && !S.over) normalClear() }
+                    continue;
+                }
+                if (car.n < 0) {
+                    car.n = route(car); car.t = 0; car.ok = false;
+                    if (car.n < 0) { car.w += dt; if (car.w > 3) { car.h.out--; S.cars.splice(k, 1) } continue }
+                    car.w = 0;
+                }
+                car.t += dt * 3.4 / (S.span.get(ek(car.i, car.n)) || 1);
+                if (car.t > .7 && !car.ok) {
+                    const d = S.bAt.get(car.n);
+                    if (d && d.type === 'd' && !car.ret) { if (d.busy > 0) { car.t = .7; continue } d.busy = tu(d) + .1; car.ok = true }
+                    else if (!d) {
+                        if (occ(car.n) >= cap(car.n) && car.st < 2.5) { car.st += dt; car.t = .7; continue }
+                        car.st = 0; car.ok = true; S.occ.set(car.n, occ(car.n) + 1);
+                    } else car.ok = true;
+                }
+                if (car.t >= 1) {
+                    car.i = car.n; car.ok = false; const d = S.bAt.get(car.i);
+                    if (d === car.h) { car.h.out--; S.cars.splice(k, 1); continue }
+                    if (d && d.type === 'd') { car.unl = tu(d); car.n = -1; car.t = 0; continue }
+                    car.t -= 1; car.n = route(car); if (car.n < 0) car.t = 0;
+                }
+            }
+        }
+        function gameOver() {
+            S.over = true;
+            show('ゲームオーバー', '通勤 ' + S.score + ' 人', true);
+        }
+        function show(t, p, v) { $('ot').textContent = t; $('op').textContent = p; $('vw').classList.toggle('hide', !v); $('dn').textContent = 'ノーマルでもう一度'; $('dv').textContent = 'パズルでもう一度'; $('ov').classList.remove('hide'); $('dn').focus() }
+        function devHud() {
+            const num = !S.alert;
+            $('cz').classList.toggle('num', num);
+            $('cz').textContent = S.alert ? '渋滞あり' : Math.ceil(CLEAR_HOLD - S.hold); // 渋滞ゼロの間はクリアまでのカウントダウン
+            $('tn').disabled = !!S.tun; // トンネルは1本だけ
+            const key = S.colors + ':' + [...S.uo] + ':' + office; if (key !== lastOf) { lastOf = key; refreshOffice() }
+        }
+        function devClear() {
+            S.over = true; // クリアしたら終わり
+            let used = 0; for (const [a, B] of S.adj) for (const b of B) if (a < b) used += S.span.get(ek(a, b)) || 1;
+            show('渋滞ゼロ達成！', '使用した道路 ' + used + ' 本', true);
+        }
+        // パズルモード：ユーザーが色ごとに1件だけオフィスを建てられる
+        // ゲーム内のオフィスと同じ図柄（建設済みは塗りつぶし）
+        const officeIcon = (col, on) => '<svg viewBox="0 0 30 30" aria-hidden="true"><rect x="2" y="2" width="26" height="26" rx="7.3" fill="' + (on ? col : '#fff') + '" stroke="' + col + '" stroke-width="2.5"/><rect x="7.7" y="7.7" width="14.6" height="14.6" rx="3.6" fill="' + (on ? 'rgba(255,255,255,.92)' : 'none') + '" stroke="' + (on ? 'none' : col) + '" stroke-width="1.5"/><circle cx="15" cy="15" r="3.1" fill="' + col + '"/></svg>';
+        $('of').innerHTML = '<span>オフィス建設</span><div>' + COLORS.map((c, i) => '<button data-c="' + i + '" aria-label="オフィス建設 ' + (i + 1) + '色目">' + officeIcon(c, false) + '</button>').join('') + '</div>';
+        function refreshOffice() {
+            $('of').classList.toggle('hide', diff !== 'dev');
+            $('of').querySelectorAll('button').forEach(b => {
+                const c = +b.dataset.c, built = !!S && S.uo.has(c);
+                b.disabled = !S || c >= S.colors || built; // 登場前・建設済みの色は押せない
+                b.classList.toggle('on', office === c); b.innerHTML = officeIcon(COLORS[c], built);
+            });
+        }
+        $('of').onclick = e => {
+            const b = e.target.closest('button'); if (!b || b.disabled || S.over) return;
+            const c = +b.dataset.c;
+            if (office === c) office = -1; else { office = c; setEraser(false); setWide(false); setBridge(false); offTunnel() }
+            refreshOffice();
+        };
+        function placeOffice(i) {
+            if (S.blocked.has(i) || S.adj.has(i) || S.bAt.has(i) || bridgeSets().deck.has(i)) return; // ユーザー建設は周りが塞がれたマスにも建てられる（橋でつなげる）
+            const b = add('d', office, i); b.pulse = 1; S.uo.add(office); office = -1; refreshOffice();
+        }
+        // パズルモード：トンネルは1本だけ。空いている2マスを、地上の建物や道に関係なく結ぶ（長さぶん道路を消費）
+        function offTunnel() { tunnel = false; tun1 = -1; $('tn').classList.remove('on') }
+        function setTunnel(v) {
+            if (v && S && S.tun) return;
+            tunnel = v; tun1 = -1; $('tn').classList.toggle('on', v);
+            if (v) { setEraser(false); setWide(false); setBridge(false); office = -1 }
+        }
+        $('tn').onclick = () => setTunnel(!tunnel);
+        function tunnelPick(i) {
+            if (S.tun || S.blocked.has(i) || S.bAt.has(i) || S.adj.has(i) || bridgeSets().deck.has(i)) return;
+            if (tun1 < 0) { tun1 = i; return }
+            if (i === tun1) { tun1 = -1; return }
+            const len = Math.abs(i % cols - tun1 % cols) + Math.abs(((i / cols) | 0) - ((tun1 / cols) | 0));
+            if (len < 2 || S.stock < len) return;
+            link(tun1, i, len);
+            if (S.adj.get(tun1)?.has(i)) { S.tun = { a: tun1, b: i, key: ek(tun1, i) }; offTunnel() }
+        }
+        // トップへ：進行を止めてスタート画面（モード選択）に戻る
+        function goTop() {
+            running = false; offTunnel(); office = -1;
+            $('rs').classList.add('hide'); $('vw').classList.add('hide');
+            $('ot').textContent = '道路つなぎ';
+            $('op').textContent = '';
+            $('dn').textContent = 'ノーマル'; $('dv').textContent = 'パズル';
+            $('ov').classList.remove('hide'); $('dn').focus();
+        }
+        let cfWasPaused = false;
+        function closeConfirm(resume) {
+            $('cf').classList.add('hide');
+            if (resume && S) { S.paused = cfWasPaused; setPauseIcon() }
+        }
+        $('hm').onclick = () => {
+            if (!S || !running || S.over) { goTop(); return } // 進行中だけ確認する
+            cfWasPaused = S.paused; S.paused = true; setPauseIcon(); // 確認中は止める
+            $('cf').classList.remove('hide'); $('cfn').focus();
+        };
+        $('cfn').onclick = () => closeConfirm(true);
+        $('cfy').onclick = () => { closeConfirm(false); goTop() };
+        // ノーマルは通勤3000人でクリア
+        function normalClear() {
+            S.over = true;
+            show('クリア！', '通勤 ' + S.score + ' 人', true);
+        }
+        // ルールの説明（トップの「？」から開く）
+        const RULES = {
+            normal: ['ノーマルのルール', [
+                '同じ色の家とオフィスを、道路でつなぎます。家に溜まった人（点）を、車がオフィスへ運びます。',
+                '通勤が1人終わるごとに、スコアとポイントが1ずつ増えます。' + NORMAL_GOAL + '人でクリアです。',
+                '家の点が' + MAXP + '個になるとゲームオーバーです。点が増える間隔は、9秒から最短3秒まで短くなります。',
+                '建物は時間とともに増え、新しい色も登場します。',
+                '道路は本数に限りがあり、24秒ごとに+8本もらえます。',
+                'ポイントで、道路+5の購入（20pt、2回目は40pt、最大2回）、拡幅（6pt）、消す（1pt）、オフィス強化（8/16/28pt）ができます。',
+                '橋は、湖や道を最大3マス飛び越えられます。'
+            ]],
+            puzzle: ['パズルのルール', [
+                '4色・家' + DEV_HOUSES + '軒と、オフィス（家5軒に1軒の割合）が建った状態から、一時停止で始まります。建物は増えません。',
+                '道路は' + DEV_STOCK + '本だけです。補充はなく、消すと戻ります。',
+                '家の点は約3秒ごとに増え、' + MAXP + '個で止まります。ゲームオーバーはありません。',
+                'ゴールは「渋滞ゼロ」です。' + MAXP + '個溜まった家（赤い点滅）が1軒もない状態を、' + CLEAR_HOLD + 'カウント続けるとクリアです。カウントは開始' + DEV_WARM + '秒後から始まります。',
+                'オフィスは最初から最大レベルで、道路は見た目は通常ですが車4台まで通れます。ポイントはなく、拡幅も不要です。',
+                '橋は、水や道を最大5マス飛び越えられます。',
+                'トンネルは1本だけ掘れます。空いている2マスを、地上に関係なく結びます。長さぶんの道路を消費し、出入口を消すと掘り直せます。',
+                'オフィスは、色ごとに1件だけ、好きな空きマスに建てられます。'
+            ]]
+        };
+        function openRules(m) {
+            const [t, items] = RULES[m];
+            $('rlt').textContent = t;
+            $('rlb').innerHTML = items.map(x => '<li>' + x + '</li>').join('');
+            $('rl').classList.remove('hide'); $('rlc').focus();
+        }
+        document.querySelectorAll('.card button.q').forEach(b => { b.onclick = () => openRules(b.dataset.m) });
+        $('rlc').onclick = () => $('rl').classList.add('hide');
+        function toast() { } // プレイ中の文字メッセージは出さない
+
+        function draw() {
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            ctx.fillStyle = T.ground; ctx.fillRect(0, 0, W, H);
+            if (!S) return;
+            ctx.strokeStyle = T.grid; ctx.lineWidth = 1; ctx.beginPath();
+            for (let x = 0; x <= cols; x++) { ctx.moveTo(ox + x * cell, oy); ctx.lineTo(ox + x * cell, oy + rows * cell) }
+            for (let y = 0; y <= rows; y++) { ctx.moveTo(ox, oy + y * cell); ctx.lineTo(ox + cols * cell, oy + y * cell) }
+            ctx.stroke();
+            ctx.fillStyle = T.water;
+            for (const i of S.blocked) { const [x, y] = P(i); ctx.beginPath(); ctx.roundRect(x - cell / 2 - .5, y - cell / 2 - .5, cell + 1, cell + 1, cell * .3); ctx.fill() }
+            if (hover >= 0 && !S.over) { const [x, y] = P(hover); ctx.fillStyle = eraser ? 'rgba(224,53,43,.25)' : 'rgba(47,111,208,.2)'; ctx.fillRect(x - cell / 2, y - cell / 2, cell, cell) }
+            ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = T.road; ctx.lineWidth = cell * .46; ctx.beginPath();
+            for (const [i, A] of S.adj) {
+                const [x, y] = P(i); ctx.moveTo(x, y); ctx.lineTo(x + .01, y);
+                for (const m of A) { if (m > i && !S.span.has(ek(i, m))) { const [a, b] = P(m); ctx.moveTo(x, y); ctx.lineTo(a, b) } }
+            }
+            ctx.stroke();
+            if (S.wide.size) {
+                ctx.strokeStyle = T.road; ctx.lineWidth = cell * .7; ctx.beginPath();
+                for (const i of S.wide) {
+                    const [x, y] = P(i); ctx.moveTo(x, y); ctx.lineTo(x + .01, y);
+                    for (const m of S.adj.get(i) || []) { if (m > i && S.wide.has(m) && !S.span.has(ek(i, m))) { const [a, b] = P(m); ctx.moveTo(x, y); ctx.lineTo(a, b) } }
+                }
+                ctx.stroke();
+            }
+            for (const k of S.span.keys()) {
+                if (S.tun && k === S.tun.key) continue;
+                const [i, m] = k.split('_').map(Number), [x, y] = P(i), [a, b] = P(m);
+                ctx.strokeStyle = T.ground; ctx.lineWidth = cell * .64; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(a, b); ctx.stroke();
+                ctx.strokeStyle = T.bridge; ctx.lineWidth = cell * .4; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(a, b); ctx.stroke();
+            }
+            // トンネル：出入口は濃いグレーの丸。車が通っている間だけ、地下の道（点線）を表示する
+            if (S.tun && S.cars.some(c => c.n >= 0 && ek(c.i, c.n) === S.tun.key)) {
+                const [x, y] = P(S.tun.a), [a, b] = P(S.tun.b);
+                ctx.save(); ctx.setLineDash([cell * .2, cell * .2]); ctx.strokeStyle = 'rgba(68,75,81,.6)'; ctx.lineWidth = cell * .16; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(a, b); ctx.stroke(); ctx.restore();
+            }
+            for (const i of S.tun ? [S.tun.a, S.tun.b] : (tun1 >= 0 ? [tun1] : [])) {
+                const [x, y] = P(i); ctx.globalAlpha = S.tun ? 1 : .55; ctx.fillStyle = '#444b51'; ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(x, y, cell * .36, 0, 7); ctx.fill(); ctx.stroke(); ctx.globalAlpha = 1;
+            }
+            if (S.occ) for (const [i, n] of S.occ) { if (n >= (diff === 'dev' || S.wide.has(i) ? 4 : 2) && !S.bAt.has(i)) { const [x, y] = P(i); ctx.fillStyle = 'rgba(224,53,43,.5)'; ctx.beginPath(); ctx.arc(x, y, cell * .28, 0, 7); ctx.fill() } }
+            for (const b of S.b) {
+                const [x, y] = P(b.id), col = COLORS[b.c];
+                if (b.type === 'h') {
+                    const s = cell * .6; ctx.beginPath(); ctx.roundRect(x - s / 2, y - s / 2, s, s, s * .22);
+                    if (b.conn) { ctx.fillStyle = col; ctx.fill() } else { ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.stroke() }
+                    ctx.fillStyle = b.conn ? 'rgba(255,255,255,.9)' : col; ctx.fillRect(x - s * .11, y + s * .02, s * .22, s * .4);
+                    for (let k = 0; k < b.pins; k++) { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x + (k - (b.pins - 1) / 2) * cell * .17, y - s / 2 - cell * .14, cell * .065, 0, 7); ctx.fill() }
+                    if (diff === 'dev' ? b.pins >= MAXP : b.pins >= 4) { ctx.strokeStyle = '#e0352b'; ctx.lineWidth = 3; ctx.globalAlpha = .5 + .5 * Math.sin(performance.now() / 120); ctx.beginPath(); ctx.arc(x, y, s * .85, 0, 7); ctx.stroke(); ctx.globalAlpha = 1 }
+                } else {
+                    const s = cell * .86; ctx.beginPath(); ctx.roundRect(x - s / 2, y - s / 2, s, s, s * .28);
+                    if (b.conn) { ctx.fillStyle = col; ctx.fill() } else { ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = col; ctx.lineWidth = 3.5; ctx.stroke() }
+                    ctx.beginPath(); ctx.roundRect(x - s * .28, y - s * .28, s * .56, s * .56, s * .14);
+                    if (b.conn) { ctx.fillStyle = 'rgba(255,255,255,.92)'; ctx.fill() } else { ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.stroke() }
+                    ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, s * .12, 0, 7); ctx.fill();
+                    ctx.fillStyle = b.conn ? '#fff' : col; for (let k = 0; k < b.lv; k++) { ctx.beginPath(); ctx.arc(x + (k - (b.lv - 1) / 2) * s * .15, y + s * .39, s * .045, 0, 7); ctx.fill() }
+                    if (b.lv < 4 && canPay(UPC[b.lv - 1])) {
+                        const bx = x + s * .46, by = y - s * .46, r = s * .19 * (1 + .12 * Math.sin(performance.now() / 180));
+                        ctx.fillStyle = '#fff'; ctx.strokeStyle = col; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.arc(bx, by, r, 0, 7); ctx.fill(); ctx.stroke();
+                        ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(bx, by - r * .55); ctx.lineTo(bx + r * .55, by + r * .4); ctx.lineTo(bx - r * .55, by + r * .4); ctx.fill();
+                    }
+                }
+            }
+            for (const c of S.cars) {
+                if (c.unl > 0) continue;
+                const [x0, y0] = P(c.i); let x = x0, y = y0, a = 0;
+                if (c.n >= 0) { const [x1, y1] = P(c.n); x = x0 + (x1 - x0) * c.t; y = y0 + (y1 - y0) * c.t; a = Math.atan2(y1 - y0, x1 - x0) }
+                ctx.save(); ctx.translate(x, y); ctx.rotate(a); ctx.globalAlpha = (c.ret ? .55 : 1) * (S.tun && c.n >= 0 && ek(c.i, c.n) === S.tun.key ? .45 : 1); ctx.fillStyle = COLORS[c.c]; ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5;
+                ctx.beginPath(); ctx.roundRect(-cell * .17, -cell * .1, cell * .34, cell * .2, cell * .06); ctx.fill(); ctx.stroke(); ctx.restore();
+            }
+        }
+        let lastT = performance.now();
+        function loop(now) {
+            const dt = Math.min(.05, (now - lastT) / 1000); lastT = now;
+            if (S && running && !S.over && !S.paused) update(dt);
+            if (S && (S.fc = (S.fc || 0) + 1) % 6 === 0) for (const b of S.b) b.conn = isConn(b);
+            draw();
+            if (S) {
+                $('s').textContent = S.score; if (diff === 'dev') devHud(); $('r').textContent = S.stock; $('wb').style.width = diff === 'dev' ? '0%' : Math.min(100, S.wt / 24 * 100) + '%'; $('pt').textContent = S.pts; const bl = S.buys >= MAX_BUYS ? '道路 購入済み' : '道路+' + ROAD_PACK + '（' + roadCost() + 'pt）残' + (MAX_BUYS - S.buys);
+                if ($('by').textContent !== bl) $('by').textContent = bl;
+                $('by').classList.toggle('dim', S.buys >= MAX_BUYS || S.pts < roadCost())
+            }
+            requestAnimationFrame(loop);
+        }
+
+        // 入力
+        let down = false, lastC = -1, mode = 'draw', startC = -1, moved = false;
+        function cellAt(e) { const x = Math.floor((e.clientX - ox) / cell), y = Math.floor((e.clientY - oy) / cell); return x < 0 || y < 0 || x >= cols || y >= rows ? -1 : y * cols + x }
+        // 隣り合う2マスを線でつなぐ（建物どうしは不可）。1本ごとに道路を1つ使う
+        function link(a, b, len = 1) {
+            if (S.blocked.has(a) || S.blocked.has(b)) return;
+            // 建物どうしは、同じ色の家とオフィスが隣り合う場合だけ直接つなげる
+            if (S.bAt.has(a) && S.bAt.has(b)) { const x = S.bAt.get(a), y = S.bAt.get(b); if (!(x.c === y.c && x.type !== y.type)) return }
+            const A = S.adj.get(a); if (A && A.has(b)) return;
+            if (S.stock < len) return;
+            for (const [p, q] of [[a, b], [b, a]]) { if (!S.adj.has(p)) S.adj.set(p, new Set()); S.adj.get(p).add(q) }
+            if (len > 1) S.span.set(ek(a, b), len);
+            S.stock -= len;
+        }
+        // そのマスにつながる線をすべて消す
+        function cut(i) {
+            const A = S.adj.get(i); if (!A) return;
+            if (!pay(1)) { toast('ポイント不足：道路を消すには1pt必要です'); return }
+            for (const m of A) { const B = S.adj.get(m), k = ek(i, m); B.delete(i); S.stock = capStock(S.stock + (S.span.get(k) || 1)); S.span.delete(k); if (S.tun && S.tun.key === k) S.tun = null; if (!B.size) { S.adj.delete(m); S.wide.delete(m) } }
+            S.adj.delete(i); S.wide.delete(i);
+        }
+        function buyRoads() {
+            if (S.over || diff === 'dev') return;
+            if (S.buys >= MAX_BUYS) { toast('道路の購入は' + MAX_BUYS + '回までです'); return }
+            const cost = roadCost();
+            if (S.pts < cost) { toast('ポイント不足：道路' + ROAD_PACK + '本は' + cost + 'ptです'); return }
+            S.pts -= cost; S.buys++; S.stock += ROAD_PACK; toast('道路を' + ROAD_PACK + '本購入しました');
+        }
+        function widen(c) {
+            if (!S.adj.has(c) || S.bAt.has(c) || S.wide.has(c)) return;
+            if (!pay(WIDE_COST)) { toast('ポイント不足：拡幅は1マス' + WIDE_COST + 'ptです'); return }
+            S.wide.add(c);
+        }
+        // 橋どうしが重ならないための判定用（橋の下のマスと両端）
+        function bridgeSets() {
+            const deck = new Set(), ends = new Set();
+            for (const k of S.span.keys()) {
+                if (S.tun && k === S.tun.key) continue; // トンネルは橋の板にしない
+                const [a, b] = k.split('_').map(Number), ax = a % cols, ay = (a / cols) | 0, bx = b % cols, by = (b / cols) | 0;
+                const n = Math.abs(bx - ax) + Math.abs(by - ay), sx = Math.sign(bx - ax), sy = Math.sign(by - ay);
+                ends.add(a); ends.add(b);
+                for (let i = 1; i < n; i++)deck.add((ay + i * sy) * cols + ax + i * sx);
+            }
+            return { deck, ends };
+        }
+        function walk(a, b) {
+            if (a < 0) return b;
+            const ob = c => !S.bAt.has(c) && (S.blocked.has(c) || S.adj.has(c));
+            let x = a % cols, y = (a / cols) | 0; const tx = b % cols, ty = (b / cols) | 0;
+            while (x !== tx || y !== ty) {
+                const p = y * cols + x; let dx = 0, dy = 0;
+                if (Math.abs(tx - x) >= Math.abs(ty - y)) dx = Math.sign(tx - x); else dy = Math.sign(ty - y);
+                x += dx; y += dy; const q = y * cols + x;
+                if (mode === 'erase') { cut(p); cut(q); continue }
+                if (wide) { widen(q); continue }
+                if (bridge && ob(q)) {
+                    // 道や湖を飛び越える（最大3マス、パズルモードは5マス）。着地点は空きマスか建物
+                    let nx = x, ny = y, len = 1;
+                    while (nx >= 0 && ny >= 0 && nx < cols && ny < rows && ob(ny * cols + nx) && len <= (diff === 'dev' ? 5 : 3)) { nx += dx; ny += dy; len++ }
+                    if (nx < 0 || ny < 0 || nx >= cols || ny >= rows || ob(ny * cols + nx)) return p;
+                    const r = ny * cols + nx, { deck, ends } = bridgeSets(), px = x - dx, py = y - dy;
+                    let bad = deck.has(p) || deck.has(r);
+                    for (let k = 1; k < len; k++) { const c = (py + k * dy) * cols + px + k * dx; if (deck.has(c) || ends.has(c)) bad = true }
+                    if (bad) return p;
+                    link(p, r, len); return r;
+                }
+                link(p, q);
+            }
+            return y * cols + x;
+        }
+        cv.addEventListener('pointerdown', e => {
+            if (!running || S.over) return;
+            if (tunnel) { const i = cellAt(e); if (i >= 0) tunnelPick(i); return }
+            if (office >= 0) { const i = cellAt(e); if (i >= 0) placeOffice(i); return }
+            cv.setPointerCapture(e.pointerId); down = true; mode = (eraser || e.button === 2) ? 'erase' : 'draw';
+            lastC = cellAt(e); startC = lastC; moved = false; if (lastC >= 0 && mode === 'erase') cut(lastC); if (lastC >= 0 && wide) widen(lastC);
+        });
+        cv.addEventListener('pointermove', e => {
+            hover = cellAt(e);
+            if (!down) return;
+            if (hover >= 0) { if (hover !== startC) moved = true; lastC = walk(lastC, hover) }
+        });
+        function tapCell(i) {
+            const d = S.bAt.get(i); if (!d || d.type !== 'd' || S.over) return;
+            if (d.lv >= 4) { toast('このオフィスは最大レベルです'); return }
+            const c = UPC[d.lv - 1];
+            if (!pay(c)) { toast('ポイント不足：強化にはあと' + (c - S.pts) + 'pt必要です'); return }
+            d.lv++; d.pulse = 1; toast('オフィス強化 Lv' + d.lv + '：降車が速くなりました');
+        }
+        const stop = () => { down = false; lastC = -1 };
+        cv.addEventListener('pointerup', () => { if (down && !moved && startC >= 0 && mode === 'draw' && !wide && !bridge) tapCell(startC); stop() });
+        cv.addEventListener('pointercancel', stop);
+        cv.addEventListener('pointerleave', () => { if (!down) hover = -1 });
+        cv.addEventListener('contextmenu', e => e.preventDefault());
+
+        function setEraser(v) { eraser = v; $('er').classList.toggle('on', v); if (v) { setWide(false); setBridge(false); office = -1; offTunnel() } }
+        function setWide(v) { wide = v; $('wd').classList.toggle('on', v); if (v) { setEraser(false); setBridge(false); office = -1; offTunnel() } }
+        function setBridge(v) { bridge = v; $('br').classList.toggle('on', v); if (v) { setEraser(false); setWide(false); office = -1; offTunnel() } }
+        const ICON_PAUSE = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+        const ICON_PLAY = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+        function setPauseIcon() { const p = S && S.paused; $('pa').classList.toggle('on', !!p); $('pa').innerHTML = p ? ICON_PLAY : ICON_PAUSE; $('pa').setAttribute('aria-label', p ? '再開' : '一時停止'); $('pa').title = p ? '再開' : '一時停止' }
+        function setPause() { if (!S || S.over || !running) return; S.paused = !S.paused; setPauseIcon() }
+        $('er').onclick = () => setEraser(!eraser);
+        $('wd').onclick = () => setWide(!wide);
+        $('br').onclick = () => setBridge(!bridge);
+        $('by').onclick = buyRoads;
+        $('pa').onclick = setPause;
+        function restart() { newGame(); started = true; running = true; $('ov').classList.add('hide'); $('rs').classList.add('hide') }
+        function applyMode() {
+            const dev = diff === 'dev'; $('by').classList.toggle('hide', dev); $('wd').classList.toggle('hide', dev); $('tn').classList.toggle('hide', !dev); if (dev) setWide(false); $('stP').classList.toggle('hide', dev);
+            $('wd').textContent = '拡幅（' + WIDE_COST + 'pt）'; $('er').textContent = dev ? '消す' : '消す（1pt）'; $('stS').classList.toggle('hide', dev); $('stC').classList.toggle('hide', !dev); refreshOffice()
+        }
+        function begin(d) { diff = d; applyMode(); resize(); restart() }
+        $('dn').onclick = () => begin('normal'); $('dv').onclick = () => begin('dev'); $('rs').onclick = restart;
+        $('vw').onclick = () => { $('ov').classList.add('hide'); $('rs').classList.remove('hide') };
+        addEventListener('resize', resize);
+        new MutationObserver(readTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+        matchMedia('(prefers-color-scheme:dark)').addEventListener('change', readTheme);
+        resize(); newGame(); requestAnimationFrame(loop);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XKL20YHCTB');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>カラーファクトリー｜色の玉を生産・加工・納品する工場物流パズルゲーム【無料】</title>
+  <meta name="description" content="
+    色の玉を生産・加工して、納品する工場物流パズルです。色々なコンベヤーと装置をつなぎ、ステージクリアを目指します。無料・インストール不要ですぐに遊べるブラウザゲームです。モバイルにも対応
+    ">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      --ground: #dfe8e2;
+      --grid: rgba(0, 0, 0, .05);
+      --belt: #97a1a9;
+      --arrow: #e8eef2;
+      --ink: #1f2a30;
+      --panel: rgba(255, 255, 255, .9);
+      --accent: #2f6fd0
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --ground: #1c2528;
+        --grid: rgba(255, 255, 255, .05);
+        --belt: #6b767e;
+        --arrow: #1c2528;
+        --ink: #e6eef0;
+        --panel: rgba(30, 40, 44, .92);
+        --accent: #6aa3f0
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --ground: #1c2528;
+      --grid: rgba(255, 255, 255, .05);
+      --belt: #6b767e;
+      --arrow: #1c2528;
+      --ink: #e6eef0;
+      --panel: rgba(30, 40, 44, .92);
+      --accent: #6aa3f0
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden
+    }
+
+    body {
+      background: var(--ground);
+      color: var(--ink);
+      font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Yu Gothic', sans-serif;
+      -webkit-user-select: none;
+      user-select: none
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      touch-action: none;
+      cursor: crosshair
+    }
+
+    #hud {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      padding: calc(env(safe-area-inset-top, 0px) + 8px) 10px 4px;
+      pointer-events: none
+    }
+
+    #hud>* {
+      pointer-events: auto
+    }
+
+    .sts {
+      display: flex;
+      flex: 1
+    }
+
+    #sk {
+      background: var(--panel);
+      border-radius: 12px;
+      padding: 5px 8px;
+      display: flex;
+      align-items: center;
+      min-height: 20px
+    }
+
+    .ch {
+      display: inline-grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      margin: 0 1.5px;
+      border: 1px solid rgba(0, 0, 0, .3)
+    }
+
+    .bts {
+      display: flex;
+      gap: 6px;
+      flex: 1 1 100%;
+      justify-content: flex-end;
+      flex-wrap: wrap
+    }
+
+    button {
+      font: inherit;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--ink);
+      background: var(--panel);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      padding: 8px 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      touch-action: manipulation
+    }
+
+    button.on {
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px
+    }
+
+    @media(max-width:420px) {
+      .bts {
+        gap: 3px
+      }
+
+      .bts button {
+        font-size: 11px;
+        padding: 8px 3px
+      }
+    }
+
+    #rl {
+      padding: 8px 8px;
+      font-size: 12px
+    }
+
+    #ps {
+      padding: 8px 10px
+    }
+
+    #ps svg {
+      display: block
+    }
+
+    #ov {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(0, 0, 0, .4);
+      padding: 16px
+    }
+
+    #ov.hide {
+      display: none
+    }
+
+    .card {
+      background: var(--panel);
+      border-radius: 20px;
+      padding: 22px;
+      max-width: 360px;
+      line-height: 1.7;
+      max-height: 88vh;
+      overflow: auto
+    }
+
+    .card h2 {
+      margin: 0 0 6px;
+      font-size: 22px
+    }
+
+    .card p {
+      margin: 0 0 14px;
+      font-size: 13px
+    }
+
+    .card button {
+      background: var(--accent);
+      color: #fff;
+      font-size: 16px;
+      padding: 10px 24px
+    }
+
+    .card button.sub {
+      background: transparent;
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      margin-left: 8px
+    }
+
+    .card a.pl {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 0;
+      font-size: 13px;
+      color: var(--ink);
+      opacity: .75
+    }
+
+    .dot {
+      display: inline-block;
+      width: .9em;
+      height: .9em;
+      border-radius: 50%;
+      vertical-align: -.1em;
+      border: 1px solid rgba(0, 0, 0, .3)
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="c"></canvas>
+  <header id="hud">
+    <div class="sts">
+      <div id="sk"></div>
+    </div>
+    <button id="rl">ルール</button>
+    <div class="bts">
+      <button id="ps" aria-label="一時停止／再開"></button>
+      <button data-t="belt" class="on">ベルト</button>
+      <button data-t="bridge">橋</button>
+      <button data-t="tn" style="display:none">地下</button>
+      <button data-t="hub">分配</button>
+      <button data-t="mg">合流</button>
+      <button data-t="mx">混色</button>
+      <button data-t="sr" style="display:none">仕分け</button>
+      <button data-t="cp" style="display:none">複製</button>
+      <button data-t="erase">消す</button>
+    </div>
+  </header>
+  <div id="ov">
+    <div class="card">
+      <h2 id="ot"></h2>
+      <p id="op"></p><button id="ob"></button><button id="ob2" class="sub" style="display:none"></button>
+      <div><a class="pl" id="pl" href="index_game.html">ゲーム一覧へ</a></div>
+    </div>
+  </div>
+  <script>
+
+    const $ = id => document.getElementById(id);
+    const cv = $('c'), ctx = cv.getContext('2d');
+    if (!ctx.roundRect) CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) { r = Math.min(r, w / 2, h / 2); this.moveTo(x + r, y); this.arcTo(x + w, y, x + w, y + h, r); this.arcTo(x + w, y + h, x, y + h, r); this.arcTo(x, y + h, x, y, r); this.arcTo(x, y, x + w, y, r); this.closePath() };
+
+    /* ---------- 定数 ---------- */
+    const COL = ['#e4574d', '#3f7fd6', '#f2b632', '#8a5cc4', '#f08a2e', '#3fa774', '#f6f6f6', '#2a2a2e', '#f7a6c4', '#8fd3f0']; // 赤青黄/紫橙緑/白黒/桃水
+    const MC = '#78909c';                           // 装置の枠色
+    const SPD = 1.8, GAP = .605;                        // 玉の速度(マス/秒)・玉の間隔(マス)
+    const BMAX = 3, TMAX = 6;                          // 橋・地下の最大スパン(マス)
+    const T_SRC = .78, T_MIX = .45, T_SORT = .15;          // 生産・混色・仕分けの所要秒数
+    const CP_OUT = 3, SORT_OUT = 2, LIT = 5;              // 複製の出口数・仕分けの出口数・納品判定の秒数
+    const UNLOCK = { sr: 1, cp: 3, tn: 3 };                // 開放されるステージ(0始まり)
+    const R = { '0,1': 3, '0,2': 4, '1,2': 5, '0,6': 8, '1,6': 9, '2,3': [6, 7], '1,4': [6, 7], '0,5': [6, 7] }; // 混色レシピ
+    const ALLC = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const STG = [[0, 1, 2, 3, 4, 5], [6, 7], [8, 9], ALLC, ALLC], STN = ['3原色＋混色3色', '白・黒', 'ピンク・水色', 'ALL', 'ALL（5秒キープ）'];
+    const HOLD = [0, 0, 0, 0, 5];                       // 全色がそろった状態を保つ秒数(0=そろった瞬間にクリア)
+    const DIRS8 = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]];
+    const PAUSE = '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><rect x="2.5" y="1.5" width="3.2" height="11" rx="1"/><rect x="8.3" y="1.5" width="3.2" height="11" rx="1"/></svg>';
+    const PLAY = '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M3.5 1.5v11l9-5.5z"/></svg>';
+    const dot = c => `<span class="dot" style="background:${COL[c]}"></span>`;
+    const INTRO = `色の玉を作って、納品所の穴へ届ける工場ゲームです。<br>赤・青・黄の拠点（${dot(0)}${dot(1)}${dot(2)}）から玉が出ます。ベルトでつなぎ、混ぜて色を増やし、納品所へ流しましょう。<br><b>ゴール</b>：各ステージの対象の色を、5秒以内にそろえて納品するとクリアです（1：原色3色＋紫・橙・緑、2：白・黒、3：桃・水色、4：全色、5：全色を5秒キープ）。ステージ5は、全色がそろった状態を5秒間保ち続けるとクリアです。クリアするたびに、続ける／止めるを選べます。<br>画面上部の丸は色ごとの納品状況です。納品すると色が付き、5秒間納品がないと薄くなって消えます（数字は残り秒数）。<br>操作や装置の説明は、右上の「ルール」ボタンでいつでも見られます。`;
+    const RULES = `<b>停止</b>：止めたまま配線できます。<br>
+<b>ベルト</b>：ドラッグで敷設。逆向きになぞると反転。分岐・合流はできません。<br>
+<b>橋</b>：最大3マス先まで飛び越えます。橋どうしは交差できません。<br>
+<b>地下</b>（ステージ3クリア後）：建物の下も通れます。間を5マスまで飛ばせます。地下どうしは交差できません。<br>
+<b>分配</b>：最初に通った1色だけ通します。入口・出口は複数可。タップで色をリセット。<br>
+<b>合流</b>：入口は複数、出口は1本。色は問いません。<br>
+<b>混色</b>：${dot(0)}+${dot(1)}=${dot(3)}　${dot(0)}+${dot(2)}=${dot(4)}　${dot(1)}+${dot(2)}=${dot(5)}　${dot(6)}+${dot(0)}=${dot(8)}　${dot(6)}+${dot(1)}=${dot(9)}<br>
+${dot(3)}+${dot(2)}、${dot(4)}+${dot(1)}、${dot(5)}+${dot(0)}は${dot(6)}か${dot(7)}（ランダム）。他の組み合わせは受け付けず、玉が手前で止まります。<br>
+<b>仕分け</b>（ステージ1クリア後）：${dot(6)}と${dot(7)}を振り分けます。1本目の出口が${dot(6)}、2本目が${dot(7)}。<br>
+<b>複製</b>（ステージ3クリア後）：出口の線1本につき1個ずつ複製します（最大3本）。1つだけ置けます。<br>
+<b>消す</b>：線や装置を消します。<br>
+装置は、斜めを含め他の建物と隣り合わせに置けません（橋・地下は例外）。`;
+
+    /* ---------- 状態 ---------- */
+    let W, H, dpr, cols = 0, rows = 0, cell, ox, oy, T = {}, G;
+    let tool = 'belt', base = 'belt', down = false, pid = null, lastC = -1, startC = -1, hover = -1, moved = false, last = 0;
+    const ONE = ['mx', 'sr', 'hub', 'mg', 'cp'];       // 1回置くと元のモードに戻る装置
+    const BT = [...document.querySelectorAll('.bts button[data-t]')], ps = $('ps'), cpBtn = BT.find(b => b.dataset.t === 'cp');
+    const setOn = () => BT.forEach(x => x.classList.toggle('on', x.dataset.t === tool));
+    const done = () => { tool = base; setOn() };
+
+    /* ---------- 盤面 ---------- */
+    function resize() {
+      dpr = devicePixelRatio || 1; W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
+      const top = $('hud').getBoundingClientRect().height + 4, bot = (parseFloat(getComputedStyle(document.documentElement).paddingBottom) || 0) + 8;
+      const aw = W - 8, ah = H - top - bot;
+      if (!cols) { const c0 = Math.max(30, Math.min(52, Math.min(W, H) / 14)); cols = Math.max(8, Math.floor(aw / c0)); rows = Math.max(8, Math.floor(ah / c0)) }
+      cell = Math.min(aw / cols, ah / rows); ox = (W - cell * cols) / 2; oy = top + (ah - cell * rows) / 2;
+      const s = getComputedStyle(document.documentElement); for (const k of ['ground', 'grid', 'belt', 'arrow', 'ink']) T[k] = s.getPropertyValue('--' + k).trim();
+    }
+    const P = i => [ox + ((i % cols) + .5) * cell, oy + (((i / cols) | 0) + .5) * cell];
+    const adjB = i => { const x = i % cols, y = (i / cols) | 0; return DIRS8.some(([a, b]) => { const X = x + a, Y = y + b; return X >= 0 && Y >= 0 && X < cols && Y < rows && G.bl[Y * cols + X] }) }; // 周囲8マスに建物があるか
+    function addB(i, k, c = null) { const b = { i, x: i % cols, y: (i / cols) | 0, k, c, hold: null, buf: [], out: [], busy: 0, t: 0, tm: 0, rr: 0, pulse: 0, last: null, lc: 0, lt: 0 }; G.bl[i] = b; G.bs.push(b); return b }
+    function place(k, c) { // 他の建物から2マス以上離して置く
+      for (let d = 3; d >= 2; d--) {
+        const cs = [];
+        for (let y = 1; y < rows - 1; y++)for (let x = 1; x < cols - 1; x++) { const i = y * cols + x; if (!G.bl[i] && G.bs.every(b => Math.max(Math.abs(b.x - x), Math.abs(b.y - y)) >= d)) cs.push(i) }
+        if (cs.length) { addB(cs[Math.random() * cs.length | 0], k, c); return }
+      }
+    }
+    function newGame() {
+      G = { bl: Array(cols * rows).fill(null), bs: [], E: new Map(), out: new Map(), lit: Array(10).fill(0), stage: 0, keep: 0, free: false, hold: false, bp: null, over: false, paused: true };
+      place('src', 0); place('src', 1); place('src', 2); place('shop');
+      tool = base = 'belt'; setOn();
+    }
+
+    /* ---------- 線(辺) ---------- */
+    // 辺は a→b の向きつき。通常は隣り合うマス、橋・地下は2マス以上離れたマスを結ぶ。
+    const ek = (a, b) => a + '>' + b;
+    const free = e => !e.it.length || e.it[e.it.length - 1].p >= e.gp;
+    const span = (a, b) => Math.max(Math.abs(a % cols - b % cols), Math.abs(((a / cols) | 0) - ((b / cols) | 0)));
+    const stepOf = (a, b) => Math.sign(b % cols - a % cols) + Math.sign(((b / cols) | 0) - ((a / cols) | 0)) * cols;
+    const mids = (a, b) => { const r = [], st = stepOf(a, b); for (let k = 1; k < span(a, b); k++)r.push(a + st * k); return r };
+    const crosses = (a, b, tn) => { const m = new Set(mids(a, b)); return [...G.E.values()].some(e => e.len > 1 && e.tn === tn && mids(e.a, e.b).some(i => m.has(i))) }; // 同じ層の橋どうしは交差不可
+    const onSpan = i => [...G.E.values()].some(e => e.len > 1 && (e.a === i || e.b === i || (!e.tn && mids(e.a, e.b).includes(i)))); // 橋・地下の足、または橋の下(地下の中間は除く)
+    const tnEnd = (a, b) => [...G.E.values()].some(e => e.len > 1 && e.tn && (e.a === a || e.a === b || e.b === a || e.b === b)); // 既存トンネルの出入口か
+    const spanOK = (a, b, tn) => !G.bl[a] && !G.bl[b] && !crosses(a, b, tn) && !(tn && tnEnd(a, b));       // 地下の出入口どうしは重ねられない(橋の脚は可)                                                                          // 橋・地下の足は建物にできない
+    function delEdge(a, b) { G.E.delete(ek(a, b)); const o = G.out.get(a); if (o) G.out.set(a, o.filter(e => e.b !== b)) }
+    function addEdge(a, b, len = 1, tn = false) {
+      const A = G.bl[a], B = G.bl[b];
+      if ((A && A.k === 'shop') || (B && B.k === 'src') || G.E.has(ek(a, b))) return;
+      if (len > 1 && !spanOK(a, b, tn)) return;
+      const oth = (G.out.get(a) || []).filter(e => e.b !== b);
+      const maxOut = !A || A.k === 'mx' || A.k === 'mg' ? 1 : A.k === 'sr' ? SORT_OUT : A.k === 'cp' ? CP_OUT : 99; // ベルトは分岐不可
+      if (oth.length >= maxOut) return;
+      if (!B && [...G.E.values()].some(e => e.b === b && e.a !== a)) return;                         // ベルトは合流不可
+      delEdge(b, a);                                                                       // 逆向きになぞると反転
+      const e = { a, b, len, tn, gp: GAP / len, it: [] };
+      if (A && A.k === 'sr') e.sc = (G.out.get(a) || []).some(x => x.sc === 6) ? 7 : 6;                     // 仕分けの出口: 1本目=白, 2本目=黒
+      G.E.set(ek(a, b), e); if (!G.out.has(a)) G.out.set(a, []); G.out.get(a).push(e);
+    }
+    function cut(i) {
+      for (const e of [...G.E.values()]) if (e.a === i || e.b === i) delEdge(e.a, e.b);
+      const b = G.bl[i]; if (b && b.k !== 'src' && b.k !== 'shop') { G.bs.splice(G.bs.indexOf(b), 1); G.bl[i] = null }
+    }
+    function emit(b, c) { // 建物の出口の線へ玉を1個出す(複数本なら順番に)
+      const os = G.out.get(b.i); if (!os) return false;
+      for (let k = 0; k < os.length; k++) { const o = os[(b.rr + k) % os.length]; if (free(o)) { o.it.push({ c, p: 0 }); b.rr += k + 1; return true } }
+      return false;
+    }
+
+    /* ---------- 装置 ---------- */
+    const pk = (x, y) => x < y ? x + ',' + y : y + ',' + x;
+    function mix(a) { const r = R[pk(a[0], a[1])]; return Array.isArray(r) ? r[Math.random() < .5 ? 0 : 1] : r }
+    // 複数の入口から交互に取り込む。ok(色)で、実際に受け取れる玉だけを待ち行列とみなす
+    const fair = (b, e, ok) => !(b.last === e && [...G.E.values()].some(x => x !== e && x.b === b.i && x.it.length && x.it[0].p >= 1 && (!ok || ok(x.it[0].c))));
+    function accept(b, c, e) { // 建物が玉を受け取れるか
+      switch (b.k) {
+        case 'mx':
+          if (b.busy > 0 || b.buf.length >= 2 || b.buf.includes(c) || b.out.length >= 3) return false;
+          if (b.buf.length && !R[pk(b.buf[0], c)]) return false;
+          b.buf.push(c); if (b.buf.length === 2) b.busy = T_MIX; return true;
+        case 'sr':
+          if (b.hold != null || (c !== 6 && c !== 7) || !(G.out.get(b.i) || []).some(x => x.sc === c)) return false;
+          b.hold = c; b.tm = T_SORT; return true;
+        case 'hub':
+          if (b.hold != null || (b.c != null && c !== b.c) || !fair(b, e, x => b.c == null || x === b.c)) return false;
+          if (b.c == null) b.c = c; b.last = e; b.hold = c; return true;
+        case 'mg':
+          if (b.hold != null || !fair(b, e)) return false;
+          b.last = e; b.hold = c; return true;
+        case 'cp': {
+          const os = (G.out.get(b.i) || []).slice(0, CP_OUT);
+          if (!os.length || b.out.length || !fair(b, e)) return false;
+          b.last = e; b.lc = c; b.lt = .6; for (const o of os) b.out.push({ c, e: o }); return true
+        }
+        case 'shop':
+          G.lit[c] = LIT; b.pulse = 1;
+          return true;
+      }
+      return false;
+    }
+
+    /* ---------- 更新 ---------- */
+    function update(dt) {
+      for (let i = 0; i < 10; i++)G.lit[i] = Math.max(0, G.lit[i] - dt);
+      if (!G.over && !G.free) { // 対象色がすべて点灯している間だけキープ時間を数える
+        if (STG[G.stage].every(i => G.lit[i] > 0)) { G.keep += dt; if (G.keep >= HOLD[G.stage]) win() } else G.keep = 0
+      }
+      for (const e of G.E.values()) { // 線の上の玉を進める
+        const L = e.it, o = G.bl[e.b] ? null : (G.out.get(e.b) || [])[0]; // 行き先が建物でなければ、次の線(1本だけ)
+        let lim = 1; if (o && o.it.length) { const q = o.it[o.it.length - 1].p * o.len; if (q < GAP) lim = Math.max(0, 1 - (GAP - q) / e.len) } // 次の線の先頭と間隔GAPを保つ
+        for (let k = 0; k < L.length; k++) { const np = Math.min(1, L[k].p + SPD * dt / e.len, k ? L[k - 1].p - e.gp : lim); L[k].p = Math.max(L[k].p, np) }
+        if (!L.length || L[0].p < 1) continue;
+        const c = L[0].c, B = G.bl[e.b];
+        if (B) { if (accept(B, c, e)) L.shift() }
+        else if (o && free(o)) { o.it.push({ c, p: 0 }); L.shift() }
+      }
+      for (const b of G.bs) {
+        b.pulse = Math.max(0, b.pulse - dt * 3);
+        switch (b.k) {
+          case 'src': b.t += dt; if (b.t >= T_SRC && emit(b, b.c)) b.t = 0; break;
+          case 'mx':
+            if (b.busy > 0) { b.busy -= dt; if (b.busy <= 0) { b.out.push(mix(b.buf)); b.buf = [] } }
+            if (b.out.length && emit(b, b.out[0])) b.out.shift(); break;
+          case 'sr':
+            if (b.hold != null) { b.tm -= dt; if (b.tm <= 0) { const o = (G.out.get(b.i) || []).find(x => x.sc === b.hold); if (!o) b.hold = null; else if (free(o)) { o.it.push({ c: b.hold, p: 0 }); b.hold = null } } } break;
+          case 'hub': case 'mg': if (b.hold != null && emit(b, b.hold)) b.hold = null; break;
+          case 'cp': {
+            b.lt = Math.max(0, b.lt - dt); const os = G.out.get(b.i) || [];
+            b.out = b.out.filter(q => { if (!os.includes(q.e)) return false; if (free(q.e)) { q.e.it.push({ c: q.c, p: 0 }); return false } return true }); break
+          }
+        }
+      }
+    }
+
+    /* ---------- モーダル・クリア ---------- */
+    function showOv(t, h, btn, fn, b2, fn2) {
+      $('pl').style.display = '';
+      $('ob2').style.display = b2 ? '' : 'none';
+      if (b2) { $('ob2').textContent = b2; $('ob2').onclick = () => { $('ov').classList.add('hide'); fn2() } }
+      $('ot').textContent = t; $('op').innerHTML = h; $('ob').textContent = btn; $('ob').onclick = () => { $('ov').classList.add('hide'); fn() }; $('ov').classList.remove('hide');
+    }
+    function win() {
+      G.over = true; const n = G.stage, fin = n >= STG.length - 1;
+      const info = `ステージ${n + 1}（${STN[n]}）をクリア！` + (n === 0 ? '<br>「仕分け」が開放されました！' : '') + (n === 2 ? '<br>「複製」と「地下（トンネル）」が開放されました！' : '');
+      const restart = () => { newGame(); G.paused = false }, resume = () => { G.lit.fill(0); G.keep = 0; G.over = false };
+      const quit = msg => () => showOv('おつかれさまでした', msg, 'はじめから', restart);
+      if (fin) showOv('全ステージクリア！', info, '続ける', () => { G.free = true; resume() }, '止める', quit('全ステージをクリアしました。'));
+      else showOv('ステージクリア！', info + `<br>次：ステージ${n + 2}（${STN[n + 1]}）`, '次のステージへ', () => { G.stage++; resume() }, '止める', quit(`ステージ${n + 1}までクリアしました。`));
+    }
+
+    /* ---------- 入力 ---------- */
+    function cellAt(e) { const x = Math.floor((e.clientX - ox) / cell), y = Math.floor((e.clientY - oy) / cell); return x < 0 || y < 0 || x >= cols || y >= rows ? -1 : y * cols + x }
+    function walk(a, b) { // aからbへ、たどったマスを順に線でつなぐ(消すモードなら消す)
+      if (a < 0) return b;
+      let x = a % cols, y = (a / cols) | 0; const tx = b % cols, ty = (b / cols) | 0;
+      while (x !== tx || y !== ty) {
+        const p = y * cols + x; let dx = 0, dy = 0;
+        if (Math.abs(tx - x) >= Math.abs(ty - y)) dx = Math.sign(tx - x); else dy = Math.sign(ty - y);
+        x += dx; y += dy; const q = y * cols + x;
+        if (tool === 'erase') { cut(p); cut(q); continue }
+        if (G.bl[q] && q !== b) return p; // 建物は通り抜けない
+        addEdge(p, q);
+      }
+      return y * cols + x;
+    }
+    function bridgeTo(h) { // 橋・地下: 起点から直線方向に最大スパンまでの予告を出す
+      G.bp = null; const a = startC, tn = tool === 'tn';
+      if (a < 0 || h < 0 || (tn && UNLOCK.tn > G.stage)) return;
+      const ax = a % cols, ay = (a / cols) | 0, dx = h % cols - ax, dy = ((h / cols) | 0) - ay, hz = Math.abs(dx) >= Math.abs(dy), d = Math.min(Math.abs(hz ? dx : dy), tn ? TMAX : BMAX);
+      if (d < 2) return;
+      const sx = hz ? Math.sign(dx) : 0, sy = hz ? 0 : Math.sign(dy), t = (ay + sy * d) * cols + ax + sx * d;
+      if (!tn) for (let k = 1; k < d; k++)if (G.bl[(ay + sy * k) * cols + ax + sx * k]) return; // 橋は建物の上を越えられない
+      if (spanOK(a, t, tn)) G.bp = { a, h: t, d, tn };
+    }
+    function build(i) {
+      if (tool === 'cp' && G.bs.some(b => b.k === 'cp')) { done(); return } // 複製機は1つだけ
+      if (G.bl[i] || onSpan(i) || adjB(i) || (UNLOCK[tool] || 0) > G.stage) return;
+      addB(i, tool); done();
+    }
+    cv.addEventListener('pointerdown', e => {
+      if (G.paused || G.over || down) return;
+      cv.setPointerCapture(e.pointerId); down = true; pid = e.pointerId; lastC = startC = cellAt(e); moved = false; G.bp = null;
+      if (lastC < 0) return;
+      if (tool === 'erase') cut(lastC); else if (tool !== 'belt' && tool !== 'bridge' && tool !== 'tn') build(lastC);
+    });
+    cv.addEventListener('pointermove', e => {
+      hover = cellAt(e); if (!down || e.pointerId !== pid || G.paused) return;
+      if (hover !== startC) moved = true;
+      if (hover < 0) return;
+      if (tool === 'bridge' || tool === 'tn') bridgeTo(hover); else if (tool === 'belt' || tool === 'erase') lastC = walk(lastC, hover);
+    });
+    const stop = () => { down = false; lastC = -1; G.bp = null };
+    cv.addEventListener('pointerup', e => {
+      if (!down || e.pointerId !== pid) return;
+      const b = !moved && startC >= 0 && tool === 'belt' ? G.bl[startC] : null;
+      if (b && b.k === 'hub' && b.hold == null) b.c = null;                       // 分配をタップで色リセット
+      if (G.bp) addEdge(G.bp.a, G.bp.h, G.bp.d, G.bp.tn);                  // 橋・地下は指を離したとき確定
+      stop();
+    });
+    cv.addEventListener('pointercancel', e => { if (e.pointerId === pid) stop() });
+    cv.addEventListener('pointerleave', () => { if (!down) hover = -1 });
+    BT.forEach(b => b.onclick = () => { const t = b.dataset.t; if (ONE.includes(t)) tool = tool === t ? base : t; else base = tool = t; setOn() });
+    ps.onclick = () => { if (!G.over && !G.paused) G.hold = !G.hold };
+    $('rl').onclick = () => { if (G.over) return; G.paused = true; showOv('ルール', RULES, '再開', () => G.paused = false); $('pl').style.display = 'none' }; // プレイ中のルール画面には一覧リンクを出さない
+
+    /* ---------- 描画 ---------- */
+    function rr(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r) }
+    function circ(x, y, r, c, ns) { ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fillStyle = COL[c]; ctx.fill(); if (!ns) { ctx.lineWidth = 1.5; ctx.strokeStyle = 'rgba(0,0,0,.4)'; ctx.stroke() } }
+    function body(cx, cy, s, col) { // 装置の外観(色つきの枠＋白い内側)
+      rr(cx - s / 2, cy - s / 2, s, s, s * .28); ctx.fillStyle = col; ctx.fill();
+      rr(cx - s * .34, cy - s * .34, s * .68, s * .68, s * .18); ctx.fillStyle = 'rgba(255,255,255,.92)'; ctx.fill();
+    }
+    const tri = (cx, cy, k, from, to) => { ctx.save(); ctx.translate(cx, cy); ctx.rotate(k * Math.PI / 2); ctx.beginPath(); ctx.moveTo(to, 0); ctx.lineTo(from, -cell * .11); ctx.lineTo(from, cell * .11); ctx.fill(); ctx.restore() };
+    function draw() {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = T.ground; ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = T.grid; ctx.lineWidth = 1; ctx.beginPath();
+      for (let x = 0; x <= cols; x++) { ctx.moveTo(ox + x * cell, oy); ctx.lineTo(ox + x * cell, oy + rows * cell) }
+      for (let y = 0; y <= rows; y++) { ctx.moveTo(ox, oy + y * cell); ctx.lineTo(ox + cols * cell, oy + y * cell) }
+      ctx.stroke();
+      if (hover >= 0 && !G.over) { const [x, y] = P(hover); ctx.fillStyle = tool === 'erase' ? 'rgba(224,53,43,.25)' : 'rgba(47,111,208,.2)'; ctx.fillRect(x - cell / 2, y - cell / 2, cell, cell) }
+      const ES = [...G.E.values()], TN = ES.filter(e => e.tn), BR = ES.filter(e => e.len > 1 && !e.tn);
+      const seg = e => { const [x, y] = P(e.a), [a, b] = P(e.b); ctx.moveTo(x, y); ctx.lineTo(a, b) };
+      const arrow = e => { const [x, y] = P(e.a), [a, b] = P(e.b), f = e.tn ? .85 : .5; ctx.save(); ctx.translate(x + (a - x) * f, y + (b - y) * f); ctx.rotate(Math.atan2(b - y, a - x)); ctx.globalAlpha = .7; ctx.fillStyle = T.arrow; ctx.beginPath(); ctx.moveTo(cell * .17, 0); ctx.lineTo(-cell * .09, -cell * .15); ctx.lineTo(-cell * .09, cell * .15); ctx.fill(); ctx.restore() };
+      const balls = (e, pred, al) => { const [x, y] = P(e.a), [a, b] = P(e.b); ctx.globalAlpha = al; for (const it of e.it) if (pred(it.p)) circ(x + (a - x) * it.p, y + (b - y) * it.p, cell * .26, it.c, 1); ctx.globalAlpha = 1 };
+      // 描画順は下の層から: 地下 → ベルト → 地下の出入口 → 橋。上の層が下の層の矢印・玉を隠す
+      ctx.lineCap = 'butt'; ctx.strokeStyle = 'rgba(60,50,40,.38)'; ctx.lineWidth = cell * .5; ctx.setLineDash([cell * .18, cell * .14]); ctx.beginPath(); TN.forEach(seg); ctx.stroke(); ctx.setLineDash([]);
+      for (const e of TN) balls(e, () => true, .25); // 地下の玉は全区間うっすら表示。出入口は上から覆う
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = T.belt; ctx.lineWidth = cell * .68; ctx.beginPath();
+      for (const e of ES) if (e.len === 1) seg(e);
+      ctx.stroke();
+      for (const e of ES) if (e.len === 1) { arrow(e); if (e.sc !== undefined) { const [x, y] = P(e.a), [a, b] = P(e.b); circ(x + (a - x) * .8, y + (b - y) * .8, cell * .13, e.sc) } balls(e, () => true, 1) }
+      for (const q of new Set(TN.flatMap(e => [e.a, e.b]))) { const [px, py] = P(q); ctx.fillStyle = 'rgba(70,58,46,.85)'; rr(px - cell * .37, py - cell * .37, cell * .74, cell * .74, cell * .2); ctx.fill(); ctx.beginPath(); ctx.arc(px, py, cell * .2, 0, 7); ctx.fillStyle = 'rgba(0,0,0,.65)'; ctx.fill() }
+      for (const e of TN) arrow(e);
+      for (const [c, w] of [['rgba(0,0,0,.2)', .92], ['rgba(255,255,255,.6)', .78], [T.belt, .62]]) { ctx.strokeStyle = c; ctx.lineWidth = cell * w; ctx.beginPath(); BR.forEach(seg); ctx.stroke() }
+      ctx.fillStyle = 'rgba(60,110,200,.6)'; for (const q of new Set(BR.flatMap(e => [e.a, e.b]))) { const [px, py] = P(q); rr(px - cell * .37, py - cell * .37, cell * .74, cell * .74, cell * .2); ctx.fill() }
+      for (const e of BR) { arrow(e); balls(e, () => true, 1) }
+      // キープ中の進行表示
+      if (!G.free && !G.over && HOLD[G.stage] > 0 && G.keep > 0) { const need = HOLD[G.stage], w = 150, y0 = oy + (G.hold ? 36 : 6); ctx.save(); ctx.fillStyle = 'rgba(0,0,0,.55)'; rr(W / 2 - w / 2, y0, w, 26, 13); ctx.fill(); ctx.fillStyle = '#3fa774'; rr(W / 2 - w / 2, y0, Math.max(26, w * Math.min(1, G.keep / need)), 26, 13); ctx.fill(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = '700 13px sans-serif'; ctx.fillStyle = '#fff'; ctx.fillText('キープ ' + Math.min(need, G.keep).toFixed(1) + ' / ' + need + '秒', W / 2, y0 + 13); ctx.restore() }
+      // 橋・地下の予告
+      if (G.bp) { const [x, y] = P(G.bp.a), [a, b] = P(G.bp.h); ctx.lineCap = 'butt'; ctx.strokeStyle = 'rgba(47,111,208,.55)'; ctx.lineWidth = cell * .5; ctx.setLineDash([8, 6]); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(a, b); ctx.stroke(); ctx.setLineDash([]); ctx.lineCap = 'round' }
+      if (G.hold) { ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = '700 14px sans-serif'; ctx.fillStyle = 'rgba(0,0,0,.55)'; rr(W / 2 - 48, oy + 6, 96, 26, 13); ctx.fill(); ctx.fillStyle = '#fff'; ctx.fillText('一時停止中', W / 2, oy + 19); ctx.restore() }
+      // 建物
+      for (const b of G.bs) {
+        const [cx, cy] = P(b.i), h = cell * .62;
+        switch (b.k) {
+          case 'src': { const s = cell * 1.24, col = COL[b.c]; rr(cx - s / 2, cy - s / 2, s, s, s * .28); ctx.fillStyle = col; ctx.fill(); rr(cx - s * .28, cy - s * .28, s * .56, s * .56, s * .14); ctx.fillStyle = 'rgba(255,255,255,.92)'; ctx.fill(); ctx.beginPath(); ctx.arc(cx, cy, s * .12, 0, 7); ctx.fillStyle = col; ctx.fill(); break }
+          case 'mx':
+            body(cx, cy, h * 2, MC);
+            for (let k = 0; k < 2; k++) {
+              const sx = cx + (k - .5) * cell * .42;
+              if (b.buf[k] !== undefined) circ(sx, cy - cell * .08, cell * .17, b.buf[k]);
+              else { ctx.beginPath(); ctx.arc(sx, cy - cell * .08, cell * .17, 0, 7); ctx.lineWidth = 1.5; ctx.strokeStyle = MC; ctx.globalAlpha = .7; ctx.stroke(); ctx.globalAlpha = 1 }
+            }
+            if (b.busy > 0) { ctx.fillStyle = MC; ctx.fillRect(cx - h + 8, cy + cell * .28, (h * 2 - 16) * (1 - b.busy / T_MIX), 4) }
+            b.out.forEach((c, k) => circ(cx - h + 12 + k * cell * .2, cy + cell * .46, cell * .08, c)); break;
+          case 'sr':
+            body(cx, cy, h * 2, MC); circ(cx - cell * .2, cy - cell * .08, cell * .17, 6); circ(cx + cell * .2, cy - cell * .08, cell * .17, 7);
+            if (b.hold != null) circ(cx, cy + cell * .38, cell * .12, b.hold); break;
+          case 'hub': {
+            const col = b.c == null ? MC : b.c === 6 ? '#b8c0c6' : COL[b.c]; body(cx, cy, h * 2, MC); ctx.fillStyle = col; for (let k = 0; k < 4; k++)tri(cx, cy, k, cell * .22, cell * .4);
+            if (b.c != null) circ(cx, cy, cell * .15, b.c); if (b.hold != null) circ(cx, cy, cell * .15, b.hold); break
+          }
+          case 'mg':
+            body(cx, cy, h * 2, MC); ctx.fillStyle = MC; for (const [k, inw] of [[3, 1], [2, 1], [0, 1], [1, 0]]) inw ? tri(cx, cy, k, cell * .4, cell * .2) : tri(cx, cy, k, cell * .22, cell * .4); // 上・左・右から入り、下へ出る
+            for (let k = 0; k < 3; k++) { ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, cell * .16, -Math.PI / 2 + k * 2.0944, -Math.PI / 2 + (k + 1) * 2.0944); ctx.closePath(); ctx.fillStyle = COL[k]; ctx.fill() }
+            if (b.hold != null) circ(cx, cy, cell * .13, b.hold); break;
+          case 'cp': {
+            body(cx, cy, h * 2, MC);
+            const dc = (b.out.length || b.lt > 0) ? (b.lc === 6 ? '#b8c0c6' : COL[b.lc]) : MC, ix = cx - cell * .24, ox2 = cx + cell * .2, n = CP_OUT, oy2 = k => cy + (k - (n - 1) / 2) * cell * .24;
+            ctx.strokeStyle = dc; ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.fillStyle = dc;
+            ctx.beginPath(); for (let k = 0; k < n; k++) { ctx.moveTo(ix, cy); ctx.lineTo(ox2, oy2(k)) } ctx.stroke();
+            ctx.beginPath(); ctx.arc(ix, cy, cell * .1, 0, 7); ctx.fill();
+            for (let k = 0; k < n; k++) { ctx.beginPath(); ctx.arc(ox2, oy2(k), cell * .09, 0, 7); ctx.fill() }
+            b.out.forEach((q, k) => circ(cx - h + 12 + k * cell * .2, cy + cell * .46, cell * .08, q.c)); break
+          }
+          case 'shop': { // 出口の穴
+            const hr = h * .9; ctx.beginPath(); ctx.arc(cx, cy, hr, 0, 7); ctx.fillStyle = '#9aa4ab'; ctx.fill();
+            const g = ctx.createRadialGradient(cx, cy - hr * .15, hr * .1, cx, cy, hr * .82); g.addColorStop(0, '#05080a'); g.addColorStop(1, '#2b343a');
+            ctx.beginPath(); ctx.arc(cx, cy, hr * .82, 0, 7); ctx.fillStyle = g; ctx.fill();
+            if (b.pulse > 0) { ctx.beginPath(); ctx.arc(cx, cy, hr * (1 + (1 - b.pulse) * .4), 0, 7); ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,' + b.pulse * .8 + ')'; ctx.stroke() }
+            break
+          }
+        }
+      }
+    }
+
+    /* ---------- HUD・ループ ---------- */
+    let hk = '', stg = -1;
+    function hud() {
+      const hasCp = G.bs.some(b => b.k === 'cp'); if (cpBtn.disabled !== hasCp) { cpBtn.disabled = hasCp; cpBtn.style.opacity = hasCp ? .4 : '' } // 設置済みなら複製ボタンを無効化
+      if (G.stage !== stg) { stg = G.stage; BT.forEach(b => { b.style.display = (UNLOCK[b.dataset.t] || 0) > stg ? 'none' : '' }) } // 開放済みのボタンだけ表示
+      const h = G.hold ? '1' : '0'; if (ps.dataset.s !== h) { ps.dataset.s = h; ps.innerHTML = h === '1' ? PLAY : PAUSE; ps.classList.toggle('on', h === '1') }
+      const html = STG[G.stage].map(i => {
+        const c = COL[i], t = G.lit[i];
+        return `<span class="ch" style="background:${t > 0 ? c : 'rgba(128,128,128,.3)'};box-shadow:${t > 0 ? '0 0 0 2px #fff,0 0 9px 3px ' + c : 'inset 0 0 0 2px ' + c};transform:scale(${t > 0 ? 1.2 : 1});color:${[2, 6, 8, 9].includes(i) && t > 0 ? '#222' : '#fff'};opacity:${t > 0 ? (.45 + .55 * Math.min(1, t / LIT)).toFixed(2) : 1}">${t > 0 ? Math.ceil(t) : ''}</span>`
+      }).join('');
+      if (html !== hk) { hk = html; $('sk').innerHTML = html }
+    }
+    function loop(ts) {
+      const dt = Math.min(.05, (ts - last) / 1000 || 0); last = ts;
+      if (!G.paused && !G.over && !G.hold) update(dt);
+      draw(); hud(); requestAnimationFrame(loop);
+    }
+    resize(); addEventListener('resize', resize);
+    new ResizeObserver(resize).observe($('hud')); // ボタンの折り返し・フォント読み込みでHUDの高さが変わったら盤面を合わせ直す
+    matchMedia('(prefers-color-scheme:dark)').addEventListener('change', resize);
+    newGame();
+    showOv('カラーファクトリー', INTRO, 'スタート', () => G.paused = false, 'ステージ4から', () => { G.stage = 3; G.paused = false });
+    requestAnimationFrame(loop);
+  </script>
+</body>
+
+</html>
