@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKL20YHCTB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XKL20YHCTB');
+  </script>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#f5f1e6">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>球団シム｜無料で遊べるプロ野球GM・球団経営ブラウザゲーム</title>
+  <meta name="description" content="
+    無料・ダウンロード不要のプロ野球GMシミュレーションゲーム。球団のGMとなって選手編成や育成、契約更改、ドラフト、FA補強などを行い、リーグ優勝と日本一を目指そう！ブラウザですぐに遊べます。
+    ">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      box-sizing: border-box;
+      color-scheme: light;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      /* 生成りの地・墨の文字・紺を主役に、縫い目の赤を差し色にする */
+      --bg: #f5f1e6;
+      --card: #fffdf8;
+      --ink: #1f2433;
+      --sub: #656a77;
+      --line: #e8e2d1;
+      --edge: #d9d2bd;
+      --navy: #1e3a6d;
+      --navy-d: #152b54;
+      --navy-t: #e7ecf6;
+      --red: #c4372c;
+      --red-t: #fbece9;
+      --amber: #d99f1a;
+      --bad: #c4372c;
+      --good: #2f8a4e;
+      --fg: #4fae5f;
+      --fy: #e3b81c;
+      --fo: #e8782a;
+      --shadow: 0 1px 2px rgba(48, 40, 16, .06), 0 4px 14px rgba(48, 40, 16, .04);
+      --font: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+      --disp: var(--font);
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.6 var(--font);
+      -webkit-text-size-adjust: 100%
+    }
+
+    #app {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 14px 14px 44px
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.3
+    }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 24px 0 10px;
+      padding: 1px 0 1px 10px;
+      border-left: 4px solid var(--navy);
+      font-family: var(--disp);
+      font-weight: 900;
+      font-size: 16px;
+      color: var(--ink)
+    }
+
+    h2 .ht {
+      flex: 1;
+      min-width: 0
+    }
+
+    .title {
+      font-family: var(--disp);
+      font-weight: 900;
+      font-size: 21px;
+      color: var(--ink)
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--edge);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow)
+    }
+
+    .sub {
+      color: var(--sub);
+      font-size: 13px
+    }
+
+    .row {
+      display: flex;
+      gap: 8px;
+      align-items: center
+    }
+
+    .between {
+      justify-content: space-between
+    }
+
+    .wrap {
+      flex-wrap: wrap
+    }
+
+    .grow {
+      flex: 1
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      cursor: pointer
+    }
+
+    /* ボタン:通常はフラット。主要操作(primary)だけを紺で塗る */
+    .btn {
+      display: block;
+      width: 100%;
+      min-height: 48px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--edge);
+      background: var(--card);
+      color: var(--ink);
+      font-weight: 700;
+      text-align: center;
+      transition: background .12s, border-color .12s
+    }
+
+    a.btn {
+      text-decoration: none
+    }
+
+    .btn:active {
+      background: var(--navy-t);
+      border-color: var(--navy)
+    }
+
+    .btn.primary {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff;
+      font-weight: 900;
+      box-shadow: 0 2px 0 var(--navy-d)
+    }
+
+    .btn.primary:active {
+      background: var(--navy-d);
+      transform: translateY(1px);
+      box-shadow: none
+    }
+
+    .btn.amber {
+      background: var(--red-t);
+      border-color: #e2b3ad;
+      color: #9b2a21
+    }
+
+    .btn.amber:active {
+      background: #f6d9d5;
+      border-color: var(--red)
+    }
+
+    .btn.sm {
+      min-height: 0;
+      padding: 6px 12px;
+      font-size: 13px;
+      width: auto;
+      border-radius: 8px
+    }
+
+    .btn:focus-visible,
+    select:focus-visible,
+    input:focus-visible,
+    .info:focus-visible,
+    [data-act="open"]:focus-visible {
+      outline: 2px solid var(--navy);
+      outline-offset: 2px
+    }
+
+    .btn[disabled] {
+      opacity: .4
+    }
+
+    .seg {
+      display: flex;
+      border: 1px solid var(--edge);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--card)
+    }
+
+    .seg button {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      padding: 8px 4px;
+      font-weight: 700;
+      color: var(--sub)
+    }
+
+    .seg button+button {
+      border-left: 1px solid var(--edge)
+    }
+
+    .seg button.on {
+      background: var(--navy);
+      color: #fff
+    }
+
+    select,
+    input[type=text] {
+      font: inherit;
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid var(--edge);
+      background: #fff;
+      color: var(--ink);
+      font-weight: 500
+    }
+
+    select.rest {
+      background: #e4f3e7;
+      border-color: #8cc79b;
+      color: #1f6b3a;
+      font-weight: 700
+    }
+
+    /* 能力ランク:階級そのものが情報なので、色はフラットに */
+    .rk {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5em;
+      height: 1.5em;
+      border-radius: 50%;
+      font-weight: 900;
+      font-size: 12px;
+      line-height: 1;
+      color: #fff;
+      background: #8d97ab;
+      vertical-align: middle
+    }
+
+    .rkS {
+      background: #e0a419;
+      color: #4a3300
+    }
+
+    .rkA {
+      background: #d9473a
+    }
+
+    .rkB {
+      background: #e8832a
+    }
+
+    .rkC {
+      background: #e3bd2a;
+      color: #4a3a00
+    }
+
+    .rkD {
+      background: #5eaa3c
+    }
+
+    .rkE {
+      background: #2d9f98
+    }
+
+    .rkF {
+      background: #4a7fd6
+    }
+
+    .rkG {
+      background: #8d97ab
+    }
+
+    .num {
+      font-variant-numeric: tabular-nums
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 4px;
+      background: #ebe5d4;
+      overflow: hidden
+    }
+
+    .bar i {
+      display: block;
+      height: 100%;
+      background: var(--navy)
+    }
+
+    .bar.fat i {
+      background: var(--fg)
+    }
+
+    .bar.fat.y i {
+      background: var(--fy)
+    }
+
+    .bar.fat.o i {
+      background: var(--fo)
+    }
+
+    .pos {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.8em;
+      height: 1.8em;
+      border-radius: 6px;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 900;
+      font-size: 12.5px
+    }
+
+    .pos[data-p="投"] {
+      background: #c4372c
+    }
+
+    .pos[data-p="捕"] {
+      background: #d9772a
+    }
+
+    .pos[data-p="指"] {
+      background: #7a4fc4
+    }
+
+    table.cmp {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px
+    }
+
+    table.cmp th,
+    table.cmp td {
+      padding: 6px 3px;
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap
+    }
+
+    table.cmp th {
+      background: #f0ebdb;
+      font-weight: 700;
+      padding: 2px
+    }
+
+    table.cmp .nm {
+      text-align: left;
+      white-space: nowrap
+    }
+
+    table.cmp .pn {
+      width: 184px;
+      min-width: 184px;
+      max-width: 184px;
+      padding-right: 8px;
+      white-space: nowrap;
+      overflow: hidden
+    }
+
+    table.cmp td.mk,
+    table.cmp th.mk {
+      width: 34px;
+      min-width: 34px;
+      max-width: 34px;
+      box-sizing: border-box
+    }
+
+    table.cmp td.mk {
+      font-weight: 700;
+      font-size: 11px;
+      color: var(--sub)
+    }
+
+    table.cmp tbody tr {
+      cursor: pointer
+    }
+
+    table.cmp tbody tr:active {
+      background: var(--navy-t)
+    }
+
+    table.cmp tr.on td {
+      background: #f6ecc8
+    }
+
+    table.cmp tr.cur td {
+      background: #f2e3a8
+    }
+
+    table.cmp td.n {
+      font-variant-numeric: tabular-nums;
+      font-weight: 500
+    }
+
+    .fm-g {
+      background: #4fae5f33
+    }
+
+    .fm-o {
+      background: #e8782a44
+    }
+
+    .fb {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 3px
+    }
+
+    .fb .tg {
+      flex: none
+    }
+
+    .fb .bar {
+      flex: 1;
+      height: 4px;
+      min-width: 0
+    }
+
+    .tg {
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid var(--edge);
+      border-radius: 999px;
+      padding: 0 8px;
+      line-height: 1.6;
+      white-space: nowrap;
+      background: #f4efe0;
+      color: var(--sub)
+    }
+
+    .tg.s {
+      background: #f8efcf;
+      border-color: #e6d28a;
+      color: #6a4a00
+    }
+
+    .tg.b {
+      background: var(--navy-t);
+      border-color: #c4d0e8;
+      color: var(--navy)
+    }
+
+    .tg.rest {
+      background: #e4f3e7;
+      border-color: #9fd0aa;
+      color: #1f6b3a;
+      font-weight: 900
+    }
+
+    .chk {
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--edge);
+      border-radius: 999px;
+      padding: 1px 10px;
+      background: var(--card);
+      color: var(--sub);
+      white-space: nowrap
+    }
+
+    .chk.on {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff
+    }
+
+    .prow {
+      border-bottom: 1px solid var(--line);
+      padding: 9px 0
+    }
+
+    .prow:last-child {
+      border-bottom: 0
+    }
+
+    .prow.rest {
+      background: #f1f8f2;
+      margin: 0 -12px;
+      padding: 9px 12px
+    }
+
+    .up {
+      color: var(--good)
+    }
+
+    .down {
+      color: var(--bad)
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 900;
+      border-radius: 6px;
+      padding: 0 6px;
+      background: var(--red-t);
+      color: var(--red);
+      border: 1px solid #e2b3ad
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 14px;
+      margin-top: 10px
+    }
+
+    .stat .l {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--sub);
+      font-weight: 500
+    }
+
+    .stat .l b {
+      color: var(--ink);
+      font-size: 14px
+    }
+
+    /* タイトル画面・節目の画面 */
+    .hero {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--edge);
+      border-radius: 16px;
+      padding: 28px 16px 22px;
+      text-align: center;
+      margin: 6px 0 16px;
+      box-shadow: var(--shadow)
+    }
+
+    .hero h1 {
+      font-family: var(--disp);
+      font-weight: 900;
+      font-size: 42px;
+      letter-spacing: .1em;
+      color: var(--navy)
+    }
+
+    .hero p {
+      margin: 10px 0 0;
+      font-size: 13px;
+      color: var(--sub);
+      letter-spacing: .14em
+    }
+
+    .hero svg {
+      display: block;
+      margin: 0 auto 8px;
+      animation: bob 2.4s ease-in-out infinite
+    }
+
+    @keyframes bob {
+      50% {
+        transform: translateY(-5px) rotate(8deg)
+      }
+    }
+
+    .report {
+      border: 1px solid #e6d9a3;
+      border-left: 4px solid var(--amber);
+      background: #fbf5da;
+      color: #4a3d10;
+      padding: 9px 12px;
+      border-radius: 10px;
+      margin: 12px 0;
+      font-size: 14px;
+      font-weight: 500
+    }
+
+    .report div {
+      padding: 1px 0
+    }
+
+    table.bx {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px
+    }
+
+    table.bx th,
+    table.bx td {
+      padding: 4px 3px;
+      text-align: right;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap
+    }
+
+    table.bx th {
+      background: #f0ebdb;
+      font-weight: 700
+    }
+
+    table.bx th:first-child,
+    table.bx td:first-child {
+      text-align: left
+    }
+
+    details {
+      background: var(--card);
+      border: 1px solid var(--edge);
+      border-radius: 12px;
+      padding: 10px 12px;
+      box-shadow: var(--shadow);
+      margin: 10px 0 12px
+    }
+
+    details summary {
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    details>.card {
+      border: 0;
+      box-shadow: none;
+      padding: 6px 0 0;
+      margin: 0;
+      background: transparent
+    }
+
+    .info {
+      flex: none;
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--edge);
+      background: var(--card);
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 13px;
+      line-height: 1;
+      padding: 0
+    }
+
+    .info::after {
+      content: "";
+      position: absolute;
+      inset: -8px
+    }
+
+    .info:active {
+      background: var(--navy-t);
+      border-color: var(--navy)
+    }
+
+    #modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(31, 36, 51, .45);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center
+    }
+
+    #modal[hidden] {
+      display: none
+    }
+
+    #modal.cm {
+      align-items: center;
+      padding: 20px
+    }
+
+    .cele {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      background: var(--card);
+      color: var(--ink);
+      border: 1px solid var(--edge);
+      border-radius: 16px;
+      padding: 26px 18px 18px;
+      text-align: center;
+      box-shadow: inset 0 0 0 5px var(--card), inset 0 0 0 6px #e6d28a, 0 18px 50px rgba(20, 25, 40, .28);
+      animation: cele-in .4s cubic-bezier(.2, .9, .3, 1.15)
+    }
+
+    .cele svg {
+      display: block;
+      margin: 0 auto 8px
+    }
+
+    .cele .cs {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: #8a5f00
+    }
+
+    .cele .ct {
+      margin: 6px 0 12px;
+      font-family: var(--disp);
+      font-weight: 900;
+      font-size: clamp(21px, 6.6vw, 27px);
+      line-height: 1.3;
+      letter-spacing: .04em;
+      word-break: keep-all;
+      color: #b07a00
+    }
+
+    .cele .cn {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 3px 16px;
+      border: 1px solid #e6d28a;
+      border-radius: 999px;
+      background: #f8efcf;
+      color: #8a5f00;
+      font-weight: 800;
+      font-size: 16px
+    }
+
+    @keyframes cele-in {
+      from {
+        opacity: 0;
+        transform: scale(.88) translateY(8px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .cele {
+        animation: none
+      }
+    }
+
+    #savewarn {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+      z-index: 60;
+      width: calc(100% - 24px);
+      max-width: 520px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: var(--red-t);
+      color: #7a211a;
+      border: 1px solid #e2b3ad;
+      border-left: 4px solid var(--red);
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow)
+    }
+
+    #savewarn button {
+      flex: none;
+      border: 1px solid #e2b3ad;
+      background: var(--card);
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 13px;
+      font-weight: 700
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      * {
+        transition: none !important;
+        animation: none !important
+      }
+    }
+
+    .foot {
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+      margin: 14px -14px 0;
+      padding: 10px 14px calc(12px + env(safe-area-inset-bottom, 0px));
+      background: var(--card);
+      border-top: 1px solid var(--edge)
+    }
+
+    .sheet {
+      background: var(--card);
+      color: var(--ink);
+      width: 100%;
+      max-width: 560px;
+      max-height: 82%;
+      overflow: auto;
+      border: 0;
+      border-radius: 18px 18px 0 0;
+      box-shadow: 0 -10px 40px rgba(20, 25, 40, .25);
+      padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px))
+    }
+
+    .sheet h3 {
+      margin: 0;
+      font-family: var(--disp);
+      font-weight: 900;
+      font-size: 17px
+    }
+
+    .sheet h4 {
+      margin: 14px 0 2px;
+      font-size: 14px;
+      color: var(--navy)
+    }
+
+    .sheet ul {
+      margin: 4px 0;
+      padding-left: 1.2em;
+      font-size: 14px
+    }
+
+    .sheet li {
+      padding: 3px 0
+    }
+
+    .wheel-wrap {
+      position: relative;
+      height: 220px;
+      margin: 8px 0 10px;
+      border: 1px solid var(--edge);
+      border-radius: 14px;
+      background: var(--card);
+      overflow: hidden
+    }
+
+    .wheel-wrap::before,
+    .wheel-wrap::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 88px;
+      z-index: 2;
+      pointer-events: none
+    }
+
+    .wheel-wrap::before {
+      top: 0;
+      background: linear-gradient(var(--card), rgba(255, 253, 248, 0))
+    }
+
+    .wheel-wrap::after {
+      bottom: 0;
+      background: linear-gradient(rgba(255, 253, 248, 0), var(--card))
+    }
+
+    .wheel-mark {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      top: 88px;
+      height: 44px;
+      border-top: 2px solid var(--navy);
+      border-bottom: 2px solid var(--navy);
+      border-radius: 4px;
+      background: var(--navy-t);
+      opacity: .55;
+      pointer-events: none;
+      z-index: 1
+    }
+
+    .wheel {
+      position: relative;
+      z-index: 3;
+      height: 220px;
+      overflow-y: auto;
+      padding: 88px 0;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      outline: none
+    }
+
+    .wheel::-webkit-scrollbar {
+      display: none
+    }
+
+    .wi {
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      scroll-snap-align: center;
+      font-size: 19px;
+      color: var(--sub);
+      user-select: none
+    }
+
+    .wi.on {
+      color: var(--ink);
+      font-weight: 900;
+      font-size: 24px
+    }
+
+    .cmp5 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 8px 0 12px
+    }
+
+    .cmp5 div {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid var(--edge);
+      border-radius: 12px;
+      background: var(--card);
+      font-weight: 800;
+      font-size: 18px
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <div id="modal" hidden></div>
+  <script>
+    // ==ENGINE_START==
+    const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    const ri = (a, b) => Math.floor(rnd(a, b + 1));
+    const pick = a => a[Math.floor(Math.random() * a.length)];
+    const avg = a => a.reduce((x, y) => x + y, 0) / (a.length || 1);
+    const gauss = () => { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+    function wpick(items, w) { let r = Math.random() * w.reduce((a, b) => a + b, 0); for (let i = 0; i < items.length; i++) { r -= w[i]; if (r <= 0) return items[i]; } return items[items.length - 1]; }
+    function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+    const PN = { 指: '指名打者', 投: 'ピッチャー', 捕: 'キャッチャー', 一: 'ファースト', 二: 'セカンド', 三: 'サード', 遊: 'ショート', 左: 'レフト', 中: 'センター', 右: 'ライト' };
+    const LBL = { meet: 'ミート', power: 'パワー', speed: '走力', field: '守備', velo: '球速', ctrl: '制球', brk: '変化球', stam: 'スタミナ' };
+    const SUR = ['佐藤', '鈴木', '高橋', '田中', '伊藤', '渡辺', '山本', '中村', '小林', '加藤', '吉田', '山田', '佐々木', '山口', '松本', '井上', '木村', '林', '斎藤', '清水', '山崎', '森', '池田', '橋本', '阿部', '石川', '山下', '中島', '石井', '小川', '前田', '岡田', '長谷川', '藤田', '後藤', '近藤', '村上', '遠藤', '青木', '坂本', '福田', '西村', '三浦', '藤井', '岡本', '松田', '中川', '原田', '小野', '竹内'];
+
+    let UID = 1;
+    const HANDL = { p: 0.15, b: 0.27 }; // 左投げの投手・左打ちの打者の割合
+    const INF = new Set(['一', '二', '三', '遊']);
+    const OFS = new Set(['左', '中', '右']);
+    const FLD_PEN = 20; // 適性外の守備位置(内野型が外野、外野型が内野)では、守備力が20(2ランク)下がる。内外型は、どこを守っても下がらない
+    const fldPen = (p, pos) => p.pos === '捕' ? ((INF.has(pos) || OFS.has(pos)) ? FLD_PEN : 0) : (p.ty === '内野型' && OFS.has(pos)) || (p.ty === '外野型' && INF.has(pos)) ? FLD_PEN : 0; // 捕手が、ほかの守備位置(一塁〜右翼)に入ると、守備−20
+    const fieldEff = (p, pos) => Math.max(1, eff(p, 'field') - fldPen(p, pos));
+    function keysOf(p) { return p.pos === '投' ? ['velo', 'ctrl', 'brk', 'stam'] : p.pos === '指' ? ['meet', 'power', 'speed'] : ['meet', 'power', 'speed', 'field']; }
+    const ap = (p, k) => (p.apt && p.apt[k]) || 1;
+    function genPlayer(pos, base) {
+      const g = (b, s = 9) => clamp(Math.round(b + gauss() * s), 15, 95), c = v => clamp(Math.round(v), 15, 95);
+      let ty = ''; // 生まれ持った資質(先発型・救援型・兼用型/内野型・外野型・内外型)。成長しても変わらない
+      const bias = { 捕: { field: 4, speed: -6 }, 一: { power: 6, speed: -6, field: -2 }, 二: { field: 4, speed: 2 }, 三: { power: 3 }, 遊: { field: 6, speed: 3 }, 左: { power: 2 }, 中: { speed: 6, field: 3 }, 右: { power: 2 } }[pos] || {};
+      const st = {};
+      if (pos === '投') {
+        const r = Math.random(); ty = r < 0.35 ? '先発型' : r < 0.6 ? '救援型' : '兼用型'; // 先発型35%・救援型25%・兼用型40%
+        st.velo = g(base + 2); st.ctrl = g(base); st.brk = g(base); st.stam = g(base + 2);
+      }
+      else if (pos === '指') { st.meet = g(base + 4); st.power = g(base + 5); st.speed = g(base - 8); }
+      else if (pos === '捕') { for (const k of ['meet', 'power', 'speed', 'field']) st[k] = g(base + (bias[k] || 0)); }
+      else {
+        for (const k of ['meet', 'power', 'speed']) st[k] = g(base + (bias[k] || 0));
+        // 守備は1つの能力。守備のタイプ(資質):「野」は内野型45%・外野型45%・内外型10%。位置の指定があれば、その位置のタイプ
+        st.field = g(base + (bias.field || 0)); const r = Math.random();
+        ty = pos === '野' ? (r < 0.45 ? '内野型' : r < 0.9 ? '外野型' : '内外型') : INF.has(pos) ? '内野型' : '外野型';
+      }
+      const p = { id: UID++, name: SUR[ri(0, SUR.length - 1)], pos, st, cap: {}, fatigue: 0, injured: 0, hand: Math.random() < (pos === '投' ? HANDL.p : HANDL.b) ? 'L' : 'R' };
+      if (ty) p.ty = ty;
+      p.apt = {};
+      for (const k of keysOf(p)) { p.cap[k] = Math.min(98, st[k] + ri(TUNE.room[0], TUNE.room[1])); p.apt[k] = rnd(0.75, 1.25); }
+      return p;
+    }
+    // 左右の相性:打者のミート・パワーに掛ける倍率
+    const HAND = { opp: 1.05, same: 0.95 };
+    function handMul(b, p) {
+      const bl = b.hand === 'L', pl = p.hand === 'L';
+      return bl && pl ? HAND.same : (bl !== pl ? HAND.opp : 1);
+    }
+    // 走力・守備の効きの強さ(1.0で元の強さ)。打撃に比べて効きすぎないように調整
+    let SPS = 1, DFS = 2, CATK = 1; // 実測で調整:走力と捕手の守備は元の強さ、内野・外野の守備は元の2倍(内外野の守備を各+20すると、1試合あたり約+0.7点)
+    const spd = p => 50 + (eff(p, 'speed') - 50) * SPS;
+    function eff(p, k) { let m = 1 + ((p.form || 3) - 3) * 0.04 - p.fatigue * 0.0012; if (p.injured > 0) m *= 0.8; return p.st[k] * m; }
+    function pscore(p, fat = true) { const f = fat ? (k => eff(p, k)) : (k => p.st[k]); return 0.4 * f('velo') + 0.3 * f('brk') + 0.3 * f('ctrl'); }
+    // 投手の資質ごとの特性。スタミナは、資質ごとに別の形で効く
+    //  先発型:ロングイニングに強い(球数の持ち=40+スタミナ)。連投(回復0.8倍で固定)と途中登板(球威−5%)が苦手
+    //  救援型:連投(回復0.9〜1.5倍、スタミナが高いほど速い)と途中登板(球威+2%)に強い。ロングイニングが苦手(球数の持ち=10+スタミナ×0.5)
+    //  兼用型:毎月の起用設定(一軍の枠)で条件が決まる。先発枠に入れていれば先発型、中継ぎ・抑え枠なら救援型の条件が、その月の全試合に当てはまる
+    const stc = p => clamp((p.st.stam - 20) / 60, 0, 1); // スタミナ20〜80を0〜1に
+    const roleT = (p, r) => p.ty === '兼用型' ? (r || p.rt || '救援型') : p.ty; // 当てはまる資質。r:枠を仮定して評価するとき('先発型'か'救援型')
+    const thrOf = (p, r) => roleT(p, r) === '先発型' ? 40 + p.st.stam : 10 + p.st.stam * 0.5;
+    const recOf = (p, r) => roleT(p, r) === '先発型' ? 0.8 : 0.9 + 0.6 * stc(p);
+    const midOf = (p, r) => roleT(p, r) === '先発型' ? 0.95 : 1.02; // 途中登板の補正
+    // 月の起用設定時に、兼用型の当てはまる資質を決める(先発枠なら先発型、それ以外は救援型)
+    function setRoles(t, po) { const sp = po ? SPL.slice(0, PO_ROT) : SPL; t.players.forEach(p => { if (p.pos === '投') p.rt = sp.some(k => t.L[k] === p.id) ? '先発型' : '救援型'; }); } // po:ポストシーズン(先発1〜4だけが先発)
+    function pnow(p, pc) {
+      const thr = thrOf(p) * (1 - p.fatigue / 260), ratio = pc / thr;
+      const tire = ratio > 0.7 ? clamp(1 - (ratio - 0.7) * 0.45, 0.55, 1) : 1;
+      return pscore(p) * tire;
+    }
+    function autoOrder(players) {
+      const sc = p => 0.5 * p.st.meet + 0.35 * p.st.power + 0.15 * p.st.speed;
+      const a = players.filter(p => p.pos !== '投').sort((x, y) => sc(y) - sc(x));
+      return [a[1], a[2], a[0], a[3], a[4], a[5], a[6], a[7], a[8]];
+    }
+    function lineup(t) {
+      if (!t.order) t.order = autoOrder(t.players);
+      if (!t.pits) t.pits = t.players.filter(p => p.pos === '投');
+      t.pitcher = t.pits[0]; t.queue = t.pits.slice(1);
+      t.hitters = t.order.slice(); t.order.forEach((w, i) => { w.bo = i; });
+      t.usedIds = new Set(t.players.map(q => q.id));
+      if (!t.bench) t.bench = [];
+    }
+    const DEFW = { 捕: 1, 一: 0.7, 二: 1.6, 三: 1, 遊: 1.8, 左: 1.2, 中: 2.2, 右: 1.2 };
+    function wdef(list, get) { let a = 0, b = 0; list.forEach(p => { const w = DEFW[p.pos] || 1; a += w * get(p); b += w; }); return a / (b || 1); }
+    function prepTeam(t) {
+      const f = t.players.filter(p => p.pos !== '投' && p.pos !== '指');
+      t.defAvg = wdef(f, p => 50 + (fieldEff(p, p.pos) - 50) * (p.pos === '捕' ? 1 : DFS));
+    }
+    function teamRates(t) {
+      const P = t.players, hit = P.filter(p => p.pos !== '投'), f = hit.filter(p => p.pos !== '指');
+      const ps = P.filter(p => p.pos === '投').map(p => 0.85 * pscore(p, false) + 0.15 * p.st.stam).sort((a, b) => b - a);
+      const bat = avg(hit.map(p => 0.65 * p.st.meet + 0.35 * p.st.power));
+      const cat = P.find(p => p.pos === '捕');
+      const pit = (0.6 * ps[0] + 0.25 * ps[1] + 0.15 * ps[2]) * (1 + (cat.st.field - 50) * 0.0025 * CATK);
+      const def = wdef(f, p => p.st.field);
+      const run = avg(hit.map(p => p.st.speed));
+      const ovr = 0.38 * bat + 0.32 * pit + 0.2 * def + 0.1 * run;
+      const c = x => Math.min(99, x);
+      return { bat: c(bat), pit: c(pit), def: c(def), run: c(run), ovr: c(ovr) };
+    }
+
+    // ---- game engine (plate-appearance level)
+    function mkGame(tA, tB) {
+      const g = { teams: [tA, tB], inn: 1, half: 0, outs: 0, bases: [null, null, null], sc: [0, 0], ls: [[], []], H: [0, 0], E: [0, 0], ord: [0, 0], pst: {}, bs: {}, fs: {}, log: [], over: false, winner: null };
+      g.teams.forEach(t => { lineup(t); prepTeam(t); });
+      hdr(g); return g;
+    }
+    function hdr(g) {
+      Object.values(g.pst).forEach(z => { z.ri = 0; });
+      g.ls[g.half][g.inn - 1] = 0;
+      const t = g.teams[g.half];
+      g.log.push({ k: 'hdr', t: `${g.inn}回${g.half ? '裏' : '表'}  ${t.name}${t.us ? '★' : ''}の攻撃` });
+    }
+    function force(g, b) {
+      const B = g.bases; let runs = 0;
+      if (B[0]) { if (B[1]) { if (B[2]) runs = 1; B[2] = B[1]; } B[1] = B[0]; }
+      B[0] = b; return runs;
+    }
+    function hitAdv(g, b, type, ft) {
+      const B = g.bases, N = [null, null, null]; let runs = 0;
+      const sp = r => spd(r) - 50;
+      if (type === 3) { runs = B.filter(Boolean).length; N[2] = b; }
+      else if (type === 2) {
+        if (B[2]) runs++; if (B[1]) runs++;
+        if (B[0]) { if (Math.random() < clamp(0.3 + sp(B[0]) * 0.004, 0.08, 0.7)) runs++; else N[2] = B[0]; }
+        N[1] = b;
+      } else {
+        if (B[2]) runs++;
+        if (B[1]) { if (Math.random() < clamp(0.55 + sp(B[1]) * 0.004, 0.25, 0.88)) runs++; else N[2] = B[1]; }
+        if (B[0]) { const go3 = Math.random() < clamp(0.25 + sp(B[0]) * 0.004, 0.08, 0.5); if (go3 && !N[2]) N[2] = B[0]; else N[1] = B[0]; }
+        N[0] = b;
+      }
+      g.bases = N; return runs;
+    }
+    function groundAdv(g) {
+      const B = g.bases, N = [null, null, null]; let runs = 0;
+      if (B[2]) { if ((B[0] && B[1]) || Math.random() < 0.45) runs++; else N[2] = B[2]; }
+      if (B[1]) { if ((B[0] || Math.random() < 0.4) && !N[2]) N[2] = B[1]; else N[1] = B[1]; }
+      if (B[0]) { if (!N[1]) N[1] = B[0]; else N[0] = B[0]; }
+      g.bases = N; return runs;
+    }
+    function maybeSwitch(g, def) {
+      const ft = g.teams[def];
+      if (!ft.queue.length) return;
+      const cur = ft.pitcher, nxt = ft.queue[0], ps = g.pst[cur.id];
+      if (!ps || ps.pc <= 0) return;
+      if (ps.mid === undefined) ps.mid = cur !== ft.pits[0];
+      const m = ps.mid ? midOf(cur) : 1, now = pnow(cur, pcE(ps)) * m, base = pscore(cur) * m, nn = pnow(nxt, 0) * midOf(nxt);
+      const comfy = g.sc[def] - g.sc[1 - def] >= 5;
+      let why = '';
+      if (now <= base * (comfy ? 0.6 : 0.9) && nn > now) why = '疲労';
+      else if (!comfy && (ps.ri >= 3 || ps.r >= 5) && nn >= now * 0.9) why = '打ち込まれ';
+      if (why) {
+        ft.queue.shift(); ft.pitcher = nxt;
+        g.log.push({ k: 'hdr', t: `投手交代(${why})  ${cur.name} → ${nxt.name}` });
+      }
+    }
+    // manual substitutions (our team)
+    function doSub(g, ti, bo, real, label) {
+      const t = g.teams[ti], old = t.order[bo];
+      const nw = Object.create(real); nw.pos = old.pos; nw.sub = true; nw.bo = bo;
+      t.order[bo] = nw;
+      const idx = t.players.indexOf(old); if (idx >= 0) t.players[idx] = nw;
+      t.hitters.push(nw); t.usedIds.add(real.id);
+      t.bench = t.bench.filter(q => q.id !== real.id);
+      prepTeam(t);
+      g.log.push({ k: 'chg', t: `${label || '選手交代'}:${old.name} → ${real.name}(${bo + 1}番・${old.pos === '指' ? 'DH' : old.pos})`, us: true });
+    }
+    const pcE = z => z.pc || 0; // 体力計算用の球数
+    const newTF = () => ({ c: { ch: 0, e: 0 }, i: { ch: 0, e: 0 }, o: { ch: 0, e: 0 }, p: { ch: 0, e: 0 }, dp: 0, sb: 0, cs: 0 }); // 守備側の記録(c:捕手 i:内野 o:外野 p:投手/dp:併殺/sb:許した盗塁/cs:刺した盗塁)
+    const tfOf = (g, i) => (g.tf || (g.tf = [newTF(), newTF()]))[i];
+    function bsOf(g, p) { return g.bs[p.id] || (g.bs[p.id] = { pa: 0, ab: 0, h: 0, hr: 0, rbi: 0, bb: 0, k: 0, sb: 0, cs: 0, sh: 0 }); }
+    // ===== 盗塁 =====
+    // 成功率:1-2盗 = base + (走者の走力 − 捕手の守備)×k。2-3盗と重盗は、これに f23 を掛ける(重盗は、先頭の二塁走者の2-3盗で判定)
+    const SB = { base: 0.705, k: 0.01, lo: 0.35, hi: 0.95, f23: 0.85, floor: 0.30, aiBase: 0.10, aiK: 4, aiMax: 0.6 };
+    // 損益分岐の成功率(得点期待値から計算)。相手AIは、成功率がこれを超えるときだけ試みる
+    const SBBE = { '12': [0.74, 0.75, 0.75], '12t': [0.78, 0.76, 0.82], '23': [0.80, 0.72, 0.84], 'dbl': [0.63, 0.63, 0.78] };
+    // いまの走者で盗塁できる状況か。一塁のみ・一三塁=一塁走者が二塁へ、二塁のみ=二塁走者が三塁へ、一二塁=重盗。三塁走者は動かない
+    function sbPlan(g) {
+      const B = g.bases;
+      if (B[1] && !B[2]) return B[0] ? { kind: 'dbl', lead: B[1], trail: B[0], to: '三塁' } : { kind: '23', lead: B[1], to: '三塁' };
+      if (B[0] && !B[1]) return { kind: B[2] ? '12t' : '12', lead: B[0], to: '二塁' };
+      return null;
+    }
+    function sbRate(rn, cat, kind) {
+      const p12 = clamp(SB.base + (spd(rn) - eff(cat, 'field')) * SB.k, SB.lo, SB.hi);
+      return (kind === '12' || kind === '12t') ? p12 : clamp(p12 * SB.f23, SB.floor, SB.hi);
+    }
+    function aiSteal(g, pl, p) {
+      if (Math.abs(g.sc[0] - g.sc[1]) >= 6) return false; // 大差では走らない
+      const be = SBBE[pl.kind][g.outs];
+      if (p < be) return false;
+      return Math.random() < clamp(SB.aiBase + (p - be) * SB.aiK, 0, SB.aiMax);
+    }
+    // 盗塁を試みる。3アウトになったときは true(その打席は行われず、チェンジ)
+    function doSteal(g, bt, ft, pl, p) {
+      const B = g.bases, lead = pl.lead, fl = { us: bt.us, opp: !bt.us }, dtf = tfOf(g, 1 - g.half);
+      if (Math.random() < p) {
+        dtf.sb += pl.kind === 'dbl' ? 2 : 1;
+        if (pl.kind === 'dbl') {
+          const tr = pl.trail; B[2] = B[1]; B[1] = B[0]; B[0] = null; bsOf(g, lead).sb++; bsOf(g, tr).sb++;
+          g.log.push({ k: 'n', t: `重盗成功!(${lead.name} 三塁へ・${tr.name} 二塁へ)`, ...fl });
+        }
+        else if (pl.kind === '23') { B[2] = B[1]; B[1] = null; bsOf(g, lead).sb++; g.log.push({ k: 'n', t: `${lead.name} 盗塁成功!(三塁へ)`, ...fl }); }
+        else { B[1] = B[0]; B[0] = null; bsOf(g, lead).sb++; g.log.push({ k: 'n', t: `${lead.name} 盗塁成功!(二塁へ)`, ...fl }); }
+        return false;
+      }
+      bsOf(g, lead).cs++; dtf.cs++; g.outs++;
+      const pit = ft.pitcher, ps = g.pst[pit.id] || (g.pst[pit.id] = { outs: 0, h: 0, k: 0, bb: 0, r: 0, pc: 0, ri: 0, t: 1 - g.half }); ps.outs++;
+      if (pl.kind === 'dbl') { B[1] = B[0]; B[0] = null; g.log.push({ k: 'n', t: `重盗失敗…(${lead.name} 三塁でタッチアウト。${pl.trail.name}は二塁へ)`, ...fl }); }
+      else if (pl.kind === '23') { B[1] = null; g.log.push({ k: 'n', t: `${lead.name} 盗塁失敗…(三塁でタッチアウト)`, ...fl }); }
+      else { B[0] = null; g.log.push({ k: 'n', t: `${lead.name} 盗塁失敗…(二塁でタッチアウト)`, ...fl }); }
+      if (g.outs >= 3) { endHalf(g); return true; }
+      return false;
+    }
+    // ===== バント(1つのコマンド。三塁走者がいればスクイズ、いなければ送りバント。打者のミートは使わない) =====
+    const BU = {
+      sac: 0.78, sacSp: 0.001, sacDef: 0.0015, sq: 0.70, sqSp: 0.002, sqDef: 0.002, hit: 0.03, hitSp: 0.001, hitDef: 0.0006,
+      failPop: 0.55, failForce: 0.35, aiSac: 0.6, aiSacLate: 0.9, aiSq: 0.75, aiWeak: 4
+    };
+    function buntPlan(g) {
+      if (g.outs >= 2) return null;
+      const B = g.bases;
+      if (B[2]) return { kind: 'sq', lead: B[2] };
+      if (B[0] || B[1]) return { kind: 'sac' };
+      return null;
+    }
+    // 成功率:送りバント=犠打が決まる確率(打者の走力と相手の内野守備)、スクイズ=三塁走者の走力と相手の内野守備
+    function buntRate(g, b, ft, pl) {
+      const dv = ft.defAvg - 50;
+      if (pl.kind === 'sq') return clamp(BU.sq + (spd(pl.lead) - 50) * BU.sqSp - dv * BU.sqDef, 0.30, 0.90);
+      return clamp(BU.sac + (spd(b) - 50) * BU.sacSp - dv * BU.sacDef, 0.40, 0.93);
+    }
+    // 相手AI(と、自チームの「試合終了まで」)。同点か1点ビハインドのときだけ。送りバントは無死で打線の下位5人、スクイズは6回以降の一死
+    function aiBunt(g, bt, b, pl, p) {
+      const off = g.half, d = g.sc[off] - g.sc[1 - off];
+      if (d > 0 || d < -1) return false;
+      if (pl.kind === 'sq') return g.inn >= 6 && g.outs === 1 && p >= 0.60 && Math.random() < BU.aiSq;
+      if (g.outs !== 0 || g.bases[2]) return false;
+      const bv = w => eff(w, 'meet') * 0.6 + eff(w, 'power') * 0.4, vals = bt.order.map(bv).sort((x, y) => x - y);
+      if (bv(b) > vals[BU.aiWeak]) return false;
+      return Math.random() < (g.inn >= 7 ? BU.aiSacLate : BU.aiSac);
+    }
+    // スクイズ失敗:三塁走者が本塁でアウト。3アウトになったときは true(チェンジ)
+    function doSqueezeFail(g, bt, ft, pl) {
+      const rn = pl.lead; g.bases[2] = null; g.outs++;
+      const pit = ft.pitcher, ps = g.pst[pit.id] || (g.pst[pit.id] = { outs: 0, h: 0, k: 0, bb: 0, r: 0, pc: 0, ri: 0, t: 1 - g.half }); ps.outs++;
+      g.log.push({ k: 'n', t: `スクイズ失敗…(${rn.name}が本塁でタッチアウト)`, us: bt.us, opp: !bt.us });
+      if (g.outs >= 3) { endHalf(g); return true; }
+      return false;
+    }
+    // 打席の前の盗塁(両チームとも、AIが判断する)
+    function stealPhase(g, bt, ft) {
+      const pl = sbPlan(g);
+      if (!pl) return false;
+      const cat = ft.players.find(p => p.pos === '捕'), p = sbRate(pl.lead, cat, pl.kind);
+      return aiSteal(g, pl, p) ? doSteal(g, bt, ft, pl, p) : false;
+    }
+    // 延長は12回まで。12回を終えて同点なら引き分け(タイブレークはなし)
+    const EXT_MAX = 12;
+    function finishDraw(g) {
+      g.over = true; g.winner = -1; g.draw = true;
+      g.log.push({ k: 'end', t: `引き分け(延長${EXT_MAX}回まで)  ${g.teams[0].name} ${g.sc[0]} - ${g.sc[1]} ${g.teams[1].name}` });
+    }
+    function stepPA(g) {
+      if (g.over) return;
+      const off = g.half, def = 1 - off, bt = g.teams[off], ft = g.teams[def];
+      if (stealPhase(g, bt, ft)) return; // 盗塁死で3アウトになったときは、打席に入らずにチェンジ
+      const bi = g.ord[off], b = bt.order[bi]; g.ord[off] = (bi + 1) % 9;
+      maybeSwitch(g, def);
+      const pit = ft.pitcher, ps = g.pst[pit.id] || (g.pst[pit.id] = { outs: 0, h: 0, k: 0, bb: 0, r: 0, pc: 0, ri: 0, t: def });
+      const bs = bsOf(g, b);
+      bs.pa++;
+      if (ps.mid === undefined) ps.mid = pit !== ft.pits[0]; // 先発以外=途中登板
+      const thr = thrOf(pit) * (1 - pit.fatigue / 260);
+      const ratio = pcE(ps) / thr;
+      const tire = (ratio > 0.7 ? clamp(1 - (ratio - 0.7) * 0.45, 0.55, 1) : 1) * (ps.mid ? midOf(pit) : 1);
+      const cat = ft.players.find(p => p.pos === '捕'), cf = 1 + (eff(cat, 'field') - 50) * 0.0025 * CATK;
+      let V = eff(pit, 'velo') * tire, C = eff(pit, 'ctrl') * tire * cf, Bk = eff(pit, 'brk') * tire;
+      let pp = (0.4 * V + 0.3 * Bk + 0.3 * C) * cf;
+      let M = eff(b, 'meet'), P = eff(b, 'power'); const SP = spd(b);
+      { const hm = handMul(b, pit); M *= hm; P *= hm; }
+      let bunt = null;
+      {
+        const pl = buntPlan(g);
+        if (pl) {
+          const p = buntRate(g, b, ft, pl);
+          if (aiBunt(g, bt, b, pl, p)) bunt = { pl, p };
+        }
+      }
+      if (bunt && bunt.pl.kind === 'sq' && Math.random() >= bunt.p) { // スクイズ失敗:三塁走者がアウトになり、打者は打席を続ける
+        if (doSqueezeFail(g, bt, ft, bunt.pl)) { bs.pa--; g.ord[off] = bi; return; }
+        bunt = null;
+      }
+      const pBB = clamp(0.085 + (50 - C) * 0.0022 + (M - 50) * 0.0006, 0.025, 0.2);
+      const pK = clamp(0.185 + (pp - 50) * 0.0042 - (M - 50) * 0.0034, 0.05, 0.4);
+      const pHR = clamp(0.022 + (P - 50) * 0.0009 - (pp - 50) * 0.0004, 0.002, 0.1);
+      const r = Math.random(), nb = g.bases.filter(Boolean).length;
+      let txt = '', kind = 'n', runs = 0, outs = 0, pcs = 0, rbi = true, ab = 1;
+      const gotHit = () => { bs.h++; g.H[off]++; ps.h++; kind = 'hit'; };
+      if (bunt) {
+        const B = g.bases; pcs = ri(2, 4);
+        if (bunt.pl.kind === 'sq') { // スクイズ成功:三塁走者が生還、打者はアウト、ほかの走者は1つ進塁
+          runs = 1; g.bases = [null, B[0], B[1]]; outs = 1; ab = 0; bs.sh++; txt = pick(['スクイズ成功!', 'スクイズを決めた!']) + `(${bunt.pl.lead.name}が生還)`;
+        } else {
+          const hp = clamp(BU.hit + (SP - 50) * BU.hitSp - (ft.defAvg - 50) * BU.hitDef, 0.005, 0.10);
+          if (Math.random() < hp) { // バントヒット
+            g.bases = [b, B[0], B[1]]; gotHit(); txt = 'バントヒット!(足で稼ぐ)';
+          } else if (Math.random() < bunt.p) { // 送りバント成功:打者アウト、走者は1つ進塁
+            outs = 1; ab = 0; bs.sh++; g.bases = [null, B[0], B[1]]; txt = pick(['送りバント成功', 'きっちり送りバントを決めた']) + (B[1] ? '(走者は三塁へ)' : '(走者は二塁へ)');
+          } else { // 失敗
+            const f = Math.random();
+            if (B[0] && f >= BU.failPop && f < BU.failPop + BU.failForce) { // 封殺:先頭の走者がアウト、打者は一塁へ
+              outs = 1; g.bases = [b, B[1] ? B[0] : null, null]; txt = 'バント失敗(走者が封殺)';
+            } else if (B[0] && g.outs < 2 && f >= BU.failPop + BU.failForce) { // 併殺:打者と先頭の走者がアウト
+              outs = 2; g.bases = [null, B[1] ? B[0] : null, null]; txt = 'バント失敗、ゲッツー…'; rbi = false; tfOf(g, def).dp++;
+            } else { outs = 1; txt = 'バント失敗(小フライ)'; }
+          }
+        }
+      } else if (r < pBB) {
+        txt = pick(['フォアボール', 'ボール球を見極めて四球', '粘って四球']); runs = force(g, b); ab = 0; bs.bb++; ps.bb++; pcs = ri(5, 7);
+      } else if (r < pBB + pK) {
+        txt = pick(['空振り三振!', '見逃し三振!', '低めの変化球で空振り三振!']); outs = 1; bs.k++; ps.k++; pcs = ri(4, 6);
+      } else if (r < pBB + pK + 0.007) {
+        txt = 'デッドボール'; runs = force(g, b); ab = 0; pcs = ri(2, 4);
+      } else if (r < pBB + pK + 0.007 + pHR) {
+        runs = 1 + nb; g.bases = [null, null, null]; gotHit(); bs.hr++; pcs = ri(2, 5);
+        txt = pick(['レフトスタンドへホームラン!', '右中間スタンドへ放り込むホームラン!', 'センターバックスクリーンへ特大ホームラン!', 'ライトスタンドへホームラン!']) + (nb ? `(${nb + 1}ラン)` : '');
+      } else {
+        pcs = ri(2, 5);
+        const babip = clamp(0.285 + (M - 50) * 0.0018 - (pp - 50) * 0.0014 - (ft.defAvg - 50) * 0.0012, 0.16, 0.42);
+        if (Math.random() < babip) {
+          const pd = clamp(0.2 + (P - 50) * 0.003, 0.08, 0.4), pt = clamp(0.03 + (SP - 50) * 0.0006, 0.005, 0.08), q = Math.random();
+          const type = q < pt ? 3 : q < pt + pd ? 2 : 1;
+          runs = hitAdv(g, b, type, ft); gotHit();
+          txt = type === 3 ? pick(['右中間を破る三塁打!', 'レフト線を抜ける三塁打!']) : type === 2 ? pick(['レフト線への二塁打', '右中間を破る二塁打', 'センター越えの二塁打']) : pick(['センター前ヒット', 'レフト前ヒット', 'ライト前ヒット', '三遊間を破るヒット', '一二塁間を抜けるヒット', '詰まりながらも内野の頭を越えるヒット']);
+        } else {
+          const q = Math.random(), ot = q < 0.45 ? 'ground' : q < 0.85 ? 'fly' : 'line';
+          const f = ot === 'ground' ? wpick(['遊', '二', '三', '一', '投', '捕'], [32, 27, 20, 13, 5, 3])
+            : ot === 'fly' ? wpick(['左', '中', '右', '三', '遊', '二', '一'], [21, 36, 21, 5, 6, 6, 5])
+              : wpick(['遊', '二', '三', '一', '左', '中', '右', '投'], [1, 1, 1, 1, 1, 1, 1, 1]);
+          const fp = f === '投' ? pit : ft.players.find(p => p.pos === f);
+          const fs0 = g.fs[fp.id] || (g.fs[fp.id] = { ch: 0, e: 0 }); fs0.ch++; const tfd = tfOf(g, def), gk = f === '捕' ? 'c' : '遊二三一'.includes(f) ? 'i' : '左中右'.includes(f) ? 'o' : 'p'; tfd[gk].ch++;
+          const fe = f === '投' ? ft.defAvg : 50 + (fieldEff(fp, f) - 50) * (f === '捕' ? 1 : DFS);
+          const pE = clamp(0.03 - (fe - 50) * 0.0006, 0.004, 0.08);
+          if (Math.random() < pE) {
+            g.E[def]++; fs0.e++; tfd[gk].e++; const B = g.bases; runs = B[2] ? 1 : 0; g.bases = [b, B[0], B[1]]; rbi = false; ab = 1;
+            txt = `${PN[f]}がエラー!打者は出塁`; kind = 'n';
+          } else if (ot === 'ground') {
+            const pDP = clamp(0.42 - (SP - 50) * 0.004 + (fe - 50) * 0.002, 0.15, 0.65);
+            const pIH = clamp((SP - 50) * 0.004 - (fe - 50) * 0.002, 0, 0.2);
+            if (Math.random() < pIH) {
+              runs = hitAdv(g, b, 1, ft); gotHit(); txt = `${PN[f]}への内野安打(足で稼ぐ)`;
+            } else if (g.bases[0] && g.outs < 2 && Math.random() < pDP) {
+              outs = 2; rbi = false;
+              if (g.outs + 2 < 3) { runs = g.bases[2] ? 1 : 0; g.bases = [null, null, g.bases[1]]; } else g.bases = [null, null, null];
+              txt = `${PN[f]}ゴロ、ゲッツー!`; tfOf(g, def).dp++;
+            } else {
+              outs = 1; txt = `${PN[f]}ゴロ`;
+              if (g.outs + 1 < 3) runs = groundAdv(g); else g.bases = [null, null, null];
+              if (runs) rbi = true;
+            }
+          } else {
+            outs = 1; txt = ot === 'fly' ? `${PN[f]}フライ` : `${PN[f]}ライナー`;
+            if (g.outs + 1 < 3 && ot === 'fly' && '左中右'.includes(f)) {
+              const B = g.bases;
+              if (B[2] && Math.random() < clamp(0.55 + (spd(B[2]) - 50) * 0.005, 0.25, 0.9)) { runs = 1; B[2] = null; txt = `${PN[f]}への犠牲フライ`; }
+              if (B[1] && !B[2] && Math.random() < clamp(0.12 + (spd(B[1]) - 50) * 0.004, 0.03, 0.4)) { B[2] = B[1]; B[1] = null; txt += '(タッチアップで三塁へ)'; }
+            }
+          }
+        }
+      }
+      bs.ab += ab; if (rbi) bs.rbi += runs;
+      ps.pc += pcs; ps.outs += outs; ps.r += runs; ps.ri = (ps.ri || 0) + runs;
+      g.outs += outs; g.sc[off] += runs; g.ls[off][g.inn - 1] = (g.ls[off][g.inn - 1] || 0) + runs;
+      const pre = `${(bi + 1)}番 ${b.name}  `;
+      if (runs > 0) { txt += `  →${runs}点!(${g.sc[0]}-${g.sc[1]})`; kind = 'run'; }
+      g.log.push({ k: kind, t: pre + txt, us: bt.us, opp: !bt.us });
+      if (off === 1 && g.inn >= 9 && g.sc[1] > g.sc[0]) { finish(g, 1); return; }
+      if (g.outs >= 3) endHalf(g);
+    }
+    const coldOk = (inn, d) => (inn >= 5 && d >= 10) || (inn >= 7 && d >= 7);
+    function finish(g, w, cold) {
+      g.over = true; g.winner = w; g.cold = !!cold; if (cold) g.coldInn = g.inn;
+      g.log.push({ k: 'end', t: `${cold ? `コールドゲーム(${g.inn}回 ${Math.abs(g.sc[0] - g.sc[1])}点差)` : '試合終了'}  ${g.teams[0].name} ${g.sc[0]} - ${g.sc[1]} ${g.teams[1].name}` });
+    }
+    function endHalf(g) {
+      g.outs = 0; g.bases = [null, null, null];
+      g.log.push({ k: 'n', t: 'チェンジ' });
+      if (g.half === 0) {
+        if (g.inn >= 9 && g.sc[1] > g.sc[0]) { finish(g, 1); return; }
+        if (!g.noCold && coldOk(g.inn, g.sc[1] - g.sc[0])) { finish(g, 1, true); return; }
+        g.half = 1;
+      } else {
+        if (g.inn >= 9 && g.sc[0] !== g.sc[1]) { finish(g, g.sc[0] > g.sc[1] ? 0 : 1); return; }
+        if (g.inn >= EXT_MAX) { finishDraw(g); return; }
+        if (!g.noCold && coldOk(g.inn, Math.abs(g.sc[0] - g.sc[1]))) { finish(g, g.sc[0] > g.sc[1] ? 0 : 1, true); return; }
+        g.inn++; g.half = 0;
+      }
+      hdr(g);
+    }
+    function stepAll(g) { let n = 0; while (!g.over && n++ < 3000) stepPA(g); }
+    // ==ENGINE_END==
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const fatCls = (v, lo = 40, hi = 70) => v >= hi ? 'o' : v >= lo ? 'y' : 'g';
+    function rkL(v) { return v >= 90 ? 'S' : v >= 80 ? 'A' : v >= 70 ? 'B' : v >= 60 ? 'C' : v >= 50 ? 'D' : v >= 40 ? 'E' : v >= 30 ? 'F' : 'G'; }
+    const rkColor = v => ({ S: '#e0a419', A: '#d9473a', B: '#e8832a', C: '#e3bd2a', D: '#5eaa3c', E: '#2d9f98', F: '#4a7fd6', G: '#8d97ab' }[rkL(v)]);
+    const chip = v => `<span class="rk rk${rkL(v)}">${rkL(v)}</span>`;
+    const FORM = [['', ''], ['絶不調', 'down'], ['不調', 'down'], ['普通', ''], ['好調', 'up'], ['絶好調', 'up']];
+    // 調子のアイコン(1文字ぶん):絶好調=上向きの三角が2つ縦に並ぶ、好調=上向き1つ、普通=横線、不調=下向き1つ、絶不調=下向き2つ
+    function formIcon(f) {
+      f = f || 3;
+      const c = f >= 4 ? '#2f8a4e' : f <= 2 ? '#c4372c' : '#9aa0ad';
+      const tri = (y, up) => up ? `<path d="M7 ${y}l5 5H2z"/>` : `<path d="M7 ${y + 5}l5-5H2z"/>`;
+      const body = f === 5 ? tri(1, true) + tri(7, true) : f === 4 ? tri(4, true) : f === 3 ? '<rect x="2" y="6" width="10" height="2" rx="1"/>' : f === 2 ? tri(4, false) : tri(1, false) + tri(7, false);
+      return `<svg class="fi" viewBox="0 0 14 14" width="13" height="13" fill="${c}" role="img" aria-label="${FORM[f][0]}" style="vertical-align:-2px">${body}</svg>`;
+    }
+    const formTag = p => { const k = p.form || 3, f = FORM[k]; return `<span class="${f[1]}" style="font-weight:900;white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:4px">${formIcon(k)}${f[0]}</span>`; };
+    // 起用タイプ:生まれ持った資質(p.ty)。古いセーブの選手は、初めて表示するときの能力から決めて、以後は固定する
+    function typeOf(p) { return p && (p.pos === '投' || p.pos === '野') ? (p.ty || '') : ''; }
+    const TYPE_TIP = { '先発型': '生まれ持った資質:ロングイニングに強い(スタミナ=球数の持ち)。連投と途中登板が苦手', '救援型': '生まれ持った資質:連投と途中登板に強い(スタミナ=連投の疲れにくさ)。ロングイニングが苦手', '兼用型': '生まれ持った資質:毎月の起用枠で決まる。先発枠なら先発型、中継ぎ・抑え枠なら救援型の条件が当てはまる', '内野型': '生まれ持った資質:内野向き。外野を守ると守備−20', '外野型': '生まれ持った資質:外野向き。内野(一塁を含む)を守ると守備−20', '内外型': '生まれ持った資質:内野も外野も守れる(守備は下がらない)', '捕手': '捕手:捕手以外の守備位置(一塁〜右翼)に入ると、守備−20' };
+    // 名前の横のタグ:先(先発型)・救(救援型)・先/救(兼用型)・内(内野型)・外(外野型)・内/外(内外型)・捕(捕手)
+    const TYPE_SHORT = { '先発型': '先', '救援型': '救', '兼用型': '先/救', '内野型': '内', '外野型': '外', '内外型': '内/外', '捕手': '捕' };
+    const typeTag = p => { const t = p && p.pos === '捕' ? '捕手' : typeOf(p); return t ? ` <span class="tg" title="${TYPE_TIP[t]}">${TYPE_SHORT[t]}</span>` : ''; };
+    const hnd = p => { const L = !!p && p.hand === 'L', t = (p && p.pos === '投') ? (L ? '左投' : '右投') : (L ? '左打' : '右打'); return `<span class="sub" style="white-space:nowrap">${t}</span>${typeTag(p)}`; };
+    const kmh = v => Math.round(110 + v * 0.5);
+
+    function starsOf(room) { return room < 16 ? 1 : room < 27 ? 2 : room < 38 ? 3 : room < 49 ? 4 : 5; }
+    function statBarP(p, k) {
+      const v = p.st[k], n = starsOf(p.cap[k] - v);
+      return `<div class="stat"><div class="l"><span>${LBL[k]}</span><b class="num">${k === 'velo' ? kmh(v) + 'km' : Math.round(v)} ${chip(v)}</b></div><div class="bar"><i style="width:${clamp(v, 0, 100)}%;background:${rkColor(v)}"></i></div><div class="sub" style="font-size:11px">伸びしろ <span style="color:var(--amber)">${'★'.repeat(n)}${'☆'.repeat(5 - n)}</span></div></div>`;
+    }
+    // ===================== プロ野球GM:月進行・編成・補強 =====================
+    const TUNE = { room: [26, 76], ind: 0.05, gg: 1 }; // gg:試合出場による成長の強さ(0で無効)
+    const jit = (x, sp = 0.35) => x * rnd(1 - sp, 1 + sp);
+    const fmtAvg = (h, ab) => ab ? (h / ab).toFixed(3).replace(/^0/, '') : '-';
+    const fmtIP = o => Math.floor(o / 3) + (o % 3 ? '.' + o % 3 : '');
+    const SHL = { meet: 'ミ', power: 'パ', speed: '走', field: '守', velo: '球', ctrl: '制', brk: '変', stam: '体', rest: '休' };
+    const KEY = 'proGM5', GPM = 18, CAPN = 70, MN = [3, 4, 5, 6, 7, 8, 9, 10];
+    // チーム名は都道府県。好きな都道府県を選び、ほかの5チームは、残りからランダムに選ぶ。日本シリーズの相手も、自リーグにいない都道府県から、毎回ランダムに選ぶ
+    const PREF_REGION = [['北海道・東北', ['北海道', '青森', '岩手', '宮城', '秋田', '山形', '福島']], ['関東', ['茨城', '栃木', '群馬', '埼玉', '千葉', '東京', '神奈川']], ['中部', ['新潟', '富山', '石川', '福井', '山梨', '長野', '岐阜', '静岡', '愛知']], ['近畿', ['三重', '滋賀', '京都', '大阪', '兵庫', '奈良', '和歌山']], ['中国・四国', ['鳥取', '島根', '岡山', '広島', '山口', '徳島', '香川', '愛媛', '高知']], ['九州・沖縄', ['福岡', '佐賀', '長崎', '熊本', '大分', '宮崎', '鹿児島', '沖縄']]];
+    const PREFS = PREF_REGION.flatMap(r => r[1]);
+    const POSL = ['一', '二', '三', '遊', '左', '中', '右'];
+    const SPL = ['p0', 'p1', 'p2', 'p3', 'p4', 'p5'], RSL = ['r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6'], QSL = ['q0', 'q1'], BSL = ['b0', 'b1', 'b2', 'b3', 'b4', 'b5'];
+    const PSL = [...SPL, 'cl', ...RSL], HK = ['c', ...POSL, 'dh'];
+    const GIV = ['翔', '大輝', '拓海', '蓮', '悠真', '健太', '隼人', '康介', '涼', '誠', '亮', '直樹', '和也', '慎吾', '雄大', '圭', '陽介', '光', '剛', '優', '蒼', '颯', '駿', '匠', '颯太', '航', '諒', '勇気', '哲也', '俊'];
+    const FN = ['ロドリゲス', 'スミス', 'ゴンザレス', 'ジョンソン', 'ガルシア', 'マルティネス', 'ブラウン', 'ウィリアムズ', 'サンチェス', 'ペレス', 'ミラー', 'ディアス', 'ロペス', 'クルーズ', 'モラレス', 'ハリス', 'ジョーンズ', 'ラミレス', 'フェルナンデス', 'アルバレス'];
+    const SK = 0.6; // 年俸の水準(以前の0.9では、年俸総額が収入を上回る年が続いた。0.5では、資金がたまりすぎた)
+    // 外国人の年俸は、総合55で0.5億〜総合75で2億(上限2億)。契約金は、年俸の50%
+    const salOf = p => p.fgn ? clamp(Math.round((0.5 + (vb(p) - 55) * 0.075) * 10) / 10, 0.5, 2) : Math.max(SAL_MIN, Math.round((0.1 + Math.pow(Math.max(0, vb(p) - 40) / 10, 2) * 0.3 * SK) * 10) / 10);
+    const r1 = x => Math.round(x * 10) / 10;
+    const dueNext = t => t.players.filter(p => p.yrs > 1 && !p.nw).reduce((a, p) => a + (p.sal || 0), 0); // 複数年契約の選手の翌年分
+    const PICK_FEE = [1, 0.8, 0.6, 0.5, 0.4]; // ドラフトの指名順ごとの契約金(入団時に支払う)
+    const SAL_MIN = 0.1; // 年俸の下限(1000万円)
+    const DRAFT_SAL = SAL_MIN; // ドラフト入団選手の年俸(一律1000万円=下限・1年契約。1年分を入団時に支払う)
+    const pickCost = i => r1(PICK_FEE[i] + DRAFT_SAL); // 指名1人あたりの入団時の支払い(契約金+年俸1年分)
+    // 契約中の選手を放出(自由契約)するときに払う、残りの契約の未払い年俸。
+    // シーズン中:今の年(支払い済み)を除く残り年数分。オフ:翌年分は支払い済みなので、それを除く残り年数分(契約直後の選手は、1年目を除く残り年数分)
+    const unpaid = p => { const off = st.mi >= MN.length && st.stage !== 'po', y = p.yrs || 1, n = off ? (p.nw ? y - 1 : y - 2) : y - 1; return r1(Math.max(0, n) * (p.sal || 0)); };
+    // 放出(自由契約)。最低人数を割る/未払い年俸を払えない(資金がマイナスになる)ときは、理由を返して何もしない
+    function releaseP(t, p) { const w = canLose(t, p); if (w) return '放出できません(' + w + ')'; const c = unpaid(p); if (st.money < c) return '資金が足りません(残りの契約の年俸 ' + c.toFixed(1) + '億円が必要です)'; t.players = t.players.filter(x => x !== p); st.money = r1(st.money - c); return ''; }
+    // ドラフトで指名できる最大人数:登録の空き枠と、入団時に払う年俸(資金)で決まる(最大5人)
+    const draftMax = t => { let n = 0, m = st.money; while (n < 5 && n < CAPN - t.players.length && m - pickCost(n) >= -1e-9) { m = r1(m - pickCost(n)); n++; } return n; };
+    const payroll = t => t.players.reduce((a, p) => a + (p.sal || 0), 0);
+    // プロ年数(入団からの年数)。オフは、終えたシーズンも含める
+    const proOf = p => p.pro != null ? p.pro : Math.max(0, (p.age || 27) - 21);
+    const proNow = p => proOf(p) + ((st && st.mi >= MN.length) ? 1 : 0);
+    // 若手の年俸の抑制:入団(プロ入り)から8年は、査定額が割り引かれる。特に最初の5年は大きく割り引く(外国人は対象外)
+    // プロ年数(経過したシーズン数)ごとの割合:オフの更改では、1年経過=50%・2年=55%・3年=60%・4年=65%・5年=70%、そのあと6年=80%・7年=90%、8年経過で100%
+    const YOUTH = [0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.8, 0.9];
+    const youthF = p => p.fgn ? 1 : (YOUTH[proNow(p)] || 1);
+    // 成績の査定:リーグ平均からの差(標準偏差単位)の加重和。打者は打率・本塁打・打点・盗塁、投手は失点率・奪三振・四球。出場が少ないと割り引く(打者450打席・投手90回で満額)
+    const perfZ = p => {
+      if (p.pos !== '投') {
+        const b = p.bt; if (!b || b.pa < 100 || !b.ab) return null; const n = b.pa / 600;
+        return { z: 0.45 * (b.h / b.ab - 0.237) / 0.034 + 0.25 * (b.hr / n - 15.8) / 7 + 0.2 * (b.rbi / n - 60) / 16 + 0.1 * (b.sb / n - 9.4) / 12.8, w: Math.min(1, b.pa / 450) };
+      }
+      const t = p.pt; if (!t || t.outs < 60) return null;
+      return { z: 0.6 * (3.9 - t.r * 27 / t.outs) / 1.6 + 0.25 * (t.k * 27 / t.outs - 7.1) / 1.2 + 0.15 * (2.8 - t.bb * 27 / t.outs) / 1.2, w: Math.min(1, t.outs / 270) };
+    };
+    const PERF_K = 0.2; // 成績の効き:平均より1標準偏差よい成績で、年俸が+20%(0.8〜1.4倍の範囲)
+    const perf = p => { const x = perfZ(p); return x ? clamp(1 + PERF_K * x.z * x.w, 0.8, 1.4) : 1; };
+    // 年俸の査定額 = 能力 × 成績 × 若手の割引
+    const assess = p => Math.max(SAL_MIN, salOf(p) * perf(p) * youthF(p));
+    // 更改・獲得の年俸:査定額(能力×今期の成績×若手の割引)で決まる。複数年は割安。FA宣言の選手は割高、自由契約の選手は割安
+    const dem = (p, y) => Math.max(SAL_MIN, Math.round(assess(p) * (p.decl ? 1.5 : 1) * (p.mk === 'FA' ? 1.15 : p.mk === '自由' ? 0.9 : 1) * (1 - 0.04 * (y - 1)) * 10) / 10);
+    // 金銭補償:FA宣言した選手を獲得した球団が、元の球団に旧年俸(1年分)の50%を支払う。確率はなく、必ず発生する
+    const compAmt = p => Math.round((p.sal || 0) * 0.5 * 10) / 10;
+    const comp = p => p.mk === 'FA' && p.from && p.from !== st.me ? compAmt(p) : 0;
+    function letGo(t, p) {
+      const i = [...t.players].sort((a, b) => (b.sal || 0) - (a.sal || 0)).indexOf(p);
+      t.players = t.players.filter(x => x !== p);
+      if (p.decl) { p.mk = 'FA'; p.from = t.id; p.crk = i < 3 ? 'A' : i < 10 ? 'B' : 'C'; } else p.mk = '自由';
+      p.decl = false; st.rel.push(p);
+    }
+    // 契約金:FAは新年俸の1年分の50%、自由契約は不要
+    const mfee = (p, y) => p.mk === 'FA' ? Math.round(dem(p, y) * 0.5 * 10) / 10 : 0;
+    const ensureC = p => { if (p.sal == null) { p.sal = salOf(p); p.yrs = ri(1, 3); } };
+    const FA_END = 4; // 外国人の獲得は7月(mi=4)まで
+    const FILL = [...SPL, 'cl', ...RSL, 'c', '遊', '二', '中', '三', '右', '左', '一', ...QSL, 'dh', ...BSL]; // 控え捕手(QSL)を、指名打者より先に埋める(捕手が少ないチームで、指名打者に捕手を取られて控えが空になるのを防ぐ)
+    const SLN = { p0: '先1', p1: '先2', p2: '先3', p3: '先4', p4: '先5', p5: '先6', cl: '抑', c: '捕', 一: '一', 二: '二', 三: '三', 遊: '遊', 左: '左', 中: '中', 右: '右', dh: 'DH' };
+    const slName = k => k ? (SLN[k] || (k[0] === 'r' ? '中' : k[0] === 'q' ? '控捕' : '控')) : '二軍';
+    const isP = k => /^[pr]\d$/.test(k) || k === 'cl';
+    const batV = p => 0.65 * p.st.meet + 0.35 * p.st.power;
+    const defV = p => p.st.field;
+    const hv = p => p.pos === '捕' ? 0.35 * batV(p) + 0.5 * p.st.field + 0.15 * p.st.speed : 0.45 * batV(p) + 0.35 * defV(p) + 0.2 * p.st.speed; // 野手の総合:試合への効き方に合わせた配分(捕手は守備の比重が大きい)
+    const val = p => p.pos === '投' ? pnow(p, 0) : hv(p);
+    const vb = p => p.pos === '投' ? pscore(p, false) : hv(p);
+    const fee = p => Math.max(0.3, Math.round((p.sal || 0) * 0.5 * 10) / 10); // 外国人の契約金:年俸の50%(最低0.3億)
+    function slotOk(k, p) { if (isP(k)) return p.pos === '投'; if (k[0] === 'q') return p.pos === '捕'; if (k[0] === 'b') return p.pos === '野'; if (k === 'c') return p.pos === '捕'; if (k === 'dh') return p.pos !== '投'; return p.pos === '野'; } // おまかせ・自動入れ替えの条件
+    // 手動の入れ替えの条件:捕手の枠(先発・控え)は捕手だけ。野手の枠(守備位置・指名打者・控え)は、捕手も入れる(捕手が守備位置に入ると、守備−20)
+    function slotOkManual(k, p) { if (isP(k)) return p.pos === '投'; if (k[0] === 'q' || k === 'c') return p.pos === '捕'; return p.pos !== '投'; }
+    function slotVal(k, p) {
+      if (p.inj > 0) return -999; // 怪我の選手は、最後に回す
+      if (k[0] === 'b') return val(p);
+      if (k[0] === 'q') return 0.7 * p.st.field + 0.3 * batV(p);
+      if (k === 'cl') return pnow(p, 0) * midOf(p, '救援型') + 20 * (recOf(p, '救援型') - 1);
+      if (k[0] === 'p') return pnow(p, 0) + 0.12 * (thrOf(p, '先発型') - 40); // 先発:球数の持ち(ロングイニング)を重視
+      if (k[0] === 'r') return pnow(p, 0) * midOf(p, '救援型') + 20 * (recOf(p, '救援型') - 1); // 中継ぎ:途中登板と連投への強さを重視
+      if (k === 'c') return 0.7 * p.st.field + 0.3 * batV(p); if (k === 'dh') return 0.75 * batV(p) + 0.25 * p.st.speed;
+      return 0.45 * batV(p) + 0.35 * Math.max(1, p.st.field - fldPen(p, k)) * ((DEFW[k] || 1) / 1.34) + 0.2 * p.st.speed;
+    }
+    const byId = (t, id) => t.players.find(p => p.id === id);
+    const mine = () => st.teams.find(t => t.id === st.me);
+    const roleOf = (t, id) => Object.keys(t.L).find(k => t.L[k] === id) || null;
+    const FMAX = 4; // 一軍に登録できる外国人は4人まで
+    const fgnN = (t, L) => Object.values(L).filter(id => { const p = byId(t, id); return p && p.fgn; }).length;
+    function autoL(t) {
+      const used = new Set(), L = {}; let fn = 0;
+      FILL.forEach(k => { const c = t.players.filter(p => !used.has(p.id) && slotOk(k, p) && !(p.fgn && fn >= FMAX)).sort((a, b) => slotVal(k, b) - slotVal(k, a))[0]; if (c) { L[k] = c.id; used.add(c.id); if (c.fgn) fn++; } });
+      t.L = L;
+    }
+    // 編成のおまかせを、投手の枠(先発・中継ぎ・抑え)だけ、または野手の枠(捕手・内野・外野・指名打者・控え)だけに適用する。もう一方の枠は、そのまま
+    const PIT_SLOTS = new Set([...SPL, 'cl', ...RSL]);
+    function autoLg(t, pit) {
+      const keys = FILL.filter(k => PIT_SLOTS.has(k) === pit), keep = FILL.filter(k => PIT_SLOTS.has(k) !== pit).map(k => t.L[k]).filter(id => id && byId(t, id));
+      const used = new Set(keep), L = { ...t.L }; let fn = keep.filter(id => byId(t, id).fgn).length;
+      // ポジションを固定した選手(怪我をしていない一軍の選手)は、今の枠のまま、動かさない
+      const pins = keys.filter(k => { const q = byId(t, t.L[k]); return q && q.pin && !(q.inj > 0); });
+      pins.forEach(k => { const q = byId(t, t.L[k]); used.add(q.id); if (q.fgn) fn++; });
+      keys.forEach(k => { if (pins.includes(k)) return; delete L[k]; const c = t.players.filter(p => !used.has(p.id) && slotOk(k, p) && !(p.fgn && fn >= FMAX)).sort((a, b) => slotVal(k, b) - slotVal(k, a))[0]; if (c) { L[k] = c.id; used.add(c.id); if (c.fgn) fn++; } });
+      t.L = L; repairL(t); return pins.length;
+    }
+    function newP(pos, base, age, names, fgn) {
+      const p = genPlayer(pos, base); p.age = age;
+      p.pk = 29 + ri(-3, 3); // 成長のピーク年齢(非公開):29歳を中心に、±3歳の個人差
+      const yl = p.pk - age, rm = yl >= 4 ? [20, 36] : yl >= 1 ? [8, 20] : [0, 5]; // 上限の伸びしろは、ピークまでの残り年数で決まる(残り4年以上で大きく、ピーク以降はほぼなし)
+      keysOf(p).forEach(k => { p.cap[k] = Math.min(98, Math.round(p.st[k]) + ri(rm[0], rm[1])); });
+      let n = 0; do { p.name = fgn ? FN[ri(0, FN.length - 1)] + (n++ > 25 ? 'Jr.' : '') : SUR[ri(0, SUR.length - 1)] + GIV[ri(0, GIV.length - 1)]; } while (names.has(p.name)); names.add(p.name); p.fgn = !!fgn; p.form = 3; p.pro = Math.max(0, age - 21); p.sal = assess(p); p.yrs = ri(1, 3); return p;
+    }
+    function mkTeamData(name, base) {
+      const names = new Set(), pl = [], add = (pos, n, b, a0, a1) => { for (let i = 0; i < n; i++)pl.push(newP(pos, b + ri(-4, 4), ri(a0, a1), names)); };
+      add('捕', 1, base + 6, 24, 35); add('捕', 2, base - 1, 24, 35); add('野', 8, base + 5, 23, 36); add('野', 6, base - 2, 22, 34);
+      const b6 = pl.slice(-6), up = (q, ks, d) => ks.forEach(k => { if (k in q.st) { q.st[k] = Math.min(95, q.st[k] + d); q.cap[k] = Math.max(q.cap[k], Math.round(q.st[k]) + 3); } });
+      up(b6[0], ['speed'], 18); up(b6[1], ['field'], 14); b6[1].ty = '内外型'; up(b6[2], ['power', 'meet'], 10); // 控え野手に、走・守・打の持ち味を持たせる
+      add('投', 6, base + 6, 23, 36); add('投', 1, base + 5, 25, 35); add('投', 7, base + 2, 22, 34);
+      add('捕', 3, base - 6, 19, 26); add('野', 18, base - 6, 19, 28); add('投', 18, base - 6, 19, 28);
+      const t = { id: name, players: pl, w: 0, l: 0, d: 0, mw: 0, ml: 0, md: 0, rs: 0, ra: 0, rot: 0 }; autoL(t); return t;
+    }
+    function mkFA() {
+      const names = new Set(mine().players.map(p => p.name));
+      return ['投', '投', '投', '野', '野', '捕'].map(pos => (q => { q.sal = salOf(q); q.yrs = 2; return q; })(newP(pos, ri(58, 72), ri(25, 34), names, true)));
+    }
+    // ---- ドラフト(野球部シムのスカウトと同じ考え方:能力は見えるが、伸びしろと逸材は入団後に分かる)
+    const DB = [56, 52, 49, 46, 43], roleRank = { 投: 0, 捕: 1, 野: 2 };
+    const defChips = q => `守${chip(q.st.field)}`;
+    const recruitStats = q => q.pos === '投' ? `球速${kmh(q.st.velo)}km 制球${chip(q.st.ctrl)} 変化球${chip(q.st.brk)} 体力${chip(q.st.stam)}` : `ミ${chip(q.st.meet)} パ${chip(q.st.power)} 走${chip(q.st.speed)} ${defChips(q)}`;
+    const recruitStars = q => { const n = starsOf(avg(keysOf(q).map(k => q.cap[k] - q.st[k]))); return `伸びしろ <span style="color:var(--amber)">${'★'.repeat(n)}${'☆'.repeat(5 - n)}</span>`; };
+    function genDraft(names = new Set(mine().players.map(p => p.name))) {
+      return DB.map(b => {
+        const roles = shuffle(['投', '投', '野', '野', pick(['捕', '野', '投'])]), gi = Math.random() < 0.5 ? ri(0, 4) : -1;
+        return roles.map((r, i) => {
+          const q = newP(r, b + ri(-3, 3), ri(18, 23), names); q.pro = 0; // 新人は、プロ0年
+          if (i === gi) { keysOf(q).forEach(k => { q.st[k] = Math.min(95, q.st[k] + 2); q.cap[k] = Math.min(98, Math.round(q.st[k]) + ri(36, 52)); q.apt[k] = rnd(1.1, 1.4); }); q.gem = true; }
+          return q;
+        }).sort((a, b) => roleRank[a.pos] - roleRank[b.pos]);
+      });
+    }
+    function drow(q, rd, rev) {
+      const on = ui.dsel === q.id;
+      return `<div class="prow"${rev ? '' : ` data-act="dsel" data-v="${q.id}" role="button" tabindex="0" style="cursor:pointer"`}><div class="row between"><div class="row wrap"><span class="pos" data-p="${q.pos}">${q.pos}</span><b>${esc(q.name)}</b><span class="sub">${q.age}歳</span>${hnd(q)}${rev && q.gem ? '<span class="badge">逸材</span>' : ''}</div>${rev ? `<span class="tg">${rd}位</span>` : `<span class="chk${on ? ' on' : ''}">${on ? '✔ 指名' : '候補'}</span>`}</div><div class="sub" style="margin-top:3px">${recruitStats(q)}</div>${rev ? `<div class="sub">${recruitStars(q)}</div>` : ''}</div>`;
+    }
+    const dseg = () => `<div class="seg" style="margin:12px 0">${[['roster', '編成'], ['draft', 'ドラフト'], ['stats', '成績']].map(([k, n]) => `<button class="${(ui.dview || 'draft') === k ? 'on' : ''}" data-act="dview" data-v="${k}">${n}</button>`).join('')}</div>`;
+    function rDraft(A) {
+      const d = st.draft, t = mine(), n = t.players.length;
+      if (ui.dview === 'roster' || ui.dview === 'stats') { A.innerHTML = `<div class="hero"><h1 style="font-size:30px">ドラフト会議</h1><p>${st.season}年目オフ</p></div>${dseg()}${ui.dview === 'roster' ? rRoster() : rStats()}`; return; }
+      if (d.pre) { // 参加前:空き枠・資金が足りないとき、枠を拡げるか、少ない人数で参加するか、参加しないかを選ぶ
+        const m = draftMax(t), free = CAPN - n, need = r1(PICK_FEE.reduce((a, x, i) => a + pickCost(i), 0));
+        const farm = t.players.filter(p => !roleOf(t, p.id)).sort((a, b) => vb(a) - vb(b)), sel = ui.dcut && farm.find(p => p.id === ui.dcut), uc = sel ? unpaid(sel) : 0;
+        const T = (l, k) => tbl(l, k, () => '二', ui.dcut, 'dcutsel', [['年俸', p => (p.sal || 0).toFixed(1)], ['残年', p => p.yrs || 1], ['違約金', p => unpaid(p) > 0 ? unpaid(p).toFixed(1) : '-']], true);
+        const rbtn = sel ? `${uc > st.money ? `<div class="sub" style="margin-bottom:6px">資金が足りないため、放出できません(残りの契約の年俸 ${uc.toFixed(1)}億円が必要)。</div>` : ''}<button class="btn amber" data-act="dcut"${uc > st.money ? ' disabled' : ''}>${ui.dcutOk === sel.id ? '本当に放出する' : '放出する(二軍のみ)'}${uc > 0 ? `・残りの契約 ${uc.toFixed(1)}億円を支払い` : ''}</button>` : '';
+        A.innerHTML = `<div class="hero"><h1 style="font-size:30px">ドラフト会議</h1><p>${st.season}年目オフ ・ 参加の前に</p></div>${dseg()}
+    <div class="card"><div class="row between"><b>登録 ${n}/${CAPN}人 ・ 空き枠 ${free}人 ・ 資金 ${st.money}億円</b>${helpBtn('draft', 'ドラフトの費用')}</div></div>
+    ${ui.msg ? `<div class="card" style="padding:8px 12px">${esc(ui.msg)}</div>` : ''}
+    <button class="btn primary" ${m > 0 ? '' : 'disabled'} data-act="dgo">${m > 0 ? '参加(最大' + m + '人)' : '空き枠がありません'}</button>
+    <div style="height:8px"></div><button class="btn" data-act="dnone">見送る</button>
+    <button class="btn" style="margin:10px 0;text-align:left" data-act="dfold">${ui.dopen ? '▼' : '▶'} 二軍を放出して枠を拡げる(${farm.length}人)</button>
+    ${ui.dopen ? `${sel ? detail(sel, rbtn, 'c') : ''}${H2('二軍 投手')}${T(farm.filter(p => p.pos === '投'), 'P')}${H2('二軍 野手')}${T(farm.filter(p => p.pos !== '投'), 'H')}` : ''}`; return;
+      }
+      if (d.rd >= d.n) { A.innerHTML = `<div class="hero"><h1 style="font-size:30px">ドラフト結果</h1><p>${st.season}年目オフ</p></div>${dseg()}${H2('指名選手')}${d.picks.length ? `<div class="card" style="padding:4px 12px">${d.picks.map((q, i) => drow(q, i + 1, true)).join('')}</div>` : '<div class="card"><div class="sub">今年は指名しませんでした。</div></div>'}<div class="sub" style="margin-bottom:12px">入団後の登録 ${n + d.picks.length}/${CAPN}人</div><button class="btn primary" data-act="djoin">${d.picks.length ? d.picks.length + '名を入団させる' : 'FA市場へ進む'}</button>`; return; }
+      A.innerHTML = `<div class="hero"><h1 style="font-size:30px">ドラフト会議</h1><p>${st.season}年目オフ ・ ${d.rd + 1}位指名</p></div>${dseg()}
+  <div class="card"><div class="row between"><b>${d.rd + 1}位指名候補(5名)から1人を選ぶ</b>${helpBtn('draft', 'ドラフトの費用')}</div><div class="sub">指名済み ${d.picks.length}/${d.n} ・ 登録 ${n}/${CAPN}人 ・ 資金 ${st.money}億円</div></div>${ui.msg ? `<div class="card" style="padding:8px 12px">${esc(ui.msg)}</div>` : ''}
+  <div class="card" style="padding:4px 12px">${d.c[d.rd].map(q => drow(q, 0, false)).join('')}</div>
+  <button class="btn primary" ${ui.dsel ? '' : 'disabled'} data-act="dpick">指名</button>`;
+    }
+    const canLose = (t, p) => {
+      const n = pos => t.players.filter(x => x.pos === pos).length - (p.pos === pos ? 1 : 0);
+      return n('投') < 14 ? '投手が14人を下回ります' : n('捕') < 3 ? '捕手が3人を下回ります' : n('野') < 14 ? '野手が14人を下回ります' : '';
+    };
+    function repairL(t) {
+      let fn = fgnN(t, t.L); const used = new Set(Object.values(t.L).filter(id => byId(t, id)));
+      FILL.forEach(k => {
+        if (t.L[k] && byId(t, t.L[k])) return;
+        const c = t.players.filter(p => !used.has(p.id) && slotOk(k, p) && !(p.fgn && fn >= FMAX)).sort((a, b) => slotVal(k, b) - slotVal(k, a))[0];
+        const c2 = c || t.players.filter(p => !used.has(p.id) && slotOk(k, p)).sort((a, b) => slotVal(k, b) - slotVal(k, a))[0]; // 外国人枠で埋まらないときは、枠を無視して埋める
+        if (c2) { t.L[k] = c2.id; used.add(c2.id); if (c2.fgn) fn++; } else delete t.L[k];
+      });
+      if (FILL.some(k => !t.L[k])) autoL(t);
+    } // どうしても埋まらないときは、全体を組み直す
+    function startOff() {
+      st.stage = 'renew'; st.rel = []; st.mk = [];
+      const me = mine(), inc = r1(28 + me.w * 0.35), d = r1(dueNext(me)); // 収入は、シーズン終了時に1年分がまとめて入る
+      st.inc = inc; st.money = r1(st.money + inc - d); st.info = '今季の収入 +' + inc + '億円' + (d > 0 ? ' / 複数年分の年俸 −' + d + '億円' : '');
+      mine().players.forEach(p => { p.decl = p.yrs <= 1 && !p.nw && vb(p) >= 66 && p.age >= 27 && p.age <= 36 && Math.random() < 0.4; });
+    }
+    // 市場の自由契約の投手・野手が、それぞれ10人に満たないときは、別のリーグから放出された選手(自由契約)で、10人まで補う(FAは数えず、作らない)
+    // 仕様は、他球団から出る自由契約の選手に合わせる:ベテラン(34〜36歳・総合は中くらい〜高め)が約5割、若手の低評価(26〜33歳・総合は低め)が約5割。投手:野手=約4:6(捕手は野手の約1割)
+    // 市場には、他球団から出る選手だけを並べる(自チームが手放した選手は、並べない)
+    const MK_MIN = 10;
+    function fillMk(list) {
+      const names = new Set([...st.teams.flatMap(t => t.players.map(p => p.name)), ...list.map(p => p.name)]);
+      const add = (pit, n) => {
+        for (let i = 0; i < n; i++) {
+          const pos = pit ? '投' : (Math.random() < 0.12 ? '捕' : '野'), vet = Math.random() < 0.54;
+          let q, tr = 0; do {
+            if (q) names.delete(q.name); // 範囲に入らないときは、作り直す(他球団から出る自由契約の範囲:ベテランは総合37〜68、若手は26〜44)
+            q = vet ? newP(pos, ri(46, 66), ri(34, 36), names) : newP(pos, ri(36, 48), 26 + Math.min(7, Math.floor(-Math.log(rnd(0.01, 1)) * 2)), names);
+          } while ((vet ? vb(q) < 37 || vb(q) > 68 : vb(q) < 26 || vb(q) > 44) && tr++ < 20);
+          q.mk = '自由'; q.ol = true; list.push(q);
+        }
+      };
+      const fr = list.filter(p => p.mk === '自由'), np = fr.filter(p => p.pos === '投').length, nh = fr.length - np; // 自由契約だけを数える
+      if (np < MK_MIN) add(true, MK_MIN - np); if (nh < MK_MIN) add(false, MK_MIN - nh);
+      return list;
+    }
+    // 他球団の契約満了選手:FA宣言する選手と、自由契約になる選手が市場に出る。抜けた分は補充する
+    function aiOff() {
+      const mk = [];
+      const star = new Set(st.teams.filter(t => t.id !== st.me).flatMap(t => t.players.filter(p => p.age >= 25 && p.age <= 36).map(p => p)).sort((a, b) => vb(b) - vb(a)).slice(0, 6)); // 各球団の主力級が、毎年FA市場に出る
+      st.teams.forEach(t => {
+        if (t.id === st.me) return; const names = new Set(t.players.map(p => p.name)), lost = [], order = [...t.players].sort((a, b) => (b.sal || 0) - (a.sal || 0));
+        t.players = t.players.filter(p => {
+          if (p.yrs > 1 && !star.has(p)) return true; const v = vb(p); let tag = star.has(p) ? 'FA' : null;
+          if (tag) { } else if (p.age >= 34 && Math.random() < 0.7) tag = '自由'; else if (v >= 66 && p.age >= 27 && p.age <= 36 && Math.random() < 0.4) tag = 'FA'; else if (v < 44 && p.age >= 26 && Math.random() < 0.6) tag = '自由';
+          if (tag) { p.mk = tag; if (tag === 'FA') { p.from = t.id; const i = order.indexOf(p); p.crk = i < 3 ? 'A' : i < 10 ? 'B' : 'C'; } mk.push(p); lost.push(p.pos); return false; }
+          p.yrs = ri(1, 3); p.sal = assess(p); p.nw = true; return true;
+        });
+        lost.forEach(pos => { const q = newP(pos, ri(46, 58), ri(22, 31), names); q.nw = true; t.players.push(q); }); autoL(t);
+      });
+      return mk;
+    }
+    function rollForm() { st.teams.forEach(t => t.players.forEach(p => { p.form = wpick([1, 2, 3, 4, 5], [10, 20, 40, 20, 10]); })); }
+    // 試合用のチーム(野球部シムの mkTeam と同じ作り:ポジションごとのラッパー)
+    function gTeam(t) {
+      const g = id => byId(t, id), L = { ...t.L }, bn = [...QSL, ...BSL].map(k => L[k]).filter(Boolean);
+      let restN = 0;
+      HK.slice().sort((a, b) => g(L[b]).fatigue - g(L[a]).fatigue).forEach(k => {
+        const cur = g(L[k]), hurtC = cur.inj > 0;
+        // 休養日:疲労が溜まった(REST_FAT以上)先発野手は、控えと交代して休む(同時に2人まで。疲労の高い順)。怪我の選手は常に交代
+        const rest = !hurtC && cur.fatigue >= REST_FAT && restN < 2;
+        if (!hurtC && !rest) return;
+        const used = new Set(Object.values(L));
+        const c = bn.filter(id => slotOk(k, g(id)) && !(g(id).inj > 0)).sort((x, y) => slotVal(k, g(y)) - slotVal(k, g(x)))[0]
+          || (hurtC ? (q => q ? q.id : null)(t.players.filter(p => !used.has(p.id) && slotOk(k, p) && !(p.inj > 0)).sort((x, y) => slotVal(k, y) - slotVal(k, x))[0]) : null); // 控えがいなければ二軍から
+        if (c && (hurtC || slotVal(k, g(c)) > slotVal(k, cur) * (cur.fatigue >= 50 ? 0.5 : 0.7))) { const i = bn.indexOf(c); if (i >= 0) bn[i] = L[k]; L[k] = c; if (rest) restN++; }
+      });
+      const mk = (id, pos) => { const w = Object.create(g(id)); w.pos = pos; return w; };
+      const sc = p => pnow(p, 0) * midOf(p) - (p.lp === t.gn ? 6 : 0), rel = RSL.map(k => g(t.L[k])).filter(p => !(p.inj > 0)).sort((x, y) => (avail(y) ? 1 : 0) - (avail(x) ? 1 : 0) || sc(y) - sc(x)); // 中継ぎは状態のよい順に登板(前の試合で投げた投手は後回し。疲労70以上・3連投の投手は、使える投手がいる限り、最後)
+      // 先発は、前の試合で投げた枠の次から、怪我でない先発を選ぶ(怪我の先発は飛ばして詰める。次の試合は、その投手の次の枠なので、連投にならない)
+      const NR = t.rotN || 6, ks = Array.from({ length: NR }, (_, i) => (t.rot + i) % NR), hk = k => !(g(t.L['p' + k]).inj > 0); let k0 = ks.find(k => hk(k) && t.L['p' + k] !== t.lsp); // 前の試合で投げた先発は外す(月初や各ステージの最初でも、連投にしない)
+      if (k0 == null) k0 = ks.find(hk); const sid = k0 != null ? t.L['p' + k0] : null;
+      const st0 = sid != null ? sid : (rel[0] ? rel[0].id : t.L.p0);
+      const pits = [mk(st0, '投'), ...rel.filter(p => p.id !== st0).map(p => mk(p.id, '投'))], closer = g(t.L.cl).inj > 0 ? null : mk(t.L.cl, '投');
+      const hit = [mk(L.c, '捕'), ...POSL.map(k => mk(L[k], k)), mk(L.dh, '指')];
+      return { name: t.id, players: [...hit, ...pits, ...(closer ? [closer] : [])], us: true, stk: k0, pits, closer, order: autoOrder(hit), bench: bn.map(id => g(id)).filter(p => !(p.inj > 0)), on: new Set(HK.map(k => L[k])) };
+    }
+    // 9回以降、リードが1〜3点のとき、クローザーに交代する
+    function closerCheck(g) {
+      if (g.over || g.outs !== 0 || g.inn < 9) return;
+      const def = 1 - g.half, ft = g.teams[def], lead = g.sc[def] - g.sc[1 - def], c = ft.closer;
+      if (!c || ft.closerUsed || lead < 1 || lead > 3 || ft.pitcher === c || !avail(c)) return;
+      const cur = ft.pitcher; ft.closerUsed = true; ft.queue = ft.queue.filter(x => x !== c); ft.pitcher = c;
+      g.log.push({ k: 'hdr', t: `投手交代(抑え)  ${cur.name} → ${c.name}` });
+    }
+    function rates(t) { const g = gTeam(t); return teamRates({ players: [...g.players.filter(p => p.pos !== '投'), ...PSL.map(k => byId(t, t.L[k]))] }); }
+    const ratesHtml = r => `<span>打${chip(r.bat)}</span> <span>投${chip(r.pit)}</span> <span>守${chip(r.def)}</span> <span>走${chip(r.run)}</span>`;
+    const REST_FAT = 30; // 先発野手の疲労がこの値以上になると、休養日(控えと交代)
+    const INJ = [], SUBS = { 代打: 0, 代走: 0, 守備固め: 0 }, SWAP = [];
+    // 一軍の投手(先発・中継ぎ・抑え)が怪我をしたら、二軍から最も適性の高い(その枠の評価が最も高い)健康な投手と入れ替える。
+    // 怪我が治っても、入れ替えたまま(AI球団は、月が替わると組み直す。自球団は、編成で戻すまでそのまま)。二軍に健康な投手がいなければ、そのまま(先発は飛ばして詰める)
+    function fixInj(t, po) {
+      [...(po ? SPL.slice(0, PO_ROT) : SPL), 'cl', ...RSL].forEach(k => {
+        const p = byId(t, t.L[k]); if (!p || !(p.inj > 0)) return;
+        const used = new Set(Object.values(t.L)), fn = fgnN(t, t.L) - (p.fgn ? 1 : 0);
+        const spare = po && SPL.includes(k) ? SPL.slice(PO_ROT).map(x => t.L[x]) : []; // ポストシーズンは、使わない先発5・6の枠の投手も候補にする
+        const c = t.players.filter(x => x.pos === '投' && (!used.has(x.id) || spare.includes(x.id)) && !(x.inj > 0) && slotOk(k, x) && (spare.includes(x.id) || !(x.fgn && fn >= FMAX))).sort((a, b) => slotVal(k, b) - slotVal(k, a))[0];
+        if (c) {
+          const from = spare.length ? SPL.slice(PO_ROT).find(x => t.L[x] === c.id) : null; if (from) t.L[from] = p.id; // 先発5・6の枠の投手とは、枠を入れ替える(怪我人は、使わない枠へ)
+          t.L[k] = c.id; p.pin = false; SWAP.push({ t, k, out: p, inn: c });
+        }
+      });
+    }
+    // ---- 試合中の起用:代打・代走・守備固め(エンジンの doSub を使う)
+    const bq = p => 0.65 * eff(p, 'meet') + 0.35 * eff(p, 'power');
+    const fdv = (p, pos) => fieldEff(p, pos);
+    const okPos = (c, pos) => pos === '捕' ? c.pos === '捕' : pos === '指' ? c.pos !== '投' : c.pos === '野';
+    function subIn(g, ti, old, real, label) {
+      doSub(g, ti, old.bo, real, label); const nw = g.teams[ti].order[old.bo];
+      for (let i = 0; i < 3; i++)if (g.bases[i] === old) g.bases[i] = nw; // 塁上の走者も入れ替える
+      nw.via = label; bsOf(g, real); SUBS[label]++; return nw;
+    }
+    // 代走:8回以降、同点か1点ビハインドで、一・二塁の走者より走力が15以上高い控えがいるとき
+    // 代打:7回以降、2点リード〜3点ビハインドで、得点圏の走者がいる(2点差以内なら、走者がいる)とき、打撃力(左右の相性込み)が6以上高い控えがいるとき
+    function pinchCheck(g) {
+      if (g.over || g.inn < 7) return;
+      const ti = g.half, t = g.teams[ti], ft = g.teams[1 - ti]; if (!t.bench || !t.bench.length) return;
+      const diff = g.sc[ti] - g.sc[1 - ti], late = g.inn >= 8;
+      if (late && diff <= 0 && diff >= -1 && g.outs < 2) {
+        for (const i of [0, 1]) {
+          const r = g.bases[i]; if (!r) continue;
+          const c = t.bench.filter(x => okPos(x, r.pos) && !(x.inj > 0)).sort((a, b) => spd(b) - spd(a))[0];
+          if (c && spd(c) - spd(r) >= 15) { subIn(g, ti, r, c, '代走'); return; }
+        }
+      }
+      const b = t.order[g.ord[ti]]; if (!b || b.sub || b.pos === '投') return;
+      const runner = g.bases[0] || g.bases[1] || g.bases[2], risp = (g.bases[1] || g.bases[2]) && g.outs < 2;
+      if (!(diff >= -3 && diff <= 2 && (risp || (runner && g.outs < 2 && Math.abs(diff) <= 2)))) return;
+      const q = x => bq(x) * handMul(x, ft.pitcher), c = t.bench.filter(x => okPos(x, b.pos) && !(x.inj > 0)).sort((x, y) => q(y) - q(x))[0];
+      if (c && q(c) - q(b) >= 6) subIn(g, ti, b, c, '代打');
+    }
+    // 守備固め:イニングの頭に、守備の差が10以上ある控えがいれば替える。先発は、8回以降に1〜3点リードしているとき。代打・代走で入った選手は、7回以降で3点差以内ならいつでも(最大2人まで)
+    function defSubs(g) {
+      if (g.over || g.inn < 7) return;
+      const di = 1 - g.half, t = g.teams[di]; if (!t.bench || !t.bench.length) return;
+      const diff = g.sc[di] - g.sc[1 - di];
+      for (let n = 0; n < 2; n++) {
+        let best = null;
+        t.order.forEach(o => {
+          if (o.pos === '指') return;
+          if (!(o.sub ? Math.abs(diff) <= 3 : (g.inn >= 8 && diff >= 1 && diff <= 3))) return;
+          t.bench.filter(c => okPos(c, o.pos) && !(c.inj > 0)).forEach(c => {
+            const gap = fdv(c, o.pos) - fdv(o, o.pos), w = gap * (DEFW[o.pos] || 1);
+            if (gap >= 10 && (!best || w > best.w)) best = { o, c, w };
+          });
+        });
+        if (!best) break; subIn(g, di, best.o, best.c, '守備固め');
+      }
+    }
+    // 怪我:出場した選手に、試合ごとに起こる。疲労が高いほど、投手は球数が多いほど起こりやすい
+    const RP_FAT = 70, RP_CONS = 3; // 中継ぎ・抑えは、疲労70以上の投手と、3連投した投手を、ほかに使える投手がいる限り、使わない
+    const avail = p => !(p.fatigue >= RP_FAT) && !((p.cs || 0) >= RP_CONS);
+    const REC_DAY = 3; // 一軍で登板しない日の、投手の疲労回復(1日あたり。回復力をかける)。先発で月に約+18、中継ぎで約+27溜まる水準
+    const INJ_FAT = 60; // 疲労がこの値までは、故障率は上がらない(これを超えると、1上がるごとに2%増える)
+    function hurt(t, p, pit, pc) {
+      const r = (pit ? 0.0035 + pc * 0.00003 : 0.0022) * (1 + Math.max(0, p.fatigue - INJ_FAT) / 50);
+      if (Math.random() >= r) return; const q = Math.random(), n = q < 0.55 ? ri(8, 20) : q < 0.85 ? ri(21, 50) : q < 0.97 ? ri(51, 110) : ri(120, 200);
+      p.inj = n; if (n >= 50) { const ks = keysOf(p), k = ks[ri(0, ks.length - 1)]; p.st[k] = Math.max(15, p.st[k] - ri(1, 3)); } // 重傷は能力が少し落ちる
+      INJ.push({ t, p, n });
+    }
+    function playGame(A, B, po) { // po:ポストシーズン(得失点・個人成績に入れない。勝者と得点を返す)
+      fixInj(A, po); fixInj(B, po); // 怪我をした投手は、試合の前に、二軍の最適な投手と入れ替える(ポストシーズンは、先発5・6の投手も候補)
+      const gA = gTeam(A), gB = gTeam(B), g = mkGame(gA, gB); g.noCold = true;
+      let key0 = -1; for (let n = 0; !g.over && n < 3000; n++) { const key = g.inn * 2 + g.half; if (key !== key0) { key0 = key; closerCheck(g); defSubs(g); } pinchCheck(g); stepPA(g); } stepAll(g);
+      [[A, 0, gA], [B, 1, gB]].forEach(([t, i, gt]) => {
+        const ichi = new Set(Object.values(t.L)), on = gt.on, gn = (t.gn || 0) + 1, onG = p => on.has(p.id) || !!g.bs[p.id];
+        t.players.forEach(p => {
+          const z = g.pst[p.id];
+          const y = p.lp === gn - 1; // 前の試合でも投げた
+          const hv = p.inj > 0; if (hv) p.inj--;
+          if (!(z && z.pc > 0)) p.cs = 0; // 連投の回数(登板しない日で、リセット)
+          if (z && z.pc > 0) { p.fatigue = Math.min(100, p.fatigue + z.pc * 0.16 + 3 + (y ? 4 * (2 - recOf(p)) : 0)); p.lp = gn; p.cs = y ? (p.cs || 0) + 1 : 1; } // 球数分+登板の負担3+連投4
+          else if (!ichi.has(p.id)) p.fatigue = Math.max(0, p.fatigue - 3 * (p.pos === '投' ? recOf(p) : 1));
+          else if (onG(p)) p.fatigue = Math.min(100, p.fatigue + (p.pos === '捕' ? 1.8 : 0.7)); // 出場:捕手は疲れやすい
+          else if (!y) p.fatigue = Math.max(0, p.fatigue - (p.pos === '投' ? REC_DAY * recOf(p) : 8)); // 一軍で出番のない野手(休養日)は、1日で大きく回復
+          if (!hv) { if (z && z.pc > 0) hurt(t, p, true, z.pc); else if (onG(p)) hurt(t, p, false, 0); }
+        }); // 前の試合で投げた投手は、回復しない
+        t.gn = gn; t.lsp = gt.pits[0].id; if (gt.stk != null) t.rot = (gt.stk + 1) % (t.rotN || 6); if (!po) { t.rs += g.sc[i]; t.ra += g.sc[1 - i]; }
+      });
+      const idx = new Map();[...A.players, ...B.players].forEach(p => idx.set(p.id, p));
+      if (!po) {
+        const tmOf = new Map(); A.players.forEach(p => tmOf.set(p.id, A)); B.players.forEach(p => tmOf.set(p.id, B)); // チームの今季の合計
+        Object.keys(g.bs).forEach(id => { const T = tmOf.get(+id), b = g.bs[id]; if (!T) return; const x = (T.ts || (T.ts = newTS())).b; for (const k in x) x[k] += b[k] || 0; });
+        Object.keys(g.pst).forEach(id => {
+          const T = tmOf.get(+id), b = g.pst[id]; if (!T) return; const ts = fillTS(T.ts || (T.ts = newTS())), x = ts.p; for (const k in x) x[k] += b[k] || 0;
+          const gt = T === A ? gA : gB, role = !b.mid ? 's' : (gt.closer && gt.closer.id === +id ? 'c' : 'm'), y = ts.r[role]; y.g++; for (const k of ['outs', 'r', 'k', 'bb', 'h']) y[k] += b[k] || 0;
+        }); // 先発・中継ぎ・抑え
+        [A, B].forEach((T, i) => { const f = fillTS(T.ts || (T.ts = newTS())).f, q = tfOf(g, i); for (const gk of ['c', 'i', 'o', 'p']) { f[gk].ch += q[gk].ch; f[gk].e += q[gk].e; } f.dp += q.dp; f.sb += q.sb; f.cs += q.cs; });
+      }
+      if (!po) Object.keys(g.bs).forEach(id => { const p = idx.get(+id), b = g.bs[id]; if (!p) return; const x = p.bt || (p.bt = { g: 0, pa: 0, ab: 0, h: 0, hr: 0, rbi: 0, bb: 0, k: 0, sb: 0, cs: 0, sh: 0 }); x.g++;['pa', 'ab', 'h', 'hr', 'rbi', 'bb', 'k', 'sb', 'cs', 'sh'].forEach(k => { x[k] += b[k] || 0; }); });
+      if (!po) Object.keys(g.pst).forEach(id => { const p = idx.get(+id), b = g.pst[id]; if (!p) return; const x = p.pt || (p.pt = { g: 0, outs: 0, pc: 0, h: 0, k: 0, bb: 0, r: 0 }); x.g++;['outs', 'pc', 'h', 'k', 'bb', 'r'].forEach(k => { x[k] += b[k] || 0; }); });
+      const mset = new Set(); if (GROW) { const me = st.teams.find(t => t.id === st.me); if (me && (A === me || B === me)) me.players.forEach(p => mset.add(p.id)); }
+      gameGrow(g, idx, [gA, gB], mset);
+      return po ? { w: g.winner, sa: g.sc[0], sb: g.sc[1] } : g.winner;
+    }
+    const newRS = () => ({ g: 0, outs: 0, r: 0, k: 0, bb: 0, h: 0 });
+    const newTS = () => ({ b: { pa: 0, ab: 0, h: 0, hr: 0, bb: 0, k: 0, sb: 0, cs: 0, sh: 0 }, p: { outs: 0, h: 0, k: 0, bb: 0, r: 0 }, r: { s: newRS(), m: newRS(), c: newRS() }, f: newTF() });
+    const fillTS = x => { if (!x.r) x.r = { s: newRS(), m: newRS(), c: newRS() }; if (!x.f) x.f = newTF(); return x; }; // 古い記録に、足りない項目を足す
+    // ---- ポストシーズン:レギュラーシーズンの上位3チームでプレーオフ → リーグ代表が日本シリーズ(他リーグ王者と対戦)
+    // ファーストステージ(2位対3位・3戦2勝)→ファイナルステージ(1位に1勝のアドバンテージ・先に4勝)→日本シリーズ(先に4勝)
+    const PO_REST = 20; // 各ステージの前に、休養日で全員の疲労が回復する量
+    const JS_BOOST = 2; // 他リーグ王者は、自チームとリーグ代表を除くトップチームを、全能力+2で強化した相手(リーグ代表の勝率は約35〜40%)
+    const PO_ROT = 4; // ポストシーズンの先発は、先発1〜4の4人で回す(先発5・6は使わない)
+    const PO_WIN = 0.5, PO_LOSE = 0.2; // 自チームは、ポストシーズンの試合ごとに、勝ちで0.5億円、負けで0.2億円を受け取る(再試合になった引き分けと、1勝のアドバンテージは対象外)
+    // 自チームが出たシリーズの収入を、その場で資金に加える
+    function payPost(r) {
+      const me = st.me; if (r.a !== me && r.b !== me) return; const isA = r.a === me; let w = 0, l = 0;
+      r.games.forEach(x => { if ((x.w === 0) === isA) w++; else l++; });
+      r.mw = w; r.ml = l; r.pay = r1(w * PO_WIN + l * PO_LOSE); st.money = r1(st.money + r.pay); st.po.earn = r1((st.po.earn || 0) + r.pay);
+    }
+    // ---- 優勝のポップアップ(野球部シムの甲子園優勝と同じ形式):リーグ優勝(レギュラーシーズン1位)と、日本一
+    // 文言:初回は「初優勝」「初の日本一」、前の年も優勝なら「N年連続M回目」、間があいたら「N年ぶりM回目」(判定は、その年を記録する前の履歴で行う)
+    function titleNote(key, first) {
+      st.titles = st.titles || { lg: [], js: [] };
+      const hy = (st.hist || []).filter(h => key === 'lg' ? h.rank === 1 : h.res === '日本一').map(h => h.y);
+      const arr = [...new Set([...(st.titles[key] || []), ...hy])], y = st.season, prev = arr.filter(v => v < y), last = prev.length ? Math.max(...prev) : null;
+      let note;
+      if (last === null) note = first;
+      else if (last === y - 1) { let n = 1, c = y - 1; while (arr.includes(c)) { n++; c--; } note = `${n}年連続`; }
+      else note = `${y - last}年ぶり`;
+      if (!arr.includes(y)) arr.push(y); st.titles[key] = arr;
+      return last === null ? note : `${note}${arr.length}回目`;
+    }
+    const CELE_CUP = '<svg width="56" height="56" viewBox="0 0 64 64" aria-hidden="true"><path d="M20 8h24v16a12 12 0 01-24 0z" fill="#d99f1a"/><path d="M20 13h-8c0 10 4 15 10 16M44 13h8c0 10-4 15-10 16" fill="none" stroke="#d99f1a" stroke-width="3" stroke-linecap="round"/><path d="M32 36v10" stroke="#d99f1a" stroke-width="4"/><path d="M24 46h16v8H24z" fill="#d99f1a" stroke="#d99f1a" stroke-width="3" stroke-linejoin="round"/></svg>';
+    let CELE = null; // 処理の途中で決まった優勝を、画面の更新後に出すための一時置き場
+    let modalOpener = null;
+    function celebrate(kind, note) {
+      const m = document.getElementById('modal');
+      m.innerHTML = `<div class="cele" role="dialog" aria-modal="true" aria-labelledby="mt">${CELE_CUP}<div class="cs">${esc(st.me)}</div><h3 class="ct" id="mt">${st.season}年目 ${kind === 'js' ? '日本一' : 'リーグ優勝'}</h3><div class="cn">${esc(note)}</div><button class="btn primary" data-act="closeModal">閉じる</button></div>`;
+      m.classList.add('cm'); m.hidden = false; document.body.style.overflow = 'hidden'; modalOpener = null; const c = m.querySelector('button'); if (c) c.focus();
+    }
+    function closeModal() { const m = document.getElementById('modal'); m.hidden = true; m.innerHTML = ''; m.classList.remove('cm'); document.body.style.overflow = ''; if (modalOpener && document.contains(modalOpener)) modalOpener.focus(); modalOpener = null; }
+    function flushCele() { if (CELE) { const c = CELE; CELE = null; celebrate(c.kind, c.note); } }
+    function startPost() {
+      st.teams.forEach(t => { t.Lreg = { ...t.L }; }); // ポストシーズンの編成は、終わると、元の編成に戻す
+      const T = table(), pool = PREFS.filter(n => !st.teams.some(t => t.id === n)); // 日本シリーズの相手は、自リーグにいない都道府県から、毎回ランダムに選ぶ
+      st.stage = 'po'; st.po = { step: 0, seeds: T.slice(0, 3).map(t => t.id), ser: [], f1: null, rep: null, champ: null, opp: pool[Math.floor(Math.random() * pool.length)] };
+      if (T[0].id === st.me) CELE = { kind: 'lg', note: titleNote('lg', '初優勝') };
+    } // リーグ優勝(自チームが1位)のポップアップ。日本シリーズ出場決定は出さない
+    // 先に need 勝したほうが勝ち。引き分けは再試合。advA:Aが最初から持っている勝ち数
+    function playSeries(name, A, B, need, advA) {
+      [A, B].forEach(t => {
+        if (t.id !== st.me && !t.virtual) autoL(t); // ステージごとに、AI球団は編成を組み直す(自球団は、ステージの前に、自分で編成する)
+        setRoles(t, true); t.rot = 0; t.rotN = PO_ROT; t.players.forEach(p => { p.fatigue = Math.max(0, p.fatigue - PO_REST); p.cs = 0; });
+      }); // 各ステージも、先発1から始め、先発4人で回す
+      const games = []; let wa = advA || 0, wb = 0;
+      while (wa < need && wb < need && games.length < 14) {
+        let r = playGame(A, B, true), k = 0; while (r.w < 0 && k++ < 2) r = playGame(A, B, true);
+        if (r.w < 0) r.w = Math.random() < 0.5 ? 0 : 1;
+        if (r.w === 0) wa++; else wb++; games.push({ sa: r.sa, sb: r.sb, w: r.w });
+      }
+      [A, B].forEach(t => { delete t.rotN; }); // 通常の6人ローテーションに戻す
+      return { name, a: A.id, b: B.id, advA: advA || 0, need, games, wa, wb, winner: wa >= need ? A.id : B.id };
+    }
+    function stepPost() {
+      const po = st.po, T = table(), g = id => st.teams.find(t => t.id === id);
+      if (po.step === 0) { const r = playSeries('ファーストステージ', g(po.seeds[1]), g(po.seeds[2]), 2, 0); po.ser.push(r); payPost(r); po.f1 = r.winner; }
+      else if (po.step === 1) { const r = playSeries('ファイナルステージ', g(po.seeds[0]), g(po.f1), 4, 1); po.ser.push(r); payPost(r); po.rep = r.winner; }
+      else if (po.step === 2) {
+        const rep = g(po.rep), src = T.find(t => t.id !== st.me && t.id !== po.rep);
+        const v = JSON.parse(JSON.stringify(src)); v.id = po.opp; v.virtual = true; v.players.forEach(p => { keysOf(p).forEach(k => { p.st[k] = Math.min(98, p.st[k] + JS_BOOST); }); p.fatigue = 0; p.inj = 0; }); setRoles(v);
+        const r = playSeries('日本シリーズ', rep, v, 4, 0); r.from = src.id; po.ser.push(r); payPost(r); po.champ = r.winner; if (r.winner === st.me) CELE = { kind: 'js', note: titleNote('js', '初の日本一') };
+      }
+      po.step++;
+    }
+    function doPost() { stepPost(); autoPost(); save(); render(); flushCele(); }
+    // 自チームが出場しない年や、敗退したあとは、日本シリーズの結果まで、一気に進める
+    function postOut() { const po = st.po, m = po.ser.filter(r => r.a === st.me || r.b === st.me), last = m[m.length - 1]; return !po.seeds.includes(st.me) || (!!last && last.winner !== st.me); }
+    function autoPost() { if (st.stage === 'po' && st.po && st.po.step < 3 && postOut()) while (st.po.step < 3) stepPost(); }
+    // ポストシーズンの結果(自チーム)
+    function postResult() {
+      const po = st.po, me = st.me; const mine = po.ser.filter(r => r.a === me || r.b === me), last = mine[mine.length - 1];
+      if (!last) return '出場なし';
+      if (last.name === '日本シリーズ') return last.winner === me ? '日本一' : '日本シリーズ敗退';
+      return last.name + '敗退';
+    }
+    function endPost() { st.teams.forEach(t => { if (t.Lreg) { t.L = t.Lreg; delete t.Lreg; repairL(t); } }); const me = mine(), po = st.po; st.hist = st.hist || []; st.hist.push({ y: st.season, rank: rank(), w: me.w, l: me.l, d: me.d || 0, res: postResult(), champ: po.champ, earn: po.earn || 0 }); startOff(); save(); render(); }
+    // 画面
+    function rPost() {
+      const po = st.po, me = st.me, nm = id => id === me ? `<b>${esc(id)}</b> <span class="tg">自</span>` : esc(id);
+      const ser = po.ser.map(r => `<div class="card" style="padding:8px 12px;margin-top:8px"><b>${r.name}</b> <span class="sub">先に${r.need}勝${r.advA ? '(1位に1勝のアドバンテージ)' : ''}${r.name === '日本シリーズ' ? '・相手は他リーグ代表' : ''}</span><div style="margin:4px 0">${nm(r.a)} ${r.wa}勝 - ${r.wb}勝 ${nm(r.b)} → <b>${nm(r.winner)}</b>の勝ち</div>${r.pay != null ? `<div class="sub" style="color:var(--good)">自チームの収入 +${r.pay.toFixed(1)}億円(${r.mw}勝${r.ml}敗)</div>` : ''}${r.games.map((x, i) => `<div class="sub">第${i + 1}戦 ${esc(r.a)} ${x.sa} - ${x.sb} ${esc(r.b)}</div>`).join('')}</div>`).join('');
+      const inPO = po.seeds.includes(me);
+      return `<div class="card" style="margin-top:12px"><div class="row between"><b>ポストシーズン</b>${helpBtn('po', 'ポストシーズン')}</div>
+  <div class="sub" style="margin-top:4px">プレーオフ進出:${po.seeds.map((id, i) => `${i + 1}位 ${nm(id)}`).join(' ・ ')}${inPO ? '' : '(自チームは出場できません)'}</div>
+  ${po.earn ? `<div style="margin-top:6px"><b>ポストシーズン収入 +${po.earn.toFixed(1)}億円</b></div>` : ''}${po.champ ? `<div style="margin-top:6px"><b>日本一は ${nm(po.champ)}${po.champ === me ? '!' : ''}</b>${po.champ === me ? '' : '(自チーム:' + postResult() + ')'}</div>` : ''}
+  ${ser}</div>`;
+    }
+    const postLabel = () => { const po = st.po, s = po.seeds; return po.step === 0 ? `ファーストステージ(${s[1]} 対 ${s[2]})へ` : po.step === 1 ? `ファイナルステージ(${s[0]} 対 ${po.f1})へ` : po.step === 2 ? `日本シリーズ(${po.rep} 対 ${po.opp})へ` : '契約更改へ'; };
+    // 試合出場による成長:出た試合ごとに、伸びしろ(上限−現在値)の一部が伸びる。全6球団が対象。
+    // 打者は打席の内容(安打・四球・本塁打・打点・盗塁)、野手は守備機会、投手は球数・奪三振・好投で伸びる。年齢補正は練習と同じ
+    const ageF = p => { const a = p.age || 27, pk = p.pk || 29; return a <= pk ? 1 : a <= pk + 4 ? 0.7 : 0.4; }; // 年齢補正:ピーク年齢までは1、その後4年は0.7、以降は0.4
+    let GROW = null; // 月の報告用に、自球団の成長をためる
+    function gameGrow(g, idx, gts, mset) {
+      const grow = (p, k, x) => {
+        if (!p || x <= 0 || !p.cap || !(k in p.cap)) return;
+        const room = p.cap[k] - p.st[k]; if (room <= 0) return;
+        const d = room * x * TUNE.gg * ap(p, k) * ageF(p) * rnd(0.7, 1.3);
+        p.st[k] += d; if (GROW && mset.has(p.id)) GROW.push({ n: p.name, k, d });
+      };
+      Object.keys(g.bs).forEach(id => {
+        const p = idx.get(+id), b = g.bs[id]; if (!p || p.pos === '投') return;
+        grow(p, 'meet', 0.0005 + 0.0004 * Math.min(b.h || 0, 3) + 0.0002 * Math.min(b.bb || 0, 2));
+        grow(p, 'power', 0.0003 + 0.001 * Math.min(b.hr || 0, 2) + 0.0002 * Math.min(b.rbi || 0, 4));
+        grow(p, 'speed', 0.0003 + 0.0007 * Math.min(b.sb || 0, 3));
+      });
+      gts.forEach(gt => {
+        const seen = new Set(); (gt.hitters || []).forEach(w => {
+          if (seen.has(w.id)) return; seen.add(w.id);
+          if (w.pos === '指' || w.pos === '投') return;
+          const f = g.fs[w.id]; if (!f) return;
+          grow(idx.get(w.id), 'field', 0.0004 + 0.00015 * Math.min(f.ch || 0, 6));
+        });
+      });
+      Object.keys(g.pst).forEach(id => {
+        const p = idx.get(+id), z = g.pst[id]; if (!p || p.pos !== '投') return;
+        const f = Math.min(z.pc || 0, 130) / 100;
+        grow(p, 'stam', 0.005 * f);['velo', 'ctrl', 'brk'].forEach(k => grow(p, k, 0.003 * f));
+        grow(p, 'brk', 0.0003 * Math.min(z.k || 0, 8)); grow(p, 'velo', 0.0002 * Math.min(z.k || 0, 8));
+        if ((z.r || 0) <= 1 && (z.outs || 0) >= 12) ['ctrl', 'brk', 'velo'].forEach(k => grow(p, k, 0.002));
+      });
+    }
+    // 個人練習(野球部シムと同じ考え方):選んだ能力が、伸びしろ×適性×疲労補正で伸びる。休養を選ぶと伸びない代わりに疲労が回復する
+    function bestKey(p) { let b = null, bv = -1; keysOf(p).forEach(k => { const v = (p.cap[k] - p.st[k]) * ap(p, k); if (v > bv) { bv = v; b = k; } }); return b; }
+    function trKey(p) { let k = p.tr; if (!k || (k !== 'rest' && !(k in p.st))) k = p.tr = bestKey(p); return k; }
+    function train(t, gl) {
+      t.players.forEach(p => {
+        const k = trKey(p);
+        if (k === 'rest') { p.fatigue = clamp(p.fatigue - jit(30, 0.25), 0, 100); return; }
+        const fm = p.fatigue < 40 ? 1 : p.fatigue < 70 ? 0.8 : 0.55, af = ageF(p);
+        const g = Math.max(0, p.cap[k] - p.st[k]) * TUNE.ind * ap(p, k) * fm * af * rnd(0.6, 1.4);
+        p.st[k] += g; if (gl && g > 0.05) gl.push({ n: p.name, k, d: g });
+      });
+    }
+    // 二軍の急成長:二軍の若手が、まれに、練習中の能力が一気に伸びて、伸びしろも広がる(全6球団が対象。1チーム年1人前後)
+    const SURGE_P = 0.003;
+    function surge(t) {
+      const out = [];
+      t.players.forEach(p => {
+        if (roleOf(t, p.id)) return; // 二軍のみ
+        const yl = (p.pk || 29) - (p.age || 27); if (yl < 3) return; // ピークまで3年以上ある若手のみ
+        const k = trKey(p); if (k === 'rest' || !p.cap || !(k in p.st)) return; // 休養の月は起きない
+        if (rnd(0, 1) > SURGE_P * Math.min(2, 1 + 0.2 * (yl - 3))) return; // 若いほど、少し起きやすい
+        p.cap[k] = Math.min(98, p.cap[k] + ri(4, 8)); // 伸びしろが広がる
+        const room = p.cap[k] - p.st[k]; if (room <= 0) return;
+        const d = Math.min(room, Math.max(3, room * rnd(0.3, 0.5))); // 伸びしろの3〜5割ほど(最低3)
+        p.st[k] += d; p.sg = st.season; out.push({ p, k, d });
+      });
+      return out;
+    }
+    const wpct = t => t.w + t.l ? t.w / (t.w + t.l) : 0; // 勝率:引き分けは除く
+    const table = () => [...st.teams].sort((a, b) => wpct(b) - wpct(a) || b.w - a.w || (b.rs - b.ra) - (a.rs - a.ra));
+    const rank = () => table().findIndex(t => t.id === st.me) + 1;
+    function playMonth() {
+      const T = st.teams, b = rank();
+      const gl = [], sgl = []; GROW = gl; st.info = ''; INJ.length = 0; SWAP.length = 0; repairL(mine());
+      T.forEach(t => {
+        t.mw = t.ml = t.md = 0; const me = t.id === st.me;
+        if (!me) t.players.forEach(p => { p.tr = p.fatigue >= 60 ? 'rest' : bestKey(p); });
+        train(t, me ? gl : null); surge(t).forEach(x => { if (me) sgl.push(x); }); if (!me) autoL(t);
+      });
+      T.forEach(setRoles); // 兼用型の当てはまる資質を、今月の起用枠で決める
+      T.forEach(t => { t.rot = 0; }); // 毎月、先発のローテーションは、一番上(先発1)から始める(疲労の高い先発は、下の枠に回せる)
+      for (let r = 0; r < GPM; r++) {
+        const o = shuffle([...T]);
+        for (let i = 0; i < 6; i += 2) {
+          const [A, B] = r % 2 ? [o[i], o[i + 1]] : [o[i + 1], o[i]];
+          const w = playGame(A, B);
+          if (w === 0) { A.mw++; B.ml++; } else if (w === 1) { B.mw++; A.ml++; } else { A.md++; B.md++; }
+        }
+      }
+      GROW = null;
+      T.forEach(t => { t.w += t.mw; t.l += t.ml; t.d = (t.d || 0) + t.md; });
+      const me = mine();
+      st.log = { swp: SWAP.filter(x => x.t === me).map(x => `${slName(x.k)}:${x.out.name}(怪我)→${x.inn.name}`), inj: INJ.filter(x => x.t === me).map(x => `${x.p.name}(${x.p.pos}) ${x.n <= 20 ? '軽傷' : x.n <= 50 ? '中等度' : '重傷'} 約${Math.max(1, Math.round(x.n / 18))}か月`), m: MN[st.mi], sg: sgl.map(x => `${x.p.name}(${x.p.pos}) ${LBL[x.k]} +${Math.round(x.d)}`), w: me.mw, l: me.ml, d: me.md, b, a: rank(), gains: Object.values(gl.reduce((m, x) => { const k = x.n + '|' + x.k; (m[k] = m[k] || { n: x.n, k: x.k, d: 0 }).d += x.d; return m; }, {})).filter(x => x.d > 0.05).sort((x, y) => y.d - x.d).slice(0, 4).map(x => `${x.n} ${LBL[x.k]} +${x.d.toFixed(1)}`), tired: Object.values(me.L).map(id => byId(me, id)).filter(p => p.fatigue >= 70).length };
+      st.mi++; if (st.mi >= MN.length) startPost(); rollForm(); st.fa = mkFA(); ui.sel = ui.rel = null; ui.msg = ''; autoPost(); save(); render(); flushCele();
+    }
+    // AI球団:市場に残った有力選手を、成績の悪い球団から順に獲得する
+    function aiSign() {
+      const order = table().filter(t => t.id !== st.me).reverse(), rest = (st.mk || []).filter(p => vb(p) >= 55).sort((a, b) => vb(b) - vb(a));
+      rest.forEach((p, i) => {
+        const t = order[i % order.length], inL = new Set(Object.values(t.L));
+        const w = t.players.filter(x => x.pos === p.pos && !inL.has(x.id)).sort((a, b) => vb(a) - vb(b))[0]; if (!w) return;
+        t.players = t.players.filter(x => x !== w); p.mk = null; p.from = null; p.decl = false; p.sal = assess(p); p.yrs = ri(2, 3); p.nw = true; t.players.push(p);
+      });
+    }
+    // AI球団もドラフトで5人の新人を獲得する
+    function aiDraft() {
+      st.teams.forEach(t => {
+        if (t.id === st.me) return; const names = new Set(t.players.map(p => p.name));
+        DB.forEach(b => {
+          const pos = pick(['投', '投', '野', '野', '捕']), q = newP(pos, b + ri(-3, 3), ri(18, 23), names); q.sal = DRAFT_SAL; q.yrs = 1; q.nw = true;
+          const inL = new Set(Object.values(t.L)), w = t.players.filter(x => x.pos === pos && !inL.has(x.id)).sort((a, c) => vb(a) - vb(c))[0];
+          if (w) { t.players = t.players.filter(x => x !== w); t.players.push(q); }
+        });
+      });
+    }
+    function newSeason() {
+      const got = (st.rel || []).filter(p => p.mk === 'FA' && p.from === st.me), gain = Math.round(got.reduce((a, p) => a + compAmt(p), 0) * 10) / 10;
+      aiSign(); aiDraft();
+      const bonus = [8, 7, 6, 5, 4, 3][rank() - 1]; st.money = Math.round((st.money + bonus) * 10) / 10;
+      st.teams.forEach(t => {
+        t.w = t.l = t.d = t.rs = t.ra = 0; t.ts = null; t.rot = 0; t.lsp = null; t.gn = 0;
+        t.players.forEach(p => { if (p.nw) p.nw = false; else p.yrs = Math.max(1, (p.yrs || 1) - 1); p.decl = false; p.mk = null; if (p.dr && p.drY < st.season) p.dr = 0; p.pro = proOf(p) + 1; p.age++; p.fatigue = 0; p.lp = null; p.cs = 0; p.inj = Math.max(0, (p.inj || 0) - 40); p.bt = p.pt = null; if (p.age >= (p.pk || 29) + 2) keysOf(p).forEach(k => { if (Math.random() < 0.6) { p.st[k] = Math.max(15, p.st[k] - ri(p.age >= (p.pk || 29) + 5 ? 1 : 0, p.age >= (p.pk || 29) + 5 ? 4 : 3)); p.cap[k] = Math.min(p.cap[k], Math.round(p.st[k]) + 2); } }); });
+        if (t.id !== st.me) {
+          const names = new Set(t.players.map(p => p.name));
+          t.players = t.players.map(p => p.age >= 35 ? newP(p.pos, ri(46, 56), ri(19, 22), names) : p); autoL(t);
+        }
+      });
+      if (got.length) { st.money = Math.round((st.money + gain) * 10) / 10; st.info = 'FA移籍の金銭補償 +' + gain + '億円(' + got.map(p => p.name).join('・') + 'が他球団へ移籍)'; } else st.info = '';
+      st.mi = 0; st.season++; st.drafted = false; st.draft = null; st.stage = null; st.po = null; st.mk = []; st.rel = []; st.faN = 0; st.log = null; rollForm(); st.fa = mkFA(); ui.sel = ui.rel = null; ui.msg = ''; save(); render();
+    }
+
+    // ===================== セーブ・状態 =====================
+    let st = null, pre = null, ui = { tab: 'roster', sel: null, msg: '', rel: null, dsel: null, pick: false, confirmNew: false, open: { p: false, h: false } };
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) { } };
+    const load = () => { try { const s = JSON.parse(localStorage.getItem(KEY)); return s && s.teams && s.teams.length === 6 ? s : null; } catch (e) { return null; } };
+    const fixUID = () => { UID = 1 + Math.max(...st.teams.flatMap(t => t.players.map(p => p.id)), ...(st.fa || []).map(p => p.id), ...(st.draft ? st.draft.c.flat().map(p => p.id) : []), ...(st.mk || []).map(p => p.id), ...(st.rel || []).map(p => p.id)); };
+    // 最初のチーム:従来の70人のうち上位45人(一軍に必要な投14・捕3(控えの捕手を1人加えて4)・野14を確保したうえで、能力の高い順)+ドラフト3回分(5巡×3回=15名)の、60人。新人は、各巡で能力(総合)が最も低い候補。
+    // 最初の数年で新人を入れ替える手間を省き、すぐに本番から始められるようにする(空き10枠は、ドラフトとFAで埋める)
+    function mkStart(t) {
+      const need = { 投: 14, 捕: 4, 野: 14 }, byV = [...t.players].sort((a, b) => vb(b) - vb(a)), keep = new Set();
+      Object.keys(need).forEach(pos => byV.filter(p => p.pos === pos).slice(0, need[pos]).forEach(p => keep.add(p)));
+      byV.forEach(p => { if (keep.size < 45) keep.add(p); });
+      t.players = t.players.filter(p => keep.has(p));
+      const names = new Set(t.players.map(p => p.name));
+      for (let ago = 0; ago < 3; ago++)genDraft(names).forEach(rd => { // ago年前のドラフト。各巡で、見えている能力が最も低い候補を指名
+        const q = [...rd].sort((a, b) => vb(a) - vb(b))[0];
+        q.age += ago; q.pro = ago;
+        keysOf(q).forEach(k => { q.st[k] = Math.min(q.cap[k], q.st[k] + (q.cap[k] - q.st[k]) * 0.1 * ago); }); // 入団からの年数分、少し成長している
+        if (ago === 0) { q.sal = DRAFT_SAL; q.yrs = 1; } else { q.sal = Math.max(DRAFT_SAL, assess(q)); q.yrs = ri(1, 3); }
+        t.players.push(q);
+      });
+      t.L = {}; autoL(t);
+    }
+    // ほかの5チーム:自球団以外の都道府県から、ランダムに5つ。やり直すときは、前と同じ組み合わせにならないようにする
+    function drawOthers(me, prev) { let o; do { o = shuffle(PREFS.filter(n => n !== me)).slice(0, 5); } while (prev && o.slice().sort().join() === prev.slice().sort().join()); return o; }
+    // 都道府県を選ぶホイール(ドラムロール形式):上下にスクロールして、中央の都道府県を選ぶ
+    const WH_H = 44;
+    function markWheel(w, i) {
+      const su = ui.setup, n = Math.max(0, Math.min(PREFS.length - 1, i)); su.sel = PREFS[n];
+      if (su.on !== undefined && w.children[su.on]) w.children[su.on].classList.remove('on');
+      if (w.children[n]) w.children[n].classList.add('on'); su.on = n;
+      const lb = document.getElementById('whsel'); if (lb) lb.textContent = su.sel;
+    }
+    function initWheel() {
+      const w = document.getElementById('wheel'); if (!w || !w.addEventListener) return;
+      const su = ui.setup, i0 = Math.max(0, PREFS.indexOf(su.sel)); su.on = undefined;
+      w.scrollTop = i0 * WH_H; markWheel(w, i0);
+      w.addEventListener('scroll', () => markWheel(w, Math.round(w.scrollTop / WH_H)));
+      w.addEventListener('click', e => { const el = e.target.closest && e.target.closest('.wi'); if (el) w.scrollTo ? w.scrollTo({ top: (+el.dataset.i) * WH_H, behavior: 'smooth' }) : (w.scrollTop = (+el.dataset.i) * WH_H); });
+    }
+    function start(name, others0) { // 選んだ都道府県が自球団。ほかの5チームは、決まった5つ(なければ、ランダム)
+      const others = others0 || drawOthers(name);
+      const me = mkTeamData(name, ri(41, 44)); mkStart(me); // 選んだ球団は、リーグ最弱の戦力から始まる
+      const teams = shuffle([me, ...others.map(n => mkTeamData(n, ri(49, 55)))]);
+      st = { me: name, teams, mi: 0, season: 1, money: 8, faN: 0, fa: [], log: null }; pre = null; rollForm(); st.fa = mkFA(); fixUID(); ui = { tab: 'roster', sel: null, msg: '', rel: null, open: { p: false, h: false } }; save(); render();
+    }
+
+    // ===================== 画面 =====================
+    const kmh2 = p => kmh(p.st.velo);
+    // 一軍の守備位置に就いている野手は、その位置での守備力(適性外なら−20して▼を付ける)を表示する
+    const defShow = p => { const k = st && mine() ? roleOf(mine(), p.id) : null; return Math.max(1, p.st.field - (k ? fldPen(p, k) : 0)); };
+    const defTxt = p => { const k = st && mine() ? roleOf(mine(), p.id) : null; return Math.round(defShow(p)) + (k && fldPen(p, k) ? '▼' : ''); };
+    const COLS = {
+      P: [['球速', p => p.st.velo, p => kmh2(p)], ['制球', p => p.st.ctrl], ['変化', p => p.st.brk], ['体力', p => p.st.stam]],
+      H: [['ミ', p => p.st.meet], ['パ', p => p.st.power], ['走', p => p.st.speed], ['守', p => defShow(p), p => defTxt(p)]]
+    };
+    function tbl(list, kind, mk, selId, act, ex, plain) {
+      const cols = COLS[kind];
+      const head = `<tr><th class="mk"></th><th class="nm pn">名前</th><th>総合</th>${cols.map(c => `<th>${c[0]}</th>`).join('')}${plain ? '' : '<th>調子</th><th>練習</th>'}${(ex || []).map(e => `<th>${e[0]}</th>`).join('')}</tr>`;
+      const cell = (v, d) => v == null ? '<td class="n">-</td>' : `<td class="n" style="background:${rkColor(v)}38">${d !== undefined ? d : Math.round(v)}</td>`;
+      const rows = list.map(p => `<tr class="${selId === p.id ? 'on' : ''}" data-act="${act}" data-v="${p.id}" tabindex="0" role="button" aria-label="${esc(p.name)}"><td class="mk">${mk(p)}</td><td class="nm pn"><b${[...p.name].length > 5 ? ` style="font-size:${[...p.name].length > 6 ? 9.5 : 10.5}px"` : ''}>${esc(p.name)}</b><span class="sub"> ${p.age}歳</span> ${hnd(p)}${(() => { const tg = (!plain && p.pin && roleOf(mine(), p.id) ? '<span class="tg b">固定</span>' : '') + (p.fgn ? '<span class="tg">外</span>' : '') + (p.dr ? `<span class="tg">D${p.dr}</span>` : '') + (p.decl ? '<span class="tg">FA宣言</span>' : '') + (p.sg === st.season ? '<span class="tg s">急成長</span>' : '') + (p.inj > 0 ? `<span class="tg" style="background:var(--red);color:#fff">怪我${p.inj}</span>` : ''); return tg || !plain ? `<div class="fb">${tg}${plain ? '' : `<div class="bar fat ${fatCls(p.fatigue)}"><i style="width:${p.fatigue}%"></i></div>`}</div>` : ''; })()}</td>${cell(plain ? vb(p) : val(p))}${cols.map(c => cell(c[1](p), c[2] ? c[2](p) : undefined)).join('')}${plain ? '' : `<td class="n fm-${p.form >= 4 ? 'g' : p.form <= 2 ? 'o' : 'n'}">${formIcon(p.form)}</td>`}${plain ? '' : `<td class="n${trKey(p) === 'rest' ? ' fm-g' : ''}">${SHL[trKey(p)]}</td>`}${(ex || []).map(e => `<td class="n">${e[1](p)}</td>`).join('')}</tr>`).join('');
+      return `<div class="card" style="padding:4px 0;overflow-x:auto"><table class="cmp"><thead>${head}</thead><tbody>${rows}</tbody></table></div>`;
+    }
+    const H2 = t => `<h2><span class="ht">${t}</span></h2>`;
+    function statLine(p) {
+      if (p.pos === '投') { const t = p.pt; return t ? `${t.g}試合 ${fmtIP(t.outs)}回 失点率${t.outs ? (t.r * 27 / t.outs).toFixed(2) : '-'} 奪三振${t.k} 四球${t.bb} 被安打${t.h}` : '今期の登板はまだありません'; }
+      const t = p.bt; return t && t.ab ? `${t.g}試合 打率${fmtAvg(t.h, t.ab)} 本塁打${t.hr} 打点${t.rbi} 盗塁${t.sb} 三振${t.k} 四球${t.bb}` : '今期の出場はまだありません';
+    }
+    function detail(p, btns, own) {
+      const k = own === true ? trKey(p) : null, opts = own === true ? `<option value="rest"${k === 'rest' ? ' selected' : ''}>休養(疲労が回復・能力は伸びない)</option>` + keysOf(p).map(x => `<option value="${x}"${x === k ? ' selected' : ''}>${LBL[x]} ${x === 'velo' ? kmh(p.st[x]) + 'km' : Math.round(p.st[x])}</option>`).join('') : '';
+      return `<div class="card" id="pdetail"><div class="row wrap"><span class="pos" data-p="${p.pos}">${p.pos}</span><b>${esc(p.name)}</b>${p.fgn ? '<span class="tg">外国人</span>' : ''}<span class="sub">${p.age}歳</span>${hnd(p)}${own === true ? formTag(p) : ''}</div>
+  ${own ? `<div class="sub" style="margin-top:6px">年俸${(p.sal || 0).toFixed(1)}億円 ・ 残り${p.yrs || 1}年${p.decl ? ' ・ FA宣言' : ''}</div>${p.inj > 0 ? `<div class="sub" style="color:var(--red)">怪我:復帰まで${p.inj}試合(約${Math.max(1, Math.round(p.inj / 18))}か月)</div>` : ''}<div class="sub">今期 ${statLine(p)}</div>` : ''}
+  <div class="stats">${keysOf(p).map(x => statBarP(p, x)).join('')}</div>
+  ${own === true ? `<div class="row" style="margin:10px 0"><span class="sub" style="width:3.2em">疲労</span><div class="bar fat ${fatCls(p.fatigue)} grow"><i style="width:${p.fatigue}%"></i></div><span class="sub num" style="width:2.2em;text-align:right">${Math.round(p.fatigue)}</span></div>` : ''}
+  ${own === true ? `<div style="margin-bottom:10px"><div class="sub" style="margin-bottom:4px">今月の練習メニュー(個人練習)</div><select class="${k === 'rest' ? 'rest' : ''}" data-act="tr" data-p="${p.id}" aria-label="${esc(p.name)}の練習メニュー">${opts}</select></div>` : ''}${btns}</div>`;
+    }
+    const PX = [['試合', p => p.pt ? p.pt.g : '-'], ['回', p => p.pt ? fmtIP(p.pt.outs) : '-'], ['失点率', p => p.pt && p.pt.outs ? (p.pt.r * 27 / p.pt.outs).toFixed(2) : '-'], ['奪三', p => p.pt ? p.pt.k : '-']];
+    const HX = [['試合', p => p.bt ? p.bt.g : '-'], ['打率', p => p.bt && p.bt.ab ? fmtAvg(p.bt.h, p.bt.ab) : '-'], ['本', p => p.bt ? p.bt.hr : '-'], ['点', p => p.bt ? p.bt.rbi : '-'], ['盗', p => p.bt ? p.bt.sb : '-']];
+    const HELP_R = [
+      ['人数と表の見方', '一軍31人(先発6・中継ぎ7・抑え1・捕手3・野手14)、二軍は最大39人(登録は最大70人)。右端の列が今期の成績です(試合・回・失点率・奪三振/打率・本塁打・打点・盗塁)。練習メニューは「練習」列で確認し、選手をタップして選びます。'],
+      ['ポジションの固定', '一軍の選手を選ぶと、「ポジションを固定」のボタンが出ます。固定した選手は、「編成をおまかせ」で動かさず、ほかの枠だけを組み直します。ほかの選手との入れ替えもできません(固定を解除すると、入れ替えられます)。名前の下に「固定」と出ます。怪我で二軍に下がったときや、手動で二軍に下げたときは、固定が外れます。'],
+      ['先発ローテーション', '先発は、毎月、一番上(先発1)から順に登板します(1か月は18試合で、先発6人が3回ずつ登板)。疲労の高い先発は、下の枠に回すと、月の最初の登板までの間隔が空きます。'],
+      ['怪我と自動入れ替え', '先発・中継ぎ・抑えが怪我をすると、二軍から、その枠の適性が最も高い健康な投手と、自動で入れ替わります(先発の枠は先発型、中継ぎ・抑えの枠は救援型が選ばれやすくなります)。怪我が治っても、入れ替えたままです(AI球団は月が替わると組み直し、自球団は、編成で戻すまでそのままです)。二軍に健康な投手がいないときは、先発は飛ばして、ローテーションを詰めます。先発野手が怪我のときは、控えが代わりに出ます。'],
+      ['中継ぎ・抑えの起用', '中継ぎと抑えは、疲労が70以上の投手と、3連投した投手を、ほかに使える投手がいる限り、使いません(使える投手がいなくなると、能力の高い順に使います)。'],
+      ['疲労', '疲労が高いほど力が落ちます(疲労100で約12%低下)。疲労は試合で溜まり(練習では溜まりません)、投手は登板のない日に回復しますが、ふつうに起用すると月に約20ずつ溜まるので、休養メニューで抜きます。疲労が60を超えると、怪我をしやすくなります。'],
+      ['野手の起用', '先発野手は、疲労が溜まると休養日になります(同時に2人まで)。試合終盤には、控えが代打・代走・守備固めで出ます。'],
+      ['ポストシーズン', 'ポストシーズンは専用の編成で、先発は4人(先発1〜4)で回し、先発5・6は設定しません。編成はステージごとに変更でき、終わると元の編成に戻ります。'],
+      ['資質タグ', '名前の横のタグは、生まれ持った資質で、成長しても変わりません(投手は先=先発型・救=救援型・先/救=兼用型、野手は内=内野型・外=外野型・内/外=内外型、捕=捕手)。投手は、先発型がロングイニングに強い(スタミナ=1試合で投げられる球数)一方、連投と途中登板が苦手です。救援型はその逆で、スタミナは連投の疲れにくさ・回復の早さに効きます。兼用型は、毎月の起用枠で条件が決まります(先発枠なら先発型、中継ぎ・抑え枠なら救援型の条件が、その月の全試合に当てはまる)。野手は、内野型が外野、外野型が内野(一塁を含む)を守ると、守備が20下がります(表の守備の数字に▼が付きます)。内外型は、どこでも下がりません。捕手も、捕手以外の守備位置に入ると、守備が20下がります(指名打者と控えは、下がりません)。'],
+      ['成長', '能力は、毎月の練習のほか、試合に出ても少しずつ伸びます(打席の内容・守備機会・投球内容で変わり、選手ごとの成長のピーク年齢(29歳前後、±3歳の個人差・非公開)を過ぎると伸びにくくなり、さらに年を取ると能力が下がります)。二軍の若手は、まれに急成長し(1チーム年1人前後が目安)、練習中の能力が一気に伸びて、伸びしろも広がります(休養の月は起きません)。']
+    ];
+    function rRoster() {
+      const t = mine(), g = id => byId(t, id), pit = ui.pos !== 'H', sel = ui.sel && byId(t, ui.sel), role = sel && roleOf(t, sel.id);
+      const po = st.stage === 'po', idle = po ? SPL.slice(PO_ROT).map(k => g(t.L[k])).filter(Boolean) : []; // ポストシーズン:先発5・6は設定しない(使わない)
+      const lst = ks => ks.map(k => g(t.L[k])).filter(Boolean), bench = pos => [...(pos === '投' ? idle : []), ...t.players.filter(p => !roleOf(t, p.id) && (pos === '投') === (p.pos === '投')).sort((a, b) => val(b) - val(a))];
+      const mk = p => { if (po && idle.includes(p)) return '待'; const n = slName(roleOf(t, p.id)); return n === '二軍' || n === '控捕' ? '控' : n; }, kd = pit ? 'P' : 'H', ex = pit ? PX : HX, T = (l, k) => tbl(l, kd, mk, ui.sel, 'pick', ex);
+      const uc = sel ? unpaid(sel) : 0, btn = sel ? (role ? `<button class="btn" data-act="pin">${sel.pin ? '固定を解除' : 'ポジションを固定'}</button>` : `${uc > st.money ? `<div class="sub" style="margin-bottom:6px">資金が足りないため、放出できません(残りの契約の年俸 ${uc.toFixed(1)}億円が必要)。</div>` : ''}<button class="btn amber" data-act="rel"${uc > st.money ? ' disabled' : ''}>${ui.rel === sel.id ? '本当に放出する' : '放出する(二軍のみ)'}${uc > 0 ? `・残りの契約 ${uc.toFixed(1)}億円を支払い` : ''}</button>`) : '';
+      const b2 = bench(pit ? '投' : '野'), k2 = pit ? 'p' : 'h';
+      const fold = `<button class="btn" style="margin:6px 0 10px;text-align:left" data-act="fold" data-v="${k2}">${ui.open[k2] ? '▼' : '▶'} 二軍 ${pit ? '投手' : '野手'}(${b2.length}人)</button>${ui.open[k2] ? T(b2) : ''}`;
+      return `<div class="row between" style="margin-bottom:10px"><div class="sub grow">${sel ? '入れ替える選手をタップ' : '2人をタップして入れ替え'}(一軍の外国人 ${fgnN(t, t.L)}/${FMAX}人)</div>${helpBtn('r', '編成と起用')}</div>
+  <div class="seg" style="margin:0 0 10px">${[['P', '投手'], ['H', '野手']].map(([k, n]) => `<button class="${(pit ? 'P' : 'H') === k ? 'on' : ''}" data-act="pos" data-v="${k}">${n}</button>`).join('')}</div>
+  ${ui.msg ? `<div class="card" style="padding:8px 12px">${esc(ui.msg)}</div>` : ''}${sel ? detail(sel, btn, true) : ''}
+  <div class="row" style="margin-bottom:10px;flex-wrap:wrap"><button class="btn sm" data-act="auto">編成をおまかせ</button><button class="btn sm" data-act="trauto">練習をおまかせ</button><button class="btn sm" data-act="trrest">疲労60以上を休養に</button></div>
+  ${pit ? `${H2(po ? '一軍 先発(4人・ポストシーズン。上から順に登板)' : '一軍 先発(6人・毎月、上から順に登板)')}${T(lst(po ? SPL.slice(0, PO_ROT) : SPL))}${H2('一軍 中継ぎ(7人・状態のよい順に登板)')}${T(lst(RSL))}${H2('一軍 クローザー(1人・9回に1〜3点リードで登板)')}${T(lst(['cl']))}`
+          : `${H2('一軍 先発野手(正捕手1+野手8)')}${T(lst(HK))}${H2('一軍 控え捕手(2人)')}${T(lst(QSL))}${H2('一軍 控え野手(6人・疲れた先発と交代)')}${T(lst(BSL))}`}
+  ${H2('二軍')}${fold}`;
+    }
+    // 年俸の査定の内訳(能力×成績×若手の割引)
+    const yrsSel = p => `<select data-act="yrs" aria-label="契約年数" style="margin-bottom:10px">${[1, 2, 3].map(y => `<option value="${y}"${y === (ui.yrs || 2) ? ' selected' : ''}>${y}年契約 年俸${dem(p, y).toFixed(1)}億円</option>`).join('')}</select>`;
+    // 長い説明は、ボタンを押すと開く(開閉の状態は、画面を切り替えても保つ)
+    // 説明は「?」ボタンで下から出るシートに表示(野球部シムと同じ形式)。長い文は、「。」ごとに箇条書きにする(かっこの中の「。」では区切らない)
+    const bullets = txt => { const out = []; let d = 0, cur = ''; for (const c of txt) { cur += c; if (c === '(' || c === '\uff08') d++; else if (c === ')' || c === '\uff09') d = Math.max(0, d - 1); else if (c === '\u3002' && d === 0) { out.push(cur); cur = ''; } } if (cur.trim()) out.push(cur); return '<ul>' + out.map(x => '<li>' + x + '</li>').join('') + '</ul>'; };
+    const sections = a => a.map(([h, t]) => '<h4>' + h + '</h4>' + bullets(t)).join('');
+    const HOWTO = [
+      ['ゲームの目的', '6球団(都道府県)のリーグで、GMとして球団を強くして、リーグ優勝と日本一を目指します。最初に球団の都道府県を選ぶと、対戦相手の5球団が決まります。自球団は、リーグ最弱の戦力と、少ない資金(8億円)から始まります。'],
+      ['1シーズンの流れ', '1シーズンは3〜10月の8か月です。「○月を進める」を押すと、練習と18試合が自動で進みます。試合は自動で行われ、操作できるのは、編成と契約です。月が進むごとに、前月の出来事(勝敗・順位・怪我・成長など)が出ます。シーズンが終わると、上位3チームがポストシーズン(プレーオフ、日本シリーズ)に進みます。自チームが出場しない年や、敗退したあとは、結果まで自動で進みます。'],
+      ['編成', '一軍は、先発6・中継ぎ7・抑え1・捕手3・野手14です。二軍の選手と入れ替えたり、「編成をおまかせ」で自動で組んだりできます。「ポジションを固定」した選手は、おまかせでも動かしません。疲労が高い選手は、練習メニューの「休養」で回復させます。選手ごとに、毎月の練習メニュー(伸ばす能力)を設定できます。'],
+      ['成長と年齢', '能力は、練習と試合出場で伸び、29歳前後のピークを過ぎると落ちます。二軍の若手が、まれに急成長することがあります。'],
+      ['オフの流れ', 'シーズンが終わると、「契約更改」「ドラフト会議」「来季へ進む」の順に進みます。契約更改では、契約が切れる選手を、更改するか自由契約にします。FA宣言した選手は、更改するか、慰留しないかを選びます。ドラフトでは、最大5人を指名できます。ドラフトのあとは、FA・自由契約の市場で選手を獲得できます。'],
+      ['お金', '収入は、シーズンの終わりに、勝利数と順位で決まる1年分が入ります。ポストシーズンの試合ごとにも収入があります。年俸は、契約・更改のときに、1年分を支払います。登録は最大70人です。資金が足りないと、更改も補強もドラフトの指名もできません。'],
+      ['補強', 'シーズン中(3〜7月)に獲得できるのは、外国人選手だけです。候補は毎月入れ替わり、一軍に登録できる外国人は4人までです。オフには、FA・自由契約の市場で獲得できます(FA宣言した選手は、1シーズンに2人までです)。'],
+      ['成績タブ', '順位、チームスタッツ(自球団・リーグ平均・順位)、個人成績が見られます。順位が低い項目が、強化するポイントです。'],
+      ['データの保存', '進行は、操作のたびに、ブラウザの中へ自動で保存されます。右上の「セーブして終わる」で、トップへ戻れます。次に開いたときは、トップの「続きから」で再開できます。保存先は、この端末のこのブラウザの中だけです。別の端末やブラウザには引き継げず、ブラウザのデータ(サイトデータ・履歴)を消したり、プライベートブラウズで遊んだりすると、消えることがあります。「新規ゲーム」は、確認のあとに保存データを上書きして、最初から始めます(元には戻せません)。']
+    ];
+    const HELP = {
+      howto: { t: '遊び方', b: () => sections(HOWTO) },
+      r: { t: '編成と起用', b: () => sections(HELP_R) },
+      m: { t: 'FA・自由契約市場', b: () => bullets(HELP_M) },
+      c: { t: '契約と年俸', b: () => sections(HELP_C) },
+      f: { t: '外国人の補強', b: () => bullets(HELP_F) },
+      start: { t: '対戦相手と戦力', b: () => bullets('ほかの5チームは、残りの都道府県から、ランダムに決まります。選んだ球団は、リーグ最弱の戦力からスタートします。ほかの球団は平均的な戦力です。資金も少なめです。登録は60人(従来の上位45人+ドラフト3回分の新人15人)で始まり、空き10枠は、ドラフトとFAで埋められます。') },
+      draft: {
+        t: 'ドラフトの費用', b: () => {
+          const d = st.draft;
+          if (d && d.pre) { const need = r1(PICK_FEE.reduce((a, x, i) => a + pickCost(i), 0)); return bullets('指名した新人は、入団時に登録の枠を1つ使い、契約金(1位1.0・2位0.8・3位0.6・4位0.5・5位0.4億円)と、年俸1000万円(1年契約)の1年分を支払います。5人指名するには、空き枠5人と資金' + need.toFixed(1) + '億円が必要です。指名できる最大人数は、空き枠と資金で決まります。二軍の選手を放出すると、枠を拡げられます。契約が残っている選手を放出すると、残りの契約の年俸(違約金)を、その場でまとめて支払います。資金が足りないと放出できません。一軍の枠に入っている選手は、放出できません。'); }
+          return bullets('能力は見えますが、伸びしろと逸材かどうかは入団後に分かります。抽選はありません。この指名の契約金' + PICK_FEE[d.picks.length].toFixed(1) + '億円と年俸' + DRAFT_SAL.toFixed(1) + '億円(1000万円・1年契約)は、入団時に支払います。');
+        }
+      },
+      po: { t: 'ポストシーズン', b: () => bullets('プレーオフは、レギュラーシーズンの上位3チームが出場します。ファーストステージ(2位対3位・3戦2勝)、ファイナルステージ(1位は1勝のアドバンテージで、先に4勝)で、リーグ代表を決めます。日本シリーズは、リーグ代表と他リーグ代表が、先に4勝したほうが日本一です。他リーグ代表は、自リーグにいない都道府県から、毎年ランダムに決まります(強さは、自チームとリーグ代表を除くトップチームを、全能力+' + JS_BOOST + 'で強化したものです)。先発は、先発1〜4の4人で回し、先発5・6は設定しません。編成は、ステージごとに変更できます(AI球団も、ステージごとに組み直します。ポストシーズンが終わると、元の編成に戻ります)。各ステージの前に、休養日で疲労が' + PO_REST + '回復します。自チームは、ポストシーズンの試合ごとに、勝ちで' + PO_WIN + '億円、負けで' + PO_LOSE + '億円を、その場で受け取ります(再試合になった引き分けと、1勝のアドバンテージは対象外)。引き分けは再試合で、ポストシーズンの試合は、レギュラーシーズンの記録(順位・個人成績)に入りません。自チームが出場しない年や、敗退したあとは、日本シリーズの結果まで、自動で進みます。') }
+    };
+    function openModal(title, body, el) {
+      const m = document.getElementById('modal');
+      m.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="row between"><h3 id="mt">${title}</h3><button class="info" data-act="closeModal" aria-label="閉じる">✕</button></div><div id="mbody">${body}</div><button class="btn" data-act="closeModal" style="margin-top:14px">閉じる</button></div>`;
+      m.classList.remove('cm'); m.hidden = false; document.body.style.overflow = 'hidden'; modalOpener = el || null; const c = m.querySelector('button'); if (c) c.focus();
+    }
+    function openHelp(key, el) { const h = HELP[key]; if (!h) return; openModal(h.t, typeof h.b === 'function' ? h.b() : h.b, el); }
+    const helpBtn = (key, label) => `<button class="info" data-act="help" data-v="${key}" aria-label="${label}の説明">?</button>`;
+    const HELP_M = `他球団のFA宣言選手と、自由契約になった選手です。FAは能力が高めで、契約金(新年俸1年分の50%)がかかり、獲得すると元の球団に金銭補償(旧年俸の50%)を払います。自由契約は契約金も補償もありません。自由契約の投手・野手が、それぞれ10人に満たないときは、別のリーグから放出された選手で、10人まで補われます(FAの選手は補われません)。`;
+    function rMarket() {
+      const t = mine(), sel = st.mk.find(p => p.id === ui.sel), y = ui.yrs || 2, mk = p => p.mk === 'FA' ? 'FA' : '自由', mx = [['契約金', p => mfee(p, y) ? mfee(p, y).toFixed(1) + '億' : 'なし'], ['年俸', p => dem(p, y).toFixed(1) + '億']];
+      const cp = sel ? comp(sel) : 0, btn = sel ? (cp ? `<div class="sub" style="margin-bottom:8px">FA宣言した選手です。獲得すると、元の${esc(sel.from)}に補償金${cp}億円を支払います。</div>` : sel.ol ? '<div class="sub" style="margin-bottom:8px">別のリーグから放出された選手です。</div>' : '') + yrsSel(sel) + `<button class="btn primary" data-act="sign">${mfee(sel, y) ? '契約金' + mfee(sel, y) + '億円' : '契約金なし'}${cp ? '+補償金' + cp + '億円' : ''}+年俸1年分${dem(sel, y).toFixed(1)}億円で獲得</button>` : '';
+      const L = st.mk.slice().sort((a, b) => vb(b) - vb(a));
+      return `<div class="row between" style="margin-bottom:6px"><div class="sub">登録 ${t.players.length}/${CAPN}名。<b>FA宣言選手の獲得は、1シーズンに2名まで(あと${Math.max(0, 2 - (st.faN || 0))}名)</b></div>${helpBtn('m', 'FA・自由契約市場')}</div>
+  ${ui.msg ? `<div class="card" style="padding:8px 12px">${esc(ui.msg)}</div>` : ''}${sel ? detail(sel, btn, 'c') : ''}
+  ${H2('FA・自由契約 投手')}${tbl(L.filter(p => p.pos === '投'), 'P', mk, ui.sel, 'fpick', mx, true)}${H2('FA・自由契約 野手')}${tbl(L.filter(p => p.pos !== '投'), 'H', mk, ui.sel, 'fpick', mx, true)}`;
+    }
+    const HELP_C = [
+      ['年俸の査定', '年俸の要求額は、能力・今期の成績・プロ年数で決まります(能力×成績×若手の割引)。成績は、打者が打率・本塁打・打点・盗塁、投手が失点率・奪三振・四球を、リーグ平均と比べて査定します(出場が少ないと、影響が小さくなります)。入団から8年は、年俸の査定額が割り引かれます(最初の5年は特に大きく、1年経過で50%、5年経過で70%。そのあと80%、90%と上がり、8年経過で100%)。年俸の下限は1000万円(0.1億円)で、ドラフトの新人の年俸もこれです。'],
+      ['お金の流れ', '収入は、シーズン終了時に1年分がまとめて入ります。年俸は、契約・更改のときに1年分をその場で支払います。複数年契約の選手の翌年分は、シーズン終了後の契約更改のタイミングで、まとめて引き落とされます。資金が足りないと、契約更改も補強もドラフトの指名もできません(資金がマイナスになる操作は、できません)。'],
+      ['放出とFA', '契約中の選手を放出(自由契約)する場合は、残りの契約の年俸(違約金)を、その場でまとめて支払います。FA宣言した選手を慰留しないと、他球団へ移籍し、来季へ進むときに、金銭補償(旧年俸の50%)を受け取れます。契約が切れる選手は契約更改の対象で、シーズン終了後に、更改するか自由契約にします(FA宣言した選手は、更改するか、慰留しないかを選びます)。']
+    ];
+    function rContract() {
+      const t = mine(), pay = payroll(t), due = dueNext(t), exp = t.players.filter(p => p.yrs <= 1 && !p.nw), pend = st.mi >= MN.length && st.stage === 'renew', y = ui.yrs || 2;
+      const sum = `<div class="card"><div class="row between" style="margin-bottom:4px"><span class="row" style="gap:6px"><b>資金残高</b>${helpBtn('c', '契約と年俸')}</span><b class="num" style="font-size:20px;color:${st.money < 0 ? 'var(--bad)' : 'var(--ink)'}">${st.money.toFixed(1)}億円</b></div><div class="row between" style="flex-wrap:wrap;gap:4px 14px"><span class="sub">前期収入 <b class="num" style="color:var(--ink)">${st.inc != null ? st.inc.toFixed(1) + '億円' : 'なし'}</b></span><span class="sub">今期の年俸総額 <b class="num" style="color:var(--ink)">${pay.toFixed(1)}億円</b></span><span class="sub">翌期の複数年分 <b class="num" style="color:var(--ink)">${due.toFixed(1)}億円</b></span></div><div class="sub" style="margin-top:4px">契約更改対象 ${exp.length}人 ・ 登録枠 <b class="num" style="color:${t.players.length >= CAPN ? 'var(--bad)' : 'var(--ink)'}">${t.players.length}/${CAPN}人</b>(空き${Math.max(0, CAPN - t.players.length)}人)</div></div>`;
+      const nm = p => `<b>${esc(p.name)}</b>${p.fgn ? ' <span class="tg">外</span>' : ''}${p.decl ? ' <span class="tg">FA宣言</span>' : ''}<span class="sub"> ${p.pos} ${p.age}歳</span>`;
+      const row = (p, c) => `<tr${pend ? ` data-act="cpick" data-v="${p.id}" tabindex="0" role="button"` : ''} class="${ui.sel === p.id ? 'on' : ''}"><td style="text-align:left">${nm(p)}</td><td>${chip(vb(p))}</td><td>${(p.sal || 0).toFixed(1)}</td><td>${c}</td></tr>`;
+      if (pend) {
+        const sel = exp.find(p => p.id === ui.sel), L = exp.slice().sort((a, b) => vb(b) - vb(a));
+        return `${sum}${ui.msg ? `<div class="card" style="padding:8px 12px">${esc(ui.msg)}</div>` : ''}${sel ? detail(sel, yrsSel(sel) + `<div class="row"><button class="btn primary" data-act="renew">更改(1年分 ${dem(sel, y).toFixed(1)}億円)</button><button class="btn amber" data-act="letgo">${sel.decl ? '慰留しない' : '自由契約'}</button></div>`, 'c') : ''}
+    ${H2('契約更改対象(' + exp.length + '人)')}${exp.length ? `<div class="card" style="padding:4px 0;overflow-x:auto"><table class="cmp"><thead><tr><th class="nm">選手</th><th>総合</th><th>現年俸</th><th>要求(${y}年)</th></tr></thead><tbody>${L.map(p => row(p, dem(p, y).toFixed(1))).join('')}</tbody></table></div>` : '<div class="card"><div class="sub">契約更改は完了しました。</div></div>'}`;
+      }
+      return `${sum}${H2('補強')}${rFA()}`;
+    }
+    const HELP_F = `候補は毎月入れ替わります。年俸は能力に応じて0.5〜2億円で、契約金は年俸の50%です。契約金と年俸は表に出ます(獲得時に、契約金と年俸1年分を払います。複数年契約の翌年分は、毎年の契約更改のときにまとめて引き落とされます)。一軍に登録できる外国人は4人までで、二軍は何人でも置けます。`;
+    function rFA() {
+      if (st.mi >= MN.length) return st.stage !== 'fa' ? '<div class="card"><b>FA市場はまだ開いていません</b><div class="sub">契約更改とドラフトのあとに開きます。</div></div>' : rMarket();
+      const t = mine(), open = st.mi <= FA_END, sel = open ? st.fa.find(p => p.id === ui.sel) : null, mk = () => '候補', fx = [['契約金', p => fee(p) + '億'], ['年俸', p => p.sal.toFixed(1) + '億']];
+      const btn = sel ? `<div class="card" style="padding:8px 12px;margin-bottom:10px"><div class="row between"><span>契約金(獲得時に1回)</span><b class="num">${fee(sel)}億円</b></div><div class="row between"><span>年俸(契約時に1年分)</span><b class="num">${sel.sal.toFixed(1)}億円 × ${sel.yrs}年</b></div></div><button class="btn primary" data-act="sign">契約金${fee(sel)}億円+年俸1年分${sel.sal.toFixed(1)}億円で獲得</button>` : '';
+      if (!open) return `<div class="card"><b>外国人選手の獲得は締め切りました</b><div class="sub">来季の3月から、また獲得できます。</div></div>`;
+      return `<div class="row between" style="margin-bottom:6px"><div class="sub">7月末まで(あと${FA_END + 1 - st.mi}回)・登録 ${t.players.length}/${CAPN}名</div>${helpBtn('f', '外国人の補強')}</div>
+  ${ui.msg ? `<div class="card" style="padding:8px 12px">${esc(ui.msg)}</div>` : ''}${sel ? detail(sel, btn) : ''}
+  ${H2('外国人 投手')}${tbl(st.fa.filter(p => p.pos === '投'), 'P', mk, ui.sel, 'fpick', fx, true)}${H2('外国人 野手')}${tbl(st.fa.filter(p => p.pos !== '投'), 'H', mk, ui.sel, 'fpick', fx, true)}`;
+    }
+    function rStats() {
+      const T = st.teams, tg = Math.max(1, ...T.map(t => t.w + t.l + (t.d || 0))), me = mine();
+      const all = T.flatMap(t => t.players.map(p => ({ p, t })));
+      const bat = all.filter(x => x.p.bt && x.p.bt.ab >= tg * 2.5), pit = all.filter(x => x.p.pt && x.p.pt.outs >= tg * 2.4);   // 規定打席・規定投球回(試合数×0.8回)の目安
+      const lead = (title, L, val, fmt, asc) => {
+        const r = L.slice().sort((a, b) => asc ? val(a) - val(b) : val(b) - val(a)).slice(0, 5);
+        return `<div class="card" style="padding:8px"><b style="font-size:13px">${title}</b><table class="bx" style="margin-top:4px">${r.length ? r.map((x, i) => `<tr><td>${i + 1}</td><td style="text-align:left"><b>${esc(x.p.name)}</b>${x.t === me ? ' <span class="tg">自</span>' : ''}<span class="sub"> ${x.t.id.slice(0, 2)}</span></td><td>${fmt(x)}</td></tr>`).join('') : '<tr><td class="sub">まだ該当者がいません</td></tr>'}</table></div>`;
+      };
+      const nm = p => `<b>${esc(p.name)}</b>${p.fgn ? ' <span class="tg">外</span>' : ''}<span class="sub"> ${slName(roleOf(me, p.id))}</span>`;
+      const bt = me.players.filter(p => p.bt && p.bt.ab > 0).sort((a, b) => b.bt.ab - a.bt.ab), pt = me.players.filter(p => p.pt && p.pt.outs > 0).sort((a, b) => b.pt.outs - a.pt.outs);
+      return `${H2('順位')}${rTable()}${H2('チームスタッツ')}${rTeamStats()}  ${H2('自チームの個人成績')}
+  ${bt.length || pt.length ? `<div class="card" style="padding:8px"><div style="overflow-x:auto"><table class="bx"><tr><th>打者</th><th>試合</th><th>打数</th><th>安打</th><th>打率</th><th>本</th><th>点</th><th>盗</th><th>三振</th><th>四球</th></tr>
+  ${bt.map(p => { const x = p.bt; return `<tr><td>${nm(p)}</td><td>${x.g}</td><td>${x.ab}</td><td>${x.h}</td><td>${fmtAvg(x.h, x.ab)}</td><td>${x.hr}</td><td>${x.rbi}</td><td>${x.sb}</td><td>${x.k}</td><td>${x.bb}</td></tr>` }).join('')}</table></div></div>
+  <div class="card" style="padding:8px"><div style="overflow-x:auto"><table class="bx"><tr><th>投手</th><th>試合</th><th>回</th><th>球数</th><th>被安</th><th>奪三</th><th>四球</th><th>失点</th><th>失点率</th></tr>
+  ${pt.map(p => { const x = p.pt; return `<tr><td>${nm(p)}</td><td>${x.g}</td><td>${fmtIP(x.outs)}</td><td>${x.pc}</td><td>${x.h}</td><td>${x.k}</td><td>${x.bb}</td><td>${x.r}</td><td>${(x.r * 27 / x.outs).toFixed(2)}</td></tr>` }).join('')}</table></div></div>
+  `: '<div class="card"><div class="sub">まだ試合がありません。</div></div>'}${st.hist && st.hist.length ? H2('歴代成績') + `<div class="card" style="padding:4px 0;overflow-x:auto"><table class="cmp"><thead><tr><th>年</th><th>順位</th><th>勝-敗-分</th><th class="nm">ポストシーズン</th><th class="nm">日本一</th></tr></thead><tbody>${st.hist.slice().reverse().map(h => `<tr><td>${h.y}</td><td>${h.rank}位</td><td class="n">${h.w}-${h.l}-${h.d}</td><td class="nm">${h.res}</td><td class="nm">${esc(h.champ || '-')}</td></tr>`).join('')}</tbody></table></div>` : ''}
+  ${H2('リーグ個人成績(上位5人)')}
+  ${lead('打率(規定打席)', bat, x => x.p.bt.h / x.p.bt.ab, x => fmtAvg(x.p.bt.h, x.p.bt.ab))}${lead('本塁打', all.filter(x => x.p.bt), x => x.p.bt.hr, x => x.p.bt.hr + '本')}${lead('打点', all.filter(x => x.p.bt), x => x.p.bt.rbi, x => x.p.bt.rbi + '点')}${lead('盗塁', all.filter(x => x.p.bt), x => x.p.bt.sb, x => x.p.bt.sb + '個')}
+  ${lead('失点率(規定投球回・9回あたり)', pit, x => x.p.pt.r * 27 / x.p.pt.outs, x => (x.p.pt.r * 27 / x.p.pt.outs).toFixed(2), true)}${lead('奪三振', all.filter(x => x.p.pt), x => x.p.pt.k, x => x.p.pt.k + '個')}`;
+    }
+    // チームスタッツ(今季):自球団・リーグ平均・順位。古いセーブ(チームの記録がない)は、選手の記録の合計から出す
+    function teamTS(t) { if (t.ts) return fillTS(t.ts); const x = newTS(); t.players.forEach(p => { if (p.bt) for (const k in x.b) x.b[k] += p.bt[k] || 0; if (p.pt) for (const k in x.p) x.p[k] += p.pt[k] || 0; }); return x; }
+    const f3 = v => v == null ? '-' : v >= 1 ? v.toFixed(3) : v.toFixed(3).slice(1), f2 = v => v == null ? '-' : v.toFixed(2), f0 = v => v == null ? '-' : String(Math.round(v)), f1 = v => v == null ? '-' : v.toFixed(1);
+    const R9 = (x, r, k) => x.r[r].outs ? x.r[r][k] * 27 / x.r[r].outs : null, FR = (x, g) => x.f[g].ch ? (x.f[g].ch - x.f[g].e) / x.f[g].ch : null; // 9回あたり、守備率
+    const TS_ROWS = [ // [項目, 値, 表示, 高いほど良い]
+      ['打撃'],
+      ['得点', (t, x) => t.rs, f0, true],
+      ['打率', (t, x) => x.b.ab ? x.b.h / x.b.ab : null, f3, true],
+      ['本塁打', (t, x) => x.b.hr, f0, true],
+      ['三振', (t, x) => x.b.k, f0, false],
+      ['盗塁', (t, x) => x.b.sb, f0, true],
+      ['盗塁成功率', (t, x) => x.b.sb + x.b.cs ? x.b.sb / (x.b.sb + x.b.cs) : null, f3, true],
+      ['投手全体(9回あたり)'],
+      ['失点', (t, x) => x.p.outs ? x.p.r * 27 / x.p.outs : null, f2, false],
+      ['奪三振', (t, x) => x.p.outs ? x.p.k * 27 / x.p.outs : null, f2, true],
+      ['与四球', (t, x) => x.p.outs ? x.p.bb * 27 / x.p.outs : null, f2, false],
+      ['被安打', (t, x) => x.p.outs ? x.p.h * 27 / x.p.outs : null, f2, false],
+      ['先発(9回あたり)'],
+      ['失点', (t, x) => R9(x, 's', 'r'), f2, false],
+      ['奪三振', (t, x) => R9(x, 's', 'k'), f2, true],
+      ['与四球', (t, x) => R9(x, 's', 'bb'), f2, false],
+      ['被安打', (t, x) => R9(x, 's', 'h'), f2, false],
+      ['平均投球回', (t, x) => x.r.s.g ? x.r.s.outs / x.r.s.g / 3 : null, f1, true],
+      ['中継ぎ(9回あたり)'],
+      ['失点', (t, x) => R9(x, 'm', 'r'), f2, false],
+      ['奪三振', (t, x) => R9(x, 'm', 'k'), f2, true],
+      ['与四球', (t, x) => R9(x, 'm', 'bb'), f2, false],
+      ['被安打', (t, x) => R9(x, 'm', 'h'), f2, false],
+      ['抑え(9回あたり)'],
+      ['失点', (t, x) => R9(x, 'c', 'r'), f2, false],
+      ['奪三振', (t, x) => R9(x, 'c', 'k'), f2, true],
+      ['与四球', (t, x) => R9(x, 'c', 'bb'), f2, false],
+      ['被安打', (t, x) => R9(x, 'c', 'h'), f2, false],
+      ['守備:捕手'],
+      ['盗塁阻止率', (t, x) => x.f.sb + x.f.cs ? x.f.cs / (x.f.sb + x.f.cs) : null, f3, true],
+      ['許した盗塁', (t, x) => x.f.sb, f0, false],
+      ['失策', (t, x) => x.f.c.e, f0, false],
+      ['守備:内野'],
+      ['守備率', (t, x) => FR(x, 'i'), f3, true],
+      ['失策', (t, x) => x.f.i.e, f0, false],
+      ['併殺', (t, x) => x.f.dp, f0, true],
+      ['守備:外野'],
+      ['守備率', (t, x) => FR(x, 'o'), f3, true],
+      ['失策', (t, x) => x.f.o.e, f0, false]];
+    function rTeamStats() {
+      const T = st.teams, me = mine();
+      const rows = TS_ROWS.map(r => {
+        if (!r[1]) return `<tr><td class="nm" colspan="4" style="background:var(--line);font-weight:700;font-size:12px">${r[0]}</td></tr>`;
+        const vals = T.map(t => ({ t, v: r[1](t, teamTS(t)) })), ok = vals.filter(o => o.v != null), mv = vals.find(o => o.t === me).v;
+        const avg = ok.length ? ok.reduce((a, o) => a + o.v, 0) / ok.length : null;
+        const rank = mv == null ? null : ok.filter(o => r[3] ? o.v > mv + 1e-9 : o.v < mv - 1e-9).length + 1;
+        const col = rank == null ? '' : rank <= 2 ? 'color:var(--good)' : rank >= T.length - 1 ? 'color:var(--bad)' : '';
+        return `<tr><td class="nm">${r[0]}</td><td class="n"><b>${r[2](mv)}</b></td><td class="n">${r[2](avg)}</td><td class="n" style="${col};font-weight:700">${rank == null ? '-' : rank + '位'}</td></tr>`;
+      }).join('');
+      return `<div class="card" style="padding:4px 0;overflow-x:auto"><table class="cmp"><thead><tr><th class="nm">項目</th><th>自球団</th><th>リーグ平均</th><th>順位</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    }
+    function rTable() {
+      return `<div class="card" style="padding:4px 0;overflow-x:auto"><table class="cmp"><thead><tr><th>位</th><th class="nm">チーム</th><th>勝</th><th>敗</th><th>分</th><th>勝率</th><th>得</th><th>失</th><th>戦力</th></tr></thead><tbody>
+  ${table().map((t, i) => `<tr class="${t.id === st.me ? 'cur' : ''}"><td>${i + 1}</td><td class="nm"><b>${t.id}</b></td><td class="n">${t.w}</td><td class="n">${t.l}</td><td class="n">${t.d || 0}</td><td class="n">${t.w + t.l ? (t.w / (t.w + t.l)).toFixed(3).slice(1) : '-'}</td><td class="n">${t.rs}</td><td class="n">${t.ra}</td><td class="n">${chip(rates(t).ovr)}</td></tr>`).join('')}</tbody></table></div>`;
+    }
+    // 同じ画面のままの再描画では、スクロール位置を保つ。行のタップは、その行(の位置)が、画面上で動かないようにする
+    // (選手を選ぶと、上に詳細カードが出て、行が下にずれるため)
+    let lastKey = null, anchor = null, jumpTo = null;
+    const scrKey = () => st ? [st.draft ? 1 : 0, ui.dview, ui.tab, ui.pos, st.mi, st.stage].join('|') : 'top';
+    function setAnchor(el) { anchor = null; if (!el || el.tagName !== 'TR') return; const rs = [...document.querySelectorAll('#app tr[data-act]')], i = rs.indexOf(el); if (i >= 0) anchor = { i, top: el.getBoundingClientRect().top }; }
+    function render() {
+      const A = document.getElementById('app'), key = scrKey(), same = key === lastKey, SX = '[style*="overflow-x"]';
+      const y = window.scrollY, xs = [...A.querySelectorAll(SX)].map(e => e.scrollLeft), an = anchor, jd = jumpTo; anchor = null; jumpTo = null;
+      render0();
+      if (same) {
+        window.scrollTo(0, y);
+        A.querySelectorAll(SX).forEach((e, i) => { if (xs[i]) e.scrollLeft = xs[i]; });
+        if (an) { const rs = A.querySelectorAll('tr[data-act]'), r = rs[Math.min(an.i, rs.length - 1)]; if (r) window.scrollBy(0, r.getBoundingClientRect().top - an.top); }
+      }
+      if (jd) { const d = document.getElementById(jd); if (d) window.scrollTo({ top: Math.max(0, d.getBoundingClientRect().top + window.scrollY - 8), behavior: 'smooth' }); else if (jd === 'sinfo') window.scrollTo({ top: 0, behavior: 'smooth' }); } // 契約・補強で選手を選んだら詳細パネルへ、月を進めたら前月の結果パネルへ、来季へ進んだら出来事(収入・補償)のパネルへ(なければ、画面の先頭へ)
+      lastKey = key;
+    }
+    function render0() {
+      const A = document.getElementById('app');
+      if (!st) {
+        const sv = load(), ball = '<svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="28" fill="#fff" stroke="#1f2433" stroke-width="3"/><path d="M14 14 C26 22 26 42 14 50 M50 14 C38 22 38 42 50 50" fill="none" stroke="#c4372c" stroke-width="3" stroke-linecap="round"/></svg>';
+        const hero = `<div class="hero">${ball}<h1>球団シム</h1><p>プロ野球GMシミュレーション</p></div>`;
+        if (sv && !ui.pick) { // セーブがあるときのトップページ
+          const ph = MN[sv.mi] ? MN[sv.mi] + '月' : 'シーズン終了', cfm = !!ui.confirmNew;
+          A.innerHTML = `${hero}
+      <button class="btn primary" data-act="cont">続きから(${esc(sv.me)}・${sv.season}年目 ${ph})</button><div style="height:14px"></div>
+      <div class="card">${cfm ? `<div class="report" style="border-left-color:var(--red);background:var(--red-t);color:#7a211a"><b>「${esc(sv.me)}」のセーブがあります。</b><div>新しく始めると、このセーブは上書きされ、元に戻せません。</div></div><button class="btn amber" data-act="newok">上書きして開始</button><div style="height:8px"></div><button class="btn" data-act="newcancel">やめる</button>` : `<button class="btn" data-act="new">新規ゲーム</button>`}</div>
+      <div class="row" style="justify-content:center;margin-top:14px"><a class="btn sm" href="index_yakyu.html">← ゲーム選択</a><button class="btn sm" data-act="help" data-v="howto">? 遊び方</button></div>`; return;
+        }
+        // 球団選択(はじめての場合は、ここから始まる):① ホイールで、好きな都道府県を選ぶ → ② ランダムな5チームを確認(OKか、もう一度引く)
+        const su = ui.setup = ui.setup || { step: 'pick', sel: '東京' };
+        const back = sv ? `<button class="btn sm" style="margin-bottom:6px" data-act="toTop">← トップへ戻る</button>` : '';
+        if (su.step === 'draw') {
+          A.innerHTML = `${hero}${back}
+    ${H2('対戦相手の5チーム')}<div class="card"><div class="row between"><span class="row" style="gap:6px"><span class="sub">あなたの球団</span>${helpBtn('start', '対戦相手と戦力')}</span><b style="font-size:20px">${esc(su.me)}</b></div></div>
+    <div class="cmp5">${su.others.map(n => `<div>${esc(n)}</div>`).join('')}</div>
+    <button class="btn primary" data-act="drawok">決定</button><div style="height:8px"></div>
+    <button class="btn" data-act="redraw">再選択</button><div style="height:8px"></div>
+    <button class="btn sm" data-act="drawback">← 戻る</button>`;
+          return;
+        }
+        A.innerHTML = `${hero}${back}
+    ${H2('チームの都道府県を選ぶ')}
+    <div class="wheel-wrap"><div class="wheel-mark"></div><div id="wheel" class="wheel" role="listbox" aria-label="都道府県">${PREFS.map((n, i) => `<div class="wi" role="option" data-i="${i}">${n}</div>`).join('')}</div></div>
+    <button class="btn primary" data-act="pickgo">決定</button>
+    <div class="row" style="justify-content:center;margin-top:14px"><a class="btn sm" href="index_yakyu.html">← ゲーム選択</a><button class="btn sm" data-act="help" data-v="howto">? 遊び方</button></div>`;
+        initWheel();
+        return;
+      }
+      if (st.draft) { rDraft(A); return; }
+      const me = mine(), end = st.mi >= MN.length, lg = st.log, over = me.players.length - CAPN;
+      const exp = me.players.filter(p => p.yrs <= 1 && !p.nw).length, post = end && st.stage !== 'po'; // 契約更改以降
+      const note = end ? (st.stage === 'po' ? '' : st.stage === 'renew' ? (exp > 0 ? `契約更改対象 ${exp}人。契約タブで、更改か自由契約を決めてください。` : '') : (me.players.length >= CAPN ? '登録が満員です。獲得するには、編成タブで二軍の選手を放出してください。' : 'FA市場が開いています(契約タブ)。')) : '';
+      const foot = end ? (st.stage === 'po' ? `<button class="btn primary" data-act="${st.po.step < 3 ? 'po' : 'poend'}">${postLabel()}</button>` : st.stage === 'renew' ? `<button class="btn primary" data-act="dstart"${exp > 0 ? ' disabled' : ''}>ドラフト会議へ</button>` : `<button class="btn primary" data-act="season"${over > 0 ? ' disabled' : ''}>来季へ進む</button>`) : `<button class="btn primary" data-act="adv">${MN[st.mi] + '月を進める'}</button>`;
+      A.innerHTML = `<div class="row between"><div class="title">${st.me}</div><button class="btn sm" data-act="reset">セーブして終わる</button></div>
+  <div class="sub num">${st.season}年目 ${end ? (st.stage === 'po' ? 'ポストシーズン' : 'シーズン終了') : MN[st.mi] + '月'} ・ 資金 ${st.money}億円 ・ ${rank()}位(${me.w}勝${me.l}敗${me.d ? me.d + '分' : ''})</div>
+  <div class="sub" style="margin-top:2px">${ratesHtml(rates(me))}</div>${st.info ? `<div class="card" id="sinfo" style="margin-top:12px">${esc(st.info)}</div>` : ''}
+  ${lg && !post ? `<div class="card" id="mres" style="margin-top:12px"><b>${lg.m}月の結果 ${lg.w}勝${lg.l}敗${lg.d ? lg.d + '分' : ''}</b><div class="sub">順位 ${lg.b}位 → ${lg.a}位${lg.tired ? ` ・ 疲労が高い一軍選手が${lg.tired}人` : ''}</div>${(lg.sg || []).map(x => `<div class="sub" style="color:var(--amber);font-weight:700">急成長:${esc(x)}</div>`).join('')}${(lg.inj || []).map(x => `<div class="sub" style="color:var(--red)">怪我:${esc(x)}</div>`).join('')}${(lg.swp || []).map(x => `<div class="sub">入れ替え ${esc(x)}</div>`).join('')}${(lg.gains || []).map(x => `<div class="sub">▲ ${esc(x)}</div>`).join('')}</div>` : ''}
+  ${end ? (post ? (note ? `<div class="card" style="margin-top:12px"><div class="sub">${note}</div></div>` : '') : `<div class="card" style="margin-top:12px"><b>最終順位 ${rank()}位</b><div class="sub">リーグ優勝は${table()[0].id}。来季の予算 +${[8, 7, 6, 5, 4, 3][rank() - 1]}億円</div>${note ? `<div class="sub">${note}</div>` : ''}</div>${st.po ? rPost() : ''}`) : ''}
+  <div class="seg" style="margin:12px 0">${[['roster', '編成'], ['contract', '契約'], ['stats', '成績']].map(([k, n]) => `<button class="${ui.tab === k ? 'on' : ''}" data-act="tab" data-v="${k}">${n}</button>`).join('')}</div>
+  ${ui.tab === 'roster' ? rRoster() : ui.tab === 'contract' ? rContract() : rStats()}
+  <div class="foot">${foot}</div>`;
+    }
+    function act(a, v, el) {
+      const t = st && mine();
+      if (a === 'pickgo') { const su = ui.setup || (ui.setup = { step: 'pick', sel: '東京' }); su.me = su.sel; su.others = drawOthers(su.me); su.step = 'draw'; render(); }
+      else if (a === 'redraw') { const su = ui.setup; su.others = drawOthers(su.me, su.others); render(); }
+      else if (a === 'drawok') { const su = ui.setup; if (su && su.me && su.others) start(su.me, su.others); }
+      else if (a === 'drawback') { ui.setup.step = 'pick'; ui.setup.sel = ui.setup.me || ui.setup.sel; render(); }
+      else if (a === 'cont') { st = load(); st.teams.forEach(x => x.players.forEach(ensureC)); st.fa.forEach(ensureC); if (st.mi >= MN.length && !st.stage) startPost(); autoPost(); if (st.fa.some(p => !p.fgn)) st.fa = mkFA(); fixUID(); render(); }
+      else if (a === 'dview') { ui.dview = v; ui.sel = ui.rel = null; ui.msg = ''; render(); }
+      else if (a === 'tab') { ui.tab = v; ui.sel = ui.rel = null; ui.msg = ''; render(); }
+      else if (a === 'tr') { }
+      else if (a === 'trauto') { const pit = ui.pos !== 'H'; t.players.filter(p => (p.pos === '投') === pit).forEach(p => { p.tr = bestKey(p); }); ui.msg = (pit ? '投手' : '野手') + 'の練習をおまかせにしました'; save(); render(); }
+      else if (a === 'trrest') { const pit = ui.pos !== 'H'; let n = 0; t.players.filter(p => (p.pos === '投') === pit).forEach(p => { if (p.fatigue >= 60) { p.tr = 'rest'; n++; } }); ui.msg = (pit ? '投手' : '野手') + 'の疲労60以上の' + n + '人を休養にしました'; save(); render(); }
+      else if (a === 'fold') { ui.open[v] = !ui.open[v]; render(); }
+      else if (a === 'help') { openHelp(v, el); }
+      else if (a === 'adv') { jumpTo = 'mres'; playMonth(); jumpTo = null; }
+      else if (a === 'closeModal') { closeModal(); }
+      else if (a === 'po') { if (st.stage === 'po' && st.po && st.po.step < 3) doPost(); }
+      else if (a === 'poend') { if (st.stage === 'po' && st.po && st.po.step >= 3) endPost(); }
+      else if (a === 'season') { if (t.players.length > CAPN) { ui.msg = '登録が' + CAPN + '人を超えています'; render(); } else { ui.tab = 'roster'; ui.sel = ui.rel = null; jumpTo = 'sinfo'; newSeason(); jumpTo = null; } }
+      else if (a === 'pos') { ui.pos = v; ui.sel = ui.rel = null; ui.msg = ''; render(); }
+      else if (a === 'yrs') { }
+      else if (a === 'cpick') { const was = ui.sel; ui.sel = ui.sel === +v ? null : +v; if (ui.sel != null && was !== ui.sel) { anchor = null; jumpTo = 'pdetail'; } render(); }
+      else if (a === 'renew') {
+        const p = byId(t, ui.sel); if (!p) return; const y = ui.yrs || 2;
+        const ns = dem(p, y); if (st.money < ns) { ui.msg = '資金が足りません(年俸1年分 ' + ns.toFixed(1) + '億円が必要です)'; render(); return; }
+        st.money = r1(st.money - ns); p.sal = ns; p.yrs = y; p.nw = true; p.decl = false; ui.msg = p.name + 'と更改しました(年俸' + ns.toFixed(1) + '億・' + y + '年)'; ui.sel = null; save(); render();
+      }
+      else if (a === 'letgo') {
+        const p = byId(t, ui.sel); if (!p) return; const w = canLose(t, p); if (w) { ui.msg = (p.decl ? '慰留しないことはできません(' : '自由契約にできません(') + w + ')'; render(); return; }
+        const fa = p.decl; letGo(t, p); repairL(t); ui.msg = fa ? p.name + 'を慰留しませんでした' : p.name + 'を自由契約にしました'; ui.sel = null; save(); render();
+      }
+      else if (a === 'dstart') { const m = draftMax(t); st.draft = { rd: 0, n: m < 5 ? 0 : 5, pre: m < 5, c: genDraft(), picks: [] }; ui.dsel = ui.dcut = ui.dcutOk = null; ui.dopen = false; ui.dview = 'draft'; ui.msg = ''; fixUID(); save(); render(); }
+      else if (a === 'dsel') { ui.dsel = ui.dsel === +v ? null : +v; render(); }
+      else if (a === 'dpick') { const d = st.draft, q = d && ui.dsel && d.c[d.rd].find(x => x.id === ui.dsel); if (!q) return; if (t.players.length + d.picks.length >= CAPN || st.money - r1(d.picks.reduce((a, x, i) => a + pickCost(i), 0)) < pickCost(d.picks.length) - 1e-9) { ui.msg = '登録の空き枠か資金が足りないため、指名できません'; render(); return; } d.picks.push(q); d.rd++; ui.dsel = null; save(); render(); }
+      else if (a === 'dgo') { const d = st.draft, m = draftMax(t); if (!d || m <= 0) return; d.pre = false; d.n = m; ui.msg = ''; ui.dsel = null; save(); render(); }
+      else if (a === 'dnone') { const d = st.draft; if (!d) return; d.pre = false; d.n = 0; d.rd = 0; ui.msg = ''; save(); render(); }
+      else if (a === 'dfold') { ui.dopen = !ui.dopen; render(); }
+      else if (a === 'dcutsel') { ui.dcut = ui.dcut === +v ? null : +v; ui.dcutOk = null; render(); }
+      else if (a === 'dcut') { if (ui.dcutOk !== ui.dcut) ui.dcutOk = ui.dcut; else { const p = byId(t, ui.dcut); if (!p) return; const c = unpaid(p), e = releaseP(t, p); if (e) ui.msg = e; else { ui.msg = p.name + 'を放出しました' + (c > 0 ? '(残りの契約の年俸 ' + c.toFixed(1) + '億円を支払い)' : ''); ui.dcut = ui.dcutOk = null; save(); } } render(); } // 参加前に、二軍の選手を放出して枠を作れる(契約中なら、残りの年俸を支払う)
+      else if (a === 'djoin') { st.draft.picks.forEach((q, i) => { q.dr = i + 1; q.drY = st.season; q.sal = DRAFT_SAL; q.yrs = 1; q.nw = true; t.players.push(q); }); const fee = r1(st.draft.picks.reduce((a, q, i) => a + PICK_FEE[i], 0)), sal = r1(st.draft.picks.length * DRAFT_SAL), rk = r1(fee + sal); st.money = r1(st.money - rk); if (st.draft.picks.length) st.info = (st.info ? st.info + ' / ' : '') + '新人' + st.draft.picks.length + '人の契約金 ' + fee + '億円+年俸1年分 ' + sal + '億円を支払いました'; st.draft = null; st.drafted = true; st.mk = fillMk(aiOff()); st.stage = 'fa'; ui.sel = null; ui.tab = t.players.length >= CAPN ? 'roster' : 'contract'; ui.msg = ''; save(); render(); } // ドラフトのあとにFA市場が開く(満員なら、先に編成画面で放出する)
+      else if (a === 'auto') { const pit = ui.pos !== 'H', np = autoLg(t, pit); ui.sel = ui.rel = null; ui.msg = (pit ? '投手' : '野手') + 'の編成をおまかせにしました' + (np ? `(固定${np}人はそのまま)` : ''); save(); render(); }
+      else if (a === 'fpick') { const was = ui.sel; ui.sel = ui.sel === +v ? null : +v; ui.msg = ''; if (ui.sel != null && was !== ui.sel) { anchor = null; jumpTo = 'pdetail'; } render(); }
+      else if (a === 'pin') { const p = byId(t, ui.sel); if (!p || !roleOf(t, p.id)) return; p.pin = !p.pin; ui.msg = p.name + (p.pin ? 'のポジションを固定しました' : 'の固定を解除しました'); save(); render(); }
+      else if (a === 'pick') {
+        const p = byId(t, +v); ui.rel = null; ui.msg = '';
+        if (ui.sel == null) ui.sel = p.id;
+        else if (ui.sel === p.id) ui.sel = null;
+        else {
+          const q = byId(t, ui.sel), rq = roleOf(t, q.id), rp = roleOf(t, p.id);
+          if ((rq && q.pin) || (rp && p.pin)) ui.msg = ((rq && q.pin) ? q : p).name + 'はポジションを固定中です。固定を解除してください';
+          else if (!rq && !rp) ui.msg = '二軍どうしは入れ替えできません';
+          else if ((rp && !slotOkManual(rp, q)) || (rq && !slotOkManual(rq, p))) ui.msg = 'そのポジションには入れません';
+          else if ((() => { const nl = { ...t.L }; if (rq) nl[rq] = p.id; if (rp) nl[rp] = q.id; const n = fgnN(t, nl); return n > FMAX && n > fgnN(t, t.L); })()) ui.msg = '一軍に登録できる外国人は4人までです';
+          else { if (rq) t.L[rq] = p.id; if (rp) t.L[rp] = q.id; ui.msg = q.name + 'と' + p.name + 'を入れ替えました';[p, q].forEach(x => { if (!roleOf(t, x.id)) x.pin = false; }); ui.sel = null; save(); }
+        }
+        render();
+      }
+      else if (a === 'rel') { if (ui.rel !== ui.sel) ui.rel = ui.sel; else { const p = byId(t, ui.sel); if (!p) return; const c = unpaid(p), e = releaseP(t, p); if (e) ui.msg = e; else { ui.msg = p.name + 'を放出しました' + (c > 0 ? '(残りの契約の年俸 ' + c.toFixed(1) + '億円を支払い)' : ''); ui.sel = ui.rel = null; save(); } } render(); }
+      else if (a === 'sign') {
+        const mkt = st.mi >= MN.length && st.stage === 'fa', p = (mkt ? st.mk : st.fa).find(x => x.id === ui.sel); if (!p) return; const y = ui.yrs || 2, f = mkt ? mfee(p, y) : fee(p), c = mkt ? comp(p) : 0, ns = mkt ? dem(p, y) : p.sal;
+        if (!mkt && st.mi > FA_END) ui.msg = '外国人選手の獲得は7月末で締め切りました';
+        else if (mkt && p.mk === 'FA' && (st.faN || 0) >= 2) ui.msg = 'FA宣言選手の獲得は、1シーズンに2名までです'
+        else if (st.money < f + c + ns) ui.msg = '資金が足りません(必要:' + (f ? '契約金' + f + '億+' : '') + (c ? '補償金' + c + '億+' : '') + '年俸1年分' + ns.toFixed(1) + '億)';
+        else if (t.players.length >= CAPN) ui.msg = '登録が満員です。編成タブで二軍の選手を放出してください';
+        else { st.money = Math.round((st.money - f - c - ns) * 10) / 10; if (mkt && p.mk === 'FA') st.faN = (st.faN || 0) + 1; if (mkt) { p.sal = dem(p, y); p.yrs = y; p.nw = true; p.mk = null; p.decl = false; p.ol = false; st.mk = st.mk.filter(x => x !== p); } else st.fa = st.fa.filter(x => x !== p); t.players.push(p); ui.msg = p.name + 'を獲得しました(二軍・年俸' + p.sal.toFixed(1) + '億' + (c ? '・' + p.from + 'へ補償金' + c + '億' : '') + ')'; ui.sel = null; save(); }
+        render();
+      }
+      else if (a === 'reset') { save(); st = null; pre = null; ui.pick = false; ui.confirmNew = false; render(); }
+      else if (a === 'new') { ui.confirmNew = true; render(); }
+      else if (a === 'newcancel') { ui.confirmNew = false; render(); }
+      else if (a === 'newok') { ui.confirmNew = false; ui.pick = true; render(); }
+      else if (a === 'toTop') { ui.pick = false; render(); }
+    }
+    document.addEventListener('click', e => { if (e.target.id === 'modal') { closeModal(); return; } const el = e.target.closest('[data-act]'); if (el) { setAnchor(el); act(el.dataset.act, el.dataset.v, el); } });
+    document.addEventListener('change', e => { const el = e.target; if (el.dataset && el.dataset.act === 'yrs') { ui.yrs = +el.value; render(); return; } if (!(el.dataset && el.dataset.act === 'tr' && st)) return; const p = byId(mine(), +el.dataset.p); if (p) { p.tr = el.value; save(); render(); } });
+    document.addEventListener('keydown', e => { const mo = document.getElementById('modal'); if (mo && !mo.hidden) { if (e.key === 'Escape') { closeModal(); return; } if (e.key === 'Tab') { e.preventDefault(); const b = mo.querySelector('button'); if (b) b.focus(); return; } } if ((e.key === 'Enter' || e.key === ' ') && e.target.tagName !== 'SELECT' && e.target.dataset && e.target.dataset.act) { e.preventDefault(); setAnchor(e.target); act(e.target.dataset.act, e.target.dataset.v, e.target); } });
+    render();
+
+  </script>
+</body>
+
+</html>
